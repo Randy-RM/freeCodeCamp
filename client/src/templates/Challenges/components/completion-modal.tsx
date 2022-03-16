@@ -212,8 +212,6 @@ export class CompletionModalInner extends Component<
       block,
       close,
       isOpen,
-      message,
-      t,
       title,
       isSignedIn,
       superBlock = ''
@@ -243,7 +241,9 @@ export class CompletionModalInner extends Component<
           className='challenge-list-header fcc-modal'
           closeButton={true}
         >
-          <Modal.Title className='completion-message'>{message}</Modal.Title>
+          <Modal.Title className='completion-message'>
+            {'Félicitations !'}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body className='completion-modal-body'>
           <CompletionModalBody
@@ -254,7 +254,9 @@ export class CompletionModalInner extends Component<
         </Modal.Body>
         <Modal.Footer>
           {isSignedIn ? null : (
-            <Login block={true}>{t('learn.sign-in-save')}</Login>
+            <Login block={true}>
+              {'Connectez-vous pour enregistrer votre progression'}
+            </Login>
           )}
           <Button
             block={true}
@@ -262,7 +264,9 @@ export class CompletionModalInner extends Component<
             bsStyle='primary'
             onClick={() => this.handleSubmit()}
           >
-            {isSignedIn ? t('buttons.submit-and-go') : t('buttons.go-to-next')}
+            {isSignedIn
+              ? 'Soumettre et passer au défi suivant'
+              : 'Passez au défi suivant'}
             <span className='hidden-xs'> (Ctrl + Enter)</span>
           </Button>
           {this.state.downloadURL ? (
@@ -274,7 +278,7 @@ export class CompletionModalInner extends Component<
               download={`${dashedName}.txt`}
               href={this.state.downloadURL}
             >
-              {t('learn.download-solution')}
+              {'Télécharger ma solution'}
             </Button>
           ) : null}
         </Modal.Footer>

@@ -8,6 +8,7 @@ import {
   ChallengeFiles,
   ResizeProps
 } from '../../../redux/prop-types';
+import { Spacer } from '../../../components/helpers';
 import ActionRow from './action-row';
 
 type Pane = { flex: number };
@@ -106,16 +107,19 @@ const DesktopLayout = (props: DesktopLayoutProps): JSX.Element => {
 
   return (
     <div className='desktop-layout'>
+      <Spacer size={2} />
       {(projectBasedChallenge || isMultiFileCertProject) && (
-        <ActionRow
-          block={block}
-          hasNotes={hasNotes}
-          showConsole={showConsole}
-          showNotes={showNotes}
-          showPreview={showPreview}
-          superBlock={superBlock}
-          togglePane={togglePane}
-        />
+        <div className='bg-info'>
+          <ActionRow
+            block={block}
+            hasNotes={hasNotes}
+            showConsole={showConsole}
+            showNotes={showNotes}
+            showPreview={showPreview}
+            superBlock={superBlock}
+            togglePane={togglePane}
+          />
+        </div>
       )}
       <ReflexContainer orientation='vertical'>
         {!projectBasedChallenge && (

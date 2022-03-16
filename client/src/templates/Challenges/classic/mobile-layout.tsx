@@ -1,7 +1,7 @@
 import { TabPane, Tabs } from '@freecodecamp/react-bootstrap';
 import i18next from 'i18next';
 import React, { Component, ReactElement } from 'react';
-
+import { Spacer } from '../../../components/helpers';
 import ToolPanel from '../components/tool-panel';
 import EditorTabs from './editor-tabs';
 
@@ -70,6 +70,7 @@ class MobileLayout extends Component<MobileLayoutProps, MobileLayoutState> {
 
     return (
       <>
+        <Spacer size={1} />
         <Tabs
           activeKey={currentTab}
           defaultActiveKey={currentTab}

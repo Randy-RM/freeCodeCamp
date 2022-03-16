@@ -3,6 +3,18 @@
   font-size: 1.1rem;
 }
 
+.tool-panel-group button {
+  background: rgba(255, 255, 255, 0);
+  border-color: var(--gray-90);
+  color: var(--gray-90);
+}
+
+.tool-panel-group button:hover {
+  background: var(--gray-90);
+  border-color: var(--gray-90);
+  color: var(--theme-color);
+}
+
 .tool-panel-group-mobile button,
 .tool-panel-group-mobile a {
   font-size: 0.8rem;
@@ -50,4 +62,16 @@
 
 #get-help-dropdown > .caret {
   transform: rotate(180deg);
+}
+
+.btn-dropdown {
+  border-color: var(--gray-90);
+  color: var(--gray-90);
+}
+
+.btn-dropdown:hover,
+.btn-dropdown:focus {
+  background: var(--gray-90);
+  border-color: var(--gray-90) !important;
+  color: var(--theme-color);
 }
