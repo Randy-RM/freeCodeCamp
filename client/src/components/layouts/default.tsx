@@ -200,8 +200,8 @@ class DefaultLayout extends Component<DefaultLayoutProps> {
           />
           <style>{fontawesome.dom.css()}</style>
         </Helmet>
+        <Header fetchState={fetchState} user={user} />
         <div className={`default-layout`}>
-          <Header fetchState={fetchState} user={user} />
           <OfflineWarning
             isOnline={isOnline}
             isServerOnline={isServerOnline}

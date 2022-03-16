@@ -1,10 +1,13 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
-import FreeCodeCampLogo from '../../../assets/icons/FreeCodeCamp-logo';
+import Logo from '../../../assets/icons/KDA-logo.webp';
 
 const NavLogo = (): JSX.Element => {
-  const { t } = useTranslation();
-  return <FreeCodeCampLogo aria-label={t('aria.fcc-curriculum')} />;
+  const kdaLogo: string = Logo as never;
+  return (
+    <div className='logo'>
+      <img src={kdaLogo} alt='Logo' />
+    </div>
+  );
 };
 
 NavLogo.displayName = 'NavLogo';

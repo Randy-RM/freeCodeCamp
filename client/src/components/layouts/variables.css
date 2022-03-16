@@ -1,5 +1,5 @@
 :root {
-  --theme-color: #0a0a23;
+  --theme-color: #ffffff;
   --yellow-gold: #ffbf00;
   --gray-00: #ffffff;
   --gray-05: #f5f6f7;
@@ -9,7 +9,7 @@
   --gray-75: #3b3b4f;
   --gray-80: #2a2a40;
   --gray-85: #1b1b32;
-  --gray-90: #0a0a23;
+  --gray-90: #3e3d3d;
   --purple-light: #dbb8ff;
   --purple-dark: #5a01a7;
   --yellow-light: #ffc300;
@@ -24,8 +24,10 @@
   --green-dark: #00471b;
   --red-light: #ffadad;
   --red-dark: #850000;
-  --love-light: #f8577c;
+  --love-light: #d92950;
+  /*--love-light: #f8577c;*/
   --love-dark: #f82153;
+  /*--love-dark: #f82153;*/
   --editor-background-light: #fffffe;
   --editor-background-dark: #2a2b40;
 }
@@ -52,7 +54,7 @@
 
 .light-palette {
   --primary-color: var(--gray-90);
-  --secondary-color: var(--gray-85);
+  --secondary-color: var(--gray-90);
   --tertiary-color: var(--gray-80);
   --quaternary-color: var(--gray-75);
   --quaternary-background: var(--gray-15);

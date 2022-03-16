@@ -20,6 +20,7 @@ export class Header extends React.Component<
   menuButtonRef: React.RefObject<any>;
   searchBarRef: React.RefObject<any>;
   static displayName: string;
+
   constructor(props: HeaderProps) {
     super(props);
     this.state = {
