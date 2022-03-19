@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aedf08804
-title: Comment out HTML
+title: Commenter le code HTML
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVMPUv/cGyGbca'
 forumTopicId: 16782
@@ -9,41 +9,41 @@ dashedName: comment-out-html
 
 # --description--
 
-Remember that in order to start a comment, you need to use `<!--` and to end a comment, you need to use `-->`
+Rappelez-vous que pour commencer un commentaire, vous devez utiliser `<!--` et pour terminer un commentaire, vous devez utiliser `-->`.
 
-Here you'll need to end the comment before your `h2` element begins.
+Ici, vous devez terminer le commentaire avant le début de votre élément `h2`.
 
 # --instructions--
 
-Comment out your `h1` element and your `p` element, but not your `h2` element.
+Commentez votre élément `h1` et votre élément `p`, mais pas votre élément `h2`.
 
 # --hints--
 
-Your `h1` element should be commented out so that it is not visible on the page.
+Votre élément `h1` doit être commenté afin qu'il ne soit pas visible sur la page.
 
 ```js
 assert($('h1').length === 0);
 ```
 
-Your `h2` element should not be commented out so that it is visible on the page.
+Votre élément `h2` ne doit pas être commenté pour qu'il soit visible sur la page.
 
 ```js
 assert($('h2').length > 0);
 ```
 
-Your `p` element should be commented out so that it is not visible on the page.
+Votre élément `p` doit être commenté afin qu'il ne soit pas visible sur la page.
 
 ```js
 assert($('p').length === 0);
 ```
 
-Each of your comments should be closed with `-->`.
+Chacun de vos commentaires doit être fermé par `-->`.
 
 ```js
 assert(code.match(/[^fc]-->/g).length > 1);
 ```
 
-You should not change the order of the `h1` `h2` or `p` in the code.
+Vous ne devez pas changer l'ordre des `h1`, `h2` ou `p` dans le code.
 
 ```js
 assert(
