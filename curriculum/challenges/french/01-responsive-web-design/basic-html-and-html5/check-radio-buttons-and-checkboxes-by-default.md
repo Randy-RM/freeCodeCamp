@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aedd08835
-title: Check Radio Buttons and Checkboxes by Default
+title: Vérifier les boutons radio et les cases à cocher par défaut
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVMPUv/cWk3Qh6'
 forumTopicId: 301094
@@ -9,9 +9,9 @@ dashedName: check-radio-buttons-and-checkboxes-by-default
 
 # --description--
 
-You can set a checkbox or radio button to be checked by default using the `checked` attribute.
+Vous pouvez faire en sorte qu'une case à cocher ou un bouton radio soit coché par défaut en utilisant l'attribut `checked`.
 
-To do this, just add the word `checked` to the inside of an input element. For example:
+Pour ce faire, il suffit d'ajouter le mot "checked" à l'intérieur d'un élément de saisie. Par exemple :
 
 ```html
 <input type="radio" name="test-name" checked>
@@ -19,29 +19,29 @@ To do this, just add the word `checked` to the inside of an input element. For e
 
 # --instructions--
 
-Set the first of your radio buttons and the first of your checkboxes to both be checked by default.
+Configurez le premier de vos boutons radio et la première de vos cases à cocher pour qu'ils soient tous deux cochés par défaut.
 
 # --hints--
 
-Your first radio button on your form should be checked by default.
+Le premier bouton radio de votre formulaire doit être coché par défaut.
 
 ```js
 assert($('input[type="radio"]').prop('checked'));
 ```
 
-Your first checkbox on your form should be checked by default.
+La première case à cocher de votre formulaire doit être cochée par défaut.
 
 ```js
 assert($('input[type="checkbox"]').prop('checked'));
 ```
 
-You should not change the inner text of the `Indoor` label.
+Vous ne devez pas modifier le texte intérieur de l'étiquette `Indoor`.
 
 ```js
 assert.equal(document.querySelector('label[for="indoor"]')?.innerText?.trim(), 'Indoor');
 ```
 
-You should not change the inner text of the `Loving` label.
+Vous ne devez pas modifier le texte intérieur de l'étiquette `Loving`.
 
 ```js
 assert.equal(document.querySelector('label[for="loving"]')?.innerText?.trim(), 'Loving');
@@ -54,21 +54,21 @@ assert.equal(document.querySelector('label[for="loving"]')?.innerText?.trim(), '
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
   <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
 
-  <p>Things cats love:</p>
+  <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
   <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
+    <li>le traitement contre les puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
     <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor" value="indoor"> Indoor</label>
@@ -87,21 +87,21 @@ assert.equal(document.querySelector('label[for="loving"]')?.innerText?.trim(), '
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
   <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
 
-  <p>Things cats love:</p>
+  <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
   <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
+    <li>le traitement contre les puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
     <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor" value="indoor" checked> Indoor</label>
