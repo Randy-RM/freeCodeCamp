@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aedf08827
-title: Create a Bulleted Unordered List
+title: Créer une liste non ordonnée à puces
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVMPUv/cDKVPuv'
 forumTopicId: 16814
@@ -9,40 +9,40 @@ dashedName: create-a-bulleted-unordered-list
 
 # --description--
 
-HTML has a special element for creating <dfn>unordered lists</dfn>, or bullet point style lists.
+HTML a un élément spécial pour créer des <dfn>listes non ordonnées</dfn>, ou des listes de style à puces.
 
-Unordered lists start with an opening `<ul>` element, followed by any number of `<li>` elements. Finally, unordered lists close with a `</ul>`.
+Les listes non ordonnées commencent par un élément `<ul>` d'ouverture, suivi d'un nombre quelconque d'éléments `<li>`. Enfin, les listes non ordonnées se terminent par un `</ul>`.
 
-For example:
+Par exemple:
 
 ```html
 <ul>
-  <li>milk</li>
-  <li>cheese</li>
+  <li>Lait</li>
+  <li>Fromage</li>
 </ul>
 ```
 
-would create a bullet point style list of `milk` and `cheese`.
+créerait une liste à puces de `lait` et `fromage`.
 
 # --instructions--
 
-Remove the last two `p` elements and create an unordered list of three things that cats love at the bottom of the page.
+Supprimez les deux derniers éléments `p` et créez une liste non ordonnée de trois choses que les chats aiment en bas de la page.
 
 # --hints--
 
-Create a `ul` element.
+Créez un élément `ul`.
 
 ```js
 assert($('ul').length > 0);
 ```
 
-You should have three `li` elements within your `ul` element.
+Vous devriez avoir trois éléments `li` dans votre élément `ul`.
 
 ```js
 assert($('ul li').length > 2);
 ```
 
-Your `ul` element should have a closing tag.
+Votre élément `ul` doit avoir une balise de fermeture.
 
 ```js
 assert(
@@ -52,7 +52,7 @@ assert(
 );
 ```
 
-Your `li` elements should have closing tags.
+Vos éléments `li` doivent avoir des balises de fermeture.
 
 ```js
 assert(
@@ -62,7 +62,7 @@ assert(
 );
 ```
 
-Your `li` elements should not contain an empty string or only white-space.
+Vos éléments `li` ne doivent pas contenir une chaîne vide ou uniquement des espaces blancs.
 
 ```js
 assert($('ul li').filter((_, item) => !$(item).text().trim()).length === 0);
@@ -75,7 +75,7 @@ assert($('ul li').filter((_, item) => !$(item).text().trim()).length === 0);
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
   <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
 
@@ -89,14 +89,14 @@ assert($('ul li').filter((_, item) => !$(item).text().trim()).length === 0);
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
   <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
 
   <ul>
-    <li>milk</li>
-    <li>mice</li>
-    <li>catnip</li>
+    <li>le lait</li>
+    <li>les souris</li>
+    <li>l'herbe à chat</li>
   </ul>
 </main>
 ```
