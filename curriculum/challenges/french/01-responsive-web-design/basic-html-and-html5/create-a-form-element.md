@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aede08830
-title: Create a Form Element
+title: Créer un élément de formulaire
 challengeType: 0
 forumTopicId: 16817
 dashedName: create-a-form-element
@@ -8,9 +8,9 @@ dashedName: create-a-form-element
 
 # --description--
 
-You can build web forms that actually submit data to a server using nothing more than pure HTML. You can do this by specifying an `action` attribute on your `form` element.
+Vous pouvez créer des formulaires Web qui soumettent réellement des données à un serveur en utilisant uniquement du HTML pur. Vous pouvez le faire en spécifiant un attribut `action` sur votre élément `form`.
 
-For example:
+Par exemple :
 
 ```html
 <form action="url-where-you-want-to-submit-form-data">
@@ -20,11 +20,11 @@ For example:
 
 # --instructions--
 
-Nest the existing `input` element inside a `form` element and assign `"https://www.freecatphotoapp.com/submit-cat-photo"` to the `action` attribute of the `form` element.
+Insérez l'élément `input` existant dans un élément `form` et attribuez `"https://www.freecatphotoapp.com/submit-cat-photo"` à l'attribut `action` de l'élément `form`.
 
 # --hints--
 
-The existing `input` element should be nested within a `form` element.
+L'élément `input` existant doit être imbriqué dans un élément `form`.
 
 ```js
 const inputElem = document.querySelector('form input');
@@ -34,14 +34,14 @@ assert(
 );
 ```
 
-Your `form` should have an `action` attribute which is set to `https://www.freecatphotoapp.com/submit-cat-photo`.
+Votre formulaire doit avoir un attribut `action` qui est égal à `https://www.freecatphotoapp.com/submit-cat-photo`.
 
 ```js
 const action = $('form').attr('action');
 assert(action.match(/^https:\/\/(www\.)?freecatphotoapp\.com\/submit-cat-photo$/i))
 ```
 
-Your `form` element should have well-formed open and close tags.
+Votre élément `form` doit avoir des balises ouvertes et fermées bien formatées.
 
 ```js
 assert(
@@ -58,21 +58,21 @@ assert(
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
   <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
 
-  <p>Things cats love:</p>
+  <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
   <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
+    <li>le traitement des puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
   </ol>
   <input type="text" placeholder="cat photo URL">
 </main>
@@ -83,21 +83,21 @@ assert(
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+<p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
   <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
 
-  <p>Things cats love:</p>
+  <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
   <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
+    <li>le traitement des puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
     <input type="text" placeholder="cat photo URL">
