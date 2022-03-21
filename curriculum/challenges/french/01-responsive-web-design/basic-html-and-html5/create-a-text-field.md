@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aedf08829
-title: Create a Text Field
+title: Créer une zone de texte
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVMPUv/c2EVnf6'
 forumTopicId: 16823
@@ -9,25 +9,25 @@ dashedName: create-a-text-field
 
 # --description--
 
-Now let's create a web form.
+Créons maintenant un formulaire web.
 
-`input` elements are a convenient way to get input from your user.
+Les éléments `input` sont un moyen pratique d'obtenir une entrée de votre utilisateur.
 
-You can create a text input like this:
+Vous pouvez créer une entrée de type texte comme ceci :
 
 ```html
 <input type="text">
 ```
 
-Note that `input` elements are self-closing.
+Notez que les éléments `input` sont auto-fermants.
 
 # --instructions--
 
-Create an `input` element of type `text` below your lists.
+Créez un élément `input` de type `text` sous vos listes.
 
 # --hints--
 
-Your app should have an `input` element of type `text`.
+Votre application devrait avoir un élément `input` de type `text`.
 
 ```js
 assert($('input[type=text]').length > 0);
@@ -40,23 +40,22 @@ assert($('input[type=text]').length > 0);
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+ <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
   <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
 
-  <p>Things cats love:</p>
+ <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
   <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
+    <li>le traitement des puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
   </ol>
-
 
 </main>
 ```
@@ -66,21 +65,21 @@ assert($('input[type=text]').length > 0);
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
   <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
 
-  <p>Things cats love:</p>
+  <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
   <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
+    <li>le traitement des puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
   </ol>
   <form>
     <input type="text">
