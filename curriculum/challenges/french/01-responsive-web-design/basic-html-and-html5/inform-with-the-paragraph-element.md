@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aedf08801
-title: Inform with the Paragraph Element
+title: Informer avec l'élément Paragraphe
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVMPUv/ceZ7DtN'
 forumTopicId: 18202
@@ -9,35 +9,35 @@ dashedName: inform-with-the-paragraph-element
 
 # --description--
 
-`p` elements are the preferred element for paragraph text on websites. `p` is short for "paragraph".
+Les éléments `p` sont les éléments préférés pour le texte des paragraphes sur les sites Web. `p` est l'abréviation de "paragraph".
 
-You can create a paragraph element like this:
+Vous pouvez créer un élément de paragraphe comme ceci :
 
 ```html
-<p>I'm a p tag!</p>
+<p>Je suis une balise p !</p>
 ```
 
 # --instructions--
 
-Create a `p` element below your `h2` element, and give it the text `Hello Paragraph`.
+Créez un élément `p` sous votre élément `h2`, et donnez-lui le texte `Hello Paragraph`.
 
-**Note:** As a convention, all HTML tags are written in lowercase, for example `<p></p>` and not `<P></P>`.
+**Note:** Par convention, toutes les balises HTML sont écrites en minuscules, par exemple `<p></p>` et non `<P></P>`.
 
 # --hints--
 
-Your code should have a valid `p` element.
+Votre code devrait avoir un élément `p` valide.
 
 ```js
 assert($('p').length > 0);
 ```
 
-Your `p` element should have the text `Hello Paragraph`.
+Votre élément `p` devrait avoir le texte `Hello Paragraph`.
 
 ```js
 assert.isTrue(/hello(\s)+paragraph/gi.test($('p').text()));
 ```
 
-Your `p` element should have a closing tag.
+Votre élément `p` doit avoir une balise de fermeture.
 
 ```js
 assert(
