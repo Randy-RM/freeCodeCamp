@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aedf0887a
-title: Headline with the h2 Element
+title: Titre avec l'élément h2
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVMPUv/cE8Gqf3'
 forumTopicId: 18196
@@ -9,25 +9,25 @@ dashedName: headline-with-the-h2-element
 
 # --description--
 
-Over the next few lessons, we'll build an HTML5 cat photo web app piece-by-piece.
+Au cours des prochaines leçons, nous allons construire une application Web HTML5 de photos de chats, pièce par pièce.
 
-The `h2` element you will be adding in this step will add a level two heading to the web page.
+L'élément `h2` que vous allez ajouter dans cette étape ajoutera un titre de niveau deux à la page Web.
 
-This element tells the browser about the structure of your website. `h1` elements are often used for main headings, while `h2` elements are generally used for subheadings. There are also `h3`, `h4`, `h5` and `h6` elements to indicate different levels of subheadings.
+Cet élément indique au navigateur la structure de votre site Web. Les éléments `h1` sont souvent utilisés pour les titres principaux, tandis que les éléments `h2` sont généralement utilisés pour les sous-titres. Il existe également des éléments `h3`, `h4`, `h5` et `h6` pour indiquer les différents niveaux de sous-titres.
 
 # --instructions--
 
-Add an `h2` tag that says "CatPhotoApp" to create a second HTML element below your "Hello World" `h1` element.
+Ajoutez une balise `h2` qui dit "CatPhotoApp" pour créer un deuxième élément HTML sous votre élément `h1` "Hello World".
 
 # --hints--
 
-You should create an `h2` element.
+Vous devez créer un élément `h2`.
 
 ```js
 assert($('h2').length > 0);
 ```
 
-Your `h2` element should have a closing tag.
+Votre élément `h2` doit avoir une balise de fermeture.
 
 ```js
 assert(
@@ -36,19 +36,19 @@ assert(
 );
 ```
 
-Your `h2` element should have the text `CatPhotoApp`.
+Votre élément `h2` devrait avoir le texte `CatPhotoApp`.
 
 ```js
 assert.isTrue(/cat(\s)?photo(\s)?app/gi.test($('h2').text()));
 ```
 
-Your `h1` element should have the text `Hello World`.
+Votre élément `h1` doit contenir le texte `Hello World`.
 
 ```js
 assert.isTrue(/hello(\s)+world/gi.test($('h1').text()));
 ```
 
-Your `h1` element should be before your `h2` element.
+Votre élément `h1` doit se placer avant votre élément `h2`.
 
 ```js
 assert(code.match(/<h1>\s*?.*?\s*?<\/h1>\s*<h2>\s*?.*?\s*?<\/h2>/gi));
