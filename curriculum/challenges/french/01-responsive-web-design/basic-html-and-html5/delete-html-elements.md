@@ -1,6 +1,6 @@
 ---
 id: bad87fed1348bd9aedf08833
-title: Delete HTML Elements
+title: Supprimer des éléments HTML
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVMPUv/ckK73C9'
 forumTopicId: 17559
@@ -9,29 +9,29 @@ dashedName: delete-html-elements
 
 # --description--
 
-Our phone doesn't have much vertical space.
+Notre téléphone n'a pas beaucoup d'espace vertical.
 
-Let's remove the unnecessary elements so we can start building our CatPhotoApp.
+Supprimons les éléments inutiles pour pouvoir commencer à construire notre CatPhotoApp.
 
 # --instructions--
 
-Delete your `h1` element so we can simplify our view.
+Supprimez votre élément `h1` pour que nous puissions simplifier notre vue.
 
 # --hints--
 
-Your `h1` element should be deleted.
+Votre élément `h1` doit être supprimé.
 
 ```js
 assert(!code.match(/<h1>/gi) && !code.match(/<\/h1>/gi));
 ```
 
-Your `h2` element should be on the page.
+Votre élément `h2` doit être sur la page.
 
 ```js
 assert(code.match(/<h2>[\w\W]*<\/h2>/gi));
 ```
 
-Your `p` element should be on the page.
+Votre élément `p` doit être sur la page.
 
 ```js
 assert(code.match(/<p>[\w\W]*<\/p>/gi));
@@ -42,7 +42,7 @@ assert(code.match(/<p>[\w\W]*<\/p>/gi));
 ## --seed-contents--
 
 ```html
-<h1>Hello World</h1>
+<h1>Bonjour le monde</h1>
 
 <h2>CatPhotoApp</h2>
 
