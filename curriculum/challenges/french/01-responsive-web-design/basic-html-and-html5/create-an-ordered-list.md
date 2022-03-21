@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aedf08828
-title: Create an Ordered List
+title: Créer une liste ordonnée
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVMPUv/cQ3B8TM'
 forumTopicId: 16824
@@ -9,11 +9,11 @@ dashedName: create-an-ordered-list
 
 # --description--
 
-HTML has another special element for creating <dfn>ordered lists</dfn>, or numbered lists.
+HTML possède un autre élément spécial pour créer des <dfn>listes ordonnées</dfn> ou des listes numérotées.
 
-Ordered lists start with an opening `<ol>` element, followed by any number of `<li>` elements. Finally, ordered lists are closed with the `</ol>` tag.
+Les listes ordonnées commencent par un élément  d’ouverture `<ol>`, suivi d’un nombre quelconque d’éléments `<li>`. Enfin, les listes ordonnées sont fermées avec la balise `</ol>`.
 
-For example:
+Par exemple:
 
 ```html
 <ol>
@@ -22,51 +22,51 @@ For example:
 </ol>
 ```
 
-would create a numbered list of `Garfield` and `Sylvester`.
+créerait une liste numérotée avec les noms `Garfield` et `Sylvester`.
 
 # --instructions--
 
-Create an ordered list of the top 3 things cats hate the most.
+Créez une liste ordonnée des trois choses que les chats détestent le plus.
 
 # --hints--
 
-You should have an ordered list for `Top 3 things cats hate:`
+Vous devriez avoir une liste ordonnée pour le `Top 3 des choses que les chats détestent`.
 
 ```js
 assert(/Top 3 things cats hate:/i.test($('ol').prev().text()));
 ```
 
-You should have an unordered list for `Things cats love:`
+Vous devriez avoir une liste non ordonnée pour les `choses que les chats aiment`.
 
 ```js
 assert(/Things cats love:/i.test($('ul').prev().text()));
 ```
 
-You should have only one `ul` element.
+Vous ne devez avoir qu'un seul élément `ul`.
 
 ```js
 assert.equal($('ul').length, 1);
 ```
 
-You should have only one `ol` element.
+Vous ne devez avoir qu'un seul élément `ol`.
 
 ```js
 assert.equal($('ol').length, 1);
 ```
 
-You should have three `li` elements within your `ul` element.
+Vous devriez avoir trois éléments `li` dans votre élément `ul`.
 
 ```js
 assert.equal($('ul li').length, 3);
 ```
 
-You should have three `li` elements within your `ol` element.
+Vous devriez avoir trois éléments `li` dans votre élément `ol`.
 
 ```js
 assert.equal($('ol li').length, 3);
 ```
 
-Your `ul` element should have a closing tag.
+Votre élément `ul` doit avoir une balise de fermeture.
 
 ```js
 assert(
@@ -75,7 +75,7 @@ assert(
 );
 ```
 
-Your `ol` element should have a closing tag.
+Votre élément `ol` doit avoir une balise de fermeture.
 
 ```js
 assert(
@@ -84,7 +84,7 @@ assert(
 );
 ```
 
-Your `li` element should have a closing tag.
+Votre élément `li` doit avoir une balise de fermeture.
 
 ```js
 assert(
@@ -94,7 +94,7 @@ assert(
 );
 ```
 
-The `li` elements in your unordered list should not be empty.
+Les éléments `li` de votre liste non ordonnée ne doivent pas être vides.
 
 ```js
 $('ul li').each((i, val) =>
@@ -102,7 +102,7 @@ $('ul li').each((i, val) =>
 );
 ```
 
-The `li` elements in your ordered list should not be empty.
+Les éléments `li` de votre liste ordonnée ne doivent pas être vides.
 
 ```js
 $('ol li').each((i, val) =>
@@ -117,17 +117,17 @@ $('ol li').each((i, val) =>
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
   <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
 
-  <p>Things cats love:</p>
+  <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
 
 </main>
 ```
@@ -137,17 +137,17 @@ $('ol li').each((i, val) =>
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
   <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
 
-  <p>Things cats love:</p>
+  <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
   <ol>
     <li>hate 1</li>
     <li>hate 2</li>
