@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aede08835
-title: Nest Many Elements within a Single div Element
+title: Intégration de plusieurs éléments dans un seul élément div
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVMPUv/cNW4kC3'
 forumTopicId: 18246
@@ -9,39 +9,39 @@ dashedName: nest-many-elements-within-a-single-div-element
 
 # --description--
 
-The `div` element, also known as a division element, is a general purpose container for other elements.
+L'élément `div`, également connu sous le nom d'élément de division, est un conteneur à usage général pour d'autres éléments.
 
-The `div` element is probably the most commonly used HTML element of all.
+L'élément `div` est probablement l'élément HTML le plus utilisé de tous.
 
-Just like any other non-self-closing element, you can open a `div` element with `<div>` and close it on another line with `</div>`.
+Comme tout autre élément non auto-fermant, vous pouvez ouvrir un élément `div` avec `<div>` et le fermer sur une autre ligne avec `</div>`. 
 
 # --instructions--
 
-Nest your "Things cats love" and "Top 3 things cats hate" lists all within a single `div` element.
+Placez vos listes "Les choses que les chats aiment" et "Les 3 choses que les chats détestent le plus" dans un seul élément `div`.
 
-Hint: Try putting your opening `div` tag above your "Things cats love" `p` element and your closing `div` tag after your closing `ol` tag so that both of your lists are within one `div`.
+Indice : essayez de placer votre balise `div` d'ouverture au-dessus de votre élément `p` "Les choses que les chats aiment" et votre balise `div` de fermeture après votre balise `ol` de fermeture, de sorte que vos deux listes se trouvent dans un seul `div`.
 
 # --hints--
 
-Your `p` elements should be nested inside your `div` element.
+Vos éléments `p` doivent être imbriqués dans votre élément `div`.
 
 ```js
 assert($('div').children('p').length > 1);
 ```
 
-Your `ul` element should be nested inside your `div` element.
+Votre élément `ul` doit être incorporé dans votre élément `div`.
 
 ```js
 assert($('div').children('ul').length > 0);
 ```
 
-Your `ol` element should be nested inside your `div` element.
+Votre élément `ol` doit être imbriqué dans votre élément `div`.
 
 ```js
 assert($('div').children('ol').length > 0);
 ```
 
-Your `div` element should have a closing tag.
+Votre élément `div` doit avoir une balise de fermeture.
 
 ```js
 assert(
@@ -57,21 +57,21 @@ assert(
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
   <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
 
-  <p>Things cats love:</p>
+  <p>Les choses que les chats aiment:</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Les 3 choses que les chats détestent le plus:</p>
   <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
+    <li>le traitement des puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
   </ol>
 
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
@@ -91,22 +91,22 @@ assert(
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
   
   <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
   <div>
-    <p>Things cats love:</p>
-    <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
-    </ul>
-    <p>Top 3 things cats hate:</p>
-    <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
-    </ol>
+    <p>Les choses que les chats aiment:</p>
+  <ul>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
+  </ul>
+    <p>Les 3 choses que les chats détestent le plus:</p>
+  <ol>
+    <li>le traitement des puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
+  </ol>
   </div>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
     <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor" value="indoor" checked> Indoor</label>
