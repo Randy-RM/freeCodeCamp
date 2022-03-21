@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aedf08817
-title: Make Dead Links Using the Hash Symbol
+title: Créer des liens morts en utilisant le symbole du dièse
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVMPUv/cMdkytL'
 forumTopicId: 18230
@@ -9,19 +9,19 @@ dashedName: make-dead-links-using-the-hash-symbol
 
 # --description--
 
-Sometimes you want to add `a` elements to your website before you know where they will link.
+Parfois, vous voulez ajouter des éléments `a` à votre site Web avant de savoir où ils seront liés.
 
-This is also handy when you're changing the behavior of a link using `JavaScript`, which we'll learn about later.
+C'est également pratique lorsque vous modifiez le comportement d'un lien à l'aide de `JavaScript`, dont nous parlerons plus tard.
 
 # --instructions--
 
-The current value of the `href` attribute is a link that points to "`https://www.freecatphotoapp.com`". Replace the `href` attribute value with a `#`, also known as a hash symbol, to create a dead link.
+La valeur actuelle de l'attribut `href` est un lien qui pointe vers "`https://www.freecatphotoapp.com`". Remplacez la valeur de l'attribut `href` par un `#`, également connu sous le nom de symbole de dièse, pour créer un lien mort.
 
-For example: `href="#"`
+Par exemple : `href="#"`
 
 # --hints--
 
-Your `a` element should be a dead link with the value of the `href` attribute set to "#".
+Votre élément `a` doit être un lien mort dont la valeur de l'attribut `href` est fixée à "#".
 
 ```js
 assert($('a').attr('href') === '#');
@@ -34,7 +34,7 @@ assert($('a').attr('href') === '#');
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="https://www.freecatphotoapp.com" target="_blank">cat photos</a>.</p>
+  <p>Cliquez ici pour voir plus de <a href="https://www.freecatphotoapp.com" target="_blank">photos de chats</a>.</p>.
 
   <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back.">
 
@@ -48,7 +48,7 @@ assert($('a').attr('href') === '#');
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#" target="_blank">cat photos</a>.</p>
+  <p>Cliquez ici pour voir plus de <a href="#" target="_blank">photos de chats</a>.</p>.
   
   <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back.">
   
