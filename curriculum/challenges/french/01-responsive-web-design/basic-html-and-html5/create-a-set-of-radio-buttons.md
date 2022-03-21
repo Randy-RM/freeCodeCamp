@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aedf08834
-title: Create a Set of Radio Buttons
+title: Créer un ensemble de boutons radio
 challengeType: 0
 forumTopicId: 16822
 dashedName: create-a-set-of-radio-buttons
@@ -8,15 +8,15 @@ dashedName: create-a-set-of-radio-buttons
 
 # --description--
 
-You can use <dfn>radio buttons</dfn> for questions where you want the user to only give you one answer out of multiple options.
+Vous pouvez utiliser les <dfn>boutons radio</dfn> pour les questions où vous souhaitez que l'utilisateur ne vous donne qu'une seule réponse parmi plusieurs options.
 
-Radio buttons are a type of `input`.
+Les boutons radio sont un type de `input`.
 
-Each of your radio buttons can be nested within its own `label` element. By wrapping an `input` element inside of a `label` element it will automatically associate the radio button input with the label element surrounding it.
+Chacun de vos boutons radio peut être imbriqué dans son propre élément `label`. En enveloppant un élément `input` à l'intérieur d'un élément `label`, le bouton radio sera automatiquement associé à l'élément label qui l'entoure.
 
-All related radio buttons should have the same `name` attribute to create a radio button group. By creating a radio group, selecting any single radio button will automatically deselect the other buttons within the same group ensuring only one answer is provided by the user.
+Tous les boutons radio associés doivent avoir le même attribut `name` pour créer un groupe de boutons radio. En créant un groupe de boutons radio, la sélection d'un seul bouton radio désélectionnera automatiquement les autres boutons du même groupe, garantissant ainsi qu'une seule réponse sera fournie par l'utilisateur.
 
-Here's an example of a radio button:
+Voici un exemple de bouton radio :
 
 ```html
 <label> 
@@ -24,14 +24,14 @@ Here's an example of a radio button:
 </label>
 ```
 
-It is considered best practice to set a `for` attribute on the `label` element, with a value that matches the value of the `id` attribute of the `input` element. This allows assistive technologies to create a linked relationship between the label and the related `input` element. For example:
+La meilleure pratique consiste à définir un attribut `for` sur l'élément `label`, dont la valeur correspond à celle de l'attribut `id` de l'élément `input`. Cela permet aux technologies d'assistance de créer un lien entre le label et l'élément `input` correspondant. Par exemple :
 
 ```html
 <input id="indoor" type="radio" name="indoor-outdoor">
 <label for="indoor">Indoor</label>
 ```
 
-We can also nest the `input` element within the `label` tags:
+Nous pouvons également imbriquer l'élément `input` dans les balises `label` :
 
 ```html
 <label for="indoor"> 
@@ -41,29 +41,29 @@ We can also nest the `input` element within the `label` tags:
 
 # --instructions--
 
-Add a pair of radio buttons to your form, each nested in its own `label` element. One should have the option of `indoor` and the other should have the option of `outdoor`. Both should share the `name` attribute of `indoor-outdoor` to create a radio group.
+Ajoutez une paire de boutons radio à votre formulaire, chacun étant imbriqué dans son propre élément `label`. L'un d'eux doit avoir l'option `indoor` et l'autre l'option `outdoor`. Les deux doivent partager l'attribut `name` de `indoor-outdoor` pour créer un groupe de radios.
 
 # --hints--
 
-Your page should have two `radio` button elements.
+Votre page doit comporter deux éléments boutons `radio`.
 
 ```js
 assert($('input[type="radio"]').length > 1);
 ```
 
-Your radio buttons should be given the `name` attribute of `indoor-outdoor`.
+Vos boutons radio doivent posséder l'attribut `name` égal à `indoor-outdoor`.
 
 ```js
 assert($('input[type="radio"]').filter("[name='indoor-outdoor']").length > 1);
 ```
 
-Each of your two radio button elements should be nested in its own `label` element.
+Chacun de vos deux éléments de bouton radio doit être imbriqué dans son propre élément `label`.
 
 ```js
 assert($('label > input[type="radio"]:only-child').length > 1);
 ```
 
-Each of your `label` elements should have a closing tag.
+Chacun de vos éléments `label` doit avoir une balise de fermeture.
 
 ```js
 assert(
@@ -73,7 +73,7 @@ assert(
 );
 ```
 
-One of your radio buttons should have the label `indoor`.
+L'un de vos boutons radio devrait avoir le label `indoor`.
 
 ```js
 assert(
@@ -83,7 +83,7 @@ assert(
 );
 ```
 
-One of your radio buttons should have the label `outdoor`.
+L'un de vos boutons radio devrait avoir le label "extérieur".
 
 ```js
 assert(
@@ -93,7 +93,7 @@ assert(
 );
 ```
 
-Each of your radio button elements should be added within the `form` tag.
+Chacun de vos éléments de bouton radio doit être ajouté dans la balise `form`.
 
 ```js
 assert($('label').parent().get(0).tagName.match('FORM'));
@@ -106,25 +106,25 @@ assert($('label').parent().get(0).tagName.match('FORM'));
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+ <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
   <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
 
-  <p>Things cats love:</p>
+ <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
   <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
+    <li>le traitement des puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
     <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
+    <button type="submit">Soumettre</button>
   </form>
 </main>
 ```
@@ -134,27 +134,27 @@ assert($('label').parent().get(0).tagName.match('FORM'));
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
   
   <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
   
-  <p>Things cats love:</p>
+  <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
   <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
+    <li>le traitement des puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor"> Indoor</label>
     <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor"> Outdoor</label><br>
     <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
+    <button type="submit">Soumettre</button>
   </form>
 </main>
 ```
