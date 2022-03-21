@@ -1,6 +1,6 @@
 ---
 id: 587d78aa367417b2b2512aed
-title: Declare the Doctype of an HTML Document
+title: Déclarer le Doctype d'un document HTML
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVMPUv/cra98AJ'
 forumTopicId: 301095
@@ -9,17 +9,17 @@ dashedName: declare-the-doctype-of-an-html-document
 
 # --description--
 
-The challenges so far have covered specific HTML elements and their uses. However, there are a few elements that give overall structure to your page, and should be included in every HTML document.
+Les défis relevés jusqu'à présent ont porté sur des éléments HTML spécifiques et leurs utilisations. Cependant, il existe quelques éléments qui donnent une structure globale à votre page et qui devraient être inclus dans chaque document HTML.
 
-At the top of your document, you need to tell the browser which version of HTML your page is using. HTML is an evolving language, and is updated regularly. Most major browsers support the latest specification, which is HTML5. However, older web pages may use previous versions of the language.
+En haut de votre document, vous devez indiquer au navigateur quelle version de HTML votre page utilise. Le langage HTML évolue et est régulièrement mis à jour. La plupart des principaux navigateurs prennent en charge la dernière spécification, à savoir le HTML5. Toutefois, des pages Web plus anciennes peuvent utiliser des versions antérieures du langage.
 
-You tell the browser this information by adding the `<!DOCTYPE ...>` tag on the first line, where the `...` part is the version of HTML. For HTML5, you use `<!DOCTYPE html>`.
+Vous indiquez cette information au navigateur en ajoutant la balise `<!DOCTYPE ...>` sur la première ligne, où la partie `...` est la version du HTML. Pour HTML5, vous utilisez `<!DOCTYPE html>`.
 
-The `!` and uppercase `DOCTYPE` is important, especially for older browsers. The `html` is not case sensitive.
+Le `!` et la majuscule de `DOCTYPE` sont importants, surtout pour les anciens navigateurs. Le `html` n'est pas sensible à la casse.
 
-Next, the rest of your HTML code needs to be wrapped in `html` tags. The opening `<html>` goes directly below the `<!DOCTYPE html>` line, and the closing `</html>` goes at the end of the page.
+Ensuite, le reste de votre code HTML doit être entouré de balises `html`. La balise d'ouverture `<html>` va directement sous la ligne `<!DOCTYPE html>`, et la balise de fermeture `</html>` va à la fin de la page.
 
-Here's an example of the page structure. Your HTML code would go in the space between the two `html` tags.
+Voici un exemple de la structure d'une page. Votre code HTML doit être placé dans l'espace entre les deux balises `html`.
 
 ```html
 <!DOCTYPE html>
@@ -30,23 +30,23 @@ Here's an example of the page structure. Your HTML code would go in the space be
 
 # --instructions--
 
-Add a `DOCTYPE` tag for HTML5 to the top of the blank HTML document in the code editor. Under it, add opening and closing `html` tags, which wrap around an `h1` element. The heading can include any text.
+Ajoutez une balise `DOCTYPE` pour HTML5 en haut du document HTML vierge dans l'éditeur de code. Sous cette balise, ajoutez les balises ouvrantes et fermantes `html`, qui entourent un élément `h1`. L'en-tête peut contenir n'importe quel texte.
 
 # --hints--
 
-Your code should include a `<!DOCTYPE html>` tag.
+Votre code doit inclure une balise `<!DOCTYPE html>`.
 
 ```js
 assert(code.match(/<!DOCTYPE\s+?html\s*?>/gi));
 ```
 
-There should be one `html` element.
+Il doit y avoir un élément `html`.
 
 ```js
 assert($('html').length == 1);
 ```
 
-The `html` tags should wrap around one `h1` element.
+Les balises `html` doivent entourer un élément `h1`.
 
 ```js
 assert(code.match(/<html>\s*?<h1>\s*?.*?\s*?<\/h1>\s*?<\/html>/gi));
