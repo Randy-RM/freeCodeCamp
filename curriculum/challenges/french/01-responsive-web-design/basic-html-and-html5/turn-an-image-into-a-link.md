@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aedf08820
-title: Turn an Image into a Link
+title: Transformer une image en lien
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVMPUv/cRdBnUr'
 forumTopicId: 18327
@@ -9,37 +9,37 @@ dashedName: turn-an-image-into-a-link
 
 # --description--
 
-You can make elements into links by nesting them within an `a` element.
+Vous pouvez transformer des éléments en liens en les imbriquant dans un élément `a`.
 
-Nest your image within an `a` element. Here's an example:
+Placez votre image dans un élément `a`. Voici un exemple :
 
 ```html
 <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="Three kittens running towards the camera."></a>
 ```
 
-Remember to use `#` as your `a` element's `href` property in order to turn it into a dead link.
+N'oubliez pas d'utiliser `#` comme propriété `href` de votre élément `a` afin de le transformer en lien mort.
 
 # --instructions--
 
-Place the existing image element within an `a` (*anchor*) element.
+Placez l'élément image existant dans un élément `a` (*ancre*).
 
-Once you've done this, hover over your image with your cursor. Your cursor's normal pointer should become the link clicking pointer. The photo is now a link.
+Une fois que vous avez fait cela, survolez votre image avec votre curseur. Le pointeur normal de votre curseur devrait devenir le pointeur de clic du lien. La photo est maintenant un lien.
 
 # --hints--
 
-The existing `img` element should be nested within an `a` element.
+L'élément `img` existant doit être imbriqué dans un élément `a`.
 
 ```js
 assert($('a').children('img').length > 0);
 ```
 
-Your `a` element should be a dead link with a `href` attribute set to `#`.
+Votre élément `a` doit être un lien mort dont l'attribut `href` est fixé à `#`.
 
 ```js
 assert(new RegExp('#').test($('a').children('img').parent().attr('href')));
 ```
 
-Each of your `a` elements should have a closing tag.
+Chacun de vos éléments `a` doit avoir une balise de fermeture.
 
 ```js
 assert(
@@ -56,7 +56,7 @@ assert(
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  </p>Cliquez ici pour voir plus de <a href="#">photos de chats</a>.</p>
 
   <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back.">
 
@@ -70,7 +70,7 @@ assert(
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  </p>Cliquez ici pour voir plus de <a href="#">photos de chats</a>.</p>
   
   <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
   
