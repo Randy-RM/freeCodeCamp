@@ -1,6 +1,6 @@
 ---
 id: 5c6c06847491271903d37cfd
-title: Use the value attribute with Radio Buttons and Checkboxes
+title: Utilisez l'attribut value avec les boutons radio et les cases à cocher.
 challengeType: 0
 forumTopicId: 301099
 dashedName: use-the-value-attribute-with-radio-buttons-and-checkboxes
