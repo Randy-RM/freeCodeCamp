@@ -49,6 +49,8 @@ interface BlockProps {
   executeGA: typeof executeGA;
   isExpanded: boolean;
   superBlock: SuperBlocks;
+  blockIndex: number;
+  isLastVisited: boolean;
   t: TFunction;
   toggleBlock: typeof toggleBlock;
 }
@@ -101,6 +103,8 @@ export class Block extends Component<BlockProps> {
       challenges,
       isExpanded,
       superBlock,
+      blockIndex,
+      isLastVisited,
       t
     } = this.props;
 
@@ -156,6 +160,18 @@ export class Block extends Component<BlockProps> {
       (completedCount / challengesWithCompleted.length) * 100
     );
 
+    const challengeCompleted = challengesWithCompleted.filter(
+      challenge => challenge.isCompleted === true
+    );
+
+    const challengeInCompleted = challengesWithCompleted.filter(
+      challenge => challenge.isCompleted === false
+    );
+
+    console.log(blockDashedName);
+    console.log(challengeCompleted[challengeCompleted.length - 1]);
+    console.log(challengeInCompleted[0]);
+
     const progressBarRender = (
       <div className='progress-wrapper'>
         <ProgressBar now={percentageComplated} />
@@ -165,53 +181,67 @@ export class Block extends Component<BlockProps> {
 
     const Block = (
       <>
-        {' '}
-        <ScrollableAnchor id={blockDashedName}>
-          <div className={`block ${isExpanded ? 'open' : ''}`}>
-            <div className='block-header'>
-              <a className='block-link' href={`#${blockDashedName}`}>
-                <h3 className='big-block-title'>
-                  {blockTitle}
-                  <span className='block-link-icon'>#</span>
-                </h3>
-              </a>
-              {!isAuditedCert(curriculumLocale, superBlock) && (
-                <div className='block-cta-wrapper'>
-                  <Link
-                    className='block-title-translation-cta'
-                    to={t('links:help-translate-link-url')}
-                  >
-                    {t('misc.translation-pending')}
-                  </Link>
+        {isLastVisited ? (
+          <>
+            <h1>Je suis là</h1>
+          </>
+        ) : (
+          <>
+            {' '}
+            <ScrollableAnchor id={blockDashedName}>
+              <div className={`block ${isExpanded ? 'open' : ''}`}>
+                <div className='block-header'>
+                  <div>
+                    <span className='bloc-index'>{blockIndex}</span> &nbsp;
+                    &nbsp;{' '}
+                  </div>
+                  <div>
+                    <a className='block-link' href={`#${blockDashedName}`}>
+                      <h3 className='big-block-title'>
+                        {blockTitle}
+                        <span className='block-link-icon'>#</span>
+                      </h3>
+                    </a>
+                  </div>
+                  {!isAuditedCert(curriculumLocale, superBlock) && (
+                    <div className='block-cta-wrapper'>
+                      <Link
+                        className='block-title-translation-cta'
+                        to={t('links:help-translate-link-url')}
+                      >
+                        {t('misc.translation-pending')}
+                      </Link>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-            {this.renderBlockIntros(blockIntroArr)}
-            <button
-              aria-expanded={isExpanded}
-              className='map-title'
-              onClick={() => {
-                this.handleBlockClick();
-              }}
-            >
-              <Caret />
-              <h4 className='course-title'>
-                {`${isExpanded ? collapseText : expandText}`}
-              </h4>
-              <div className='map-title-completed course-title'>
-                {this.renderCheckMark(isBlockCompleted)}
-                <span className='map-completed-count'>{`${completedCount}/${challengesWithCompleted.length}`}</span>
+                {this.renderBlockIntros(blockIntroArr)}
+                <button
+                  aria-expanded={isExpanded}
+                  className='map-title'
+                  onClick={() => {
+                    this.handleBlockClick();
+                  }}
+                >
+                  <Caret />
+                  <h4 className='course-title'>
+                    {`${isExpanded ? collapseText : expandText}`}
+                  </h4>
+                  <div className='map-title-completed course-title'>
+                    {this.renderCheckMark(isBlockCompleted)}
+                    <span className='map-completed-count'>{`${completedCount}/${challengesWithCompleted.length}`}</span>
+                  </div>
+                </button>
+                {isExpanded && (
+                  <Challenges
+                    challengesWithCompleted={challengesWithCompleted}
+                    isProjectBlock={isProjectBlock}
+                    superBlock={superBlock}
+                  />
+                )}
               </div>
-            </button>
-            {isExpanded && (
-              <Challenges
-                challengesWithCompleted={challengesWithCompleted}
-                isProjectBlock={isProjectBlock}
-                superBlock={superBlock}
-              />
-            )}
-          </div>
-        </ScrollableAnchor>
+            </ScrollableAnchor>
+          </>
+        )}
       </>
     );
 
@@ -325,8 +355,11 @@ export class Block extends Component<BlockProps> {
     );
 
     const blockrenderer = () => {
-      if (isProjectBlock)
-        return isNewResponsiveWebDesign ? GridProjectBlock : ProjectBlock;
+      if (isProjectBlock) {
+        if (!isLastVisited) {
+          return isNewResponsiveWebDesign ? GridProjectBlock : ProjectBlock;
+        }
+      }
       return isNewResponsiveWebDesign ? GridBlock : Block;
     };
 
