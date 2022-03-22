@@ -8,9 +8,9 @@ dashedName: use-the-value-attribute-with-radio-buttons-and-checkboxes
 
 # --description--
 
-When a form gets submitted, the data is sent to the server and includes entries for the options selected. Inputs of type `radio` and `checkbox` report their values from the `value` attribute.
+Lorsqu'un formulaire est soumis, les données sont envoyées au serveur et comprennent des entrées pour les options sélectionnées. Les entrées de type `radio` et `checkbox` renvoient leurs valeurs à partir de l'attribut `value`.
 
-For example:
+Par exemple :
 
 ```html
 <label for="indoor">
@@ -21,17 +21,17 @@ For example:
 </label>
 ```
 
-Here, you have two `radio` inputs. When the user submits the form with the `indoor` option selected, the form data will include the line: `indoor-outdoor=indoor`. This is from the `name` and `value` attributes of the "indoor" input.
+Ici, vous avez deux entrées `radio`. Lorsque l'utilisateur soumet le formulaire avec l'option `indoor` sélectionnée, les données du formulaire comprendront la ligne : `indoor-outdoor=indoor`. Cela provient des attributs `name` et `value` de l'entrée "indoor".
 
-If you omit the `value` attribute, the submitted form data uses the default value, which is `on`. In this scenario, if the user clicked the "indoor" option and submitted the form, the resulting form data would be `indoor-outdoor=on`, which is not useful. So the `value` attribute needs to be set to something to identify the option.
+Si vous omettez l'attribut `value`, les données du formulaire soumis utilisent la valeur par défaut, qui est `on`. Dans ce scénario, si l'utilisateur clique sur l'option "indoor" et soumet le formulaire, les données de formulaire résultantes seront `indoor-outdoor=on`, ce qui n'est pas utile. L'attribut "value" doit donc être défini sur une valeur permettant d'identifier l'option.
 
 # --instructions--
 
-Give each of the existing `radio` and `checkbox` inputs the `value` attribute. Do not create any new radio or checkbox elements. Use the input label text, in lowercase, as the value for the attribute.
+Donnez à chacune des entrées existantes `radio` et `checkbox` l'attribut `value`. Ne créez pas de nouveaux éléments radio ou case à cocher. Utilisez le texte du label de l'entrée, en minuscules, comme valeur de l'attribut.
 
 # --hints--
 
-One of your radio buttons should have the `value` attribute of `indoor`.
+L'un de vos boutons radio doit avoir l'attribut `value` de `indoor`.
 
 ```js
 assert(
@@ -40,7 +40,7 @@ assert(
 );
 ```
 
-One of your radio buttons should have the `value` attribute of `outdoor`.
+L'un de vos boutons radio doit avoir l'attribut `value` avec la valeur `outdoor`.
 
 ```js
 assert(
@@ -50,7 +50,7 @@ assert(
 );
 ```
 
-One of your checkboxes should have the `value` attribute of `loving`.
+L'une de vos cases à cocher doit avoir l'attribut `value` avec la valeur `loving`.
 
 ```js
 assert(
@@ -60,7 +60,7 @@ assert(
 );
 ```
 
-One of your checkboxes should have the `value` attribute of `lazy`.
+L'une de vos cases à cocher devrait avoir l'attribut `value` de `lazy`.
 
 ```js
 assert(
@@ -69,7 +69,7 @@ assert(
 );
 ```
 
-One of your checkboxes should have the `value` attribute of `energetic`.
+L'une de vos cases à cocher doit avoir l'attribut `value` avec la valeur `energetic`.
 
 ```js
 assert(
@@ -86,21 +86,21 @@ assert(
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  </p>Cliquez ici pour voir plus de <a href="#">photos de chats</a>.</p>
 
   <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
 
-  <p>Things cats love:</p>
+  <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
   <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
+    <li>le traitement contre les puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
     <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor"> Indoor</label>
@@ -119,21 +119,21 @@ assert(
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  </p>Cliquez ici pour voir plus de <a href="#">photos de chats</a>.</p>
 
   <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
 
-  <p>Things cats love:</p>
+  <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
   <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
+    <li>le traitement contre les puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
     <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor" value="indoor"> Indoor</label>
