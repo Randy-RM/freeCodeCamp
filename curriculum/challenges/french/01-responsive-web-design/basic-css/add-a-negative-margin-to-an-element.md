@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aedf08823
-title: Add a Negative Margin to an Element
+title: Ajouter une marge négative à un élément
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cnpyGs3'
 forumTopicId: 16166
@@ -9,19 +9,19 @@ dashedName: add-a-negative-margin-to-an-element
 
 # --description--
 
-An element's `margin` controls the amount of space between an element's `border` and surrounding elements.
+La marge d'un élément contrôle la quantité d'espace entre la bordure de l'élément et les éléments qui l'entourent.
 
-If you set an element's `margin` to a negative value, the element will grow larger.
+Si vous définissez la marge d'un élément à une valeur négative, l'élément s'agrandira.
 
 # --instructions--
 
-Try to set the `margin` to a negative value like the one for the red box.
+Essayez de définir la "marge" sur une valeur négative comme celle de la boîte rouge.
 
-Change the `margin` of the blue box to `-15px`, so it fills the entire horizontal width of the yellow box around it.
+Changez la "marge" de la boîte bleue à "15px", afin qu'elle remplisse toute la largeur horizontale de la boîte jaune qui l'entoure.
 
 # --hints--
 
-Your `blue-box` class should give elements `-15px` of `margin`.
+Votre classe `blue-box` devrait donner aux éléments `-15px` de `margin`.
 
 ```js
 assert($('.blue-box').css('margin-top') === '-15px');
