@@ -85,7 +85,7 @@
   width: 0;
   overflow: hidden;
   position: relative;
-  background-color: var(--love-light);
+  background-color: var(--primary-color);
   transition: width 0ms linear;
 }
 
