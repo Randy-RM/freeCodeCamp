@@ -562,7 +562,7 @@ hr {
 }
 
 .progress-bar {
-  background: var(--love-light);
+  background: var(--primary-color);
 }
 
 @media (max-width: 769px) {

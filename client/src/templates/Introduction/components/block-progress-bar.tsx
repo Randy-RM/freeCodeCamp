@@ -68,7 +68,11 @@ export class BlockProgressBar extends Component<BlockProps> {
       <>
         <div className='progress-wrapper'>
           <h2>
-            <span>{`${percentageComplated}% parcouru`}</span>
+            <span>{`${percentageComplated}% ${
+              percentageComplated === 0 || percentageComplated === 1
+                ? 'achevé'
+                : 'achevés'
+            }`}</span>
           </h2>
           <br />
           <ProgressBar now={percentageComplated} animated />
