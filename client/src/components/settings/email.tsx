@@ -19,9 +19,6 @@ import { maybeEmailRE } from '../../utils';
 
 import BlockSaveButton from '../helpers/form/block-save-button';
 import FullWidthRow from '../helpers/full-width-row';
-import Spacer from '../helpers/spacer';
-import SectionHeader from './section-header';
-import ToggleSetting from './toggle-setting';
 
 const mapStateToProps = () => ({});
 const mapDispatchToProps = (dispatch: Dispatch) =>
@@ -46,10 +43,7 @@ interface EmailForm {
 function EmailSettings({
   email,
   isEmailVerified,
-  sendQuincyEmail,
-  t,
-  updateMyEmail,
-  updateQuincyEmail
+  updateMyEmail
 }: EmailProps): JSX.Element {
   const [emailForm, setEmailForm] = useState<EmailForm>({
     currentEmail: email,
@@ -88,7 +82,7 @@ function EmailSettings({
     if (newEmail === currentEmail) {
       return {
         state: 'error',
-        message: t('validation.same-email')
+        message: 'Cet email est le même que votre email actuel'
       };
     }
     if (isEmail(newEmail)) {
@@ -96,7 +90,8 @@ function EmailSettings({
     } else {
       return {
         state: 'error',
-        message: t('validation.invalid-email')
+        message:
+          "Nous n'avons pas pu valider votre e-mail correctement, veuillez vous assurer qu'il est correct."
       };
     }
   }
@@ -113,7 +108,9 @@ function EmailSettings({
     if (maybeEmailRE.test(confirmNewEmail)) {
       return {
         state: isMatch ? 'success' : 'error',
-        message: isMatch ? '' : t('validation.email-mismatch')
+        message: isMatch
+          ? ''
+          : 'Les deux nouvelles adresses électroniques doivent être les mêmes'
       };
     } else {
       return {
@@ -137,12 +134,14 @@ function EmailSettings({
     return (
       <div>
         <FullWidthRow>
-          <p className='large-p text-center'>{t('settings.email.missing')}</p>
+          <p className='large-p text-center'>
+            {"Vous n'avez pas d'adresse électronique associée à ce compte."}
+          </p>
         </FullWidthRow>
         <FullWidthRow>
           <Link style={{ textDecoration: 'none' }} to='/update-email'>
             <Button block={true} bsSize='lg' bsStyle='primary'>
-              {t('buttons.edit')}
+              {'Modifier'}
             </Button>
           </Link>
         </FullWidthRow>
@@ -151,32 +150,27 @@ function EmailSettings({
   }
   return (
     <div className='email-settings'>
-      <SectionHeader>{t('settings.email.heading')}</SectionHeader>
       {isEmailVerified ? null : (
-        <FullWidthRow>
+        <div>
           <HelpBlock>
-            <Alert
-              bsStyle='info'
-              className='text-center'
-              closeLabel={t('buttons.close')}
-            >
-              {t('settings.email.not-verified')}
+            <Alert bsStyle='info' className='text-center' closeLabel={'Fermer'}>
+              {"Votre courriel n'a pas été vérifié."}
               <br />
               <Trans i18nKey='settings.email.check'>
                 <Link to='/update-email' />
               </Trans>
             </Alert>
           </HelpBlock>
-        </FullWidthRow>
+        </div>
       )}
-      <FullWidthRow>
+      <div>
         <form id='form-update-email' onSubmit={handleSubmit}>
           <FormGroup controlId='current-email'>
-            <ControlLabel>{t('settings.email.current')}</ControlLabel>
+            <ControlLabel>{'Email actuel'}</ControlLabel>
             <FormControl.Static>{currentEmail}</FormControl.Static>
           </FormGroup>
           <FormGroup controlId='new-email' validationState={newEmailValidation}>
-            <ControlLabel>{t('settings.email.new')}</ControlLabel>
+            <ControlLabel>{'Nouvel email'}</ControlLabel>
             <FormControl
               onChange={createHandleEmailFormChange('newEmail')}
               type='email'
@@ -184,13 +178,15 @@ function EmailSettings({
             />
             {newEmailValidationMessage ? (
               <HelpBlock>{newEmailValidationMessage}</HelpBlock>
-            ) : null}
+            ) : (
+              <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+            )}
           </FormGroup>
           <FormGroup
             controlId='confirm-email'
             validationState={confirmEmailValidation}
           >
-            <ControlLabel>{t('settings.email.confirm')}</ControlLabel>
+            <ControlLabel>{'Confirmer le nouvel email'}</ControlLabel>
             <FormControl
               onChange={createHandleEmailFormChange('confirmNewEmail')}
               type='email'
@@ -198,7 +194,9 @@ function EmailSettings({
             />
             {confirmEmailValidationMessage ? (
               <HelpBlock>{confirmEmailValidationMessage}</HelpBlock>
-            ) : null}
+            ) : (
+              <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+            )}
           </FormGroup>
           <BlockSaveButton
             disabled={
@@ -208,20 +206,7 @@ function EmailSettings({
             }
           />
         </form>
-      </FullWidthRow>
-      <Spacer />
-      <FullWidthRow>
-        <form id='form-quincy-email' onSubmit={handleSubmit}>
-          <ToggleSetting
-            action={t('settings.email.weekly')}
-            flag={sendQuincyEmail}
-            flagName='sendQuincyEmail'
-            offLabel={t('buttons.no-thanks')}
-            onLabel={t('buttons.yes-please')}
-            toggleFlag={() => updateQuincyEmail(!sendQuincyEmail)}
-          />
-        </form>
-      </FullWidthRow>
+      </div>
     </div>
   );
 }

@@ -653,3 +653,7 @@ blockquote .small {
 #search::placeholder {
   color: var(--secondary-color);
 }
+
+.none-help-block {
+  color: rgba(0, 0, 0, 0) !important;
+}

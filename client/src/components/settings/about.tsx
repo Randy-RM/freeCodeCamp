@@ -9,30 +9,29 @@ import React, { Component } from 'react';
 
 import { TFunction, withTranslation } from 'react-i18next';
 import isURL from 'validator/lib/isURL';
-import { FullWidthRow, Spacer } from '../helpers';
+import { Spacer } from '../helpers';
 import BlockSaveButton from '../helpers/form/block-save-button';
-import SoundSettings from './sound';
-import ThemeSettings, { Themes } from './theme';
-import UsernameSettings from './username';
 
 type FormValues = {
   name: string;
   location: string;
+  gender: string;
+  codeTime: string;
   picture: string;
   about: string;
 };
 
 type AboutProps = {
   about: string;
-  currentTheme: Themes;
   location: string;
   name: string;
+  gender: string;
+  codeTime: string;
   picture: string;
   points: number;
   sound: boolean;
   submitNewAbout: (formValues: FormValues) => void;
   t: TFunction;
-  toggleNightMode: (theme: Themes) => void;
   toggleSoundMode: (sound: boolean) => void;
   username: string;
 };
@@ -50,10 +49,19 @@ class AboutSettings extends Component<AboutProps, AboutState> {
   constructor(props: AboutProps) {
     super(props);
     this.validationImage = new Image();
-    const { name = '', location = '', picture = '', about = '' } = props;
+    const {
+      name = '',
+      location = '',
+      gender = '',
+      codeTime = '',
+      picture = '',
+      about = ''
+    } = props;
     const values = {
       name,
       location,
+      gender,
+      codeTime,
       picture,
       about
     };
@@ -66,12 +74,14 @@ class AboutSettings extends Component<AboutProps, AboutState> {
   }
 
   componentDidUpdate() {
-    const { name, location, picture, about } = this.props;
+    const { name, location, gender, codeTime, picture, about } = this.props;
     const { formValues, formClicked } = this.state;
     if (
       formClicked &&
       name === formValues.name &&
       location === formValues.location &&
+      gender === formValues.gender &&
+      codeTime === formValues.codeTime &&
       picture === formValues.picture &&
       about === formValues.about
     ) {
@@ -80,6 +90,8 @@ class AboutSettings extends Component<AboutProps, AboutState> {
         originalValues: {
           name,
           location,
+          gender,
+          codeTime,
           picture,
           about
         },
@@ -128,6 +140,26 @@ class AboutSettings extends Component<AboutProps, AboutState> {
       formValues: {
         ...state.formValues,
         location: value
+      }
+    }));
+  };
+
+  handleGenderChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement).value.slice(0);
+    return this.setState(state => ({
+      formValues: {
+        ...state.formValues,
+        gender: value
+      }
+    }));
+  };
+
+  handleCodeTimeChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement).value.slice(0);
+    return this.setState(state => ({
+      formValues: {
+        ...state.formValues,
+        codeTime: value
       }
     }));
   };
@@ -193,74 +225,95 @@ class AboutSettings extends Component<AboutProps, AboutState> {
 
   render() {
     const {
-      formValues: { name, location, picture, about }
+      formValues: { name, location, gender, codeTime, about }
     } = this.state;
-    const {
-      currentTheme,
-      sound,
-      username,
-      t,
-      toggleNightMode,
-      toggleSoundMode
-    } = this.props;
+
     return (
       <div className='about-settings'>
-        <UsernameSettings username={username} />
-        <br />
-        <FullWidthRow>
+        <div>
           <form id='camper-identity' onSubmit={this.handleSubmit}>
             <FormGroup controlId='about-name'>
               <ControlLabel>
-                <strong>{t('settings.labels.name')}</strong>
+                <strong>{'Nom complet'}</strong>
               </ControlLabel>
               <FormControl
                 onChange={this.handleNameChange}
                 type='text'
                 value={name}
               />
+              <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
             </FormGroup>
+
             <FormGroup controlId='about-location'>
               <ControlLabel>
-                <strong>{t('settings.labels.location')}</strong>
+                <strong>{'Adress'}</strong>
               </ControlLabel>
               <FormControl
                 onChange={this.handleLocationChange}
                 type='text'
                 value={location}
               />
+              <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
             </FormGroup>
-            <FormGroup controlId='about-picture'>
+
+            <FormGroup controlId='about-genre'>
               <ControlLabel>
-                <strong>{t('settings.labels.picture')}</strong>
+                <strong>{'Genre'}</strong>
               </ControlLabel>
               <FormControl
-                onChange={this.handlePictureChange}
-                type='url'
-                value={picture}
-              />
-              {this.showImageValidationWarning()}
+                componentClass='select'
+                onChange={this.handleGenderChange}
+              >
+                {gender.length === 0 ? (
+                  <option selected>Choisissez votre genre</option>
+                ) : (
+                  <option>Choisissez votre genre</option>
+                )}
+                {gender === 'Femme' ? (
+                  <option value='Femme' selected>
+                    Femme
+                  </option>
+                ) : (
+                  <option value='Femme'>Femme</option>
+                )}
+                {gender === 'Homme' ? (
+                  <option value='Homme' selected>
+                    Homme
+                  </option>
+                ) : (
+                  <option value='Homme'>Homme</option>
+                )}
+              </FormControl>
+              <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
             </FormGroup>
+
+            <FormGroup controlId='about-code'>
+              <ControlLabel>
+                <strong>{'Code depuis quand'}</strong>
+              </ControlLabel>
+              <FormControl
+                onChange={this.handleCodeTimeChange}
+                type='date'
+                value={codeTime}
+              />
+              <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+            </FormGroup>
+
             <FormGroup controlId='about-about'>
               <ControlLabel>
-                <strong>{t('settings.labels.about')}</strong>
+                <strong>{'Apropos'}</strong>
               </ControlLabel>
               <FormControl
                 componentClass='textarea'
                 onChange={this.handleAboutChange}
                 value={about}
               />
+              <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
             </FormGroup>
             <BlockSaveButton disabled={this.isFormPristine()} />
           </form>
-        </FullWidthRow>
+        </div>
         <Spacer />
-        <FullWidthRow>
-          <ThemeSettings
-            currentTheme={currentTheme}
-            toggleNightMode={toggleNightMode}
-          />
-          <SoundSettings sound={sound} toggleSoundMode={toggleSoundMode} />
-        </FullWidthRow>
       </div>
     );
   }

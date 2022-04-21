@@ -27,6 +27,8 @@ export default function settingsController(app) {
   api.post('/update-my-portfolio', ifNoUser401, updateMyPortfolio);
   api.post('/update-my-theme', deprecatedEndpoint);
   api.put('/update-my-about', ifNoUser401, updateMyAbout);
+  api.put('/update-my-education', ifNoUser401, updateMyEducation);
+  api.put('/update-my-work-experience', ifNoUser401, updateMyWorkExperience);
   api.put(
     '/update-my-email',
     ifNoUser401,
@@ -126,13 +128,35 @@ function updateMyProfileUI(req, res, next) {
 function updateMyAbout(req, res, next) {
   const {
     user,
-    body: { name, location, about, picture }
+    body: { name, location, gender, codeTime, about, picture }
   } = req;
-  log(name, location, picture, about);
+  log(name, location, gender, codeTime, picture, about);
   // prevent dataurls from being stored
   const update = isURL(picture, { require_protocol: true })
-    ? { name, location, about, picture }
-    : { name, location, about };
+    ? { name, location, gender, codeTime, about, picture }
+    : { name, location, gender, codeTime, about };
+  return user.updateAttributes(update, createStandardHandler(req, res, next));
+}
+
+function updateMyEducation(req, res, next) {
+  const {
+    user,
+    body: { fieldOfStudy, levelOfStudy }
+  } = req;
+  log(fieldOfStudy, levelOfStudy);
+  // prevent dataurls from being stored
+  const update = { fieldOfStudy, levelOfStudy };
+  return user.updateAttributes(update, createStandardHandler(req, res, next));
+}
+
+function updateMyWorkExperience(req, res, next) {
+  const {
+    user,
+    body: { employedWhere, sinceWhen, position }
+  } = req;
+  log(employedWhere, sinceWhen, position);
+  // prevent dataurls from being stored
+  const update = { employedWhere, sinceWhen, position };
   return user.updateAttributes(update, createStandardHandler(req, res, next));
 }
 

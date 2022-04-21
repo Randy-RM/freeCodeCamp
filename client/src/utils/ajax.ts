@@ -212,11 +212,32 @@ export function postWebhookToken(): Promise<void> {
 interface MyAbout {
   name: string;
   location: string;
+  gender: string;
+  codeTime: string;
   about: string;
   picture: string;
 }
 export function putUpdateMyAbout(values: MyAbout): Promise<void> {
   return put('/update-my-about', { ...values });
+}
+
+interface MyEducation {
+  fieldOfStudy: string;
+  levelOfStudy: string;
+}
+export function putUpdateMyEducation(values: MyEducation): Promise<void> {
+  return put('/update-my-education', { ...values });
+}
+
+interface MyWorkExperience {
+  employedWhere: string;
+  sinceWhen: string;
+  position: string;
+}
+export function putUpdateMyWorkExperience(
+  values: MyWorkExperience
+): Promise<void> {
+  return put('/update-my-work-experience', { ...values });
 }
 
 export function putUpdateMyUsername(username: string): Promise<void> {

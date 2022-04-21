@@ -47,6 +47,13 @@
   background: var(--love-light) !important;
 }
 
+.btn-secondary:disabled,
+.btn-secondary:disabled:hover {
+  border: solid 2px rgba(255, 255, 255, 0) !important;
+  background: var(--quaternary-background) !important;
+  color: var(--primary-color) !important;
+}
+
 .tool-panel-group-mobile {
   display: flex;
   position: fixed;
