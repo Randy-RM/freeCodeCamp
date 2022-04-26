@@ -64,6 +64,8 @@ function LearnLayout({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  console.log(user);
+
   useEffect(() => {
     return () => {
       const metaTag = document.querySelector(`meta[name="robots"]`);

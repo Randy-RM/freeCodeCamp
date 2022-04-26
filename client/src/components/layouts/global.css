@@ -657,3 +657,30 @@ blockquote .small {
 .none-help-block {
   color: rgba(0, 0, 0, 0) !important;
 }
+
+@media (max-width: 769px) {
+  .text-responsive {
+    font-size: 0.9rem !important;
+  }
+}
+
+.text-normal {
+  font-weight: 400 !important;
+}
+
+.fw-semi-bold {
+  font-weight: 600 !important;
+}
+
+.fw-bold {
+  font-weight: 700 !important;
+}
+
+.d-flex {
+  display: flex;
+  gap: 10%;
+}
+
+.justify-content-center {
+  justify-content: center;
+}

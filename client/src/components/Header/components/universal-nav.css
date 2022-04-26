@@ -75,6 +75,23 @@
   border: solid 2px var(--love-light);
 }
 
+.nav-list .nav-item .nav-signout-btn {
+  padding: 8px 10px;
+  text-decoration: none;
+  color: var(--love-light);
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0);
+  border: solid 2px var(--love-light);
+  transition: all 0.3s ease;
+}
+
+.nav-list .nav-item .nav-signout-btn:hover,
+.nav-list .nav-item .nav-signout-btn:focus {
+  color: var(--gray-00) !important;
+  background: var(--love-light) !important;
+  border: solid 2px var(--love-light);
+}
+
 .dropdown-nav-link {
   padding-left: 0;
   padding-right: 0;

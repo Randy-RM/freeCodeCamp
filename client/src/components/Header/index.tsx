@@ -72,8 +72,6 @@ export class Header extends React.Component<
           <UniversalNav
             displayMenu={displayMenu}
             fetchState={fetchState}
-            menuButtonRef={this.menuButtonRef}
-            searchBarRef={this.searchBarRef}
             toggleDisplayMenu={this.toggleDisplayMenu}
             user={user}
           />

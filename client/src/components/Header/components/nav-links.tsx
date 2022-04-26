@@ -17,7 +17,6 @@ import { connect } from 'react-redux';
 import envData from '../../../../../config/env.json';
 import { hardGoTo as navigate } from '../../../redux';
 import { Link } from '../../helpers';
-import AuthOrProfile from './auth-or-profile';
 
 const { apiLocation } = envData;
 
@@ -43,9 +42,7 @@ export class NavLinks extends Component<NavLinksProps, {}> {
   render() {
     const {
       fetchState,
-      t,
-      user: { username },
-      user
+      user: { username }
     }: NavLinksProps = this.props;
 
     const { pending } = fetchState;
@@ -60,8 +57,8 @@ export class NavLinks extends Component<NavLinksProps, {}> {
         <input type='checkbox' id='show-menu' />
         <ul className='nav-list'>
           <li className='nav-item'>
-            <Link className='active' key='learn' to='/'>
-              {t('buttons.curriculum')}
+            <Link className='' key='learn' to={'/'} activeClassName='active'>
+              {'Accueil'}
             </Link>
           </li>
 
@@ -70,11 +67,11 @@ export class NavLinks extends Component<NavLinksProps, {}> {
               <li className='nav-item'>
                 <Link
                   className=''
-                  key='profile'
-                  sameTab={false}
-                  to={`/${username}`}
+                  key='learn'
+                  to='/learn/responsive-web-design/'
+                  activeClassName='active'
                 >
-                  {t('buttons.profile')}
+                  {'Tableau de bord'}
                 </Link>
               </li>
 
@@ -84,15 +81,10 @@ export class NavLinks extends Component<NavLinksProps, {}> {
                   key='settings'
                   sameTab={false}
                   to={`/settings`}
+                  activeClassName='active'
                 >
-                  {t('buttons.settings')}
+                  {'Profile'}
                 </Link>
-              </li>
-
-              <li className='navatar'>
-                <div>
-                  <AuthOrProfile user={user} />
-                </div>
               </li>
             </Fragment>
           )}
@@ -104,7 +96,7 @@ export class NavLinks extends Component<NavLinksProps, {}> {
                 href={`${apiLocation}/signin`}
                 key='signin'
               >
-                {t('buttons.sign-in')}
+                {'Connexion'}
               </a>
             </li>
           )}
@@ -113,11 +105,11 @@ export class NavLinks extends Component<NavLinksProps, {}> {
             <Fragment key='signout-frag'>
               <li className='nav-item'>
                 <a
-                  className='nav-signin-btn'
+                  className='nav-signout-btn'
                   href={`${apiLocation}/signout`}
                   key='sign-out'
                 >
-                  {t('buttons.sign-out')}
+                  {'Déconnexion'}
                 </a>
               </li>
             </Fragment>

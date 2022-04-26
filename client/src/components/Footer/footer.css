@@ -213,3 +213,11 @@ p.footer-donation a:hover {
     background-color: var(--quaternary-background);
   }
 }
+
+.footer-logo {
+  width: 20%;
+}
+
+.footer-icon {
+  width: 1.5rem;
+}
