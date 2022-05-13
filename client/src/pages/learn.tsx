@@ -17,6 +17,8 @@ import {
 import AsSeenIn from '../components/landing/components/as-seen-in';
 import LandingTop from '../components/landing/components/landing-top';
 import LandingDetails from '../components/landing/components/landing-details';
+import LandingLearn from '../components/landing/components/landing-learn';
+import LandingGoals from '../components/landing/components/landing-goals';
 
 import '../components/landing/landing.css';
 
@@ -76,6 +78,14 @@ function LearnPage({ isSignedIn }: LearnPageProps) {
         <Grid>
           <LandingDetails />
         </Grid>
+        <Grid>
+          <LandingLearn />
+        </Grid>
+        <div className='bg-beige'>
+          <Grid>
+            <LandingGoals />
+          </Grid>
+        </div>
         <Grid fluid={true}>
           <AsSeenIn isSignedIn={isSignedIn} />
         </Grid>

@@ -89,16 +89,13 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
     submitNewAbout,
     submitNewEducation,
     submitNewWorkExperience,
-    toggleSoundMode,
     user: {
       email,
       isEmailVerified,
       sendQuincyEmail,
       username,
       about,
-      picture,
       points,
-      sound,
       location,
       name,
       gender,
@@ -156,11 +153,8 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
                     name={name}
                     gender={gender}
                     codeTime={codeTime}
-                    picture={picture}
                     points={points}
-                    sound={sound}
                     submitNewAbout={submitNewAbout}
-                    toggleSoundMode={toggleSoundMode}
                     username={username}
                   />
                 </div>

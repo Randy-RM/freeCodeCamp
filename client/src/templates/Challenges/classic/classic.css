@@ -119,6 +119,5 @@ button.monaco-editor-tab:hover {
 
 .editor-border-top {
   background: var(--quaternary-background);
-  height: 35px;
-  margin-bottom: 10px;
+  height: 5px;
 }

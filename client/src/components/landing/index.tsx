@@ -13,6 +13,8 @@ import {
 import AsSeenIn from './components/as-seen-in';
 import LandingTop from './components/landing-top';
 import LandingDetails from './components/landing-details';
+import LandingLearn from './components/landing-learn';
+import LandingGoals from './components/landing-goals';
 
 import './landing.css';
 
@@ -61,6 +63,14 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
         <Grid>
           <LandingDetails />
         </Grid>
+        <Grid>
+          <LandingLearn />
+        </Grid>
+        <div className='bg-beige'>
+          <Grid>
+            <LandingGoals />
+          </Grid>
+        </div>
         <Grid fluid={true}>
           <AsSeenIn isSignedIn={isSignedIn} />
         </Grid>

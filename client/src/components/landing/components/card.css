@@ -1,12 +1,42 @@
-.card-mt-mb {
-  margin: 20px 0;
-}
-
 .card-details {
   padding: 8%;
+}
+
+.card-details-height {
+  max-height: 50vh;
 }
 
 .card-details-logo {
   width: 10%;
   padding: 0 0 5% 0;
 }
+
+.card-height {
+  height: auto;
+}
+
+@media (max-width: 1083px) and (min-width: 992px) {
+  .card-height {
+    height: 65vh;
+  }
+}
+
+@media (max-width: 1440px) and (min-width: 1084px) {
+  .card-height {
+    height: 60vh;
+  }
+}
+
+/*
+@media (max-width: 1439px) and (min-width: 1001px) {
+  .card-height {
+    height: 30vh;
+  }
+}
+
+@media (max-width: 2560px) and (min-width: 1440px) {
+  .card-height {
+    height: 25vh;
+  }
+}
+*/

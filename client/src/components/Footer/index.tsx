@@ -1,22 +1,22 @@
 import React from 'react';
 import Link from '../helpers/link';
-import NavLogo from '../Header/components/nav-logo';
 import { Spacer } from '../helpers';
-import Facebook from '../../assets/icons/facebook-square-brands.svg';
-import Twitter from '../../assets/icons/twitter-square-brands.svg';
-import Linkedin from '../../assets/icons/linkedin-brands.svg';
-import Instagram from '../../assets/icons/instagram-square-brands.svg';
+import Facebook from '../../assets/icons/facebook-square-brands-light.svg';
+import Twitter from '../../assets/icons/twitter-square-brands-light.svg';
+import Linkedin from '../../assets/icons/linkedin-brands-light.svg';
+import Instagram from '../../assets/icons/instagram-square-brands-light.svg';
+import FooterLogo from './footer-logo';
 import './footer.css';
 
 function Footer(): JSX.Element {
   return (
-    <footer className='bg-light'>
+    <footer className='bg-dark-gray'>
       <div className='footer-container'>
         <Spacer />
         <div className='row d-flex justify-content-center'>
           <div className='col-lg-2 col-md-3 col-sm-3 col-xs-6 d-flex justify-content-center'>
-            <Link to='/'>
-              <NavLogo />
+            <Link className='link-logo' to='/'>
+              <FooterLogo />
             </Link>
           </div>
         </div>
@@ -24,13 +24,13 @@ function Footer(): JSX.Element {
         <div className='row text-center'>
           <div className='col-12'>
             <p>
-              <span className='fw-bold'>Texaf Digital Campus</span>
+              <span className='fw-bold text-light'>Texaf Digital Campus</span>
               <br />
-              <span className='fw-semi-bold'>
+              <span className='fw-semi-bold text-light'>
                 Concession COTEX N° 63 Avenue Colonel Mondjiba
               </span>
               <br />
-              <span className='fw-semi-bold'>
+              <span className='fw-semi-bold text-light'>
                 Commune de Ngaliema - Kinshasa
               </span>
               <br />

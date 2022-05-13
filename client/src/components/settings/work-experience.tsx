@@ -5,6 +5,7 @@ import {
   FormControl
 } from '@freecodecamp/react-bootstrap';
 import React, { Component } from 'react';
+import validator from 'validator/';
 
 import { TFunction, withTranslation } from 'react-i18next';
 import { Spacer } from '../helpers';
@@ -28,6 +29,13 @@ type WorkExperienceState = {
   formValues: FormValues;
   originalValues: FormValues;
   formClicked: boolean;
+  isValidEmployedWhere: boolean;
+  isFocusEmployedWhere: boolean;
+  isBlurEmployedWhere: boolean;
+  isValidSinceWhen: boolean;
+  isValidPosition: boolean;
+  isFocusPosition: boolean;
+  isBlurPosition: boolean;
 };
 
 class WorkExperienceSettings extends Component<
@@ -46,7 +54,14 @@ class WorkExperienceSettings extends Component<
     this.state = {
       formValues: { ...values },
       originalValues: { ...values },
-      formClicked: false
+      formClicked: false,
+      isValidEmployedWhere: true,
+      isFocusEmployedWhere: false,
+      isBlurEmployedWhere: false,
+      isValidSinceWhen: true,
+      isValidPosition: true,
+      isFocusPosition: false,
+      isBlurPosition: false
     };
   }
 
@@ -73,10 +88,24 @@ class WorkExperienceSettings extends Component<
   }
 
   isFormPristine = () => {
-    const { formValues, originalValues } = this.state;
-    return (Object.keys(originalValues) as Array<keyof FormValues>)
-      .map(key => originalValues[key] === formValues[key])
-      .every(bool => bool);
+    const {
+      formValues,
+      originalValues,
+      isValidEmployedWhere,
+      isValidSinceWhen,
+      isValidPosition
+    } = this.state;
+
+    if (
+      isValidEmployedWhere === true &&
+      isValidSinceWhen === true &&
+      isValidPosition === true
+    ) {
+      return (Object.keys(originalValues) as Array<keyof FormValues>)
+        .map(key => originalValues[key] === formValues[key])
+        .every(bool => bool);
+    }
+    return true;
   };
 
   handleSubmit = (e: React.FormEvent) => {
@@ -91,15 +120,64 @@ class WorkExperienceSettings extends Component<
     );
   };
 
+  // ------------EmployedWhere Handler------------
+
   handleEmployedWhereChange = (e: React.FormEvent<HTMLInputElement>) => {
     const value = (e.target as HTMLInputElement).value.slice(0);
     return this.setState(state => ({
       formValues: {
         ...state.formValues,
         employedWhere: value
-      }
+      },
+      isValidEmployedWhere:
+        validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
+        validator.isLength(value, { min: 5, max: 255 })
     }));
   };
+
+  focusHandlerEmployedWhere = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement).value.slice(0);
+
+    if (
+      validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
+      validator.isLength(value, { min: 5, max: 255 })
+    ) {
+      this.setState({
+        isValidEmployedWhere: true,
+        isFocusEmployedWhere: true,
+        isBlurEmployedWhere: false
+      });
+    } else {
+      this.setState({
+        isValidEmployedWhere: false,
+        isFocusEmployedWhere: true,
+        isBlurEmployedWhere: false
+      });
+    }
+  };
+
+  blurHandlerEmployedWhere = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement).value.slice(0);
+
+    if (
+      validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
+      validator.isLength(value, { min: 5, max: 255 })
+    ) {
+      this.setState({
+        isValidEmployedWhere: true,
+        isFocusEmployedWhere: false,
+        isBlurEmployedWhere: true
+      });
+    } else {
+      this.setState({
+        isValidEmployedWhere: false,
+        isFocusEmployedWhere: false,
+        isBlurEmployedWhere: true
+      });
+    }
+  };
+
+  // ------------SinceWhen Handler------------
 
   handleSinceWhenChange = (e: React.FormEvent<HTMLInputElement>) => {
     const value = (e.target as HTMLInputElement).value.slice(0);
@@ -107,9 +185,15 @@ class WorkExperienceSettings extends Component<
       formValues: {
         ...state.formValues,
         sinceWhen: value
-      }
+      },
+      isValidSinceWhen: validator.isDate(value, {
+        format: 'YYYY-MM-DD',
+        strictMode: true
+      })
     }));
   };
+
+  // ------------Position Handler------------
 
   handlePositionChange = (e: React.FormEvent<HTMLInputElement>) => {
     const value = (e.target as HTMLInputElement).value.slice(0);
@@ -117,13 +201,65 @@ class WorkExperienceSettings extends Component<
       formValues: {
         ...state.formValues,
         position: value
-      }
+      },
+      isValidPosition:
+        validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
+        validator.isLength(value, { min: 5, max: 255 })
     }));
+  };
+
+  focusHandlerPosition = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement).value.slice(0);
+
+    if (
+      validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
+      validator.isLength(value, { min: 5, max: 255 })
+    ) {
+      this.setState({
+        isValidPosition: true,
+        isFocusPosition: true,
+        isBlurPosition: false
+      });
+    } else {
+      this.setState({
+        isValidPosition: false,
+        isFocusPosition: true,
+        isBlurPosition: false
+      });
+    }
+  };
+
+  blurHandlerPosition = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement).value.slice(0);
+
+    if (
+      validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
+      validator.isLength(value, { min: 5, max: 255 })
+    ) {
+      this.setState({
+        isValidPosition: true,
+        isFocusPosition: false,
+        isBlurPosition: true
+      });
+    } else {
+      this.setState({
+        isValidPosition: false,
+        isFocusPosition: false,
+        isBlurPosition: true
+      });
+    }
   };
 
   render() {
     const {
-      formValues: { employedWhere, sinceWhen, position }
+      formValues: { employedWhere, sinceWhen, position },
+      isValidEmployedWhere,
+      isFocusEmployedWhere,
+      isBlurEmployedWhere,
+      isValidSinceWhen,
+      isValidPosition,
+      isFocusPosition,
+      isBlurPosition
     } = this.state;
     return (
       <div className='about-settings'>
@@ -134,12 +270,35 @@ class WorkExperienceSettings extends Component<
                 <strong>{'Employé où'}</strong>
               </ControlLabel>
               <FormControl
+                onFocus={this.focusHandlerEmployedWhere}
+                onBlur={this.blurHandlerEmployedWhere}
                 onChange={this.handleEmployedWhereChange}
                 type='text'
                 value={employedWhere}
               />
-              <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              {!isFocusEmployedWhere &&
+                !isBlurEmployedWhere &&
+                isValidEmployedWhere && (
+                  <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+                )}
+
+              {isFocusEmployedWhere && (
+                <HelpBlock className='text-warning'>
+                  {
+                    'Seuls les lettres et les espaces sont acceptés | minimume 5 et maximum 255 caractères.'
+                  }
+                </HelpBlock>
+              )}
+              {isBlurEmployedWhere && !isValidEmployedWhere && (
+                <HelpBlock className='text-danger'>
+                  {`Le nom de l'entreprise que vous avez entré n'est pas valide.`}
+                </HelpBlock>
+              )}
+              {isBlurEmployedWhere && isValidEmployedWhere && (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              )}
             </FormGroup>
+
             <FormGroup controlId='work-experience-sinceWhen'>
               <ControlLabel>
                 <strong>{'Depuis quand'}</strong>
@@ -149,18 +308,46 @@ class WorkExperienceSettings extends Component<
                 type='date'
                 value={sinceWhen}
               />
-              <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              {isValidSinceWhen && (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              )}
+              {!isValidSinceWhen && (
+                <HelpBlock className='text-danger'>
+                  {`La date dois être au format Jour/Mois/Année`}
+                </HelpBlock>
+              )}
             </FormGroup>
+
             <FormGroup controlId='work-experience-position'>
               <ControlLabel>
                 <strong>{'Poste'}</strong>
               </ControlLabel>
               <FormControl
+                onFocus={this.focusHandlerPosition}
+                onBlur={this.blurHandlerPosition}
                 onChange={this.handlePositionChange}
                 type='text'
                 value={position}
               />
-              <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              {!isFocusPosition && !isBlurPosition && isValidPosition && (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              )}
+
+              {isFocusPosition && (
+                <HelpBlock className='text-warning'>
+                  {
+                    'Seuls les lettres et les espaces sont acceptés | minimume 5 et maximum 255 caractères.'
+                  }
+                </HelpBlock>
+              )}
+              {isBlurPosition && !isValidPosition && (
+                <HelpBlock className='text-danger'>
+                  {`Le nom du poste que vous avez entré n'est pas valide.`}
+                </HelpBlock>
+              )}
+              {isBlurPosition && isValidPosition && (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              )}
             </FormGroup>
             <BlockSaveButton disabled={this.isFormPristine()} />
           </form>

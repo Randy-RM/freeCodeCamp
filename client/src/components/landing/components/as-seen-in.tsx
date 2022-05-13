@@ -1,4 +1,4 @@
-import { Col, Row } from '@freecodecamp/react-bootstrap';
+import { Row } from '@freecodecamp/react-bootstrap';
 import React from 'react';
 import envData from '../../../../../config/env.json';
 import Map from '../../Map/index';
@@ -12,41 +12,30 @@ type AsSeenInProps = {
 const AsSeenIn = ({ isSignedIn }: AsSeenInProps): JSX.Element => {
   return (
     <Row className='as-seen-in'>
-      <Col sm={8} smOffset={2} xs={12}>
+      <div className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <div className='text-center'>
-          <p className='as-seen-in-text text-09 text-normal'>
-            {`
-            Vous commencerez par créer une application de photos de chats pour apprendre 
-            les bases du HTML et du CSS. Ensuite, 
-            vous apprendrez des techniques modernes comme les variables CSS en construisant 
-            un pingouin, et les meilleures pratiques 
-            en matière d'accessibilité en construisant un formulaire Web.
-            Enfin, vous apprendrez à créer des pages Web adaptées 
-            à différentes tailles d'écran en créant une carte Twitter avec Flexbox 
-            et une mise en page de blog complexe avec CSS Grid.
-            `}
-          </p>
+          <h2 className='big-heading text-ligth'>{`Prêt à donner un coup de fouet à votre carrière ?`}</h2>
           <br />
           <div>
             {isSignedIn ? (
               <Map
                 forLanding={true}
                 single={true}
-                className='btn-primary-dark link-button'
-                text='Lancez-vous'
+                className='btn-light link-button text-responsive'
+                text='Commencez à Apprendre'
                 keyPrefix='as-seen-in-top'
               />
             ) : (
               <a
                 href={`${apiLocation}/signin`}
-                className='btn-primary-dark link-button'
+                className='btn-light link-button'
               >
-                {'Lancez-vous'}
+                {'Commencez à Apprendre'}
               </a>
             )}
           </div>
         </div>
-      </Col>
+      </div>
     </Row>
   );
 };

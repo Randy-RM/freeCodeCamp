@@ -658,9 +658,13 @@ blockquote .small {
   color: rgba(0, 0, 0, 0) !important;
 }
 
+.text-responsive {
+  font-size: 1rem !important;
+}
+
 @media (max-width: 769px) {
   .text-responsive {
-    font-size: 0.9rem !important;
+    font-size: 0.8rem !important;
   }
 }
 
@@ -683,4 +687,45 @@ blockquote .small {
 
 .justify-content-center {
   justify-content: center;
+}
+
+.text-gray-90 {
+  color: var(--gray-90) !important;
+}
+
+.text-danger {
+  color: var(--danger-color);
+}
+
+.text-love-light {
+  color: var(--love-light);
+}
+
+.btn-light {
+  background: var(--gray-00);
+  color: var(--love-light);
+  border: solid 2px var(--gray-00);
+  transition: all 0.3s ease;
+}
+
+.btn-light:hover {
+  color: var(--gray-00) !important;
+  background: rgba(255, 255, 255, 0) !important;
+  border: solid 2px var(--gray-00) !important;
+}
+
+.bg-dark-gray {
+  background-color: var(--gray-dark);
+}
+
+.bg-beige {
+  background-color: #faf3e9;
+}
+
+.text-light {
+  color: var(--primary-background);
+}
+
+.mt-mb-5 {
+  margin: 5vh 0;
 }

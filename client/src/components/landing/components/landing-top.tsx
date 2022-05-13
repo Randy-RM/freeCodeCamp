@@ -13,23 +13,20 @@ interface LandingTopProps {
 }
 function LandingTop({ pageName, isSignedIn }: LandingTopProps): JSX.Element {
   return (
-    <div className='landing-top'>
-      <Spacer size={2} />
-      <Row>
-        <Spacer />
-        <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
-          <div className=''>
-            <img src={LearnCode} alt='LearnCode' className='img-fluid' />
-          </div>
-        </div>
+    <div className='landing-top landing-top-pt-pb'>
+      <Row className='d-flex-hero align-items-center'>
         <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
           <div className='landing-top-content'>
-            <h1 className='big-heading' data-test-label={`${pageName}-header`}>
-              {'Responsive Web Design'}
-            </h1>
-            <p className='hero-text'>
+            <h1 className='hero-heading' data-test-label={`${pageName}-header`}>
               {`
-            Trouvez le bon cours et lancez-vous !!!
+                Apprenez à coder 
+                gratuitement et soyez admis 
+                dans la meilleure école 
+                de codage.
+              `}
+            </h1>
+            <p className='hero-text text-responsive'>
+              {`
             Concentrez-vous sur ce qui est nécessaire pour acquérir 
             une compétence spécifique et applicable.
             Vous serez mieux outillé pour construire une carrière.
@@ -53,6 +50,12 @@ function LandingTop({ pageName, isSignedIn }: LandingTopProps): JSX.Element {
                 </a>
               )}
             </div>
+            <Spacer />
+          </div>
+        </div>
+        <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
+          <div className=''>
+            <img src={LearnCode} alt='LearnCode' className='img-fluid' />
           </div>
         </div>
         <Spacer />
