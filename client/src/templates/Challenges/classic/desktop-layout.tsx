@@ -119,14 +119,13 @@ const DesktopLayout = (props: DesktopLayoutProps): JSX.Element => {
           />
         </div>
       )}
-      <ReflexContainer orientation='vertical'>
+      <ReflexContainer className='editor-border-top' orientation='vertical'>
         {!projectBasedChallenge && (
           <ReflexElement
             className='padding-t-b-10 bg-light'
             flex={instructionPane.flex}
             {...resizeProps}
           >
-            <div className='editor-border-top'></div>
             {instructions}
           </ReflexElement>
         )}
@@ -147,7 +146,6 @@ const DesktopLayout = (props: DesktopLayoutProps): JSX.Element => {
                 {...reflexProps}
                 {...resizeProps}
               >
-                <div className='editor-border-top'></div>
                 {editor}
               </ReflexElement>
 
@@ -183,7 +181,6 @@ const DesktopLayout = (props: DesktopLayoutProps): JSX.Element => {
             flex={previewPane.flex}
             {...resizeProps}
           >
-            <div className='editor-border-top'></div>
             {preview}
           </ReflexElement>
         )}
