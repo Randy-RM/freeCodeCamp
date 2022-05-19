@@ -160,7 +160,7 @@
   background: rgb(255, 255, 255);
 }
 
-@media (max-width: 426px) {
+@media (max-width: 768px) {
   /* For mobile: */
   .logo img {
     height: 30px;
