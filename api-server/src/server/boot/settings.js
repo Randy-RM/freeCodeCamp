@@ -1,6 +1,6 @@
 import debug from 'debug';
 import { check } from 'express-validator';
-import isURL from 'validator/lib/isURL';
+// import isURL from 'validator/lib/isURL';
 
 import { isValidUsername } from '../../../../utils/validate';
 import { alertTypes } from '../../common/utils/flash.js';
@@ -130,11 +130,12 @@ function updateMyAbout(req, res, next) {
     user,
     body: { name, location, gender, codeTime, about, picture }
   } = req;
-  log(name, location, gender, codeTime, picture, about);
+  log(name, location, gender, codeTime, about, picture);
   // prevent dataurls from being stored
-  const update = isURL(picture, { require_protocol: true })
-    ? { name, location, gender, codeTime, about, picture }
-    : { name, location, gender, codeTime, about };
+  // const update = isURL(picture, { require_protocol: true })
+  //   ? { name, location, gender, codeTime, about, picture }
+  //   : { name, location, gender, codeTime, about };
+  const update = { name, location, gender, codeTime, about };
   return user.updateAttributes(update, createStandardHandler(req, res, next));
 }
 
