@@ -60,17 +60,21 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
             <LandingTop pageName={'landing'} isSignedIn={isSignedIn} />
           </Grid>
         </div>
+
         <Grid>
           <LandingDetails />
         </Grid>
+
         <Grid>
           <LandingLearn />
         </Grid>
+
         <div className='bg-beige'>
           <Grid>
             <LandingGoals />
           </Grid>
         </div>
+
         <Grid fluid={true}>
           <AsSeenIn isSignedIn={isSignedIn} />
         </Grid>
