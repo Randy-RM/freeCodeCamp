@@ -40,16 +40,44 @@ function Footer(): JSX.Element {
         <div className='row text-center d-flex justify-content-center'>
           <div className='col-lg-3 col-md-3 col-sm-6 col-xs-6 d-flex justify-content-center'>
             <div className='footer-icon'>
-              <img src={Facebook} alt='facebook' />
+              <a
+                href='https://www.facebook.com/kda243'
+                target='_blank'
+                rel='noreferrer'
+                className='link-icon'
+              >
+                <img src={Facebook} alt='facebook' />
+              </a>
             </div>
             <div className='footer-icon'>
-              <img src={Linkedin} alt='Linkedin' />
+              <a
+                href='https://www.linkedin.com/company/kda243'
+                target='_blank'
+                rel='noreferrer'
+                className='link-icon'
+              >
+                <img src={Linkedin} alt='Linkedin' />
+              </a>
             </div>
             <div className='footer-icon'>
-              <img src={Twitter} alt='Twitter' />
+              <a
+                href='https://www.twitter.com/kda243'
+                target='_blank'
+                rel='noreferrer'
+                className='link-icon'
+              >
+                <img src={Twitter} alt='Twitter' />
+              </a>
             </div>
             <div className='footer-icon'>
-              <img src={Instagram} alt='Instagram' />
+              <a
+                href='https://www.instagram.com/kinshasadigitalacademy/'
+                target='_blank'
+                rel='noreferrer'
+                className='link-icon'
+              >
+                <img src={Instagram} alt='Instagram' />
+              </a>
             </div>
           </div>
         </div>

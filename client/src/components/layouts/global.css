@@ -729,3 +729,7 @@ blockquote .small {
 .mt-mb-5 {
   margin: 5vh 0;
 }
+
+.p-3-2 {
+  padding: 3vh 2vw;
+}
