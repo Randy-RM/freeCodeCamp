@@ -127,7 +127,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
 
   return (
     <>
-      <Helmet title={`${t('buttons.settings')} | freeCodeCamp.org`} />
+      <Helmet title={`${t('buttons.settings')} | Code Learning Plateform`} />
       <Grid fluid={true} className='bg-light'>
         <main>
           <Spacer size={2} />
