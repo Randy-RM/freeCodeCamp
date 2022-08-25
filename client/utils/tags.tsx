@@ -3,12 +3,12 @@ import i18next from 'i18next';
 import psl from 'psl';
 import React from 'react';
 import env from '../../config/env.json';
+import LandingLogo from '../src/assets/images/kda-learning-plateform-landing-logo.png';
 
 const { homeLocation } = env;
 
 export function getheadTagComponents(): JSX.Element[] {
-  const socialImage =
-    'https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png';
+  const socialImage = LandingLogo;
 
   const pathToBootstrap = withPrefix('/css/bootstrap.min.css');
 
@@ -20,7 +20,7 @@ export function getheadTagComponents(): JSX.Element[] {
       rel='preload'
     />,
     <link href={pathToBootstrap} key='bootstrap-min' rel='stylesheet' />,
-    <meta content='freeCodeCamp.org' key='og:title' name='og:title' />,
+    <meta content='Code Learning Platform' key='og:title' name='og:title' />,
     <meta
       content={i18next.t('metaTags:social-description')}
       key='og:description'
