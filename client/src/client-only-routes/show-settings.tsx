@@ -12,7 +12,7 @@ import About from '../components/settings/about';
 import Education from '../components/settings/education';
 import WorkExperience from '../components/settings/work-experience';
 import DangerZone from '../components/settings/danger-zone';
-import Email from '../components/settings/email';
+// import Email from '../components/settings/email';
 import Internet from '../components/settings/internet';
 import { Themes } from '../components/settings/theme';
 
@@ -90,9 +90,9 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
     submitNewEducation,
     submitNewWorkExperience,
     user: {
-      email,
-      isEmailVerified,
-      sendQuincyEmail,
+      // email,
+      // isEmailVerified,
+      // sendQuincyEmail,
       username,
       about,
       points,
@@ -112,7 +112,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
     },
     navigate,
     showLoading,
-    updateQuincyEmail,
+    // updateQuincyEmail,
     updateInternetSettings
   } = props;
 
@@ -220,7 +220,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
             </Row>
             <Spacer size={1} />
           </div>
-          <Spacer size={2} />
+          {/* <Spacer size={2} />
           <div className=''>
             <Spacer size={1} />
             <Row className='super-block-intro-page'>
@@ -248,7 +248,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
               </Col>
             </Row>
             <Spacer size={1} />
-          </div>
+          </div> */}
           <Spacer size={2} />
           <div className=''>
             <Spacer size={1} />
