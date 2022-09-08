@@ -17,7 +17,8 @@ export const availableLangs = {
     'italian',
     'portuguese',
     'ukrainian',
-    'japanese'
+    'japanese',
+    'french'
   ],
   curriculum: [
     'english',
@@ -27,7 +28,8 @@ export const availableLangs = {
     'italian',
     'portuguese',
     'ukrainian',
-    'japanese'
+    'japanese',
+    'french'
   ]
 };
 
@@ -124,7 +126,8 @@ export const auditedCerts = {
     SuperBlocks.MachineLearningPy,
     SuperBlocks.CodingInterviewPrep,
     SuperBlocks.RelationalDb
-  ]
+  ],
+  french: [SuperBlocks.RespWebDesign]
 };
 
 // ---------------------------------------------------------------------------
@@ -143,7 +146,8 @@ export const i18nextCodes = {
   italian: 'it',
   portuguese: 'pt-BR',
   ukrainian: 'uk',
-  japanese: 'ja'
+  japanese: 'ja',
+  french: 'fr'
 };
 
 // These are for the language selector dropdown menu in the footer
@@ -155,7 +159,8 @@ export const langDisplayNames = {
   italian: 'Italiano',
   portuguese: 'Português',
   ukrainian: 'Українська',
-  japanese: '日本語'
+  japanese: '日本語',
+  french: 'Français'
 };
 
 /* These are for formatting dates and numbers. Used with JS .toLocaleString().
@@ -170,5 +175,6 @@ export const langCodes = {
   italian: 'it',
   portuguese: 'pt-BR',
   ukrainian: 'uk',
-  japanese: 'ja'
+  japanese: 'ja',
+  french: 'fr'
 };
