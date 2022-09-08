@@ -185,6 +185,8 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
     nodesForSuperBlock.filter(node => node.challenge.block === blockDashedName)
   );
 
+  const { completedChallenges } = props.user;
+
   // delete the project module which is always at the end of the table
   progressData.pop();
 
@@ -215,38 +217,47 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
           </Row>
           <Spacer size={1} />
         </div>
-        <div className=''>
-          <Spacer size={1} />
-          <Row className='super-block-intro-page'>
-            <Col md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
-              <h2 className='big-subheading'>{'Module en cours'}</h2>
-            </Col>
-            <Col className='' md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
-              <Spacer size={1} />
-              <div className='block-ui bg-secondary'>
-                {defaultCurriculumNames.map((blockDashedName, index) => {
-                  if (index < defaultCurriculumNames.length - 1) {
-                    // delete the project module which is always at the end of the table with the condition if
-                    return (
-                      <Fragment key={blockDashedName}>
-                        <BlockLastVisited
-                          blockDashedName={blockDashedName}
-                          challenges={nodesForSuperBlock.filter(
-                            node => node.challenge.block === blockDashedName
-                          )}
-                          superBlock={superBlock}
-                          blockIndex={1 + index}
-                        />
-                      </Fragment>
-                    );
-                  }
-                })}
-              </div>
-              <Spacer size={1} />
-            </Col>
-          </Row>
-          <Spacer size={1} />
-        </div>
+        {completedChallenges.length > 0 && (
+          <div className=''>
+            <Spacer size={1} />
+            <Row className='super-block-intro-page'>
+              <Col md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+                <h2 className='big-subheading'>{'Module en cours'}</h2>
+              </Col>
+              <Col
+                className=''
+                md={10}
+                mdOffset={1}
+                sm={10}
+                smOffset={1}
+                xs={12}
+              >
+                <Spacer size={1} />
+                <div className='block-ui bg-secondary'>
+                  {defaultCurriculumNames.map((blockDashedName, index) => {
+                    if (index < defaultCurriculumNames.length - 1) {
+                      // delete the project module which is always at the end of the table with the condition if
+                      return (
+                        <Fragment key={blockDashedName}>
+                          <BlockLastVisited
+                            blockDashedName={blockDashedName}
+                            challenges={nodesForSuperBlock.filter(
+                              node => node.challenge.block === blockDashedName
+                            )}
+                            superBlock={superBlock}
+                            blockIndex={1 + index}
+                          />
+                        </Fragment>
+                      );
+                    }
+                  })}
+                </div>
+                <Spacer size={1} />
+              </Col>
+            </Row>
+            <Spacer size={1} />
+          </div>
+        )}
         <div className=''>
           <Spacer size={1} />
           <Row className='super-block-intro-page'>
