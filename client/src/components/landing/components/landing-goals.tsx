@@ -14,7 +14,7 @@ function LandingGoals(): JSX.Element {
         <div className='col-lg-4 col-md-4 col-sm-4 col-xs-12'>
           <div className='card-outlin-border card-mt-mb'>
             <div className='card-outlin card-outlin-height'>
-              <h4 className='fw-bold card-outlin-text'>{`Construire une carrière`}</h4>
+              <h4 className='fw-bold card-outlin-text'>{`Construire une carrière.`}</h4>
               <p className='text-responsive card-outlin-text'>
                 {`
                 Nos offres sont complètes.
@@ -29,7 +29,7 @@ function LandingGoals(): JSX.Element {
         <div className='col-lg-4 col-md-4 col-sm-4 col-xs-12'>
           <div className='card-outlin-border card-mt-mb'>
             <div className='card-outlin card-outlin-height'>
-              <h4 className='fw-bold card-outlin-text'>{`Acquérir une compétence`}</h4>
+              <h4 className='fw-bold card-outlin-text'>{`Acquérir une compétence.`}</h4>
               <p className='text-responsive card-outlin-text'>
                 {`
                 Concentrez-vous sur ce qui est 
@@ -47,7 +47,7 @@ function LandingGoals(): JSX.Element {
               <h4 className='fw-bold card-outlin-text'>
                 {`
                   Rejoindre la meilleure 
-                  école de code en RDC
+                  école de code en RDC.
                 `}
               </h4>
               <p className='text-responsive card-outlin-text'>

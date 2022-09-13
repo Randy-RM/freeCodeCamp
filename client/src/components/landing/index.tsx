@@ -1,7 +1,7 @@
 import { Grid } from '@freecodecamp/react-bootstrap';
 import React, { ReactElement } from 'react';
 import Helmet from 'react-helmet';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import {
@@ -47,12 +47,13 @@ type LearnLayoutProps = {
 };
 
 function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   return (
     <>
       <Helmet>
-        <title>{t('metaTags:title')}</title>
+        {/* <title>{t('metaTags:title')}</title> */}
+        <title>{`Apprendre à coder - gratuitement | Code Learning Platform`}</title>
       </Helmet>
       <main className='landing-page bg-light'>
         <div className='bg-secondary'>

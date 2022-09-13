@@ -37,11 +37,11 @@ export function getheadTagComponents(): JSX.Element[] {
       key='twitter:image:src'
       name='twitter:image:src'
     />,
-    <meta
-      content='freeCodeCamp.org'
-      key='twitter:title'
-      name='twitter:title'
-    />,
+    // <meta
+    //   content='freeCodeCamp.org'
+    //   key='twitter:title'
+    //   name='twitter:title'
+    // />,
     <meta
       content={i18next.t('metaTags:social-description')}
       key='twitter:description'
