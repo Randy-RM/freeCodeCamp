@@ -24,6 +24,7 @@ Ajoutez un bouton comme dernier élément de votre élément `form` dont le type
 # --hints--
 
 Votre `form` devrait avoir un `button` à l'intérieur.
+
 ```js
 assert($('form').children('button').length > 0);
 ```
