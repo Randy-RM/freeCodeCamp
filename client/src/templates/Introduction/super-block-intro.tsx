@@ -217,7 +217,7 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
           </Row>
           <Spacer size={1} />
         </div>
-        {completedChallenges.length > 0 && (
+        {completedChallenges && completedChallenges.length > 0 && (
           <div className=''>
             <Spacer size={1} />
             <Row className='super-block-intro-page'>
