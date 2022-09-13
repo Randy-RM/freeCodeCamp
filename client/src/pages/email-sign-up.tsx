@@ -32,9 +32,9 @@ const RedirectToLearn = createRedirect('/learn');
 
 function AcceptPrivacyTerms({
   acceptTerms,
-  acceptedPrivacyTerms,
-  t
-}: AcceptPrivacyTermsProps) {
+  acceptedPrivacyTerms
+}: // t
+AcceptPrivacyTermsProps) {
   const acceptedPrivacyRef = useRef(acceptedPrivacyTerms);
   const acceptTermsRef = useRef(acceptTerms);
   useEffect(() => {
@@ -60,7 +60,8 @@ function AcceptPrivacyTerms({
   ) : (
     <>
       <Helmet>
-        <title>{t('misc.email-signup')} | Code Learning Plateform</title>
+        {/* <title>{t('misc.email-signup')} | Code Learning Plateform</title> */}
+        <title>{`Inscription réussie`} | Code Learning Plateform</title>
       </Helmet>
       <Grid>
         <Row>
