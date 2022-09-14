@@ -30,20 +30,20 @@
   height: auto;
 }
 
-@media (max-width: 1000px) and (min-width: 768px) {
+@media (max-width: 2560px) and (min-width: 1440px) {
   .card-outlin-height {
-    height: 45vh;
+    height: 28vh;
   }
 }
 
 @media (max-width: 1439px) and (min-width: 1001px) {
   .card-outlin-height {
-    height: 30vh;
+    height: 40vh;
   }
 }
 
-@media (max-width: 2560px) and (min-width: 1440px) {
+@media (max-width: 1000px) and (min-width: 768px) {
   .card-outlin-height {
-    height: 28vh;
+    height: 45vh;
   }
 }
