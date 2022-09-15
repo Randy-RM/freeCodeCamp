@@ -2,7 +2,7 @@ import { Grid } from '@freecodecamp/react-bootstrap';
 import { graphql } from 'gatsby';
 import React from 'react';
 import Helmet from 'react-helmet';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
@@ -64,11 +64,14 @@ interface LearnPageProps {
 }
 
 function LearnPage({ isSignedIn }: LearnPageProps) {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   return (
     <LearnLayout>
-      <Helmet title={t('metaTags:title')} />
+      {/* <Helmet title={t('metaTags:title')} /> */}
+      <Helmet
+        title={`Apprendre à coder - gratuitement | Code Learning Platform`}
+      />
       <main className='landing-page bg-light'>
         <div className='bg-secondary'>
           <Grid>

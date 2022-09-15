@@ -1,7 +1,7 @@
 import { Grid, Row, Col } from '@freecodecamp/react-bootstrap';
 import React from 'react';
 import Helmet from 'react-helmet';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
@@ -83,7 +83,7 @@ const mapDispatchToProps = {
 };
 
 export function ShowSettings(props: ShowSettingsProps): JSX.Element {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   const {
     isSignedIn,
     submitNewAbout,
@@ -127,7 +127,8 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
 
   return (
     <>
-      <Helmet title={`${t('buttons.settings')} | Code Learning Plateform`} />
+      {/* <Helmet title={`${t('buttons.settings')} | Code Learning Plateform`} /> */}
+      <Helmet title={`Profile | Code Learning Plateform`} />
       <Grid fluid={true} className='bg-light'>
         <main>
           <Spacer size={2} />

@@ -3,12 +3,12 @@ import i18next from 'i18next';
 import psl from 'psl';
 import React from 'react';
 import env from '../../config/env.json';
-import LandingLogo from '../src/assets/images/kda-learning-plateform-landing-logo.png';
 
 const { homeLocation } = env;
 
 export function getheadTagComponents(): JSX.Element[] {
-  const socialImage = LandingLogo;
+  const socialImage =
+    'https://kda-certificats.s3.eu-west-3.amazonaws.com/kda_learning_plateform_landing_logo_c24451c4eb.png';
 
   const pathToBootstrap = withPrefix('/css/bootstrap.min.css');
 
@@ -37,11 +37,11 @@ export function getheadTagComponents(): JSX.Element[] {
       key='twitter:image:src'
       name='twitter:image:src'
     />,
-    <meta
-      content='freeCodeCamp.org'
-      key='twitter:title'
-      name='twitter:title'
-    />,
+    // <meta
+    //   content='freeCodeCamp.org'
+    //   key='twitter:title'
+    //   name='twitter:title'
+    // />,
     <meta
       content={i18next.t('metaTags:social-description')}
       key='twitter:description'
