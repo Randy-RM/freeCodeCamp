@@ -12,7 +12,7 @@ import About from '../components/settings/about';
 import Education from '../components/settings/education';
 import WorkExperience from '../components/settings/work-experience';
 import DangerZone from '../components/settings/danger-zone';
-import Email from '../components/settings/email';
+// import Email from '../components/settings/email';
 import Internet from '../components/settings/internet';
 import { Themes } from '../components/settings/theme';
 
@@ -89,16 +89,13 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
     submitNewAbout,
     submitNewEducation,
     submitNewWorkExperience,
-    toggleSoundMode,
     user: {
-      email,
-      isEmailVerified,
-      sendQuincyEmail,
+      // email,
+      // isEmailVerified,
+      // sendQuincyEmail,
       username,
       about,
-      picture,
       points,
-      sound,
       location,
       name,
       gender,
@@ -115,7 +112,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
     },
     navigate,
     showLoading,
-    updateQuincyEmail,
+    // updateQuincyEmail,
     updateInternetSettings
   } = props;
 
@@ -130,7 +127,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
 
   return (
     <>
-      <Helmet title={`${t('buttons.settings')} | freeCodeCamp.org`} />
+      <Helmet title={`${t('buttons.settings')} | Code Learning Plateform`} />
       <Grid fluid={true} className='bg-light'>
         <main>
           <Spacer size={2} />
@@ -156,11 +153,8 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
                     name={name}
                     gender={gender}
                     codeTime={codeTime}
-                    picture={picture}
                     points={points}
-                    sound={sound}
                     submitNewAbout={submitNewAbout}
-                    toggleSoundMode={toggleSoundMode}
                     username={username}
                   />
                 </div>
@@ -226,7 +220,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
             </Row>
             <Spacer size={1} />
           </div>
-          <Spacer size={2} />
+          {/* <Spacer size={2} />
           <div className=''>
             <Spacer size={1} />
             <Row className='super-block-intro-page'>
@@ -254,7 +248,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
               </Col>
             </Row>
             <Spacer size={1} />
-          </div>
+          </div> */}
           <Spacer size={2} />
           <div className=''>
             <Spacer size={1} />

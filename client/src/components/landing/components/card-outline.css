@@ -1,0 +1,49 @@
+.card-outlin-border {
+  border: solid 1px #3e3d3d;
+}
+
+.card-mt-mb {
+  margin: 20px 0;
+}
+
+.card-outlin {
+  padding: 8%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-learn-logo {
+  width: 20%;
+  padding: 0 0 5% 0;
+}
+
+.card-outlin-text {
+  text-align: center;
+}
+
+.card-outlin-text-right {
+  text-align: right;
+}
+
+.card-outlin-height {
+  height: auto;
+}
+
+@media (max-width: 1000px) and (min-width: 768px) {
+  .card-outlin-height {
+    height: 45vh;
+  }
+}
+
+@media (max-width: 1439px) and (min-width: 1001px) {
+  .card-outlin-height {
+    height: 30vh;
+  }
+}
+
+@media (max-width: 2560px) and (min-width: 1440px) {
+  .card-outlin-height {
+    height: 28vh;
+  }
+}

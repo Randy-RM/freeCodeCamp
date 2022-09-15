@@ -9,7 +9,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 // @ts-nocheck
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { Component, Fragment } from 'react';
 import { TFunction, withTranslation } from 'react-i18next';
@@ -17,7 +17,6 @@ import { connect } from 'react-redux';
 import envData from '../../../../../config/env.json';
 import { hardGoTo as navigate } from '../../../redux';
 import { Link } from '../../helpers';
-import AuthOrProfile from './auth-or-profile';
 
 const { apiLocation } = envData;
 
@@ -38,30 +37,50 @@ export class NavLinks extends Component<NavLinksProps, {}> {
 
   constructor(props: NavLinksProps) {
     super(props);
+    this.state = {
+      isDropdown: false
+    };
   }
+
+  // ------------IsDropdown Handler------------
+
+  handleIsDropdown = () => {
+    this.setState({
+      isDropdown: this.state.isDropdown ? false : true
+    });
+  };
 
   render() {
     const {
       fetchState,
-      t,
-      user: { username },
-      user
+      user: { username }
     }: NavLinksProps = this.props;
 
     const { pending } = fetchState;
+
+    const { isDropdown } = this.state;
 
     return pending ? (
       <div className='nav-skeleton' />
     ) : (
       <div>
         <label htmlFor='show-menu' className='menu-icon'>
-          <FontAwesomeIcon icon={faBars} />
+          <FontAwesomeIcon
+            icon={isDropdown ? faXmark : faBars}
+            onClick={this.handleIsDropdown}
+          />
         </label>
         <input type='checkbox' id='show-menu' />
-        <ul className='nav-list'>
+        <ul className={isDropdown ? 'nav-list show-menu' : 'nav-list'}>
           <li className='nav-item'>
-            <Link className='active' key='learn' to='/'>
-              {t('buttons.curriculum')}
+            <Link
+              onClick={this.handleIsDropdown}
+              className=''
+              key='learn'
+              to={'/'}
+              activeClassName='active'
+            >
+              {'Accueil'}
             </Link>
           </li>
 
@@ -69,30 +88,27 @@ export class NavLinks extends Component<NavLinksProps, {}> {
             <Fragment key='profile-settings'>
               <li className='nav-item'>
                 <Link
+                  onClick={this.handleIsDropdown}
                   className=''
-                  key='profile'
-                  sameTab={false}
-                  to={`/${username}`}
+                  key='learn'
+                  to='/learn/responsive-web-design/'
+                  activeClassName='active'
                 >
-                  {t('buttons.profile')}
+                  {'Tableau de bord'}
                 </Link>
               </li>
 
               <li className='nav-item'>
                 <Link
+                  onClick={this.handleIsDropdown}
                   className=''
                   key='settings'
                   sameTab={false}
                   to={`/settings`}
+                  activeClassName='active'
                 >
-                  {t('buttons.settings')}
+                  {'Profile'}
                 </Link>
-              </li>
-
-              <li className='navatar'>
-                <div>
-                  <AuthOrProfile user={user} />
-                </div>
               </li>
             </Fragment>
           )}
@@ -100,11 +116,12 @@ export class NavLinks extends Component<NavLinksProps, {}> {
           {!username && (
             <li className='nav-item'>
               <a
+                onClick={this.handleIsDropdown}
                 className='nav-signin-btn'
                 href={`${apiLocation}/signin`}
                 key='signin'
               >
-                {t('buttons.sign-in')}
+                {'Connexion'}
               </a>
             </li>
           )}
@@ -113,11 +130,12 @@ export class NavLinks extends Component<NavLinksProps, {}> {
             <Fragment key='signout-frag'>
               <li className='nav-item'>
                 <a
-                  className='nav-signin-btn'
+                  onClick={this.handleIsDropdown}
+                  className='nav-signout-btn'
                   href={`${apiLocation}/signout`}
                   key='sign-out'
                 >
-                  {t('buttons.sign-out')}
+                  {'Déconnexion'}
                 </a>
               </li>
             </Fragment>

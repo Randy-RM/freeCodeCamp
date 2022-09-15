@@ -75,7 +75,7 @@ export class BlockProgressBar extends Component<BlockProps> {
             }`}</span>
           </h2>
           <br />
-          <ProgressBar now={percentageComplated} animated />
+          <ProgressBar now={percentageComplated} animated={'true'} />
         </div>
       </>
     );

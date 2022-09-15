@@ -2,15 +2,51 @@ import { Grid } from '@freecodecamp/react-bootstrap';
 import React, { ReactElement } from 'react';
 import Helmet from 'react-helmet';
 import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import {
+  userSelector,
+  userFetchStateSelector,
+  isSignedInSelector
+} from '../../redux';
 
 import AsSeenIn from './components/as-seen-in';
-import Certifications from './components/certifications';
 import LandingTop from './components/landing-top';
-import Testimonials from './components/testimonials';
+import LandingDetails from './components/landing-details';
+import LandingLearn from './components/landing-learn';
+import LandingGoals from './components/landing-goals';
 
 import './landing.css';
 
-function Landing(): ReactElement {
+type FetchState = {
+  pending: boolean;
+  complete: boolean;
+  errored: boolean;
+};
+
+type User = {
+  acceptedPrivacyTerms: boolean;
+};
+
+const mapStateToProps = createSelector(
+  userFetchStateSelector,
+  isSignedInSelector,
+  userSelector,
+  (fetchState: FetchState, isSignedIn, user: User) => ({
+    fetchState,
+    isSignedIn,
+    user
+  })
+);
+
+type LearnLayoutProps = {
+  isSignedIn?: boolean;
+  fetchState: FetchState;
+  user: User;
+  children?: React.ReactNode;
+};
+
+function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
   const { t } = useTranslation();
 
   return (
@@ -18,16 +54,27 @@ function Landing(): ReactElement {
       <Helmet>
         <title>{t('metaTags:title')}</title>
       </Helmet>
-      <main className='landing-page'>
+      <main className='landing-page bg-light'>
+        <div className='bg-secondary'>
+          <Grid>
+            <LandingTop pageName={'landing'} isSignedIn={isSignedIn} />
+          </Grid>
+        </div>
         <Grid>
-          <LandingTop pageName={'landing'} />
+          <LandingDetails />
         </Grid>
+        <Grid>
+          <LandingLearn />
+        </Grid>
+
+        <div className='bg-beige'>
+          <Grid>
+            <LandingGoals />
+          </Grid>
+        </div>
+
         <Grid fluid={true}>
-          <AsSeenIn />
-        </Grid>
-        <Grid>
-          <Testimonials />
-          <Certifications pageName={'landing'} />
+          <AsSeenIn isSignedIn={isSignedIn} />
         </Grid>
       </main>
     </>
@@ -35,4 +82,4 @@ function Landing(): ReactElement {
 }
 
 Landing.displayName = 'Landing';
-export default Landing;
+export default connect(mapStateToProps)(Landing);

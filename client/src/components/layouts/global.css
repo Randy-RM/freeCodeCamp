@@ -17,7 +17,7 @@ body {
   /* font-family: 'Roboto Mono', monospace; */
   font-family: 'Poppins', sans-serif !important;
   color: var(--primary-color);
-  background: var(--secondary-background);
+  background: var(--primary-background);
 }
 
 #___gatsby {
@@ -68,7 +68,7 @@ body {
 .default-layout {
   flex: 1 0 auto;
   margin-top: var(--header-height, 0px);
-  background: var(--secondary-background);
+  background: var(--primary-background);
 }
 
 h1 {
@@ -656,4 +656,80 @@ blockquote .small {
 
 .none-help-block {
   color: rgba(0, 0, 0, 0) !important;
+}
+
+.text-responsive {
+  font-size: 1rem !important;
+}
+
+@media (max-width: 769px) {
+  .text-responsive {
+    font-size: 0.8rem !important;
+  }
+}
+
+.text-normal {
+  font-weight: 400 !important;
+}
+
+.fw-semi-bold {
+  font-weight: 600 !important;
+}
+
+.fw-bold {
+  font-weight: 700 !important;
+}
+
+.d-flex {
+  display: flex;
+  gap: 10%;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.text-gray-90 {
+  color: var(--gray-90) !important;
+}
+
+.text-danger {
+  color: var(--danger-color);
+}
+
+.text-love-light {
+  color: var(--love-light);
+}
+
+.btn-light {
+  background: var(--gray-00);
+  color: var(--love-light);
+  border: solid 2px var(--gray-00);
+  transition: all 0.3s ease;
+}
+
+.btn-light:hover {
+  color: var(--gray-00) !important;
+  background: rgba(255, 255, 255, 0) !important;
+  border: solid 2px var(--gray-00) !important;
+}
+
+.bg-dark-gray {
+  background-color: var(--gray-dark);
+}
+
+.bg-beige {
+  background-color: #faf3e9;
+}
+
+.text-light {
+  color: var(--primary-background);
+}
+
+.mt-mb-5 {
+  margin: 5vh 0;
+}
+
+.p-3-2 {
+  padding: 3vh 2vw;
 }

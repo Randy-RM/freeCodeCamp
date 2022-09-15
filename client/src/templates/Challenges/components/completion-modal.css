@@ -163,6 +163,26 @@
   background: var(--love-light) !important;
 }
 
+.btn-primary-dark {
+  background: var(--love-light);
+  color: var(--gray-00);
+  border: solid 2px var(--love-light) !important;
+  transition: all 0.3s ease;
+}
+
+.btn-primary-dark:hover {
+  color: #ffffff !important;
+  border: solid 2px #ffffff !important;
+  background: rgba(255, 255, 255, 0) !important;
+}
+
+.link-button {
+  text-decoration: none !important;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 10px 30px;
+}
+
 .completion-header {
   background: #fff !important;
 }

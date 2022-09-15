@@ -12,7 +12,7 @@ import { TFunction, Trans, withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import type { Dispatch } from 'redux';
-import isEmail from 'validator/lib/isEmail';
+import validator from 'validator/';
 
 import { updateMyEmail } from '../../redux/settings';
 import { maybeEmailRE } from '../../utils';
@@ -38,6 +38,9 @@ interface EmailForm {
   newEmail: string;
   confirmNewEmail: string;
   isPristine: boolean;
+  isValidNewEmail: boolean;
+  isFocusNewEmail: boolean;
+  isBlurNewEmail: boolean;
 }
 
 function EmailSettings({
@@ -49,7 +52,10 @@ function EmailSettings({
     currentEmail: email,
     newEmail: '',
     confirmNewEmail: '',
-    isPristine: true
+    isPristine: true,
+    isValidNewEmail: true,
+    isFocusNewEmail: false,
+    isBlurNewEmail: false
   });
 
   function handleSubmit(e: React.FormEvent): void {
@@ -66,17 +72,20 @@ function EmailSettings({
       setEmailForm(prev => ({
         ...prev,
         [key]: userInput,
-        isPristine: userInput === prev.currentEmail
+        isPristine: userInput === prev.currentEmail,
+        isValidNewEmail:
+          key === 'newEmail' && validator.isEmail(userInput) ? true : false
       }));
     };
   }
 
   function getValidationForNewEmail() {
-    const { newEmail, currentEmail } = emailForm;
-    if (!maybeEmailRE.test(newEmail)) {
+    const { newEmail, currentEmail, isValidNewEmail, isFocusNewEmail } =
+      emailForm;
+    if (!maybeEmailRE.test(newEmail) && isFocusNewEmail) {
       return {
         state: null,
-        message: ''
+        message: 'Votre e-mail dois etre sous la forme : exemple@mail.com'
       };
     }
     if (newEmail === currentEmail) {
@@ -85,15 +94,20 @@ function EmailSettings({
         message: 'Cet email est le même que votre email actuel'
       };
     }
-    if (isEmail(newEmail)) {
+    if (validator.isEmail(newEmail)) {
       return { state: 'success', message: '' };
-    } else {
+    }
+    if (!validator.isEmail(newEmail) && !isValidNewEmail) {
       return {
         state: 'error',
         message:
           "Nous n'avons pas pu valider votre e-mail correctement, veuillez vous assurer qu'il est correct."
       };
     }
+    return {
+      state: null,
+      message: ''
+    };
   }
 
   function getValidationForConfirmEmail() {
@@ -117,6 +131,66 @@ function EmailSettings({
         state: null,
         message: ''
       };
+    }
+  }
+
+  // ------------NewEmail Handler------------
+
+  function focusHandlerNewEmail(e: React.FocusEvent<HTMLInputElement>): void {
+    const value = (e.target as HTMLInputElement).value.slice(0);
+
+    if (value) {
+      if (validator.isEmail(value)) {
+        setEmailForm({
+          ...emailForm,
+          isValidNewEmail: true,
+          isFocusNewEmail: true,
+          isBlurNewEmail: false
+        });
+      } else {
+        setEmailForm({
+          ...emailForm,
+          isValidNewEmail: false,
+          isFocusNewEmail: true,
+          isBlurNewEmail: false
+        });
+      }
+    } else {
+      setEmailForm({
+        ...emailForm,
+        isValidNewEmail: true,
+        isFocusNewEmail: true,
+        isBlurNewEmail: false
+      });
+    }
+  }
+
+  function blurHandlerNewEmail(e: React.FocusEvent<HTMLInputElement>): void {
+    const value = (e.target as HTMLInputElement).value.slice(0);
+
+    if (value) {
+      if (validator.isEmail(value)) {
+        setEmailForm({
+          ...emailForm,
+          isValidNewEmail: true,
+          isFocusNewEmail: false,
+          isBlurNewEmail: true
+        });
+      } else {
+        setEmailForm({
+          ...emailForm,
+          isValidNewEmail: false,
+          isFocusNewEmail: false,
+          isBlurNewEmail: true
+        });
+      }
+    } else {
+      setEmailForm({
+        ...emailForm,
+        isValidNewEmail: true,
+        isFocusNewEmail: false,
+        isBlurNewEmail: true
+      });
     }
   }
 
@@ -170,8 +244,12 @@ function EmailSettings({
             <FormControl.Static>{currentEmail}</FormControl.Static>
           </FormGroup>
           <FormGroup controlId='new-email' validationState={newEmailValidation}>
-            <ControlLabel>{'Nouvel email'}</ControlLabel>
+            <ControlLabel className='text-gray-90'>
+              {'Nouvel email'}
+            </ControlLabel>
             <FormControl
+              onFocus={focusHandlerNewEmail}
+              onBlur={blurHandlerNewEmail}
               onChange={createHandleEmailFormChange('newEmail')}
               type='email'
               value={newEmail}
@@ -186,7 +264,9 @@ function EmailSettings({
             controlId='confirm-email'
             validationState={confirmEmailValidation}
           >
-            <ControlLabel>{'Confirmer le nouvel email'}</ControlLabel>
+            <ControlLabel className='text-gray-90'>
+              {'Confirmer le nouvel email'}
+            </ControlLabel>
             <FormControl
               onChange={createHandleEmailFormChange('confirmNewEmail')}
               type='email'

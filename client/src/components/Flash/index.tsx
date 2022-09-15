@@ -34,25 +34,33 @@ function Flash({ flashMessage, removeFlashMessage }: FlashProps): JSX.Element {
 
   return (
     <>
-      <TransitionGroup>
-        <CSSTransition classNames='flash-message' key={id} timeout={500}>
-          <Alert
-            bsStyle={type}
-            className='flash-message'
-            closeLabel={t('buttons.close')}
-            onDismiss={handleClose}
-          >
-            {t(message, variables)}
-          </Alert>
-        </CSSTransition>
-      </TransitionGroup>
-      {flashMessage && (
-        <div
-          style={{
-            height: `${flashMessageHeight}px`
-          }}
-        />
-      )}
+      <div>
+        {console.log(type)}
+        <TransitionGroup>
+          <CSSTransition classNames='flash-message' key={id} timeout={500}>
+            <Alert
+              bsStyle={type}
+              className='flash-message'
+              closeLabel={t('buttons.close')}
+              onDismiss={handleClose}
+              style={
+                type === 'errors'
+                  ? { background: '#FFADAD', color: '#850000' }
+                  : null
+              }
+            >
+              {t(message, variables)}
+            </Alert>
+          </CSSTransition>
+        </TransitionGroup>
+        {flashMessage && (
+          <div
+            style={{
+              height: `${flashMessageHeight}px`
+            }}
+          />
+        )}
+      </div>
     </>
   );
 }

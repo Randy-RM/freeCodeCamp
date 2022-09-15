@@ -19,7 +19,7 @@ module.exports = {
     DEV_SSR: false
   },
   siteMetadata: {
-    title: 'freeCodeCamp',
+    title: 'Code Learning Platform',
     siteUrl: homeLocation
   },
   pathPrefix: pathPrefix,

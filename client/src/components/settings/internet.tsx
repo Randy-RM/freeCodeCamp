@@ -8,7 +8,7 @@ import {
 } from '@freecodecamp/react-bootstrap';
 import React, { Component } from 'react';
 import { TFunction, withTranslation } from 'react-i18next';
-import isURL from 'validator/lib/isURL';
+import validator from 'validator/';
 
 import { maybeUrlRE } from '../../utils';
 
@@ -29,6 +29,12 @@ interface InternetProps extends InternetFormValues {
 type InternetState = {
   formValues: InternetFormValues;
   originalValues: InternetFormValues;
+  isValidLinkedin: boolean;
+  isFocusLinkedin: boolean;
+  isBlurLinkedin: boolean;
+  isValidGithubProfile: boolean;
+  isFocusGithubProfile: boolean;
+  isBlurGithubProfile: boolean;
 };
 
 class InternetSettings extends Component<InternetProps, InternetState> {
@@ -44,7 +50,13 @@ class InternetSettings extends Component<InternetProps, InternetState> {
 
     this.state = {
       formValues: { githubProfile, linkedin, twitter, website },
-      originalValues: { githubProfile, linkedin, twitter, website }
+      originalValues: { githubProfile, linkedin, twitter, website },
+      isValidLinkedin: true,
+      isFocusLinkedin: false,
+      isBlurLinkedin: false,
+      isValidGithubProfile: true,
+      isFocusGithubProfile: false,
+      isBlurGithubProfile: false
     };
   }
 
@@ -72,23 +84,69 @@ class InternetSettings extends Component<InternetProps, InternetState> {
     return null;
   }
 
-  getValidationStateFor(maybeURl = '') {
+  getValidationStateFor(maybeURl = '', inputName = '') {
+    const {
+      isValidLinkedin,
+      isFocusLinkedin,
+      isBlurLinkedin,
+      isValidGithubProfile,
+      isFocusGithubProfile,
+      isBlurGithubProfile
+    } = this.state;
+
     if (!maybeURl || !maybeUrlRE.test(maybeURl)) {
-      return {
-        state: null,
-        message: ''
-      };
+      if (inputName === 'linkedIn' && isFocusLinkedin) {
+        return {
+          state: null,
+          message: `L'url dois être comme : https://www.linkedin.com/in/user-name`
+        };
+      }
+
+      if (inputName === 'githubProfile' && isFocusGithubProfile) {
+        return {
+          state: null,
+          message: `L'url dois être comme : https://github.com/user-name`
+        };
+      }
     }
-    if (isURL(maybeURl)) {
-      return {
-        state: 'success',
-        message: ''
-      };
+    if (!validator.isURL(maybeURl)) {
+      if (inputName === 'linkedIn' && isBlurLinkedin && !isValidLinkedin) {
+        return {
+          state: 'error',
+          message: 'Veuillez vous assurer que votre URL est correcte.'
+        };
+      }
+      if (
+        inputName === 'githubProfile' &&
+        isBlurGithubProfile &&
+        !isValidGithubProfile
+      ) {
+        return {
+          state: 'error',
+          message: 'Veuillez vous assurer que votre URL est correcte.'
+        };
+      }
+    } else {
+      if (inputName === 'linkedIn' && isBlurLinkedin && isValidLinkedin) {
+        return {
+          state: null,
+          message: ''
+        };
+      }
+      if (
+        inputName === 'githubProfile' &&
+        isBlurGithubProfile &&
+        isValidGithubProfile
+      ) {
+        return {
+          state: null,
+          message: ''
+        };
+      }
     }
     return {
-      state: 'error',
-      message:
-        "Nous n'avons pas pu valider votre URL correctement. Veuillez vous assurer qu'elle est correcte."
+      state: null,
+      message: ''
     };
   }
 
@@ -96,19 +154,145 @@ class InternetSettings extends Component<InternetProps, InternetState> {
     (key: keyof InternetFormValues) =>
     (e: React.FormEvent<HTMLInputElement>) => {
       const value = (e.target as HTMLInputElement).value.slice(0);
-      return this.setState(state => ({
-        formValues: {
-          ...state.formValues,
-          [key]: value
-        }
-      }));
+      if (key === 'linkedin') {
+        return this.setState(state => ({
+          formValues: {
+            ...state.formValues,
+            [key]: value
+          },
+          isValidLinkedin: validator.isURL(value) ? true : false
+        }));
+      }
+      if (key === 'githubProfile') {
+        return this.setState(state => ({
+          formValues: {
+            ...state.formValues,
+            [key]: value
+          },
+          isValidGithubProfile: validator.isURL(value) ? true : false
+        }));
+      }
     };
 
+  // ------------Linkedin Handler------------
+
+  focusHandlerLinkedin = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement).value.slice(0);
+
+    if (value) {
+      if (validator.isURL(value)) {
+        this.setState({
+          isValidLinkedin: true,
+          isFocusLinkedin: true,
+          isBlurLinkedin: false
+        });
+      } else {
+        this.setState({
+          isValidLinkedin: false,
+          isFocusLinkedin: true,
+          isBlurLinkedin: false
+        });
+      }
+    } else {
+      this.setState({
+        isValidLinkedin: true,
+        isFocusLinkedin: true,
+        isBlurLinkedin: false
+      });
+    }
+  };
+
+  blurHandlerLinkedin = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement).value.slice(0);
+    if (value) {
+      if (validator.isURL(value)) {
+        this.setState({
+          isValidLinkedin: true,
+          isFocusLinkedin: false,
+          isBlurLinkedin: true
+        });
+      } else {
+        this.setState({
+          isValidLinkedin: false,
+          isFocusLinkedin: false,
+          isBlurLinkedin: true
+        });
+      }
+    } else {
+      this.setState({
+        isValidLinkedin: true,
+        isFocusLinkedin: false,
+        isBlurLinkedin: true
+      });
+    }
+  };
+
+  // ------------GithubProfile Handler------------
+
+  focusHandlerGithubProfile = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement).value.slice(0);
+
+    if (value) {
+      if (validator.isURL(value)) {
+        this.setState({
+          isValidGithubProfile: true,
+          isFocusGithubProfile: true,
+          isBlurGithubProfile: false
+        });
+      } else {
+        this.setState({
+          isValidGithubProfile: false,
+          isFocusGithubProfile: true,
+          isBlurGithubProfile: false
+        });
+      }
+    } else {
+      this.setState({
+        isValidGithubProfile: true,
+        isFocusGithubProfile: true,
+        isBlurGithubProfile: false
+      });
+    }
+  };
+
+  blurHandlerGithubProfile = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement).value.slice(0);
+    if (value) {
+      if (validator.isURL(value)) {
+        this.setState({
+          isValidGithubProfile: true,
+          isFocusGithubProfile: false,
+          isBlurGithubProfile: true
+        });
+      } else {
+        this.setState({
+          isValidGithubProfile: false,
+          isFocusGithubProfile: false,
+          isBlurGithubProfile: true
+        });
+      }
+    } else {
+      this.setState({
+        isValidGithubProfile: true,
+        isFocusGithubProfile: false,
+        isBlurGithubProfile: true
+      });
+    }
+  };
+
   isFormPristine = () => {
-    const { formValues, originalValues } = this.state;
-    return (Object.keys(originalValues) as Array<keyof InternetFormValues>)
-      .map(key => originalValues[key] === formValues[key])
-      .every(bool => bool);
+    const {
+      formValues,
+      originalValues,
+      isValidLinkedin,
+      isValidGithubProfile
+    } = this.state;
+    if (isValidLinkedin === true && isValidGithubProfile === true) {
+      return (Object.keys(originalValues) as Array<keyof InternetFormValues>)
+        .map(key => originalValues[key] === formValues[key])
+        .every(bool => bool);
+    }
+    return true;
   };
 
   isFormValid = (): boolean => {
@@ -129,7 +313,7 @@ class InternetSettings extends Component<InternetProps, InternetState> {
     return (Object.keys(formValues) as Array<keyof InternetFormValues>).reduce(
       (bool: boolean, key: keyof InternetFormValues): boolean => {
         const maybeUrl = formValues[key];
-        return maybeUrl ? isURL(maybeUrl) : bool;
+        return maybeUrl ? validator.isURL(maybeUrl) : bool;
       },
       false
     );
@@ -177,10 +361,10 @@ class InternetSettings extends Component<InternetProps, InternetState> {
     const {
       state: githubProfileValidation,
       message: githubProfileValidationMessage
-    } = this.getValidationStateFor(githubProfile);
+    } = this.getValidationStateFor(githubProfile, 'githubProfile');
 
     const { state: linkedinValidation, message: linkedinValidationMessage } =
-      this.getValidationStateFor(linkedin);
+      this.getValidationStateFor(linkedin, 'linkedIn');
 
     return (
       <>
@@ -192,12 +376,13 @@ class InternetSettings extends Component<InternetProps, InternetState> {
             >
               <ControlLabel>LinkedIn</ControlLabel>
               <FormControl
+                onFocus={this.focusHandlerLinkedin}
+                onBlur={this.blurHandlerLinkedin}
                 onChange={this.createHandleChange('linkedin')}
                 placeholder='https://www.linkedin.com/in/user-name'
                 type='url'
                 value={linkedin}
               />
-              {this.renderCheck(linkedin, linkedinValidation)}
               {this.renderHelpBlock(linkedinValidationMessage)}
             </FormGroup>
             <FormGroup
@@ -206,12 +391,13 @@ class InternetSettings extends Component<InternetProps, InternetState> {
             >
               <ControlLabel>GitHub</ControlLabel>
               <FormControl
+                onFocus={this.focusHandlerGithubProfile}
+                onBlur={this.blurHandlerGithubProfile}
                 onChange={this.createHandleChange('githubProfile')}
                 placeholder='https://github.com/user-name'
                 type='url'
                 value={githubProfile}
               />
-              {this.renderCheck(githubProfile, githubProfileValidation)}
               {this.renderHelpBlock(githubProfileValidationMessage)}
             </FormGroup>
             <BlockSaveButton
