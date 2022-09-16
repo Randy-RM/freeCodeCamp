@@ -63,7 +63,7 @@ export class NavLinks extends Component<NavLinksProps, {}> {
     return pending ? (
       <div className='nav-skeleton' />
     ) : (
-      <div>
+      <div className=''>
         <label htmlFor='show-menu' className='menu-icon'>
           <FontAwesomeIcon
             icon={isDropdown ? faXmark : faBars}

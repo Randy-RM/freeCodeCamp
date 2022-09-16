@@ -1,5 +1,5 @@
 .nav-bar {
-  padding: 10px 30px;
+  padding: 10px 8%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -22,6 +22,7 @@
 
 .nav-bar .menu-icon {
   width: 20px;
+  margin-bottom: 0px !important;
 }
 
 .nav-bar .menu-icon {
@@ -37,6 +38,7 @@
   align-items: center;
   justify-content: center;
   list-style: none;
+  margin-bottom: 0px !important;
 }
 
 .nav-list .navatar {
@@ -160,7 +162,17 @@
   background: rgb(255, 255, 255);
 }
 
+@media (max-width: 1024px) {
+  .nav-bar {
+    padding: 10px 3%;
+  }
+}
+
 @media (max-width: 768px) {
+  .nav-bar {
+    padding: 10px 2%;
+  }
+
   /* For mobile: */
   .logo img {
     height: 30px;
