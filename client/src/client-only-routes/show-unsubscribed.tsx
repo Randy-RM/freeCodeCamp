@@ -18,7 +18,9 @@ function ShowUnsubscribed({
   return (
     <>
       <Helmet>
-        <title>{t('metaTags:youre-unsubscribed')} | freeCodeCamp.org</title>
+        <title>
+          {t('metaTags:youre-unsubscribed')} | Code Learning Plateform
+        </title>
       </Helmet>
       <Grid>
         <main>

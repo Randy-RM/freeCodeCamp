@@ -21,6 +21,7 @@ interface Challenges {
   executeGA: (payload: ExecuteGaArg) => void;
   isProjectBlock: boolean;
   superBlock: SuperBlocks;
+  isLastVisited: boolean;
 }
 
 const mapIconStyle = { height: '15px', marginRight: '10px', width: '15px' };
@@ -29,7 +30,8 @@ function Challenges({
   challengesWithCompleted,
   executeGA,
   isProjectBlock,
-  superBlock
+  superBlock,
+  isLastVisited
 }: Challenges): JSX.Element {
   const handleChallengeClick = (slug: string) =>
     executeGA({
@@ -49,7 +51,47 @@ function Challenges({
 
   const isGridMap = isNewRespCert(superBlock);
 
-  return isGridMap ? (
+  return isLastVisited ? (
+    <>
+      {challengesWithCompleted[0] ? (
+        <>
+          <div
+            className='card-challenge-action'
+            id={challengesWithCompleted[0].dashedName}
+            key={'map-challenge' + challengesWithCompleted[0].fields.slug}
+          >
+            {!isProjectBlock ? (
+              <Link
+                className='link-action'
+                onClick={() =>
+                  handleChallengeClick(challengesWithCompleted[0].fields.slug)
+                }
+                to={challengesWithCompleted[0].fields.slug}
+              >
+                Continuer la leçon
+              </Link>
+            ) : (
+              <Link
+                className='link-action'
+                onClick={() =>
+                  handleChallengeClick(challengesWithCompleted[0].fields.slug)
+                }
+                to={challengesWithCompleted[0].fields.slug}
+              >
+                Continuer la leçon
+              </Link>
+            )}
+          </div>
+        </>
+      ) : (
+        <>
+          <div className='card-challenge-visited-action'>
+            <span className='big-block-title text-success fw-800'>Fini</span>
+          </div>
+        </>
+      )}
+    </>
+  ) : isGridMap ? (
     <ul className={`map-challenges-ul map-challenges-grid `}>
       {challengesWithCompleted.map((challenge, i) => (
         <li

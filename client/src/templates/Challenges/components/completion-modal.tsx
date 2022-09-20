@@ -212,8 +212,6 @@ export class CompletionModalInner extends Component<
       block,
       close,
       isOpen,
-      message,
-      t,
       title,
       isSignedIn,
       superBlock = ''
@@ -240,41 +238,50 @@ export class CompletionModalInner extends Component<
         show={isOpen}
       >
         <Modal.Header
-          className='challenge-list-header fcc-modal'
+          className='challenge-list-header fcc-modal completion-header'
           closeButton={true}
         >
-          <Modal.Title className='completion-message'>{message}</Modal.Title>
+          <Modal.Title className='completion-message'>
+            {'Félicitations !'}
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body className='completion-modal-body'>
+
+        <Modal.Body className='completion-modal-body bg-light'>
           <CompletionModalBody
             block={block}
             completedPercent={completedPercent}
             superBlock={superBlock}
           />
         </Modal.Body>
-        <Modal.Footer>
+
+        <Modal.Footer className='bg-light'>
           {isSignedIn ? null : (
-            <Login block={true}>{t('learn.sign-in-save')}</Login>
+            <Login block={true}>
+              {'Connectez-vous pour enregistrer votre progression'}
+            </Login>
           )}
           <Button
+            className='action-btn btn-primary'
             block={true}
             bsSize='large'
             bsStyle='primary'
             onClick={() => this.handleSubmit()}
           >
-            {isSignedIn ? t('buttons.submit-and-go') : t('buttons.go-to-next')}
+            {isSignedIn
+              ? 'Soumettre et passer au défi suivant'
+              : 'Passez au défi suivant'}
             <span className='hidden-xs'> (Ctrl + Enter)</span>
           </Button>
           {this.state.downloadURL ? (
             <Button
+              className='action-btn btn-secondary'
               block={true}
               bsSize='lg'
               bsStyle='primary'
-              className='btn-invert'
               download={`${dashedName}.txt`}
               href={this.state.downloadURL}
             >
-              {t('learn.download-solution')}
+              {'Télécharger ma solution'}
             </Button>
           ) : null}
         </Modal.Footer>

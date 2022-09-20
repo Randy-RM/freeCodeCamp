@@ -55,7 +55,14 @@ export const UserPropType = PropTypes.shape({
   theme: PropTypes.string,
   twitter: PropTypes.string,
   username: PropTypes.string,
-  website: PropTypes.string
+  website: PropTypes.string,
+  gender: PropTypes.string,
+  codeTime: PropTypes.string,
+  fieldOfStudy: PropTypes.string,
+  levelOfStudy: PropTypes.string,
+  employedWhere: PropTypes.string,
+  sinceWhen: PropTypes.string,
+  position: PropTypes.string
 });
 
 export const CurrentCertsPropType = PropTypes.arrayOf(
@@ -275,6 +282,13 @@ export type User = {
   website: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   yearsTopContributor: any[];
+  gender: string;
+  codeTime: string;
+  fieldOfStudy: string;
+  levelOfStudy: string;
+  employedWhere: string;
+  sinceWhen: string;
+  position: string;
 } & ClaimedCertifications;
 
 export type ProfileUI = {

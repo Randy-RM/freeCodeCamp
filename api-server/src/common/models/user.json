@@ -85,6 +85,34 @@
       "type": "string",
       "default": ""
     },
+    "gender": {
+      "type": "string",
+      "default": ""
+    },
+    "codeTime": {
+      "type": "string",
+      "default": ""
+    },
+    "fieldOfStudy": {
+      "type": "string",
+      "default": ""
+    },
+    "levelOfStudy": {
+      "type": "string",
+      "default": ""
+    },
+    "employedWhere": {
+      "type": "string",
+      "default": ""
+    },
+    "sinceWhen": {
+      "type": "string",
+      "default": ""
+    },
+    "position": {
+      "type": "string",
+      "default": ""
+    },
     "location": {
       "type": "string",
       "default": ""

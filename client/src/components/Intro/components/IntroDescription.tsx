@@ -1,38 +1,46 @@
 import React from 'react';
-import { Trans, useTranslation } from 'react-i18next';
-import envData from '../../../../../config/env.json';
-import { Link, Spacer } from '../../helpers';
+import { Spacer } from '../../helpers';
 
 import '../intro.css';
-
-const { forumLocation } = envData;
 function IntroDescription(): JSX.Element {
-  const { t } = useTranslation();
-
   return (
     <div className='intro-description'>
-      <strong>{t('learn.read-this.heading')}</strong>
       <Spacer />
-      <p>{t('learn.read-this.p1')}</p>
-      <p>{t('learn.read-this.p2')}</p>
-      <p>{t('learn.read-this.p3')}</p>
-      <p>{t('learn.read-this.p4')}</p>
-      <p>{t('learn.read-this.p5')}</p>
-      <p>{t('learn.read-this.p6')}</p>
-      <p>{t('learn.read-this.p7')}</p>
-      <p>{t('learn.read-this.p8')}</p>
       <p>
-        <Trans i18nKey='learn.read-this.p9'>
-          <Link className='inline' to='https://youtube.com/freecodecamp' />
-        </Trans>
+        {`
+          Si vous êtes novice en programmation, nous vous recommandons 
+          de commencer par le début et d'obtenir ces certifications dans l'ordre.
+        `}
       </p>
-      <p>{t('learn.read-this.p10')}</p>
       <p>
-        <Trans i18nKey='learn.read-this.p11'>
-          <Link className='inline' to={forumLocation} />
-        </Trans>
+        {`
+          Si vous vous sentez dépassé, c'est normal. La programmation est difficile.
+        `}
       </p>
-      <p>{t('learn.read-this.p12')}</p>
+      <p>
+        {`
+          La pratique est la clé. La pratique, la pratique, la pratique.
+        `}
+      </p>
+      <p>
+        {`
+          Et ce programme vous donnera des milliers 
+          d'heures de pratique de la programmation.
+        `}
+      </p>
+      <p>
+        {`
+          Si vous voulez obtenir un emploi de développeur ou 
+          des clients en freelance, les compétences en programmation 
+          ne seront qu'une partie du puzzle. Vous devez également 
+          construire votre réseau personnel et votre réputation de développeur.
+        `}
+      </p>
+      <p>
+        {`
+          
+        `}
+      </p>
     </div>
   );
 }

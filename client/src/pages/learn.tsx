@@ -1,4 +1,4 @@
-import { Grid, Row, Col } from '@freecodecamp/react-bootstrap';
+import { Grid } from '@freecodecamp/react-bootstrap';
 import { graphql } from 'gatsby';
 import React from 'react';
 import Helmet from 'react-helmet';
@@ -6,15 +6,21 @@ import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
-import Intro from '../components/Intro';
-import Map from '../components/Map';
-import { Spacer } from '../components/helpers';
 import LearnLayout from '../components/layouts/learn';
+
 import {
   userFetchStateSelector,
   isSignedInSelector,
   userSelector
 } from '../redux';
+
+import AsSeenIn from '../components/landing/components/as-seen-in';
+import LandingTop from '../components/landing/components/landing-top';
+import LandingDetails from '../components/landing/components/landing-details';
+import LandingLearn from '../components/landing/components/landing-learn';
+import LandingGoals from '../components/landing/components/landing-goals';
+
+import '../components/landing/landing.css';
 
 interface FetchState {
   pending: boolean;
@@ -57,39 +63,33 @@ interface LearnPageProps {
   };
 }
 
-function LearnPage({
-  isSignedIn,
-  fetchState: { pending, complete },
-  user: { name = '', completedChallengeCount = 0 },
-  data: {
-    challengeNode: {
-      challenge: {
-        fields: { slug }
-      }
-    }
-  }
-}: LearnPageProps) {
+function LearnPage({ isSignedIn }: LearnPageProps) {
   const { t } = useTranslation();
 
   return (
     <LearnLayout>
       <Helmet title={t('metaTags:title')} />
-      <Grid>
-        <Row>
-          <Col md={8} mdOffset={2} sm={10} smOffset={1} xs={12}>
-            <Intro
-              complete={complete}
-              completedChallengeCount={completedChallengeCount}
-              isSignedIn={isSignedIn}
-              name={name}
-              pending={pending}
-              slug={slug}
-            />
-            <Map />
-            <Spacer size={2} />
-          </Col>
-        </Row>
-      </Grid>
+      <main className='landing-page bg-light'>
+        <div className='bg-secondary'>
+          <Grid>
+            <LandingTop pageName={'landing'} isSignedIn={isSignedIn} />
+          </Grid>
+        </div>
+        <Grid>
+          <LandingDetails />
+        </Grid>
+        <Grid>
+          <LandingLearn />
+        </Grid>
+        <div className='bg-beige'>
+          <Grid>
+            <LandingGoals />
+          </Grid>
+        </div>
+        <Grid fluid={true}>
+          <AsSeenIn isSignedIn={isSignedIn} />
+        </Grid>
+      </main>
     </LearnLayout>
   );
 }

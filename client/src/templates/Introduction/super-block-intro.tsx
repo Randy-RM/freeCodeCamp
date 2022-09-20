@@ -12,8 +12,6 @@ import { createSelector } from 'reselect';
 
 import { SuperBlocks } from '../../../../config/certification-settings';
 import DonateModal from '../../components/Donation/donation-modal';
-import Login from '../../components/Header/components/Login';
-import Map from '../../components/Map';
 import { Spacer } from '../../components/helpers';
 import {
   currentChallengeIdSelector,
@@ -25,9 +23,8 @@ import {
 } from '../../redux';
 import { MarkdownRemark, AllChallengeNode, User } from '../../redux/prop-types';
 import Block from './components/block';
-import CertChallenge from './components/cert-challenge';
-import LegacyLinks from './components/legacy-links';
-import SuperBlockIntro from './components/super-block-intro';
+import BlockProgressBar from './components/block-progress-bar';
+import BlockLastVisited from './components/block-last-visited';
 import { resetExpansion, toggleBlock } from './redux';
 
 import './intro.css';
@@ -162,14 +159,11 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
   const {
     data: {
       markdownRemark: {
-        frontmatter: { superBlock, title, certification }
+        frontmatter: { superBlock }
       },
       allChallengeNode: { edges }
     },
-    isSignedIn,
-    signInLoading,
-    t,
-    user
+    t
   } = props;
 
   const nodesForSuperBlock = edges.map(({ node }) => node);
@@ -187,63 +181,104 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
 
   const defaultCurriculumNames = blockDashedNames;
 
+  const progressData = defaultCurriculumNames.map(blockDashedName =>
+    nodesForSuperBlock.filter(node => node.challenge.block === blockDashedName)
+  );
+
+  // delete the project module which is always at the end of the table
+  progressData.pop();
+
   return (
     <>
       <Helmet>
-        <title>{i18nTitle} | freeCodeCamp.org</title>
+        <title>{i18nTitle} | Code Learning Plateform</title>
       </Helmet>
-      <Grid>
-        <Row className='super-block-intro-page'>
-          <Col md={8} mdOffset={2} sm={10} smOffset={1} xs={12}>
-            <Spacer size={2} />
-            <LegacyLinks superBlock={superBlock} />
-            <SuperBlockIntro superBlock={superBlock} />
-            <Spacer size={2} />
-            <h2 className='text-center big-subheading'>
-              {t(`intro:misc-text.courses`)}
-            </h2>
-            <Spacer />
-            <div className='block-ui'>
-              {defaultCurriculumNames.map(blockDashedName => (
-                <Fragment key={blockDashedName}>
-                  <Block
-                    blockDashedName={blockDashedName}
-                    challenges={nodesForSuperBlock.filter(
-                      node => node.challenge.block === blockDashedName
-                    )}
-                    superBlock={superBlock}
-                  />
-                </Fragment>
-              ))}
-              {superBlock !== SuperBlocks.CodingInterviewPrep && (
-                <div>
-                  <CertChallenge
-                    certification={certification}
-                    superBlock={superBlock}
-                    title={title}
-                    user={user}
-                  />
+      <Grid fluid={true} className='bg-light'>
+        <Spacer size={2} />
+        <div className=''>
+          <Spacer size={1} />
+          <Row className='super-block-intro-page'>
+            <Col md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+              <h2 className='big-subheading'>{'Progression globale'}</h2>
+            </Col>
+            <Col className='' md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+              <Spacer size={1} />
+              <div className='block-ui bg-secondary'>
+                <div className='card-challenge'>
+                  <div>
+                    <BlockProgressBar challenges={progressData} />
+                  </div>
                 </div>
-              )}
-            </div>
-            {!isSignedIn && !signInLoading && (
-              <div>
-                <Spacer size={2} />
-                <Login block={true}>{t('buttons.logged-out-cta-btn')}</Login>
               </div>
-            )}
-            <Spacer size={2} />
-            <h3
-              className='text-center big-block-title'
-              style={{ whiteSpace: 'pre-line' }}
-            >
-              {t(`intro:misc-text.browse-other`)}
-            </h3>
-            <Spacer />
-            <Map currentSuperBlock={superBlock} />
-            <Spacer size={2} />
-          </Col>
-        </Row>
+              <Spacer size={1} />
+            </Col>
+          </Row>
+          <Spacer size={1} />
+        </div>
+        <div className=''>
+          <Spacer size={1} />
+          <Row className='super-block-intro-page'>
+            <Col md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+              <h2 className='big-subheading'>{'Module en cours'}</h2>
+            </Col>
+            <Col className='' md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+              <Spacer size={1} />
+              <div className='block-ui bg-secondary'>
+                {defaultCurriculumNames.map((blockDashedName, index) => {
+                  if (index < defaultCurriculumNames.length - 1) {
+                    // delete the project module which is always at the end of the table with the condition if
+                    return (
+                      <Fragment key={blockDashedName}>
+                        <BlockLastVisited
+                          blockDashedName={blockDashedName}
+                          challenges={nodesForSuperBlock.filter(
+                            node => node.challenge.block === blockDashedName
+                          )}
+                          superBlock={superBlock}
+                          blockIndex={1 + index}
+                        />
+                      </Fragment>
+                    );
+                  }
+                })}
+              </div>
+              <Spacer size={1} />
+            </Col>
+          </Row>
+          <Spacer size={1} />
+        </div>
+        <div className=''>
+          <Spacer size={1} />
+          <Row className='super-block-intro-page'>
+            <Col md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+              <h2 className='big-subheading'>{'Syllabus'}</h2>
+            </Col>
+            <Col className='' md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+              <Spacer size={1} />
+              <div className='block-ui bg-secondary'>
+                {defaultCurriculumNames.map((blockDashedName, index) => {
+                  if (index < defaultCurriculumNames.length - 1) {
+                    // delete the project module which is always at the end of the table with the condition if
+                    return (
+                      <Fragment key={blockDashedName}>
+                        <Block
+                          blockDashedName={blockDashedName}
+                          challenges={nodesForSuperBlock.filter(
+                            node => node.challenge.block === blockDashedName
+                          )}
+                          superBlock={superBlock}
+                          blockIndex={1 + index}
+                        />
+                      </Fragment>
+                    );
+                  }
+                })}
+              </div>
+              <Spacer size={1} />
+            </Col>
+          </Row>
+          <Spacer size={1} />
+        </div>
       </Grid>
       <DonateModal location={props.location} />
     </>

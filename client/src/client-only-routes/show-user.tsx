@@ -106,7 +106,7 @@ function ShowUser({
   return (
     <>
       <Helmet>
-        <title>{t('report.portfolio')} | freeCodeCamp.org</title>
+        <title>{t('report.portfolio')} | Code Learning Plateform</title>
       </Helmet>
       <Spacer size={2} />
       <Row className='text-center overflow-fix'>

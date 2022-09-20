@@ -5,13 +5,6 @@ import { TFunction, withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { createSelector } from 'reselect';
-
-import latoBoldURL from '../../../static/fonts/lato/Lato-Bold.woff';
-import latoLightURL from '../../../static/fonts/lato/Lato-Light.woff';
-import latoRegularURL from '../../../static/fonts/lato/Lato-Regular.woff';
-import robotoBoldURL from '../../../static/fonts/roboto-mono/RobotoMono-Bold.woff';
-import robotoItalicURL from '../../../static/fonts/roboto-mono/RobotoMono-Italic.woff';
-import robotoRegularURL from '../../../static/fonts/roboto-mono/RobotoMono-Regular.woff';
 import { isBrowser } from '../../../utils';
 import {
   fetchUser,
@@ -31,6 +24,7 @@ import { flashMessageSelector, removeFlashMessage } from '../Flash/redux';
 import Footer from '../Footer';
 import Header from '../Header';
 import OfflineWarning from '../OfflineWarning';
+import { Spacer } from '../helpers';
 
 // preload common fonts
 import './fonts.css';
@@ -156,52 +150,11 @@ class DefaultLayout extends Component<DefaultLayoutProps> {
             { name: 'keywords', content: t('metaTags:keywords') }
           ]}
         >
-          <link
-            as='font'
-            crossOrigin='anonymous'
-            href={latoRegularURL}
-            rel='preload'
-            type='font/woff'
-          />
-          <link
-            as='font'
-            crossOrigin='anonymous'
-            href={latoLightURL}
-            rel='preload'
-            type='font/woff'
-          />
-          <link
-            as='font'
-            crossOrigin='anonymous'
-            href={latoBoldURL}
-            rel='preload'
-            type='font/woff'
-          />
-          <link
-            as='font'
-            crossOrigin='anonymous'
-            href={robotoRegularURL}
-            rel='preload'
-            type='font/woff'
-          />
-          <link
-            as='font'
-            crossOrigin='anonymous'
-            href={robotoBoldURL}
-            rel='preload'
-            type='font/woff'
-          />
-          <link
-            as='font'
-            crossOrigin='anonymous'
-            href={robotoItalicURL}
-            rel='preload'
-            type='font/woff'
-          />
           <style>{fontawesome.dom.css()}</style>
         </Helmet>
+        <Header fetchState={fetchState} user={user} />
         <div className={`default-layout`}>
-          <Header fetchState={fetchState} user={user} />
+          <Spacer />
           <OfflineWarning
             isOnline={isOnline}
             isServerOnline={isServerOnline}

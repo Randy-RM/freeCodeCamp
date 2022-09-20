@@ -2,38 +2,32 @@ import {
   FormGroup,
   ControlLabel,
   FormControl,
-  HelpBlock,
-  Alert
+  HelpBlock
 } from '@freecodecamp/react-bootstrap';
 import React, { Component } from 'react';
+import validator from 'validator/';
 
 import { TFunction, withTranslation } from 'react-i18next';
-import isURL from 'validator/lib/isURL';
-import { FullWidthRow, Spacer } from '../helpers';
+import { Spacer } from '../helpers';
 import BlockSaveButton from '../helpers/form/block-save-button';
-import SoundSettings from './sound';
-import ThemeSettings, { Themes } from './theme';
-import UsernameSettings from './username';
 
 type FormValues = {
   name: string;
   location: string;
-  picture: string;
+  gender: string;
+  codeTime: string;
   about: string;
 };
 
 type AboutProps = {
   about: string;
-  currentTheme: Themes;
   location: string;
   name: string;
-  picture: string;
+  gender: string;
+  codeTime: string;
   points: number;
-  sound: boolean;
   submitNewAbout: (formValues: FormValues) => void;
   t: TFunction;
-  toggleNightMode: (theme: Themes) => void;
-  toggleSoundMode: (sound: boolean) => void;
   username: string;
 };
 
@@ -41,7 +35,17 @@ type AboutState = {
   formValues: FormValues;
   originalValues: FormValues;
   formClicked: boolean;
-  isPictureUrlValid: boolean;
+  isValidName: boolean;
+  isFocusName: boolean;
+  isBlurName: boolean;
+  isValidLocation: boolean;
+  isFocusLocation: boolean;
+  isBlurLocation: boolean;
+  isValidGender: boolean;
+  isValidCodeTime: boolean;
+  isValidAbout: boolean;
+  isFocusAbout: boolean;
+  isBlurAbout: boolean;
 };
 
 class AboutSettings extends Component<AboutProps, AboutState> {
@@ -50,29 +54,50 @@ class AboutSettings extends Component<AboutProps, AboutState> {
   constructor(props: AboutProps) {
     super(props);
     this.validationImage = new Image();
-    const { name = '', location = '', picture = '', about = '' } = props;
+    const {
+      name = '',
+      location = '',
+      gender = '',
+      codeTime = '',
+      about = ''
+    } = props;
     const values = {
       name,
       location,
-      picture,
+      gender,
+      codeTime,
       about
     };
     this.state = {
       formValues: { ...values },
       originalValues: { ...values },
       formClicked: false,
-      isPictureUrlValid: true
+      isValidName: true,
+      isFocusName: false,
+      isBlurName: false,
+      isValidLocation: true,
+      isFocusLocation: false,
+      isBlurLocation: false,
+      isValidGender: true,
+      isValidCodeTime: true,
+      isValidAbout: true,
+      isFocusAbout: false,
+      isBlurAbout: false
     };
+
+    // this.focusHandlerName = this.focusHandlerName.bind(this);
+    // this.blurHandlerName = this.blurHandlerName.bind(this);
   }
 
   componentDidUpdate() {
-    const { name, location, picture, about } = this.props;
+    const { name, location, gender, codeTime, about } = this.props;
     const { formValues, formClicked } = this.state;
     if (
       formClicked &&
       name === formValues.name &&
       location === formValues.location &&
-      picture === formValues.picture &&
+      gender === formValues.gender &&
+      codeTime === formValues.codeTime &&
       about === formValues.about
     ) {
       // eslint-disable-next-line react/no-did-update-set-state
@@ -80,7 +105,8 @@ class AboutSettings extends Component<AboutProps, AboutState> {
         originalValues: {
           name,
           location,
-          picture,
+          gender,
+          codeTime,
           about
         },
         formClicked: false
@@ -90,27 +116,39 @@ class AboutSettings extends Component<AboutProps, AboutState> {
   }
 
   isFormPristine = () => {
-    const { formValues, originalValues } = this.state;
-    return (
-      this.state.isPictureUrlValid === false ||
-      (Object.keys(originalValues) as Array<keyof FormValues>)
+    const {
+      formValues,
+      originalValues,
+      isValidName,
+      isValidLocation,
+      isValidGender,
+      isValidCodeTime,
+      isValidAbout
+    } = this.state;
+    if (
+      isValidName === true &&
+      isValidLocation === true &&
+      isValidGender === true &&
+      isValidCodeTime === true &&
+      isValidAbout === true
+    ) {
+      return (Object.keys(originalValues) as Array<keyof FormValues>)
         .map(key => originalValues[key] === formValues[key])
-        .every(bool => bool)
-    );
+        .every(bool => bool);
+    }
+    return true;
   };
 
   handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const { formValues } = this.state;
     const { submitNewAbout } = this.props;
-    if (this.state.isPictureUrlValid === true) {
-      return this.setState({ formClicked: true }, () =>
-        submitNewAbout(formValues)
-      );
-    } else {
-      return false;
-    }
+    return this.setState({ formClicked: true }, () =>
+      submitNewAbout(formValues)
+    );
   };
+
+  // ------------Name Handler------------
 
   handleNameChange = (e: React.FormEvent<HTMLInputElement>) => {
     const value = (e.target as HTMLInputElement).value.slice(0);
@@ -118,9 +156,56 @@ class AboutSettings extends Component<AboutProps, AboutState> {
       formValues: {
         ...state.formValues,
         name: value
-      }
+      },
+      isValidName:
+        validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
+        validator.isLength(value, { min: 5, max: 255 })
     }));
   };
+
+  focusHandlerName = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement).value.slice(0);
+
+    if (
+      validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
+      validator.isLength(value, { min: 5, max: 255 })
+    ) {
+      this.setState({
+        isValidName: true,
+        isFocusName: true,
+        isBlurName: false
+      });
+    } else {
+      this.setState({
+        isValidName: false,
+        isFocusName: true,
+        isBlurName: false
+      });
+    }
+  };
+
+  blurHandlerName = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement).value.slice(0);
+
+    if (
+      validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
+      validator.isLength(value, { min: 5, max: 255 })
+    ) {
+      this.setState({
+        isValidName: true,
+        isFocusName: false,
+        isBlurName: true
+      });
+    } else {
+      this.setState({
+        isValidName: false,
+        isFocusName: false,
+        isBlurName: true
+      });
+    }
+  };
+
+  // ------------Location Handler------------
 
   handleLocationChange = (e: React.FormEvent<HTMLInputElement>) => {
     const value = (e.target as HTMLInputElement).value.slice(0);
@@ -128,58 +213,78 @@ class AboutSettings extends Component<AboutProps, AboutState> {
       formValues: {
         ...state.formValues,
         location: value
-      }
+      },
+      isValidLocation: !validator.isEmpty(value)
     }));
   };
 
-  componentDidMount() {
-    this.validationImage.addEventListener('error', this.errorEvent);
-    this.validationImage.addEventListener('load', this.loadEvent);
-  }
-
-  componentWillUnmount() {
-    this.validationImage.removeEventListener('load', this.loadEvent);
-    this.validationImage.removeEventListener('error', this.errorEvent);
-  }
-
-  loadEvent = () => this.setState({ isPictureUrlValid: true });
-  errorEvent = () =>
-    this.setState(state => ({
-      isPictureUrlValid: state.formValues.picture === ''
-    }));
-
-  handlePictureChange = (e: React.FormEvent<HTMLInputElement>) => {
+  focusHandlerLocation = (e: React.FocusEvent<HTMLInputElement>) => {
     const value = (e.target as HTMLInputElement).value.slice(0);
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    if (isURL(value, { require_protocol: true })) {
-      this.validationImage.src = value;
+
+    if (!validator.isEmpty(value)) {
+      this.setState({
+        isValidLocation: true,
+        isFocusLocation: true,
+        isBlurLocation: false
+      });
     } else {
       this.setState({
-        isPictureUrlValid: false
+        isValidLocation: false,
+        isFocusLocation: true,
+        isBlurLocation: false
       });
     }
-    this.setState(state => ({
+  };
+
+  blurHandlerLocation = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement).value.slice(0);
+
+    if (!validator.isEmpty(value)) {
+      this.setState({
+        isValidLocation: true,
+        isFocusLocation: false,
+        isBlurLocation: true
+      });
+    } else {
+      this.setState({
+        isValidLocation: false,
+        isFocusLocation: false,
+        isBlurLocation: true
+      });
+    }
+  };
+
+  // ------------Gender Handler------------
+
+  handleGenderChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement).value.slice(0);
+    return this.setState(state => ({
       formValues: {
         ...state.formValues,
-        picture: value
-      }
+        gender: value
+      },
+      isValidGender:
+        validator.equals(value, 'Homme') || validator.equals(value, 'Femme')
     }));
   };
 
-  showImageValidationWarning = () => {
-    const { t } = this.props;
-    if (this.state.isPictureUrlValid === false) {
-      return (
-        <HelpBlock>
-          <Alert bsStyle='info' closeLabel={t('buttons.close')}>
-            {t('validation.url-not-image')}
-          </Alert>
-        </HelpBlock>
-      );
-    } else {
-      return true;
-    }
+  // ------------CodeTime Handler------------
+
+  handleCodeTimeChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement).value.slice(0);
+    return this.setState(state => ({
+      formValues: {
+        ...state.formValues,
+        codeTime: value
+      },
+      isValidCodeTime: validator.isDate(value, {
+        format: 'YYYY-MM-DD',
+        strictMode: true
+      })
+    }));
   };
+
+  // ------------About Handler------------
 
   handleAboutChange = (e: React.FormEvent<HTMLInputElement>) => {
     const value = (e.target as HTMLInputElement).value.slice(0);
@@ -187,80 +292,206 @@ class AboutSettings extends Component<AboutProps, AboutState> {
       formValues: {
         ...state.formValues,
         about: value
-      }
+      },
+      isValidAbout: validator.isLength(value, { max: 300 })
     }));
   };
 
+  focusHandlerAbout = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement).value.slice(0);
+
+    if (validator.isLength(value, { max: 300 })) {
+      this.setState({
+        isValidAbout: true,
+        isFocusAbout: true,
+        isBlurAbout: false
+      });
+    } else {
+      this.setState({
+        isValidAbout: false,
+        isFocusAbout: true,
+        isBlurAbout: false
+      });
+    }
+  };
+
+  blurHandlerAbout = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement).value.slice(0);
+
+    if (validator.isLength(value, { max: 300 })) {
+      this.setState({
+        isValidAbout: true,
+        isFocusAbout: false,
+        isBlurAbout: true
+      });
+    } else {
+      this.setState({
+        isValidAbout: false,
+        isFocusAbout: false,
+        isBlurAbout: true
+      });
+    }
+  };
+
+  // ------------Render------------
+
   render() {
     const {
-      formValues: { name, location, picture, about }
+      formValues: { name, location, gender, codeTime, about },
+      isValidName,
+      isFocusName,
+      isBlurName,
+      isValidLocation,
+      isFocusLocation,
+      isBlurLocation,
+      isValidGender,
+      isValidCodeTime,
+      isValidAbout,
+      isFocusAbout,
+      isBlurAbout
     } = this.state;
-    const {
-      currentTheme,
-      sound,
-      username,
-      t,
-      toggleNightMode,
-      toggleSoundMode
-    } = this.props;
+
     return (
       <div className='about-settings'>
-        <UsernameSettings username={username} />
-        <br />
-        <FullWidthRow>
+        <div>
           <form id='camper-identity' onSubmit={this.handleSubmit}>
             <FormGroup controlId='about-name'>
               <ControlLabel>
-                <strong>{t('settings.labels.name')}</strong>
+                <strong>{'Nom complet'}</strong>
               </ControlLabel>
               <FormControl
+                onFocus={this.focusHandlerName}
+                onBlur={this.blurHandlerName}
                 onChange={this.handleNameChange}
                 type='text'
                 value={name}
               />
+
+              {!isFocusName && !isBlurName && isValidName && (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              )}
+
+              {isFocusName && (
+                <HelpBlock className='text-warning'>
+                  {
+                    'Seuls les lettres et les espaces sont acceptés | minimume 5 et maximum 255 caractères.'
+                  }
+                </HelpBlock>
+              )}
+              {isBlurName && !isValidName && (
+                <HelpBlock className='text-danger'>
+                  {`Le nom que vous avez entré n'est pas valide.`}
+                </HelpBlock>
+              )}
+              {isBlurName && isValidName && (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              )}
             </FormGroup>
+
             <FormGroup controlId='about-location'>
               <ControlLabel>
-                <strong>{t('settings.labels.location')}</strong>
+                <strong>{'Adresse'}</strong>
               </ControlLabel>
               <FormControl
+                onFocus={this.focusHandlerLocation}
+                onBlur={this.blurHandlerLocation}
                 onChange={this.handleLocationChange}
                 type='text'
                 value={location}
               />
+              {!isFocusLocation && !isBlurLocation && isValidLocation && (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              )}
+
+              {isFocusLocation && (
+                <HelpBlock className='text-warning'>
+                  {`L'adresse ne peut être constituée que de caractère vide.`}
+                </HelpBlock>
+              )}
+              {isBlurLocation && !isValidLocation && (
+                <HelpBlock className='text-danger'>
+                  {`L'adresse que vous avez entré n'est pas valide.`}
+                </HelpBlock>
+              )}
+              {isBlurLocation && isValidLocation && (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              )}
             </FormGroup>
-            <FormGroup controlId='about-picture'>
+
+            <FormGroup controlId='about-genre'>
               <ControlLabel>
-                <strong>{t('settings.labels.picture')}</strong>
+                <strong>{'Genre'}</strong>
               </ControlLabel>
               <FormControl
-                onChange={this.handlePictureChange}
-                type='url'
-                value={picture}
-              />
-              {this.showImageValidationWarning()}
+                componentClass='select'
+                onChange={this.handleGenderChange}
+                value={gender.length === 0 ? '' : gender}
+              >
+                <option value='Femme'>Femme</option>
+                <option value='Homme'>Homme</option>
+              </FormControl>
+              {isValidGender && (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              )}
+              {!isValidGender && (
+                <HelpBlock className='text-danger'>
+                  {`Les seuls genres autorisés sont Femme et Homme.`}
+                </HelpBlock>
+              )}
             </FormGroup>
+
+            <FormGroup controlId='about-code'>
+              <ControlLabel>
+                <strong>{'Code depuis quand'}</strong>
+              </ControlLabel>
+              <FormControl
+                onChange={this.handleCodeTimeChange}
+                type='date'
+                value={codeTime}
+              />
+              {isValidCodeTime && (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              )}
+              {!isValidCodeTime && (
+                <HelpBlock className='text-danger'>
+                  {`La date dois être au format Jour/Mois/Année`}
+                </HelpBlock>
+              )}
+            </FormGroup>
+
             <FormGroup controlId='about-about'>
               <ControlLabel>
-                <strong>{t('settings.labels.about')}</strong>
+                <strong>{'Apropos'}</strong>
               </ControlLabel>
               <FormControl
                 componentClass='textarea'
+                onFocus={this.focusHandlerAbout}
+                onBlur={this.blurHandlerAbout}
                 onChange={this.handleAboutChange}
                 value={about}
               />
+              {!isFocusAbout && !isBlurAbout && isValidAbout && (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              )}
+
+              {isFocusAbout && (
+                <HelpBlock className='text-warning'>
+                  {'Maximum 300 caractères pour ce champ.'}
+                </HelpBlock>
+              )}
+              {isBlurAbout && !isValidAbout && (
+                <HelpBlock className='text-danger'>
+                  {`Pas plus de 300 caractères toléré pour ce champ.`}
+                </HelpBlock>
+              )}
+              {isBlurAbout && isValidAbout && (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              )}
             </FormGroup>
             <BlockSaveButton disabled={this.isFormPristine()} />
           </form>
-        </FullWidthRow>
+        </div>
         <Spacer />
-        <FullWidthRow>
-          <ThemeSettings
-            currentTheme={currentTheme}
-            toggleNightMode={toggleNightMode}
-          />
-          <SoundSettings sound={sound} toggleSoundMode={toggleSoundMode} />
-        </FullWidthRow>
       </div>
     );
   }

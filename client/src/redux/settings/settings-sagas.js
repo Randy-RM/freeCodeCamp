@@ -2,14 +2,18 @@ import { omit } from 'lodash-es';
 import { call, delay, put, takeLatest, takeEvery } from 'redux-saga/effects';
 
 import { createFlashMessage } from '../../components/Flash/redux';
+
 import {
   getUsernameExists,
   putUpdateMyAbout,
+  putUpdateMyEducation,
+  putUpdateMyWorkExperience,
   putUpdateMyProfileUI,
   putUpdateMyUsername,
   putUpdateUserFlag,
   putVerifyCert
 } from '../../utils/ajax';
+
 import {
   updateUserFlagComplete,
   updateUserFlagError,
@@ -17,6 +21,10 @@ import {
   validateUsernameError,
   submitNewAboutComplete,
   submitNewAboutError,
+  submitNewEducationComplete,
+  submitNewEducationError,
+  submitNewWorkExperienceComplete,
+  submitNewWorkExperienceError,
   submitNewUsernameComplete,
   submitNewUsernameError,
   submitProfileUIComplete,
@@ -32,6 +40,26 @@ function* submitNewAboutSaga({ payload }) {
     yield put(createFlashMessage(response));
   } catch (e) {
     yield put(submitNewAboutError(e));
+  }
+}
+
+function* submitNewEducationSaga({ payload }) {
+  try {
+    const response = yield call(putUpdateMyEducation, payload);
+    yield put(submitNewEducationComplete({ ...response, payload }));
+    yield put(createFlashMessage(response));
+  } catch (e) {
+    yield put(submitNewEducationError(e));
+  }
+}
+
+function* submitNewWorkExperienceCompleteSaga({ payload }) {
+  try {
+    const response = yield call(putUpdateMyWorkExperience, payload);
+    yield put(submitNewWorkExperienceComplete({ ...response, payload }));
+    yield put(createFlashMessage(response));
+  } catch (e) {
+    yield put(submitNewWorkExperienceError(e));
   }
 }
 
@@ -105,6 +133,11 @@ export function createSettingsSagas(types) {
   return [
     takeEvery(types.updateUserFlag, updateUserFlagSaga),
     takeLatest(types.submitNewAbout, submitNewAboutSaga),
+    takeLatest(types.submitNewEducation, submitNewEducationSaga),
+    takeLatest(
+      types.submitNewWorkExperience,
+      submitNewWorkExperienceCompleteSaga
+    ),
     takeLatest(types.submitNewUsername, submitNewUsernameSaga),
     takeLatest(types.validateUsername, validateUsernameSaga),
     takeLatest(types.submitProfileUI, submitProfileUISaga),

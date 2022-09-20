@@ -20,6 +20,7 @@ export class Header extends React.Component<
   menuButtonRef: React.RefObject<any>;
   searchBarRef: React.RefObject<any>;
   static displayName: string;
+
   constructor(props: HeaderProps) {
     super(props);
     this.state = {
@@ -71,8 +72,6 @@ export class Header extends React.Component<
           <UniversalNav
             displayMenu={displayMenu}
             fetchState={fetchState}
-            menuButtonRef={this.menuButtonRef}
-            searchBarRef={this.searchBarRef}
             toggleDisplayMenu={this.toggleDisplayMenu}
             user={user}
           />

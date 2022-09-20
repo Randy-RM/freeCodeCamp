@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
     dispatch
   );
 
-function DangerZone({ deleteAccount, resetProgress, t }: DangerZoneProps) {
+function DangerZone({ deleteAccount, resetProgress }: DangerZoneProps) {
   const [reset, setReset] = useState(false);
   const [delete_, setDelete] = useState(false);
   // delete is reserved
@@ -45,30 +45,34 @@ function DangerZone({ deleteAccount, resetProgress, t }: DangerZoneProps) {
     <div className='danger-zone text-center'>
       <FullWidthRow>
         <Panel bsStyle='danger'>
-          <Panel.Heading>{t('settings.danger.heading')}</Panel.Heading>
+          <Panel.Heading>{'Zone à risque'}</Panel.Heading>
           <Spacer />
-          <p>{t('settings.danger.be-careful')}</p>
+          <p>
+            {
+              'Veuillez faire attention. Les changements dans cette section sont permanents.'
+            }
+          </p>
           <FullWidthRow>
             <Button
+              className='action-btn btn-secondary'
               block={true}
               bsSize='lg'
               bsStyle='danger'
-              className='btn-danger'
               onClick={toggleResetModal}
               type='button'
             >
-              {t('settings.danger.reset')}
+              {'Réinitialiser tous mes progrès'}
             </Button>
             <ButtonSpacer />
             <Button
+              className='action-btn btn-secondary'
               block={true}
               bsSize='lg'
               bsStyle='danger'
-              className='btn-danger'
               onClick={toggleDeleteModal}
               type='button'
             >
-              {t('settings.danger.delete')}
+              {'Supprimer mon compte'}
             </Button>
             <Spacer />
           </FullWidthRow>
