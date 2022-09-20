@@ -9,17 +9,17 @@
     "note": "Note: Some browser extensions, such as ad-blockers and dark mode extensions can interfere with the tests. If you face issues, we recommend disabling extensions that modify the content or layout of pages, while taking the course.",
     "blocks": {
       "basic-html-and-html5": {
-        "title": "HTML et HTML5 de base",
+        "title": "Basique HTML et HTML5",
         "intro": [
           "Le HTML est un langage de balisage qui utilise une syntaxe ou une notation spéciale pour décrire la structure d'une page Web au navigateur. Les éléments HTML ont généralement des balises d'ouverture et de fermeture qui entourent et donnent un sens au contenu. Par exemple, différents éléments peuvent décrire un texte comme un titre, un paragraphe ou un élément de liste.",
           "Dans ce cours, vous construirez une application de photos de chats afin d'apprendre certains des éléments HTML les plus courants, qui constituent la base de toute page Web."
         ]
       },
       "basic-css": {
-        "title": "Basic CSS",
+        "title": "Basique CSS",
         "intro": [
-          "CSS, or Cascading Style Sheets, tell the browser how to display the text and other content that you write in HTML. With CSS, you can control the color, font, size, spacing, and many other aspects of HTML elements.",
-          "Now that you've described the structure of your cat photo app, give it some style with CSS."
+          "Les CSS, ou feuilles de style en cascade, indiquent au navigateur comment afficher le texte et les autres contenus que vous écrivez en HTML. Avec le CSS, vous pouvez contrôler la couleur, la police, la taille, l'espacement et de nombreux autres aspects des éléments HTML.",
+          "Maintenant que vous avez décrit la structure de votre application de photos de chats, donnez-lui du style avec le CSS."
         ]
       },
       "applied-visual-design": {
