@@ -58,10 +58,10 @@
         ]
       },
       "responsive-web-design-projects": {
-        "title": "Responsive Web Design Projects",
+        "title": "Projets de Responsive Web Design",
         "intro": [
-          "Time to put your newly learnt skills to work. By working on these projects, you will get a chance to apply all of the skills, principles, and concepts you have learned so far: HTML, CSS, Visual Design, Accessibility, and more.",
-          "Complete the five web programming projects below to earn your Responsive Web Design certification."
+          "Il est temps de mettre en pratique les compétences que vous venez d'acquérir. En travaillant sur ces projets, vous aurez l'occasion d'appliquer l'ensemble des compétences, principes et concepts que vous avez appris jusqu'à présent : HTML, CSS, conception visuelle, accessibilité, etc.",
+          "Réalisez les cinq projets de programmation web ci-dessous pour obtenir votre certification Responsive Web Design."
         ]
       }
     }
