@@ -30,10 +30,10 @@
         ]
       },
       "applied-accessibility": {
-        "title": "Applied Accessibility",
+        "title": "Accessibilité appliquée",
         "intro": [
-          "In web development, accessibility refers to web content and a UI (user interface) that can be understood, navigated, and interacted with by a broad audience. This includes people with visual, auditory, mobility, or cognitive disabilities.",
-          "In this course, you'll learn best practices for building webpages that are accessible to everyone."
+          "Dans le domaine du développement Web, l'accessibilité fait référence à un contenu Web et à une interface utilisateur (IU) qui peuvent être compris, navigués et utilisés par un large public. Cela inclut les personnes souffrant de handicaps visuels, auditifs, de mobilité ou cognitifs.",
+          "Dans ce cours, vous apprendrez les meilleures pratiques pour créer des pages Web accessibles à tous."
         ]
       },
       "responsive-web-design-principles": {
