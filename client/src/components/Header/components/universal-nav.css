@@ -201,6 +201,10 @@
     margin: 20px 0;
   }
 
+  .nav-list .nav-item a {
+    font-size: small;
+  }
+
   .nav-list .navatar {
     flex-direction: column;
     justify-content: center;

@@ -35,7 +35,6 @@ function Flash({ flashMessage, removeFlashMessage }: FlashProps): JSX.Element {
   return (
     <>
       <div>
-        {console.log(type)}
         <TransitionGroup>
           <CSSTransition classNames='flash-message' key={id} timeout={500}>
             <Alert

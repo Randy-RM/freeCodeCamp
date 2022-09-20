@@ -24,7 +24,7 @@ import { flashMessageSelector, removeFlashMessage } from '../Flash/redux';
 import Footer from '../Footer';
 import Header from '../Header';
 import OfflineWarning from '../OfflineWarning';
-import { Spacer } from '../helpers';
+// import { Spacer } from '../helpers';
 
 // preload common fonts
 import './fonts.css';
@@ -154,17 +154,19 @@ class DefaultLayout extends Component<DefaultLayoutProps> {
         </Helmet>
         <Header fetchState={fetchState} user={user} />
         <div className={`default-layout`}>
-          <Spacer />
+          {/* <Spacer /> */}
           <OfflineWarning
             isOnline={isOnline}
             isServerOnline={isServerOnline}
             isSignedIn={isSignedIn}
           />
           {hasMessage && flashMessage ? (
-            <Flash
-              flashMessage={flashMessage}
-              removeFlashMessage={removeFlashMessage}
-            />
+            <>
+              <Flash
+                flashMessage={flashMessage}
+                removeFlashMessage={removeFlashMessage}
+              />
+            </>
           ) : null}
           {children}
         </div>

@@ -70,6 +70,7 @@ class MobileLayout extends Component<MobileLayoutProps, MobileLayoutState> {
 
     return (
       <>
+        <Spacer size={1} />
         <Tabs
           activeKey={currentTab}
           defaultActiveKey={currentTab}

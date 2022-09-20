@@ -1,6 +1,6 @@
 ---
 id: bd7123c8c441eddfaeb5bdef
-title: Dites bonjour aux éléments HTML QBEL
+title: Dites bonjour aux éléments HTML
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVMPUv/cE8Gpt2'
 forumTopicId: 18276
