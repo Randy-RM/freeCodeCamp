@@ -9,10 +9,10 @@
     "note": "Note: Some browser extensions, such as ad-blockers and dark mode extensions can interfere with the tests. If you face issues, we recommend disabling extensions that modify the content or layout of pages, while taking the course.",
     "blocks": {
       "basic-html-and-html5": {
-        "title": "Basic HTML and HTML5 lol ici",
+        "title": "HTML et HTML5 de base",
         "intro": [
-          "HTML is a markup language that uses a special syntax or notation to describe the structure of a webpage to the browser. HTML elements usually have opening and closing tags that surround and give meaning to content. For example, different elements can describe text as a heading, paragraph, or list item.",
-          "In this course, you'll build a cat photo app to learn some of the most common HTML elements — the building blocks of any webpage."
+          "Le HTML est un langage de balisage qui utilise une syntaxe ou une notation spéciale pour décrire la structure d'une page Web au navigateur. Les éléments HTML ont généralement des balises d'ouverture et de fermeture qui entourent et donnent un sens au contenu. Par exemple, différents éléments peuvent décrire un texte comme un titre, un paragraphe ou un élément de liste.",
+          "Dans ce cours, vous construirez une application de photos de chats afin d'apprendre certains des éléments HTML les plus courants, qui constituent la base de toute page Web."
         ]
       },
       "basic-css": {
