@@ -1,12 +1,12 @@
 {
   "responsive-web-design": {
-    "title": "Responsive Web Design TTest",
+    "title": "Responsive Web Design",
     "intro": [
-      "In this Responsive Web Design Certification, you'll learn the languages that developers use to build webpages: HTML (Hypertext Markup Language) for content, and CSS (Cascading Style Sheets) for design.",
-      "First, you'll build a cat photo app to learn the basics of HTML and CSS. Later, you'll learn modern techniques like CSS variables by building a penguin, and best practices for accessibility by building a web form.",
-      "Finally, you'll learn how to make webpages that respond to different screen sizes by building a Twitter card with Flexbox, and a complex blog layout with CSS Grid."
+      "Dans ce cours de Responsive Web Design, vous apprendrez les langages que les développeurs utilisent pour créer des pages Web : HTML (Hypertext Markup Language) pour le contenu, et CSS (Cascading Style Sheets) pour la conception.",
+      "Tout d'abord, vous construirez une application de photos de chats pour apprendre les bases du HTML et du CSS. Ensuite, vous apprendrez des techniques modernes comme les variables CSS en construisant un pingouin, et les meilleures pratiques en matière d'accessibilité en construisant un formulaire Web.",
+      "Enfin, vous apprendrez à créer des pages Web qui s'adaptent à différentes tailles d'écran en créant une carte Twitter avec Flexbox et une mise en page de blog complexe avec CSS Grid."
     ],
-    "note": "Note: Some browser extensions, such as ad-blockers and dark mode extensions can interfere with the tests. If you face issues, we recommend disabling extensions that modify the content or layout of pages, while taking the course.",
+    "note": "Remarque : certaines extensions de navigateur, telles que les bloqueurs de publicité et les extensions de mode sombre, peuvent interférer avec les tests. Si vous rencontrez des problèmes, nous vous recommandons de désactiver les extensions qui modifient le contenu ou la présentation des pages, tout en suivant le cours.",
     "blocks": {
       "basic-html-and-html5": {
         "title": "Basique HTML et HTML5",
@@ -18,7 +18,7 @@
       "basic-css": {
         "title": "Basique CSS",
         "intro": [
-          "Les CSS, ou feuilles de style en cascade, indiquent au navigateur comment afficher le texte et les autres contenus que vous écrivez en HTML. Avec le CSS, vous pouvez contrôler la couleur, la police, la taille, l'espacement et de nombreux autres aspects des éléments HTML.",
+          "Le CSS, ou feuilles de style en cascade, indiquent au navigateur comment afficher le texte et les autres contenus que vous écrivez en HTML. Avec le CSS, vous pouvez contrôler la couleur, la police, la taille, l'espacement et de nombreux autres aspects des éléments HTML.",
           "Maintenant que vous avez décrit la structure de votre application de photos de chats, donnez-lui du style avec le CSS."
         ]
       },
