@@ -37,10 +37,10 @@
         ]
       },
       "responsive-web-design-principles": {
-        "title": "Responsive Web Design Principles",
+        "title": "Principes du Responsive Web Design",
         "intro": [
-          "There are many devices that can access the web, and they come in all shapes and sizes. Responsive web design is the practice of designing flexible websites that can respond to different screen sizes, orientations, and resolutions.",
-          "In this course, you'll learn how to use CSS to make your webpages look good, no matter what device they're viewed on."
+          "De nombreux appareils peuvent accéder au web, et ils sont de toutes formes et de toutes tailles. Le responsive web design est la pratique consistant à concevoir des sites web flexibles qui peuvent répondre à différentes tailles, orientations et résolutions d'écran.",
+          "Dans ce cours, vous apprendrez à utiliser les feuilles de style en cascade (CSS) pour améliorer l'apparence de vos pages Web, quel que soit l'appareil sur lequel elles sont affichées."
         ]
       },
       "css-flexbox": {
