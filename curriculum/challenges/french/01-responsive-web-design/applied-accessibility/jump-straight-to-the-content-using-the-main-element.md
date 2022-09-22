@@ -1,6 +1,6 @@
 ---
 id: 587d774e367417b2b2512a9f
-title: Jump Straight to the Content Using the main Element
+title: Accéder directement au contenu à l'aide de l'élément main
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cPp7zuE'
 forumTopicId: 301018

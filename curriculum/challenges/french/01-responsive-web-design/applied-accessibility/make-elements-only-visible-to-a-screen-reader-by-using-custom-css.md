@@ -1,6 +1,6 @@
 ---
 id: 587d778d367417b2b2512aaa
-title: Make Elements Only Visible to a Screen Reader by Using Custom CSS
+title: Rendre les éléments uniquement visibles pour un lecteur d'écran à l'aide d'un CSS personnalisé
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cJ8QGkhJ'
 forumTopicId: 301020

@@ -1,6 +1,6 @@
 ---
 id: 587d7789367417b2b2512aa4
-title: Improve Accessibility of Audio Content with the audio Element
+title: Améliorer l'accessibilité du contenu audio avec l'élément audio
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cVJVkcZ'
 forumTopicId: 301014
