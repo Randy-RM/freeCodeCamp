@@ -1,6 +1,6 @@
 ---
 id: 5a90372638fddaf9a66b5d38
-title: Use grid-column to Control Spacing
+title: Utilisez la grid-column pour contrôler l'espacement
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pByETK/cnzkDSr'
 forumTopicId: 301136

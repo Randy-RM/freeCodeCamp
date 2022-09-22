@@ -1,6 +1,6 @@
 ---
 id: 5a90374338fddaf9a66b5d3a
-title: Align an Item Horizontally using justify-self
+title: Aligner un élément horizontalement à l'aide de justify-self
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pByETK/cJbpKHq'
 forumTopicId: 301122

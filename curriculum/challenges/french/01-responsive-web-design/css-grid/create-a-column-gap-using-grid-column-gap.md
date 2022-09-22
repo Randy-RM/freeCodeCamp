@@ -1,6 +1,6 @@
 ---
 id: 5a9036ee38fddaf9a66b5d35
-title: Create a Column Gap Using grid-column-gap
+title: Créer un écart de colonne à l'aide de grid-column-gap
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pByETK/cVZ8vfD'
 forumTopicId: 301124

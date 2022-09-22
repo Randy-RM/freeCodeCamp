@@ -1,6 +1,6 @@
 ---
 id: 5a94fe1369fb03452672e45d
-title: Place Items in Grid Areas Using the grid-area Property
+title: Placer des éléments dans des grilles à l'aide de la propriété grid-area
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pByETK/cRrqmtV'
 forumTopicId: 301132

@@ -1,6 +1,6 @@
 ---
 id: 5a94fe0569fb03452672e45c
-title: Divide the Grid Into an Area Template
+title: Diviser la grille (Grid) en un modèle de zone
 challengeType: 0
 forumTopicId: 301130
 dashedName: divide-the-grid-into-an-area-template
