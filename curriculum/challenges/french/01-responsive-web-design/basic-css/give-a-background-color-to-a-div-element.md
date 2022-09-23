@@ -1,17 +1,17 @@
 ---
 id: bad87fed1348bd9aede07836
-title: Give a Background Color to a div Element
+title: Donner une couleur de fond à un élément div
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cdRKMCk'
+videoUrl: "https://scrimba.com/c/cdRKMCk"
 forumTopicId: 18190
 dashedName: give-a-background-color-to-a-div-element
 ---
 
 # --description--
 
-You can set an element's background color with the `background-color` property.
+Vous pouvez définir la couleur de fond d'un élément avec la propriété `background-color`.
 
-For example, if you wanted an element's background color to be `green`, you'd put this within your `style` element:
+Par exemple, si vous voulez que la couleur d'arrière-plan d'un élément soit `green`, vous devez l'indiquer dans votre élément `style` :
 
 ```css
 .green-background {
@@ -21,26 +21,28 @@ For example, if you wanted an element's background color to be `green`, you'd pu
 
 # --instructions--
 
-Create a class called `silver-background` with the `background-color` of `silver`. Assign this class to your `div` element.
+Créez une classe appelée `silver-background` avec la `background-color` de `silver`. Affectez cette classe à votre élément `div`.
 
 # --hints--
 
-Your`div` element should have the class `silver-background`.
+Votre élément `div` doit avoir la classe `silver-background`
 
 ```js
-assert($('div').hasClass('silver-background'));
+assert($("div").hasClass("silver-background"));
 ```
 
-Your `div` element should have a silver background.
+Votre élément `div` doit avoir un fond argenté.
 
 ```js
-assert($('div').css('background-color') === 'rgb(192, 192, 192)');
+assert($("div").css("background-color") === "rgb(192, 192, 192)");
 ```
 
-A class named `silver-background` should be defined within the `style` element and the value of `silver` should be assigned to the `background-color` property.
+Une classe nommée `silver-background` doit être définie dans l'élément `style` et la valeur de `silver` doit être attribuée à la propriété `background-color`.
 
 ```js
-assert(code.match(/\.silver-background\s*{\s*background-color\s*:\s*silver\s*;?\s*}/));
+assert(
+  code.match(/\.silver-background\s*{\s*background-color\s*:\s*silver\s*;?\s*}/)
+);
 ```
 
 # --seed--
@@ -48,7 +50,11 @@ assert(code.match(/\.silver-background\s*{\s*background-color\s*:\s*silver\s*;?\
 ## --seed-contents--
 
 ```html
-<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+<link
+  href="https://fonts.googleapis.com/css?family=Lobster"
+  rel="stylesheet"
+  type="text/css"
+/>
 <style>
   .red-text {
     color: red;
@@ -77,33 +83,42 @@ assert(code.match(/\.silver-background\s*{\s*background-color\s*:\s*silver\s*;?\
 
 <h2 class="red-text">CatPhotoApp</h2>
 <main>
-  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+  <p class="red-text">
+    Cliquez ici pour voir plus <a href="#">photos de chats</a>.
+  </p>
 
-  <a href="#"><img class="smaller-image thick-green-border" src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"
+    ><img
+      class="smaller-image thick-green-border"
+      src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg"
+      alt="A cute orange cat lying on its back."
+  /></a>
 
   <div>
-    <p>Things cats love:</p>
+    <p>Les choses que les chats aiment :</p>
     <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
+      <li>cataire</li>
+      <li>pointeurs laser</li>
+      <li>lasagnes</li>
     </ul>
-    <p>Top 3 things cats hate:</p>
+    <p>Les 3 choses que les chats détestent le plus :</p>
     <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
+      <li>traitement contre les puces</li>
+      <li>tonnerre</li>
+      <li>autres chats</li>
     </ol>
   </div>
 
   <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
+    <label
+      ><input type="radio" name="indoor-outdoor" checked /> Intérieur</label
+    >
+    <label><input type="radio" name="indoor-outdoor" /> Extérieur</label><br />
+    <label><input type="checkbox" name="personality" checked /> Aimant</label>
+    <label><input type="checkbox" name="personality" /> Paresseux</label>
+    <label><input type="checkbox" name="personality" /> Énergique</label><br />
+    <input type="text" placeholder="cat photo URL" required />
+    <button type="submit">Soumettre</button>
   </form>
 </main>
 ```
@@ -111,7 +126,11 @@ assert(code.match(/\.silver-background\s*{\s*background-color\s*:\s*silver\s*;?\
 # --solutions--
 
 ```html
-<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+<link
+  href="https://fonts.googleapis.com/css?family=Lobster"
+  rel="stylesheet"
+  type="text/css"
+/>
 <style>
   .red-text {
     color: red;
@@ -144,33 +163,42 @@ assert(code.match(/\.silver-background\s*{\s*background-color\s*:\s*silver\s*;?\
 
 <h2 class="red-text">CatPhotoApp</h2>
 <main>
-  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+  <p class="red-text">
+    Cliquez ici pour voir plus <a href="#">photos de chats</a>.
+  </p>
 
-  <a href="#"><img class="smaller-image thick-green-border" src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"
+    ><img
+      class="smaller-image thick-green-border"
+      src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg"
+      alt="A cute orange cat lying on its back."
+  /></a>
 
   <div class="silver-background">
-    <p>Things cats love:</p>
+    <p>Les choses que les chats aiment :</p>
     <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
+      <li>cataire</li>
+      <li>pointeurs laser</li>
+      <li>lasagnes</li>
     </ul>
-    <p>Top 3 things cats hate:</p>
+    <p>Les 3 choses que les chats détestent le plus :</p>
     <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
+      <li>traitement contre les puces</li>
+      <li>tonnerre</li>
+      <li>autres chats</li>
     </ol>
   </div>
 
   <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
+    <label
+      ><input type="radio" name="indoor-outdoor" checked /> Intérieur</label
+    >
+    <label><input type="radio" name="indoor-outdoor" /> Extérieur</label><br />
+    <label><input type="checkbox" name="personality" checked /> Aimant</label>
+    <label><input type="checkbox" name="personality" /> Paresseux</label>
+    <label><input type="checkbox" name="personality" /> Énergique</label><br />
+    <input type="text" placeholder="cat photo URL" required />
+    <button type="submit">Soumettre</button>
   </form>
 </main>
 ```

@@ -1,29 +1,29 @@
 ---
 id: bad87fee1348bd9aedf08815
-title: Make Circular Images with a border-radius
+title: Créer des images circulaires avec border-radius
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/c2MvrcB'
+videoUrl: "https://scrimba.com/c/c2MvrcB"
 forumTopicId: 18229
 dashedName: make-circular-images-with-a-border-radius
 ---
 
 # --description--
 
-In addition to pixels, you can also specify the `border-radius` using a percentage.
+En plus des pixels, vous pouvez également spécifier le "rayon de la bordure" en utilisant un pourcentage.
 
 # --instructions--
 
-Give your cat photo a `border-radius` of `50%`.
+Give your cat photo `border-radius` de `50%`.
 
 # --hints--
 
-Your image should have a border radius of `50%`, making it perfectly circular.
+Votre image doit avoir un rayon de bordure de `50 %`, ce qui la rend parfaitement circulaire.
 
 ```js
-assert(parseInt($('img').css('border-top-left-radius')) > 48);
+assert(parseInt($("img").css("border-top-left-radius")) > 48);
 ```
 
-The `border-radius` value should use a percentage value of `50%`.
+La valeur `border-radius` doit utiliser un pourcentage de `50%`.
 
 ```js
 assert(code.match(/50%/g));
@@ -34,7 +34,11 @@ assert(code.match(/50%/g));
 ## --seed-contents--
 
 ```html
-<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+<link
+  href="https://fonts.googleapis.com/css?family=Lobster"
+  rel="stylesheet"
+  type="text/css"
+/>
 <style>
   .red-text {
     color: red;
@@ -63,33 +67,42 @@ assert(code.match(/50%/g));
 
 <h2 class="red-text">CatPhotoApp</h2>
 <main>
-  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+  <p class="red-text">
+    Cliquez ici pour voir plus <a href="#">photos de chats</a>.
+  </p>
 
-  <a href="#"><img class="smaller-image thick-green-border" src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"
+    ><img
+      class="smaller-image thick-green-border"
+      src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg"
+      alt="A cute orange cat lying on its back."
+  /></a>
 
   <div>
-    <p>Things cats love:</p>
+    <p>Les choses que les chats aiment :</p>
     <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
+      <li>cataire</li>
+      <li>pointeurs laser</li>
+      <li>lasagnes</li>
     </ul>
-    <p>Top 3 things cats hate:</p>
+    <p>Les 3 choses que les chats détestent le plus :</p>
     <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
+      <li>traitement contre les puces</li>
+      <li>tonnerre</li>
+      <li>autres chats</li>
     </ol>
   </div>
 
   <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
+    <label
+      ><input type="radio" name="indoor-outdoor" checked /> Intérieur</label
+    >
+    <label><input type="radio" name="indoor-outdoor" /> Extérieur</label><br />
+    <label><input type="checkbox" name="personality" checked /> Aimant</label>
+    <label><input type="checkbox" name="personality" /> Paresseux</label>
+    <label><input type="checkbox" name="personality" /> Énergique</label><br />
+    <input type="text" placeholder="cat photo URL" required />
+    <button type="submit">Soumettre</button>
   </form>
 </main>
 ```
@@ -97,7 +110,11 @@ assert(code.match(/50%/g));
 # --solutions--
 
 ```html
-<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+<link
+  href="https://fonts.googleapis.com/css?family=Lobster"
+  rel="stylesheet"
+  type="text/css"
+/>
 <style>
   .red-text {
     color: red;
@@ -127,33 +144,40 @@ assert(code.match(/50%/g));
 
 <h2 class="red-text">CatPhotoApp</h2>
 <main>
-  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+  <p class="red-text">Cliquez ici pour en savoir plus <a href="#">photos de chats</a>.</p>
 
-  <a href="#"><img class="smaller-image thick-green-border" src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"
+    ><img
+      class="smaller-image thick-green-border"
+      src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg"
+      alt="A cute orange cat lying on its back."
+  /></a>
 
   <div>
-    <p>Things cats love:</p>
+    <p>Les choses que les chats aiment :</p>
     <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
+      <li>cataire</li>
+      <li>pointeurs laser</li>
+      <li>lasagnes</li>
     </ul>
-    <p>Top 3 things cats hate:</p>
+    <p>Les 3 choses que les chats détestent le plus :</p>
     <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
+      <li>traitement contre les puces</li>
+      <li>tonnerre</li>
+      <li>autres chats</li>
     </ol>
   </div>
 
   <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
+    <label
+      ><input type="radio" name="indoor-outdoor" checked /> Intérieur</label
+    >
+    <label><input type="radio" name="indoor-outdoor" /> Extérieur</label><br />
+    <label><input type="checkbox" name="personality" checked /> Aimant</label>
+    <label><input type="checkbox" name="personality" /> Paresseux</label>
+    <label><input type="checkbox" name="personality" /> Énergique</label><br />
+    <input type="text" placeholder="cat photo URL" required />
+    <button type="submit">Soumettre</button>
   </form>
 </main>
 ```

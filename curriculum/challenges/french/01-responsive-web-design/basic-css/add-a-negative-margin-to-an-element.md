@@ -15,9 +15,9 @@ Si vous définissez la marge d'un élément à une valeur négative, l'élément
 
 # --instructions--
 
-Essayez de définir la "marge" sur une valeur négative comme celle de la boîte rouge.
+Essayez de définir le `marging` sur une valeur négative comme celle du conteneur rouge.
 
-Changez la "marge" de la boîte bleue à "15px", afin qu'elle remplisse toute la largeur horizontale de la boîte jaune qui l'entoure.
+Changez la "marge" du conteneur bleue à "15px", afin qu'elle remplisse toute la largeur horizontale du conteneur jaune qui l'entoure.
 
 # --hints--
 
@@ -66,8 +66,8 @@ assert($('.blue-box').css('margin-top') === '-15px');
 </style>
 
 <div class="box yellow-box">
-  <h5 class="box red-box">padding</h5>
-  <h5 class="box blue-box">padding</h5>
+  <h5 class="box red-box">marge interne</h5>
+  <h5 class="box blue-box">marge interne</h5>
 </div>
 ```
 
@@ -109,7 +109,7 @@ assert($('.blue-box').css('margin-top') === '-15px');
 </style>
 
 <div class="box yellow-box">
-  <h5 class="box red-box">padding</h5>
-  <h5 class="box blue-box">padding</h5>
+  <h5 class="box red-box">marge interne</h5>
+  <h5 class="box blue-box">marge interne</h5>
 </div>
 ```

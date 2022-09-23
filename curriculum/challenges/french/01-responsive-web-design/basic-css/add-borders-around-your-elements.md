@@ -118,7 +118,7 @@ assert($('img').css('border-left-color') === 'rgb(0, 128, 0)');
   <form action="https://freecatphotoapp.com/submit-cat-photo">
     <label><input type="radio" name="indoor-outdoor" checked> Intérieur</label>
     <label><input type="radio" name="indoor-outdoor"> Extérieur</label><br>
-    <label><input type="checkbox" name="personality" checked> Amour</label>
+    <label><input type="checkbox" name="personality" checked> Aimant</label>
     <label><input type="checkbox" name="personality"> Paresseux</label>
     <label><input type="checkbox" name="personality"> Énergique</label><br>
     <input type="text" placeholder="cat photo URL" required>
@@ -181,7 +181,7 @@ assert($('img').css('border-left-color') === 'rgb(0, 128, 0)');
   <form action="https://freecatphotoapp.com/submit-cat-photo">
     <label><input type="radio" name="indoor-outdoor" checked> Intérieur</label>
     <label><input type="radio" name="indoor-outdoor"> Extérieur</label><br>
-    <label><input type="checkbox" name="personality" checked> Amour</label>
+    <label><input type="checkbox" name="personality" checked> Aimant</label>
     <label><input type="checkbox" name="personality"> Paresseux</label>
     <label><input type="checkbox" name="personality"> Énergique</label><br>
     <input type="text" placeholder="cat photo URL" required>
