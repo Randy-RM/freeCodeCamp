@@ -1,34 +1,34 @@
 ---
 id: 587d781a367417b2b2512ab8
-title: Use the u Tag to Underline Text
+title: Utilisez la balise u pour souligner du texte
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cN6aQCL'
+videoUrl: "https://scrimba.com/c/cN6aQCL"
 forumTopicId: 301082
 dashedName: use-the-u-tag-to-underline-text
 ---
 
 # --description--
 
-To underline text, you can use the `u` tag. This is often used to signify that a section of text is important, or something to remember. With the `u` tag, the browser applies the CSS of `text-decoration: underline;` to the element.
+Pour souligner du texte, vous pouvez utiliser la balise `u`. Elle est souvent utilisée pour indiquer qu'une section de texte est importante ou qu'il faut s'en souvenir. Avec la balise `u`, le navigateur applique la CSS de `text-decoration : underline;` à l'élément.
 
 # --instructions--
 
-Wrap the `u` tag only around the text `Ph.D. students`.
+Enveloppez la balise `u` uniquement autour du texte `Ph.D. students`.
 
-**Note:** Try to avoid using the `u` tag when it could be confused for a link. Anchor tags also have a default underlined formatting.
+**Note:** Essayez d'éviter d'utiliser la balise `u` lorsqu'elle peut être confondue avec un lien. Les balises d'ancrage ont également une mise en forme soulignée par défaut.
 
 # --hints--
 
-Your code should add a `u` tag to the markup.
+Votre code devrait ajouter une balise `u` à la balise.
 
 ```js
-assert($('u').length === 1);
+assert($("u").length === 1);
 ```
 
-The `u` tag should wrap around the text `Ph.D. students`.
+La balise `u` doit entourer le texte `Ph.D. students`.
 
 ```js
-assert($('u').text() === 'Ph.D. students');
+assert($("u").text() === "Ph.D. students");
 ```
 
 # --seed--
@@ -66,11 +66,24 @@ assert($('u').text() === 'Ph.D. students');
   <div class="cardContent">
     <div class="cardText">
       <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at <strong>Stanford University</strong>.</p>
+      <p>
+        Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient
+        étudiants en doctorat à <strong>l'université de Stanford</strong>.
+      </p>
     </div>
     <div class="cardLinks">
-      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
-      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
+      <a
+        href="https://en.wikipedia.org/wiki/Larry_Page"
+        target="_blank"
+        class="links"
+        >Larry Page</a
+      ><br /><br />
+      <a
+        href="https://en.wikipedia.org/wiki/Sergey_Brin"
+        target="_blank"
+        class="links"
+        >Sergey Brin</a
+      >
     </div>
   </div>
 </div>
@@ -109,11 +122,25 @@ assert($('u').text() === 'Ph.D. students');
   <div class="cardContent">
     <div class="cardText">
       <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</p>
+      <p>
+        Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient
+        <u>étudiants en doctorat</u> à 
+        <strong>l'université de Stanford</strong>.
+      </p>
     </div>
     <div class="cardLinks">
-      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
-      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
+      <a
+        href="https://en.wikipedia.org/wiki/Larry_Page"
+        target="_blank"
+        class="links"
+        >Larry Page</a
+      ><br /><br />
+      <a
+        href="https://en.wikipedia.org/wiki/Sergey_Brin"
+        target="_blank"
+        class="links"
+        >Sergey Brin</a
+      >
     </div>
   </div>
 </div>

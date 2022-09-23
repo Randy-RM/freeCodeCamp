@@ -1,6 +1,6 @@
 ---
 id: 587d781b367417b2b2512aba
-title: Use the s Tag to Strikethrough Text
+title: Utilisez la balise s pour barrer le texte
 challengeType: 0
 videoUrl: ''
 forumTopicId: 301079
@@ -9,21 +9,21 @@ dashedName: use-the-s-tag-to-strikethrough-text
 
 # --description--
 
-To strikethrough text, which is when a horizontal line cuts across the characters, you can use the `s` tag. It shows that a section of text is no longer valid. With the `s` tag, the browser applies the CSS of `text-decoration: line-through;` to the element.
+Pour barrer du texte, c'est-à-dire lorsqu'une ligne horizontale coupe les caractères, vous pouvez utiliser la balise `s`. Elle indique qu'une section de texte n'est plus valable. Avec la balise `s`, le navigateur applique le CSS de `text-decoration : line-through;` à l'élément.
 
 # --instructions--
 
-Wrap the `s` tag around `Google` inside the `h4` tag and then add the word `Alphabet` beside it without the strikethrough formatting.
+Placez la balise `s` autour de `Google` à l'intérieur de la balise `h4`, puis ajoutez le mot `Alphabet` à côté sans le formatage barré.
 
 # --hints--
 
-Your code should add one `s` tag to the markup.
+Votre code doit ajouter une balise `s` à la balise.
 
 ```js
 assert($('s').length == 1);
 ```
 
-A `s` tag should wrap around the `Google` text in the `h4` tag. It should not contain the word `Alphabet`.
+Une balise `s` doit entourer le texte `Google` dans la balise `h4`. Elle ne doit pas contenir le mot `Alphabet`.
 
 ```js
 assert(
@@ -36,7 +36,7 @@ assert(
 );
 ```
 
-You should include the word `Alphabet` in the `h4` tag, without strikethrough formatting.
+Vous devez inclure le mot `Alphabet` dans la balise `h4`, sans le formatage barré.
 
 ```js
 assert(
@@ -81,7 +81,7 @@ assert(
   <div class="cardContent">
     <div class="cardText">
       <h4>Google</h4>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+      <p><em>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient <u>étudiants en doctorat</u> à <strong>l'université de Stanford</strong>.</em></p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
@@ -124,7 +124,7 @@ assert(
   <div class="cardContent">
     <div class="cardText">
       <h4><s>Google</s> Alphabet</h4>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+      <p><em>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient <u>étudiants en doctorat</u> à <strong>l'université de Stanford</strong>.</em></p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>

@@ -1,6 +1,6 @@
 ---
 id: 587d78a5367417b2b2512ad9
-title: Use the CSS Transform scale Property to Change the Size of an Element
+title: Utilisez la propriété d'échelle de transformation CSS pour modifier la taille d'un élément
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/c2MZVSg'
 forumTopicId: 301076
@@ -9,7 +9,7 @@ dashedName: use-the-css-transform-scale-property-to-change-the-size-of-an-elemen
 
 # --description--
 
-To change the scale of an element, CSS has the `transform` property, along with its `scale()` function. The following code example doubles the size of all the paragraph elements on the page:
+Pour modifier l'échelle d'un élément, CSS dispose de la propriété `transform`, ainsi que de sa fonction `scale()`. L'exemple de code suivant double la taille de tous les éléments de paragraphe de la page :
 
 ```css
 p {
@@ -19,11 +19,11 @@ p {
 
 # --instructions--
 
-Increase the size of the element with the id of `ball2` to 1.5 times its original size.
+Augmente la taille de l'élément avec l'id de `ball2` à 1,5 fois sa taille originale.
 
 # --hints--
 
-The `transform` property for `#ball2` should be set to scale it to 1.5 times its size.
+La propriété `transform` de `#ball2` doit être définie de façon à ce que sa taille soit 1,5 fois plus grande.
 
 ```js
 assert(

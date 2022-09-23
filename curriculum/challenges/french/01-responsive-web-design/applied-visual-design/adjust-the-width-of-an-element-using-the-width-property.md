@@ -1,6 +1,6 @@
 ---
 id: 587d7791367417b2b2512ab4
-title: Adjust the Width of an Element Using the width Property
+title: Ajuster la largeur d'un élément à l'aide de la propriété width
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cvVLPtN'
 forumTopicId: 301039
@@ -9,7 +9,7 @@ dashedName: adjust-the-width-of-an-element-using-the-width-property
 
 # --description--
 
-You can specify the width of an element using the `width` property in CSS. Values can be given in relative length units (such as `em`), absolute length units (such as `px`), or as a percentage of its containing parent element. Here's an example that changes the width of an image to 220px:
+Vous pouvez spécifier la largeur d'un élément à l'aide de la propriété `width` en CSS. Les valeurs peuvent être données en unités de longueur relative (comme `em`), en unités de longueur absolue (comme `px`) ou en pourcentage de l'élément parent qui le contient. Voici un exemple qui modifie la largeur d'une image à 220px :
 
 ```css
 img {
@@ -19,11 +19,11 @@ img {
 
 # --instructions--
 
-Add a `width` property to the entire card and set it to an absolute value of 245px. Use the `fullCard` class to select the element.
+Ajoutez une propriété `width` à la carte entière et définissez-la à une valeur absolue de 245px. Utilisez la classe `fullCard` pour sélectionner l'élément.
 
 # --hints--
 
-Your code should change the `width` property of the card to 245 pixels by using the `fullCard` class selector.
+Votre code doit modifier la propriété `width` de la carte en 245 pixels en utilisant le sélecteur de classe `fullCard`.
 
 ```js
 const fullCard = code.match(/\.fullCard\s*{[\s\S]+?[^}]}/g);
@@ -65,7 +65,7 @@ assert(
   <div class="cardContent">
     <div class="cardText">
       <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University.</p>
+      <p>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient étudiants en doctorat à l'université de Stanford.</p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a>
@@ -104,7 +104,7 @@ assert(
   <div class="cardContent">
     <div class="cardText">
       <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University.</p>
+      <p>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient étudiants en doctorat à l'université de Stanford.</p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a>

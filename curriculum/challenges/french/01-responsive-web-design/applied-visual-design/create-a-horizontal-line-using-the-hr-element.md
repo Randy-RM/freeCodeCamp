@@ -1,6 +1,6 @@
 ---
 id: 587d781b367417b2b2512abb
-title: Create a Horizontal Line Using the hr Element
+title: Créer une ligne horizontale à l'aide du hr 
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/c3bR8t7'
 forumTopicId: 301049
@@ -9,23 +9,23 @@ dashedName: create-a-horizontal-line-using-the-hr-element
 
 # --description--
 
-You can use the `hr` tag to add a horizontal line across the width of its containing element. This can be used to define a change in topic or to visually separate groups of content.
+Vous pouvez utiliser la balise `hr` pour ajouter une ligne horizontale sur la largeur de l'élément qui la contient. Cela peut être utilisé pour définir un changement de sujet ou pour séparer visuellement des groupes de contenu.
 
 # --instructions--
 
-Add an `hr` tag underneath the `h4` which contains the card title.
+Ajoutez une balise `hr` sous la balise `h4` qui contient le titre de la carte.
 
-**Note:** In HTML, `hr` is a self-closing tag, and therefore doesn't need a separate closing tag.
+**Note :** En HTML, la balise `hr` se ferme d'elle-même et n'a donc pas besoin d'une balise de fermeture distincte.
 
 # --hints--
 
-Your code should add an `hr` tag to the markup.
+Votre code doit ajouter une balise `hr` au balisage.
 
 ```js
 assert($('hr').length == 1);
 ```
 
-The `hr` tag should come between the title and the paragraph.
+La balise `hr` doit se trouver entre le titre et le paragraphe.
 
 ```js
 assert(code.match(/<\/h4>\s*?<hr(>|\s*?\/>)\s*?<p>/gi));
@@ -67,7 +67,7 @@ assert(code.match(/<\/h4>\s*?<hr(>|\s*?\/>)\s*?<p>/gi));
     <div class="cardText">
       <h4><s>Google</s>Alphabet</h4>
 
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+      <p><em>Google a été fondé par Larry Page et Sergey Brin pendant qu'ils étaient <u>étudiants en doctorat</u> à <strong>l' université de Stanford</strong>.</em></p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
@@ -111,7 +111,7 @@ assert(code.match(/<\/h4>\s*?<hr(>|\s*?\/>)\s*?<p>/gi));
     <div class="cardText">
       <h4><s>Google</s>Alphabet</h4>
       <hr>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+      <p><em>Google a été fondé par Larry Page et Sergey Brin pendant qu'ils étaient <u>étudiants en doctorat</u> à <strong>l' université de Stanford</strong>.</em></p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>

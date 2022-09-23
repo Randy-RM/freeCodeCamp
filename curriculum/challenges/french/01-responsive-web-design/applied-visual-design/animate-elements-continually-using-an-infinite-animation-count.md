@@ -1,6 +1,6 @@
 ---
 id: 587d78a8367417b2b2512ae3
-title: Animate Elements Continually Using an Infinite Animation Count
+title: Animer des éléments de façon continue en utilisant un nombre infini d'animations
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cVJDVfq'
 forumTopicId: 301041
@@ -9,21 +9,21 @@ dashedName: animate-elements-continually-using-an-infinite-animation-count
 
 # --description--
 
-The previous challenges covered how to use some of the animation properties and the `@keyframes` rule. Another animation property is the `animation-iteration-count`, which allows you to control how many times you would like to loop through the animation. Here's an example:
+Dans les défis précédents, nous avons vu comment utiliser certaines des propriétés d'animation et la règle `@keyframes`. Une autre propriété d'animation est le `animation-iteration-count`, qui vous permet de contrôler le nombre de fois que vous souhaitez faire tourner l'animation en boucle. Voici un exemple :
 
 ```css
 animation-iteration-count: 3;
 ```
 
-In this case the animation will stop after running 3 times, but it's possible to make the animation run continuously by setting that value to `infinite`.
+Dans ce cas, l'animation s'arrêtera après avoir été exécutée 3 fois, mais il est possible de faire en sorte que l'animation soit exécutée en continu en mettant cette valeur à `infinite`.
 
 # --instructions--
 
-To keep the ball bouncing on the right on a continuous loop, change the `animation-iteration-count` property to `infinite`.
+Pour que la balle continue de rebondir sur la droite en boucle, changez la propriété `animation-iteration-count` en `infinite`.
 
 # --hints--
 
-The `animation-iteration-count` property should have a value of `infinite`.
+La propriété `animation-iteration-count` devrait avoir une valeur de `infinite`.
 
 ```js
 assert($('#ball').css('animation-iteration-count') == 'infinite');

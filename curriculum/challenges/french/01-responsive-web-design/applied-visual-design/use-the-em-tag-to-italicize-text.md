@@ -1,6 +1,6 @@
 ---
 id: 587d781a367417b2b2512ab9
-title: Use the em Tag to Italicize Text
+title: Utilisez la balise em pour mettre le texte en italique
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cVJRBtp'
 forumTopicId: 301078
@@ -9,21 +9,21 @@ dashedName: use-the-em-tag-to-italicize-text
 
 # --description--
 
-To emphasize text, you can use the `em` tag. This displays text as italicized, as the browser applies the CSS of `font-style: italic;` to the element.
+Pour mettre du texte en valeur, vous pouvez utiliser la balise `em`. Le texte s'affiche alors en italique, car le navigateur applique le CSS de `font-style : italic;` à l'élément.
 
 # --instructions--
 
-Wrap an `em` tag around the contents of the paragraph tag to give it emphasis.
+Enveloppez une balise `em` autour du contenu de la balise de paragraphe pour lui donner de l'emphase.
 
 # --hints--
 
-Your code should add an `em` tag to the markup.
+Votre code doit ajouter une balise `em` au balisage.
 
 ```js
 assert($('em').length == 1);
 ```
 
-The `em` tag should wrap around the contents of the `p` tag but not the `p` tag itself.
+La balise `em` doit envelopper le contenu de la balise `p` mais pas la balise `p` elle-même.
 
 ```js
 assert($('p').children().length == 1 && $('em').children().length == 2);
@@ -64,7 +64,7 @@ assert($('p').children().length == 1 && $('em').children().length == 2);
   <div class="cardContent">
     <div class="cardText">
       <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</p>
+      <p>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient <u>étudiants en doctorat</u> à <strong>l'université de Stanford</strong>.</p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
@@ -107,7 +107,7 @@ assert($('p').children().length == 1 && $('em').children().length == 2);
   <div class="cardContent">
     <div class="cardText">
       <h4>Google</h4>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+      <p><em>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient <u>étudiants en doctorat</u> à <strong>l'université de Stanford</strong>.</em></p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>

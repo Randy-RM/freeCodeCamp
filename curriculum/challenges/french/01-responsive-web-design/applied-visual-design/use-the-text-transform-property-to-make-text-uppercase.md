@@ -1,6 +1,6 @@
 ---
 id: 587d781c367417b2b2512ac0
-title: Use the text-transform Property to Make Text Uppercase
+title: Utilisez la propriété text-transform pour mettre le texte en majuscules.
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cvVZQSP'
 forumTopicId: 301081
@@ -9,25 +9,25 @@ dashedName: use-the-text-transform-property-to-make-text-uppercase
 
 # --description--
 
-The `text-transform` property in CSS is used to change the appearance of text. It's a convenient way to make sure text on a webpage appears consistently, without having to change the text content of the actual HTML elements.
+La propriété `text-transform` de CSS est utilisée pour modifier l'apparence du texte. C'est un moyen pratique de s'assurer que le texte d'une page Web apparaît de manière cohérente, sans avoir à modifier le contenu textuel des éléments HTML.
 
-The following table shows how the different `text-transform`values change the example text "Transform me".
+Le tableau suivant montre comment les différentes valeurs de `text-transform` modifient le texte de l'exemple "Transforme-moi".
 
-<table class='table table-striped'><thead><tr><th>Value</th><th>Result</th></tr></thead><tbody><tr><td><code>lowercase</code></td><td>"transform me"</td></tr><tr><td><code>uppercase</code></td><td>"TRANSFORM ME"</td></tr><tr><td><code>capitalize</code></td><td>"Transform Me"</td></tr><tr><td><code>initial</code></td><td>Use the default value</td></tr><tr><td><code>inherit</code></td><td>Use the <code>text-transform</code> value from the parent element</td></tr><tr><td><code>none</code></td><td><strong>Default:</strong> Use the original text</td></tr></tbody></table>
+<table class='table table-striped'><thead><tr><th>Valeur</th><th>Résultat</th></tr></thead><tbody><tr><td><code>lowercase</code></td><td>"transforme moi"</td></tr><tr><td><code>uppercase</code></td><td>"TRANSFORME MOI"</td></tr><tr><td><code>capitalize</code></td><td>"Transforme Moi"</td></tr><tr><td><code>initial</code></td><td>Utiliser la valeur par défaut</td></tr><tr><td><code>inherit</code></td><td>Utilise le <code>text-transform</code> de l'élément parent</td></tr><tr><td><code>none</code></td><td><strong>Default:</strong> Utilisez le texte original</td></tr></tbody></table>
 
 # --instructions--
 
-Transform the text of the `h4` to be uppercase using the `text-transform` property.
+Transformez le texte du `h4` en majuscules en utilisant la propriété `text-transform`.
 
 # --hints--
 
-The `h4` text should be `uppercase`.
+Le texte `h4` doit être en `uppercase`.
 
 ```js
 assert($('h4').css('text-transform') === 'uppercase');
 ```
 
-The original text of the h4 should not be changed.
+Le texte original du h4 ne doit pas être modifié.
 
 ```js
 assert($('h4').text() !== $('h4').text().toUpperCase());
@@ -76,7 +76,7 @@ assert($('h4').text() !== $('h4').text().toUpperCase());
     <div class="cardText">
       <h4>Alphabet</h4>
       <hr>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+      <p><em>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient <u>étudiants en doctorat</u> à <strong>l'université de Stanford</strong>.</em></p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
@@ -127,7 +127,7 @@ assert($('h4').text() !== $('h4').text().toUpperCase());
     <div class="cardText">
       <h4>Alphabet</h4>
       <hr>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+      <p><em>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient <u>étudiants en doctorat</u> à <strong>l'université de Stanford</strong>.</em></p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>

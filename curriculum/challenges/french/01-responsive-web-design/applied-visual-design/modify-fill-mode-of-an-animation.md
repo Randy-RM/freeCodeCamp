@@ -1,6 +1,6 @@
 ---
 id: 58a7a6ebf9a6318348e2d5aa
-title: Modify Fill Mode of an Animation
+title: Modifier le mode de remplissage d'une animation
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cVJDmcE'
 forumTopicId: 301064
@@ -9,9 +9,9 @@ dashedName: modify-fill-mode-of-an-animation
 
 # --description--
 
-That's great, but it doesn't work right yet. Notice how the animation resets after `500ms` has passed, causing the button to revert back to the original color. You want the button to stay highlighted.
+C'est génial, mais ça ne fonctionne pas encore correctement. Remarquez que l'animation se réinitialise au bout de `500ms`, ce qui fait que le bouton reprend sa couleur d'origine. Vous voulez que le bouton reste en surbrillance.
 
-This can be done by setting the `animation-fill-mode` property to `forwards`. The `animation-fill-mode` specifies the style applied to an element when the animation has finished. You can set it like so:
+Vous pouvez le faire en définissant la propriété `animation-fill-mode` sur `forwards`. La propriété `animation-fill-mode` spécifie le style appliqué à un élément lorsque l'animation est terminée. Vous pouvez le définir comme suit :
 
 ```css
 animation-fill-mode: forwards;
@@ -19,11 +19,11 @@ animation-fill-mode: forwards;
 
 # --instructions--
 
-Set the `animation-fill-mode` property of `button:hover` to `forwards` so the button stays highlighted when a user hovers over it.
+Définissez la propriété `animation-fill-mode` de `button:hover` sur `forwards` pour que le bouton reste en surbrillance lorsque l'utilisateur le survole.
 
 # --hints--
 
-`button:hover` should have a `animation-fill-mode` property with a value of `forwards`.
+La propriété `button:hover` devrait avoir une `animation-fill-mode` avec une valeur de `forwards`.
 
 ```js
 assert(
@@ -64,7 +64,7 @@ assert(
     }
   }
 </style>
-<button>Register</button>
+<button>Enregistrer</button>
 ```
 
 # --solutions--
@@ -88,5 +88,5 @@ assert(
     }
   }
 </style>
-<button>Register</button>
+<button>Enregistrer</button>
 ```
