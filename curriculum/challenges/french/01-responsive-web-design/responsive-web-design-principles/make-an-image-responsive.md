@@ -1,6 +1,6 @@
 ---
 id: 587d78b1367417b2b2512b09
-title: Make an Image Responsive
+title: Rendre une image responsive
 challengeType: 0
 forumTopicId: 301140
 dashedName: make-an-image-responsive
