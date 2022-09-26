@@ -9,31 +9,31 @@ dashedName: know-when-alt-text-should-be-left-blank
 
 # --description--
 
-In the last challenge, you learned that including an `alt` attribute when using `img` tags is mandatory. However, sometimes images are grouped with a caption already describing them, or are used for decoration only. In these cases, `alt` text may seem redundant or unnecessary.
+Dans le dernier défi, vous avez appris que l'inclusion d'un attribut `alt` lors de l'utilisation des balises `img` est obligatoire. Cependant, il arrive que les images soient regroupées avec une légende les décrivant déjà, ou qu'elles ne soient utilisées que pour la décoration. Dans ces cas, le texte `alt` peut sembler redondant ou inutile.
 
-When an image is already explained with text content or does not add meaning to a page, the `img` still needs an `alt` attribute, but it can be set to an empty string. Here's an example:
+Lorsqu'une image est déjà expliquée par un contenu textuel ou qu'elle n'ajoute pas de sens à une page, l'attribut `img` a toujours besoin d'un attribut `alt`, mais il peut être défini comme une chaîne vide. Voici un exemple:
 
 ```html
 <img src="visualDecoration.jpeg" alt="">
 ```
 
-Background images usually fall under the 'decorative' label as well. However, they are typically applied with CSS rules, and therefore not part of the markup screen readers process.
+Les images d'arrière-plan sont généralement classées dans la catégorie "décoratif". Cependant, elles sont généralement appliquées avec des règles CSS et ne font donc pas partie du processus de balisage des lecteurs d'écran.
 
-**Note:** For images with a caption, you may still want to include `alt` text since it helps search engines catalog the image's content.
+**Note:** Pour les images avec une légende, vous pouvez toujours inclure le texte `alt` car il aide les moteurs de recherche à cataloguer le contenu de l'image.
 
 # --instructions--
 
-Camper Cat has coded a skeleton page for the blog part of his website. He's planning to add a visual break between his two articles with a decorative image of a samurai sword. Add an `alt` attribute to the `img` tag and set it to an empty string. (Note that the image `src` doesn't link to an actual file - don't worry that there are no swords showing in the display.)
+Camper Cat a codé un squelette de page pour la partie blog de son site Web. Il prévoit d'ajouter une rupture visuelle entre ses deux articles avec une image décorative d'un sabre de samouraï. Ajoutez un attribut `alt` à la balise `img` et donnez-lui la valeur d'une chaîne vide. (Notez que l'image `src` n'est pas liée à un fichier réel - ne vous inquiétez pas qu'il n'y ait pas d'épées affichées).
 
 # --hints--
 
-Your `img` tag should have an `alt` attribute.
+Votre balise `img` doit avoir un attribut `alt`.
 
 ```js
 assert(!($('img').attr('alt') == undefined));
 ```
 
-The `alt` attribute should be set to an empty string.
+L'attribut `alt` doit être défini comme une chaîne vide.
 
 ```js
 assert($('img').attr('alt') == '');
@@ -44,33 +44,33 @@ assert($('img').attr('alt') == '');
 ## --seed-contents--
 
 ```html
-<h1>Deep Thoughts with Master Camper Cat</h1>
+<h1>Réflexions profondes avec Master Camper Cat</h1>
 <article>
-  <h2>Defeating your Foe: the Red Dot is Ours!</h2>
-  <p>To Come...</p>
+  <h2>Vaincre l'ennemi : le point rouge est à nous!</h2>
+  <p>À venir...</p>
 </article>
 
 <img src="samuraiSwords.jpeg">
 
 <article>
-  <h2>Is Chuck Norris a Cat Person?</h2>
-  <p>To Come...</p>
+  <h2>Chuck Norris aime-t-il les chats ?</h2>
+  <p>À venir...</p>
 </article>
 ```
 
 # --solutions--
 
 ```html
-<h1>Deep Thoughts with Master Camper Cat</h1>
+<h1>Réflexions profondes avec Master Camper Cat</h1>
 <article>
-  <h2>Defeating your Foe: the Red Dot is Ours!</h2>
-  <p>To Come...</p>
+  <h2>Vaincre l'ennemi : le point rouge est à nous!</h2>
+  <p>À venir...</p>
 </article>
 
 <img src="samuraiSwords.jpeg" alt="">
 
 <article>
-  <h2>Is Chuck Norris a Cat Person?</h2>
-  <p>To Come...</p>
+  <h2>Chuck Norris aime-t-il les chats ?</h2>
+  <p>À venir...</p>
 </article>
 ```

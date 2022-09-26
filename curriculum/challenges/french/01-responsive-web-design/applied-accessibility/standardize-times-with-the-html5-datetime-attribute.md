@@ -9,27 +9,28 @@ dashedName: standardize-times-with-the-html5-datetime-attribute
 
 # --description--
 
-Continuing with the date theme, HTML5 also introduced the `time` element along with a `datetime` attribute to standardize times. The `time` element is an inline element that can wrap a date or time on a page. A `datetime` attribute holds a valid format of that date. This is the value accessed by assistive devices. It helps avoid confusion by stating a standardized version of a time, even if it's informally or colloquially written in the text.
+Pour continuer sur le thème de la date, HTML5 a également introduit l'élément `time` avec un attribut `datetime` pour standardiser les temps. L'élément `time` est un élément en ligne qui peut envelopper une date ou une heure sur une page. Un attribut `datetime` contient un format valide de cette date. Il s'agit de la valeur à laquelle accèdent les dispositifs d'assistance. Il permet d'éviter toute confusion en indiquant une version normalisée de l'heure, même si elle est écrite de manière informelle ou familière dans le texte.
 
-Here's an example:
+Voici un exemple :
 
 ```html
-<p>Master Camper Cat officiated the cage match between Goro and Scorpion <time datetime="2013-02-13">last Wednesday</time>, which ended in a draw.</p>
+<p>Maître Camper Cat a officié le combat en cage entre Goro et Scorpion. <time datetime="2013-02-13">mercredi dernier </time>, qui s'est terminé par un match nul.</p>
 ```
 
 # --instructions--
 
-Camper Cat's Mortal Kombat survey results are in! Wrap a `time` tag around the text `Thursday, September 15<sup>th</sup>` and add a `datetime` attribute to it set to `2016-09-15`.
+es résultats du sondage de Camper Cat sur Mortal Kombat sont arrivés ! Enveloppez le texte d'une balise `time`.
+ `Thursday, September 15<sup>th</sup>` et ajouter l'attribut `datetime` pour le fixer à `2016-09-15`.
 
 # --hints--
 
-Your code should have a `p` element which includes the text `Thank you to everyone for responding to Master Camper Cat's survey.` and include a `time` element.
+Ton code doit avoir un élément `p` qui inclut le texte `Thank you to everyone for responding to Master Camper Cat's survey.` et inclut un élément `time`.
 
 ```js
 assert(timeElement);
 ```
 
-Your added `time` tags should wrap around the text `Thursday, September 15<sup>th</sup>`.
+Les balises `time` ajoutées doivent entourer le texte `Thursday, September 15<sup>th</sup>`.
 
 ```js
 assert(
@@ -38,13 +39,13 @@ assert(
 );
 ```
 
-Your added `time` tag should have a `datetime` attribute that is not empty.
+Votre balise `time` ajoutée doit avoir un attribut `datetime` qui n'est pas vide.
 
 ```js
 assert(datetimeAttr && datetimeAttr?.length);
 ```
 
-Your added `datetime` attribute should be set to a value of `2016-09-15`.
+La valeur de l'attribut `datetime` que vous avez ajouté doit être `2016-09-15`.
 
 ```js
 assert(datetimeAttr === '2016-09-15');
@@ -68,30 +69,30 @@ const datetimeAttr = timeElement?.getAttribute("datetime");
 ```html
 <body>
   <header>
-    <h1>Tournaments</h1>
+    <h1>Tournois</h1>
   </header>
   <article>
-    <h2>Mortal Kombat Tournament Survey Results</h2>
+    <h2>Résultats de l'enquête sur le tournoi de Mortal Kombat</h2>
 
     <!-- Only change code below this line -->
 
-    <p>Thank you to everyone for responding to Master Camper Cat's survey. The best day to host the vaunted Mortal Kombat tournament is Thursday, September 15<sup>th</sup>. May the best ninja win!</p>
+    <p>Merci à tous d'avoir répondu à l'enquête de Master Camper Cat. Le meilleur jour pour organiser le fameux tournoi Mortal Kombat est le jeudi 15 septembre. Que le meilleur ninja gagne !</p>
 
     <!-- Only change code above this line -->
 
     <section>
-      <h3>Comments:</h3>
+      <h3>Commentaires:</h3>
       <article>
-        <p>Posted by: Sub-Zero on <time datetime="2016-08-13T20:01Z">August 13<sup>th</sup></time></p>
-        <p>Johnny Cage better be there, I'll finish him!</p>
+        <p>Posté par : Sub-Zero le <time datetime="2016-08-13T20:01Z">August 13<sup>th</sup></time></p>
+        <p>Johnny Cage a intérêt à être là, je vais le finir !</p>
       </article>
       <article>
-        <p>Posted by: Doge on <time datetime="2016-08-15T08:12Z">August 15<sup>th</sup></time></p>
-        <p>Wow, much combat, so mortal.</p>
+        <p>Posté par : Doge on <time datetime="2016-08-15T08:12Z">August 15<sup>th</sup></time></p>
+        <p>Wow, beaucoup de combat, si mortel.</p>
       </article>
       <article>
-        <p>Posted by: The Grim Reaper on <time datetime="2016-08-16T00:00Z">August 16<sup>th</sup></time></p>
-        <p>Looks like I'll be busy that day.</p>
+        <p>Posté par : The Grim Reaper on <time datetime="2016-08-16T00:00Z">August 16<sup>th</sup></time></p>
+        <p>On dirait que je vais être occupé ce jour-là.</p>
       </article>
     </section>
   </article>
@@ -104,26 +105,26 @@ const datetimeAttr = timeElement?.getAttribute("datetime");
 ```html
 <body>
   <header>
-    <h1>Tournaments</h1>
+    <h1>Tournois</h1>
   </header>
   <article>
-    <h2>Mortal Kombat Tournament Survey Results</h2>
+    <h2>Résultats de l'enquête sur le tournoi de Mortal Kombat</h2>
 
-    <p>Thank you to everyone for responding to Master Camper Cat's survey. The best day to host the vaunted Mortal Kombat tournament is <time datetime="2016-09-15">Thursday, September 15<sup>th</sup></time>. May the best ninja win!</p>
+    <p>Merci à tous d'avoir répondu à l'enquête de Master Camper Cat. Le meilleur jour pour organiser le fameux tournoi Mortal Kombat est le jeudi 15 septembre. Que le meilleur ninja gagne !</p>
 
     <section>
-      <h3>Comments:</h3>
+      <h3>Commentaires:</h3>
       <article>
-        <p>Posted by: Sub-Zero on <time datetime="2016-08-13T20:01Z">August 13<sup>th</sup></time></p>
-        <p>Johnny Cage better be there, I'll finish him!</p>
+        <p>Posté par : Sub-Zero le <time datetime="2016-08-13T20:01Z">August 13<sup>th</sup></time></p>
+        <p>Johnny Cage a intérêt à être là, je vais le finir !</p>
       </article>
       <article>
-        <p>Posted by: Doge on <time datetime="2016-08-15T08:12Z">August 15<sup>th</sup></time></p>
-        <p>Wow, much combat, so mortal.</p>
+        <p>Posté par : Doge on <time datetime="2016-08-15T08:12Z">August 15<sup>th</sup></time></p>
+        <p>Wow, beaucoup de combat, si mortel.</p>
       </article>
       <article>
-        <p>Posted by: The Grim Reaper on <time datetime="2016-08-16T00:00Z">August 16<sup>th</sup></time></p>
-        <p>Looks like I'll be busy that day.</p>
+        <p>Posté par : The Grim Reaper on <time datetime="2016-08-16T00:00Z">August 16<sup>th</sup></time></p>
+        <p>On dirait que je vais être occupé ce jour-là.</p>
       </article>
     </section>
   </article>

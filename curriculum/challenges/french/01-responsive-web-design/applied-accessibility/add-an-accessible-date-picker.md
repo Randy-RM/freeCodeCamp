@@ -9,44 +9,44 @@ dashedName: add-an-accessible-date-picker
 
 # --description--
 
-Forms often include the `input` field, which can be used to create several different form controls. The `type` attribute on this element indicates what kind of `input` element will be created.
+Les formulaires comprennent souvent le champ `input`, qui peut être utilisé pour créer plusieurs contrôles de formulaire différents. L'attribut `type` de cet élément indique le type d'élément `input` qui sera créé.
 
-You may have noticed the `text` and `submit` input types in prior challenges, and HTML5 introduced an option to specify a `date` field. Depending on browser support, a date picker shows up in the `input` field when it's in focus, which makes filling in a form easier for all users.
+Vous avez peut-être remarqué les types d'entrée `text` et `submit` dans les défis précédents, et HTML5 a introduit une option pour spécifier un champ `date`. En fonction de la prise en charge du navigateur, un sélecteur de date s'affiche dans le champ `input` lorsqu'il est en focus, ce qui facilite le remplissage d'un formulaire pour tous les utilisateurs.
 
-For older browsers, the type will default to `text`, so it helps to show users the expected date format in the `label` or `placeholder` text just in case.
+Pour les navigateurs plus anciens, le type sera par défaut `text`, il est donc utile d'indiquer aux utilisateurs le format de date attendu dans le texte `label` ou `placeholder` au cas où.
 
-Here's an example:
+Voici un exemple:
 
 ```html
-<label for="input1">Enter a date:</label>
+<label for="input1">Saisissez une date:</label>
 <input type="date" id="input1" name="input1">
 ```
 
 # --instructions--
 
-Camper Cat is setting up a Mortal Kombat tournament and wants to ask his competitors to see what date works best. Add an `input` tag with a `type` attribute of `date`, an `id` attribute of `pickdate`, and a `name` attribute of `date`.
+Camper Cat organise un tournoi de Mortal Kombat et veut demander à ses concurrents de lui indiquer la date qui leur convient le mieux. Ajoutez une balise `input` avec un attribut `type` de `date`, un attribut `id` de `pickdate`, et un attribut `name` de `date`.
 
 # --hints--
 
-Your code should add one `input` tag for the date selector field.
+Votre code devrait ajouter une balise `input` pour le champ de sélection de la date.
 
 ```js
 assert($('input').length == 2);
 ```
 
-Your `input` tag should have a `type` attribute with a value of `date`.
+Votre balise `input` doit avoir un attribut `type` avec une valeur de `date`.
 
 ```js
 assert($('input').attr('type') == 'date');
 ```
 
-Your `input` tag should have an `id` attribute with a value of `pickdate`.
+Votre balise `input` devrait avoir un attribut `id` avec une valeur de `pickdate`.
 
 ```js
 assert($('input').attr('id') == 'pickdate');
 ```
 
-Your `input` tag should have a `name` attribute with a value of `date`.
+Votre balise `input` devrait avoir un attribut `name` avec une valeur de `date`.
 
 ```js
 assert($('input').attr('name') == 'date');
@@ -59,14 +59,14 @@ assert($('input').attr('name') == 'date');
 ```html
 <body>
   <header>
-    <h1>Tournaments</h1>
+    <h1>Tournois</h1>
   </header>
   <main>
     <section>
-      <h2>Mortal Kombat Tournament Survey</h2>
+      <h2>Enquête sur le tournoi Mortal Kombat</h2>
       <form>
-        <p>Tell us the best date for the competition</p>
-        <label for="pickdate">Preferred Date:</label>
+        <p>Dites-nous quelle est la meilleure date pour la compétition</p>
+        <label for="pickdate">Date souhaitée:</label>
 
         <!-- Only change code below this line -->
 
@@ -87,14 +87,14 @@ assert($('input').attr('name') == 'date');
 ```html
 <body>
   <header>
-    <h1>Tournaments</h1>
+    <h1>Tournois</h1>
   </header>
   <main>
     <section>
-      <h2>Mortal Kombat Tournament Survey</h2>
+      <h2>Enquête sur le tournoi Mortal Kombat</h2>
       <form>
-        <p>Tell us the best date for the competition</p>
-        <label for="pickdate">Preferred Date:</label>
+        <p>Dites-nous quelle est la meilleure date pour la compétition</p>
+        <label for="pickdate">Date souhaitée:</label>
         <input type="date" id="pickdate" name="date">
         <input type="submit" name="submit" value="Submit">
       </form>

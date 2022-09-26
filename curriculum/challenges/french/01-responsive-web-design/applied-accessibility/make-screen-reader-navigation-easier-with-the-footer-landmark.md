@@ -9,27 +9,27 @@ dashedName: make-screen-reader-navigation-easier-with-the-footer-landmark
 
 # --description--
 
-Similar to `header` and `nav`, the `footer` element has a built-in landmark feature that allows assistive devices to quickly navigate to it. It's primarily used to contain copyright information or links to related documents that usually sit at the bottom of a page.
+Comme les éléments `header` et `nav`, l'élément `footer` possède une fonction de repère intégrée qui permet aux dispositifs d'assistance de s'y rendre rapidement. Il est principalement utilisé pour contenir des informations sur les droits d'auteur ou des liens vers des documents connexes qui se trouvent généralement au bas d'une page.
 
 # --instructions--
 
-Camper Cat's training page is making good progress. Change the `div` he used to wrap his copyright information at the bottom of the page to a `footer` element.
+La page de formation de Camper Cat progresse bien. Changez le `div` qu'il a utilisé pour envelopper ses informations de copyright en bas de la page en un élément `footer`.
 
 # --hints--
 
-Your code should have one `footer` tag.
+Votre code doit comporter une balise `footer`.
 
 ```js
 assert($('footer').length == 1);
 ```
 
-Your code should not have any `div` tags.
+Votre code ne doit pas comporter de balise `div`.
 
 ```js
 assert($('div').length == 0);
 ```
 
-Your code should have an opening and closing `footer` tag.
+Votre code doit comporter une balise `footer` d'ouverture et de fermeture.
 
 ```js
 assert(code.match(/<footer>\s*&copy; 2018 Camper Cat\s*<\/footer>/g));
@@ -42,30 +42,30 @@ assert(code.match(/<footer>\s*&copy; 2018 Camper Cat\s*<\/footer>/g));
 ```html
 <body>
   <header>
-    <h1>Training</h1>
+    <h1>Entraînement</h1>
     <nav>
       <ul>
-        <li><a href="#stealth">Stealth &amp; Agility</a></li>
+        <li><a href="#stealth">Entraînement &amp; Agilité</a></li>
         <li><a href="#combat">Combat</a></li>
-        <li><a href="#weapons">Weapons</a></li>
+        <li><a href="#weapons">Armes</a></li>
       </ul>
     </nav>
   </header>
   <main>
     <section id="stealth">
-      <h2>Stealth &amp; Agility Training</h2>
-      <article><h3>Climb foliage quickly using a minimum spanning tree approach</h3></article>
-      <article><h3>No training is NP-complete without parkour</h3></article>
+      <h2>Entraînement &amp; Entraînement à l'agilité</h2>
+      <article><h3>Grimper rapidement au feuillage à l'aide d'une approche par arbre à portée minimale</h3></article>
+      <article><h3>Aucun entraînement n'est NP-complet sans parkour.</h3></article>
     </section>
     <section id="combat">
-      <h2>Combat Training</h2>
-      <article><h3>Dispatch multiple enemies with multithreaded tactics</h3></article>
-      <article><h3>Goodbye world: 5 proven ways to knock out an opponent</h3></article>
+      <h2>Entraînement au combat</h2>
+      <article><h3>Eliminez plusieurs ennemis grâce à des tactiques multidimensionnelles.</h3></article>
+      <article><h3>Adieu le monde : 5 façons éprouvées d'assommer un adversaire</h3></article>
     </section>
     <section id="weapons">
-      <h2>Weapons Training</h2>
-      <article><h3>Swords: the best tool to literally divide and conquer</h3></article>
-      <article><h3>Breadth-first or depth-first in multi-weapon training?</h3></article>
+      <h2>Formation au maniement des armes</h2>
+      <article><h3>Les épées : le meilleur outil pour diviser et conquérir littéralement</h3></article>
+      <article><h3>Formation multi-armes : priorité à la largeur ou à la profondeur ?</h3></article>
     </section>
   </main>
 
@@ -81,30 +81,30 @@ assert(code.match(/<footer>\s*&copy; 2018 Camper Cat\s*<\/footer>/g));
 ```html
 <body>
   <header>
-    <h1>Training</h1>
+    <h1>Entraînement</h1>
     <nav>
       <ul>
-        <li><a href="#stealth">Stealth &amp; Agility</a></li>
+        <li><a href="#stealth">Entraînement &amp; Agilité</a></li>
         <li><a href="#combat">Combat</a></li>
-        <li><a href="#weapons">Weapons</a></li>
+        <li><a href="#weapons">Armes</a></li>
       </ul>
     </nav>
   </header>
   <main>
     <section id="stealth">
-      <h2>Stealth &amp; Agility Training</h2>
-      <article><h3>Climb foliage quickly using a minimum spanning tree approach</h3></article>
-      <article><h3>No training is NP-complete without parkour</h3></article>
+      <h2>Entraînement &amp; Entraînement à l'agilité</h2>
+      <article><h3>Grimper rapidement au feuillage à l'aide d'une approche par arbre à portée minimale</h3></article>
+      <article><h3>Aucun entraînement n'est NP-complet sans parkour.</h3></article>
     </section>
     <section id="combat">
-      <h2>Combat Training</h2>
-      <article><h3>Dispatch multiple enemies with multithreaded tactics</h3></article>
-      <article><h3>Goodbye world: 5 proven ways to knock out an opponent</h3></article>
+      <h2>Entraînement au combat</h2>
+      <article><h3>Eliminez plusieurs ennemis grâce à des tactiques multidimensionnelles.</h3></article>
+      <article><h3>Adieu le monde : 5 façons éprouvées d'assommer un adversaire</h3></article>
     </section>
     <section id="weapons">
-      <h2>Weapons Training</h2>
-      <article><h3>Swords: the best tool to literally divide and conquer</h3></article>
-      <article><h3>Breadth-first or depth-first in multi-weapon training?</h3></article>
+      <h2>Formation au maniement des armes</h2>
+      <article><h3>Les épées : le meilleur outil pour diviser et conquérir littéralement</h3></article>
+      <article><h3>Formation multi-armes : priorité à la largeur ou à la profondeur ?</h3></article>
     </section>
   </main>
 

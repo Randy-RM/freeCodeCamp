@@ -9,49 +9,49 @@ dashedName: use-tabindex-to-specify-the-order-of-keyboard-focus-for-several-elem
 
 # --description--
 
-The `tabindex` attribute also specifies the exact tab order of elements. This is achieved when the attribute's value is set to a positive number of 1 or higher.
+L'attribut `tabindex` spécifie également l'ordre exact des tabulations des éléments. Cela est possible lorsque la valeur de l'attribut est définie sur un nombre positif de 1 ou plus.
 
-Setting a `tabindex="1"` will bring keyboard focus to that element first. Then it cycles through the sequence of specified `tabindex` values (2, 3, etc.), before moving to default and `tabindex="0"` items.
+Si vous définissez un attribut `tabindex="1"`, le clavier mettra d'abord l'accent sur cet élément. Ensuite, il parcourt la séquence des valeurs `tabindex` spécifiées (2, 3, etc.), avant de passer aux éléments par défaut et `tabindex="0"`.
 
-It's important to note that when the tab order is set this way, it overrides the default order (which uses the HTML source). This may confuse users who are expecting to start navigation from the top of the page. This technique may be necessary in some circumstances, but in terms of accessibility, take care before applying it.
+Il est important de noter que lorsque l'ordre des onglets est défini de cette manière, il remplace l'ordre par défaut (qui utilise la source HTML). Cela peut perturber les utilisateurs qui s'attendent à ce que la navigation commence en haut de la page. Cette technique peut être nécessaire dans certaines circonstances, mais en termes d'accessibilité, faites attention avant de l'appliquer.
 
-Here's an example:
+Voici un exemple :
 
 ```html
-<div tabindex="1">I get keyboard focus, and I get it first!</div>
+<div tabindex="1">J'obtiens le focus clavier, et je l'obtiens en premier !</div>
 ```
 
 ```html
-<div tabindex="2">I get keyboard focus, and I get it second!</div>
+<div tabindex="2">J'obtiens le focus du clavier, et je l'obtiens en second !</div>
 ```
 
 # --instructions--
 
-Camper Cat has a search field on his Inspirational Quotes page that he plans to position in the upper right corner with CSS. He wants the search `input` and submit `input` form controls to be the first two items in the tab order. Add a `tabindex` attribute set to `1` to the `search` `input`, and a `tabindex` attribute set to `2` to the `submit` `input`.
+Camper Cat a un champ de recherche sur sa page de citations inspirantes qu'il prévoit de positionner dans le coin supérieur droit avec CSS. Il souhaite que les contrôles de formulaire `input` de recherche et `input` d'envoi soient les deux premiers éléments dans l'ordre de tabulation. Ajoutez un attribut `tabindex` défini sur `1` à l'entrée `search` `input`, et un attribut `tabindex` défini sur `2` à l'entrée `submit` `input`.
 
-Another thing to note is that some browsers may place you in the middle of your tab order when an element is clicked. An element has been added to the page that ensures you will always start at the beginning of your tab order.
+Une autre chose à noter est que certains navigateurs peuvent vous placer au milieu de l'ordre des onglets lorsqu'un élément est cliqué. Un élément a été ajouté à la page pour que vous commenciez toujours au début de l'ordre des onglets.
 
 # --hints--
 
-Your code should add a `tabindex` attribute to the `search` `input` tag.
+Votre code devrait ajouter un attribut `tabindex` à la balise `search ` `input`.
 
 ```js
 assert($('#search').attr('tabindex'));
 ```
 
-Your code should add a `tabindex` attribute to the `submit` `input` tag.
+Votre code devrait ajouter un attribut `tabindex` à la balise `submit` `input`.
 
 ```js
 assert($('#submit').attr('tabindex'));
 ```
 
-Your code should set the `tabindex` attribute on the `search` `input` tag to a value of 1.
+Votre code doit attribuer la valeur 1 à l'attribut `tabindex` de la balise d'entrée `search` `input`.
 
 ```js
 assert($('#search').attr('tabindex') == '1');
 ```
 
-Your code should set the `tabindex` attribute on the `submit` `input` tag to a value of 2.
+Votre code doit attribuer la valeur 2 à l'attribut `tabindex` de la balise d'entrée `submit` `input`.
 
 ```js
 assert($('#submit').attr('tabindex') == '2');
@@ -65,17 +65,17 @@ assert($('#submit').attr('tabindex') == '2');
 <body>
   <div tabindex="1" class="overlay"></div>
   <header>
-    <h1>Even Deeper Thoughts with Master Camper Cat</h1>
+    <h1>Des pensées encore plus profondes avec Maître Camper Cat</h1>
     <nav>
       <ul>
-        <li><a href="">Home</a></li>
+        <li><a href="">Accueil</a></li>
         <li><a href="">Blog</a></li>
-        <li><a href="">Training</a></li>
+        <li><a href="">Formation</a></li>
       </ul>
     </nav>
   </header>
   <form>
-    <label for="search">Search:</label>
+    <label for="search">Recherche:</label>
 
 
     <input type="search" name="search" id="search">
@@ -83,13 +83,13 @@ assert($('#submit').attr('tabindex') == '2');
 
 
   </form>
-  <h2>Inspirational Quotes</h2>
+  <h2>Citations inspirantes</h2>
   <blockquote>
-    <p>&ldquo;There's no Theory of Evolution, just a list of creatures I've allowed to live.&rdquo;<br>
+    <p>&ldquo;Il n'y a pas de théorie de l'évolution, juste une liste de créatures que j'ai laissé vivre.&rdquo;<br>
     - Chuck Norris</p>
   </blockquote>
   <blockquote>
-    <p>&ldquo;Wise men say forgiveness is divine, but never pay full price for late pizza.&rdquo;<br>
+    <p>&ldquo;Les sages disent que le pardon est divin, mais ne paient jamais le prix fort pour une pizza en retard.&rdquo;<br>
     - TMNT</p>
   </blockquote>
   <footer>&copy; 2018 Camper Cat</footer>
@@ -115,17 +115,17 @@ assert($('#submit').attr('tabindex') == '2');
 <body>
   <div tabindex="1" class="overlay"></div>
   <header>
-    <h1>Even Deeper Thoughts with Master Camper Cat</h1>
+    <h1>Des pensées encore plus profondes avec Maître Camper Cat</h1>
     <nav>
       <ul>
-        <li><a href="">Home</a></li>
+        <li><a href="">Accueil</a></li>
         <li><a href="">Blog</a></li>
-        <li><a href="">Training</a></li>
+        <li><a href="">Formation</a></li>
       </ul>
     </nav>
   </header>
   <form>
-    <label for="search">Search:</label>
+    <label for="search">Recherches :</label>
 
 
     <input tabindex="1" type="search" name="search" id="search">
@@ -133,13 +133,13 @@ assert($('#submit').attr('tabindex') == '2');
 
 
   </form>
-  <h2>Inspirational Quotes</h2>
+  <h2>Citations inspirantes</h2>
   <blockquote>
-    <p>&ldquo;There's no Theory of Evolution, just a list of creatures I've allowed to live.&rdquo;<br>
+    <p>&ldquo;Il n'y a pas de théorie de l'évolution, juste une liste de créatures que j'ai laissé vivre.&rdquo;<br>
     - Chuck Norris</p>
   </blockquote>
   <blockquote>
-    <p>&ldquo;Wise men say forgiveness is divine, but never pay full price for late pizza.&rdquo;<br>
+    <p>&ldquo;Les sages disent que le pardon est divin, mais ne paient jamais le prix fort pour une pizza en retard.&rdquo;<br>
     - TMNT</p>
   </blockquote>
   <footer>&copy; 2018 Camper Cat</footer>

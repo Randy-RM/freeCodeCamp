@@ -9,59 +9,59 @@ dashedName: improve-chart-accessibility-with-the-figure-element
 
 # --description--
 
-HTML5 introduced the `figure` element and the related `figcaption`. Used together, these items wrap a visual representation (like an image, diagram, or chart) along with its caption. Wrapping these elements together gives a two-fold accessibility boost by semantically grouping related content and providing a text alternative explaining the `figure`.
+HTML5 a introduit l'élément `figure` et l'élément connexe `figcaption`. Utilisés ensemble, ces éléments enveloppent une représentation visuelle (comme une image, un diagramme ou un graphique) ainsi que sa légende. L'association de ces éléments donne un double avantage en termes d'accessibilité, en regroupant sémantiquement le contenu associé et en fournissant une alternative textuelle expliquant la "figure".
 
-For data visualizations like charts, the caption can be used to briefly note the trends or conclusions for users with visual impairments. Another challenge covers how to move a table version of the chart's data off-screen (using CSS) for screen reader users.
+Pour les visualisations de données telles que les graphiques, la légende peut être utilisée pour noter brièvement les tendances ou les conclusions pour les utilisateurs ayant une déficience visuelle. Un autre défi consiste à déplacer une version tableau des données du graphique hors de l'écran (à l'aide de CSS) pour les utilisateurs de lecteurs d'écran.
 
-Here's an example - note that the `figcaption` goes inside the `figure` tags and can be combined with other elements:
+Voici un exemple - notez que la légende du tableau se trouve à l'intérieur des balises `figure` et peut être combinée avec d'autres éléments :
 
 ```html
 <figure>
   <img src="roundhouseDestruction.jpeg" alt="Photo of Camper Cat executing a roundhouse kick">
   <br>
   <figcaption>
-    Master Camper Cat demonstrates proper form of a roundhouse kick.
+    Master Camper Cat démontre la forme correcte d'un coup de pied circulaire.
   </figcaption>
 </figure>
 ```
 
 # --instructions--
 
-Camper Cat is hard at work creating a stacked bar chart showing the amount of time per week to spend training in stealth, combat, and weapons. Help him structure his page better by changing the `div` tag he used to a `figure` tag, and the `p` tag that surrounds the caption to a `figcaption` tag.
+Camper Cat est en train de créer un diagramme à barres empilées montrant le temps qu'il faut consacrer chaque semaine à l'entraînement à la furtivité, au combat et aux armes. Aidez-le à mieux structurer sa page en remplaçant la balise `div` qu'il a utilisée par une balise `figure`, et la balise `p` qui entoure la légende par une balise `figcaption`.
 
 # --hints--
 
-Your code should have one `figure` tag.
+Votre code devrait avoir une balise `figure`.
 
 ```js
 assert($('figure').length == 1);
 ```
 
-Your code should have one `figcaption` tag.
+Votre code devrait comporter une balise `figcaption`.
 
 ```js
 assert($('figcaption').length == 1);
 ```
 
-Your code should not have any `div` tags.
+Votre code ne devrait pas comporter de balises `div`.
 
 ```js
 assert($('div').length == 0);
 ```
 
-Your code should not have any `p` tags.
+Votre code ne devrait pas avoir de balises `p`.
 
 ```js
 assert($('p').length == 0);
 ```
 
-The `figcaption` should be a child of the `figure` tag.
+La balise `figcaption` devrait être un enfant de la balise `figure`.
 
 ```js
 assert($('figure').children('figcaption').length == 1);
 ```
 
-Your `figure` element should have a closing tag.
+Votre élément `figure` doit avoir une balise de fermeture.
 
 ```js
 assert(
@@ -77,12 +77,12 @@ assert(
 ```html
 <body>
   <header>
-    <h1>Training</h1>
+    <h1>Entraînements</h1>
     <nav>
       <ul>
-        <li><a href="#stealth">Stealth &amp; Agility</a></li>
+        <li><a href="#stealth">Furtivité &amp; Agilité</a></li>
         <li><a href="#combat">Combat</a></li>
-        <li><a href="#weapons">Weapons</a></li>
+        <li><a href="#weapons">Armes</a></li>
       </ul>
     </nav>
   </header>
@@ -93,25 +93,25 @@ assert(
       <div>
         <!-- Stacked bar chart will go here -->
         <br>
-        <p>Breakdown per week of time to spend training in stealth, combat, and weapons.</p>
+        <p>Répartition par semaine du temps à consacrer à l'entraînement à la furtivité, au combat et aux armes.</p>
       </div>
       <!-- Only change code above this line -->
 
     </section>
     <section id="stealth">
-      <h2>Stealth &amp; Agility Training</h2>
-      <article><h3>Climb foliage quickly using a minimum spanning tree approach</h3></article>
-      <article><h3>No training is NP-complete without parkour</h3></article>
+      <h2>Entraînement de furtivité &amp; d'agilité</h2>
+      <article><h3>Grimper rapidement sur le feuillage en utilisant une approche par arbre à portée minimale</h3></article>
+      <article><h3>Aucun entraînement n'est NP-complet sans parkour</h3></article>
     </section>
     <section id="combat">
-      <h2>Combat Training</h2>
-      <article><h3>Dispatch multiple enemies with multithreaded tactics</h3></article>
-      <article><h3>Goodbye world: 5 proven ways to knock out an opponent</h3></article>
+      <h2>Entraînement au combat</h2>
+      <article><h3>Affrontez de nombreux ennemis grâce à des tactiques multithreads.</h3></article>
+      <article><h3>Goodbye world : 5 façons éprouvées d'assommer un adversaire</h3></article>
     </section>
     <section id="weapons">
-      <h2>Weapons Training</h2>
-      <article><h3>Swords: the best tool to literally divide and conquer</h3></article>
-      <article><h3>Breadth-first or depth-first in multi-weapon training?</h3></article>
+      <h2>Entraînement aux armes</h2>
+      <article><h3>Les épées : le meilleur outil pour littéralement diviser et conquérir</h3></article>
+      <article><h3>Formation aux armes multiples : priorité à l'élargissement ou à la profondeur ?</h3></article>
     </section>
   </main>
   <footer>&copy; 2018 Camper Cat</footer>
@@ -123,12 +123,12 @@ assert(
 ```html
 <body>
   <header>
-    <h1>Training</h1>
+    <h1>Entraînements</h1>
     <nav>
       <ul>
-        <li><a href="#stealth">Stealth &amp; Agility</a></li>
+        <li><a href="#stealth">Furtivité &amp; Agilité</a></li>
         <li><a href="#combat">Combat</a></li>
-        <li><a href="#weapons">Weapons</a></li>
+        <li><a href="#weapons">Armes</a></li>
       </ul>
     </nav>
   </header>
@@ -137,23 +137,23 @@ assert(
       <figure>
         <!-- Stacked bar chart will go here -->
         <br>
-        <figcaption>Breakdown per week of time to spend training in stealth, combat, and weapons.</figcaption>
+        <figcaption>Répartition par semaine du temps à consacrer à l'entraînement à la furtivité, au combat et aux armes.</figcaption>
       </figure>
     </section>
     <section id="stealth">
-      <h2>Stealth &amp; Agility Training</h2>
-      <article><h3>Climb foliage quickly using a minimum spanning tree approach</h3></article>
-      <article><h3>No training is NP-complete without parkour</h3></article>
+      <h2>Entraînement de furtivité &amp; d'agilité</h2>
+      <article><h3>Grimper rapidement sur le feuillage en utilisant une approche par arbre à portée minimale</h3></article>
+      <article><h3>Aucun entraînement n'est NP-complet sans parkour</h3></article>
     </section>
     <section id="combat">
-      <h2>Combat Training</h2>
-      <article><h3>Dispatch multiple enemies with multithreaded tactics</h3></article>
-      <article><h3>Goodbye world: 5 proven ways to knock out an opponent</h3></article>
+      <h2>Entraînement au combat</h2>
+      <article><h3>Affrontez de nombreux ennemis grâce à des tactiques multithreads.</h3></article>
+      <article><h3>Goodbye world : 5 façons éprouvées d'assommer un adversaire</h3></article>
     </section>
     <section id="weapons">
-      <h2>Weapons Training</h2>
-      <article><h3>Swords: the best tool to literally divide and conquer</h3></article>
-      <article><h3>Breadth-first or depth-first in multi-weapon training?</h3></article>
+      <h2>Entraînement aux armes</h2>
+      <article><h3>Les épées : le meilleur outil pour littéralement diviser et conquérir</h3></article>
+      <article><h3>Formation aux armes multiples : priorité à l'élargissement ou à la profondeur ?</h3></article>
     </section>
   </main>
   <footer>&copy; 2018 Camper Cat</footer>

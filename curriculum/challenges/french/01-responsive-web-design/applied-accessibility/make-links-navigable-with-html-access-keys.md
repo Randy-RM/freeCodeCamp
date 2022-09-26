@@ -2,51 +2,51 @@
 id: 587d7790367417b2b2512aaf
 title: Make Links Navigable with HTML Access Keys
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cQvmaTp'
+videoUrl: "https://scrimba.com/c/cQvmaTp"
 forumTopicId: 301021
 dashedName: make-links-navigable-with-html-access-keys
 ---
 
 # --description--
 
-HTML offers the `accesskey` attribute to specify a shortcut key to activate or bring focus to an element. Adding an `accesskey` attribute can make navigation more efficient for keyboard-only users.
+Le langage HTML propose l'attribut `accesskey` pour spécifier un raccourci clavier permettant d'activer ou de mettre en évidence un élément. L'ajout d'un attribut `accesskey` peut rendre la navigation plus efficace pour les utilisateurs ne possédant qu'un clavier.
 
-HTML5 allows this attribute to be used on any element, but it's particularly useful when it's used with interactive ones. This includes links, buttons, and form controls.
+HTML5 permet d'utiliser cet attribut sur n'importe quel élément, mais il est particulièrement utile lorsqu'il est utilisé avec des éléments interactifs. Cela inclut les liens, les boutons et les contrôles de formulaires.
 
-Here's an example:
+Voici un exemple:
 
 ```html
-<button accesskey="b">Important Button</button>
+<button accesskey="b">Bouton important</button>
 ```
 
 # --instructions--
 
-Camper Cat wants the links around the two blog article titles to have keyboard shortcuts so his site's users can quickly navigate to the full story. Add an `accesskey` attribute to both links and set the first one to `g` (for Garfield) and the second one to `c` (for Chuck Norris).
+Camper Cat veut que les liens autour des deux titres d'articles de blog aient des raccourcis clavier pour que les utilisateurs de son site puissent accéder rapidement à l'article complet. Ajoutez un attribut `accesskey` aux deux liens et attribuez au premier la valeur `g` (pour Garfield) et au second la valeur `c` (pour Chuck Norris).
 
 # --hints--
 
-Your code should add an `accesskey` attribute to the `a` tag with the `id` of `first`.
+Votre code devrait ajouter un attribut `accesskey` à la balise `a` avec le `id` de `first`.
 
 ```js
-assert($('#first').attr('accesskey'));
+assert($("#first").attr("accesskey"));
 ```
 
-Your code should add an `accesskey` attribute to the `a` tag with the `id` of `second`.
+Votre code devrait ajouter un attribut `accesskey` à la balise `a` avec le `id` de `second`.
 
 ```js
-assert($('#second').attr('accesskey'));
+assert($("#second").attr("accesskey"));
 ```
 
-Your code should set the `accesskey` attribute on the `a` tag with the `id` of `first` to `g`. Note that case matters.
+Votre code devrait définir l'attribut `accesskey` sur la balise `a` avec l'`id` de `first` à `g`. Notez que la casse est importante.
 
 ```js
-assert($('#first').attr('accesskey') == 'g');
+assert($("#first").attr("accesskey") == "g");
 ```
 
-Your code should set the `accesskey` attribute on the `a` tag with the `id` of `second` to `c`. Note that case matters.
+Votre code devrait définir l'attribut `accesskey` sur la balise `a` avec l'`id` de `second` à `c`. Notez que la casse est importante.
 
 ```js
-assert($('#second').attr('accesskey') == 'c');
+assert($("#second").attr("accesskey") == "c");
 ```
 
 # --seed--
@@ -56,23 +56,31 @@ assert($('#second').attr('accesskey') == 'c');
 ```html
 <body>
   <header>
-    <h1>Deep Thoughts with Master Camper Cat</h1>
+    <h1>Réflexions profondes avec Master Camper Cat</h1>
   </header>
   <article>
+    <h2>
+      <a id="first" href="#"
+        >Les Dossiers Garfield : Les lasagnes comme carburant d'entraînement?</a
+      >
+    </h2>
 
-
-    <h2><a id="first" href="#">The Garfield Files: Lasagna as Training Fuel?</a></h2>
-
-
-    <p>The internet is littered with varying opinions on nutritional paradigms, from catnip paleo to hairball cleanses. But let's turn our attention to an often overlooked fitness fuel, and examine the protein-carb-NOM trifecta that is lasagna...</p>
+    <p>
+      Internet regorge d'opinions diverses sur les paradigmes nutritionnels, de
+      l'herbe à chat paléo aux nettoyages de boules de poils. Mais tournons
+      notre attention vers un carburant de remise en forme souvent négligé, et
+      examinons le tiercé protéine-carbone-NOM que sont les lasagnes...
+    </p>
   </article>
   <article>
+    <h2><a id="second" href="#">Chuck Norris aime-t-il les chats?</a></h2>
 
-
-    <h2><a id="second" href="#">Is Chuck Norris a Cat Person?</a></h2>
-
-
-    <p>Chuck Norris is widely regarded as the premier martial artist on the planet, and it's a complete coincidence anyone who disagrees with this fact mysteriously disappears soon after. But the real question is, is he a cat person?...</p>
+    <p>
+      Chuck Norris est largement considéré comme le premier pratiquant d'arts
+      martiaux de la planète, et c'est une coïncidence totale que tous ceux qui
+      ne sont pas d'accord avec ce fait disparaissent mystérieusement peu après.
+      Mais la vraie question est de savoir s'il aime les chats?...
+    </p>
   </article>
   <footer>&copy; 2018 Camper Cat</footer>
 </body>
@@ -83,23 +91,35 @@ assert($('#second').attr('accesskey') == 'c');
 ```html
 <body>
   <header>
-    <h1>Deep Thoughts with Master Camper Cat</h1>
+    <h1>Réflexions profondes avec Master Camper Cat</h1>
   </header>
   <article>
+    <h2>
+      <a id="first" accesskey="g" href="#"
+        >Les Dossiers Garfield : Les lasagnes comme carburant d'entraînement?</a
+      >
+    </h2>
 
-
-    <h2><a id="first" accesskey="g" href="#">The Garfield Files: Lasagna as Training Fuel?</a></h2>
-
-
-    <p>The internet is littered with varying opinions on nutritional paradigms, from catnip paleo to hairball cleanses. But let's turn our attention to an often overlooked fitness fuel, and examine the protein-carb-NOM trifecta that is lasagna...</p>
+    <p>
+      Internet regorge d'opinions diverses sur les paradigmes nutritionnels, de
+      l'herbe à chat paléo aux nettoyages de boules de poils. Mais tournons
+      notre attention vers un carburant de remise en forme souvent négligé, et
+      examinons le tiercé protéine-carbone-NOM que sont les lasagnes...
+    </p>
   </article>
   <article>
+    <h2>
+      <a id="second" accesskey="c" href="#"
+        >Chuck Norris aime-t-il les chats?</a
+      >
+    </h2>
 
-
-    <h2><a id="second" accesskey="c" href="#">Is Chuck Norris a Cat Person?</a></h2>
-
-
-    <p>Chuck Norris is widely regarded as the premier martial artist on the planet, and it's a complete coincidence anyone who disagrees with this fact mysteriously disappears soon after. But the real question is, is he a cat person?...</p>
+    <p>
+      Internet regorge d'opinions diverses sur les paradigmes nutritionnels, de
+      l'herbe à chat paléo aux nettoyages de boules de poils. Mais tournons
+      notre attention vers un carburant de remise en forme souvent négligé, et
+      examinons le tiercé protéine-carbone-NOM que sont les lasagnes...
+    </p>
   </article>
   <footer>&copy; 2018 Camper Cat</footer>
 </body>

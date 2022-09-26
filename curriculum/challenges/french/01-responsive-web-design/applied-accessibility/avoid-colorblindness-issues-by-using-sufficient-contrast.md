@@ -9,27 +9,27 @@ dashedName: avoid-colorblindness-issues-by-using-sufficient-contrast
 
 # --description--
 
-Color is a large part of visual design, but its use introduces two accessibility issues. First, color alone should not be used as the only way to convey important information because screen reader users won't see it. Second, foreground and background colors need sufficient contrast so colorblind users can distinguish them.
+La couleur est un élément important de la conception visuelle, mais son utilisation pose deux problèmes d'accessibilité. Premièrement, la couleur seule ne doit pas être utilisée comme seul moyen de transmettre des informations importantes, car les utilisateurs de lecteurs d'écran ne les verront pas. Deuxièmement, les couleurs de premier plan et d'arrière-plan doivent être suffisamment contrastées pour que les utilisateurs daltoniens puissent les distinguer.
 
-Previous challenges covered having text alternatives to address the first issue. The last challenge introduced contrast checking tools to help with the second. The WCAG-recommended contrast ratio of 4.5:1 applies for color use as well as gray-scale combinations.
+Les défis précédents portaient sur l'utilisation d'alternatives textuelles pour résoudre le premier problème. Le dernier défi a introduit des outils de vérification du contraste pour aider à résoudre le second. Le rapport de contraste de 4,5:1 recommandé par les WCAG s'applique à l'utilisation des couleurs ainsi qu'aux combinaisons de niveaux de gris.
 
-Colorblind users have trouble distinguishing some colors from others - usually in hue but sometimes lightness as well. You may recall the contrast ratio is calculated using the relative luminance (or lightness) values of the foreground and background colors.
+Les utilisateurs daltoniens ont des difficultés à distinguer certaines couleurs des autres - généralement la teinte, mais parfois aussi la luminosité. Vous vous souvenez peut-être que le rapport de contraste est calculé à partir des valeurs de luminance (ou de luminosité) relatives des couleurs de premier plan et d'arrière-plan.
 
-In practice, the 4.5:1 contrast ratio can be reached by shading (adding black to) the darker color and tinting (adding white to) the lighter color. Darker shades on the color wheel are considered to be shades of blues, violets, magentas, and reds, whereas lighter tinted colors are oranges, yellows, greens, and blue-greens.
+En pratique, le rapport de contraste de 4,5:1 peut être atteint en ombrant (en ajoutant du noir à) la couleur la plus foncée et en teintant (en ajoutant du blanc à) la couleur la plus claire. Sur la roue chromatique, les nuances les plus sombres sont les bleus, les violets, les magentas et les rouges, tandis que les couleurs plus claires sont les oranges, les jaunes, les verts et les bleu-vert.
 
 # --instructions--
 
-Camper Cat is experimenting with using color for his blog text and background, but his current combination of a greenish `background-color` with maroon text `color` has a 2.5:1 contrast ratio. You can easily adjust the lightness of the colors since he declared them using the CSS `hsl()` property (which stands for hue, saturation, lightness) by changing the third argument. Increase the `background-color` lightness value from 35% to 55%, and decrease the `color` lightness value from 20% to 15%. This improves the contrast to 5.9:1.
+Camper Cat expérimente l'utilisation de la couleur pour le texte et l'arrière-plan de son blog, mais sa combinaison actuelle d'un `background-color` verdâtre et d'un `color` de texte marron a un rapport de contraste de 2,5:1. Vous pouvez facilement ajuster la luminosité des couleurs puisqu'il les a déclarées à l'aide de la propriété CSS `hsl()` (qui signifie teinte, saturation, luminosité) en modifiant le troisième argument. Augmentez la valeur de luminosité de `background-color` de 35% à 55%, et diminuez la valeur de luminosité de `color` de 20% à 15%. Cela améliore le contraste à 5,9:1.
 
 # --hints--
 
-Your code should only change the lightness value for the text `color` property to a value of 15%.
+Votre code doit uniquement modifier la valeur de luminosité de la propriété `color` du texte à une valeur de 15%.
 
 ```js
 assert(code.match(/color:\s*?hsl\(0,\s*?55%,\s*?15%\)/gi));
 ```
 
-Your code should only change the lightness value for the `background-color` property to a value of 55%.
+Votre code devrait seulement changer la valeur de luminosité pour la propriété `background-color` à une valeur de 55%.
 
 ```js
 assert(code.match(/background-color:\s*?hsl\(120,\s*?25%,\s*?55%\)/gi));
@@ -50,12 +50,12 @@ assert(code.match(/background-color:\s*?hsl\(120,\s*?25%,\s*?55%\)/gi));
 </head>
 <body>
   <header>
-    <h1>Deep Thoughts with Master Camper Cat</h1>
+    <h1>Réflexions profondes avec Master Camper Cat</h1>
   </header>
   <article>
-    <h2>A Word on the Recent Catnip Doping Scandal</h2>
-    <p>The influence that catnip has on feline behavior is well-documented, and its use as an herbal supplement in competitive ninja circles remains controversial. Once again, the debate to ban the substance is brought to the public's attention after the high-profile win of Kittytron, a long-time proponent and user of the green stuff, at the Claw of Fury tournament.</p>
-    <p>As I've stated in the past, I firmly believe a true ninja's skills must come from within, with no external influences. My own catnip use shall continue as purely recreational.</p>
+    <h2>Un mot sur le récent scandale du dopage à l'herbe à chat</h2>
+    <p>L'influence de l'herbe à chat sur le comportement des félins est bien documentée, mais son utilisation en tant que complément alimentaire dans le milieu des ninjas de compétition reste controversée. Une fois de plus, le débat visant à interdire cette substance est porté à l'attention du public après la victoire très médiatisée de Kittytron, un partisan et utilisateur de longue date de la substance verte, au tournoi Claw of Fury.</p>
+    <p>Comme je l'ai dit dans le passé, je crois fermement que les compétences d'un vrai ninja doivent venir de l'intérieur, sans influences extérieures. Ma propre utilisation de l'herbe à chat doit continuer à être purement récréative.</p>
   </article>
 </body>
 ```
@@ -73,12 +73,12 @@ assert(code.match(/background-color:\s*?hsl\(120,\s*?25%,\s*?55%\)/gi));
 </head>
 <body>
   <header>
-    <h1>Deep Thoughts with Master Camper Cat</h1>
+    <h1>Réflexions profondes avec Master Camper Cat</h1>
   </header>
   <article>
-    <h2>A Word on the Recent Catnip Doping Scandal</h2>
-    <p>The influence that catnip has on feline behavior is well-documented, and its use as an herbal supplement in competitive ninja circles remains controversial. Once again, the debate to ban the substance is brought to the public's attention after the high-profile win of Kittytron, a long-time proponent and user of the green stuff, at the Claw of Fury tournament.</p>
-    <p>As I've stated in the past, I firmly believe a true ninja's skills must come from within, with no external influences. My own catnip use shall continue as purely recreational.</p>
+    <h2>Un mot sur le récent scandale du dopage à l'herbe à chat</h2>
+    <p>L'influence de l'herbe à chat sur le comportement des félins est bien documentée, mais son utilisation en tant que complément alimentaire dans le milieu des ninjas de compétition reste controversée. Une fois de plus, le débat visant à interdire cette substance est porté à l'attention du public après la victoire très médiatisée de Kittytron, un partisan et utilisateur de longue date de la substance verte, au tournoi Claw of Fury.</p>
+    <p>Comme je l'ai dit dans le passé, je crois fermement que les compétences d'un vrai ninja doivent venir de l'intérieur, sans influences extérieures. Ma propre utilisation de l'herbe à chat doit continuer à être purement récréative.</p>
   </article>
 </body>
 ```

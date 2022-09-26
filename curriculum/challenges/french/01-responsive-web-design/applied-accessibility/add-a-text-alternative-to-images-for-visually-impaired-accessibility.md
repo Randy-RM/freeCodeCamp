@@ -9,23 +9,23 @@ dashedName: add-a-text-alternative-to-images-for-visually-impaired-accessibility
 
 # --description--
 
-You've likely seen an `alt` attribute on an `img` tag in other challenges. `alt` text describes the image's content and provides a text-alternative for it. An `alt` attribute helps in cases where the image fails to load or can't be seen by a user. Search engines also use it to understand what an image contains to include it in search results. Here's an example:
+Vous avez probablement déjà vu un attribut `alt` sur une balise `img` dans d'autres défis. Le texte `alt` décrit le contenu de l'image et lui fournit une alternative textuelle. Un attribut `alt` est utile dans les cas où l'image ne se charge pas ou ne peut pas être vue par un utilisateur. Les moteurs de recherche l'utilisent également pour comprendre ce que contient une image et l'inclure dans les résultats de recherche. Voici un exemple:
 
 ```html
 <img src="importantLogo.jpeg" alt="Company logo">
 ```
 
-People with visual impairments rely on screen readers to convert web content to an audio interface. They won't get information if it's only presented visually. For images, screen readers can access the `alt` attribute and read its contents to deliver key information.
+Les personnes souffrant de problèmes de vue utilisent des lecteurs d'écran pour convertir le contenu du Web en une interface audio. Elles n'obtiendront pas les informations si elles ne sont présentées que visuellement. Pour les images, les lecteurs d'écran peuvent accéder à l'attribut `alt` et lire son contenu pour fournir des informations clés.
 
-Good `alt` text provides the reader a brief description of the image. You should always include an `alt` attribute on your image. Per HTML5 specification, this is now considered mandatory.
+Un bon texte `alt` fournit au lecteur une brève description de l'image. Vous devez toujours inclure un attribut `alt` sur votre image. Conformément à la spécification HTML5, cet attribut est désormais considéré comme obligatoire.
 
 # --instructions--
 
-Camper Cat happens to be both a coding ninja and an actual ninja, who is building a website to share his knowledge. The profile picture he wants to use shows his skills and should be appreciated by all site visitors. Add an `alt` attribute in the `img` tag, that explains Camper Cat is doing karate. (The image `src` doesn't link to an actual file, so you should see the `alt` text in the display.)
+Camper Cat est à la fois un ninja du codage et un vrai ninja, qui construit un site Web pour partager ses connaissances. La photo de profil qu'il veut utiliser montre ses compétences et devrait être appréciée par tous les visiteurs du site. Ajoutez un attribut `alt` dans la balise `img`, qui explique que Camper Cat fait du karaté. (L'attribut `src` de l'image n'est pas liée à un fichier réel, vous devriez donc voir le texte `alt` dans l'affichage).
 
 # --hints--
 
-Your `img` tag should have an `alt` attribute and it should not be empty.
+Votre balise `img` doit avoir un attribut `alt` et il ne doit pas être vide.
 
 ```js
 assert($('img').attr('alt'));
