@@ -9,25 +9,25 @@ dashedName: use-the-flex-shrink-property-to-shrink-items
 
 # --description--
 
-So far, all the properties in the challenges apply to the flex container (the parent of the flex items). However, there are several useful properties for the flex items.
+Jusqu'à présent, toutes les propriétés des défis s'appliquent au conteneur flex (le parent des éléments flex). Cependant, il existe plusieurs propriétés utiles pour les éléments flex.
 
-The first is the `flex-shrink` property. When it's used, it allows an item to shrink if the flex container is too small. Items shrink when the width of the parent container is smaller than the combined widths of all the flex items within it.
+La première est la propriété `flex-shrink`. Lorsqu'elle est utilisée, elle permet à un élément de rétrécir si le conteneur flexible est trop petit. Les éléments rétrécissent lorsque la largeur du conteneur parent est inférieure aux largeurs combinées de tous les éléments flexibles qu'il contient.
 
-The `flex-shrink` property takes numbers as values. The higher the number, the more it will shrink compared to the other items in the container. For example, if one item has a `flex-shrink` value of `1` and the other has a `flex-shrink` value of `3`, the one with the value of `3` will shrink three times as much as the other.
+La propriété `flex-shrink` prend des nombres comme valeurs. Plus le nombre est élevé, plus l'élément se rétrécit par rapport aux autres éléments du conteneur. Par exemple, si un élément a une valeur `flex-shrink` de `1` et l'autre une valeur `flex-shrink` de `3`, celui qui a la valeur `3` se rétractera trois fois plus que l'autre.
 
 # --instructions--
 
-Add the CSS property `flex-shrink` to both `#box-1` and `#box-2`. Give `#box-1` a value of `1` and `#box-2` a value of `2`.
+Ajoutez la propriété CSS `flex-shrink` aux deux `#box-1` et `#box-2`. Donnez à `#box-1` une valeur de `1` et à `#box-2` une valeur de `2`.
 
 # --hints--
 
-The `#box-1` element should have the `flex-shrink` property set to a value of `1`.
+L'élément `#box-1` doit avoir la propriété `flex-shrink` définie sur une valeur de `1`.
 
 ```js
 assert($('#box-1').css('flex-shrink') == '1');
 ```
 
-The `#box-2` element should have the `flex-shrink` property set to a value of `2`.
+La propriété `flex-shrink` de l'élément `#box-2` doit prendre la valeur `2`.
 
 ```js
 assert($('#box-2').css('flex-shrink') == '2');

@@ -9,23 +9,23 @@ dashedName: use-the-align-self-property
 
 # --description--
 
-The final property for flex items is `align-self`. This property allows you to adjust each item's alignment individually, instead of setting them all at once. This is useful since other common adjustment techniques using the CSS properties `float`, `clear`, and `vertical-align` do not work on flex items.
+La dernière propriété pour les éléments flexibles est `align-self`. Cette propriété vous permet de régler l'alignement de chaque élément individuellement, au lieu de les régler tous en même temps. C'est utile car les autres techniques d'ajustement courantes utilisant les propriétés CSS `float`, `clear` et `vertical-align` ne fonctionnent pas sur les éléments flex.
 
-`align-self` accepts the same values as `align-items` and will override any value set by the `align-items` property.
+`align-self` accepte les mêmes valeurs que `align-items` et remplacera toute valeur définie par la propriété `align-items`.
 
 # --instructions--
 
-Add the CSS property `align-self` to both `#box-1` and `#box-2`. Give `#box-1` a value of `center` and give `#box-2` a value of `flex-end`.
+Ajoutez la propriété CSS `align-self` aux deux `#box-1` et `#box-2`. Donnez à `#box-1` une valeur de `center` et à `#box-2` une valeur de `flex-end`.
 
 # --hints--
 
-The `#box-1` element should have the `align-self` property set to a value of `center`.
+L'élément `#box-1` doit avoir la propriété `align-self` définie sur une valeur de `center`.
 
 ```js
 assert($('#box-1').css('align-self') == 'center');
 ```
 
-The `#box-2` element should have the `align-self` property set to a value of `flex-end`.
+L'élément `#box-2` doit avoir la propriété `align-self` définie sur une valeur de `flex-end`.
 
 ```js
 assert($('#box-2').css('align-self') == 'flex-end');

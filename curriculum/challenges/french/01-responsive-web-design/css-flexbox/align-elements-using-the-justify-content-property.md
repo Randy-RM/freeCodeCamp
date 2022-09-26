@@ -9,26 +9,26 @@ dashedName: align-elements-using-the-justify-content-property
 
 # --description--
 
-Sometimes the flex items within a flex container do not fill all the space in the container. It is common to want to tell CSS how to align and space out the flex items a certain way. Fortunately, the `justify-content` property has several options to do this. But first, there is some important terminology to understand before reviewing those options.
+Parfois, les éléments flexibles d'un conteneur flex ne remplissent pas tout l'espace du conteneur. Il est courant de vouloir indiquer à CSS comment aligner et espacer les éléments flexibles d'une certaine manière. Heureusement, la propriété `justify-content` offre plusieurs options à cet effet. Mais avant de passer en revue ces options, il convient de comprendre une terminologie importante.
 
 [Here is a useful image showing a row to illustrate the concepts below.](https://www.w3.org/TR/css-flexbox-1/images/flex-direction-terms.svg)
 
-Recall that setting a flex container as a row places the flex items side-by-side from left-to-right. A flex container set as a column places the flex items in a vertical stack from top-to-bottom. For each, the direction the flex items are arranged is called the **main axis**. For a row, this is a horizontal line that cuts through each item. And for a column, the main axis is a vertical line through the items.
+Rappelez-vous que la définition d'un conteneur flex en tant que ligne place les éléments flex côte à côte, de gauche à droite. Un conteneur flexible défini en tant que colonne place les éléments flexibles dans une pile verticale, de haut en bas. Dans chaque cas, la direction dans laquelle les éléments flex sont disposés est appelée **main axis**. Pour une ligne, il s'agit d'une ligne horizontale qui traverse chaque élément. Et pour une colonne, l'axe principal est une ligne verticale qui traverse les éléments.
 
-There are several options for how to space the flex items along the line that is the main axis. One of the most commonly used is `justify-content: center;`, which aligns all the flex items to the center inside the flex container. Other options include:
+Il existe plusieurs options pour espacer les éléments flexibles le long de la ligne qui constitue l'axe principal. L'une des plus couramment utilisées est `Justify-content : center;`, qui aligne tous les éléments flex au centre du conteneur flex. D'autres options sont disponibles :
 
-<ul><li><code>flex-start</code>: aligns items to the start of the flex container. For a row, this pushes the items to the left of the container. For a column, this pushes the items to the top of the container. This is the default alignment if no <code>justify-content</code> is specified.</li><li><code>flex-end</code>: aligns items to the end of the flex container. For a row, this pushes the items to the right of the container. For a column, this pushes the items to the bottom of the container.</li><li><code>space-between</code>: aligns items to the center of the main axis, with extra space placed between the items. The first and last items are pushed to the very edge of the flex container. For example, in a row the first item is against the left side of the container, the last item is against the right side of the container, then the remaining space is distributed evenly among the other items.</li><li><code>space-around</code>: similar to <code>space-between</code> but the first and last items are not locked to the edges of the container, the space is distributed around all the items with a half space on either end of the flex container.</li><li><code>space-evenly</code>: Distributes space evenly between the flex items with a full space at either end of the flex container</li></ul>
+<ul><li><code>flex-start</code>: aligne les éléments sur le début du conteneur flexible. Pour une ligne, cela pousse les éléments vers la gauche du conteneur. Pour une colonne, les éléments sont placés en haut du conteneur. Il s'agit de l'alignement par défaut si aucune <code>justify-content</code> valeur est spécifié.</li><li><code>flex-end</code>: aligne les éléments à la fin du conteneur flexible. Pour une ligne, cela pousse les éléments vers la droite du conteneur. Pour une colonne, ceci pousse les éléments vers le bas du conteneur.</li><li><code>space-between</code>: aligne les éléments au centre de l'axe principal, avec un espace supplémentaire placé entre les éléments. Le premier et le dernier élément sont poussés jusqu'au bord du conteneur flexible. Par exemple, dans une rangée, le premier élément est contre le côté gauche du conteneur, le dernier élément est contre le côté droit du conteneur, puis l'espace restant est réparti uniformément entre les autres éléments.</li><li><code>space-around</code>: similaire à <code>space-between</code> mais les premier et dernier éléments ne sont pas verrouillés aux bords du conteneur, l'espace est distribué autour de tous les éléments avec un demi-espace à chaque extrémité du conteneur flexible.</li><li><code>space-evenly</code>: Répartit l'espace de manière égale entre les éléments flexibles, avec un espace complet à chaque extrémité du conteneur flexible.</li></ul>
 
 # --instructions--
 
-An example helps show this property in action. Add the CSS property `justify-content` to the `#box-container` element, and give it a value of `center`.
+Un exemple permet de montrer cette propriété en action. Ajoutez la propriété CSS `justify-content` à l'élément `#box-container`, et donnez-lui la valeur `center`.
 
 **Bonus**  
-Try the other options for the `justify-content` property in the code editor to see their differences. But note that a value of `center` is the only one that will pass this challenge.
+Essayez les autres options de la propriété `justify-content` dans l'éditeur de code pour voir leurs différences. Mais notez qu'une valeur de `center` est la seule qui passe ce défi.
 
 # --hints--
 
-The `#box-container` element should have a `justify-content` property set to a value of `center`.
+L'élément `#box-container` doit avoir une propriété `justify-content` dont la valeur est `center`.
 
 ```js
 assert($('#box-container').css('justify-content') == 'center');

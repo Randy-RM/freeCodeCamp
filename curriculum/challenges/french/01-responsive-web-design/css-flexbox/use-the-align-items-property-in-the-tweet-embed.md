@@ -9,21 +9,21 @@ dashedName: use-the-align-items-property-in-the-tweet-embed
 
 # --description--
 
-The last challenge introduced the `align-items` property and gave an example. This property can be applied to a few tweet embed elements to align the flex items inside them.
+Le dernier défi a introduit la propriété `align-items` et a donné un exemple. Cette propriété peut être appliquée à quelques éléments tweet embed pour aligner les éléments flex à l'intérieur de ceux-ci.
 
 # --instructions--
 
-Add the CSS property `align-items` to the header's `.follow-btn` element. Set the value to `center`.
+Ajoutez la propriété CSS `align-items` à l'élément `.follow-btn` de l'en-tête. Définissez la valeur sur `center`..
 
 # --hints--
 
-Your `.follow-btn` should be rendered on the page. Be sure to turn off any extensions such as ad blockers.
+Votre `.follow-btn` devrait être rendu sur la page. Assurez-vous de désactiver toute extension telle que les bloqueurs de publicité.
 
 ```js
 assert($('.follow-btn').length > 0 && $('.follow-btn').css('display') !== 'none');
 ```
 
-The `.follow-btn` element should have the `align-items` property set to a value of `center`.
+L'élément `.follow-btn` doit avoir la propriété `align-items` définie sur une valeur de `center`.
 
 ```js
 assert($('.follow-btn').css('align-items') == 'center');
@@ -101,11 +101,11 @@ assert($('.follow-btn').css('align-items') == 'center');
     <h4>@ossia</h4>
   </div>
   <div class="follow-btn">
-    <button>Follow</button>
+    <button>Suivre</button>
   </div>
 </header>
 <div id="inner">
-  <p>I meet so many people who are in search of that one trick that will help them work smart. Even if you work smart, you still have to work hard.</p>
+  <p>Je rencontre tellement de gens qui sont à la recherche de l'astuce qui les aidera à travailler intelligemment. Même si vous travaillez intelligemment, vous devez toujours travailler dur.</p>
   <span class="date">1:32 PM - 12 Jan 2018</span>
   <hr>
 </div>
@@ -119,9 +119,9 @@ assert($('.follow-btn').css('align-items') == 'center');
     </div>
   </div>
   <div class="cta">
-    <button class="share-btn">Share</button>
+    <button class="share-btn">Partager</button>
     <button class="retweet-btn">Retweet</button>
-    <button class="like-btn">Like</button>
+    <button class="like-btn">J'aime</button>
   </div>
 </footer>
 ```
@@ -196,11 +196,11 @@ assert($('.follow-btn').css('align-items') == 'center');
     <h4>@ossia</h4>
   </div>
   <div class="follow-btn">
-    <button>Follow</button>
+    <button>Suivre</button>
   </div>
 </header>
 <div id="inner">
-  <p>I meet so many people who are in search of that one trick that will help them work smart. Even if you work smart, you still have to work hard.</p>
+  <p>Je rencontre tellement de gens qui sont à la recherche de l'astuce qui les aidera à travailler intelligemment. Même si vous travaillez intelligemment, vous devez toujours travailler dur.</p>
   <span class="date">1:32 PM - 12 Jan 2018</span>
   <hr>
 </div>
@@ -214,9 +214,9 @@ assert($('.follow-btn').css('align-items') == 'center');
     </div>
   </div>
   <div class="cta">
-    <button class="share-btn">Share</button>
+    <button class="share-btn">Partager</button>
     <button class="retweet-btn">Retweet</button>
-    <button class="like-btn">Like</button>
+    <button class="like-btn">J'aime</button>
   </div>
 </footer>
 ```

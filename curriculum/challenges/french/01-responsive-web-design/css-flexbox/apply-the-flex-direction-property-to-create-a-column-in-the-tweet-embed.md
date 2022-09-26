@@ -9,21 +9,21 @@ dashedName: apply-the-flex-direction-property-to-create-a-column-in-the-tweet-em
 
 # --description--
 
-The tweet embed `header` and `footer` used the `flex-direction` property earlier with a row value. Similarly, the items inside the `.profile-name` element would work well stacked as a column.
+Les éléments `header` et `footer` du tweet ont utilisé la propriété `flex-direction` précédemment avec une valeur de ligne. De même, les éléments contenus dans l'élément `.profile-name` fonctionneraient bien empilés en tant que colonne.
 
 # --instructions--
 
-Add the CSS property `flex-direction` to the header's `.profile-name` element and set the value to `column`.
+Ajoutez la propriété CSS `flex-direction` à l'élément `.profile-name` de l'en-tête et donnez-lui la valeur `column`.
 
 # --hints--
 
-Your `.follow-btn` should be rendered on the page. Be sure to turn off any extensions such as ad blockers.
+Votre `.follow-btn` devrait être rendu sur la page. Assurez-vous de désactiver toute extension telle que les bloqueurs de publicité.
 
 ```js
 assert($('.follow-btn').length > 0 && $('.follow-btn').css('display') !== 'none');
 ```
 
-The `.profile-name` element should have a `flex-direction` property set to `column`.
+L'élément `.profile-name` doit avoir une propriété `flex-direction` définie sur `column`.
 
 ```js
 assert($('.profile-name').css('flex-direction') == 'column');
@@ -99,11 +99,11 @@ assert($('.profile-name').css('flex-direction') == 'column');
     <h4>@ossia</h4>
   </div>
   <div class="follow-btn">
-    <button>Follow</button>
+    <button>Suivre</button>
   </div>
 </header>
 <div id="inner">
-  <p>I meet so many people who are in search of that one trick that will help them work smart. Even if you work smart, you still have to work hard.</p>
+  <p>Je rencontre tellement de gens qui sont à la recherche de l'astuce qui les aidera à travailler intelligemment. Même si vous travaillez intelligemment, vous devez toujours travailler dur.</p>
   <span class="date">1:32 PM - 12 Jan 2018</span>
   <hr>
 </div>
@@ -117,9 +117,9 @@ assert($('.profile-name').css('flex-direction') == 'column');
     </div>
   </div>
   <div class="cta">
-    <button class="share-btn">Share</button>
+    <button class="share-btn">Partager</button>
     <button class="retweet-btn">Retweet</button>
-    <button class="like-btn">Like</button>
+    <button class="like-btn">J'aime</button>
   </div>
 </footer>
 ```
@@ -192,11 +192,11 @@ assert($('.profile-name').css('flex-direction') == 'column');
     <h4>@ossia</h4>
   </div>
   <div class="follow-btn">
-    <button>Follow</button>
+    <button>Suivre</button>
   </div>
 </header>
 <div id="inner">
-  <p>I meet so many people who are in search of that one trick that will help them work smart. Even if you work smart, you still have to work hard.</p>
+  <p>Je rencontre tellement de gens qui sont à la recherche de l'astuce qui les aidera à travailler intelligemment. Même si vous travaillez intelligemment, vous devez toujours travailler dur.</p>
   <span class="date">1:32 PM - 12 Jan 2018</span>
   <hr>
 </div>
@@ -210,9 +210,9 @@ assert($('.profile-name').css('flex-direction') == 'column');
     </div>
   </div>
   <div class="cta">
-    <button class="share-btn">Share</button>
+    <button class="share-btn">Partager</button>
     <button class="retweet-btn">Retweet</button>
-    <button class="like-btn">Like</button>
+    <button class="like-btn">J'aime</button>
   </div>
 </footer>
 ```

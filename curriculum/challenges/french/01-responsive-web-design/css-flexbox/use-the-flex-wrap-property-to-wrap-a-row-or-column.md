@@ -9,21 +9,21 @@ dashedName: use-the-flex-wrap-property-to-wrap-a-row-or-column
 
 # --description--
 
-CSS flexbox has a feature to split a flex item into multiple rows (or columns). By default, a flex container will fit all flex items together. For example, a row will all be on one line.
+La fonction flexbox de CSS permet de diviser un élément flex en plusieurs lignes (ou colonnes). Par défaut, un conteneur flex s'adapte à tous les éléments flex ensemble. Par exemple, une rangée sera sur une seule ligne.
 
-However, using the `flex-wrap` property tells CSS to wrap items. This means extra items move into a new row or column. The break point of where the wrapping happens depends on the size of the items and the size of the container.
+Cependant, l'utilisation de la propriété `flex-wrap` indique à CSS d'envelopper les éléments. Cela signifie que les éléments supplémentaires sont déplacés dans une nouvelle ligne ou colonne. Le point de rupture où l'habillage se produit dépend de la taille des éléments et de la taille du conteneur.
 
-CSS also has options for the direction of the wrap:
+CSS dispose également d'options pour la direction de l'habillage :
 
-<ul><li><code>nowrap</code>: this is the default setting, and does not wrap items.</li><li><code>wrap</code>: wraps items onto multiple lines from top-to-bottom if they are in rows and left-to-right if they are in columns.</li><li><code>wrap-reverse</code>: wraps items onto multiple lines from bottom-to-top if they are in rows and right-to-left if they are in columns.</li></ul>
+<ul><li><code>nowrap</code>: il s'agit du paramètre par défaut, qui n'englobe pas les éléments.</li><li><code>wrap</code>: enveloppe les éléments sur plusieurs lignes de haut en bas s'ils sont en lignes et de gauche à droite s'ils sont en colonnes.</li><li><code>wrap-reverse</code>: enveloppe les éléments sur plusieurs lignes de bas en haut s'ils sont en lignes et de droite à gauche s'ils sont en colonnes..</li></ul>
 
 # --instructions--
 
-The current layout has too many boxes for one row. Add the CSS property `flex-wrap` to the `#box-container` element, and give it a value of `wrap`.
+La disposition actuelle comporte trop de boîtes pour une seule ligne. Ajoutez la propriété CSS `flex-wrap` à l'élément `#box-container`, et donnez-lui une valeur de `wrap`.
 
 # --hints--
 
-The `#box-container` element should have the `flex-wrap` property set to a value of `wrap`.
+L'élément `#box-container` doit avoir la propriété `flex-wrap` définie sur une valeur de `wrap`.
 
 ```js
 assert($('#box-container').css('flex-wrap') == 'wrap');

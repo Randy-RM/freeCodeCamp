@@ -9,27 +9,27 @@ dashedName: apply-the-flex-direction-property-to-create-rows-in-the-tweet-embed
 
 # --description--
 
-The `header` and `footer` in the tweet embed example have child items that could be arranged as rows using the `flex-direction` property. This tells CSS to align the children horizontally.
+Les éléments `header` et `footer` de l'exemple d'intégration d'un tweet ont des éléments enfants qui pourraient être disposés en rangées en utilisant la propriété `flex-direction`. Celle-ci indique à CSS d'aligner les enfants horizontalement.
 
 # --instructions--
 
-Add the CSS property `flex-direction` to both the `header` and `footer` and set the value to `row`.
+Ajoutez la propriété CSS `flex-direction` au `header` et au `footer` et définissez la valeur sur `row`.
 
 # --hints--
 
-Your `.follow-btn` should be rendered on the page. Be sure to turn off any extensions such as ad blockers.
+Votre `.follow-btn` devrait être rendu sur la page. Assurez-vous de désactiver toute extension telle que les bloqueurs de publicité.
 
 ```js
 assert($('.follow-btn').length > 0 && $('.follow-btn').css('display') !== 'none');
 ```
 
-The `header` should have a `flex-direction` property set to `row`.
+Le `header` doit avoir une propriété `flex-direction` définie sur `row`.
 
 ```js
 assert(code.match(/header\s*?{[^}]*?flex-direction:\s*?row;/g));
 ```
 
-The `footer` should have a `flex-direction` property set to `row`.
+Le `footer` doit avoir une propriété `flex-direction` définie sur `row`.
 
 ```js
 assert(code.match(/footer\s*?{[^}]*?flex-direction:\s*?row;/g));
@@ -108,11 +108,11 @@ assert(code.match(/footer\s*?{[^}]*?flex-direction:\s*?row;/g));
     <h4>@ossia</h4>
   </div>
   <div class="follow-btn">
-    <button>Follow</button>
+    <button>Suivre</button>
   </div>
 </header>
 <div id="inner">
-  <p>I meet so many people who are in search of that one trick that will help them work smart. Even if you work smart, you still have to work hard.</p>
+  <p>Je rencontre tellement de gens qui sont à la recherche de l'astuce qui les aidera à travailler intelligemment. Même si vous travaillez intelligemment, vous devez toujours travailler dur.</p>
   <span class="date">1:32 PM - 12 Jan 2018</span>
   <hr>
 </div>
@@ -126,9 +126,9 @@ assert(code.match(/footer\s*?{[^}]*?flex-direction:\s*?row;/g));
     </div>
   </div>
   <div class="cta">
-    <button class="share-btn">Share</button>
+    <button class="share-btn">Partager</button>
     <button class="retweet-btn">Retweet</button>
-    <button class="like-btn">Like</button>
+    <button class="like-btn">J'aime</button>
   </div>
 </footer>
 ```
@@ -204,11 +204,11 @@ assert(code.match(/footer\s*?{[^}]*?flex-direction:\s*?row;/g));
     <h4>@ossia</h4>
   </div>
   <div class="follow-btn">
-    <button>Follow</button>
+    <button>Suivre</button>
   </div>
 </header>
 <div id="inner">
-  <p>I meet so many people who are in search of that one trick that will help them work smart. Even if you work smart, you still have to work hard.</p>
+  <p>Je rencontre tellement de gens qui sont à la recherche de l'astuce qui les aidera à travailler intelligemment. Même si vous travaillez intelligemment, vous devez toujours travailler dur.</p>
   <span class="date">1:32 PM - 12 Jan 2018</span>
   <hr>
 </div>
@@ -222,9 +222,9 @@ assert(code.match(/footer\s*?{[^}]*?flex-direction:\s*?row;/g));
     </div>
   </div>
   <div class="cta">
-    <button class="share-btn">Share</button>
+    <button class="share-btn">Partager</button>
     <button class="retweet-btn">Retweet</button>
-    <button class="like-btn">Like</button>
+    <button class="like-btn">J'aime</button>
   </div>
 </footer>
 ```

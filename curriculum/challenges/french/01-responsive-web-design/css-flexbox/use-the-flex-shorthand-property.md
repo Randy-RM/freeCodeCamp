@@ -9,21 +9,21 @@ dashedName: use-the-flex-shorthand-property
 
 # --description--
 
-There is a shortcut available to set several flex properties at once. The `flex-grow`, `flex-shrink`, and `flex-basis` properties can all be set together by using the `flex` property.
+Il existe un raccourci permettant de définir plusieurs propriétés flexibles à la fois. Les propriétés `flex-grow`, `flex-shrink`, et `flex-basis` peuvent toutes être définies ensemble en utilisant la propriété `flex`.
 
-For example, `flex: 1 0 10px;` will set the item to `flex-grow: 1;`, `flex-shrink: 0;`, and `flex-basis: 10px;`.
+Par exemple, `flex : 1 0 10px;` définira l'élément comme `flex-grow : 1;`, `flex-shrink : 0;`, et `flex-basis : 10px;`.
 
-The default property settings are `flex: 0 1 auto;`.
+Les paramètres de propriété par défaut sont `flex : 0 1 auto ;`.
 
 # --instructions--
 
-Add the CSS property `flex` to both `#box-1` and `#box-2`. Give `#box-1` the values so its `flex-grow` is `2`, its `flex-shrink` is `2`, and its `flex-basis` is `150px`. Give `#box-2` the values so its `flex-grow` is `1`, its `flex-shrink` is `1`, and its `flex-basis` is `150px`.
+Ajoutez la propriété CSS `flex` à `#box-1` et `#box-2`. Donnez à `#box-1` les valeurs pour que son `flex-grow` soit `2`, son `flex-shrink` soit `2`, et son `flex-basis` soit `150px`. Donnez à `#box-2` les valeurs pour que son `flex-grow` soit `1`, son `flex-shrink` soit `1`, et son `flex-basis` soit `150px`.
 
-These values will cause `#box-1` to grow to fill the extra space at twice the rate of `#box-2` when the container is greater than 300px and shrink at twice the rate of `#box-2` when the container is less than 300px. 300px is the combined size of the `flex-basis` values of the two boxes.
+Ces valeurs feront en sorte que la `#box-1` s'agrandisse pour remplir l'espace supplémentaire deux fois plus vite que la `#box-2` lorsque le conteneur est supérieur à 300px et qu'elle rétrécisse deux fois plus vite que la `#box-2` lorsque le conteneur est inférieur à 300px. 300px est la taille combinée des valeurs `flex-basis` des deux boîtes.
 
 # --hints--
 
-The `#box-1` element should have the `flex` property set to a value of `2 2 150px`.
+L'élément `#box-1` doit avoir la propriété `flex` définie sur une valeur de `2 2 150px`.
 
 ```js
 assert(
@@ -33,7 +33,7 @@ assert(
 );
 ```
 
-The `#box-2` element should have the `flex` property set to a value of `1 1 150px`.
+L'élément `#box-2` doit avoir la propriété `flex` définie sur une valeur de `1 1 150px`.
 
 ```js
 assert(
@@ -43,7 +43,7 @@ assert(
 );
 ```
 
-Your code should use the `flex` property for `#box-1` and `#box-2`.
+Votre code devrait utiliser la propriété `flex` pour `#box-1` et `#box-2`.
 
 ```js
 assert(code.match(/flex:\s*?\d\s+?\d\s+?150px;/g).length == 2);
