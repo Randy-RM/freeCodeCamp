@@ -9,7 +9,7 @@ dashedName: place-items-in-grid-areas-using-the-grid-area-property
 
 # --description--
 
-After creating an area template for your grid container, as shown in the previous challenge, you can place an item in your custom area by referencing the name you gave it. To do this, you use the `grid-area` property on an item like this:
+Après avoir créé un modèle de zone pour votre conteneur de grille, comme indiqué dans le défi précédent, vous pouvez placer un élément dans votre zone personnalisée en faisant référence au nom que vous lui avez donné. Pour ce faire, vous utilisez la propriété `grid-area` sur un élément comme ceci :
 
 ```css
 .item1 {
@@ -17,15 +17,15 @@ After creating an area template for your grid container, as shown in the previou
 }
 ```
 
-This lets the grid know that you want the `item1` class to go in the area named `header`. In this case, the item will use the entire top row because that whole row is named as the header area.
+Cela permet à la grille de savoir que vous voulez que la classe `item1` aille dans la zone nommée `header`. Dans ce cas, l'élément utilisera la totalité de la ligne supérieure, car cette ligne entière est nommée zone d'en-tête.
 
 # --instructions--
 
-Place an element with the `item5` class in the `footer` area using the `grid-area` property.
+Placez un élément avec la classe `item5` dans la zone `footer` en utilisant la propriété `grid-area`.
 
 # --hints--
 
-`item5` class should have a `grid-area` property that has the value of `footer`.
+La classe `item5` devrait avoir une propriété `grid-area` qui a la valeur de `footer`.
 
 ```js
 assert(

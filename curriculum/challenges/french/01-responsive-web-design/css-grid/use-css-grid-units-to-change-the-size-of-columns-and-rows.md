@@ -9,29 +9,29 @@ dashedName: use-css-grid-units-to-change-the-size-of-columns-and-rows
 
 # --description--
 
-You can use absolute and relative units like `px` and `em` in CSS Grid to define the size of rows and columns. You can use these as well:
+Vous pouvez utiliser des unités absolues et relatives comme `px` et `em` dans CSS Grid pour définir la taille des lignes et des colonnes. Vous pouvez également utiliser ces unités :
 
-`fr`: sets the column or row to a fraction of the available space,
+`fr` : définit la colonne ou la ligne à une fraction de l'espace disponible,
 
-`auto`: sets the column or row to the width or height of its content automatically,
+`auto` : règle automatiquement la colonne ou la ligne sur la largeur ou la hauteur de son contenu,
 
-`%`: adjusts the column or row to the percent width of its container.
+`%` : ajuste la colonne ou la ligne au pourcentage de largeur de son conteneur.
 
-Here's the code that generates the output in the preview:
+Voici le code qui génère la sortie dans l'aperçu :
 
 ```css
 grid-template-columns: auto 50px 10% 2fr 1fr;
 ```
 
-This snippet creates five columns. The first column is as wide as its content, the second column is 50px, the third column is 10% of its container, and for the last two columns; the remaining space is divided into three sections, two are allocated for the fourth column, and one for the fifth.
+Ce snippet crée cinq colonnes. La première colonne est aussi large que son contenu, la deuxième colonne est de 50px, la troisième colonne est de 10% de son conteneur, et pour les deux dernières colonnes ; l'espace restant est divisé en trois sections, deux sont allouées pour la quatrième colonne, et une pour la cinquième.
 
 # --instructions--
 
-Make a grid with three columns whose widths are as follows: 1fr, 100px, and 2fr.
+Faites une grille avec trois colonnes dont les largeurs sont les suivantes : 1fr, 100px, et 2fr.
 
 # --hints--
 
-`container` class should have a `grid-template-columns` property that has three columns with the following widths: `1fr, 100px, and 2fr`.
+La classe `container` devrait avoir une propriété `grid-template-columns` qui a trois colonnes avec les largeurs suivantes : `1fr, 100px, et 2fr`.
 
 ```js
 assert(

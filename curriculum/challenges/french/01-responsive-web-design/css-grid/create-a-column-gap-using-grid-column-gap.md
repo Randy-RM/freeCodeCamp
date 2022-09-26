@@ -9,21 +9,21 @@ dashedName: create-a-column-gap-using-grid-column-gap
 
 # --description--
 
-So far in the grids you have created, the columns have all been tight up against each other. Sometimes you want a gap in between the columns. To add a gap between the columns, use the `grid-column-gap` property like this:
+Jusqu'à présent, dans les grilles que vous avez créées, les colonnes étaient toutes serrées les unes contre les autres. Parfois, vous voulez un espace entre les colonnes. Pour ajouter un espace entre les colonnes, utilisez la propriété `grid-column-gap` comme ceci:
 
 ```css
 grid-column-gap: 10px;
 ```
 
-This creates 10px of empty space between all of our columns.
+Cela crée 10px d'espace vide entre toutes nos colonnes.
 
 # --instructions--
 
-Give the columns in the grid a `20px` gap.
+Donnez aux colonnes de la grille un espace de `20px`.
 
 # --hints--
 
-`container` class should have a `grid-column-gap` property that has the value of `20px`.
+La classe `container` doit avoir une propriété `grid-column-gap` dont la valeur est `20px`.
 
 ```js
 assert(

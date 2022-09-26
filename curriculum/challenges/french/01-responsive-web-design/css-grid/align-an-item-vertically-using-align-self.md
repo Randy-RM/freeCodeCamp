@@ -9,15 +9,15 @@ dashedName: align-an-item-vertically-using-align-self
 
 # --description--
 
-Just as you can align an item horizontally, there's a way to align an item vertically as well. To do this, you use the `align-self` property on an item. This property accepts all of the same values as `justify-self` from the last challenge.
+De même que vous pouvez aligner un élément horizontalement, il existe un moyen d'aligner un élément verticalement également. Pour ce faire, vous utilisez la propriété `align-self` sur un élément. Cette propriété accepte toutes les mêmes valeurs que la propriété `justify-self` du dernier défi.
 
 # --instructions--
 
-Align the item with the class `item3` vertically at the `end`.
+Aligne l'élément avec la classe `item3` verticalement à la `fin`.
 
 # --hints--
 
-`item3` class should have a `align-self` property that has the value of `end`.
+La classe `item3` devrait avoir une propriété `align-self` dont la valeur est `end`.
 
 ```js
 assert(code.match(/.item3\s*?{[\s\S]*align-self\s*?:\s*?end\s*?;[\s\S]*}/gi));

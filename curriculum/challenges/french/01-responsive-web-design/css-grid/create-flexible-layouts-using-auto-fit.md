@@ -9,17 +9,17 @@ dashedName: create-flexible-layouts-using-auto-fit
 
 # --description--
 
-`auto-fit` works almost identically to `auto-fill`. The only difference is that when the container's size exceeds the size of all the items combined, `auto-fill` keeps inserting empty rows or columns and pushes your items to the side, while `auto-fit` collapses those empty rows or columns and stretches your items to fit the size of the container.
+`auto-fit` fonctionne de manière presque identique à `auto-fill`. La seule différence est que lorsque la taille du conteneur dépasse la taille de tous les éléments combinés, `auto-fill` continue d'insérer des lignes ou des colonnes vides et repousse vos éléments sur le côté, tandis que `auto-fit` réduit ces lignes ou colonnes vides et étire vos éléments pour les adapter à la taille du conteneur.
 
-**Note:** If your container can't fit all your items on one row, it will move them down to a new one.
+**Note :** si votre conteneur ne peut pas contenir tous vos éléments sur une ligne, il les déplacera vers une nouvelle ligne.
 
 # --instructions--
 
-In the second grid, use `auto-fit` with `repeat` to fill the grid with columns that have a minimum width of `60px` and maximum of `1fr`. Then resize the preview to see the difference.
+Dans la deuxième grille, utilisez `auto-fit` avec `repeat` pour remplir la grille avec des colonnes qui ont une largeur minimale de `60px` et maximale de `1fr`. Redimensionnez ensuite l'aperçu pour voir la différence.
 
 # --hints--
 
-`container2` class should have a `grid-template-columns` property with `repeat` and `auto-fit` that will fill the grid with columns that have a minimum width of `60px` and a maximum of `1fr`.
+La classe `container2` devrait avoir une propriété `grid-template-columns` avec `repeat` et `auto-fit` qui remplira la grille avec des colonnes ayant une largeur minimale de `60px` et maximale de `1fr`.
 
 ```js
 assert(

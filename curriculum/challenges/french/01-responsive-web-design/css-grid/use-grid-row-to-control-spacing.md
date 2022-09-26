@@ -9,15 +9,15 @@ dashedName: use-grid-row-to-control-spacing
 
 # --description--
 
-Of course, you can make items consume multiple rows just like you can with columns. You define the horizontal lines you want an item to start and stop at using the `grid-row` property on a grid item.
+Bien entendu, vous pouvez faire en sorte que les éléments consomment plusieurs lignes, tout comme vous le faites pour les colonnes. Vous définissez les lignes horizontales sur lesquelles vous voulez qu'un élément commence et s'arrête en utilisant la propriété `grid-row` d'un élément de grille.
 
 # --instructions--
 
-Make the element with the `item5` class consume the last two rows.
+Faites en sorte que l'élément avec la classe `item5` consomme les deux dernières rangées.
 
 # --hints--
 
-`item5` class should have a `grid-row` property.
+La classe `item5` devrait avoir une propriété `grid-row`.
 
 ```js
 assert(
@@ -25,7 +25,7 @@ assert(
 );
 ```
 
-`item5` class should have a `grid-row` property which results in it consuming the last two rows of the grid.
+La classe `item5` doit avoir une propriété `grid-row` qui fait qu'elle consomme les deux dernières lignes de la grille.
 
 ```js
 const rowStart = getComputedStyle($('.item5')[0]).gridRowStart;

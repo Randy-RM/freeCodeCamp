@@ -9,27 +9,27 @@ dashedName: use-grid-area-without-creating-an-areas-template
 
 # --description--
 
-The `grid-area` property you learned in the last challenge can be used in another way. If your grid doesn't have an areas template to reference, you can create an area on the fly for an item to be placed like this:
+La propriété `grid-area` que vous avez apprise dans le dernier défi peut être utilisée d'une autre manière. Si votre grille n'a pas de modèle de zone à référencer, vous pouvez créer une zone à la volée pour qu'un élément soit placé comme ceci :
 
 ```css
 item1 { grid-area: 1/1/2/4; }
 ```
 
-This is using the line numbers you learned about earlier to define where the area for this item will be. The numbers in the example above represent these values:
+Vous utilisez les numéros de ligne que vous avez appris précédemment pour définir l'emplacement de la zone pour cet élément. Les chiffres de l'exemple ci-dessus représentent ces valeurs :
 
 ```css
 grid-area: horizontal line to start at / vertical line to start at / horizontal line to end at / vertical line to end at;
 ```
 
-So the item in the example will consume the rows between lines 1 and 2, and the columns between lines 1 and 4.
+Ainsi, l'élément de l'exemple consommera les lignes entre les lignes 1 et 2, et les colonnes entre les lignes 1 et 4.
 
 # --instructions--
 
-Using the `grid-area` property, place the element with `item5` class between the third and fourth horizontal lines and between the first and fourth vertical lines.
+En utilisant la propriété `grid-area`, placez l'élément avec la classe `item5` entre les troisième et quatrième lignes horizontales et entre les première et quatrième lignes verticales.
 
 # --hints--
 
-The `item5` class should have a `grid-area` property to make it fill the whole area between the third and fourth horizontal lines, and first and fourth vertical lines.
+La classe `item5` devrait avoir une propriété `grid-area` pour qu'elle remplisse toute la zone entre les troisième et quatrième lignes horizontales, et les première et quatrième lignes verticales.
 
 ```js
 assert(

@@ -9,15 +9,15 @@ dashedName: align-all-items-horizontally-using-justify-items
 
 # --description--
 
-Sometimes you want all the items in your CSS Grid to share the same alignment. You can use the previously learned properties and align them individually, or you can align them all at once horizontally by using `justify-items` on your grid container. This property can accept all the same values you learned about in the previous two challenges, the difference being that it will move **all** the items in our grid to the desired alignment.
+Parfois, vous souhaitez que tous les éléments de votre grille CSS partagent le même alignement. Vous pouvez utiliser les propriétés apprises précédemment et les aligner individuellement, ou vous pouvez les aligner tous en même temps horizontalement en utilisant `justify-items` sur votre conteneur de grille. Cette propriété peut accepter toutes les valeurs que vous avez apprises dans les deux défis précédents, la différence étant qu'elle déplacera **all** les éléments de notre grille vers l'alignement souhaité.
 
 # --instructions--
 
-Use this property to center all our items horizontally.
+Utilisez cette propriété pour centrer tous nos éléments horizontalement.
 
 # --hints--
 
-`container` class should have a `justify-items` property that has the value of `center`.
+La classe `container` doit avoir une propriété `justify-items` dont la valeur est `center`.
 
 ```js
 assert(
