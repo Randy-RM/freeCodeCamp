@@ -1,6 +1,6 @@
 ---
 id: 587d78ab367417b2b2512af2
-title: Use the flex-direction Property to Make a Row
+title: Utiliser la propriété flex-direction pour constituer une rangée
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVaDAv/cBEkbfJ'
 forumTopicId: 301110

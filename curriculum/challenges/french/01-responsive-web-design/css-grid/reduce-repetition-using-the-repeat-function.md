@@ -1,6 +1,6 @@
 ---
 id: 5a94fe3669fb03452672e45f
-title: Reduce Repetition Using the repeat Function
+title: Réduire les répétitions à l'aide de la fonction repeat
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pByETK/cQvqyHR'
 forumTopicId: 301133

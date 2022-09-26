@@ -1,6 +1,6 @@
 ---
 id: 587d774e367417b2b2512aa0
-title: Wrap Content in the article Element
+title: Envelopper le contenu dans l'élément d'article
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cPp79S3'
 forumTopicId: 301029

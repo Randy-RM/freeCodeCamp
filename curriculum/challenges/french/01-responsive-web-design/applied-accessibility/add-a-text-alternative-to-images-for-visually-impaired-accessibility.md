@@ -1,6 +1,6 @@
 ---
 id: 587d774c367417b2b2512a9c
-title: Add a Text Alternative to Images for Visually Impaired Accessibility
+title: Ajouter une alternative textuelle aux images pour l'accessibilité des malvoyants
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cPp7VfD'
 forumTopicId: 16628

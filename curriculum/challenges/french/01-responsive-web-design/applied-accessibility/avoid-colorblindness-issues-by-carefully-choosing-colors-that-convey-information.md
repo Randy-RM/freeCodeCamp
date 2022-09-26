@@ -1,8 +1,7 @@
 ---
 id: 587d778f367417b2b2512aad
 title: >-
-  Avoid Colorblindness Issues by Carefully Choosing Colors that Convey
-  Information
+  Éviter les problèmes de daltonisme en choisissant soigneusement les couleurs qui véhiculent les informations
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/c437as3'
 forumTopicId: 301011

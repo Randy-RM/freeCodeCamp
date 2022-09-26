@@ -1,6 +1,6 @@
 ---
 id: 587d78ad367417b2b2512afb
-title: Use the flex-shrink Property to Shrink Items
+title: Utiliser la propriété flex-shrink pour rétrécir des éléments
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVaDAv/cd3PBfr'
 forumTopicId: 301113

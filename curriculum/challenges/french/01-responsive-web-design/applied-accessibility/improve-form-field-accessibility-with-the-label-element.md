@@ -1,6 +1,6 @@
 ---
 id: 587d778a367417b2b2512aa6
-title: Improve Form Field Accessibility with the label Element
+title: Améliorer l'accessibilité des champs de formulaire avec l'élément label
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cGJMMAN'
 forumTopicId: 301016

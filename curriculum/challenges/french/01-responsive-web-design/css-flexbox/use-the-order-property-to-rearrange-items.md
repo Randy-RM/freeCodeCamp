@@ -1,6 +1,6 @@
 ---
 id: 587d78ae367417b2b2512aff
-title: Use the order Property to Rearrange Items
+title: Utilisez la propriété order pour réorganiser les éléments
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVaDAv/cMbvNAG'
 forumTopicId: 301116

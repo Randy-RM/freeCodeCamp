@@ -1,6 +1,6 @@
 ---
 id: 587d778e367417b2b2512aab
-title: Improve Readability with High Contrast Text
+title: Améliorer la lisibilité grâce à un texte à fort contraste
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cKb3nCq'
 forumTopicId: 301017

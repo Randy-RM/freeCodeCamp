@@ -1,6 +1,6 @@
 ---
 id: 587d778f367417b2b2512aae
-title: Give Links Meaning by Using Descriptive Link Text
+title: Donnez du sens aux liens en utilisant un texte de lien descriptif
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/c437DcV'
 forumTopicId: 301013

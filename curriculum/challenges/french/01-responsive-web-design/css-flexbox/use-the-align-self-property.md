@@ -1,6 +1,6 @@
 ---
 id: 587d78af367417b2b2512b00
-title: Use the align-self Property
+title: Utilisez la propriété align-self
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVaDAv/cMbvzfv'
 forumTopicId: 301107

@@ -1,6 +1,6 @@
 ---
 id: 5a94fe7769fb03452672e463
-title: Use Media Queries to Create Responsive Layouts
+title: Utilisez les requêtes multimédia pour créer des mises en page réactives
 challengeType: 0
 videoUrl: "https://scrimba.com/p/pByETK/cMbqeHk"
 forumTopicId: 301138

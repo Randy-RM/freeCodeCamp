@@ -1,6 +1,6 @@
 ---
 id: 5a94fe5469fb03452672e461
-title: Create Flexible Layouts Using auto-fill
+title: Créer des mises en page flexibles en utilisant le remplissage automatique
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pByETK/cmzdycW'
 forumTopicId: 301126
