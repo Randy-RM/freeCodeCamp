@@ -8,45 +8,45 @@ dashedName: build-a-technical-documentation-page
 
 # --description--
 
-**Objective:** Build a [CodePen.io](https://codepen.io) app that is functionally similar to this: <https://codepen.io/freeCodeCamp/full/NdrKKL>.
+**Objectif :** Construisez une [CodePen.io](https://codepen.io) application fonctionnellement similaire à celle-ci : <https://codepen.io/freeCodeCamp/full/NdrKKL>.
 
-Fulfill the below [user stories](https://en.wikipedia.org/wiki/User_story) and get all of the tests to pass. Give it your own personal style.
+Remplir les conditions suivantes [user stories](https://en.wikipedia.org/wiki/User_story) et faire passer tous les tests. Donnez-lui votre propre style personnel.
 
-You can use HTML, JavaScript, and CSS to complete this project. Plain CSS is recommended because that is what the lessons have covered so far and you should get some practice with plain CSS. You can use Bootstrap or SASS if you choose. Additional technologies (just for example jQuery, React, Angular, or Vue) are not recommended for this project, and using them is at your own risk. Other projects will give you a chance to work with different technology stacks like React. We will accept and try to fix all issue reports that use the suggested technology stack for this project. Happy coding!
+Vous pouvez utiliser HTML, JavaScript et CSS pour réaliser ce projet. Il est recommandé d'utiliser du CSS simple car c'est ce que les leçons ont couvert jusqu'à présent et vous devriez vous entraîner à utiliser du CSS simple. Vous pouvez utiliser Bootstrap ou SASS si vous le souhaitez. Les technologies supplémentaires (par exemple jQuery, React, Angular ou Vue) ne sont pas recommandées pour ce projet et leur utilisation est à vos risques et périls. D'autres projets vous donneront l'occasion de travailler avec différentes piles technologiques comme React. Nous accepterons et essaierons de corriger tous les rapports de problèmes qui utilisent la pile technologique suggérée pour ce projet. Bon codage !
 
-**User Story #1:** I can see a `main` element with a corresponding `id="main-doc"`, which contains the page's main content (technical documentation).
+**User Story #1:** Je peux voir un élément `main` avec un `id="main-doc"` correspondant, qui contient le contenu principal de la page (documentation technique).
 
-**User Story #2:** Within the `#main-doc` element, I can see several `section` elements, each with a class of `main-section`. There should be a minimum of 5.
+**User Story #2:** Dans l'élément `#main-doc`, je peux voir plusieurs éléments `section`, chacun avec une classe de `main-section`. Il devrait y en avoir au moins 5.
 
-**User Story #3:** The first element within each `.main-section` should be a `header` element which contains text that describes the topic of that section.
+**User Story #3:** Le premier élément de chaque `.main-section` devrait être un élément `header` qui contient un texte décrivant le sujet de cette section.
 
-**User Story #4:** Each `section` element with the class of `main-section` should also have an id that corresponds with the text of each `header` contained within it. Any spaces should be replaced with underscores (e.g. The `section` that contains the header "JavaScript and Java" should have a corresponding `id="JavaScript_and_Java"`).
+**User Story #4:** Chaque élément `section` avec la classe `main-section` devrait aussi avoir un id qui correspond au texte de chaque `header` qu'il contient. Les espaces doivent être remplacés par des traits de soulignement (par exemple, la `section` qui contient l'en-tête "JavaScript et Java" doit avoir un `id="JavaScript_et_Java"` correspondant).
 
-**User Story #5:** The `.main-section` elements should contain at least 10 `p` elements total (not each).
+**User Story #5:** Les éléments `.main-section` devraient contenir au moins 10 éléments `p` au total (pas chacun).
 
-**User Story #6:** The `.main-section` elements should contain at least 5 `code` elements total (not each).
+**User Story #6:** Les éléments `.main-section` devraient contenir au total au moins 5 éléments `code` (pas chacun).
 
-**User Story #7:** The `.main-section` elements should contain at least 5 `li` items total (not each).
+**User Story #7:** Les éléments `.main-section` devraient contenir au total au moins 5 éléments `li` (pas chacun).
 
-**User Story #8:** I can see a `nav` element with a corresponding `id="navbar"`.
+**User Story #8:** Je peux voir un élément `nav` avec un `id="navbar"` correspondant.
 
-**User Story #9:** The navbar element should contain one `header` element which contains text that describes the topic of the technical documentation.
+**User Story #9:** L'élément navbar doit contenir un élément `header` qui contient un texte décrivant le sujet de la documentation technique.
 
-**User Story #10:** Additionally, the navbar should contain link (`a`) elements with the class of `nav-link`. There should be one for every element with the class `main-section`.
+**User Story #10:** En outre, la barre de navigation doit contenir des éléments de lien (`a`) avec la classe `nav-link`. Il devrait y en avoir un pour chaque élément avec la classe `main-section`.
 
-**User Story #11:** The `header` element in the navbar must come before any link (`a`) elements in the navbar.
+**User Story #11:** L'élément `header` de la navbar doit précéder tous les éléments de lien (`a`) de la navbar.
 
-**User Story #12:** Each element with the class of `nav-link` should contain text that corresponds to the `header` text within each `section` (e.g. if you have a "Hello world" section/header, your navbar should have an element which contains the text "Hello world").
+**User Story #12:** Chaque élément avec la classe `nav-link` doit contenir un texte qui correspond au texte de l'en-tête de chaque `section` (par exemple, si vous avez une section/en-tête "Hello world", votre navbar doit avoir un élément qui contient le texte "Hello world").
 
-**User Story #13:** When I click on a navbar element, the page should navigate to the corresponding section of the `main-doc` element (e.g. If I click on a `nav-link` element that contains the text "Hello world", the page navigates to a `section` element that has that id and contains the corresponding `header`.
+**User Story #13:** Lorsque je clique sur un élément de la barre de navigation, la page devrait naviguer vers la section correspondante de l'élément `main-doc` (par exemple, si je clique sur un élément `nav-link` qui contient le texte "Hello world", la page navigue vers un élément `section` qui a cet id et contient le `header` correspondant.
 
-**User Story #14:** On regular sized devices (laptops, desktops), the element with `id="navbar"` should be shown on the left side of the screen and should always be visible to the user.
+**User Story #14:** Sur les appareils de taille normale (ordinateurs portables, ordinateurs de bureau), l'élément avec `id="navbar"` devrait être affiché sur le côté gauche de l'écran et devrait toujours être visible pour l'utilisateur.
 
-**User Story #15:** My Technical Documentation page should use at least one media query.
+**Story d'utilisateur #15:** Ma page de documentation technique devrait utiliser au moins une media query.
 
-You can build your project by <a href='https://codepen.io/pen?template=MJjpwO' target='_blank' rel='nofollow'>using this CodePen template</a> and clicking `Save` to create your own pen. Or you can use this CDN link to run the tests in any environment you like: `https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js`
+Vous pouvez construire votre projet en <a href='https://codepen.io/pen?template=MJjpwO' target='_blank' rel='nofollow'>utilisant ce modèle CodePen</a> et en cliquant sur `Save` pour créer votre propre stylo. Ou vous pouvez utiliser ce lien CDN pour exécuter les tests dans l'environnement de votre choix : `https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js`
 
-Once you're done, submit the URL to your working project with all its tests passing.
+Une fois que vous avez terminé, soumettez l'URL de votre projet de travail avec tous ses tests réussis.
 
 # --solutions--
 

@@ -8,45 +8,45 @@ dashedName: build-a-product-landing-page
 
 # --description--
 
-**Objective:** Build a [CodePen.io](https://codepen.io) app that is functionally similar to this: <https://codepen.io/freeCodeCamp/full/RKRbwL>.
+**Objectif :** Construisez une [CodePen.io](https://codepen.io) application fonctionnellement similaire à celle-ci : <https://codepen.io/freeCodeCamp/full/RKRbwL>.
 
-Fulfill the below [user stories](https://en.wikipedia.org/wiki/User_story) and get all of the tests to pass. Give it your own personal style.
+Remplir les conditions suivantes [user stories](https://en.wikipedia.org/wiki/User_story) et faire passer tous les tests. Donnez-lui votre propre style personnel.
 
-You can use HTML, JavaScript, and CSS to complete this project. Plain CSS is recommended because that is what the lessons have covered so far and you should get some practice with plain CSS. You can use Bootstrap or SASS if you choose. Additional technologies (just for example jQuery, React, Angular, or Vue) are not recommended for this project, and using them is at your own risk. Other projects will give you a chance to work with different technology stacks like React. We will accept and try to fix all issue reports that use the suggested technology stack for this project. Happy coding!
+Vous pouvez utiliser HTML, JavaScript et CSS pour réaliser ce projet. Il est recommandé d'utiliser du CSS simple car c'est ce que les leçons ont couvert jusqu'à présent et vous devriez vous entraîner à utiliser du CSS simple. Vous pouvez utiliser Bootstrap ou SASS si vous le souhaitez. Les technologies supplémentaires (par exemple jQuery, React, Angular ou Vue) ne sont pas recommandées pour ce projet et leur utilisation est à vos risques et périls. D'autres projets vous donneront l'occasion de travailler avec différentes piles technologiques comme React. Nous accepterons et essaierons de corriger tous les rapports de problèmes qui utilisent la pile technologique suggérée pour ce projet. Bon codage !
 
-**User Story #1:** My product landing page should have a `header` element with a corresponding `id="header"`.
+**User Story #1:** Ma page d'accueil de produit devrait avoir un élément `header` avec un `id="header"` correspondant.
 
-**User Story #2:** I can see an image within the `header` element with a corresponding `id="header-img"`. A company logo would make a good image here.
+**User Story #2:** Je peux voir une image dans l'élément `header` avec un `id="header-img"` correspondant. Un logo d'entreprise ferait une bonne image ici.
 
-**User Story #3:** Within the `#header` element I can see a `nav` element with a corresponding `id="nav-bar"`.
+**User Story #3:** Dans l'élément `#header`, je peux voir un élément `nav` avec un correspondant `id="nav-bar"`.
 
-**User Story #4:** I can see at least three clickable elements inside the `nav` element, each with the class `nav-link`.
+**User Story #4:** Je peux voir au moins trois éléments cliquables dans l'élément `nav`, chacun avec la classe `nav-link`.
 
-**User Story #5:** When I click a `.nav-link` button in the `nav` element, I am taken to the corresponding section of the landing page.
+**User Story #5:** Lorsque je clique sur un bouton `.nav-link` dans l'élément `nav`, je suis amené à la section correspondante de la page de destination.
 
-**User Story #6:** I can watch an embedded product video with `id="video"`.
+**User Story #6:** Je peux regarder une vidéo de produit intégrée avec `id="video"`.
 
-**User Story #7:** My landing page has a `form` element with a corresponding `id="form"`.
+**User Story #7:** Ma page de destination comporte un élément `form` avec un `id="form"` correspondant.
 
-**User Story #8:** Within the form, there is an `input` field with `id="email"` where I can enter an email address.
+**User Story #8:** Dans le formulaire, il y a un champ `input` avec `id="email"` où je peux entrer une adresse email.
 
-**User Story #9:** The `#email` input field should have placeholder text to let the user know what the field is for.
+**User Story #9:** Le champ de saisie `#email` devrait avoir un texte de remplacement pour que l'utilisateur sache à quoi sert le champ.
 
-**User Story #10:** The `#email` input field uses HTML5 validation to confirm that the entered text is an email address.
+**User Story #10:** Le champ de saisie `#email` utilise la validation HTML5 pour confirmer que le texte saisi est une adresse électronique.
 
-**User Story #11:** Within the form, there is a submit `input` with a corresponding `id="submit"`.
+**User Story #11:** Dans le formulaire, il y a un `input` submit avec un `id="submit"` correspondant.
 
-**User Story #12:** When I click the `#submit` element, the email is submitted to a static page (use this mock URL: <https://www.freecodecamp.com/email-submit>).
+**User Story #12:** Lorsque je clique sur l'élément `#submit`, l'email est soumis à une page statique (utilisez cette URL simulée : <https://www.freecodecamp.com/email-submit>).
 
-**User Story #13:** The navbar should always be at the top of the viewport.
+**User Story #13:** La barre de navigation devrait toujours être en haut de la fenêtre d'affichage.
 
-**User Story #14:** My product landing page should have at least one media query.
+**User Story #14:** La page de destination de mon produit devrait avoir au moins une media query.
 
-**User Story #15:** My product landing page should utilize CSS flexbox at least once.
+**User Story #15:** Ma page d'atterrissage de produit devrait utiliser le flexbox CSS au moins une fois.
 
-You can build your project by <a href='https://codepen.io/pen?template=MJjpwO' target='_blank' rel='nofollow'>using this CodePen template</a> and clicking `Save` to create your own pen. Or you can use this CDN link to run the tests in any environment you like: `https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js`
+Vous pouvez construire votre projet en <a href='https://codepen.io/pen?template=MJjpwO' target='_blank' rel='nofollow'>utilisant ce modèle CodePen</a> et en cliquant sur `Save` pour créer votre propre stylo. Ou vous pouvez utiliser ce lien CDN pour exécuter les tests dans l'environnement de votre choix : `https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js`
 
-Once you're done, submit the URL to your working project with all its tests passing.
+Une fois que vous avez terminé, soumettez l'URL de votre projet de travail avec tous ses tests réussis.
 
 # --solutions--
 

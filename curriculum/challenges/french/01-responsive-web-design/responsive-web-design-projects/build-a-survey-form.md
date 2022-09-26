@@ -8,47 +8,47 @@ dashedName: build-a-survey-form
 
 # --description--
 
-**Objective:** Build a [CodePen.io](https://codepen.io) app that is functionally similar to this: <https://codepen.io/freeCodeCamp/full/VPaoNP>.
+**Objectif :** Construisez une [CodePen.io](https://codepen.io) application fonctionnellement similaire à celle-ci : <https://codepen.io/freeCodeCamp/full/VPaoNP>.
 
-Fulfill the below [user stories](https://en.wikipedia.org/wiki/User_story) and get all of the tests to pass. Give it your own personal style.
+Remplir les conditions suivantes [user stories](https://en.wikipedia.org/wiki/User_story) et faire passer tous les tests. Donnez-lui votre propre style personnel.
 
-You can use HTML, JavaScript, and CSS to complete this project. Plain CSS is recommended because that is what the lessons have covered so far and you should get some practice with plain CSS. You can use Bootstrap or SASS if you choose. Additional technologies (just for example jQuery, React, Angular, or Vue) are not recommended for this project, and using them is at your own risk. Other projects will give you a chance to work with different technology stacks like React. We will accept and try to fix all issue reports that use the suggested technology stack for this project. Happy coding!
+Vous pouvez utiliser HTML, JavaScript et CSS pour réaliser ce projet. Il est recommandé d'utiliser du CSS simple car c'est ce que les leçons ont couvert jusqu'à présent et vous devriez vous entraîner à utiliser du CSS simple. Vous pouvez utiliser Bootstrap ou SASS si vous le souhaitez. Les technologies supplémentaires (par exemple jQuery, React, Angular ou Vue) ne sont pas recommandées pour ce projet et leur utilisation est à vos risques et périls. D'autres projets vous donneront l'occasion de travailler avec différentes piles technologiques comme React. Nous accepterons et essaierons de corriger tous les rapports de problèmes qui utilisent la pile technologique suggérée pour ce projet. Bon codage !
 
-**User Story #1:** I can see a title with `id="title"` in H1 sized text.
+**User Story #1:** Je peux voir un titre avec `id="title"` en texte de taille H1.
 
-**User Story #2:** I can see a short explanation with `id="description"` in P sized text.
+**User Story #2:** Je peux voir une courte explication avec `id="description"` dans un texte de taille P.
 
-**User Story #3:** I can see a `form` with `id="survey-form"`.
+**User Story #3:** Je peux voir un `formulaire` avec `id="survey-form"`.
 
-**User Story #4:** Inside the form element, I am required to enter my name in a field with `id="name"`.
+**User Story #4:** Dans l'élément de formulaire, je dois entrer mon nom dans un champ avec `id="name"`.
 
-**User Story #5:** Inside the form element, I am required to enter an email in a field with `id="email"`.
+**User Story #5:** A l'intérieur de l'élément de formulaire, je dois entrer une adresse électronique dans un champ avec `id="email"`.
 
-**User Story #6:** If I enter an email that is not formatted correctly, I will see an HTML5 validation error.
+**User Story #6:** Si je saisis un email qui n'est pas formaté correctement, je verrai une erreur de validation HTML5.
 
-**User Story #7:** Inside the form, I can enter a number in a field with `id="number"`.
+**User Story #7:** Dans le formulaire, je peux entrer un nombre dans un champ avec `id="nombre"`.
 
-**User Story #8:** If I enter non-numbers in the number input, I will see an HTML5 validation error.
+**User Story #8:** Si je saisis un nombre autre qu'un chiffre dans le champ de saisie, je verrai une erreur de validation HTML5.
 
-**User Story #9:** If I enter numbers outside the range of the number input, which are defined by the `min` and `max` attributes, I will see an HTML5 validation error.
+**User Story #9:** Si je saisis des nombres en dehors de la plage de saisie du nombre, qui sont définis par les attributs `min` et `max`, je verrai une erreur de validation HTML5.
 
-**User Story #10:** For the name, email, and number input fields inside the form I can see corresponding labels that describe the purpose of each field with the following ids: `id="name-label"`, `id="email-label"`, and `id="number-label"`.
+**User Story #10:** Pour les champs de saisie du nom, de l'email et du nombre à l'intérieur du formulaire, je peux voir les étiquettes correspondantes qui décrivent le but de chaque champ avec les ids suivants : `id="name-label"`, `id="email-label"`, et `id="number-label"`.
 
-**User Story #11:** For the name, email, and number input fields, I can see placeholder text that gives me a description or instructions for each field.
+**User Story #11:** Pour les champs de saisie du nom, de l'email et du numéro, je peux voir un texte de remplacement qui me donne une description ou des instructions pour chaque champ.
 
-**User Story #12:** Inside the form element, I can select an option from a dropdown that has a corresponding `id="dropdown"`.
+**User Story #12:** À l'intérieur de l'élément de formulaire, je peux sélectionner une option dans une liste déroulante à laquelle correspond un `id="dropdown"`.
 
-**User Story #13:** Inside the form element, I can select a field from one or more groups of radio buttons. Each group should be grouped using the `name` attribute.
+**User Story #13:** À l'intérieur de l'élément de formulaire, je peux sélectionner un champ dans un ou plusieurs groupes de boutons radio. Chaque groupe doit être groupé en utilisant l'attribut `name`.
 
-**User Story #14:** Inside the form element, I can select several fields from a series of checkboxes, each of which must have a `value` attribute.
+**User Story #14:** A l'intérieur de l'élément form, je peux sélectionner plusieurs champs à partir d'une série de cases à cocher, chacune devant avoir un attribut `value`.
 
-**User Story #15:** Inside the form element, I am presented with a `textarea` at the end for additional comments.
+**User Story #15:** A l'intérieur de l'élément de formulaire, on me présente un `textarea` à la fin pour des commentaires supplémentaires.
 
-**User Story #16:** Inside the form element, I am presented with a button with `id="submit"` to submit all my inputs.
+**User Story #16:** A l'intérieur de l'élément de formulaire, on me présente un bouton avec `id="submit"` pour soumettre toutes mes entrées.
 
-You can build your project by <a href='https://codepen.io/pen?template=MJjpwO' target='_blank' rel='nofollow'>using this CodePen template</a> and clicking `Save` to create your own pen. Or you can use this CDN link to run the tests in any environment you like: `https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js`
+Vous pouvez construire votre projet en <a href='https://codepen.io/pen?template=MJjpwO' target='_blank' rel='nofollow'>utilisant ce modèle CodePen</a> et en cliquant sur `Save` pour créer votre propre stylo. Ou vous pouvez utiliser ce lien CDN pour exécuter les tests dans l'environnement de votre choix : `https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js`
 
-Once you're done, submit the URL to your working project with all its tests passing.
+Une fois que vous avez terminé, soumettez l'URL de votre projet de travail avec tous ses tests réussis.
 
 # --solutions--
 

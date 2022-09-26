@@ -8,37 +8,37 @@ dashedName: build-a-personal-portfolio-webpage
 
 # --description--
 
-**Objective:** Build a [CodePen.io](https://codepen.io) app that is functionally similar to this: <https://codepen.io/freeCodeCamp/full/zNBOYG>.
+**Objectif :**Construisez une [CodePen.io](https://codepen.io) application fonctionnellement similaire à celle-ci : <https://codepen.io/freeCodeCamp/full/zNBOYG>.
 
-Fulfill the below [user stories](https://en.wikipedia.org/wiki/User_story) and get all of the tests to pass. Give it your own personal style.
+Remplir les conditions suivantes [user stories](https://en.wikipedia.org/wiki/User_story) et faire passer tous les tests. Donnez-lui votre propre style personnel.
 
-You can use HTML, JavaScript, and CSS to complete this project. Plain CSS is recommended because that is what the lessons have covered so far and you should get some practice with plain CSS. You can use Bootstrap or SASS if you choose. Additional technologies (just for example jQuery, React, Angular, or Vue) are not recommended for this project, and using them is at your own risk. Other projects will give you a chance to work with different technology stacks like React. We will accept and try to fix all issue reports that use the suggested technology stack for this project. Happy coding!
+Vous pouvez utiliser HTML, JavaScript et CSS pour réaliser ce projet. Il est recommandé d'utiliser du CSS simple car c'est ce que les leçons ont couvert jusqu'à présent et vous devriez vous entraîner à utiliser du CSS simple. Vous pouvez utiliser Bootstrap ou SASS si vous le souhaitez. Les technologies supplémentaires (par exemple jQuery, React, Angular ou Vue) ne sont pas recommandées pour ce projet et leur utilisation est à vos risques et périls. D'autres projets vous donneront l'occasion de travailler avec différentes piles technologiques comme React. Nous accepterons et essaierons de corriger tous les rapports de problèmes qui utilisent la pile technologique suggérée pour ce projet. Bon codage !
 
-**User Story #1:** My portfolio should have a welcome section with an id of `welcome-section`.
+**User Story #1:** Mon portfolio doit avoir une section de bienvenue avec un id de `welcome-section`.
 
-**User Story #2:** The welcome section should have an `h1` element that contains text.
+**User Story #2:** La section de bienvenue devrait avoir un élément `h1` qui contient du texte.
 
-**User Story #3:** My portfolio should have a projects section with an id of `projects`.
+**User Story #3:** Mon portfolio devrait avoir une section projets avec un id de `projects`.
 
-**User Story #4:** The projects section should contain at least one element with a class of `project-tile` to hold a project.
+**User Story #4:** La section projects devrait contenir au moins un élément avec une classe de `project-tile` pour contenir un projet.
 
-**User Story #5:** The projects section should contain at least one link to a project.
+**User Story #5:** La section projects devrait contenir au moins un lien vers un projet.
 
-**User Story #6:** My portfolio should have a navbar with an id of `navbar`.
+**User Story #6:** Mon portfolio devrait avoir une barre de navigation avec un id de `navbar`.
 
-**User Story #7:** The navbar should contain at least one link that I can click on to navigate to different sections of the page.
+**User Story #7:** La barre de navigation doit contenir au moins un lien sur lequel je peux cliquer pour naviguer vers différentes sections de la page.
 
-**User Story #8:** My portfolio should have a link with an id of `profile-link`, which opens my GitHub or FCC profile in a new tab.
+**User Story #8:** Mon portfolio devrait avoir un lien avec un id de `profile-link`, qui ouvre mon profil GitHub ou FCC dans un nouvel onglet.
 
-**User Story #9:** My portfolio should have at least one media query.
+**User Story #9:** Mon portfolio devrait avoir au moins une media query.
 
-**User Story #10:** The height of the welcome section should be equal to the height of the viewport.
+**User Story #10:** La hauteur de la section de bienvenue devrait être égale à la hauteur du viewport.
 
-**User Story #11:** The navbar should always be at the top of the viewport.
+**User Story #11:** La barre de navigation doit toujours être en haut de la fenêtre.
 
-You can build your project by <a href='https://codepen.io/pen?template=MJjpwO' target='_blank' rel='nofollow'>using this CodePen template</a> and clicking `Save` to create your own pen. Or you can use this CDN link to run the tests in any environment you like: `https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js`
+Vous pouvez construire votre projet en <a href='https://codepen.io/pen?template=MJjpwO' target='_blank' rel='nofollow'>utilisant ce modèle CodePen</a> et en cliquant sur `Save` pour créer votre propre stylo. Ou vous pouvez utiliser ce lien CDN pour exécuter les tests dans l'environnement de votre choix : `https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js`
 
-Once you're done, submit the URL to your working project with all its tests passing.
+Une fois que vous avez terminé, soumettez l'URL de votre projet de travail avec tous ses tests réussis.
 
 # --solutions--
 
