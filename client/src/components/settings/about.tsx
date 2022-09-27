@@ -163,29 +163,29 @@ class AboutSettings extends Component<AboutProps, AboutState> {
     }));
   };
 
-  focusHandlerName = (e: React.FocusEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value.slice(0);
+  // focusHandlerName = (e: React.FocusEvent<HTMLInputElement>) => {
+  //   const value = (e.target as HTMLInputElement).value.slice(0);
 
-    if (
-      validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
-      validator.isLength(value, { min: 5, max: 255 })
-    ) {
-      this.setState({
-        isValidName: true,
-        isFocusName: true,
-        isBlurName: false
-      });
-    } else {
-      this.setState({
-        isValidName: false,
-        isFocusName: true,
-        isBlurName: false
-      });
-    }
-  };
+  //   if (
+  //     validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
+  //     validator.isLength(value, { min: 5, max: 255 })
+  //   ) {
+  //     this.setState({
+  //       isValidName: true,
+  //       isFocusName: true,
+  //       isBlurName: false
+  //     });
+  //   } else {
+  //     this.setState({
+  //       isValidName: false,
+  //       isFocusName: true,
+  //       isBlurName: false
+  //     });
+  //   }
+  // };
 
   blurHandlerName = (e: React.FocusEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value.slice(0);
+    const value = (e.target as HTMLInputElement).value.slice(0).trim();
 
     if (
       validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
@@ -193,13 +193,13 @@ class AboutSettings extends Component<AboutProps, AboutState> {
     ) {
       this.setState({
         isValidName: true,
-        isFocusName: false,
+        // isFocusName: false,
         isBlurName: true
       });
     } else {
       this.setState({
         isValidName: false,
-        isFocusName: false,
+        // isFocusName: false,
         isBlurName: true
       });
     }
@@ -300,7 +300,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
   focusHandlerAbout = (e: React.FocusEvent<HTMLInputElement>) => {
     const value = (e.target as HTMLInputElement).value.slice(0);
 
-    if (validator.isLength(value, { max: 300 })) {
+    if (validator.isLength(value, { min: 5, max: 300 })) {
       this.setState({
         isValidAbout: true,
         isFocusAbout: true,
@@ -360,11 +360,12 @@ class AboutSettings extends Component<AboutProps, AboutState> {
                 <strong>{'Nom complet'}</strong>
               </ControlLabel>
               <FormControl
-                onFocus={this.focusHandlerName}
+                // onFocus={this.focusHandlerName}
                 onBlur={this.blurHandlerName}
                 onChange={this.handleNameChange}
                 type='text'
                 value={name}
+                placeholder='Jean-Louis Mbaka'
               />
 
               {!isFocusName && !isBlurName && isValidName && (
@@ -393,11 +394,12 @@ class AboutSettings extends Component<AboutProps, AboutState> {
                 <strong>{'Adresse'}</strong>
               </ControlLabel>
               <FormControl
-                onFocus={this.focusHandlerLocation}
+                // onFocus={this.focusHandlerLocation}
                 onBlur={this.blurHandlerLocation}
                 onChange={this.handleLocationChange}
                 type='text'
                 value={location}
+                placeholder='63, av. Colonel Mondjiba, Ngaliema - Kinshasa'
               />
               {!isFocusLocation && !isBlurLocation && isValidLocation && (
                 <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
@@ -442,7 +444,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
 
             <FormGroup controlId='about-code'>
               <ControlLabel>
-                <strong>{'Code depuis quand'}</strong>
+                <strong>{'Depuis quand codez-vous?'}</strong>
               </ControlLabel>
               <FormControl
                 onChange={this.handleCodeTimeChange}
@@ -461,11 +463,11 @@ class AboutSettings extends Component<AboutProps, AboutState> {
 
             <FormGroup controlId='about-about'>
               <ControlLabel>
-                <strong>{'Apropos'}</strong>
+                <strong>{'A propos'}</strong>
               </ControlLabel>
               <FormControl
                 componentClass='textarea'
-                onFocus={this.focusHandlerAbout}
+                // onFocus={this.focusHandlerAbout}
                 onBlur={this.blurHandlerAbout}
                 onChange={this.handleAboutChange}
                 value={about}
