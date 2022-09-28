@@ -158,7 +158,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
         name: value
       },
       isValidName:
-        validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
+        validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
         validator.isLength(value, { min: 5, max: 255 })
     }));
   };
@@ -188,7 +188,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
     const value = (e.target as HTMLInputElement).value.slice(0).trim();
 
     if (
-      validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
+      validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
       validator.isLength(value, { min: 5, max: 255 })
     ) {
       this.setState({
