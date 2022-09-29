@@ -15,7 +15,7 @@ Vous avez probablement déjà vu un attribut `alt` sur une balise `img` dans d'a
 <img src="importantLogo.jpeg" alt="Company logo">
 ```
 
-Les personnes souffrant de problèmes de vue utilisent des lecteurs d'écran pour convertir le contenu du Web en une interface audio. Elles n'obtiendront pas les informations si elles ne sont présentées que visuellement. Pour les images, les lecteurs d'écran peuvent accéder à l'attribut `alt` et lire son contenu pour fournir des informations clés.
+Les personnes malvoyantes utilisent des lecteurs d'écran pour convertir le contenu du Web en une interface audio. Elles n'obtiendront pas les informations si elles ne sont présentées que visuellement. Pour les images, les lecteurs d'écran peuvent accéder à l'attribut `alt` et lire son contenu pour fournir des informations clés.
 
 Un bon texte `alt` fournit au lecteur une brève description de l'image. Vous devez toujours inclure un attribut `alt` sur votre image. Conformément à la spécification HTML5, cet attribut est désormais considéré comme obligatoire.
 
