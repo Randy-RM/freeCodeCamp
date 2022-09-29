@@ -19,7 +19,7 @@ Voici un exemple :
 
 # --instructions--
 
-es résultats du sondage de Camper Cat sur Mortal Kombat sont arrivés ! Enveloppez le texte d'une balise `time`.
+Les résultats du sondage de Camper Cat sur Mortal Kombat sont arrivés ! Enveloppez le texte d'une balise `time`.
  `Thursday, September 15<sup>th</sup>` et ajouter l'attribut `datetime` pour le fixer à `2016-09-15`.
 
 # --hints--
