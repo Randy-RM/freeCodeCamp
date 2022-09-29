@@ -2,66 +2,66 @@
   "responsive-web-design": {
     "title": "Responsive Web Design",
     "intro": [
-      "Dans ce cours de Responsive Web Design, vous apprendrez les langages que les développeurs utilisent pour créer des pages Web : HTML (Hypertext Markup Language) pour le contenu, et CSS (Cascading Style Sheets) pour la conception.",
-      "Tout d'abord, vous construirez une application de photos de chats pour apprendre les bases du HTML et du CSS. Ensuite, vous apprendrez des techniques modernes comme les variables CSS en construisant un pingouin, et les meilleures pratiques en matière d'accessibilité en construisant un formulaire Web.",
-      "Enfin, vous apprendrez à créer des pages Web qui s'adaptent à différentes tailles d'écran en créant une carte Twitter avec Flexbox et une mise en page de blog complexe avec CSS Grid."
+      "In this Responsive Web Design Certification, you'll learn the languages that developers use to build webpages: HTML (Hypertext Markup Language) for content, and CSS (Cascading Style Sheets) for design.",
+      "First, you'll build a cat photo app to learn the basics of HTML and CSS. Later, you'll learn modern techniques like CSS variables by building a penguin, and best practices for accessibility by building a web form.",
+      "Finally, you'll learn how to make webpages that respond to different screen sizes by building a Twitter card with Flexbox, and a complex blog layout with CSS Grid."
     ],
-    "note": "Remarque : certaines extensions de navigateur, telles que les bloqueurs de publicité et les extensions de mode sombre, peuvent interférer avec les tests. Si vous rencontrez des problèmes, nous vous recommandons de désactiver les extensions qui modifient le contenu ou la présentation des pages, tout en suivant le cours.",
+    "note": "Note: Some browser extensions, such as ad-blockers and dark mode extensions can interfere with the tests. If you face issues, we recommend disabling extensions that modify the content or layout of pages, while taking the course.",
     "blocks": {
       "basic-html-and-html5": {
-        "title": "Basique HTML et HTML5",
+        "title": "Basic HTML and HTML5",
         "intro": [
-          "Le HTML est un langage de balisage qui utilise une syntaxe ou une notation spéciale pour décrire la structure d'une page Web au navigateur. Les éléments HTML ont généralement des balises d'ouverture et de fermeture qui entourent et donnent un sens au contenu. Par exemple, différents éléments peuvent décrire un texte comme un titre, un paragraphe ou un élément de liste.",
-          "Dans ce cours, vous construirez une application de photos de chats afin d'apprendre certains des éléments HTML les plus courants, qui constituent la base de toute page Web."
+          "HTML is a markup language that uses a special syntax or notation to describe the structure of a webpage to the browser. HTML elements usually have opening and closing tags that surround and give meaning to content. For example, different elements can describe text as a heading, paragraph, or list item.",
+          "In this course, you'll build a cat photo app to learn some of the most common HTML elements — the building blocks of any webpage."
         ]
       },
       "basic-css": {
-        "title": "Basique CSS",
+        "title": "Basic CSS",
         "intro": [
-          "Le CSS, ou feuilles de style en cascade, indiquent au navigateur comment afficher le texte et les autres contenus que vous écrivez en HTML. Avec le CSS, vous pouvez contrôler la couleur, la police, la taille, l'espacement et de nombreux autres aspects des éléments HTML.",
-          "Maintenant que vous avez décrit la structure de votre application de photos de chats, donnez-lui du style avec le CSS."
+          "CSS, or Cascading Style Sheets, tell the browser how to display the text and other content that you write in HTML. With CSS, you can control the color, font, size, spacing, and many other aspects of HTML elements.",
+          "Now that you've described the structure of your cat photo app, give it some style with CSS."
         ]
       },
       "applied-visual-design": {
-        "title": "Design visuel appliqué",
+        "title": "Applied Visual Design",
         "intro": [
-          "La conception visuelle est une combinaison de la typographie, de la théorie des couleurs, du graphisme, de l'animation, de la mise en page et d'autres éléments pour vous aider à transmettre votre message unique.",
-          "Dans ce cours, vous apprendrez à appliquer différents éléments de conception visuelle à vos pages Web."
+          "Visual design is a combination of typography, color theory, graphics, animation, page layout, and more to help deliver your unique message.",
+          "In this course, you'll learn how to apply these different elements of visual design to your webpages."
         ]
       },
       "applied-accessibility": {
-        "title": "Accessibilité appliquée",
+        "title": "Applied Accessibility",
         "intro": [
-          "Dans le domaine du développement Web, l'accessibilité fait référence à un contenu Web et à une interface utilisateur (IU) qui peuvent être compris, navigués et utilisés par un large public. Cela inclut les personnes souffrant de handicaps visuels, auditifs, de mobilité ou cognitifs.",
-          "Dans ce cours, vous apprendrez les meilleures pratiques pour créer des pages Web accessibles à tous."
+          "In web development, accessibility refers to web content and a UI (user interface) that can be understood, navigated, and interacted with by a broad audience. This includes people with visual, auditory, mobility, or cognitive disabilities.",
+          "In this course, you'll learn best practices for building webpages that are accessible to everyone."
         ]
       },
       "responsive-web-design-principles": {
-        "title": "Principes du Responsive Web Design",
+        "title": "Responsive Web Design Principles",
         "intro": [
-          "De nombreux appareils peuvent accéder au web, et ils sont de toutes formes et de toutes tailles. Le responsive web design est la pratique consistant à concevoir des sites web flexibles qui peuvent répondre à différentes tailles, orientations et résolutions d'écran.",
-          "Dans ce cours, vous apprendrez à utiliser les feuilles de style en cascade (CSS) pour améliorer l'apparence de vos pages Web, quel que soit l'appareil sur lequel elles sont affichées."
+          "There are many devices that can access the web, and they come in all shapes and sizes. Responsive web design is the practice of designing flexible websites that can respond to different screen sizes, orientations, and resolutions.",
+          "In this course, you'll learn how to use CSS to make your webpages look good, no matter what device they're viewed on."
         ]
       },
       "css-flexbox": {
         "title": "CSS Flexbox",
         "intro": [
-          "Flexbox est une méthode de mise en page puissante et bien supportée qui a été introduite avec la dernière version de CSS, CSS3. Avec flexbox, il est facile de centrer les éléments sur la page et de créer des interfaces utilisateur dynamiques qui se rétrécissent et s'étendent automatiquement.",
-          "Dans ce cours, vous apprendrez les principes fondamentaux de la flexbox et des mises en page dynamiques en créant une carte Twitter."
+          "Flexbox is a powerful, well-supported layout method that was introduced with the latest version of CSS, CSS3. With flexbox, it's easy to center elements on the page and create dynamic user interfaces that shrink and expand automatically.",
+          "In this course, you'll learn the fundamentals of flexbox and dynamic layouts by building a Twitter card."
         ]
       },
       "css-grid": {
         "title": "CSS Grid",
         "intro": [
-          "La grille CSS est une nouvelle norme qui facilite la création de mises en page complexes et réactives. Elle transforme un élément HTML en une grille et vous permet de placer des éléments enfants n'importe où à l'intérieur.",
-          "Dans ce cours, vous apprendrez les principes fondamentaux de la grille CSS en construisant différentes mises en page complexes, dont un blog."
+          "The CSS grid is a newer standard that makes it easy to build complex responsive layouts. It works by turning an HTML element into a grid, and lets you place child elements anywhere within.",
+          "In this course, you'll learn the fundamentals of CSS grid by building different complex layouts, including a blog."
         ]
       },
       "responsive-web-design-projects": {
-        "title": "Projets de Responsive Web Design",
+        "title": "Responsive Web Design Projects",
         "intro": [
-          "Il est temps de mettre en pratique les compétences que vous venez d'acquérir. En travaillant sur ces projets, vous aurez l'occasion d'appliquer l'ensemble des compétences, principes et concepts que vous avez appris jusqu'à présent : HTML, CSS, conception visuelle, accessibilité, etc.",
-          "Réalisez les cinq projets de programmation web ci-dessous pour obtenir votre certification Responsive Web Design."
+          "Time to put your newly learnt skills to work. By working on these projects, you will get a chance to apply all of the skills, principles, and concepts you have learned so far: HTML, CSS, Visual Design, Accessibility, and more.",
+          "Complete the five web programming projects below to earn your Responsive Web Design certification."
         ]
       }
     }
