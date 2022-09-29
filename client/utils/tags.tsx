@@ -8,7 +8,7 @@ const { homeLocation } = env;
 
 export function getheadTagComponents(): JSX.Element[] {
   const socialImage =
-    'https://kda-certificats.s3.eu-west-3.amazonaws.com/kda_learning_plateform_landing_logo_c24451c4eb.png';
+    'https://kda-cms-develop.ams3.digitaloceanspaces.com/kda-learning-platform/kda-learning-platform-landing-logo%20%281%29.png';
 
   const pathToBootstrap = withPrefix('/css/bootstrap.min.css');
 
