@@ -15,7 +15,7 @@ Il existe plusieurs formes de daltonisme. Elles peuvent aller d'une sensibilité
 
 Par exemple, si deux couleurs vertes similaires constituent la couleur d'avant-plan et d'arrière-plan de votre contenu, un utilisateur daltonien peut ne pas être en mesure de les distinguer. Les couleurs proches peuvent être considérées comme des voisines sur la roue chromatique, et ces combinaisons doivent être évitées lorsque vous transmettez des informations importantes.
 
-**Note:** certains outils de sélection des couleurs en ligne comprennent des simulations visuelles de l'apparence des couleurs pour différents types de daltonisme. Ce sont d'excellentes ressources en plus des calculateurs de contraste en ligne.
+**Note:** Certains outils de sélection des couleurs en ligne comprennent des simulations visuelles de l'apparence des couleurs pour différents types de daltonisme. Ce sont d'excellentes ressources en plus des calculateurs de contraste en ligne.
 
 # --instructions--
 
