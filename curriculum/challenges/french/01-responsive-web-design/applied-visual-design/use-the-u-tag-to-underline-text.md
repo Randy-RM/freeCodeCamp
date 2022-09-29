@@ -68,7 +68,7 @@ assert($("u").text() === "Ph.D. students");
       <h4>Google</h4>
       <p>
         Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient
-        étudiants en doctorat à <strong>l'université de Stanford</strong>.
+        Ph.D. students à <strong>l'université de Stanford</strong>.
       </p>
     </div>
     <div class="cardLinks">
@@ -124,7 +124,7 @@ assert($("u").text() === "Ph.D. students");
       <h4>Google</h4>
       <p>
         Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient
-        <u>étudiants en doctorat</u> à 
+        <u>Ph.D. students</u> à 
         <strong>l'université de Stanford</strong>.
       </p>
     </div>
