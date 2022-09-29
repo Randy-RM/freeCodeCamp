@@ -9,17 +9,17 @@ dashedName: wrap-content-in-the-article-element
 
 # --description--
 
-`article` is another one of the new HTML5 elements that add semantic meaning to your markup. `article` is a sectioning element and is used to wrap independent, self-contained content. The tag works well with blog entries, forum posts, or news articles.
+`article` est un autre des nouveaux éléments HTML5 qui ajoutent une signification sémantique à votre balisage. La balise `article` est un élément de sectionnement et est utilisée pour envelopper un contenu indépendant et autonome. La balise fonctionne bien avec les entrées de blog, les messages de forum ou les articles d'actualité.
 
-Determining whether content can stand alone is usually a judgment call, but you can use a couple of simple tests. Ask yourself if you removed all surrounding context, would that content still make sense? Similarly, for text, would the content hold up if it were in an RSS feed?
+Déterminer si un contenu peut être autonome est généralement une question de jugement, mais vous pouvez utiliser quelques tests simples. Demandez-vous si, en supprimant tout le contexte environnant, ce contenu aurait encore un sens. De même, pour le texte, le contenu tiendrait-il la route s'il se trouvait dans un flux RSS ?
 
-Remember that folks using assistive technologies rely on organized, semantically meaningful markup to better understand your work.
+N'oubliez pas que les personnes utilisant des technologies d'assistance comptent sur un balisage organisé et sémantiquement significatif pour mieux comprendre votre travail.
 
-**Note:** The `section` element is also new with HTML5, and has a slightly different semantic meaning than `article`. An `article` is for standalone content, and a `section` is for grouping thematically related content. They can be used within each other, as needed. For example, if a book is the `article`, then each chapter is a `section`. When there's no relationship between groups of content, then use a `div`.
+**Note:** L'élément `section` est également nouveau dans HTML5, et sa signification sémantique est légèrement différente de celle de l'élément `article`. Un `article` est destiné à un contenu autonome, tandis qu'une `section` sert à regrouper un contenu thématiquement lié. Ils peuvent être utilisés l'un dans l'autre, selon les besoins. Par exemple, si un livre est un `article`, alors chaque chapitre est une `section`. S'il n'y a pas de relation entre les groupes de contenu, utilisez une `div`.
 
-`<div>` - groups content
-`<section>` - groups related content
-`<article>` - groups independent, self-contained content
+`<div>` - contenu des groupes
+`<section>` - contenu lié aux groupes
+`<article>` - regroupe des contenus indépendants et autonomes
 
 # --instructions--
 
