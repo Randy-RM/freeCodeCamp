@@ -74,7 +74,7 @@ assert(
   <div class="cardContent">
     <div class="cardText">
       <h4>Google</h4>
-      <p>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient étudiants en doctorat à l'université de Stanford</p>
+      <p>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient étudiants en doctorat à la Stanford University</p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
@@ -117,7 +117,7 @@ assert(
   <div class="cardContent">
     <div class="cardText">
       <h4>Google</h4>
-      <p>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient étudiants en doctorat à  <strong>l'université de Stanford</strong>.</p>
+      <p>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient étudiants en doctorat à  la <strong>Stanford University</strong>.</p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
