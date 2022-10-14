@@ -35,7 +35,7 @@ Voici un exemple des règles CSS qui permettent d'y parvenir:
 
 # --instructions--
 
-Camper Cat a créé un diagramme à barres empilées vraiment cool pour sa page de formation, et a mis les données dans un tableau pour ses utilisateurs malvoyants. Le tableau a déjà une classe `sr-only`, mais les règles CSS ne sont pas encore remplies. Donnez à la " position " une valeur " absolue ", à la " gauche " une valeur " 10000px ", et à la " largeur " et à la " hauteur " des valeurs " 1px ".
+Camper Cat a créé un diagramme à barres empilées vraiment cool pour sa page de formation, et a mis les données dans un tableau pour ses utilisateurs malvoyants. Le tableau a déjà une classe `sr-only`, mais les règles CSS ne sont pas encore remplies. Donnez à la `position` une valeur `absolute`, à  `left`  une valeur `-10000px`, et à la `width` et à la `height` des valeurs `1px`.
 
 # --hints--
 

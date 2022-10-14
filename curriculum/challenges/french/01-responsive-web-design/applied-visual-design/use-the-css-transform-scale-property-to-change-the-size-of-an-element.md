@@ -19,11 +19,11 @@ p {
 
 # --instructions--
 
-Augmente la taille de l'élément avec l'id de `ball2` à 1,5 fois sa taille originale.
+Augmente la taille de l'élément avec l'id de `ball2` à 1.5 fois sa taille originale.
 
 # --hints--
 
-La propriété `transform` de `#ball2` doit être définie de façon à ce que sa taille soit 1,5 fois plus grande.
+La propriété `transform` de `#ball2` doit être définie de façon à ce que sa taille soit 1.5 fois plus grande.
 
 ```js
 assert(

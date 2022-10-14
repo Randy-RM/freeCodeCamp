@@ -1,6 +1,6 @@
 ---
 id: 587d78ac367417b2b2512af5
-title: Appliquer la propriété flex-direction pour créer une colonne dans l'incorporation de Tweet
+title: Utiliser la propriété flex-direction pour créer une colonne dans le Tweet embarqué
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVaDAv/cnzdVC9'
 forumTopicId: 301103
@@ -9,7 +9,7 @@ dashedName: apply-the-flex-direction-property-to-create-a-column-in-the-tweet-em
 
 # --description--
 
-Les éléments `header` et `footer` du tweet ont utilisé la propriété `flex-direction` précédemment avec une valeur de ligne. De même, les éléments contenus dans l'élément `.profile-name` fonctionneraient bien empilés en tant que colonne.
+Les éléments `header` et `footer` du tweet ont utilisé la propriété `flex-direction` précédemment avec la valeur de row. De même, les éléments contenus dans l'élément `.profile-name` fonctionneraient bien empilés si on les empilait en colonne.
 
 # --instructions--
 

@@ -1,6 +1,6 @@
 ---
 id: 587d78ab367417b2b2512af2
-title: Utiliser la propriété flex-direction pour constituer une rangée
+title: Utiliser la propriété flex-direction pour constituer une ligne
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVaDAv/cBEkbfJ'
 forumTopicId: 301110
@@ -9,7 +9,7 @@ dashedName: use-the-flex-direction-property-to-make-a-row
 
 # --description--
 
-L'ajout de `display : flex` à un élément le transforme en un conteneur flex. Cela permet d'aligner les enfants de cet élément en rangées ou en colonnes. Pour ce faire, ajoutez la propriété `flex-direction` à l'élément parent et attribuez-lui la valeur row ou column. Si vous créez une ligne, les enfants seront alignés horizontalement, et si vous créez une colonne, les enfants seront alignés verticalement.
+L'ajout de `display : flex` à un élément le transforme en un conteneur flex. Cela permet de disposer les enfants de cet élément en lignes ou en colonnes. Pour ce faire, ajoutez la propriété `flex-direction` à l'élément parent et attribuez-lui la valeur row ou column. Si vous créez une ligne, les enfants seront alignés horizontalement, et si vous créez une colonne, les enfants seront alignés verticalement.
 
 Les autres options pour `flex-direction` sont `row-reverse` et `column-reverse`.
 

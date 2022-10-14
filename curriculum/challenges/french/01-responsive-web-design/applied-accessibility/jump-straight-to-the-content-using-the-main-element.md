@@ -9,7 +9,7 @@ dashedName: jump-straight-to-the-content-using-the-main-element
 
 # --description--
 
-HTML5 a introduit plusieurs nouveaux éléments qui offrent aux développeurs davantage d'options tout en intégrant des fonctions d'accessibilité. Ces balises sont, entre autres, `main`, `header`, `footer`, `nav`, `article` et `section`.
+Le HTML5 a introduit plusieurs nouveaux éléments qui offrent aux développeurs davantage d'options tout en intégrant des fonctions d'accessibilité. Ces balises sont, entre autres, `main`, `header`, `footer`, `nav`, `article` et `section`.
 
 Par défaut, un navigateur rend ces éléments comme l'humble `div`. Cependant, leur utilisation, le cas échéant, donne une signification supplémentaire à votre balisage. Le nom de la balise peut à lui seul indiquer le type d'information qu'elle contient, ce qui ajoute une signification sémantique à ce contenu. Les technologies d'assistance peuvent accéder à ces informations pour fournir un meilleur résumé de la page ou des options de navigation à leurs utilisateurs.
 

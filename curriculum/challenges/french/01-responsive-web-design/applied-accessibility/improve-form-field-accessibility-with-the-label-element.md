@@ -13,7 +13,7 @@ L'amélioration de l'accessibilité grâce au balisage HTML sémantique s'appliq
 
 La balise `label` enveloppe le texte d'un élément de contrôle de formulaire spécifique, généralement le nom ou l'étiquette d'un choix. Cela donne un sens à l'élément et rend le formulaire plus lisible. L'attribut `for` d'une balise `label` associe explicitement cette balise `label` au contrôle de formulaire et est utilisé par les lecteurs d'écran.
 
-Vous avez appris à connaître les boutons radio et leurs étiquettes dans une leçon de la section HTML de base. Dans cette leçon, nous avons enveloppé l'élément d'entrée du bouton radio dans un élément `label` avec le texte de l'étiquette afin de rendre le texte cliquable. Une autre façon d'y parvenir est d'utiliser l'attribut `for`, comme expliqué dans cette leçon.
+Vous avez étudié les boutons radio et leurs étiquettes dans une leçon de la section HTML de base. Dans cette leçon, nous avons enveloppé le bouton radio dans un élément label avec le texte du `label` afin de rendre le texte cliquable. Une autre façon d'y parvenir est d'utiliser l'attribut `for`, comme expliqué dans cette leçon.
 
 La valeur de l'attribut `for` doit être la même que celle de l'attribut `id` du contrôle de formulaire. Voici un exemple:
 

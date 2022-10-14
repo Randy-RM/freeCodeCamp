@@ -1,6 +1,6 @@
 ---
 id: 587d78ab367417b2b2512af3
-title: Appliquer la propriété flex-direction pour créer des rangées dans l'incorporation de Tweet
+title: Utiliser la propriété flex-direction pour créer des lignes dans le Tweet embarqué
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVaDAv/cJb8yuq'
 forumTopicId: 301104
@@ -9,7 +9,7 @@ dashedName: apply-the-flex-direction-property-to-create-rows-in-the-tweet-embed
 
 # --description--
 
-Les éléments `header` et `footer` de l'exemple d'intégration d'un tweet ont des éléments enfants qui pourraient être disposés en rangées en utilisant la propriété `flex-direction`. Celle-ci indique à CSS d'aligner les enfants horizontalement.
+Les éléments `header` et le `footer` de l'exemple du tweet embarqué ont des éléments enfants qui pourraient être disposés en lignes à l'aide de la propriété `flex-direction`. Celle-ci indique à CSS d'aligner les enfants horizontalement.
 
 # --instructions--
 

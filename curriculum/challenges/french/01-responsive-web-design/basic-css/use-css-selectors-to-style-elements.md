@@ -9,7 +9,7 @@ dashedName: use-css-selectors-to-style-elements
 
 # --description--
 
-Avec CSS, il existe des centaines de propriétés CSS que vous pouvez utiliser pour modifier l'apparence d'un élément sur votre page.
+Avec le CSS, il existe des centaines de propriétés CSS que vous pouvez utiliser pour modifier l'apparence d'un élément sur votre page.
 
 Lorsque vous avez saisi `<h2 style="color : red ;">CatPhotoApp</h2>`, vous avez donné un style à cet élément `h2` individuel avec le CSS en ligne, qui signifie feuilles de style en cascade.
 
@@ -87,7 +87,7 @@ assert(
 <main>
   <p>Cliquez ici pour voir plus <a href="#">photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <div>
     <p>Les choses que les chats aiment :</p>
@@ -128,7 +128,7 @@ assert(
 <main>
   <p>Cliquez ici pour voir plus <a href="#">photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <div>
     <p>Les choses que les chats aiment :</p>

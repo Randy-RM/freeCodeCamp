@@ -25,7 +25,7 @@ Lorsque les utilisateurs cliquent sur le lien `Contacts`, ils sont dirigés vers
 
 # --instructions--
 
-Transformez votre lien externe en lien interne en remplaçant l'attribut `href` par `#footer` et le texte de `cat photos` par `Jump to Bottom`.
+Transformez votre lien externe en lien interne en remplaçant l'attribut `href` par `#footer` et le texte de `cat photos` par `Sauter au bas de la page`.
 
 Supprimez l'attribut `target="_blank"` de la balise d'ancrage, car il entraîne l'ouverture du document lié dans un nouvel onglet de fenêtre.
 
@@ -60,14 +60,14 @@ assert(
 );
 ```
 
-Le texte `a` devrait être "Jump to Bottom".
+Le texte `a` devrait être "Sauter au bas de la page".
 
 ```js
 assert(
   $('a')
     .eq(0)
     .text()
-    .match(/Jump to Bottom/gi)
+    .match(/Sauter au bas de la page/gi)
 );
 ```
 
@@ -87,7 +87,7 @@ assert($('footer').eq(0).attr('id') == 'footer');
 
   <a href="https://www.freecatphotoapp.com" target="_blank">cat photos</a>
 
-  <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back.">
+  <img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos.">
 
   <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff. Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched. Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
   <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched. Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff. Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>
@@ -105,9 +105,9 @@ assert($('footer').eq(0).attr('id') == 'footer');
 <h2>CatPhotoApp</h2>
 <main>
 
-  <a href="#footer">Jump to Bottom</a>
+  <a href="#footer">Sauter au bas de la page</a>
 
-  <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back.">
+  <img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos.">
 
   <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff. Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched. Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
   <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched. Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff. Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>

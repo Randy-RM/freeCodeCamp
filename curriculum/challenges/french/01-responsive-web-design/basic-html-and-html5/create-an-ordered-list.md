@@ -9,7 +9,7 @@ dashedName: create-an-ordered-list
 
 # --description--
 
-HTML possède un autre élément spécial pour créer des <dfn>listes ordonnées</dfn> ou des listes numérotées.
+Le HTML possède un autre élément spécial pour créer des <dfn>listes ordonnées</dfn> ou des listes numérotées.
 
 Les listes ordonnées commencent par un élément  d’ouverture `<ol>`, suivi d’un nombre quelconque d’éléments `<li>`. Enfin, les listes ordonnées sont fermées avec la balise `</ol>`.
 
@@ -30,16 +30,16 @@ Créez une liste ordonnée des trois choses que les chats détestent le plus.
 
 # --hints--
 
-Vous devriez avoir une liste ordonnée pour le `Top 3 des choses que les chats détestent`.
+Vous devriez avoir une liste ordonnée pour le `top 3 des choses que les chats détestent`.
 
 ```js
-assert(/Top 3 things cats hate:/i.test($('ol').prev().text()));
+assert(/top 3 des choses que les chats détestent :/i.test($('ol').prev().text()));
 ```
 
 Vous devriez avoir une liste non ordonnée pour les `choses que les chats aiment`.
 
 ```js
-assert(/Things cats love:/i.test($('ul').prev().text()));
+assert(/choses que les chats aiment :/i.test($('ul').prev().text()));
 ```
 
 Vous ne devez avoir qu'un seul élément `ul`.
@@ -119,7 +119,7 @@ $('ol li').each((i, val) =>
 <main>
   <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <p>Les choses que les chats aiment :</p>
   <ul>
@@ -139,7 +139,7 @@ $('ol li').each((i, val) =>
 <main>
   <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <p>Les choses que les chats aiment :</p>
   <ul>

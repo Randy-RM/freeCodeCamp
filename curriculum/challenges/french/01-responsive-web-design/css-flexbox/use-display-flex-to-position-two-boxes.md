@@ -15,7 +15,7 @@ En plaçant la propriété CSS `display : flex;` sur un élément, vous pouvez u
 
 # --instructions--
 
-Ajoutez la propriété CSS `display` à `#box-container` et définissez sa valeur sur `flex`.
+Ajoutez la propriété CSS `display` à `#box-container` et attribuez-lui la valeur `flex`.
 
 # --hints--
 

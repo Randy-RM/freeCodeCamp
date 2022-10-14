@@ -34,7 +34,7 @@ assert(
 );
 ```
 
-Votre classe `red-box` devrait donner aux éléments 1,5em de `padding`.
+Votre classe `red-box` devrait donner aux éléments `1,5em` de `padding`.
 
 ```js
 assert(code.match(/\.red-box\s*?{[\s\S]*padding\s*:\s*?1\.5em/gi));

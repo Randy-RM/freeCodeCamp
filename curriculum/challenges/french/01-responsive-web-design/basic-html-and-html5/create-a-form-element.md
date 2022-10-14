@@ -13,7 +13,7 @@ Vous pouvez créer des formulaires Web qui soumettent réellement des données �
 Par exemple :
 
 ```html
-<form action="url-where-you-want-to-submit-form-data">
+<form action="url-ou-vous-voulez-soumettre-les-donnees-du-formulaire">
   <input>
 </form>
 ```
@@ -30,7 +30,7 @@ L'élément `input` existant doit être imbriqué dans un élément `form`.
 const inputElem = document.querySelector('form input');
 assert(
   inputElem.getAttribute('type') === 'text' &&
-    inputElem.getAttribute('placeholder') === 'cat photo URL'
+    inputElem.getAttribute('placeholder') === 'URL de la photo de chat'
 );
 ```
 
@@ -60,7 +60,7 @@ assert(
 <main>
   <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <p>Les choses que les chats aiment :</p>
   <ul>
@@ -74,7 +74,7 @@ assert(
     <li>le tonnerre</li>
     <li>les autres chats</li>
   </ol>
-  <input type="text" placeholder="cat photo URL">
+  <input type="text" placeholder="URL de la photo de chat">
 </main>
 ```
 
@@ -85,7 +85,7 @@ assert(
 <main>
 <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <p>Les choses que les chats aiment :</p>
   <ul>
@@ -100,7 +100,7 @@ assert(
     <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
-    <input type="text" placeholder="cat photo URL">
+    <input type="text" placeholder="URL de la photo de chat">
   </form>
 </main>
 ```

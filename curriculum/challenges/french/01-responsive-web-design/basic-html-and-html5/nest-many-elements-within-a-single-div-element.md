@@ -59,7 +59,7 @@ assert(
 <main>
   <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <p>Les choses que les chats aiment:</p>
   <ul>
@@ -75,13 +75,13 @@ assert(
   </ol>
 
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
-    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor" value="indoor" checked> Indoor</label>
-    <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label><br>
-    <label for="loving"><input id="loving" type="checkbox" name="personality" value="loving" checked> Loving</label>
-    <label for="lazy"><input id="lazy" type="checkbox" name="personality" value="lazy"> Lazy</label>
-    <label for="energetic"><input id="energetic" type="checkbox" name="personality" value="energetic"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
+    <label for="interieur"><input id="interieur" type="radio" name="interieur-exterieur" value="interieur" checked> Interieur</label>
+    <label for="exterieur"><input id="exterieur" type="radio" name="interieur-exterieur" value="exterieur"> Extérieur</label><br>
+    <label for="aimable"><input id="aimable" type="checkbox" name="personnalite" value="aimable" checked> Aimable</label>
+    <label for="paresseux"><input id="paresseux" type="checkbox" name="personnalite" value="paresseux"> Paresseux</label>
+    <label for="energetique"><input id="energetique" type="checkbox" name="personnalite" value="energetique"> Énergétique</label><br>
+    <input type="text" placeholder="URL de la photo de chat" required>
+    <button type="submit">Envoyer</button>
   </form>
 </main>
 ```
@@ -93,7 +93,7 @@ assert(
 <main>
   <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
   
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
   <div>
     <p>Les choses que les chats aiment:</p>
   <ul>
@@ -109,13 +109,13 @@ assert(
   </ol>
   </div>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
-    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor" value="indoor" checked> Indoor</label>
-    <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label><br>
-    <label for="loving"><input id="loving" type="checkbox" name="personality" value="loving" checked> Loving</label>
-    <label for="lazy"><input id="lazy" type="checkbox" name="personality" value="lazy"> Lazy</label>
-    <label for="energetic"><input id="energetic" type="checkbox" name="personality" value="energetic"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
+    <label for="interieur"><input id="interieur" type="radio" name="interieur-exterieur" value="interieur" checked> Interieur</label>
+    <label for="exterieur"><input id="exterieur" type="radio" name="interieur-exterieur" value="exterieur"> Extérieur</label><br>
+    <label for="aimable"><input id="aimable" type="checkbox" name="personnalite" value="aimable" checked> Aimable</label>
+    <label for="paresseux"><input id="paresseux" type="checkbox" name="personnalite" value="paresseux"> Paresseux</label>
+    <label for="energetique"><input id="energetique" type="checkbox" name="personnalite" value="energetique"> Énergétique</label><br>
+    <input type="text" placeholder="URL de la photo de chat" required>
+    <button type="submit">Envoyer</button>
   </form>
 </main>
 ```

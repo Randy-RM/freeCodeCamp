@@ -1,6 +1,6 @@
 ---
 id: 587d78a8367417b2b2512ae5
-title: Éléments animés à taux variable
+title: Animer les éléments à des taux variables
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cZ89WA4'
 forumTopicId: 301040
@@ -11,11 +11,11 @@ dashedName: animate-elements-at-variable-rates
 
 Il existe plusieurs façons de modifier la vitesse d'animation d'éléments animés de façon similaire. Jusqu'à présent, cela a été réalisé en appliquant une propriété `animation-iteration-count` et en définissant des règles `@keyframes`.
 
-À titre d'exemple, l'animation de droite est constituée de deux étoiles dont la taille et l'opacité diminuent toutes deux au niveau des 20 % de la règle `@@frames-clés`, ce qui crée l'animation de scintillement. Vous pouvez modifier la règle `@@frames-clés` pour l'un des éléments afin que les étoiles scintillent à des rythmes différents.
+À titre d'exemple, l'animation de droite est constituée de deux étoiles dont la taille et l'opacité diminuent toutes deux au niveau des 20 % de la règle `@keyframes`, ce qui crée l'animation de scintillement. Vous pouvez modifier la règle `@keyframes` pour l'un des éléments afin que les étoiles scintillent à des rythmes différents.
 
 # --instructions--
 
-Modifiez le taux d'animation de l'élément dont le nom de classe est `star-1` en changeant sa règle `@keyframes` à 50%.
+Modifiez le rythme d'animation de l'élément dont le nom de classe est `star-1` en changeant sa règle `@keyframes` à 50%.
 
 # --hints--
 

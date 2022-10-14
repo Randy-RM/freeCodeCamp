@@ -19,7 +19,7 @@ Voici un exemple de bouton d'envoi :
 
 # --instructions--
 
-Ajoutez un bouton comme dernier élément de votre élément `form` dont le type est `submit` et dont le texte est `Submit`.
+Ajoutez un bouton comme dernier élément de votre élément `form` dont le type est `submit` et dont le texte est `Envoyer`.
 
 # --hints--
 
@@ -35,13 +35,13 @@ Votre bouton d'envoi doit avoir l'attribut `type` défini à `submit`.
 assert($('button').attr('type') === 'submit');
 ```
 
-Votre bouton d'envoi ne doit comporter que le texte `Submit`.
+Votre bouton d'envoi ne doit comporter que le texte `Envoyer`.
 
 ```js
 assert(
   $('button')
     .text()
-    .match(/^\s*submit\s*$/gi)
+    .match(/^\s*Envoyer\s*$/gi)
 );
 ```
 
@@ -64,7 +64,7 @@ assert(
 <main>
   <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <p>Les choses que les chats aiment :</p>
   <ul>
@@ -79,7 +79,7 @@ assert(
     <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
-    <input type="text" placeholder="cat photo URL">
+    <input type="text" placeholder="URL de la photo de chat">
   </form>
 </main>
 ```
@@ -91,7 +91,7 @@ assert(
 <main>
   <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <p>Les choses que les chats aiment :</p>
   <ul>
@@ -106,8 +106,8 @@ assert(
     <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
-    <input type="text" placeholder="cat photo URL">
-    <button type="submit">Submit</button>
+    <input type="text" placeholder="URL de la photo de chat">
+    <button type="submit">Envoyer</button>
   </form>
 </main>
 ```

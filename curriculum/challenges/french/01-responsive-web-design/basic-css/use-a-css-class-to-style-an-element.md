@@ -25,7 +25,7 @@ Vous pouvez voir que nous avons créé une classe CSS appelée `blue-text` dans 
 
 # --instructions--
 
-Dans votre élément `style`, changez le sélecteur `h2` en `.red-text` et mettez à jour la valeur de la couleur de `blue` à `rouge`.
+Dans votre élément `style`, changez le sélecteur `h2` en `.red-text` et mettez à jour la valeur de la couleur de `blue` à `red`.
 
 Donnez à votre élément `h2` l'attribut `class` avec la valeur `red-text`.
 
@@ -70,7 +70,7 @@ assert($('h2').attr('style') === undefined);
 <main>
   <p>Cliquez ici pour voir plus <a href="#">photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <div>
     <p>Les choses que les chats aiment :</p>
@@ -112,7 +112,7 @@ assert($('h2').attr('style') === undefined);
 <main>
   <p>Cliquez ici pour voir plus <a href="#">photos de chats</a>.</p>
   
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
   
   <div>
     <p>Les choses que les chats aiment :</p>

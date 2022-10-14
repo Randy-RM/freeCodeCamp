@@ -9,7 +9,7 @@ dashedName: make-typography-responsive
 
 # --description--
 
-Dimensionner le texte, vous pouvez utiliser les unités de visualisation pour une typographie réactive. Les unités de visualisation, comme les pourcentages, sont des unités relatives, mais elles sont basées sur des éléments différents. Les unités de visualisation sont relatives aux dimensions de la fenêtre d'affichage (largeur ou hauteur) d'un périphérique, tandis que les pourcentages sont relatifs à la taille de l'élément conteneur parent.
+Dimensionner le texte, vous pouvez utiliser les unités de visualisation pour une typographie responsive. Les unités de visualisation, comme les pourcentages, sont des unités relatives, mais elles sont basées sur des éléments différents. Les unités de visualisation sont relatives aux dimensions de la fenêtre d'affichage (largeur ou hauteur) d'un périphérique, tandis que les pourcentages sont relatifs à la taille de l'élément conteneur parent.
 
 Les quatre unités d'affichage différentes sont les suivantes :
 

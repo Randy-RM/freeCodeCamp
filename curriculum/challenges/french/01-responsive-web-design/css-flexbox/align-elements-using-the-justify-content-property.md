@@ -11,7 +11,7 @@ dashedName: align-elements-using-the-justify-content-property
 
 Parfois, les éléments flexibles d'un conteneur flex ne remplissent pas tout l'espace du conteneur. Il est courant de vouloir indiquer à CSS comment aligner et espacer les éléments flexibles d'une certaine manière. Heureusement, la propriété `justify-content` offre plusieurs options à cet effet. Mais avant de passer en revue ces options, il convient de comprendre une terminologie importante.
 
-[Here is a useful image showing a row to illustrate the concepts below.](https://www.w3.org/TR/css-flexbox-1/images/flex-direction-terms.svg)
+[Voici une image utile montrant une rangée pour illustrer les concepts ci-dessous.](https://www.w3.org/TR/css-flexbox-1/images/flex-direction-terms.svg)
 
 Rappelez-vous que la définition d'un conteneur flex en tant que ligne place les éléments flex côte à côte, de gauche à droite. Un conteneur flexible défini en tant que colonne place les éléments flexibles dans une pile verticale, de haut en bas. Dans chaque cas, la direction dans laquelle les éléments flex sont disposés est appelée **main axis**. Pour une ligne, il s'agit d'une ligne horizontale qui traverse chaque élément. Et pour une colonne, l'axe principal est une ligne verticale qui traverse les éléments.
 

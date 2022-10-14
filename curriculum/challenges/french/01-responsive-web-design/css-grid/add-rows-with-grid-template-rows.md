@@ -1,6 +1,6 @@
 ---
 id: 5a9036e138fddaf9a66b5d33
-title: Ajouter des rangées avec grid-template-rows
+title: Ajouter des lignes avec grid-template-rows
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pByETK/cbp9Pua'
 forumTopicId: 301119
@@ -9,11 +9,11 @@ dashedName: add-rows-with-grid-template-rows
 
 # --description--
 
-La grille que vous avez créée dans le dernier défi définira automatiquement le nombre de rangées. Pour ajuster les rangées manuellement, utilisez la propriété `grid-template-rows` de la même manière que vous avez utilisé `grid-template-columns` dans le défi précédent.
+La grille que vous avez créée dans le dernier défi définira automatiquement le nombre de lignes. Pour ajuster les lignes manuellement, utilisez la propriété `grid-template-rows` de la même manière que vous avez utilisé `grid-template-columns` dans le défi précédent.
 
 # --instructions--
 
-Ajoutez à la grille deux rangées d'une hauteur de `50px` chacune.
+Ajoutez à la grille deux lignes d'une hauteur de `50px` chacune.
 
 # --hints--
 

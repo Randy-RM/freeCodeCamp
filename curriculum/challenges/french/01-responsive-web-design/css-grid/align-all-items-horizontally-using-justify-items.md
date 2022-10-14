@@ -9,7 +9,7 @@ dashedName: align-all-items-horizontally-using-justify-items
 
 # --description--
 
-Parfois, vous souhaitez que tous les éléments de votre grille CSS partagent le même alignement. Vous pouvez utiliser les propriétés apprises précédemment et les aligner individuellement, ou vous pouvez les aligner tous en même temps horizontalement en utilisant `justify-items` sur votre conteneur de grille. Cette propriété peut accepter toutes les valeurs que vous avez apprises dans les deux défis précédents, la différence étant qu'elle déplacera **all** les éléments de notre grille vers l'alignement souhaité.
+Parfois, vous souhaitez que tous les éléments de votre grille CSS partagent le même alignement. Vous pouvez utiliser les propriétés apprises précédemment et les aligner individuellement, ou vous pouvez les aligner tous en même temps horizontalement en utilisant `justify-items` sur votre conteneur de grille. Cette propriété peut accepter toutes les valeurs que vous avez apprises dans les deux défis précédents, la différence étant qu'elle déplacera **tous** les éléments de notre grille vers l'alignement souhaité.
 
 # --instructions--
 

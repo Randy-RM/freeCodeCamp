@@ -11,7 +11,7 @@ dashedName: add-different-margins-to-each-side-of-an-element
 
 Parfois, vous voudrez personnaliser un élément pour qu'il ait un `margin` différent sur chacun de ses côtés.
 
-CSS vous permet de contrôler le `margin` de chacun des quatre côtés d'un élément grâce aux propriétés `margin-top`, `margin-right`, `margin-bottom` et `margin-left`.
+Le CSS vous permet de contrôler le `margin` de chacun des quatre côtés d'un élément grâce aux propriétés `margin-top`, `margin-right`, `margin-bottom` et `margin-left`.
 
 # --instructions--
 

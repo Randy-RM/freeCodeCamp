@@ -17,7 +17,7 @@ Cet élément indique au navigateur la structure de votre site Web. Les élémen
 
 # --instructions--
 
-Ajoutez une balise `h2` qui dit "CatPhotoApp" pour créer un deuxième élément HTML sous votre élément `h1` "Hello World".
+Ajoutez une balise `h2` qui dit "CatPhotoApp" pour créer un deuxième élément HTML sous votre élément `h1` "Bonjour le monde".
 
 # --hints--
 
@@ -42,10 +42,10 @@ Votre élément `h2` devrait avoir le texte `CatPhotoApp`.
 assert.isTrue(/cat(\s)?photo(\s)?app/gi.test($('h2').text()));
 ```
 
-Votre élément `h1` doit contenir le texte `Hello World`.
+Votre élément `h1` doit contenir le texte `Bonjour le monde`.
 
 ```js
-assert.isTrue(/hello(\s)+world/gi.test($('h1').text()));
+assert.isTrue(/Bonjour(\s)+le(\s)+monde/gi.test($('h1').text()));
 ```
 
 Votre élément `h1` doit se placer avant votre élément `h2`.
@@ -59,12 +59,12 @@ assert(code.match(/<h1>\s*?.*?\s*?<\/h1>\s*<h2>\s*?.*?\s*?<\/h2>/gi));
 ## --seed-contents--
 
 ```html
-<h1>Hello World</h1>
+<h1>Bonjour le monde</h1>
 ```
 
 # --solutions--
 
 ```html
-<h1>Hello World</h1>
+<h1>Bonjour le monde</h1>
 <h2>CatPhotoApp</h2>
 ```

@@ -17,7 +17,7 @@ Voici un exemple - notez que la légende du tableau se trouve à l'intérieur de
 
 ```html
 <figure>
-  <img src="roundhouseDestruction.jpeg" alt="Photo of Camper Cat executing a roundhouse kick">
+  <img src="roundhouseDestruction.jpeg" alt="Photo de Camper Cat exécutant un coup de pied circulaire.">
   <br>
   <figcaption>
     Master Camper Cat démontre la forme correcte d'un coup de pied circulaire.

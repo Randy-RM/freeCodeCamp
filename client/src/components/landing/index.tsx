@@ -62,7 +62,7 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
           </Grid>
         </div>
         <Grid>
-          <LandingDetails />
+          <LandingDetails isSignedIn={isSignedIn} />
         </Grid>
         <Grid>
           <LandingLearn />

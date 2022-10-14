@@ -15,7 +15,7 @@ La fonction de répétition est accompagnée d'une option appelée <dfn>auto-fil
 repeat(auto-fill, minmax(60px, 1fr));
 ```
 
-Lorsque le conteneur change de taille, cette configuration continue à insérer des colonnes de 60px et à les étirer jusqu'à ce qu'elle puisse en insérer une autre. **Note:** si votre conteneur ne peut pas contenir tous vos éléments sur une seule ligne, il les déplacera vers une nouvelle ligne.
+Lorsque le conteneur change de taille, cette configuration continue à insérer des colonnes de 60px et à les étirer jusqu'à ce qu'elle puisse en insérer une autre. **Note:** Si votre conteneur ne peut pas contenir tous vos éléments sur une seule ligne, il les déplacera vers une nouvelle ligne.
 
 # --instructions--
 

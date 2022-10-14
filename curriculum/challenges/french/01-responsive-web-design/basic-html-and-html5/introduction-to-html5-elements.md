@@ -9,7 +9,7 @@ dashedName: introduction-to-html5-elements
 
 # --description--
 
-HTML5 introduit des balises HTML plus descriptives. Celles-ci incluent `main`, `header`, `footer`, `nav`, `video`, `article`, `section` et autres.
+Le HTML5 introduit des balises HTML plus descriptives. Celles-ci incluent `main`, `header`, `footer`, `nav`, `video`, `article`, `section` et autres.
 
 Ces balises donnent une structure descriptive à votre HTML, le rendent plus facile à lire et contribuent à l'optimisation des moteurs de recherche (SEO) et à l'accessibilité. La balise HTML5 `main` aide les moteurs de recherche et les autres développeurs à trouver le contenu principal de votre page.
 
@@ -17,8 +17,8 @@ Exemple d'utilisation, un élément `main` avec deux éléments enfants imbriqu�
 
 ```html
 <main> 
-  <h1>Hello World</h1>
-  <p>Hello Paragraph</p>
+  <h1>Bonjour le monde</h1>
+  <p>Bonjour Paragraphe</p>
 </main>
 ```
 

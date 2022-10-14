@@ -12,7 +12,7 @@ Vous pouvez incorporer des liens dans d'autres éléments de texte.
 
 ```html
 <p>
-  Voici un <a target="_blank" href="https://www.freecodecamp.org"> lien vers www.freecodecamp.org</a> pour que vous puissiez le suivre.
+  Voici un <a target="_blank" href="https://www.google.com"> lien vers www.google.com</a> pour que vous puissiez le suivre.
 </p>
 ```
 
@@ -31,22 +31,22 @@ Vient ensuite l'élément *ancre* `<a>` (qui nécessite une balise de fermeture 
 `target` est un attribut de la balise d'ancrage qui indique où ouvrir le lien. La valeur `_blank` indique qu'il faut ouvrir le lien dans un nouvel onglet. La valeur `href` est un attribut de la balise d'ancrage qui contient l'adresse URL du lien :  
 
 ```html
-<a href="https://www.freecodecamp.org" target="_blank"> ... </a>
+<a href="https://www.google.com" target="_blank"> ... </a>
 ```
 
-Le texte, `lien vers www.freecodecamp.org`, dans l'élément `a` est appelé <dfn>texte d'ancrage</dfn>, et affichera le lien à cliquer :
+Le texte, `lien vers www.google.com`, dans l'élément `a` est appelé <dfn>texte d'ancrage</dfn>, et affichera le lien à cliquer :
 
 ```html
-<a href=" ... " target="...">lien vers freecodecamp.org</a>
+<a href=" ... " target="...">lien vers www.google.com</a>
 ```
 
 La résultante finale de l'exemple ressemblera à ceci :  
 
-Voici un <a href="https://www.freecodecamp.org" target="_blank">lien vers www.freecodecamp.org</a> à suivre.
+Voici un <a href="https://www.google.com" target="_blank">lien vers www.google.com</a> à suivre.
 
 # --instructions--
 
-Placez l'élément `a` existant dans un nouvel élément `p`. Ne créez pas de nouvelle balise d'ancrage. Le nouveau paragraphe doit contenir le texte suivant : `View more cat photos`, où `cat photos` est un lien, le reste étant du texte brut.
+Placez l'élément `a` existant dans un nouvel élément `p`. Ne créez pas de nouvelle balise d'ancrage. Le nouveau paragraphe doit contenir le texte suivant : `Voir plus de photos de chats`, où `photos de chats` est un lien, le reste étant du texte brut.
 
 # --hints--
 
@@ -66,13 +66,13 @@ assert(
 );
 ```
 
-Votre élément `a` doit contenir le texte d'ancrage `cat photos`.
+Votre élément `a` doit contenir le texte d'ancrage `photos de chats`.
 
 ```js
 assert(
   $('a')
     .text()
-    .match(/cat\sphotos/gi)
+    .match(/photos\sde\schats/gi)
 );
 ```
 
@@ -90,24 +90,24 @@ assert(
 );
 ```
 
-Votre élément `p` doit contenir le texte `View more` (avec un espace après).
+Votre élément `p` doit contenir le texte `Voir plus de` (avec un espace après).
 
 ```js
 assert(
   $('a[href="https://www.freecatphotoapp.com"]')
     .parent()
     .text()
-    .match(/View\smore\s/gi)
+    .match(/Voir\splus\sde\s/gi)
 );
 ```
 
-Votre élément `a` ne devrait <em>pas</em> avoir le texte `View more`. 
+Votre élément `a` ne devrait <em>pas</em> avoir le texte `Voir plus de`. 
 
 ```js
 assert(
   !$('a')
     .text()
-    .match(/View\smore/gi)
+    .match(/Voir\splus\sde\s/gi)
 );
 ```
 
@@ -139,9 +139,9 @@ assert(
 <h2>CatPhotoApp</h2>
 <main>
 
-  <a href="https://www.freecatphotoapp.com" target="_blank">cat photos</a>
+  <a href="https://www.freecatphotoapp.com" target="_blank">photos de chats</a>
 
-  <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back.">
+  <img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos.">
 
   <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
   <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>
@@ -153,9 +153,9 @@ assert(
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>View more <a target="_blank" href="https://www.freecatphotoapp.com">cat photos</a></p>
+  <p>Voir plus de <a target="_blank" href="https://www.freecatphotoapp.com">photos de chats</a></p>
 
-  <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back.">
+  <img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos.">
 
   <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
   <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>

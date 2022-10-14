@@ -21,7 +21,7 @@ Changez le `margin` du conteneur bleue pour qu'elle corresponde à celle du cont
 
 # --hints--
 
-Votre classe `blue-box` devrait donner aux éléments `20px` de `margin`.
+Votre classe `blue-box` devrait donner à l'élément `20px` de `margin`.
 
 ```js
 assert($('.blue-box').css('margin-top') === '20px');

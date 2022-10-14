@@ -25,7 +25,7 @@ Il existe de nombreux outils de sélection des couleurs disponibles en ligne qui
 
 # --instructions--
 
-Changez la propriété `background-color` des classes `blue` et `jaune` pour leurs couleurs respectives. Remarquez que les couleurs n'ont pas le même aspect l'une à côté de l'autre que sur le fond blanc.
+Changez la propriété `background-color` des classes `blue` et `yellow` pour leurs couleurs respectives. Remarquez que les couleurs n'ont pas le même aspect l'une à côté de l'autre que sur le fond blanc.
 
 # --hints--
 

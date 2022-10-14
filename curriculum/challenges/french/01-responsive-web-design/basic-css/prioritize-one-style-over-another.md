@@ -35,7 +35,7 @@ Votre `<style>` devrait avoir une classe CSS `pink-text` qui change la `color`.
 assert(code.match(/\.pink-text\s*\{\s*color\s*:\s*.+\s*;?\s*\}/g));
 ```
 
-Votre élément `h1` devrait être rose.
+Votre élément `h1` devrait être `pink`.
 
 ```js
 assert($('h1').css('color') === 'rgb(255, 192, 203)');

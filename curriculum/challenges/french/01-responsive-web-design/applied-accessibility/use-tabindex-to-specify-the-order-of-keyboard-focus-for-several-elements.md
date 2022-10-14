@@ -27,31 +27,31 @@ Voici un exemple :
 
 # --instructions--
 
-Camper Cat a un champ de recherche sur sa page de citations inspirantes qu'il prévoit de positionner dans le coin supérieur droit avec CSS. Il souhaite que les contrôles de formulaire `input` de recherche et `input` d'envoi soient les deux premiers éléments dans l'ordre de tabulation. Ajoutez un attribut `tabindex` défini sur `1` à l'entrée `search` `input`, et un attribut `tabindex` défini sur `2` à l'entrée `submit` `input`.
+Camper Cat a un champ de recherche sur sa page de citations inspirantes qu'il prévoit de positionner dans le coin supérieur droit avec CSS. Il souhaite que les contrôles de formulaire `input` de recherche et `input` d'envoi soient les deux premiers éléments dans l'ordre de tabulation. Ajoutez un attribut `tabindex` défini sur `1` à la balise `input` de type `search`, et un attribut `tabindex` défini sur `2` à la balise `input` de type `submit`.
 
 Une autre chose à noter est que certains navigateurs peuvent vous placer au milieu de l'ordre des onglets lorsqu'un élément est cliqué. Un élément a été ajouté à la page pour que vous commenciez toujours au début de l'ordre des onglets.
 
 # --hints--
 
-Votre code devrait ajouter un attribut `tabindex` à la balise `search ` `input`.
+Votre code devrait ajouter un attribut `tabindex` à la balise `input` de type `search`.
 
 ```js
 assert($('#search').attr('tabindex'));
 ```
 
-Votre code devrait ajouter un attribut `tabindex` à la balise `submit` `input`.
+Votre code devrait ajouter un attribut `tabindex` à la balise `input` de type `submit`.
 
 ```js
 assert($('#submit').attr('tabindex'));
 ```
 
-Votre code doit attribuer la valeur 1 à l'attribut `tabindex` de la balise d'entrée `search` `input`.
+Votre code doit attribuer la valeur 1 à l'attribut `tabindex` de la balise `input` de type `search`.
 
 ```js
 assert($('#search').attr('tabindex') == '1');
 ```
 
-Votre code doit attribuer la valeur 2 à l'attribut `tabindex` de la balise d'entrée `submit` `input`.
+Votre code doit attribuer la valeur 2 à l'attribut `tabindex` de la balise `input` de type `submit`.
 
 ```js
 assert($('#submit').attr('tabindex') == '2');

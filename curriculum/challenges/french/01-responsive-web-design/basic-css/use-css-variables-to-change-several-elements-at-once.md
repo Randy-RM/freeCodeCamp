@@ -15,7 +15,7 @@ Suivez les instructions ci-dessous pour voir comment la modification de trois va
 
 # --instructions--
 
-Dans la classe `pingouin`, changez la valeur `noir` en `gris`, la valeur `gris` en `blanc` et la valeur `jaune` en `orange`.
+Dans la classe `pingouin`, changez la valeur `black` en `gray`, la valeur `gray` en `white` et la valeur `yellow` en `orange`.
 
 # --hints--
 
@@ -27,7 +27,7 @@ assert(
 );
 ```
 
-La classe `-penguin` doit déclarer la variable `--penguin-belly` et l'affecter à `white`.
+La classe `penguin` doit déclarer la variable `--penguin-belly` et l'affecter à `white`.
 
 ```js
 assert(
@@ -35,7 +35,7 @@ assert(
 );
 ```
 
-La classe `-penguin` doit déclarer la variable `--penguin-beak` et l'affecter à `orange`.
+La classe `penguin` doit déclarer la variable `--penguin-beak` et l'affecter à `orange`.
 
 ```js
 assert(

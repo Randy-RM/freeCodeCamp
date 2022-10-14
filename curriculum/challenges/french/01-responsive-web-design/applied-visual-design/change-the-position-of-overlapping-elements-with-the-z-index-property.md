@@ -9,7 +9,7 @@ dashedName: change-the-position-of-overlapping-elements-with-the-z-index-propert
 
 # --description--
 
-Lorsque des éléments sont positionnés de manière à se chevaucher (c'est-à-dire en utilisant la propriété `position : absolute | relative | fixed | sticky`), l'élément qui arrive le plus tard dans le balisage HTML apparaîtra, par défaut, au dessus des autres éléments. Toutefois, la propriété `z-index` permet de spécifier l'ordre dans lequel les éléments sont empilés les uns sur les autres. Il doit s'agir d'un entier (c'est-à-dire d'un nombre entier et non d'une décimale), et les valeurs les plus élevées de la propriété `z-index` d'un élément le déplacent plus haut dans la pile que les valeurs inférieures.
+Lorsque des éléments sont positionnés de manière à se chevaucher (c'est-à-dire en utilisant la propriété `position : absolute | relative | fixed | sticky`), l'élément venant en dernier dans le balisage HTML apparaîtra, par défaut, au dessus des autres éléments. Toutefois, la propriété `z-index` permet de spécifier l'ordre dans lequel les éléments sont empilés les uns sur les autres. Il doit s'agir d'un nombre entier (c'est-à-dire un nombre entier et non décimal), et les valeurs les plus élevées de la propriété `z-index` d'un élément le déplacent plus haut dans la pile que les valeurs inférieures.
 
 # --instructions--
 

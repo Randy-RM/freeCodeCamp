@@ -13,7 +13,7 @@ Une façon d'ajouter de la texture et de l'intérêt à un arrière-plan et de l
 
 # --instructions--
 
-En utilisant l'url de `https://cdn-media-1.freecodecamp.org/imgr/MJAkxbh.png`, définissez le `background` de la page entière avec le sélecteur `body`.
+En utilisant l'url de `https://kda-certificats.s3.eu-west-3.amazonaws.com/MJ_Akxbh_86aa6354ff.png?111509.39999997616`, définissez le `background` de la page entière avec le sélecteur `body`.
 
 # --hints--
 
@@ -22,7 +22,7 @@ Votre élément `body` doit avoir une propriété `background` définie sur un `
 ```js
 assert(
   code.match(
-    /background(-image)?:\s*?url\(\s*("|'|)https:\/\/cdn-media-1\.freecodecamp\.org\/imgr\/MJAkxbh\.png\2\s*\)/gi
+    /background(-image)?:\s*?url\(\s*("|'|)https:\/\/kda-certificats\.s3\.eu-west-3\.amazonaws\.com\/MJ_Akxbh_86aa6354ff\.png\?111509\.39999997616\2\s*\)/gi
   )
 );
 ```
@@ -44,7 +44,7 @@ assert(
 ```html
 <style>
   body {
-    background: url("https://cdn-media-1.freecodecamp.org/imgr/MJAkxbh.png");
+    background: url("https://kda-certificats.s3.eu-west-3.amazonaws.com/MJ_Akxbh_86aa6354ff.png?111509.39999997616");
   }
 </style>
 ```

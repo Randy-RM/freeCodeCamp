@@ -21,7 +21,7 @@ Le chiffre `F` est le chiffre le plus élevé du code hexadécimal et représent
 
 # --instructions--
 
-Remplacez les mots de couleur dans notre élément `style` par leurs codes hexagonaux corrects.
+Remplacez les mots de couleur dans notre élément `style` par leurs codes hexadécimaux corrects.
 
 <table class='table table-striped'><tbody><tr><th>Color</th><th>Hex Code</th></tr><tr><td>Dodger Blue</td><td><code>#1E90FF</code></td></tr><tr><td>Green</td><td><code>#00FF00</code></td></tr><tr><td>Orange</td><td><code>#FFA500</code></td></tr><tr><td>Red</td><td><code>#FF0000</code></td></tr></tbody></table>
 
@@ -33,7 +33,7 @@ Votre élément `h1` avec le texte `Je suis rouge!` devrait recevoir la `couleur
 assert($(".red-text").css("color") === "rgb(255, 0, 0)");
 ```
 
-Le `code hex` de la couleur rouge doit être utilisé à la place du mot `rouge`.
+Le `code hex` de la couleur rouge doit être utilisé à la place du mot `red`.
 
 ```js
 assert(
@@ -47,7 +47,7 @@ Votre élément `h1` avec le texte `Je suis vert!` devrait recevoir la `couleur`
 assert($(".green-text").css("color") === "rgb(0, 255, 0)");
 ```
 
-Le `code hex` de la couleur verte doit être utilisé à la place du mot `vert`.
+Le `code hex` de la couleur verte doit être utilisé à la place du mot `green`.
 
 ```js
 assert(
@@ -55,7 +55,7 @@ assert(
 );
 ```
 
-Votre élément `h1` avec le texte `Je suis dodger blue!` devrait recevoir le `color` dodger blue.
+Votre élément `h1` avec le texte `Je suis dodger blue!` devrait recevoir la `couleur` dodger blue.
 
 ```js
 assert($(".dodger-blue-text").css("color") === "rgb(30, 144, 255)");

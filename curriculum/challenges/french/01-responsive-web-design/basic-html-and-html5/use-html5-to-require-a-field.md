@@ -20,7 +20,7 @@ Faites de votre `input` de type texte un champ `required`, de sorte que votre ut
 Essayez ensuite de soumettre le formulaire sans saisir de texte. Vous voyez comment votre formulaire HTML5 vous signale que le champ est obligatoire ?
 # --hints--
 
-Votre élément `input` de type texte doit avoir l'attribut `required
+Votre élément `input` de type texte doit avoir l'attribut `required`
 
 ```js
 assert($('input').prop('required'));
@@ -35,7 +35,7 @@ assert($('input').prop('required'));
 <main>
   <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <p>Les choses que les chats aiment :</p>
   <ul>
@@ -50,8 +50,8 @@ assert($('input').prop('required'));
     <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
-    <input type="text" placeholder="cat photo URL">
-    <button type="submit">Soumettre</button>
+    <input type="text" placeholder="URL de la photo de chat">
+    <button type="submit">Envoyer</button>
   </form>
 </main>
 ```
@@ -63,7 +63,7 @@ assert($('input').prop('required'));
 <main>
   <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <p>Les choses que les chats aiment :</p>
   <ul>
@@ -78,8 +78,8 @@ assert($('input').prop('required'));
     <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
-    <input type="text" required placeholder="cat photo URL">
-    <button type="submit">Soumettre</button>
+    <input type="text" placeholder="URL de la photo de chat" required>
+    <button type="submit">Envoyer</button>
   </form>
 </main>
 ```

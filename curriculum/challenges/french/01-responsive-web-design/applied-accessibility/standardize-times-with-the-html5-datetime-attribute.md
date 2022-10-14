@@ -20,22 +20,22 @@ Voici un exemple :
 # --instructions--
 
 Les résultats du sondage de Camper Cat sur Mortal Kombat sont arrivés ! Enveloppez le texte d'une balise `time`.
- `Thursday, September 15<sup>th</sup>` et ajouter l'attribut `datetime` pour le fixer à `2016-09-15`.
+ `jeudi 15 septembre` et ajouter l'attribut `datetime` pour le fixer à `2016-09-15`.
 
 # --hints--
 
-Ton code doit avoir un élément `p` qui inclut le texte `Thank you to everyone for responding to Master Camper Cat's survey.` et inclut un élément `time`.
+Ton code doit avoir un élément `p` qui inclut le texte `Merci à tous ceux qui ont répondu à l'enquête de Master Camper Cat.` et inclut un élément `time`.
 
 ```js
 assert(timeElement);
 ```
 
-Les balises `time` ajoutées doivent entourer le texte `Thursday, September 15<sup>th</sup>`.
+Les balises `time` ajoutées doivent entourer le texte `jeudi 15 septembre`.
 
 ```js
 assert(
   timeElement &&
-    timeElement?.innerHTML?.trim() === 'Thursday, September 15<sup>th</sup>'
+    timeElement?.innerHTML?.trim() === 'jeudi 15 septembre'
 );
 ```
 
@@ -58,7 +58,7 @@ assert(datetimeAttr === '2016-09-15');
 ```html
 <script>
 const pElement = [...document.querySelectorAll("article > p")]
-  .filter(x => x?.textContent?.includes("Thank you to everyone for responding to Master Camper Cat's survey."));
+  .filter(x => x?.textContent?.includes("Merci à tous ceux qui ont répondu à l'enquête de Master Camper Cat."));
 const timeElement = pElement[0] ? pElement[0].querySelector("time") : null;
 const datetimeAttr = timeElement?.getAttribute("datetime");
 </script>
@@ -76,22 +76,22 @@ const datetimeAttr = timeElement?.getAttribute("datetime");
 
     <!-- Only change code below this line -->
 
-    <p>Merci à tous d'avoir répondu à l'enquête de Master Camper Cat. Le meilleur jour pour organiser le fameux tournoi Mortal Kombat est le jeudi 15 septembre. Que le meilleur ninja gagne !</p>
+    <p>Merci à tous ceux qui ont répondu à l'enquête de Master Camper Cat. Le meilleur jour pour organiser le fameux tournoi Mortal Kombat est le jeudi 15 septembre. Que le meilleur ninja gagne !</p>
 
     <!-- Only change code above this line -->
 
     <section>
       <h3>Commentaires:</h3>
       <article>
-        <p>Posté par : Sub-Zero le <time datetime="2016-08-13T20:01Z">August 13<sup>th</sup></time></p>
+        <p>Posté par : Sub-Zero le <time datetime="2016-08-13T20:01Z">13 Août</time></p>
         <p>Johnny Cage a intérêt à être là, je vais le finir !</p>
       </article>
       <article>
-        <p>Posté par : Doge on <time datetime="2016-08-15T08:12Z">August 15<sup>th</sup></time></p>
+        <p>Posté par : Doge le <time datetime="2016-08-15T08:12Z">15 Août</time></p>
         <p>Wow, beaucoup de combat, si mortel.</p>
       </article>
       <article>
-        <p>Posté par : The Grim Reaper on <time datetime="2016-08-16T00:00Z">August 16<sup>th</sup></time></p>
+        <p>Posté par : The Grim Reaper le <time datetime="2016-08-16T00:00Z">16 Août</time></p>
         <p>On dirait que je vais être occupé ce jour-là.</p>
       </article>
     </section>
@@ -110,20 +110,20 @@ const datetimeAttr = timeElement?.getAttribute("datetime");
   <article>
     <h2>Résultats de l'enquête sur le tournoi de Mortal Kombat</h2>
 
-    <p>Merci à tous d'avoir répondu à l'enquête de Master Camper Cat. Le meilleur jour pour organiser le fameux tournoi Mortal Kombat est le jeudi 15 septembre. Que le meilleur ninja gagne !</p>
+    <p>Merci à tous ceux qui ont répondu à l'enquête de Master Camper Cat. Le meilleur jour pour organiser le fameux tournoi Mortal Kombat est le <time datetime="2016-09-15">jeudi 15 septembre</time>. Que le meilleur ninja gagne !</p>
 
     <section>
       <h3>Commentaires:</h3>
       <article>
-        <p>Posté par : Sub-Zero le <time datetime="2016-08-13T20:01Z">August 13<sup>th</sup></time></p>
+        <p>Posté par : Sub-Zero le <time datetime="2016-08-13T20:01Z">13 Août</time></p>
         <p>Johnny Cage a intérêt à être là, je vais le finir !</p>
       </article>
       <article>
-        <p>Posté par : Doge on <time datetime="2016-08-15T08:12Z">August 15<sup>th</sup></time></p>
+        <p>Posté par : Doge le <time datetime="2016-08-15T08:12Z">15 Août</time></p>
         <p>Wow, beaucoup de combat, si mortel.</p>
       </article>
       <article>
-        <p>Posté par : The Grim Reaper on <time datetime="2016-08-16T00:00Z">August 16<sup>th</sup></time></p>
+        <p>Posté par : The Grim Reaper le <time datetime="2016-08-16T00:00Z">16 Août</time></p>
         <p>On dirait que je vais être occupé ce jour-là.</p>
       </article>
     </section>

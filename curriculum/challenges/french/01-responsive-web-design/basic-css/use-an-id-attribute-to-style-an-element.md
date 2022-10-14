@@ -11,7 +11,7 @@ dashedName: use-an-id-attribute-to-style-an-element
 
 Ce qui est bien avec les attributs `id`, c'est que, comme les classes, vous pouvez les styliser à l'aide de CSS.
 
-Cependant, un `id` n'est pas réutilisable et ne doit être appliqué qu'à un seul élément. Un `id` a également une spécificité (importance) plus élevée qu'une classe, donc si les deux sont appliqués au même élément et ont des styles conflictuels, les styles du `id` seront appliqués.
+Cependant, un `id` n'est pas réutilisable et ne doit être appliqué qu'à un seul élément. Un `id` a également une spécificité (importance) plus élevée qu'une classe, donc si les deux sont appliqués au même élément et ont des styles conflictuels, les styles de l'`id` seront appliqués.
 
 Voici un exemple de la façon dont vous pouvez prendre votre élément avec l'attribut `id` de `cat-photo-element` et lui donner la couleur de fond verte. Dans votre élément `style` :
 
@@ -35,7 +35,7 @@ Votre élément `form` devrait avoir l'id de `cat-photo-form`.
 assert($('form').attr('id') === 'cat-photo-form');
 ```
 
-Votre élément `form` devrait avoir la `background-color` de couleur verte.
+Votre élément `form` devrait avoir le `background-color` de couleur verte.
 
 ```js
 assert($('#cat-photo-form').css('background-color') === 'rgb(0, 128, 0)');
@@ -96,7 +96,7 @@ assert(!code.match(/<form.*style.*>/gi) && !code.match(/<form.*class.*>/gi));
 <main>
   <p class="red-text">Cliquez ici pour voir plus <a href="#">photos de chats</a>.</p>
 
-  <a href="#"><img class="smaller-image thick-green-border" src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img class="smaller-image thick-green-border" src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <div class="silver-background">
     <p>Les choses que les chats aiment :</p>
@@ -167,7 +167,7 @@ assert(!code.match(/<form.*style.*>/gi) && !code.match(/<form.*class.*>/gi));
 <main>
   <p class="red-text">Cliquez ici pour voir plus <a href="#">photos de chats</a>.</p>
   
-  <a href="#"><img class="smaller-image thick-green-border" src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img class="smaller-image thick-green-border" src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
   
   <div class="silver-background">
     <p>Les choses que les chats aiment :</p>

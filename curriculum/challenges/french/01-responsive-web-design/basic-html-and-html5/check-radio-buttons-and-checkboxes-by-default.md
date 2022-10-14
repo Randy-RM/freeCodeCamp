@@ -11,10 +11,10 @@ dashedName: check-radio-buttons-and-checkboxes-by-default
 
 Vous pouvez faire en sorte qu'une case à cocher ou un bouton radio soit coché par défaut en utilisant l'attribut `checked`.
 
-Pour ce faire, il suffit d'ajouter le mot "checked" à l'intérieur d'un élément de saisie. Par exemple :
+Pour ce faire, il suffit d'ajouter le mot "**checked**" à l'intérieur d'un élément de saisie. Par exemple :
 
 ```html
-<input type="radio" name="test-name" checked>
+<input type="radio" name="nom-test" checked>
 ```
 
 # --instructions--
@@ -35,16 +35,16 @@ La première case à cocher de votre formulaire doit être cochée par défaut.
 assert($('input[type="checkbox"]').prop('checked'));
 ```
 
-Vous ne devez pas modifier le texte intérieur de l'étiquette `Indoor`.
+Vous ne devez pas modifier le texte intérieur de l'étiquette `Intérieur`.
 
 ```js
-assert.equal(document.querySelector('label[for="indoor"]')?.innerText?.trim(), 'Indoor');
+assert.equal(document.querySelector('label[for="interieur"]')?.innerText?.trim(), 'Intérieur');
 ```
 
-Vous ne devez pas modifier le texte intérieur de l'étiquette `Loving`.
+Vous ne devez pas modifier le texte intérieur de l'étiquette `Aimable`.
 
 ```js
-assert.equal(document.querySelector('label[for="loving"]')?.innerText?.trim(), 'Loving');
+assert.equal(document.querySelector('label[for="aimable"]')?.innerText?.trim(), 'Aimable');
 ```
 
 # --seed--
@@ -56,7 +56,7 @@ assert.equal(document.querySelector('label[for="loving"]')?.innerText?.trim(), '
 <main>
   <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <p>Les choses que les chats aiment :</p>
   <ul>
@@ -71,13 +71,13 @@ assert.equal(document.querySelector('label[for="loving"]')?.innerText?.trim(), '
     <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
-    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor" value="indoor"> Indoor</label>
-    <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label><br>
-    <label for="loving"><input id="loving" type="checkbox" name="personality" value="loving"> Loving</label>
-    <label for="lazy"><input id="lazy" type="checkbox" name="personality" value="lazy"> Lazy</label>
-    <label for="energetic"><input id="energetic" type="checkbox" name="personality" value="energetic"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
+    <label for="interieur"><input id="interieur" type="radio" name="interieur-exterieur" value="interieur"> Intérieur</label>
+    <label for="exterieur"><input id="exterieur" type="radio" name="interieur-exterieur" value="exterieur"> Extérieur</label><br>
+    <label for="aimable"><input id="aimable" type="checkbox" name="personnalite" value="aimable"> Aimable</label>
+    <label for="paresseux"><input id="paresseux" type="checkbox" name="personnalite" value="paresseux"> Paresseux</label>
+    <label for="energique"><input id="energique" type="checkbox" name="personnalite" value="energique"> Énergique</label><br>
+    <input type="text" placeholder="URL de la photo de chat" required>
+    <button type="submit">Envoyer</button>
   </form>
 </main>
 ```
@@ -89,7 +89,7 @@ assert.equal(document.querySelector('label[for="loving"]')?.innerText?.trim(), '
 <main>
   <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <p>Les choses que les chats aiment :</p>
   <ul>
@@ -104,13 +104,13 @@ assert.equal(document.querySelector('label[for="loving"]')?.innerText?.trim(), '
     <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
-    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor" value="indoor" checked> Indoor</label>
-    <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label><br>
-    <label for="loving"><input id="loving" type="checkbox" name="personality" value="loving" checked> Loving</label>
-    <label for="lazy"><input id="lazy" type="checkbox" name="personality" value="lazy"> Lazy</label>
-    <label for="energetic"><input id="energetic" type="checkbox" name="personality" value="energetic"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
+    <label for="interieur"><input id="interieur" type="radio" name="interieur-exterieur" value="interieur" checked> Intérieur</label>
+    <label for="exterieur"><input id="exterieur" type="radio" name="interieur-exterieur" value="exterieur"> Extérieur</label><br>
+    <label for="aimable"><input id="aimable" type="checkbox" name="personnalite" value="aimable" checked> Aimable</label>
+    <label for="paresseux"><input id="paresseux" type="checkbox" name="personnalite" value="paresseux"> Paresseux</label>
+    <label for="energique"><input id="energique" type="checkbox" name="personnalite" value="energique"> Énergique</label><br>
+    <input type="text" placeholder="URL de la photo de chat" required>
+    <button type="submit">Envoyer</button>
   </form>
 </main>
 ```

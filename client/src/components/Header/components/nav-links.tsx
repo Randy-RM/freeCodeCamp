@@ -94,7 +94,7 @@ export class NavLinks extends Component<NavLinksProps, {}> {
                   to='/learn/responsive-web-design/'
                   activeClassName='active'
                 >
-                  {'Tableau de bord'}
+                  {'Cours'}
                 </Link>
               </li>
 
@@ -107,7 +107,7 @@ export class NavLinks extends Component<NavLinksProps, {}> {
                   to={`/settings`}
                   activeClassName='active'
                 >
-                  {'Profile'}
+                  {'Profil'}
                 </Link>
               </li>
             </Fragment>

@@ -11,7 +11,7 @@ dashedName: lock-an-element-to-its-parent-with-absolute-positioning
 
 L'option suivante pour la propriété CSS `position` est `absolue`, qui verrouille l'élément en place par rapport à son conteneur parent. Contrairement à la position `relative`, cette option retire l'élément du flux normal du document, de sorte que les éléments environnants l'ignorent. Les propriétés de décalage CSS (haut ou bas et gauche ou droite) sont utilisées pour ajuster la position.
 
-Une nuance avec le positionnement absolu est qu'il sera verrouillé par rapport à son ancêtre *positioned* le plus proche. Si vous oubliez d'ajouter une règle de positionnement à l'élément parent (ce qui est généralement fait en utilisant `position : relative;`), le navigateur continuera à chercher en haut de la chaîne et finira par utiliser par défaut la balise `body`.
+Une nuance avec le positionnement absolu est qu'il sera verrouillé par rapport à son ancêtre *positionné* le plus proche. Si vous oubliez d'ajouter une règle de positionnement à l'élément parent (ce qui est généralement fait en utilisant `position : relative;`), le navigateur continuera à chercher en haut de la chaîne et finira par utiliser par défaut la balise `body`.
 
 # --instructions--
 

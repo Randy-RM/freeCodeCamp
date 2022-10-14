@@ -13,7 +13,7 @@ Pour souligner du texte, vous pouvez utiliser la balise `u`. Elle est souvent ut
 
 # --instructions--
 
-Enveloppez la balise `u` uniquement autour du texte `Ph.D. students`.
+Enveloppez la balise `u` uniquement autour du texte `étudiants en doctorat`.
 
 **Note:** Essayez d'éviter d'utiliser la balise `u` lorsqu'elle peut être confondue avec un lien. Les balises d'ancrage ont également une mise en forme soulignée par défaut.
 
@@ -25,10 +25,10 @@ Votre code devrait ajouter une balise `u` à la balise.
 assert($("u").length === 1);
 ```
 
-La balise `u` doit entourer le texte `Ph.D. students`.
+La balise `u` doit entourer le texte `étudiants en doctorat`.
 
 ```js
-assert($("u").text() === "Ph.D. students");
+assert($("u").text() === "étudiants en doctorat");
 ```
 
 # --seed--
@@ -68,7 +68,7 @@ assert($("u").text() === "Ph.D. students");
       <h4>Google</h4>
       <p>
         Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient
-        Ph.D. students à <strong>l'université de Stanford</strong>.
+        étudiants en doctorat à <strong>l'université de Stanford</strong>.
       </p>
     </div>
     <div class="cardLinks">
@@ -124,7 +124,7 @@ assert($("u").text() === "Ph.D. students");
       <h4>Google</h4>
       <p>
         Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient
-        <u>Ph.D. students</u> à 
+        <u>étudiants en doctorat</u> à 
         <strong>l'université de Stanford</strong>.
       </p>
     </div>

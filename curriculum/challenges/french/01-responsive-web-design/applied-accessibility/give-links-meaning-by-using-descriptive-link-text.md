@@ -15,17 +15,17 @@ Les lecteurs d'écran lisent le texte du lien, ou ce qui se trouve entre les bal
 
 # --instructions--
 
-Le texte du lien utilisé par Camper Cat n'est pas très descriptif sans le contexte environnant. Déplacez les balises d'ancrage (`a`) pour qu'elles entourent le texte `information sur les piles` au lieu de `Cliquez ici`.
+Le texte du lien utilisé par Camper Cat n'est pas très descriptif sans le contexte environnant. Déplacez les balises d'ancrage (`a`) pour qu'elles entourent le texte `informations sur les piles` au lieu de `Cliquez ici`.
 
 # --hints--
 
-Votre code devrait déplacer les balises d'ancrage `a` autour des mots `Cliquez ici` pour les placer autour des mots `information sur les piles`.
+Votre code devrait déplacer les balises d'ancrage `a` autour des mots `Cliquez ici` pour les placer autour des mots `informations sur les piles`.
 
 ```js
 assert(
   $('a')
     .text()
-    .match(/^(information sur les piles)$/g)
+    .match(/^(informations sur les piles)$/g)
 );
 ```
 

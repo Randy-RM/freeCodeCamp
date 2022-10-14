@@ -15,7 +15,7 @@ N'oubliez pas que vous pouvez donner un style à votre élément `body` comme à
 
 # --instructions--
 
-Tout d'abord, créez un élément `h1` avec le texte `Hello World`.
+Tout d'abord, créez un élément `h1` avec le texte `Bonjour le monde`.
 
 Ensuite, donnez à tous les éléments de votre page la couleur `green` en ajoutant `color : green;` à la déclaration de style de votre élément `body`
 
@@ -29,14 +29,14 @@ Vous devez créer un élément `h1`.
 assert($('h1').length > 0);
 ```
 
-Votre élément `h1` doit contenir le texte `Hello World`.
+Votre élément `h1` doit contenir le texte `Bonjour le monde`.
 
 ```js
 assert(
   $('h1').length > 0 &&
     $('h1')
       .text()
-      .match(/hello world/i)
+      .match(/bonjour le monde/i)
 );
 ```
 

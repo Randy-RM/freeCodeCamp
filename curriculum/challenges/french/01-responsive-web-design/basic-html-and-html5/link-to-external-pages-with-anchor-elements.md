@@ -14,10 +14,10 @@ Vous pouvez utiliser des éléments `a` (*ancre*) pour créer un lien vers un co
 Les éléments `a` ont besoin d'une adresse Web de destination appelée attribut `href`. Ils ont également besoin d'un texte d'ancrage. Voici un exemple :
 
 ```html
-<a href="https://www.freecodecamp.org">ce lien pointe vers freecodecamp.org</a>
+<a href="https://www.google.com">ce lien pointe vers google.com</a>
 ```
 
-Votre navigateur affichera alors le texte "ce lien pointe vers freecodecamp.org" comme un lien sur lequel vous pouvez cliquer. Et ce lien vous mènera à l'adresse web `https://www.freecodecamp.org`.
+Votre navigateur affichera alors le texte "**ce lien pointe vers google.com**" comme un lien sur lequel vous pouvez cliquer. Et ce lien vous mènera à l'adresse web `https://www.google.com`.
 
 # --instructions--
 
@@ -56,7 +56,7 @@ assert(
 
 
 
-  <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back.">
+  <img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos.">
 
   <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
   <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>
@@ -69,7 +69,7 @@ assert(
 <h2>CatPhotoApp</h2>
 <main>
   
-  <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back.">
+  <img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos.">
   
   <a href="https://www.freecatphotoapp.com">cat photos</a>
   <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>

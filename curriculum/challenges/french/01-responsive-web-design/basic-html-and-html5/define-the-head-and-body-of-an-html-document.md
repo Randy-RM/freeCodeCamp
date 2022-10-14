@@ -13,7 +13,7 @@ Vous pouvez ajouter un autre niveau d'organisation dans votre document HTML à l
 
 Les éléments de métadonnées, tels que `link`, `meta`, `title` et `style`, sont généralement placés dans l'élément `head`.
 
-Voici un exemple de mise en page d'une page :
+Voici un exemple de mise en page d'une page HTML :
 
 ```html
 <!DOCTYPE html>

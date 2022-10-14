@@ -1,6 +1,6 @@
 ---
 id: 5a9036ee38fddaf9a66b5d34
-title: Utilisez les unités de grille (Grid ) CSS pour modifier la taille des colonnes et des rangées
+title: Utilisez les unités de grille (Grid ) CSS pour modifier la taille des colonnes et des lignes
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pByETK/cvE8phd'
 forumTopicId: 301134

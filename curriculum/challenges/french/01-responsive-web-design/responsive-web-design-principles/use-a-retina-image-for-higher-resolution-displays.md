@@ -17,7 +17,7 @@ La façon la plus simple de faire apparaître correctement vos images sur des é
 <style>
   img { height: 250px; width: 250px; }
 </style>
-<img src="coolPic500x500" alt="A most excellent picture">
+<img src="coolPic500x500" alt="Une excellente photo">
 ```
 
 # --instructions--
@@ -47,7 +47,7 @@ assert(document.querySelector('img').height === 100);
 
 </style>
 
-<img src="https://s3.amazonaws.com/freecodecamp/FCCStickers-CamperBot200x200.jpg" alt="freeCodeCamp sticker that says 'Because CamperBot Cares'">
+<img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/FCC_Stickers_Camper_Bot200x200_845a03f022.jpg" alt="un autocollant qui dit 'Because CamperBot Cares'.">
 ```
 
 # --solutions--
@@ -60,5 +60,5 @@ assert(document.querySelector('img').height === 100);
   }
 </style>
 
-<img src="https://s3.amazonaws.com/freecodecamp/FCCStickers-CamperBot200x200.jpg" alt="freeCodeCamp sticker that says 'Because CamperBot Cares'">
+<img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/FCC_Stickers_Camper_Bot200x200_845a03f022.jpg" alt="un autocollant qui dit 'Because CamperBot Cares'.">
 ```

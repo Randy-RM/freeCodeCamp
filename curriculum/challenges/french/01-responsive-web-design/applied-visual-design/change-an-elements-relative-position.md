@@ -11,7 +11,7 @@ dashedName: change-an-elements-relative-position
 
 CSS traite chaque élément HTML comme sa propre boîte, que l'on appelle généralement le <dfn>CSS Box Model</dfn>. Les éléments de niveau bloc commencent automatiquement sur une nouvelle ligne (pensez aux titres, aux paragraphes et aux divs), tandis que les éléments en ligne s'insèrent dans le contenu environnant (comme les images ou les espaces). La disposition par défaut des éléments de cette manière est appelée le <dfn>normal flow</dfn> d'un document, mais CSS propose la propriété position pour la remplacer.
 
-Lorsque la position d'un élément est définie sur `relative`, cela vous permet de spécifier comment le CSS doit le déplacer *relative* à sa position actuelle dans le flux normal de la page. Elle est associée aux propriétés de décalage CSS `left` ou `right`, et `top` ou `bottom`. Ces propriétés indiquent combien de pixels, de pourcentages ou d'ems il faut déplacer l'élément *away* de sa position normale. L'exemple suivant déplace le paragraphe de 10 pixels par rapport au bas :
+Lorsque la position d'un élément est définie sur `relative`, cela vous permet de spécifier comment le CSS doit le déplacer *relativement* à sa position actuelle dans le flux normal de la page. Elle est associée aux propriétés de décalage CSS `left` ou `right`, et `top` ou `bottom`. Elles indiquent de combien de pixels, de pourcentages ou d'ems il faut déplacer l'élément *par rapport* à sa position normale. L'exemple suivant déplace le paragraphe de 10 pixels par rapport au bas (`bottom`) :
 
 ```css
 p {
@@ -36,7 +36,7 @@ L'élément `h2` doit avoir une propriété `position` définie sur `relative`.
 assert($('h2').css('position') == 'relative');
 ```
 
-Votre code devrait utiliser un décalage CSS pour positionner relativement le "h2" à 15px du "haut" de l'endroit où il se trouve normalement.
+Votre code devrait utiliser un décalage CSS pour positionner relativement le `h2` à 15px du `haut` de l'endroit où il se trouve normalement.
 
 ```js
 assert($('h2').css('top') == '15px');

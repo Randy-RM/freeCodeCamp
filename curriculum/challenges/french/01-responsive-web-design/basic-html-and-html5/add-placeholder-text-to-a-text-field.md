@@ -11,17 +11,17 @@ dashedName: add-placeholder-text-to-a-text-field
 
 Le texte de remplacement est ce qui est affiché dans votre élément `input` avant que l'utilisateur n'ait saisi quoi que ce soit.
 
-Vous pouvez créer un texte placeholder comme suit :
+Vous pouvez créer un texte de remplacement ( **placeholder** ) comme suit :
 
 ```html
-<input type="text" placeholder="this is placeholder text">
+<input type="text" placeholder="ceci est un texte de remplacement">
 ```
 
 **Note:** Rappelez-vous que les éléments `input` sont auto-fermants.
 
 # --instructions--
 
-Mettez la valeur `placeholder` de votre `input` textuel à "cat photo URL".
+Mettez la valeur `placeholder` de votre `input` textuel à "URL de la photo de chat".
 
 # --hints--
 
@@ -31,7 +31,7 @@ Vous devez ajouter un attribut `placeholder` à l'élément textuel `input` exis
 assert($('input[placeholder]').length > 0);
 ```
 
-Vous devez définir la valeur de votre attribut `placeholder` à `cat photo URL`.
+Vous devez définir la valeur de votre attribut `placeholder` à `URL de la photo de chat`.
 
 ```js
 assert(
@@ -39,7 +39,7 @@ assert(
     $('input').attr('placeholder') &&
     $('input')
       .attr('placeholder')
-      .match(/cat\s+photo\s+URL/gi)
+      .match(/URL\s+de\s+la\s+photo\s+de\s+chat/gi)
 );
 ```
 
@@ -64,7 +64,7 @@ assert($('input[type=text]').length > 0);
 <main>
   <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <p>Les choses que les chats aiment :</p>
   <ul>
@@ -89,7 +89,7 @@ assert($('input[type=text]').length > 0);
 <main>
   <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
   
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
   
   <p>Les choses que les chats aiment :</p>
   <ul>
@@ -103,6 +103,6 @@ assert($('input[type=text]').length > 0);
     <li>le tonnerre</li>
     <li>les autres chats</li>
   </ol>
-  <input type="text" placeholder="cat photo URL">
+  <input type="text" placeholder="URL de la photo de chat">
 </main>
 ```

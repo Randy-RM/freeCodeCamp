@@ -23,25 +23,25 @@ Utilisez la notation dans le sens des aiguilles d'une montre pour donner à la c
 
 # --hints--
 
-Votre classe `blue-box` devrait donner au haut des éléments `40px` de `padding`.
+Votre classe `blue-box` devrait donner au haut de l'élément `40px` de `padding`.
 
 ```js
 assert($('.blue-box').css('padding-top') === '40px');
 ```
 
-Votre classe `blue-box` devrait donner à la droite des éléments `20px` de `padding`.
+Votre classe `blue-box` devrait donner à la droite de l'élément `20px` de `padding`.
 
 ```js
 assert($('.blue-box').css('padding-right') === '20px');
 ```
 
-Votre classe `blue-box` devrait donner au bas des éléments `20px` de `padding`.
+Votre classe `blue-box` devrait donner au bas de l'élément `20px` de `padding`.
 
 ```js
 assert($('.blue-box').css('padding-bottom') === '20px');
 ```
 
-Votre classe `blue-box` devrait donner à la gauche des éléments `40px` de `padding`.
+Votre classe `blue-box` devrait donner à la gauche de l'élément `40px` de `padding`.
 
 ```js
 assert($('.blue-box').css('padding-left') === '40px');
@@ -94,8 +94,8 @@ assert(
 <h5 class="injected-text">marge externe</h5>
 
 <div class="box yellow-box">
-  <h5 class="box red-box">marge interne/h5>
-  <h5 class="box blue-box">marge interne/h5>
+  <h5 class="box red-box">marge interne</h5>
+  <h5 class="box blue-box">marge interne</h5>
 </div>
 ```
 
@@ -135,7 +135,7 @@ assert(
 <h5 class="injected-text">marge externe</h5>
 
 <div class="box yellow-box">
-  <h5 class="box red-box">marge interne/h5>
-  <h5 class="box blue-box">marge interne/h5>
+  <h5 class="box red-box">marge interne</h5>
+  <h5 class="box blue-box">marge interne</h5>
 </div>
 ```

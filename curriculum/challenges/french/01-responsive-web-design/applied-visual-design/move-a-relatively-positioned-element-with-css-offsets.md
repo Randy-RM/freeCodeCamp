@@ -17,13 +17,13 @@ Utilisez les décalages CSS pour déplacer le `h2` de 15 pixels vers la droite e
 
 # --hints--
 
-Your code should use a CSS offset to position the `h2` 10px relatively up. In other words, move it 10px away from `bottom` where it normally is.
+Votre code doit utiliser un décalage CSS pour positionner le `h2` 10px plus haut. En d'autres termes, déplacez-le de 10px par rapport au `bas` où il se trouve normalement.
 
 ```js
 assert($('h2').css('bottom') == '10px');
 ```
 
-Your code should use a CSS offset to position the `h2` 15px relatively to the right. In other words, move it 15px away from where it normally is.
+Votre code doit utiliser un décalage CSS pour positionner le `h2` 15px relativement à droite. En d'autres termes, il faut le déplacer de 15px par rapport à sa position normale.
 
 ```js
 assert($('h2').css('left') == '15px');

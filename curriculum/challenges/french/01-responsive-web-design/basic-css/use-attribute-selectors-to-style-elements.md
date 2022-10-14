@@ -109,7 +109,7 @@ assert(
 <main>
   <p class="red-text">Cliquez ici pour voir plus <a href="#">photos de chats</a>.</p>
 
-  <a href="#"><img class="smaller-image thick-green-border" src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img class="smaller-image thick-green-border" src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <div class="silver-background">
     <p>Les choses que les chats aiment :</p>
@@ -180,7 +180,7 @@ assert(
 <main>
   <p class="red-text">Cliquez ici pour voir plus <a href="#">cat photos</a>.</p>
   
-  <a href="#"><img class="smaller-image thick-green-border" src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img class="smaller-image thick-green-border" src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
   
   <div class="silver-background">
     <p>Les choses que les chats aiment :</p>

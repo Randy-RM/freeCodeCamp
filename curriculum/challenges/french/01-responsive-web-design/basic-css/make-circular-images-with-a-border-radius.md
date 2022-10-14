@@ -13,7 +13,7 @@ En plus des pixels, vous pouvez également spécifier le "rayon de la bordure" e
 
 # --instructions--
 
-Give your cat photo `border-radius` de `50%`.
+Donnez à votre photo de chat un `border-radius` de `50%`.
 
 # --hints--
 
@@ -74,8 +74,7 @@ assert(code.match(/50%/g));
   <a href="#"
     ><img
       class="smaller-image thick-green-border"
-      src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg"
-      alt="A cute orange cat lying on its back."
+      src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."
   /></a>
 
   <div>
@@ -149,8 +148,7 @@ assert(code.match(/50%/g));
   <a href="#"
     ><img
       class="smaller-image thick-green-border"
-      src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg"
-      alt="A cute orange cat lying on its back."
+      src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."
   /></a>
 
   <div>

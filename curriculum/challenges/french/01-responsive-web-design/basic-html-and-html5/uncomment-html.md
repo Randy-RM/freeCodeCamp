@@ -52,7 +52,7 @@ assert(!$('*:contains("-->")')[1]);
 
 ```html
 <!--
-<h1>Hello World</h1>
+<h1>Bonjour le monde</h1>
 
 <h2>CatPhotoApp</h2>
 
@@ -63,7 +63,7 @@ assert(!$('*:contains("-->")')[1]);
 # --solutions--
 
 ```html
-<h1>Hello World</h1>
+<h1>Bonjour le monde</h1>
 
 <h2>CatPhotoApp</h2>
 

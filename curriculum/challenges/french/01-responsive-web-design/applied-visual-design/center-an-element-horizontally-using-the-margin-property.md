@@ -9,13 +9,13 @@ dashedName: center-an-element-horizontally-using-the-margin-property
 
 # --description--
 
-Une autre technique de positionnement consiste à centrer un élément de bloc horizontalement. Pour ce faire, il suffit de donner à sain`margin` la valeur auto.
+Une autre technique de positionnement consiste à centrer horizontalement un élément de bloc. Pour ce faire, il suffit de lui attribuer la valeur auto pour sa marge (`margin`).
 
 Cette méthode fonctionne également pour les images. Par défaut, les images sont des éléments en ligne, mais elles peuvent être transformées en éléments de type bloc lorsque vous définissez la propriété `display` sur `block`.
 
 # --instructions--
 
-Center the `div` on the page by adding a `margin` property with a value of `auto`.
+Centrez la `div` sur la page en ajoutant une propriété `margin` avec la valeur `auto`.
 
 # --hints--
 

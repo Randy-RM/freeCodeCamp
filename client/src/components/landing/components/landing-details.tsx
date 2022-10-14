@@ -1,11 +1,18 @@
 import { Row } from '@freecodecamp/react-bootstrap';
 import React from 'react';
+import envData from '../../../../../config/env.json';
 import { Spacer } from '../../helpers';
+import Map from '../../Map/index';
 import HtmlCode from '../../../assets/images/html.png';
 import CssCode from '../../../assets/images/css.png';
 import './card.css';
 
-function LandingDetails(): JSX.Element {
+const { apiLocation } = envData;
+
+interface LandingDetailsProps {
+  isSignedIn?: boolean;
+}
+function LandingDetails({ isSignedIn }: LandingDetailsProps): JSX.Element {
   return (
     <div className='landing-top'>
       <div>
@@ -37,6 +44,25 @@ function LandingDetails(): JSX.Element {
                 tailles d'écran en créant
                 `}
                 </p>
+                <div className='card-outlin-text-right'>
+                  <Spacer />
+                  {isSignedIn ? (
+                    <Map
+                      forLanding={true}
+                      single={true}
+                      className='btn-primary link-button'
+                      text='Débuter le Cours'
+                      keyPrefix='landing-details'
+                    />
+                  ) : (
+                    <a
+                      href={`${apiLocation}/signin`}
+                      className='btn-primary link-button'
+                    >
+                      {'Débuter le Cours'}
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -58,9 +84,13 @@ function LandingDetails(): JSX.Element {
                 la certification JavaScript Algorithm and Data Structures, vous apprendrez 
                 les principes fondamentaux de JavaScript, etc.
                 `}
+                  <br />
                 </p>
-                <div className='card-outlin-text-right text-love-light fw-semi-bold text-responsive'>
-                  Bientôt disponible
+                <div className='card-outlin-text-right'>
+                  <Spacer />
+                  <p className='text-love-light fw-semi-bold text-responsive py-4'>
+                    <span>Bientôt disponible</span>
+                  </p>
                 </div>
               </div>
             </div>

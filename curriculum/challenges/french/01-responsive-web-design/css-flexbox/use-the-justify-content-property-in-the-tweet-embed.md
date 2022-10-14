@@ -9,7 +9,7 @@ dashedName: use-the-justify-content-property-in-the-tweet-embed
 
 # --description--
 
-Le dernier défi montrait un exemple de la propriété `justify-content`. Pour le tweet embed, cette propriété peut être appliquée pour aligner les éléments de l'élément `.profile-name`.
+Le dernier défi montrait un exemple de la propriété `justify-content`. Pour le tweet embarqué, cette propriété peut être appliquée pour aligner les éléments de l'élément `.profile-name`.
 
 # --instructions--
 

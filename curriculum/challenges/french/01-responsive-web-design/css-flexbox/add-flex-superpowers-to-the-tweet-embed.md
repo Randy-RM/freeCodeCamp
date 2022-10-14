@@ -9,7 +9,7 @@ dashedName: add-flex-superpowers-to-the-tweet-embed
 
 # --description--
 
-À droite se trouve le tweet embed qui sera utilisé comme exemple pratique. Certains éléments seraient plus jolis avec une mise en page différente. Le dernier défi a démontré `display : flex`. Ici, vous allez l'ajouter à plusieurs composants dans le tweet embed pour commencer à ajuster leur positionnement.
+À droite se trouve le tweet embarqué qui sera utilisé comme exemple pratique. Certains éléments seraient plus jolis avec une mise en page différente. Le dernier défi a démontré `display : flex`. Ici, vous allez l'ajouter à plusieurs composants dans le tweet embarqué pour commencer à ajuster leur positionnement.
 
 # --instructions--
 

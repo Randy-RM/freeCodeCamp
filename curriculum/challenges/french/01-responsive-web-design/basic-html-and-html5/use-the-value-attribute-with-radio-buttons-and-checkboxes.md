@@ -13,17 +13,17 @@ Lorsqu'un formulaire est soumis, les données sont envoyées au serveur et compr
 Par exemple :
 
 ```html
-<label for="indoor">
-  <input id="indoor" value="indoor" type="radio" name="indoor-outdoor">Indoor
+<label for="interieur">
+  <input id="interieur" value="interieur" type="radio" name="interieur-exterieur"> Interieur
 </label>
-<label for="outdoor">
-  <input id="outdoor" value="outdoor" type="radio" name="indoor-outdoor">Outdoor
+<label for="exterieur">
+  <input id="exterieur" value="exterieur" type="radio" name="interieur-exterieur"> Extérieur
 </label>
 ```
 
-Ici, vous avez deux entrées `radio`. Lorsque l'utilisateur soumet le formulaire avec l'option `indoor` sélectionnée, les données du formulaire comprendront la ligne : `indoor-outdoor=indoor`. Cela provient des attributs `name` et `value` de l'entrée "indoor".
+Ici, vous avez deux entrées `radio`. Lorsque l'utilisateur soumet le formulaire avec l'option `interieur` sélectionnée, les données du formulaire comprendront la ligne : `interieur-exterieur=interieur`. Cela provient des attributs `name` et `value` de l'entrée "interieur".
 
-Si vous omettez l'attribut `value`, les données du formulaire soumis utilisent la valeur par défaut, qui est `on`. Dans ce scénario, si l'utilisateur clique sur l'option "indoor" et soumet le formulaire, les données de formulaire résultantes seront `indoor-outdoor=on`, ce qui n'est pas utile. L'attribut "value" doit donc être défini sur une valeur permettant d'identifier l'option.
+Si vous omettez l'attribut `value`, les données du formulaire soumis utilisent la valeur par défaut, qui est `on`. Dans ce scénario, si l'utilisateur clique sur l'option "interieur" et soumet le formulaire, les données de formulaire résultantes seront `interieur-exterieur=on`, ce qui n'est pas utile. L'attribut "value" doit donc être défini sur une valeur permettant d'identifier l'option.
 
 # --instructions--
 
@@ -31,50 +31,50 @@ Donnez à chacune des entrées existantes `radio` et `checkbox` l'attribut `valu
 
 # --hints--
 
-L'un de vos boutons radio doit avoir l'attribut `value` de `indoor`.
+L'un de vos boutons radio doit avoir l'attribut `value` de `interieur`.
 
 ```js
 assert(
-  $('label:contains("Indoor") > input[type="radio"]').filter("[value='indoor']")
+  $('label:contains("Interieur") > input[type="radio"]').filter("[value='interieur']")
     .length > 0
 );
 ```
 
-L'un de vos boutons radio doit avoir l'attribut `value` avec la valeur `outdoor`.
+L'un de vos boutons radio doit avoir l'attribut `value` avec la valeur `exterieur`.
 
 ```js
 assert(
-  $('label:contains("Outdoor") > input[type="radio"]').filter(
-    "[value='outdoor']"
+  $('label:contains("Extérieur") > input[type="radio"]').filter(
+    "[value='exterieur']"
   ).length > 0
 );
 ```
 
-L'une de vos cases à cocher doit avoir l'attribut `value` avec la valeur `loving`.
+L'une de vos cases à cocher doit avoir l'attribut `value` avec la valeur `aimable`.
 
 ```js
 assert(
-  $('label:contains("Loving") > input[type="checkbox"]').filter(
-    "[value='loving']"
+  $('label:contains("Aimable") > input[type="checkbox"]').filter(
+    "[value='aimable']"
   ).length > 0
 );
 ```
 
-L'une de vos cases à cocher devrait avoir l'attribut `value` de `lazy`.
+L'une de vos cases à cocher devrait avoir l'attribut `value` de `paresseux`.
 
 ```js
 assert(
-  $('label:contains("Lazy") > input[type="checkbox"]').filter("[value='lazy']")
+  $('label:contains("Paresseux") > input[type="checkbox"]').filter("[value='paresseux']")
     .length > 0
 );
 ```
 
-L'une de vos cases à cocher doit avoir l'attribut `value` avec la valeur `energetic`.
+L'une de vos cases à cocher doit avoir l'attribut `value` avec la valeur `energetique`.
 
 ```js
 assert(
-  $('label:contains("Energetic") > input[type="checkbox"]').filter(
-    "[value='energetic']"
+  $('label:contains("Énergétique") > input[type="checkbox"]').filter(
+    "[value='energetique']"
   ).length > 0
 );
 ```
@@ -88,7 +88,7 @@ assert(
 <main>
   </p>Cliquez ici pour voir plus de <a href="#">photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <p>Les choses que les chats aiment :</p>
   <ul>
@@ -103,11 +103,11 @@ assert(
     <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
-    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor"> Indoor</label>
-    <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label for="loving"><input id="loving" type="checkbox" name="personality"> Loving</label>
-    <label for="lazy"><input id="lazy" type="checkbox" name="personality"> Lazy</label>
-    <label for="energetic"><input id="energetic" type="checkbox" name="personality"> Energetic</label><br>
+    <label for="interieur"><input id="interieur" type="radio" name="interieur-exterieur">  Interieur</label>
+    <label for="exterieur"><input id="exterieur" type="radio" name="interieur-exterieur"> Extérieur</label><br>
+    <label for="aimable"><input id="aimable" type="checkbox" name="personality"> Aimable</label>
+    <label for="paresseux"><input id="paresseux" type="checkbox" name="personality"> Paresseux</label>
+    <label for="energetique"><input id="energetique" type="checkbox" name="personality"> Énergétique</label><br>
     <input type="text" placeholder="cat photo URL" required>
     <button type="submit">Submit</button>
   </form>
@@ -121,7 +121,7 @@ assert(
 <main>
   </p>Cliquez ici pour voir plus de <a href="#">photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <p>Les choses que les chats aiment :</p>
   <ul>
@@ -136,11 +136,11 @@ assert(
     <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
-    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor" value="indoor"> Indoor</label>
-    <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label><br>
-    <label for="loving"><input id="loving" type="checkbox" name="personality" value="loving"> Loving</label>
-    <label for="lazy"><input id="lazy" type="checkbox" name="personality" value="lazy"> Lazy</label>
-    <label for="energetic"><input id="energetic" type="checkbox" name="personality" value="energetic"> Energetic</label><br>
+    <label for="interieur"><input id="interieur" type="radio" name="interieur-exterieur" value="interieur"> Interieur</label>
+    <label for="exterieur"><input id="exterieur" type="radio" name="interieur-exterieur" value="exterieur"> Extérieur</label><br>
+    <label for="aimable"><input id="aimable" type="checkbox" name="personality" value="aimable"> Aimable</label>
+    <label for="paresseux"><input id="paresseux" type="checkbox" name="personality" value="paresseux"> Paresseux</label>
+    <label for="energetique"><input id="energetique" type="checkbox" name="personality" value="energetique"> Énergétique</label><br>
     <input type="text" placeholder="cat photo URL" required>
     <button type="submit">Submit</button>
   </form>

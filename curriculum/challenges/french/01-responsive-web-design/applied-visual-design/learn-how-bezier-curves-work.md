@@ -36,7 +36,7 @@ assert(
 );
 ```
 
-La valeur de la propriété `animation-timing-function` pour l'élément avec l'id `ball2` ne doit pas changer.a
+La valeur de la propriété `animation-timing-function` pour l'élément avec l'id `ball2` ne doit pas changer.
 
 ```js
 const ball2Animation = __helpers.removeWhiteSpace(

@@ -22,12 +22,12 @@ La meilleure pratique consiste à définir explicitement la relation entre une e
 Voici un exemple de case à cocher :
 
 ```html
-<label for="loving"><input id="loving" type="checkbox" name="personality"> Loving</label>
+<label for="aimable"><input id="aimable" type="checkbox" name="personnalite"> Aimable</label>
 ```
 
 # --instructions--
 
-Ajoutez à votre formulaire un ensemble de trois cases à cocher. Chaque case à cocher doit être imbriquée dans son propre élément `label`. Toutes les trois doivent partager l'attribut `name` de `personality`.
+Ajoutez à votre formulaire un ensemble de trois cases à cocher. Chaque case à cocher doit être imbriquée dans son propre élément `label`. Toutes les trois doivent avoir l'attribut `name` avec comme valeur `personnalite`.
 
 # --hints--
 
@@ -53,11 +53,11 @@ assert(
 );
 ```
 
-Vos cases à cocher doivent recevoir l'attribut `name` égal à `personality`.
+Vos cases à cocher doivent recevoir l'attribut `name` égal à `personnalite`.
 
 ```js
 assert(
-  $('label > input[type="checkbox"]').filter('[name="personality"]').length > 2
+  $('label > input[type="checkbox"]').filter('[name="personnalite"]').length > 2
 );
 ```
 
@@ -76,7 +76,7 @@ assert($('label').parent().get(0).tagName.match('FORM'));
 <main>
  <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
  <p>Les choses que les chats aiment :</p>
   <ul>
@@ -91,10 +91,10 @@ assert($('label').parent().get(0).tagName.match('FORM'));
     <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
-    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor"> Indoor</label>
-    <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Soumettre</button>
+    <label for="interieur"><input id="interieur" type="radio" name="interieur-exterieur"> Interieur</label>
+    <label for="exterieur"><input id="exterieur" type="radio" name="interieur-exterieur"> Extérieur</label><br>
+    <input type="text" placeholder="URL de la photo de chat" required>
+    <button type="submit">Envoyer</button>
   </form>
 </main>
 ```
@@ -106,7 +106,7 @@ assert($('label').parent().get(0).tagName.match('FORM'));
 <main>
 <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
   
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
   
   <p>Les choses que les chats aiment :</p>
   <ul>
@@ -121,15 +121,15 @@ assert($('label').parent().get(0).tagName.match('FORM'));
     <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
-    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor"> Indoor</label>
-    <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label for="playful"><input id="playful" type="checkbox" name="personality">Playful</label>
-    <label for="lazy"><input id="lazy" type="checkbox" 
-name="personality">Lazy</label>
-    <label for="evil"><input id="evil" type="checkbox" 
-name="personality">Evil</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Soumettre</button>
+    <label for="interieur"><input id="interieur" type="radio" name="interieur-exterieur"> Interieur</label>
+    <label for="exterieur"><input id="exterieur" type="radio" name="interieur-exterieur"> Extérieur</label><br>
+    <label for="aimable"><input id="aimable" type="checkbox" name="personnalite"> Aimable</label>
+    <label for="paresseux"><input id="paresseux" type="checkbox" 
+name="personnalite"> Paresseux</label>
+    <label for="mauvais"><input id="mauvais" type="checkbox" 
+name="personnalite"> Mauvais</label><br>
+    <input type="text" placeholder="URL de la photo de chat" required>
+    <button type="submit">Envoyer</button>
   </form>
 </main>
 ```

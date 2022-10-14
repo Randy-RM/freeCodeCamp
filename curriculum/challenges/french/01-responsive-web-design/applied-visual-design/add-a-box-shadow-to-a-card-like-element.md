@@ -33,7 +33,7 @@ box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 
 # --instructions--
 
-L'élément a maintenant un id de `thumbnail`. Avec ce sélecteur, utilisez les valeurs CSS d'exemple ci-dessus pour placer un `box-shadow` sur la carte.
+L'élément a maintenant un id qui vaut `thumbnail`. Avec ce sélecteur, utilisez les valeurs CSS de l'exemple ci-dessus pour placer un `box-shadow` sur la carte.
 
 # --hints--
 

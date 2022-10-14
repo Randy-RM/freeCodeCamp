@@ -17,7 +17,7 @@ Si vous définissez la marge d'un élément à une valeur négative, l'élément
 
 Essayez de définir le `marging` sur une valeur négative comme celle du conteneur rouge.
 
-Changez la "marge" du conteneur bleue à "15px", afin qu'elle remplisse toute la largeur horizontale du conteneur jaune qui l'entoure.
+Changez la `marge` du conteneur bleue à `15px`, afin qu'elle remplisse toute la largeur horizontale du conteneur jaune qui l'entoure.
 
 # --hints--
 

@@ -26,7 +26,7 @@ Modifiez le `padding` de votre conteneur bleue pour qu'il corresponde à celui d
 
 # --hints--
 
-Votre classe `blue-box` devrait donner aux éléments `20px` de `padding`.
+Votre classe `blue-box` devrait donner à l'élément `20px` de `padding`.
 
 ```js
 assert($('.blue-box').css('padding-top') === '20px');

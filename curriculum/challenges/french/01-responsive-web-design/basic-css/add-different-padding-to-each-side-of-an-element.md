@@ -19,25 +19,25 @@ Donnez au conteneur bleue un `padding` de `40px` sur son haut et son côté gauc
 
 # --hints--
 
-Votre classe `blue-box` devrait donner au sommet des éléments `40px` de `padding`.
+Votre classe `blue-box` devrait donner au sommet de l'élément `40px` de `padding`.
 
 ```js
 assert($('.blue-box').css('padding-top') === '40px');
 ```
 
-Votre classe `blue-box` devrait donner à la droite des éléments `20px` de `padding`.
+Votre classe `blue-box` devrait donner à la droite de l'élément `20px` de `padding`.
 
 ```js
 assert($('.blue-box').css('padding-right') === '20px');
 ```
 
-Votre classe `blue-box` devrait donner au bas des éléments `20px` de `padding`.
+Votre classe `blue-box` devrait donner au bas de l'élément `20px` de `padding`.
 
 ```js
 assert($('.blue-box').css('padding-bottom') === '20px');
 ```
 
-Votre classe `blue-box` devrait donner à la gauche des éléments `40px` de `padding`.
+Votre classe `blue-box` devrait donner à la gauche de l'élément `40px` de `padding`.
 
 ```js
 assert($('.blue-box').css('padding-left') === '40px');

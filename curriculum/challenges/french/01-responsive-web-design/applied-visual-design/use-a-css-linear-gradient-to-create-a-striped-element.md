@@ -53,7 +53,7 @@ Un arrêt de couleur à 40 pixels devrait être `yellow`.
 assert(code.match(/yellow\s+?40px/gi));
 ```
 
-Le deuxième arrêt de couleur à 40 pixels doit être `noir`.
+Le deuxième arrêt de couleur à 40 pixels doit être `black`.
 
 ```js
 assert(code.match(/yellow\s+?40px,\s*?black\s+?40px/gi));

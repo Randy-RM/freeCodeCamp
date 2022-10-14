@@ -21,7 +21,7 @@ Il semble qu'une variable soit utilisée pour définir la couleur de fond de la 
 
 # --hints--
 
-Votre règle `.red-box` devrait inclure un fallback avec le `background` défini à `red` immédiatement avant la déclaration `background` existante.
+Votre règle `.red-box` devrait inclure une solution de secours avec le `background` défini à `red` immédiatement avant la déclaration `background` existante.
 
 ```js
 assert(

@@ -13,7 +13,7 @@ Bienvenue aux défis de codage HTML de Code Learning Platform. Ces défis vous p
 
 Tout d'abord, vous commencerez par créer une page Web simple en utilisant le langage HTML. Vous pouvez modifier le code dans votre éditeur de code, qui est intégré à cette page Web.
 
-Voyez-vous le code dans votre éditeur de code qui dit "<h1>Hello</h1>` ? C'est un élément HTML.
+Voyez-vous le code dans votre éditeur de code qui dit `<h1>Bonjour</h1>` ? C'est un élément HTML.
 
 La plupart des éléments HTML ont une balise d'ouverture et une balise de fermeture.
 
@@ -35,14 +35,14 @@ Chaque défi comporte des tests que vous pouvez exécuter à tout moment en cliq
 
 # --instructions--
 
-Pour réussir le test de ce défi, changez le texte de votre élément `h1` pour dire `Hello World`.
+Pour réussir le test de ce défi, changez le texte de votre élément `h1` pour dire `Bonjour le monde`.
 
 # --hints--
 
-Votre élément `h1` doit contenir le texte `Hello World`.
+Votre élément `h1` doit contenir le texte `Bonjour le monde`.
 
 ```js
-assert.isTrue(/hello(\s)+world/gi.test($('h1').text()));
+assert.isTrue(/Bonjour(\s)+le(\s)+monde/gi.test($('h1').text()));
 ```
 
 # --seed--
@@ -50,11 +50,11 @@ assert.isTrue(/hello(\s)+world/gi.test($('h1').text()));
 ## --seed-contents--
 
 ```html
-<h1>Hello</h1>
+<h1>Bonjour</h1>
 ```
 
 # --solutions--
 
 ```html
-<h1>Hello World</h1>
+<h1>Bonjour le monde</h1>
 ```

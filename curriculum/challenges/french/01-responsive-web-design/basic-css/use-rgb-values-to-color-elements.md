@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aede08718
-title: Utiliser les valeurs RVB pour colorer les éléments
+title: Utiliser les valeurs RGB pour colorer les éléments
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cRkp2fr'
 forumTopicId: 18369
@@ -27,7 +27,7 @@ Au lieu d'utiliser six chiffres hexadécimaux comme avec le code hexadécimal, a
 
 Si vous faites le calcul, les deux chiffres d'une couleur sont égaux à 16 fois 16, ce qui nous donne 256 valeurs au total. Ainsi, `RGB`, qui commence à compter à partir de zéro, a exactement le même nombre de valeurs possibles que le code hexadécimal.
 
-Voici un exemple de la façon dont vous pouvez changer le fond de `body` en orange en utilisant son code RVB.
+Voici un exemple de la façon dont vous pouvez changer le fond de `body` en orange en utilisant son code RGB.
 
 ```css
 body {
@@ -37,7 +37,7 @@ body {
 
 # --instructions--
 
-Remplaçons le code hexadécimal de la couleur d'arrière-plan de notre élément `body` par la valeur RVB du noir : `rgb(0, 0, 0)`.
+Remplaçons le code hexadécimal de la couleur d'arrière-plan de notre élément `body` par la valeur RGB du noir : `rgb(0, 0, 0)`.
 
 # --hints--
 

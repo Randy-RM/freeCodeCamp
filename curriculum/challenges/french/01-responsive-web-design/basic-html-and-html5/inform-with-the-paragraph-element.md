@@ -9,7 +9,7 @@ dashedName: inform-with-the-paragraph-element
 
 # --description--
 
-Les éléments `p` sont les éléments préférés pour le texte des paragraphes sur les sites Web. `p` est l'abréviation de "paragraph".
+Les éléments `p` sont les éléments préférés pour le texte des paragraphes sur les sites Web. `p` est l'abréviation de "**paragraph**".
 
 Vous pouvez créer un élément de paragraphe comme ceci :
 
@@ -19,7 +19,7 @@ Vous pouvez créer un élément de paragraphe comme ceci :
 
 # --instructions--
 
-Créez un élément `p` sous votre élément `h2`, et donnez-lui le texte `Hello Paragraph`.
+Créez un élément `p` sous votre élément `h2`, et donnez-lui le texte `Bonjour Paragraphe`.
 
 **Note:** Par convention, toutes les balises HTML sont écrites en minuscules, par exemple `<p></p>` et non `<P></P>`.
 
@@ -31,10 +31,10 @@ Votre code devrait avoir un élément `p` valide.
 assert($('p').length > 0);
 ```
 
-Votre élément `p` devrait avoir le texte `Hello Paragraph`.
+Votre élément `p` devrait avoir le texte `Bonjour Paragraphe`.
 
 ```js
-assert.isTrue(/hello(\s)+paragraph/gi.test($('p').text()));
+assert.isTrue(/bonjour(\s)+paragraphe/gi.test($('p').text()));
 ```
 
 Votre élément `p` doit avoir une balise de fermeture.
@@ -51,14 +51,14 @@ assert(
 ## --seed-contents--
 
 ```html
-<h1>Hello World</h1>
+<h1>Bonjour le monde</h1>
 <h2>CatPhotoApp</h2>
 ```
 
 # --solutions--
 
 ```html
-<h1>Hello World</h1>
+<h1>Bonjour le monde</h1>
 <h2>CatPhotoApp</h2>
-<p>Hello Paragraph</p>
+<p>Bonjour Paragraphe</p>
 ```
