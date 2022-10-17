@@ -1,0 +1,86 @@
+small {
+  font-size: 14px;
+}
+
+.pull {
+  float: left;
+}
+
+.push {
+  float: right;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+/*Card Styling*/
+
+.card-outlin-border {
+  border: solid 1px #3e3d3d;
+}
+
+.card-py-5 {
+  padding: 5% 0;
+}
+
+.card-unit {
+  padding: 12px 0;
+}
+
+.card-item {
+  padding: 0% 5%;
+}
+
+.card-sub {
+  padding: 0 18px;
+}
+
+.card-footer {
+  padding: 5% 5%;
+  overflow: hidden;
+}
+
+.card-details-logo {
+  width: 20%;
+  padding: 5%;
+}
+
+/*Card Flex Code*/
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.card-unit {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  .card-unit {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card-unit {
+    width: 48%;
+  }
+}
+
+.flexible {
+  flex-grow: 1;
+}
