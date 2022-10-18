@@ -1,8 +1,45 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import {
+  userSelector,
+  userFetchStateSelector,
+  isSignedInSelector
+} from '../../../redux';
+import Map from '../../Map/index';
+
 import { Spacer } from '../../helpers';
 
 import '../intro.css';
-function IntroDescription(): JSX.Element {
+
+type FetchState = {
+  pending: boolean;
+  complete: boolean;
+  errored: boolean;
+};
+
+type User = {
+  acceptedPrivacyTerms: boolean;
+};
+
+const mapStateToProps = createSelector(
+  userFetchStateSelector,
+  isSignedInSelector,
+  userSelector,
+  (fetchState: FetchState, isSignedIn, user: User) => ({
+    fetchState,
+    isSignedIn,
+    user
+  })
+);
+
+type IntroDescriptionProps = {
+  isSignedIn?: boolean;
+  fetchState: FetchState;
+  user: User;
+};
+
+function IntroDescription({ isSignedIn }: IntroDescriptionProps): JSX.Element {
   return (
     <div className='intro-description'>
       <h1>
@@ -35,10 +72,20 @@ function IntroDescription(): JSX.Element {
           
         `}
       </p>
+      <Spacer />
+      {isSignedIn && (
+        <Map
+          forLanding={true}
+          single={true}
+          className='btn-primary link-button'
+          text='Lancez-vous maintenant !'
+          keyPrefix='landing-details'
+        />
+      )}
+      <Spacer />
     </div>
   );
 }
 
 IntroDescription.displayName = 'IntroDescription';
-
-export default IntroDescription;
+export default connect(mapStateToProps)(IntroDescription);
