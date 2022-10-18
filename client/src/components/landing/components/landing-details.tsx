@@ -1,6 +1,6 @@
 import React from 'react';
 import envData from '../../../../../config/env.json';
-import { Spacer } from '../../helpers';
+// import { Spacer } from '../../helpers';
 import Map from '../../Map/index';
 import HtmlCode from '../../../assets/images/html.png';
 import CssCode from '../../../assets/images/css.png';
@@ -23,10 +23,9 @@ function LandingDetails({ isSignedIn }: LandingDetailsProps): JSX.Element {
           `}
         </p>
       </div>
-      <Spacer />
       <div className=''>
         <div className='card-container'>
-          <div className='card-unit'>
+          <div className='card-unit-col-6'>
             <div className='bg-secondary card-py-5'>
               <div className='card-details-logo'>
                 <img src={HtmlCode} alt='LearnCode' className='img-fluid' />
@@ -56,7 +55,7 @@ function LandingDetails({ isSignedIn }: LandingDetailsProps): JSX.Element {
                       forLanding={true}
                       single={true}
                       className='btn-primary link-button'
-                      text='Débuter le Cours'
+                      text='Suivre le cours'
                       keyPrefix='landing-details'
                     />
                   ) : (
@@ -64,7 +63,7 @@ function LandingDetails({ isSignedIn }: LandingDetailsProps): JSX.Element {
                       href={`${apiLocation}/signin`}
                       className='btn-primary link-button'
                     >
-                      {'Débuter le Cours'}
+                      {'Suivre le cours'}
                     </a>
                   )}
                 </div>
@@ -72,7 +71,7 @@ function LandingDetails({ isSignedIn }: LandingDetailsProps): JSX.Element {
             </div>
           </div>
 
-          <div className='card-unit'>
+          <div className='card-unit-col-6'>
             <div className='bg-secondary card-py-5'>
               <div className='card-details-logo'>
                 <img src={CssCode} alt='LearnCode' className='img-fluid' />

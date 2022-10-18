@@ -1,52 +1,60 @@
-import { Row } from '@freecodecamp/react-bootstrap';
+// import { Row } from '@freecodecamp/react-bootstrap';
 import React from 'react';
-import { Spacer } from '../../helpers';
+// import { Spacer } from '../../helpers';
 import HtmlCode from '../../../assets/images/bi-bar-chart.png';
 import CssCode from '../../../assets/images/bx-code-block.png';
 import './card-outline.css';
+import './card-details.css';
 
 function LandingLearn(): JSX.Element {
   return (
     <div className='landing-top'>
       <div>
         <h2 className='big-heading'>{`Comment allez-vous apprendre ?`}</h2>
+        <br />
       </div>
-      <Row>
-        <Spacer />
-        <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
-          <div className='card-outlin-border card-mt-mb'>
-            <div className='card-outlin'>
+      <div className=''>
+        <div className='card-container'>
+          <div className='card-unit-col-6'>
+            <div className='card-outlin-border card-py-5'>
               <div className='card-learn-logo'>
                 <img src={HtmlCode} alt='LearnCode' className='img-fluid' />
               </div>
-              <h4 className='fw-bold card-outlin-text'>{`Étape par étape`}</h4>
-              <p className='text-responsive card-outlin-text'>
-                {`
+              <div className='card-item'>
+                <h4 className='fw-bold text-center'>{`Étape par étape`}</h4>
+              </div>
+              <div className='card-item  flexible'>
+                <p className='text-responsive text-center'>
+                  {`
                 Suivez notre parcours étape par étape 
                 et développez vos compétences.
                 `}
-              </p>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
-          <div className='card-outlin-border card-mt-mb'>
-            <div className='card-outlin'>
+
+          <div className='card-unit-col-6'>
+            <div className='card-outlin-border card-py-5'>
               <div className='card-learn-logo'>
                 <img src={CssCode} alt='LearnCode' className='img-fluid' />
               </div>
-              <h4 className='fw-bold card-outlin-text'>{`Interactif`}</h4>
-              <p className='text-responsive card-outlin-text'>
-                {`
+              <div className='card-item flexible'>
+                <h4 className='fw-bold text-center'>{`Interactif`}</h4>
+              </div>
+              <div className='card-item  flexible'>
+                <p className='text-responsive text-center'>
+                  {`
                 Apprenez et interagissez directement sur 
                 notre éditeur de code en ligne.
                 `}
-              </p>
+                </p>
+                <br />
+              </div>
             </div>
           </div>
         </div>
-        <Spacer />
-      </Row>
+      </div>
     </div>
   );
 }
