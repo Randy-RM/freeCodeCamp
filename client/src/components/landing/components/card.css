@@ -86,6 +86,12 @@ img {
   }
 }
 
+@media (max-width: 350px) {
+  .hide-small {
+    display: none;
+  }
+}
+
 .flexible {
   flex-grow: 1;
 }
