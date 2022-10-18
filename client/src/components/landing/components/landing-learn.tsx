@@ -3,8 +3,7 @@ import React from 'react';
 // import { Spacer } from '../../helpers';
 import HtmlCode from '../../../assets/images/bi-bar-chart.png';
 import CssCode from '../../../assets/images/bx-code-block.png';
-import './card-outline.css';
-import './card-details.css';
+import './card.css';
 
 function LandingLearn(): JSX.Element {
   return (

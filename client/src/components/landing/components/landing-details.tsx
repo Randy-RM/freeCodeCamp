@@ -4,7 +4,7 @@ import envData from '../../../../../config/env.json';
 import Map from '../../Map/index';
 import HtmlCode from '../../../assets/images/html.png';
 import CssCode from '../../../assets/images/css.png';
-import './card-details.css';
+import './card.css';
 
 const { apiLocation } = envData;
 
