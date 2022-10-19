@@ -25,6 +25,7 @@ import { MarkdownRemark, AllChallengeNode, User } from '../../redux/prop-types';
 import Block from './components/block';
 import BlockProgressBar from './components/block-progress-bar';
 import BlockLastVisited from './components/block-last-visited';
+import SuperBlockIntro from './components/super-block-intro';
 import { resetExpansion, toggleBlock } from './redux';
 
 import './intro.css';
@@ -196,7 +197,10 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
         <title>{i18nTitle} | Code Learning Plateform</title>
       </Helmet>
       <Grid fluid={true} className='bg-light'>
-        <Spacer size={2} />
+        <Spacer size={3} />
+        <SuperBlockIntro superBlock={superBlock} />
+        <Spacer />
+        <Spacer size={1} />
         <div className=''>
           <Spacer size={1} />
           <Row className='super-block-intro-page'>

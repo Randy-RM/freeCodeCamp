@@ -18,12 +18,10 @@ function LandingTop({ pageName, isSignedIn }: LandingTopProps): JSX.Element {
         <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
           <div className='landing-top-content'>
             <h1 className='hero-heading' data-test-label={`${pageName}-header`}>
-              {`
-                Apprenez à coder 
-                gratuitement et soyez admis 
-                dans la meilleure école 
-                de codage.
-              `}
+              Apprenez à <span className='text-love-light'>coder</span>{' '}
+              gratuitement et soyez admis dans la{' '}
+              <span className='text-love-light'>meilleure</span> école de
+              codage.
             </h1>
             <p className='hero-text text-responsive'>
               {`
