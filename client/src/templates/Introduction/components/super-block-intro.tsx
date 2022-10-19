@@ -30,7 +30,8 @@ function SuperBlockIntro(props: SuperBlockIntroProps): JSX.Element {
         <Row className='super-block-intro-page'>
           <Col md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
             <p className='text-love-light fw-bold'>
-              {t(`intro:misc-text.courses`)}
+              {/* {t(`intro:misc-text.courses`)} */}
+              Cour
             </p>
             <h1 className='big-heading'>{i18nSuperBlock}</h1>
             <Spacer size={1} />

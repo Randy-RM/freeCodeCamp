@@ -62,13 +62,6 @@ function IntroDescription({ isSignedIn }: IntroDescriptionProps): JSX.Element {
       </p>
       <p>
         {`
-          Si vous voulez obtenir un emploi de développeur ou 
-          des clients en freelance, les compétences en 
-          programmation sont nécessaire.
-        `}
-      </p>
-      <p>
-        {`
           
         `}
       </p>

@@ -188,6 +188,8 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
 
   const { completedChallenges } = props.user;
 
+  console.log(props.user);
+
   // delete the project module which is always at the end of the table
   progressData.pop();
 

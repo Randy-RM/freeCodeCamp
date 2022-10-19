@@ -47,7 +47,7 @@ function LandingDetails({ isSignedIn }: LandingDetailsProps): JSX.Element {
               </div>
               <div className='card-footer'>
                 <span className='pull fw-semi-bold'>
-                  <small className='hide-small'>300 Heurs</small>
+                  <small className='hide-small'>300 Heures</small>
                 </span>
                 <div className='push'>
                   {isSignedIn ? (
