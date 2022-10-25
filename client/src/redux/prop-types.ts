@@ -151,6 +151,24 @@ export type ChallengeWithCompletedNode = {
   title: string;
 };
 
+export type CurrentChallengeNode = {
+  node: {
+    challenge: {
+      block: string;
+      challengeType: number;
+      dashedName: string;
+      fields: {
+        blockName: string;
+        slug: string;
+      };
+      id: string;
+      order: number;
+      superBlock: SuperBlocks;
+      title: string;
+    };
+  };
+};
+
 export type ChallengeNode = {
   challenge: {
     block: string;

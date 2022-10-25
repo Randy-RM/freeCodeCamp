@@ -23,11 +23,11 @@ body { width: 30vw; }
 
 # --instructions--
 
-Définissez le `height` de la balise `h2` à 80 % de la largeur de la fenêtre d'affichage et le `height` du paragraphe à 75 % de la plus petite dimension de la fenêtre d'affichage.
+Définissez le `width` de la balise `h2` à 80 % de la largeur de la fenêtre d'affichage et le `width` du paragraphe à 75 % de la plus petite dimension de la fenêtre d'affichage.
 
 # --hints--
 
-Votre balise `h2` doit avoir un `height` de 80vw.
+Votre balise `h2` doit avoir un `width` de 80vw.
 
 ```js
 assert(
