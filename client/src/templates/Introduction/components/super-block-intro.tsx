@@ -39,19 +39,19 @@ function SuperBlockIntro(props: SuperBlockIntroProps): JSX.Element {
           {/* {generateIconComponent(superBlock, 'cert-header-icon')} */}
           {/* <Spacer /> */}
           <Col className='' md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
-            <div className='alert bg-secondary'>
-              {superBlockIntroText.map((str, i) => (
-                <p key={i}>{str}</p>
-              ))}
-            </div>
-          </Col>
-          <Col className='' md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
             <div className=''>
               {superBlockNoteText && (
                 <div className='alert alert-info' style={{ marginTop: '2rem' }}>
                   {superBlockNoteText}
                 </div>
               )}
+            </div>
+          </Col>
+          <Col className='' md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+            <div className='alert bg-secondary'>
+              {superBlockIntroText.map((str, i) => (
+                <p key={i}>{str}</p>
+              ))}
             </div>
           </Col>
           <Spacer />
