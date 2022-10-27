@@ -365,7 +365,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
                 onChange={this.handleNameChange}
                 type='text'
                 value={name}
-                placeholder='Jean-Louis Mbaka'
+                placeholder='John Doe'
               />
 
               {!isFocusName && !isBlurName && isValidName && (

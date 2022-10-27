@@ -98,6 +98,19 @@ export class NavLinks extends Component<NavLinksProps, {}> {
                 </Link>
               </li>
 
+              {/* <li className='nav-item'>
+                <Link
+                  onClick={this.handleIsDropdown}
+                  className=''
+                  key='dashboard'
+                  sameTab={false}
+                  to={`/dashboard`}
+                  activeClassName='active'
+                >
+                  {'Tableau de bord'}
+                </Link>
+              </li> */}
+
               <li className='nav-item'>
                 <Link
                   onClick={this.handleIsDropdown}

@@ -204,7 +204,7 @@ export class Block extends Component<BlockProps> {
             >
               <Caret />
               <h4 className='course-title'>
-                {`${isExpanded ? 'fermer' : 'voir plus de chapitres'}`}
+                {`${isExpanded ? 'Fermer' : 'Voir plus de chapitres'}`}
               </h4>
               <div className='map-title-completed course-title'>
                 {this.renderCheckMark(isBlockCompleted)}
