@@ -46,7 +46,7 @@ type LearnLayoutProps = {
   children?: React.ReactNode;
 };
 
-function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
+function Landing({ isSignedIn, user }: LearnLayoutProps): ReactElement {
   // const { t } = useTranslation();
 
   return (
@@ -56,6 +56,7 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
         <title>{`Apprendre à coder - gratuitement | Code Learning Platform`}</title>
       </Helmet>
       <main className='landing-page bg-light'>
+        {console.log(user)}
         <div className='bg-secondary'>
           <Grid>
             <LandingTop pageName={'landing'} isSignedIn={isSignedIn} />

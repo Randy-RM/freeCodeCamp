@@ -98,7 +98,7 @@ export class NavLinks extends Component<NavLinksProps, {}> {
                 </Link>
               </li>
 
-              {/* <li className='nav-item'>
+              <li className='nav-item'>
                 <Link
                   onClick={this.handleIsDropdown}
                   className=''
@@ -109,7 +109,7 @@ export class NavLinks extends Component<NavLinksProps, {}> {
                 >
                   {'Tableau de bord'}
                 </Link>
-              </li> */}
+              </li>
 
               <li className='nav-item'>
                 <Link

@@ -269,6 +269,37 @@
       ],
       "default": []
     },
+    "currentsSuperBlock": {
+      "type": [
+        {
+          "superBlockName": {
+            "type": "string",
+            "default": ""
+          },
+          "blockName": {
+            "type": "string",
+            "default": ""
+          },
+          "challengeName": {
+            "type": "string",
+            "default": ""
+          },
+          "currentChallengeId": {
+            "type": "string",
+            "default": ""
+          },
+          "totalChallenges": {
+            "type": "number",
+            "default": 0
+          },
+          "totalCompletedChallenges": {
+            "type": "number",
+            "default": 0
+          }
+        }
+      ],
+      "default": []
+    },
     "partiallyCompletedChallenges": {
       "type": [
         {
