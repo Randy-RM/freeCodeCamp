@@ -94,7 +94,7 @@ export class NavLinks extends Component<NavLinksProps, {}> {
                   to='/learn/responsive-web-design/'
                   activeClassName='active'
                 >
-                  {'Cour'}
+                  {'Cours'}
                 </Link>
               </li>
 

@@ -17,6 +17,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  padding: 1.5em 0;
 }
 
 .cours-card-content .cours-card-content-left {
@@ -65,5 +66,23 @@
   border: solid 2px var(--love-light);
 }
 
-@media (max-width: 769px) {
+@media (max-width: 480px) {
+  .cours-card-progress .cours-card-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0.2em 0;
+  }
+
+  .cours-card-content .cours-card-content-left {
+    width: 45%;
+  }
+
+  .cours-card-content .cours-card-content-right {
+    width: 100%;
+    text-align: left;
+    padding: 1.5em 0;
+  }
 }
