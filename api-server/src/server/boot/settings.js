@@ -28,6 +28,11 @@ export default function settingsController(app) {
   api.post('/update-my-theme', deprecatedEndpoint);
   api.put('/update-my-about', ifNoUser401, updateMyAbout);
   api.put('/update-my-education', ifNoUser401, updateMyEducation);
+  api.put(
+    '/update-my-currents-super-block',
+    ifNoUser401,
+    updateMyCurrentsSuperBlock
+  );
   api.put('/update-my-work-experience', ifNoUser401, updateMyWorkExperience);
   api.put(
     '/update-my-email',
@@ -147,6 +152,17 @@ function updateMyEducation(req, res, next) {
   log(fieldOfStudy, levelOfStudy);
   // prevent dataurls from being stored
   const update = { fieldOfStudy, levelOfStudy };
+  return user.updateAttributes(update, createStandardHandler(req, res, next));
+}
+
+function updateMyCurrentsSuperBlock(req, res, next) {
+  const {
+    user,
+    body: { currentsSuperBlock }
+  } = req;
+  log(currentsSuperBlock);
+  // prevent dataurls from being stored
+  const update = { currentsSuperBlock };
   return user.updateAttributes(update, createStandardHandler(req, res, next));
 }
 

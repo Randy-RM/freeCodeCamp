@@ -11,7 +11,8 @@ import {
   putUpdateMyProfileUI,
   putUpdateMyUsername,
   putUpdateUserFlag,
-  putVerifyCert
+  putVerifyCert,
+  putUpdateMyCurrentsSuperBlock
 } from '../../utils/ajax';
 
 import {
@@ -23,6 +24,8 @@ import {
   submitNewAboutError,
   submitNewEducationComplete,
   submitNewEducationError,
+  submitNewCurrentsSuperBlockComplete,
+  submitNewCurrentsSuperBlockError,
   submitNewWorkExperienceComplete,
   submitNewWorkExperienceError,
   submitNewUsernameComplete,
@@ -50,6 +53,16 @@ function* submitNewEducationSaga({ payload }) {
     yield put(createFlashMessage(response));
   } catch (e) {
     yield put(submitNewEducationError(e));
+  }
+}
+
+function* submitNewCurrentsSuperBlockSaga({ payload }) {
+  try {
+    const response = yield call(putUpdateMyCurrentsSuperBlock, payload);
+    yield put(submitNewCurrentsSuperBlockComplete({ ...response, payload }));
+    yield put(createFlashMessage(response));
+  } catch (e) {
+    yield put(submitNewCurrentsSuperBlockError(e));
   }
 }
 
@@ -134,6 +147,10 @@ export function createSettingsSagas(types) {
     takeEvery(types.updateUserFlag, updateUserFlagSaga),
     takeLatest(types.submitNewAbout, submitNewAboutSaga),
     takeLatest(types.submitNewEducation, submitNewEducationSaga),
+    takeLatest(
+      types.submitNewCurrentsSuperBlock,
+      submitNewCurrentsSuperBlockSaga
+    ),
     takeLatest(
       types.submitNewWorkExperience,
       submitNewWorkExperienceCompleteSaga

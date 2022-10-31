@@ -14,6 +14,7 @@ export const actionTypes = createTypes(
     ...createAsyncTypes('resetProgress'),
     ...createAsyncTypes('deleteAccount'),
     ...createAsyncTypes('submitNewEducation'),
+    ...createAsyncTypes('submitNewCurrentsSuperBlock'),
     ...createAsyncTypes('submitNewWorkExperience')
   ],
   ns

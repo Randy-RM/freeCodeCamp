@@ -699,6 +699,8 @@ export const reducer = handleActions(
       payload ? spreadThePayloadOnUser(state, payload) : state,
     [settingsTypes.submitNewEducationComplete]: (state, { payload }) =>
       payload ? spreadThePayloadOnUser(state, payload) : state,
+    [settingsTypes.submitNewCurrentsSuperBlockComplete]: (state, { payload }) =>
+      payload ? spreadThePayloadOnUser(state, payload) : state,
     [settingsTypes.submitNewWorkExperienceComplete]: (state, { payload }) =>
       payload ? spreadThePayloadOnUser(state, payload) : state,
     [settingsTypes.updateMyEmailComplete]: (state, { payload }) =>

@@ -37,6 +37,7 @@ export const submitNewAboutComplete = createAction(
 export const submitNewAboutError = createAction(types.submitNewAboutError);
 
 export const submitNewEducation = createAction(types.submitNewEducation);
+
 export const submitNewEducationComplete = createAction(
   types.submitNewEducationComplete,
   checkForSuccessPayload
@@ -44,6 +45,21 @@ export const submitNewEducationComplete = createAction(
 export const submitNewEducationError = createAction(
   types.submitNewEducationError
 );
+
+//----------------------------------------------------------------
+export const submitNewCurrentsSuperBlock = createAction(
+  types.submitNewCurrentsSuperBlock
+);
+
+export const submitNewCurrentsSuperBlockComplete = createAction(
+  types.submitNewCurrentsSuperBlockComplete,
+  checkForSuccessPayload
+);
+
+export const submitNewCurrentsSuperBlockError = createAction(
+  types.submitNewCurrentsSuperBlockError
+);
+//----------------------------------------------------------------
 
 export const submitNewWorkExperience = createAction(
   types.submitNewWorkExperience
