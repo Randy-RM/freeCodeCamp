@@ -41,32 +41,37 @@ export function CoursCardProgress(props: CoursCardProgressProps): JSX.Element {
   return (
     <>
       <div className='cours-card-progress bg-light p-4'>
-        <div>
-          <small className='text-love-light fw-bold'>
-            Cours
-            <br />
-          </small>
-          <h3>{coursName}</h3>
-        </div>
+        <small className='text-love-light fw-bold'>
+          Cours
+          <br />
+        </small>
         <div className='cours-card-content'>
           <div className='cours-card-content-left'>
-            <small className='fw-bold'>
-              {`${percentageCompleted}% ${
-                percentageCompleted === 0 || percentageCompleted === 1
-                  ? 'achevé'
-                  : 'achevés'
-              }`}
-              <br />
-            </small>
-            <ProgressBar now={percentageCompleted} animated={'true'} />
+            <h3 className='display-inlin'>{coursName}</h3>
           </div>
-          <div className='cours-card-content-right'>
+          <div className='cours-card-content-right hide-on-mobile'>
             <small>
               <span className='cours-card-progress-btn'>
-                Poursuivre le cours
+                Continuer le cours
               </span>
             </small>
           </div>
+        </div>
+        <div>
+          <small className='fw-bold'>
+            {`${percentageCompleted}% ${
+              percentageCompleted === 0 || percentageCompleted === 1
+                ? 'achevé'
+                : 'achevés'
+            }`}
+            <br />
+          </small>
+          <ProgressBar now={percentageCompleted} animated={'true'} />
+        </div>
+        <div className='show-on-mobile'>
+          <small>
+            <span className='cours-card-progress-btn'>Continuer le cours</span>
+          </small>
         </div>
       </div>
     </>
