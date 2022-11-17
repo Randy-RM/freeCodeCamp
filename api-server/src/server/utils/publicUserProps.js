@@ -49,7 +49,8 @@ export const publicUserProps = [
   'levelOfStudy',
   'employedWhere',
   'sinceWhen',
-  'position'
+  'position',
+  'currentsSuperBlock'
 ];
 
 export const userPropsForSession = [

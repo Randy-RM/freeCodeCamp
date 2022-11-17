@@ -66,6 +66,24 @@ const createStandardHandler = (req, res, next) => err => {
   return res.status(200).json(standardSuccessMessage);
 };
 
+const standardProgressErrorMessage = {
+  type: 'danger',
+  message: 'Un problème est survenu lors de la mise à jour de votre progression'
+};
+
+const standardProgressSuccessMessage = {
+  type: 'success',
+  message: 'Nous avons mis à jour votre progression'
+};
+
+const createStandardProgressHandler = (req, res, next) => err => {
+  if (err) {
+    res.status(500).json(standardProgressErrorMessage);
+    return next(err);
+  }
+  return res.status(200).json(standardProgressSuccessMessage);
+};
+
 const updateMyEmailValidators = [
   check('email').isEmail().withMessage('Email format is invalid.')
 ];
@@ -163,7 +181,10 @@ function updateMyCurrentsSuperBlock(req, res, next) {
   log(currentsSuperBlock);
   // prevent dataurls from being stored
   const update = { currentsSuperBlock };
-  return user.updateAttributes(update, createStandardHandler(req, res, next));
+  return user.updateAttributes(
+    update,
+    createStandardProgressHandler(req, res, next)
+  );
 }
 
 function updateMyWorkExperience(req, res, next) {

@@ -1,3 +1,4 @@
+// import { NumberQuestionOptions } from 'inquirer';
 import PropTypes from 'prop-types';
 import { HandlerProps } from 'react-reflex';
 import { SuperBlocks } from '../../../config/certification-settings';
@@ -62,7 +63,17 @@ export const UserPropType = PropTypes.shape({
   levelOfStudy: PropTypes.string,
   employedWhere: PropTypes.string,
   sinceWhen: PropTypes.string,
-  position: PropTypes.string
+  position: PropTypes.string,
+  currentsSuperBlock: PropTypes.arrayOf(
+    PropTypes.shape({
+      superBlockName: PropTypes.string,
+      blockName: PropTypes.string,
+      superBlockPath: PropTypes.string,
+      currentChallengeId: PropTypes.string,
+      totalChallenges: PropTypes.number,
+      totalCompletedChallenges: PropTypes.number
+    })
+  )
 });
 
 export const CurrentCertsPropType = PropTypes.arrayOf(
@@ -307,6 +318,7 @@ export type User = {
   employedWhere: string;
   sinceWhen: string;
   position: string;
+  currentsSuperBlock: CurrentSuperBlock[];
 } & ClaimedCertifications;
 
 export type ProfileUI = {
@@ -373,6 +385,28 @@ export type Portfolio = {
   url?: string;
   image?: string;
   description?: string;
+};
+
+export type CurrentsSuperBlock = {
+  superBlockName?: string;
+  blockName?: string;
+  superBlockPath?: string;
+  currentChallengeId?: string;
+  totalChallenges?: number;
+  totalCompletedChallenges?: number;
+};
+
+export type CurrentSuperBlock = {
+  superBlockName?: string;
+  blockName?: string;
+  superBlockPath?: string;
+  currentChallengeId?: string;
+  totalChallenges?: number;
+  totalCompletedChallenges?: number;
+};
+
+export type CurrentsSuperBlockList = {
+  currentsSuperBlock?: CurrentSuperBlock[];
 };
 
 export type FileKeyChallenge = {

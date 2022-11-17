@@ -244,16 +244,21 @@ export function putUpdateMyUsername(username: string): Promise<void> {
   return put('/update-my-username', { username });
 }
 
-interface MyCurrentsSuperBlock {
+interface CurrentSuperBlock {
   superBlockName: string;
   blockName: string;
-  challengeName: string;
+  superBlockPath: string;
   currentChallengeId: string;
   totalChallenges: number;
   totalCompletedChallenges: number;
 }
+
+interface MyCurrentsSuperBlockList {
+  currentsSuperBlock: CurrentSuperBlock[];
+}
+
 export function putUpdateMyCurrentsSuperBlock(
-  values: MyCurrentsSuperBlock
+  values: MyCurrentsSuperBlockList
 ): Promise<void> {
   return put('/update-my-currents-super-block', { ...values });
 }

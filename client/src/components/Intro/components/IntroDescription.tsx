@@ -51,7 +51,7 @@ function IntroDescription({ isSignedIn }: IntroDescriptionProps): JSX.Element {
       <p>
         {`
           Si vous êtes novice en programmation, nous vous recommandons 
-          de commencer par le début et de parcourir nos formations dans l'ordre.
+          de commencer par le début et de parcourir nos cours dans l'ordre.
         `}
       </p>
       <p>

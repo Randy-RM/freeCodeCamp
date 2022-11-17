@@ -280,7 +280,7 @@
             "type": "string",
             "default": ""
           },
-          "challengeName": {
+          "superBlockPath": {
             "type": "string",
             "default": ""
           },

@@ -43,6 +43,7 @@ const authUser = {
   sinceWhen: 'Lorem Ipsum',
   position: 'Lorem Ipsum',
   location: '',
+  currentsSuperBlock: [],
   picture: defaultUserImage,
   acceptedPrivacyTerms: envVariables.includes('--unset-privacy-terms')
     ? null
@@ -112,6 +113,7 @@ const blankUser = {
   sinceWhen: 'Lorem Ipsum',
   position: 'Lorem Ipsum',
   location: '',
+  currentsSuperBlock: [],
   picture: defaultUserImage,
   acceptedPrivacyTerms: true,
   sendQuincyEmail: false,
