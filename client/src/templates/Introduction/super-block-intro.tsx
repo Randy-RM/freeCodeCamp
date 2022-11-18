@@ -187,6 +187,7 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
     nodesForSuperBlock.map(({ challenge: { block } }) => block)
   );
 
+  // Translates the title and content of the course
   const i18nSuperBlock = t(`intro:${superBlock}.title`);
   const i18nTitle =
     superBlock === SuperBlocks.CodingInterviewPrep
@@ -201,6 +202,7 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
     nodesForSuperBlock.filter(node => node.challenge.block === blockDashedName)
   );
 
+  // Count the total number of challenges and the number of solved challenges
   const countChallengeBlocks = (
     blocs: ChallengeNode[][],
     completedChallenges: CompletedChallenge[]
@@ -232,6 +234,7 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
     };
   };
 
+  // Check if the current challenge is in the course
   const isCurrentChallengeInSuperBlock = (challengeId: string): boolean => {
     const isChallengeExist = blocs.find(block => {
       return block.find(challenge => challenge.challenge.id === challengeId);
@@ -245,15 +248,17 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
   );
 
   const { currentsSuperBlock } = user;
+  // Checks if there is progress on the course
   const isCurrentSuperBlockProgressExist: CurrentSuperBlock | undefined =
     currentsSuperBlock.find(
       currentsSuperBlockItem =>
         currentsSuperBlockItem.superBlockName === i18nSuperBlock
     );
 
+  // Initialize the value of the followed course and the progression to be saved
   const currentSuperBlockValue: CurrentSuperBlock = {
     superBlockName: i18nSuperBlock,
-    blockName: 'test',
+    blockName: '',
     superBlockPath: props.location.pathname,
     currentChallengeId: props.currentChallengeId,
     totalChallenges: challengeCount,
@@ -264,6 +269,7 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
     currentsSuperBlock: []
   };
 
+  // Management of the user's progress on the course followed and records the course followed
   const handleUpdateSuperBlockProgress = (
     currentSuperBlock: CurrentSuperBlock
   ) => {
@@ -345,7 +351,10 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
               <div className='block-ui bg-secondary'>
                 <div className='card-challenge'>
                   <div>
-                    <BlockProgressBar challenges={blocs} />
+                    <BlockProgressBar
+                      challengeCount={challengeCount}
+                      completedChallengeCount={completedChallengeCount}
+                    />
                   </div>
                 </div>
               </div>
