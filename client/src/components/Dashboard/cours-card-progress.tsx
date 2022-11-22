@@ -1,5 +1,6 @@
 import React from 'react';
 import { ProgressBar } from '@freecodecamp/react-bootstrap';
+import { Link } from '../helpers';
 import './dashboard.css';
 
 interface CoursCardProgressProps {
@@ -10,7 +11,8 @@ interface CoursCardProgressProps {
 }
 
 export function CoursCardProgress(props: CoursCardProgressProps): JSX.Element {
-  const { challengeCount, completedChallengeCount, coursName } = props;
+  const { challengeCount, completedChallengeCount, coursName, superBlockPath } =
+    props;
 
   const percentageCompleted: number =
     completedChallengeCount && challengeCount
@@ -30,9 +32,12 @@ export function CoursCardProgress(props: CoursCardProgressProps): JSX.Element {
           </div>
           <div className='cours-card-content-right hide-on-mobile'>
             <small>
-              <span className='cours-card-progress-btn'>
+              <Link
+                to={superBlockPath ? superBlockPath : ''}
+                className='cours-card-progress-btn'
+              >
                 Continuer le cours
-              </span>
+              </Link>
             </small>
           </div>
         </div>
@@ -49,7 +54,12 @@ export function CoursCardProgress(props: CoursCardProgressProps): JSX.Element {
         </div>
         <div className='show-on-mobile'>
           <small>
-            <span className='cours-card-progress-btn'>Continuer le cours</span>
+            <Link
+              to={superBlockPath ? superBlockPath : ''}
+              className='cours-card-progress-btn'
+            >
+              Continuer le cours
+            </Link>
           </small>
         </div>
       </div>
