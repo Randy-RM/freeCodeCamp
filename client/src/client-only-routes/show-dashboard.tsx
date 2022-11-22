@@ -9,7 +9,6 @@ import envData from '../../../config/env.json';
 import { createFlashMessage } from '../components/Flash/redux';
 import { Loader, Spacer } from '../components/helpers';
 import CoursCardProgress from '../components/Dashboard/cours-card-progress';
-import { Themes } from '../components/settings/theme';
 
 import {
   signInLoadingSelector,
@@ -20,34 +19,15 @@ import {
 
 import { User } from '../redux/prop-types';
 
-import {
-  submitNewAbout,
-  updateUserFlag,
-  verifyCert,
-  submitNewEducation,
-  submitNewWorkExperience
-} from '../redux/settings';
-
 const { apiLocation } = envData;
 
 // TODO: update types for actions
-interface ShowSettingsProps {
+interface ShowDashboardProps {
   createFlashMessage: typeof createFlashMessage;
   isSignedIn: boolean;
   navigate: (location: string) => void;
   showLoading: boolean;
-  submitNewAbout: () => void;
-  submitNewEducation: () => void;
-  submitNewWorkExperience: () => void;
-  toggleNightMode: (theme: Themes) => void;
-  toggleSoundMode: (sound: boolean) => void;
-  updateInternetSettings: () => void;
-  updateIsHonest: () => void;
-  updatePortfolio: () => void;
-  updateQuincyEmail: (isSendQuincyEmail: boolean) => void;
   user: User;
-  verifyCert: () => void;
-  path?: string;
 }
 
 const mapStateToProps = createSelector(
@@ -63,21 +43,10 @@ const mapStateToProps = createSelector(
 
 const mapDispatchToProps = {
   createFlashMessage,
-  navigate,
-  submitNewAbout,
-  submitNewEducation,
-  submitNewWorkExperience,
-  toggleNightMode: (theme: Themes) => updateUserFlag({ theme }),
-  toggleSoundMode: (sound: boolean) => updateUserFlag({ sound }),
-  updateInternetSettings: updateUserFlag,
-  updateIsHonest: updateUserFlag,
-  updatePortfolio: updateUserFlag,
-  updateQuincyEmail: (sendQuincyEmail: boolean) =>
-    updateUserFlag({ sendQuincyEmail }),
-  verifyCert
+  navigate
 };
 
-export function ShowDashboard(props: ShowSettingsProps): JSX.Element {
+export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
   // const { t } = useTranslation();
   const { isSignedIn, user, navigate, showLoading } = props;
 
