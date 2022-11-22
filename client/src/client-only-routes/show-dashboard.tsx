@@ -119,7 +119,20 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
                   )}
                 </>
               ) : (
-                <></>
+                <Col
+                  className=''
+                  md={8}
+                  mdOffset={2}
+                  sm={8}
+                  smOffset={2}
+                  xs={12}
+                >
+                  <Spacer size={1} />
+                  <div className='block-ui bg-secondary'>
+                    <p className='h3'>{`Aucun cours suivi pour l'instant`}</p>
+                  </div>
+                  <Spacer size={1} />
+                </Col>
               )}
             </Row>
             <Spacer size={1} />
