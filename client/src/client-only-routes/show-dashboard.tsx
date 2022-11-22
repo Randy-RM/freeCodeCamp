@@ -49,6 +49,7 @@ const mapDispatchToProps = {
 export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
   // const { t } = useTranslation();
   const { isSignedIn, user, navigate, showLoading } = props;
+  const { currentsSuperBlock } = user;
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
@@ -61,7 +62,7 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
 
   return (
     <>
-      {console.log(user)}
+      {console.log(currentsSuperBlock)}
       {/* <Helmet title={`${t('buttons.settings')} | Code Learning Plateform`} /> */}
       <Helmet title={`Tableau de bord | Code Learning Platform`} />
       <Grid fluid={true} className='bg-light'>
@@ -80,18 +81,46 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
                   </h1>
                 </div>
               </Col>
-              <Col className='' md={8} mdOffset={2} sm={8} smOffset={2} xs={12}>
-                <Spacer size={1} />
-                <div className='block-ui bg-secondary'>
-                  <CoursCardProgress
-                    challengeCount={100}
-                    completedChallengeCount={20}
-                    coursName='Responsive web design'
-                    superBlockPath={'/learn/responsive-web-design/'}
-                  />
-                </div>
-                <Spacer size={1} />
-              </Col>
+              {currentsSuperBlock && currentsSuperBlock.length > 0 ? (
+                <>
+                  {currentsSuperBlock.map(
+                    (
+                      {
+                        totalChallenges,
+                        totalCompletedChallenges,
+                        superBlockName,
+                        superBlockPath
+                      },
+                      index
+                    ) => {
+                      return (
+                        <Col
+                          key={index}
+                          className=''
+                          md={8}
+                          mdOffset={2}
+                          sm={8}
+                          smOffset={2}
+                          xs={12}
+                        >
+                          <Spacer size={1} />
+                          <div className='block-ui bg-secondary'>
+                            <CoursCardProgress
+                              challengeCount={totalChallenges}
+                              completedChallengeCount={totalCompletedChallenges}
+                              coursName={superBlockName}
+                              superBlockPath={superBlockPath}
+                            />
+                          </div>
+                          <Spacer size={1} />
+                        </Col>
+                      );
+                    }
+                  )}
+                </>
+              ) : (
+                <></>
+              )}
             </Row>
             <Spacer size={1} />
           </div>

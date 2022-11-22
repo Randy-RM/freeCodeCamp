@@ -4,10 +4,10 @@ import { Link } from '../helpers';
 import './dashboard.css';
 
 interface CoursCardProgressProps {
-  challengeCount: number;
-  completedChallengeCount: number;
-  coursName: string;
-  superBlockPath: string;
+  challengeCount?: number;
+  completedChallengeCount?: number;
+  coursName?: string;
+  superBlockPath?: string;
 }
 
 export function CoursCardProgress(props: CoursCardProgressProps): JSX.Element {
@@ -28,7 +28,7 @@ export function CoursCardProgress(props: CoursCardProgressProps): JSX.Element {
         </small>
         <div className='cours-card-content'>
           <div className='cours-card-content-left'>
-            <h3 className='display-inlin'>{coursName}</h3>
+            <h3 className='display-inlin'>{coursName ? coursName : ''}</h3>
           </div>
           <div className='cours-card-content-right hide-on-mobile'>
             <small>
