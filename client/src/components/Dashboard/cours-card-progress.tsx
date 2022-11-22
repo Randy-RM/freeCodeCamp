@@ -31,12 +31,19 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({ toggleBlock, executeGA }, dispatch);
 
 interface CoursCardProgressProps {
-  percentageCompleted: number;
-  coursName: string[];
+  challengeCount: number;
+  completedChallengeCount: number;
+  coursName: string;
+  superBlockPath: string;
 }
 
 export function CoursCardProgress(props: CoursCardProgressProps): JSX.Element {
-  const { percentageCompleted, coursName } = props;
+  const { challengeCount, completedChallengeCount, coursName } = props;
+
+  const percentageCompleted: number =
+    completedChallengeCount && challengeCount
+      ? Math.floor((completedChallengeCount / challengeCount) * 100)
+      : 0;
 
   return (
     <>

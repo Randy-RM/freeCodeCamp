@@ -84,8 +84,10 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
                 <Spacer size={1} />
                 <div className='block-ui bg-secondary'>
                   <CoursCardProgress
-                    percentageCompleted={50}
+                    challengeCount={100}
+                    completedChallengeCount={20}
                     coursName='Responsive web design'
+                    superBlockPath={'/learn/responsive-web-design/'}
                   />
                 </div>
                 <Spacer size={1} />
