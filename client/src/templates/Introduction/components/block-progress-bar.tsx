@@ -15,7 +15,7 @@ export class BlockProgressBar extends Component<BlockProgressBarProps> {
   render(): JSX.Element {
     const { completedChallengeCount, challengeCount } = this.props;
 
-    const percentageComplated =
+    const percentageCompleted =
       completedChallengeCount && challengeCount
         ? Math.floor((completedChallengeCount / challengeCount) * 100)
         : 0;
@@ -24,14 +24,14 @@ export class BlockProgressBar extends Component<BlockProgressBarProps> {
       <>
         <div className='progress-wrapper'>
           <h2>
-            <span>{`${percentageComplated}% ${
-              percentageComplated === 0 || percentageComplated === 1
+            <span>{`${percentageCompleted}% ${
+              percentageCompleted === 0 || percentageCompleted === 1
                 ? 'achevé'
                 : 'achevés'
             }`}</span>
           </h2>
           <br />
-          <ProgressBar now={percentageComplated} animated={'true'} />
+          <ProgressBar now={percentageCompleted} animated={'true'} />
         </div>
       </>
     );
