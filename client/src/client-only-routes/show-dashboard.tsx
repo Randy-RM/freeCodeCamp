@@ -28,6 +28,7 @@ interface ShowDashboardProps {
   navigate: (location: string) => void;
   showLoading: boolean;
   user: User;
+  path?: string;
 }
 
 const mapStateToProps = createSelector(
