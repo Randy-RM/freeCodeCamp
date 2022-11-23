@@ -84,20 +84,20 @@ export class NavLinks extends Component<NavLinksProps, {}> {
             </Link>
           </li>
 
+          <li className='nav-item'>
+            <Link
+              onClick={this.handleIsDropdown}
+              className=''
+              key='courses'
+              to='/courses'
+              activeClassName='active'
+            >
+              {'Cours'}
+            </Link>
+          </li>
+
           {username && (
             <Fragment key='profile-settings'>
-              <li className='nav-item'>
-                <Link
-                  onClick={this.handleIsDropdown}
-                  className=''
-                  key='learn'
-                  to='/learn/responsive-web-design/'
-                  activeClassName='active'
-                >
-                  {'Cours'}
-                </Link>
-              </li>
-
               <li className='nav-item'>
                 <Link
                   onClick={this.handleIsDropdown}

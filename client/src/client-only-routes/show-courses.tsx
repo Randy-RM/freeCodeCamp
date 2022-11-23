@@ -5,7 +5,7 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
-import envData from '../../../config/env.json';
+// import envData from '../../../config/env.json';
 import { createFlashMessage } from '../components/Flash/redux';
 import { Loader, Spacer } from '../components/helpers';
 import {
@@ -19,7 +19,7 @@ import { User } from '../redux/prop-types';
 
 import CoursesList from '../components/Courses/courses-list';
 
-const { apiLocation } = envData;
+// const { apiLocation } = envData;
 
 // TODO: update types for actions
 interface CoursesProps {
@@ -49,16 +49,16 @@ const mapDispatchToProps = {
 
 export function Courses(props: CoursesProps): JSX.Element {
   // const { t } = useTranslation();
-  const { isSignedIn, navigate, showLoading } = props;
+  const { isSignedIn, /*navigate,*/ showLoading } = props;
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
   }
 
-  if (!isSignedIn) {
-    navigate(`${apiLocation}/signin`);
-    return <Loader fullScreen={true} />;
-  }
+  // if (!isSignedIn) {
+  //   navigate(`${apiLocation}/signin`);
+  //   return <Loader fullScreen={true} />;
+  // }
 
   return (
     <>
