@@ -25,6 +25,11 @@ function Flash({ flashMessage, removeFlashMessage }: FlashProps): JSX.Element {
       '--flash-message-height',
       `${flashMessageHeight}px`
     );
+    const timeToCloseModal = setTimeout(() => {
+      handleClose();
+    }, 8000);
+    return () => clearTimeout(timeToCloseModal);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [flashMessageHeight]);
 
   function handleClose() {
