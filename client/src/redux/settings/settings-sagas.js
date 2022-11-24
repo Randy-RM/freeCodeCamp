@@ -59,7 +59,6 @@ function* submitNewEducationSaga({ payload }) {
 function* submitNewCurrentsSuperBlockSaga({ payload }) {
   try {
     const response = yield call(putUpdateMyCurrentsSuperBlock, payload);
-    console.log('payload : ', payload);
     yield put(submitNewCurrentsSuperBlockComplete({ ...response, payload }));
     yield put(createFlashMessage(response));
   } catch (e) {

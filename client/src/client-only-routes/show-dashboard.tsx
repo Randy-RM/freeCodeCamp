@@ -63,7 +63,6 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
 
   return (
     <>
-      {console.log(currentsSuperBlock)}
       {/* <Helmet title={`${t('buttons.settings')} | Code Learning Plateform`} /> */}
       <Helmet title={`Tableau de bord | Code Learning Platform`} />
       <Grid fluid={true} className='bg-light'>

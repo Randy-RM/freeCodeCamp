@@ -318,8 +318,6 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
     }
   };
 
-  console.log('props :', props);
-
   // delete the project module which is always at the end of the table
   blocs.pop();
 
