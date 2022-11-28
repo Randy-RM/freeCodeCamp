@@ -16,8 +16,14 @@ import {
   isSignedInSelector,
   executeGA,
   allowBlockDonationRequests
+  // eslint-disable-next-line import/no-duplicates
 } from '../../../redux';
-import { AllChallengeNode, ChallengeFiles } from '../../../redux/prop-types';
+
+import {
+  AllChallengeNode,
+  ChallengeFiles,
+  User
+} from '../../../redux/prop-types';
 
 import {
   closeModal,
@@ -28,6 +34,9 @@ import {
   challengeFilesSelector,
   challengeMetaSelector
 } from '../redux';
+// eslint-disable-next-line import/no-duplicates
+import { userSelector } from '../../../redux';
+import { Link } from '../../../components/helpers';
 import CompletionModalBody from './completion-modal-body';
 
 import './completion-modal.css';
@@ -39,6 +48,7 @@ const mapStateToProps = createSelector(
   isCompletionModalOpenSelector,
   isSignedInSelector,
   successMessageSelector,
+  userSelector,
   (
     challengeFiles: ChallengeFiles,
     {
@@ -49,7 +59,8 @@ const mapStateToProps = createSelector(
     completedChallengesIds: string[],
     isOpen: boolean,
     isSignedIn: boolean,
-    message: string
+    message: string,
+    user: User
   ) => ({
     challengeFiles,
     title,
@@ -58,7 +69,8 @@ const mapStateToProps = createSelector(
     completedChallengesIds,
     isOpen,
     isSignedIn,
-    message
+    message,
+    user
   })
 );
 
@@ -98,6 +110,7 @@ export function getCompletedPercent(
 
 interface CompletionModalsProps {
   allowBlockDonationRequests: (arg0: string) => void;
+  user: User;
   block: string;
   blockName: string;
   certification: string;
@@ -212,12 +225,16 @@ export class CompletionModalInner extends Component<
       block,
       close,
       isOpen,
-      title,
+      // title,
       isSignedIn,
       superBlock = ''
     } = this.props;
 
     const { completedPercent } = this.state;
+
+    if (this.props) {
+      console.log('Completion Modal Props :', this.props.user);
+    }
 
     if (isOpen) {
       executeGA({ type: 'modal', data: '/completion-modal' });
@@ -225,7 +242,7 @@ export class CompletionModalInner extends Component<
     // normally dashedName should be graphQL queried and then passed around,
     // but it's only used to make a nice filename for downloading, so dasherize
     // is fine here.
-    const dashedName = dasherize(title);
+    // const dashedName = dasherize(title);
     return (
       <Modal
         animation={false}
@@ -261,7 +278,7 @@ export class CompletionModalInner extends Component<
             </Login>
           )}
           <Button
-            className='action-btn btn-primary'
+            className='action-btn btn-primary mb-1'
             block={true}
             bsSize='large'
             bsStyle='primary'
@@ -272,7 +289,7 @@ export class CompletionModalInner extends Component<
               : 'Passez au défi suivant'}
             <span className='hidden-xs'> (Ctrl + Enter)</span>
           </Button>
-          {this.state.downloadURL ? (
+          {/* {this.state.downloadURL ? (
             <Button
               className='action-btn btn-secondary'
               block={true}
@@ -283,7 +300,22 @@ export class CompletionModalInner extends Component<
             >
               {'Télécharger ma solution'}
             </Button>
-          ) : null}
+          ) : null} */}
+          <Link
+            to='https://www.kinshasadigital.academy/inscription'
+            external={true}
+            sameTab={false}
+            className='link-resset-style'
+          >
+            <Button
+              className='action-btn btn-secondary'
+              block={true}
+              bsSize='lg'
+              bsStyle='primary'
+            >
+              {'Rejoignez notre académie ici'}
+            </Button>
+          </Link>
         </Modal.Footer>
       </Modal>
     );

@@ -183,6 +183,14 @@
   padding: 10px 30px;
 }
 
+.mb-1 {
+  margin-bottom: 0.5rem;
+}
+
+.link-resset-style {
+  text-decoration: none;
+}
+
 .completion-header {
   background: #fff !important;
 }
