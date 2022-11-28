@@ -9,7 +9,7 @@ function LandingLearn(): JSX.Element {
   return (
     <div className='landing-top'>
       <div>
-        <h2 className='big-heading'>{`Comment allez-vous apprendre ?`}</h2>
+        <h2 className='big-heading'>{`Comment vas-tu apprendre ?`}</h2>
         <br />
       </div>
       <div className=''>
@@ -25,8 +25,8 @@ function LandingLearn(): JSX.Element {
               <div className='card-item  flexible'>
                 <p className='text-responsive text-center'>
                   {`
-                Suivez notre parcours étape par étape 
-                et développez vos compétences.
+                Suis notre parcours étape par étape 
+                et développe tes compétences.
                 `}
                 </p>
               </div>
@@ -44,8 +44,8 @@ function LandingLearn(): JSX.Element {
               <div className='card-item  flexible'>
                 <p className='text-responsive text-center'>
                   {`
-                Apprenez et interagissez directement sur 
-                notre éditeur de code en ligne.
+                Apprends et interagis directement 
+                sur notre éditeur de code en ligne.
                 `}
                 </p>
                 <br />

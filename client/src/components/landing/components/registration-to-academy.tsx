@@ -7,7 +7,7 @@ const RegistrationToAcademy = (): JSX.Element => {
     <Row>
       <div className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <div>
-          <h2 className='big-heading text-ligth'>{`Inscrit toi dans la meilleure école de codage`}</h2>
+          <h2 className='big-heading text-ligth'>{`Inscrit toi dans la meilleure école de codage.`}</h2>
           <br />
           <p>
             <div className='text-registration'>
@@ -27,7 +27,7 @@ const RegistrationToAcademy = (): JSX.Element => {
               sameTab={false}
               className='btn-light link-button'
             >
-              {'Rejoignez notre académie ici'}
+              {'Rejoins notre académie ici'}
             </Link>
           </div>
         </div>

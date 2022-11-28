@@ -68,12 +68,12 @@ const createStandardHandler = (req, res, next) => err => {
 
 const standardProgressErrorMessage = {
   type: 'danger',
-  message: 'Un problème est survenu lors de la mise à jour de votre progression'
+  message: 'Un problème est survenu lors de la mise à jour de ta progression.'
 };
 
 const standardProgressSuccessMessage = {
   type: 'success',
-  message: 'Nous avons mis à jour votre progression'
+  message: 'Nous avons mis à jour ta progression.'
 };
 
 const createStandardProgressHandler = (req, res, next) => err => {

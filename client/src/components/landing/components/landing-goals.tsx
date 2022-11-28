@@ -7,7 +7,7 @@ function LandingGoals(): JSX.Element {
   return (
     <div className='landing-top'>
       <div>
-        <h2 className='big-heading'>{`Que pourrez-vous faire ?`}</h2>
+        <h2 className='big-heading'>{`Que pourras-tu faire ?`}</h2>
         <br />
       </div>
       <div className=''>
@@ -20,10 +20,9 @@ function LandingGoals(): JSX.Element {
               <div className='card-item  flexible'>
                 <p className='text-responsive text-center'>
                   {`
-                Nos offres sont complètes.
-                Avec tout ce dont vous avez
-                besoin pour construire votre
-                carrière.
+                Nos offres sont complètes. 
+                Avec tout ce dont tu as besoin 
+                pour construire ta carrière.
                 `}
                 </p>
               </div>
@@ -38,10 +37,8 @@ function LandingGoals(): JSX.Element {
               <div className='card-item  flexible'>
                 <p className='text-responsive text-center'>
                   {`
-                Concentrez-vous sur ce qui est 
-                nécessaire pour acquérir 
-                une compétence spécifique
-                et applicable.
+                Concentre-toi sur ce qui est nécessaire 
+                pour acquérir une compétence spécifique et applicable.
                 `}
                 </p>
               </div>
@@ -61,8 +58,7 @@ function LandingGoals(): JSX.Element {
               <div className='card-item  flexible'>
                 <p className='text-responsive text-center'>
                   {`
-                Trouvez le bon cours et 
-                lancez-vous trouvez le bon cours et pratiquez.
+                Trouve le bon cours, lance-toi et pratique.
                 `}
                 </p>
               </div>

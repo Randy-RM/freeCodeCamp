@@ -14,7 +14,7 @@ const AsSeenIn = ({ isSignedIn }: AsSeenInProps): JSX.Element => {
     <Row className='as-seen-in'>
       <div className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <div className='text-center'>
-          <h2 className='big-heading text-ligth'>{`Prêt à donner un coup de fouet à votre carrière ?`}</h2>
+          <h2 className='big-heading text-ligth'>{`Prêt à donner un coup de fouet à ta carrière ?`}</h2>
           <br />
           <div>
             {isSignedIn ? (
@@ -22,7 +22,7 @@ const AsSeenIn = ({ isSignedIn }: AsSeenInProps): JSX.Element => {
                 forLanding={true}
                 single={true}
                 className='btn-light link-button text-responsive'
-                text='Commencez à Apprendre'
+                text='Commence à apprendre'
                 keyPrefix='as-seen-in-top'
               />
             ) : (
@@ -30,7 +30,7 @@ const AsSeenIn = ({ isSignedIn }: AsSeenInProps): JSX.Element => {
                 href={`${apiLocation}/signin`}
                 className='btn-light link-button'
               >
-                {'Commencez à Apprendre'}
+                {'Commence à apprendre'}
               </a>
             )}
           </div>

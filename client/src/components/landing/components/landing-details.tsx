@@ -15,11 +15,11 @@ function LandingDetails({ isSignedIn }: LandingDetailsProps): JSX.Element {
   return (
     <div className='landing-top'>
       <div>
-        <h2 className='big-heading'>{`Qu’allez-vous apprendre ?`}</h2>
+        <h2 className='big-heading'>{`Que vas-tu apprendre ?`}</h2>
         <br />
         <p className='text-responsive'>
           {`
-          Si vous êtes novice en matière de codage, nous vous recommandons de commencer par le début.
+          Si tu es novice en matière de codage, nous te recommandons de commencer par le début.
           `}
         </p>
       </div>
@@ -36,12 +36,10 @@ function LandingDetails({ isSignedIn }: LandingDetailsProps): JSX.Element {
               <div className='card-item  flexible'>
                 <p className='text-responsive'>
                   {`
-                Dans cette formation, 
-                vous apprendrez les langages que les développeurs 
-                utilisent pour créer des pages Web :  HTML (Hypertext Markup Language) 
+                Dans cette formation, tu apprendras les langages que les développeurs 
+                utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
                 pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
-                Enfin, vous apprendrez à créer des pages Web adaptées à différentes 
-                tailles d'écran en créant
+                Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
                 `}
                 </p>
               </div>
@@ -86,7 +84,7 @@ function LandingDetails({ isSignedIn }: LandingDetailsProps): JSX.Element {
                   {`
                 Alors que HTML et CSS contrôlent le contenu et le style  d'une page, 
                 JavaScript est utilisé pour la rendre interactive. Dans le cadre de 
-                la certification JavaScript Algorithm and Data Structures, vous apprendrez 
+                la certification JavaScript Algorithm and Data Structures, tu apprendras 
                 les principes fondamentaux de JavaScript, etc.
                 `}
                 </p>
