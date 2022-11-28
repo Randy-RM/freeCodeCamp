@@ -183,6 +183,13 @@
   padding: 10px 30px;
 }
 
+@media (max-width: 350px) {
+  .link-button {
+    font-size: 0.8rem;
+    padding: 10px 20px;
+  }
+}
+
 .mb-1 {
   margin-bottom: 0.5rem;
 }

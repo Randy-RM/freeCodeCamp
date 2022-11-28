@@ -11,6 +11,7 @@ import {
 } from '../../redux';
 
 import AsSeenIn from './components/as-seen-in';
+import RegistrationToAcademy from './components/registration-to-academy';
 import LandingTop from './components/landing-top';
 import LandingDetails from './components/landing-details';
 import LandingLearn from './components/landing-learn';
@@ -61,9 +62,17 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
             <LandingTop pageName={'landing'} isSignedIn={isSignedIn} />
           </Grid>
         </div>
+
+        <div className='as-seen-in'>
+          <Grid>
+            <RegistrationToAcademy />
+          </Grid>
+        </div>
+
         <Grid>
           <LandingDetails isSignedIn={isSignedIn} />
         </Grid>
+
         <Grid>
           <LandingLearn />
         </Grid>
