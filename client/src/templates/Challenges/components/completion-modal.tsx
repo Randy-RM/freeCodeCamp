@@ -108,6 +108,25 @@ export function getCompletedPercent(
   return completedPercent > 100 ? 100 : completedPercent;
 }
 
+export function countChallengeBlocks(
+  superBlockChallengeIds?: string[],
+  completedChallengeIds?: string[]
+): number {
+  let completedChallengeCount = 0;
+  if (
+    superBlockChallengeIds &&
+    completedChallengeIds &&
+    completedChallengeIds.length > 0
+  ) {
+    for (const ChallengeId of superBlockChallengeIds) {
+      if (completedChallengeIds.includes(ChallengeId)) {
+        completedChallengeCount++;
+      }
+    }
+  }
+  return completedChallengeCount;
+}
+
 interface CompletionModalsProps {
   allowBlockDonationRequests: (arg0: string) => void;
   user: User;
@@ -118,6 +137,7 @@ interface CompletionModalsProps {
   close: () => void;
   completedChallengesIds: string[];
   currentBlockIds?: string[];
+  superBlockChallengeIds?: string[];
   executeGA: () => void;
   challengeFiles: ChallengeFiles;
   id: string;
@@ -231,10 +251,23 @@ export class CompletionModalInner extends Component<
     } = this.props;
 
     const { completedPercent } = this.state;
+    console.log(
+      'Completion Modal props superBlockChallengeIds :',
+      this.props.superBlockChallengeIds
+    );
 
-    if (this.props) {
-      console.log('Completion Modal Props :', this.props.user);
-    }
+    console.log(
+      'completed : ',
+      countChallengeBlocks(
+        this.props.superBlockChallengeIds,
+        this.props.completedChallengesIds
+      )
+    );
+
+    // if (this.props) {
+    //   console.log('Completion Modal Props :', this.props);
+    //   console.log('Completion Modal State :', this.state);
+    // }
 
     if (isOpen) {
       executeGA({ type: 'modal', data: '/completion-modal' });
@@ -337,6 +370,7 @@ interface CertificateNode {
 const useCurrentBlockIds = (
   block: string,
   certification: string,
+  superBlock: string,
   options?: Options
 ) => {
   const {
@@ -359,8 +393,17 @@ const useCurrentBlockIds = (
         edges {
           node {
             challenge {
-              block
               id
+              block
+              challengeType
+              title
+              order
+              superBlock
+              dashedName
+              fields {
+                slug
+                blockName
+              }
             }
           }
         }
@@ -383,23 +426,46 @@ const useCurrentBlockIds = (
       node => dasherize(node.challenge.certification) === certification
     )[0]
     ?.challenge.tests.map(test => test.id);
+
   const currentBlockIds = challengeEdges
     .filter(edge => edge.node.challenge.block === block)
     .map(edge => edge.node.challenge.id);
 
+  const currentSuperBlockChallenge = challengeEdges
+    .filter(edge => edge.node.challenge.superBlock === superBlock)
+    .map(edge => edge.node.challenge.id);
+
   return options?.isCertificationBlock
-    ? currentCertificateIds
-    : currentBlockIds;
+    ? {
+        currentBlockIds: currentCertificateIds,
+        superBlockChallenges: currentCertificateIds
+      }
+    : {
+        currentBlockIds: currentBlockIds,
+        superBlockChallenges: currentSuperBlockChallenge
+      };
 };
 
 const CompletionModal = (props: CompletionModalsProps) => {
   const currentBlockIds = useCurrentBlockIds(
     props.block || '',
     props.certification || '',
+    props.superBlock || '',
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     { isCertificationBlock: isProject(props.challengeType) }
   );
-  return <CompletionModalInner currentBlockIds={currentBlockIds} {...props} />;
+  console.log('Completion modal props :', props);
+  console.log(
+    'superBlockChallenges challengeEdges :',
+    currentBlockIds.superBlockChallenges
+  );
+  return (
+    <CompletionModalInner
+      currentBlockIds={currentBlockIds.currentBlockIds}
+      superBlockChallengeIds={currentBlockIds.superBlockChallenges}
+      {...props}
+    />
+  );
 };
 
 CompletionModal.displayName = 'CompletionModal';

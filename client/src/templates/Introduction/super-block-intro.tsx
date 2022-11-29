@@ -250,6 +250,7 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
   const { currentsSuperBlock } = user;
   // Checks if there is progress on the course
   const isCurrentSuperBlockProgressExist: CurrentSuperBlock | undefined =
+    currentsSuperBlock &&
     currentsSuperBlock.find(
       currentsSuperBlockItem =>
         currentsSuperBlockItem.superBlockName === i18nSuperBlock
