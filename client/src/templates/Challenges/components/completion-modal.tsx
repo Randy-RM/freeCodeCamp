@@ -22,7 +22,9 @@ import {
 import {
   AllChallengeNode,
   ChallengeFiles,
-  User
+  User,
+  CurrentSuperBlock,
+  CurrentsSuperBlockList
 } from '../../../redux/prop-types';
 
 import {
@@ -34,6 +36,7 @@ import {
   challengeFilesSelector,
   challengeMetaSelector
 } from '../redux';
+import { submitNewCurrentsSuperBlock } from '../../../redux/settings';
 // eslint-disable-next-line import/no-duplicates
 import { userSelector } from '../../../redux';
 import { Link } from '../../../components/helpers';
@@ -83,7 +86,10 @@ const mapDispatchToProps = function (dispatch: Dispatch) {
     allowBlockDonationRequests: (block: string) => {
       dispatch(allowBlockDonationRequests(block));
     },
-    executeGA
+    executeGA,
+    submitNewCurrentsSuperBlock: (
+      currentsSuperBlockValue: CurrentsSuperBlockList
+    ) => dispatch(submitNewCurrentsSuperBlock(currentsSuperBlockValue))
   };
   return () => dispatchers;
 };
@@ -108,11 +114,15 @@ export function getCompletedPercent(
   return completedPercent > 100 ? 100 : completedPercent;
 }
 
-export function countChallengeBlocks(
+// Count the total number of challenges and the number of solved challenges
+export function countCompletedAndUncompletedChallenges(
   superBlockChallengeIds?: string[],
   completedChallengeIds?: string[]
-): number {
+): { challengeCount: number; completedChallengeCount: number } {
   let completedChallengeCount = 0;
+  const challengeCount = superBlockChallengeIds
+    ? superBlockChallengeIds.length
+    : 0;
   if (
     superBlockChallengeIds &&
     completedChallengeIds &&
@@ -124,7 +134,10 @@ export function countChallengeBlocks(
       }
     }
   }
-  return completedChallengeCount;
+  return {
+    challengeCount: challengeCount,
+    completedChallengeCount: completedChallengeCount
+  };
 }
 
 interface CompletionModalsProps {
@@ -138,6 +151,7 @@ interface CompletionModalsProps {
   completedChallengesIds: string[];
   currentBlockIds?: string[];
   superBlockChallengeIds?: string[];
+  currentSuperBlock?: MarkdownRemark;
   executeGA: () => void;
   challengeFiles: ChallengeFiles;
   id: string;
@@ -148,6 +162,9 @@ interface CompletionModalsProps {
   superBlock: string;
   t: TFunction;
   title: string;
+  submitNewCurrentsSuperBlock: (
+    currentsSuperBlockValue: CurrentsSuperBlockList
+  ) => void;
 }
 
 interface CompletionModalInnerState {
@@ -218,9 +235,82 @@ export class CompletionModalInner extends Component<
     }
   }
 
+  handleUpdateSuperBlockProgress(currentSuperBlock: CurrentSuperBlock) {
+    const { user, submitNewCurrentsSuperBlock } = this.props;
+
+    const currentsSuperBlockList: CurrentsSuperBlockList = {
+      currentsSuperBlock: []
+    };
+
+    if (user.currentsSuperBlock && user.currentsSuperBlock.length == 0) {
+      submitNewCurrentsSuperBlock({
+        currentsSuperBlock: [currentSuperBlock]
+      });
+      return;
+    }
+
+    if (user.currentsSuperBlock) {
+      const isCurrentSuperBlockExist = user.currentsSuperBlock.find(
+        currentsSuperBlockItem => {
+          return (
+            currentsSuperBlockItem.superBlockName ===
+            currentSuperBlock.superBlockName
+          );
+        }
+      );
+
+      const currentSuperBlockIndex = user.currentsSuperBlock.findIndex(
+        currentsSuperBlockItem => {
+          return (
+            currentsSuperBlockItem.superBlockName ===
+            currentSuperBlock.superBlockName
+          );
+        }
+      );
+
+      currentsSuperBlockList.currentsSuperBlock = [...user.currentsSuperBlock];
+
+      if (isCurrentSuperBlockExist) {
+        currentsSuperBlockList.currentsSuperBlock[currentSuperBlockIndex] =
+          currentSuperBlock;
+        submitNewCurrentsSuperBlock(currentsSuperBlockList);
+        return;
+      }
+      currentsSuperBlockList.currentsSuperBlock = [
+        ...currentsSuperBlockList.currentsSuperBlock,
+        currentSuperBlock
+      ];
+      submitNewCurrentsSuperBlock(currentsSuperBlockList);
+      return;
+    }
+  }
+
   handleSubmit(): void {
+    const {
+      superBlockChallengeIds,
+      completedChallengesIds,
+      currentSuperBlock,
+      blockName,
+      id
+    } = this.props;
+
+    const { challengeCount, completedChallengeCount } =
+      countCompletedAndUncompletedChallenges(
+        superBlockChallengeIds,
+        completedChallengesIds
+      );
+
+    const currentSuperBlockValue: CurrentSuperBlock = {
+      superBlockName: currentSuperBlock?.frontmatter.title,
+      blockName: blockName,
+      superBlockPath: currentSuperBlock?.fields.slug,
+      currentChallengeId: id,
+      totalChallenges: challengeCount,
+      totalCompletedChallenges: completedChallengeCount + 1
+    };
     this.props.submitChallenge();
     this.checkBlockCompletion();
+    this.handleUpdateSuperBlockProgress(currentSuperBlockValue);
   }
 
   // check block completion for donation
@@ -251,23 +341,8 @@ export class CompletionModalInner extends Component<
     } = this.props;
 
     const { completedPercent } = this.state;
-    console.log(
-      'Completion Modal props superBlockChallengeIds :',
-      this.props.superBlockChallengeIds
-    );
 
-    console.log(
-      'completed : ',
-      countChallengeBlocks(
-        this.props.superBlockChallengeIds,
-        this.props.completedChallengesIds
-      )
-    );
-
-    // if (this.props) {
-    //   console.log('Completion Modal Props :', this.props);
-    //   console.log('Completion Modal State :', this.state);
-    // }
+    console.log('props : ', this.props);
 
     if (isOpen) {
       executeGA({ type: 'modal', data: '/completion-modal' });
@@ -367,6 +442,16 @@ interface CertificateNode {
   };
 }
 
+interface MarkdownRemark {
+  fields: {
+    slug: string;
+  };
+  frontmatter: {
+    title: string;
+    superBlock: string;
+  };
+}
+
 const useCurrentBlockIds = (
   block: string,
   certification: string,
@@ -375,10 +460,12 @@ const useCurrentBlockIds = (
 ) => {
   const {
     allChallengeNode: { edges: challengeEdges },
-    allCertificateNode: { nodes: certificateNodes }
+    allCertificateNode: { nodes: certificateNodes },
+    allMarkdownRemark: { nodes: markdownRemarks }
   }: {
     allChallengeNode: AllChallengeNode;
     allCertificateNode: { nodes: CertificateNode[] };
+    allMarkdownRemark: { nodes: MarkdownRemark[] };
   } = useStaticQuery(graphql`
     query getCurrentBlockNodes {
       allChallengeNode(
@@ -418,6 +505,17 @@ const useCurrentBlockIds = (
           }
         }
       }
+      allMarkdownRemark {
+        nodes {
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+            superBlock
+          }
+        }
+      }
     }
   `);
 
@@ -435,34 +533,37 @@ const useCurrentBlockIds = (
     .filter(edge => edge.node.challenge.superBlock === superBlock)
     .map(edge => edge.node.challenge.id);
 
+  const currentSuperBlock = markdownRemarks.find(
+    node => node.frontmatter.superBlock === superBlock
+  );
+
   return options?.isCertificationBlock
     ? {
         currentBlockIds: currentCertificateIds,
-        superBlockChallenges: currentCertificateIds
+        superBlockChallenges: currentCertificateIds,
+        currentSuperBlock: currentSuperBlock
       }
     : {
         currentBlockIds: currentBlockIds,
-        superBlockChallenges: currentSuperBlockChallenge
+        superBlockChallenges: currentSuperBlockChallenge,
+        currentSuperBlock: currentSuperBlock
       };
 };
 
 const CompletionModal = (props: CompletionModalsProps) => {
-  const currentBlockIds = useCurrentBlockIds(
+  const currentBlockData = useCurrentBlockIds(
     props.block || '',
     props.certification || '',
     props.superBlock || '',
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     { isCertificationBlock: isProject(props.challengeType) }
   );
-  console.log('Completion modal props :', props);
-  console.log(
-    'superBlockChallenges challengeEdges :',
-    currentBlockIds.superBlockChallenges
-  );
+
   return (
     <CompletionModalInner
-      currentBlockIds={currentBlockIds.currentBlockIds}
-      superBlockChallengeIds={currentBlockIds.superBlockChallenges}
+      currentBlockIds={currentBlockData.currentBlockIds}
+      superBlockChallengeIds={currentBlockData.superBlockChallenges}
+      currentSuperBlock={currentBlockData.currentSuperBlock}
       {...props}
     />
   );
