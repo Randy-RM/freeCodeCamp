@@ -26,11 +26,9 @@ import {
   AllChallengeNode,
   User,
   CurrentSuperBlock,
-  CurrentsSuperBlockList,
   ChallengeNode,
   CompletedChallenge
 } from '../../redux/prop-types';
-import { submitNewCurrentsSuperBlock } from '../../redux/settings';
 import Block from './components/block';
 import BlockProgressBar from './components/block-progress-bar';
 import BlockLastVisited from './components/block-last-visited';
@@ -62,9 +60,6 @@ type SuperBlockProp = {
   t: TFunction;
   toggleBlock: (arg0: string) => void;
   tryToShowDonationModal: () => void;
-  submitNewCurrentsSuperBlock: (
-    currentsSuperBlockValue: CurrentsSuperBlockList
-  ) => void;
   user: User;
 };
 
@@ -98,8 +93,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
     {
       tryToShowDonationModal,
       resetExpansion,
-      toggleBlock: b => toggleBlock(b),
-      submitNewCurrentsSuperBlock
+      toggleBlock: b => toggleBlock(b)
     },
     dispatch
   );
@@ -119,7 +113,7 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { submitNewCurrentsSuperBlock, user } = props;
+  const { user } = props;
 
   const getChosenBlock = (): string => {
     const {
@@ -234,14 +228,6 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
     };
   };
 
-  // Check if the current challenge is in the course
-  const isCurrentChallengeInSuperBlock = (challengeId: string): boolean => {
-    const isChallengeExist = blocs.find(block => {
-      return block.find(challenge => challenge.challenge.id === challengeId);
-    });
-    return isChallengeExist ? true : false;
-  };
-
   const { challengeCount, completedChallengeCount } = countChallengeBlocks(
     blocs,
     props.user.completedChallenges
@@ -256,78 +242,8 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
         currentsSuperBlockItem.superBlockName === i18nSuperBlock
     );
 
-  // Initialize the value of the followed course and the progression to be saved
-  const currentSuperBlockValue: CurrentSuperBlock = {
-    superBlockName: i18nSuperBlock,
-    blockName: '',
-    superBlockPath: props.location.pathname,
-    currentChallengeId: props.currentChallengeId,
-    totalChallenges: challengeCount,
-    totalCompletedChallenges: completedChallengeCount
-  };
-
-  const currentsSuperBlockListValue: CurrentsSuperBlockList = {
-    currentsSuperBlock: []
-  };
-
-  // Management of the user's progress on the course followed and records the course followed
-  const handleUpdateSuperBlockProgress = (
-    currentSuperBlock: CurrentSuperBlock
-  ) => {
-    if (
-      props.user.currentsSuperBlock &&
-      props.user.currentsSuperBlock.length == 0
-    ) {
-      return submitNewCurrentsSuperBlock({
-        currentsSuperBlock: [currentSuperBlock]
-      });
-    }
-
-    if (props.user.currentsSuperBlock) {
-      const isCurrentSuperBlockExist = props.user.currentsSuperBlock.find(
-        currentsSuperBlockItem => {
-          return (
-            currentsSuperBlockItem.superBlockName ===
-            currentSuperBlock.superBlockName
-          );
-        }
-      );
-
-      const currentSuperBlockIndex = props.user.currentsSuperBlock.findIndex(
-        currentsSuperBlockItem => {
-          return (
-            currentsSuperBlockItem.superBlockName ===
-            currentSuperBlock.superBlockName
-          );
-        }
-      );
-
-      currentsSuperBlockListValue.currentsSuperBlock = [
-        ...props.user.currentsSuperBlock
-      ];
-
-      if (isCurrentSuperBlockExist) {
-        currentsSuperBlockListValue.currentsSuperBlock[currentSuperBlockIndex] =
-          currentSuperBlock;
-        return submitNewCurrentsSuperBlock(currentsSuperBlockListValue);
-      }
-      currentsSuperBlockListValue.currentsSuperBlock = [
-        ...currentsSuperBlockListValue.currentsSuperBlock,
-        currentSuperBlock
-      ];
-      return submitNewCurrentsSuperBlock(currentsSuperBlockListValue);
-    }
-  };
-
   // delete the project module which is always at the end of the table
   blocs.pop();
-
-  useEffect(() => {
-    if (isCurrentChallengeInSuperBlock(props.currentChallengeId)) {
-      handleUpdateSuperBlockProgress(currentSuperBlockValue);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <>

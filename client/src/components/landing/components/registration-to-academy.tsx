@@ -9,15 +9,13 @@ const RegistrationToAcademy = (): JSX.Element => {
         <div>
           <h2 className='big-heading text-ligth'>{`Inscrit toi dans la meilleure école de codage.`}</h2>
           <br />
-          <p>
-            <div className='text-registration'>
-              {`
+          <p className='text-registration'>
+            {`
             Deviens Développeur.se ou Specialiste en 
             Marketing Digital en 9 mois de formation certifiante 
             suivi de 3 à 6 mois de stage, et trouve un emploi dans 
             les meilleurs entreprises nationales et internationales.
             `}
-            </div>
           </p>
           <br />
           <div>
