@@ -191,10 +191,6 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
 
   const defaultCurriculumNames = blockDashedNames;
 
-  const blocs = defaultCurriculumNames.map(blockDashedName =>
-    nodesForSuperBlock.filter(node => node.challenge.block === blockDashedName)
-  );
-
   const { currentsSuperBlock } = user;
   // Checks if there is progress on the course
   const isCurrentSuperBlockProgressExist: CurrentSuperBlock | undefined =
@@ -205,14 +201,14 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
     );
 
   // delete the project module which is always at the end of the table
-  blocs.pop();
+  // blocs.pop();
 
   // console.log('allChallengeNode : ', props.data.allChallengeNode);
   console.log(
     'isCurrentSuperBlockProgressExist : ',
     isCurrentSuperBlockProgressExist
   );
-  console.log('nodesForSuperBlock : ', nodesForSuperBlock);
+  // console.log('nodesForSuperBlock : ', nodesForSuperBlock);
 
   const lasteVisitedBlock = nodesForSuperBlock.filter(
     (challengeNode: ChallengeNode) => {
@@ -220,7 +216,15 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
       return blockName === isCurrentSuperBlockProgressExist?.blockName;
     }
   );
+
+  const lasteVisitedBlockIndex =
+    defaultCurriculumNames.findIndex(curriculumName => {
+      return (
+        curriculumName === isCurrentSuperBlockProgressExist?.blockDashedName
+      );
+    }) + 1;
   console.log('lasteVisitedBlock : ', lasteVisitedBlock);
+  console.log('lasteVisitedBlockIndex : ', lasteVisitedBlockIndex);
   console.log('defaultCurriculumNames : ', defaultCurriculumNames);
 
   return (
@@ -281,27 +285,20 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
               >
                 <Spacer size={1} />
                 <div className='block-ui bg-secondary'>
-                  {defaultCurriculumNames.map((blockDashedName, index) => {
-                    if (index < defaultCurriculumNames.length - 1) {
-                      // delete the project module which is always at the end of the table with the condition if
-                      return (
-                        <Fragment key={blockDashedName}>
-                          {console.log(
-                            'blockDashedName last visited : ',
-                            blockDashedName
-                          )}
-                          <BlockLastVisited
-                            blockDashedName={blockDashedName}
-                            challenges={nodesForSuperBlock.filter(
-                              node => node.challenge.block === blockDashedName
-                            )}
-                            superBlock={superBlock}
-                            blockIndex={1 + index}
-                          />
-                        </Fragment>
-                      );
+                  <BlockLastVisited
+                    blockDashedName={
+                      isCurrentSuperBlockProgressExist.blockDashedName
+                        ? isCurrentSuperBlockProgressExist.blockDashedName
+                        : ''
                     }
-                  })}
+                    challenges={lasteVisitedBlock}
+                    superBlock={
+                      isCurrentSuperBlockProgressExist.superBlockDashedName
+                        ? isCurrentSuperBlockProgressExist.superBlockDashedName
+                        : ''
+                    }
+                    blockIndex={lasteVisitedBlockIndex}
+                  />
                 </div>
                 <Spacer size={1} />
               </Col>

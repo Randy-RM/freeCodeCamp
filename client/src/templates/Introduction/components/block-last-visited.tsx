@@ -5,7 +5,6 @@ import { withTranslation, TFunction } from 'react-i18next';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { createSelector } from 'reselect';
-import { SuperBlocks } from '../../../../../config/certification-settings';
 import Caret from '../../../assets/icons/caret';
 import GreenNotCompleted from '../../../assets/icons/green-not-completed';
 import GreenPass from '../../../assets/icons/green-pass';
@@ -41,7 +40,7 @@ interface BlockProps {
   completedChallengeIds: string[];
   executeGA: typeof executeGA;
   isExpanded: boolean;
-  superBlock: SuperBlocks;
+  superBlock: string;
   blockIndex: number;
   t: TFunction;
   toggleBlock: typeof toggleBlock;
