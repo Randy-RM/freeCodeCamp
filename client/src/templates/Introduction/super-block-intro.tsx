@@ -25,9 +25,7 @@ import {
   MarkdownRemark,
   AllChallengeNode,
   User,
-  CurrentSuperBlock,
-  ChallengeNode,
-  CompletedChallenge
+  CurrentSuperBlock
 } from '../../redux/prop-types';
 import Block from './components/block';
 import BlockProgressBar from './components/block-progress-bar';
@@ -196,43 +194,6 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
     nodesForSuperBlock.filter(node => node.challenge.block === blockDashedName)
   );
 
-  // Count the total number of challenges and the number of solved challenges
-  const countChallengeBlocks = (
-    blocs: ChallengeNode[][],
-    completedChallenges: CompletedChallenge[]
-  ) => {
-    let completedChallengeCount = 0;
-    let challengeCount = 0;
-
-    if (blocs && completedChallenges) {
-      for (const challengeBlock of blocs) {
-        for (const { challenge } of challengeBlock) {
-          const { id } = challenge;
-          const isCompleted = completedChallenges.some(
-            (completedChallenge: CompletedChallenge) =>
-              completedChallenge.id === id
-          );
-          if (isCompleted) {
-            completedChallengeCount++;
-          }
-          challengeCount++;
-        }
-      }
-    } else {
-      challengeCount = 100;
-    }
-
-    return {
-      challengeCount: challengeCount,
-      completedChallengeCount: completedChallengeCount
-    };
-  };
-
-  const { challengeCount, completedChallengeCount } = countChallengeBlocks(
-    blocs,
-    props.user.completedChallenges
-  );
-
   const { currentsSuperBlock } = user;
   // Checks if there is progress on the course
   const isCurrentSuperBlockProgressExist: CurrentSuperBlock | undefined =
@@ -241,6 +202,11 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
       currentsSuperBlockItem =>
         currentsSuperBlockItem.superBlockName === i18nSuperBlock
     );
+
+  console.log(
+    'isCurrentSuperBlockProgressExist : ',
+    isCurrentSuperBlockProgressExist
+  );
 
   // delete the project module which is always at the end of the table
   blocs.pop();
@@ -267,8 +233,16 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
                 <div className='card-challenge'>
                   <div>
                     <BlockProgressBar
-                      challengeCount={challengeCount}
-                      completedChallengeCount={completedChallengeCount}
+                      challengeCount={
+                        isCurrentSuperBlockProgressExist
+                          ? isCurrentSuperBlockProgressExist.totalChallenges
+                          : 100
+                      }
+                      completedChallengeCount={
+                        isCurrentSuperBlockProgressExist
+                          ? isCurrentSuperBlockProgressExist.totalCompletedChallenges
+                          : 0
+                      }
                     />
                   </div>
                 </div>

@@ -122,7 +122,7 @@ export function countCompletedAndUncompletedChallenges(
   let completedChallengeCount = 0;
   const challengeCount = superBlockChallengeIds
     ? superBlockChallengeIds.length
-    : 0;
+    : 100;
   if (
     superBlockChallengeIds &&
     completedChallengeIds &&
