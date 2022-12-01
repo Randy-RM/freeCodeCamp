@@ -229,6 +229,7 @@ class EducationSettings extends Component<EducationProps, EducationState> {
                 onChange={this.handleLevelOfStudyChange}
                 value={levelOfStudy.length === 0 ? '' : levelOfStudy}
               >
+                <option value=''></option>
                 <option value={`Diplomé d'état`}>{`Diplomé d'état`}</option>
                 <option value={`Gradué`}>{`Gradué`}</option>
                 <option value={`Licencié`}>{`Licencié`}</option>
