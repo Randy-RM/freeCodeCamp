@@ -19,7 +19,7 @@ function ShowUnsubscribed({
     <>
       <Helmet>
         <title>
-          {t('metaTags:youre-unsubscribed')} | Code Learning Plateform
+          {t('metaTags:youre-unsubscribed')} | Code Learning Platform
         </title>
       </Helmet>
       <Grid>

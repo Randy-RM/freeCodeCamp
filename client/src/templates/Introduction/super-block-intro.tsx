@@ -248,7 +248,7 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
   return (
     <>
       <Helmet>
-        <title>{i18nTitle} | Code Learning Plateform</title>
+        <title>{i18nTitle} | Code Learning Platform</title>
       </Helmet>
       <Grid fluid={true} className='bg-light'>
         <Spacer size={3} />

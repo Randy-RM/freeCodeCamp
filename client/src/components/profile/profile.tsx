@@ -126,7 +126,7 @@ function Profile({ user, isSessionUser }: ProfileProps): JSX.Element {
   return (
     <>
       <Helmet>
-        <title>{t('buttons.profile')} | Code Learning Plateform</title>
+        <title>{t('buttons.profile')} | Code Learning Platform</title>
       </Helmet>
       <Spacer />
       <Grid>

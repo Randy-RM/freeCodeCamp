@@ -51,7 +51,7 @@ function IntroductionPage({
   return (
     <LearnLayout>
       <Helmet>
-        <title>{block} | Code Learning Plateform</title>
+        <title>{block} | Code Learning Platform</title>
       </Helmet>
       <Grid className='intro-layout-container'>
         <FullWidthRow>

@@ -448,7 +448,7 @@ class ShowClassic extends Component<ShowClassicProps, ShowClassicState> {
       >
         <LearnLayout>
           <Helmet
-            title={`${this.getBlockNameTitle(t)} | Code Learning Plateform`}
+            title={`${this.getBlockNameTitle(t)} | Code Learning Platform`}
           />
           <Media maxWidth={MAX_MOBILE_WIDTH}>
             <MobileLayout

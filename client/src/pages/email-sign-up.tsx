@@ -61,7 +61,7 @@ AcceptPrivacyTermsProps) {
     <>
       <Helmet>
         {/* <title>{t('misc.email-signup')} | Code Learning Plateform</title> */}
-        <title>{`Inscription réussie`} | Code Learning Plateform</title>
+        <title>{`Inscription réussie`} | Code Learning Platform</title>
       </Helmet>
       <Grid>
         <Row>
