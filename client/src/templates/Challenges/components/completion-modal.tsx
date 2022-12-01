@@ -291,6 +291,8 @@ export class CompletionModalInner extends Component<
       completedChallengesIds,
       currentSuperBlock,
       blockName,
+      block,
+      superBlock,
       id
     } = this.props;
 
@@ -302,7 +304,9 @@ export class CompletionModalInner extends Component<
 
     const currentSuperBlockValue: CurrentSuperBlock = {
       superBlockName: currentSuperBlock?.frontmatter.title,
+      superBlockDashedName: superBlock,
       blockName: blockName,
+      blockDashedName: block,
       superBlockPath: currentSuperBlock?.fields.slug,
       currentChallengeId: id,
       totalChallenges: challengeCount,

@@ -246,7 +246,9 @@ export function putUpdateMyUsername(username: string): Promise<void> {
 
 interface CurrentSuperBlock {
   superBlockName: string;
+  superBlockDashedName: string;
   blockName: string;
+  blockDashedName: string;
   superBlockPath: string;
   currentChallengeId: string;
   totalChallenges: number;

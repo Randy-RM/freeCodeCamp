@@ -67,7 +67,9 @@ export const UserPropType = PropTypes.shape({
   currentsSuperBlock: PropTypes.arrayOf(
     PropTypes.shape({
       superBlockName: PropTypes.string,
+      superBlockDashedName: PropTypes.string,
       blockName: PropTypes.string,
+      blockDashedName: PropTypes.string,
       superBlockPath: PropTypes.string,
       currentChallengeId: PropTypes.string,
       totalChallenges: PropTypes.number,
@@ -387,18 +389,11 @@ export type Portfolio = {
   description?: string;
 };
 
-export type CurrentsSuperBlock = {
-  superBlockName?: string;
-  blockName?: string;
-  superBlockPath?: string;
-  currentChallengeId?: string;
-  totalChallenges?: number;
-  totalCompletedChallenges?: number;
-};
-
 export type CurrentSuperBlock = {
   superBlockName?: string;
+  superBlockDashedName?: string;
   blockName?: string;
+  blockDashedName?: string;
   superBlockPath?: string;
   currentChallengeId?: string;
   totalChallenges?: number;

@@ -25,7 +25,8 @@ import {
   MarkdownRemark,
   AllChallengeNode,
   User,
-  CurrentSuperBlock
+  CurrentSuperBlock,
+  ChallengeNode
 } from '../../redux/prop-types';
 import Block from './components/block';
 import BlockProgressBar from './components/block-progress-bar';
@@ -203,13 +204,24 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
         currentsSuperBlockItem.superBlockName === i18nSuperBlock
     );
 
+  // delete the project module which is always at the end of the table
+  blocs.pop();
+
+  // console.log('allChallengeNode : ', props.data.allChallengeNode);
   console.log(
     'isCurrentSuperBlockProgressExist : ',
     isCurrentSuperBlockProgressExist
   );
+  console.log('nodesForSuperBlock : ', nodesForSuperBlock);
 
-  // delete the project module which is always at the end of the table
-  blocs.pop();
+  const lasteVisitedBlock = nodesForSuperBlock.filter(
+    (challengeNode: ChallengeNode) => {
+      const { blockName } = challengeNode.challenge.fields;
+      return blockName === isCurrentSuperBlockProgressExist?.blockName;
+    }
+  );
+  console.log('lasteVisitedBlock : ', lasteVisitedBlock);
+  console.log('defaultCurriculumNames : ', defaultCurriculumNames);
 
   return (
     <>
@@ -274,6 +286,10 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
                       // delete the project module which is always at the end of the table with the condition if
                       return (
                         <Fragment key={blockDashedName}>
+                          {console.log(
+                            'blockDashedName last visited : ',
+                            blockDashedName
+                          )}
                           <BlockLastVisited
                             blockDashedName={blockDashedName}
                             challenges={nodesForSuperBlock.filter(
