@@ -429,6 +429,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
                 onChange={this.handleGenderChange}
                 value={gender.length === 0 ? '' : gender}
               >
+                <option value=''></option>
                 <option value='Femme'>Femme</option>
                 <option value='Homme'>Homme</option>
               </FormControl>
