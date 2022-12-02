@@ -258,44 +258,45 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
           </Row>
           <Spacer size={1} />
         </div>
-        {isCurrentSuperBlockProgressExist && (
-          <div className=''>
-            <Spacer size={1} />
-            <Row className='super-block-intro-page'>
-              <Col md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
-                <h2 className='big-subheading'>{'Module en cours'}</h2>
-              </Col>
-              <Col
-                className=''
-                md={10}
-                mdOffset={1}
-                sm={10}
-                smOffset={1}
-                xs={12}
-              >
-                <Spacer size={1} />
-                <div className='block-ui bg-secondary'>
-                  <BlockLastVisited
-                    blockDashedName={
-                      isCurrentSuperBlockProgressExist.blockDashedName
-                        ? isCurrentSuperBlockProgressExist.blockDashedName
-                        : ''
-                    }
-                    challenges={lasteVisitedBlock}
-                    superBlock={
-                      isCurrentSuperBlockProgressExist.superBlockDashedName
-                        ? isCurrentSuperBlockProgressExist.superBlockDashedName
-                        : ''
-                    }
-                    blockIndex={lasteVisitedBlockIndex}
-                  />
-                </div>
-                <Spacer size={1} />
-              </Col>
-            </Row>
-            <Spacer size={1} />
-          </div>
-        )}
+        {isCurrentSuperBlockProgressExist &&
+          !isCurrentSuperBlockProgressExist.isCurrentBlockCompleted && (
+            <div className=''>
+              <Spacer size={1} />
+              <Row className='super-block-intro-page'>
+                <Col md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+                  <h2 className='big-subheading'>{'Module en cours'}</h2>
+                </Col>
+                <Col
+                  className=''
+                  md={10}
+                  mdOffset={1}
+                  sm={10}
+                  smOffset={1}
+                  xs={12}
+                >
+                  <Spacer size={1} />
+                  <div className='block-ui bg-secondary'>
+                    <BlockLastVisited
+                      blockDashedName={
+                        isCurrentSuperBlockProgressExist.blockDashedName
+                          ? isCurrentSuperBlockProgressExist.blockDashedName
+                          : ''
+                      }
+                      challenges={lasteVisitedBlock}
+                      superBlock={
+                        isCurrentSuperBlockProgressExist.superBlockDashedName
+                          ? isCurrentSuperBlockProgressExist.superBlockDashedName
+                          : ''
+                      }
+                      blockIndex={lasteVisitedBlockIndex}
+                    />
+                  </div>
+                  <Spacer size={1} />
+                </Col>
+              </Row>
+              <Spacer size={1} />
+            </div>
+          )}
         <div className=''>
           <Spacer size={1} />
           <Row className='super-block-intro-page'>

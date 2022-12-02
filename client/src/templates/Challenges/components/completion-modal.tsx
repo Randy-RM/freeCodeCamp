@@ -287,6 +287,8 @@ export class CompletionModalInner extends Component<
       id
     } = this.props;
 
+    const { completedPercent } = this.state;
+
     const { challengeCount, completedChallengeCount } =
       countCompletedAndUncompletedChallenges(
         superBlockChallengeIds,
@@ -298,6 +300,7 @@ export class CompletionModalInner extends Component<
       superBlockDashedName: superBlock,
       blockName: blockName,
       blockDashedName: block,
+      isCurrentBlockCompleted: completedPercent === 100 ? true : false,
       superBlockPath: currentSuperBlock?.fields.slug,
       currentChallengeId: id,
       totalChallenges: challengeCount,
@@ -340,6 +343,7 @@ export class CompletionModalInner extends Component<
     if (isOpen) {
       executeGA({ type: 'modal', data: '/completion-modal' });
     }
+    console.log(this.props.user);
     // normally dashedName should be graphQL queried and then passed around,
     // but it's only used to make a nice filename for downloading, so dasherize
     // is fine here.

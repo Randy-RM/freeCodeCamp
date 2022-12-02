@@ -70,6 +70,7 @@ export const UserPropType = PropTypes.shape({
       superBlockDashedName: PropTypes.string,
       blockName: PropTypes.string,
       blockDashedName: PropTypes.string,
+      isCurrentBlockCompleted: PropTypes.bool,
       superBlockPath: PropTypes.string,
       currentChallengeId: PropTypes.string,
       totalChallenges: PropTypes.number,
@@ -394,6 +395,7 @@ export type CurrentSuperBlock = {
   superBlockDashedName?: string;
   blockName?: string;
   blockDashedName?: string;
+  isCurrentBlockCompleted?: boolean;
   superBlockPath?: string;
   currentChallengeId?: string;
   totalChallenges?: number;

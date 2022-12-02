@@ -288,6 +288,10 @@
             "type": "string",
             "default": ""
           },
+          "isCurrentBlockCompleted": {
+            "type": "boolean",
+            "default": false
+          },
           "superBlockPath": {
             "type": "string",
             "default": ""

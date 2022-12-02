@@ -249,6 +249,7 @@ interface CurrentSuperBlock {
   superBlockDashedName: string;
   blockName: string;
   blockDashedName: string;
+  isCurrentBlockCompleted: boolean;
   superBlockPath: string;
   currentChallengeId: string;
   totalChallenges: number;
