@@ -15,8 +15,23 @@ import isNewRespCert from '../../../utils/is-new-responsive-web-design-cert';
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({ executeGA }, dispatch);
 
+interface Challenge {
+  block: string;
+  challengeType: number;
+  dashedName: string;
+  fields: {
+    blockName: string;
+    slug: string;
+  };
+  id: string;
+  order: number;
+  isCompleted: boolean;
+  superBlock: string;
+  title: string;
+}
 interface Challenges {
-  challengesWithCompleted: ChallengeWithCompletedNode[];
+  challengesWithCompleted?: ChallengeWithCompletedNode[];
+  currentChallenge?: Challenge;
   executeGA: (payload: ExecuteGaArg) => void;
   isProjectBlock: boolean;
   superBlock: string;
@@ -27,6 +42,7 @@ const mapIconStyle = { height: '15px', marginRight: '10px', width: '15px' };
 
 function Challenges({
   challengesWithCompleted,
+  currentChallenge,
   executeGA,
   isProjectBlock,
   superBlock,
@@ -52,20 +68,19 @@ function Challenges({
 
   return isLastVisited ? (
     <>
-      {challengesWithCompleted[0] ? (
+      {currentChallenge ? (
         <>
           <div
             className='card-challenge-action'
-            id={challengesWithCompleted[0].dashedName}
-            key={'map-challenge' + challengesWithCompleted[0].fields.slug}
+            id={currentChallenge.dashedName}
           >
             {!isProjectBlock ? (
               <Link
                 className='link-action'
                 onClick={() =>
-                  handleChallengeClick(challengesWithCompleted[0].fields.slug)
+                  handleChallengeClick(currentChallenge.fields.slug)
                 }
-                to={challengesWithCompleted[0].fields.slug}
+                to={currentChallenge.fields.slug}
               >
                 Continuer la leçon
               </Link>
@@ -73,9 +88,9 @@ function Challenges({
               <Link
                 className='link-action'
                 onClick={() =>
-                  handleChallengeClick(challengesWithCompleted[0].fields.slug)
+                  handleChallengeClick(currentChallenge.fields.slug)
                 }
-                to={challengesWithCompleted[0].fields.slug}
+                to={currentChallenge.fields.slug}
               >
                 Continuer la leçon
               </Link>
@@ -92,71 +107,73 @@ function Challenges({
     </>
   ) : isGridMap ? (
     <ul className={`map-challenges-ul map-challenges-grid `}>
-      {challengesWithCompleted.map((challenge, i) => (
-        <li
-          className={`map-challenge-title map-challenge-title-grid ${
-            isProjectBlock ? 'map-project-wrap' : 'map-challenge-wrap'
-          }`}
-          id={challenge.dashedName}
-          key={`map-challenge ${challenge.fields.slug}`}
-        >
-          {!isProjectBlock ? (
-            <Link
-              onClick={() => handleChallengeClick(challenge.fields.slug)}
-              to={challenge.fields.slug}
-              className={`map-grid-item ${
-                challenge.isCompleted ? 'challenge-completed' : ''
-              }`}
-            >
-              {i + 1}
-            </Link>
-          ) : (
-            <Link
-              onClick={() => handleChallengeClick(challenge.fields.slug)}
-              to={challenge.fields.slug}
-            >
-              {challenge.title}
-              <span className=' badge map-badge map-project-checkmark'>
-                {renderCheckMark(challenge.isCompleted)}
-              </span>
-            </Link>
-          )}
-        </li>
-      ))}
+      {challengesWithCompleted != undefined &&
+        challengesWithCompleted.map((challenge, i) => (
+          <li
+            className={`map-challenge-title map-challenge-title-grid ${
+              isProjectBlock ? 'map-project-wrap' : 'map-challenge-wrap'
+            }`}
+            id={challenge.dashedName}
+            key={`map-challenge ${challenge.fields.slug}`}
+          >
+            {!isProjectBlock ? (
+              <Link
+                onClick={() => handleChallengeClick(challenge.fields.slug)}
+                to={challenge.fields.slug}
+                className={`map-grid-item ${
+                  challenge.isCompleted ? 'challenge-completed' : ''
+                }`}
+              >
+                {i + 1}
+              </Link>
+            ) : (
+              <Link
+                onClick={() => handleChallengeClick(challenge.fields.slug)}
+                to={challenge.fields.slug}
+              >
+                {challenge.title}
+                <span className=' badge map-badge map-project-checkmark'>
+                  {renderCheckMark(challenge.isCompleted)}
+                </span>
+              </Link>
+            )}
+          </li>
+        ))}
     </ul>
   ) : (
     <ul className={`map-challenges-ul`}>
-      {challengesWithCompleted.map(challenge => (
-        <li
-          className={`map-challenge-title ${
-            isProjectBlock ? 'map-project-wrap' : 'map-challenge-wrap'
-          }`}
-          id={challenge.dashedName}
-          key={'map-challenge' + challenge.fields.slug}
-        >
-          {!isProjectBlock ? (
-            <Link
-              onClick={() => handleChallengeClick(challenge.fields.slug)}
-              to={challenge.fields.slug}
-            >
-              <span className='badge map-badge'>
-                {renderCheckMark(challenge.isCompleted)}
-              </span>
-              {challenge.title}
-            </Link>
-          ) : (
-            <Link
-              onClick={() => handleChallengeClick(challenge.fields.slug)}
-              to={challenge.fields.slug}
-            >
-              {challenge.title}
-              <span className='badge map-badge map-project-checkmark'>
-                {renderCheckMark(challenge.isCompleted)}
-              </span>
-            </Link>
-          )}
-        </li>
-      ))}
+      {challengesWithCompleted != undefined &&
+        challengesWithCompleted.map(challenge => (
+          <li
+            className={`map-challenge-title ${
+              isProjectBlock ? 'map-project-wrap' : 'map-challenge-wrap'
+            }`}
+            id={challenge.dashedName}
+            key={'map-challenge' + challenge.fields.slug}
+          >
+            {!isProjectBlock ? (
+              <Link
+                onClick={() => handleChallengeClick(challenge.fields.slug)}
+                to={challenge.fields.slug}
+              >
+                <span className='badge map-badge'>
+                  {renderCheckMark(challenge.isCompleted)}
+                </span>
+                {challenge.title}
+              </Link>
+            ) : (
+              <Link
+                onClick={() => handleChallengeClick(challenge.fields.slug)}
+                to={challenge.fields.slug}
+              >
+                {challenge.title}
+                <span className='badge map-badge map-project-checkmark'>
+                  {renderCheckMark(challenge.isCompleted)}
+                </span>
+              </Link>
+            )}
+          </li>
+        ))}
     </ul>
   );
 }

@@ -124,80 +124,78 @@ export class BlockLastVisited extends Component<BlockProps> {
     );
     const blockTitle = blockIntroObj ? blockIntroObj.title : null;
 
-    const isBlockCompleted = completedCount === challengesWithCompleted.length;
+    let isBlockCompleted = completedCount === challengesWithCompleted.length;
 
-    const challengeCompleted = challengesWithCompleted.filter(
-      challenge => challenge.isCompleted === true
+    const currentChallenge = challengesWithCompleted.find(challenge => {
+      return challenge.isCompleted === false;
+    });
+
+    console.log(
+      'challengesWithCompleted.length : ',
+      challengesWithCompleted.length
     );
+    console.log('Last visited completedCount : ', completedCount);
+    console.log('currentChallenge : ', currentChallenge);
 
-    const lastVisitedChallenge = [];
-
-    for (let index = 0; index < challengesWithCompleted.length; index++) {
-      if (challengesWithCompleted[index].id === completedChallengeIds[0]) {
-        lastVisitedChallenge.push(challengesWithCompleted[index + 1]);
-        break;
-      }
-    }
+    isBlockCompleted = false;
 
     const Block = (
       <>
-        {challengeCompleted.length != 0 &&
-          lastVisitedChallenge.length != 0 &&
-          !isBlockCompleted && (
-            <>
-              <div className={`block ${isExpanded ? 'open' : ''}`}>
-                <div className='card-challenge'>
-                  <div className='card-challenge-header'>
-                    <div className='card-challenge-index'>{blockIndex}</div>
-                    <h3 className='card-challenge-title'>{blockTitle}</h3>
+        {currentChallenge && !isBlockCompleted && (
+          <>
+            <div className={`block ${isExpanded ? 'open' : ''}`}>
+              <div className='card-challenge'>
+                <div className='card-challenge-header'>
+                  <div className='card-challenge-index'>{blockIndex}</div>
+                  <h3 className='card-challenge-title'>{blockTitle}</h3>
+                </div>
+                <div className='card-challenge-body'>
+                  <div className='card-challenge-icon'>
+                    <FontAwesomeIcon icon={faBookOpen} />
                   </div>
-                  <div className='card-challenge-body'>
-                    <div className='card-challenge-icon'>
-                      <FontAwesomeIcon icon={faBookOpen} />
-                    </div>
-                    <div className='card-challenge-content'>
-                      {lastVisitedChallenge[0] && (
-                        <div className='card-challenge-description'>
-                          {`Leçon : ${lastVisitedChallenge[0].title}`}
-                        </div>
-                      )}
-                      <Challenges
-                        challengesWithCompleted={lastVisitedChallenge}
-                        isProjectBlock={isProjectBlock}
-                        superBlock={superBlock}
-                        isLastVisited={true}
-                      />
-                    </div>
+                  <div className='card-challenge-content'>
+                    {currentChallenge && (
+                      <div className='card-challenge-description'>
+                        {`Leçon : ${currentChallenge.title}`}
+                      </div>
+                    )}
+                    <Challenges
+                      currentChallenge={currentChallenge}
+                      isProjectBlock={isProjectBlock}
+                      superBlock={superBlock}
+                      isLastVisited={true}
+                    />
                   </div>
                 </div>
-                <hr />
-                <button
-                  aria-expanded={isExpanded}
-                  className='map-title'
-                  onClick={() => {
-                    this.handleBlockClick();
-                  }}
-                >
-                  <Caret />
-                  <h4 className='course-title'>
-                    {`${isExpanded ? 'Fermer' : 'Voir plus de chapitres'}`}
-                  </h4>
-                  <div className='map-title-completed course-title'>
-                    {this.renderCheckMark(isBlockCompleted)}
-                    <span className='map-completed-count'>{`${completedCount}/${challengesWithCompleted.length}`}</span>
-                  </div>
-                </button>
-                {isExpanded && (
-                  <Challenges
-                    challengesWithCompleted={challengesWithCompleted}
-                    isProjectBlock={isProjectBlock}
-                    superBlock={superBlock}
-                    isLastVisited={false}
-                  />
-                )}
               </div>
-            </>
-          )}
+              <hr />
+              <button
+                aria-expanded={isExpanded}
+                className='map-title'
+                onClick={() => {
+                  this.handleBlockClick();
+                }}
+              >
+                <Caret />
+                <h4 className='course-title'>
+                  {`${isExpanded ? 'Fermer' : 'Voir plus de chapitres'}`}
+                </h4>
+                <div className='map-title-completed course-title'>
+                  {this.renderCheckMark(isBlockCompleted)}
+                  <span className='map-completed-count'>{`${completedCount}/${challengesWithCompleted.length}`}</span>
+                </div>
+              </button>
+              {isExpanded && (
+                <Challenges
+                  challengesWithCompleted={challengesWithCompleted}
+                  isProjectBlock={isProjectBlock}
+                  superBlock={superBlock}
+                  isLastVisited={false}
+                />
+              )}
+            </div>
+          </>
+        )}
       </>
     );
 
