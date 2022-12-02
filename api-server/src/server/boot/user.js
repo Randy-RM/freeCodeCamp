@@ -251,7 +251,8 @@ function postResetProgress(req, res, next) {
       isDataAnalysisPyCertV7: false,
       isMachineLearningPyCertV7: false,
       isRelationalDatabaseCertV8: false,
-      completedChallenges: []
+      completedChallenges: [],
+      currentsSuperBlock: []
     },
     function (err) {
       if (err) {

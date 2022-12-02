@@ -343,7 +343,6 @@ export class CompletionModalInner extends Component<
     if (isOpen) {
       executeGA({ type: 'modal', data: '/completion-modal' });
     }
-    console.log(this.props.user);
     // normally dashedName should be graphQL queried and then passed around,
     // but it's only used to make a nice filename for downloading, so dasherize
     // is fine here.

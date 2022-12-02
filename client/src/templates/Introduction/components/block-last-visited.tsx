@@ -130,13 +130,6 @@ export class BlockLastVisited extends Component<BlockProps> {
       return challenge.isCompleted === false;
     });
 
-    console.log(
-      'challengesWithCompleted.length : ',
-      challengesWithCompleted.length
-    );
-    console.log('Last visited completedCount : ', completedCount);
-    console.log('currentChallenge : ', currentChallenge);
-
     isBlockCompleted = false;
 
     const Block = (
