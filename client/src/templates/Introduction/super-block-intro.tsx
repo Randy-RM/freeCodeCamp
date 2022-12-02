@@ -203,13 +203,6 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
   // delete the project module which is always at the end of the table
   // blocs.pop();
 
-  // console.log('allChallengeNode : ', props.data.allChallengeNode);
-  console.log(
-    'isCurrentSuperBlockProgressExist : ',
-    isCurrentSuperBlockProgressExist
-  );
-  // console.log('nodesForSuperBlock : ', nodesForSuperBlock);
-
   const lasteVisitedBlock = nodesForSuperBlock.filter(
     (challengeNode: ChallengeNode) => {
       const { blockName } = challengeNode.challenge.fields;
@@ -223,9 +216,6 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
         curriculumName === isCurrentSuperBlockProgressExist?.blockDashedName
       );
     }) + 1;
-  console.log('lasteVisitedBlock : ', lasteVisitedBlock);
-  console.log('lasteVisitedBlockIndex : ', lasteVisitedBlockIndex);
-  console.log('defaultCurriculumNames : ', defaultCurriculumNames);
 
   return (
     <>

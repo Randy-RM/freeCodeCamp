@@ -250,15 +250,6 @@ export class CompletionModalInner extends Component<
     }
 
     if (user.currentsSuperBlock) {
-      const isCurrentSuperBlockExist = user.currentsSuperBlock.find(
-        currentsSuperBlockItem => {
-          return (
-            currentsSuperBlockItem.superBlockName ===
-            currentSuperBlock.superBlockName
-          );
-        }
-      );
-
       const currentSuperBlockIndex = user.currentsSuperBlock.findIndex(
         currentsSuperBlockItem => {
           return (
@@ -270,7 +261,7 @@ export class CompletionModalInner extends Component<
 
       currentsSuperBlockList.currentsSuperBlock = [...user.currentsSuperBlock];
 
-      if (isCurrentSuperBlockExist) {
+      if (currentSuperBlockIndex != -1) {
         currentsSuperBlockList.currentsSuperBlock[currentSuperBlockIndex] =
           currentSuperBlock;
         submitNewCurrentsSuperBlock(currentsSuperBlockList);
@@ -345,8 +336,6 @@ export class CompletionModalInner extends Component<
     } = this.props;
 
     const { completedPercent } = this.state;
-
-    console.log('props : ', this.props);
 
     if (isOpen) {
       executeGA({ type: 'modal', data: '/completion-modal' });
