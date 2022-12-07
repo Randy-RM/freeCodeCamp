@@ -15,6 +15,7 @@ import {
 } from '../redux';
 
 import AsSeenIn from '../components/landing/components/as-seen-in';
+import RegistrationToAcademy from '../components/landing/components/registration-to-academy';
 import LandingTop from '../components/landing/components/landing-top';
 import LandingDetails from '../components/landing/components/landing-details';
 import LandingLearn from '../components/landing/components/landing-learn';
@@ -78,17 +79,27 @@ function LearnPage({ isSignedIn }: LearnPageProps) {
             <LandingTop pageName={'landing'} isSignedIn={isSignedIn} />
           </Grid>
         </div>
+
+        <div className='as-seen-in'>
+          <Grid>
+            <RegistrationToAcademy />
+          </Grid>
+        </div>
+
         <Grid>
           <LandingDetails />
         </Grid>
+
         <Grid>
           <LandingLearn />
         </Grid>
+
         <div className='bg-beige'>
           <Grid>
             <LandingGoals />
           </Grid>
         </div>
+
         <Grid fluid={true}>
           <AsSeenIn isSignedIn={isSignedIn} />
         </Grid>
