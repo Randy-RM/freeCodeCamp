@@ -48,18 +48,18 @@ Ressources :
 ###### - Modifier les variables liées a Auth0 dans le fichier **.env** :
 
 - **Variable :** `AUTH0_CLIENT_ID`
-  **Valeur :** `INKgvvk4rWlBYB28niLVCaVc3FgVthfU`
+  **Valeur :** `VALEUR_AUTH0_CLIENT_ID`
 - **Variable :** `AUTH0_CLIENT_SECRET`
-  **Valeur :** `UoA7osFGb4ZHzkAvgJEfHh4vgJlf1zoTHFkhQ0UntJH_bIdc2OEDV5XpHJ2HLhfX`
+  **Valeur :** `VALEUR_AUTH0_CLIENT_SECRET`
 - **Variable :** `AUTH0_DOMAIN`
-  **Valeur :** `dev-36hdybdm.eu.auth0.com`
+  **Valeur :** `VALEUR_AUTH0_DOMAIN`
 
 ###### - Modifier les variable liées au client et l'api dans le fichier .env :
 
 - **Variable :** `HOME_LOCATION`
-  > Note : La Variable `HOME_LOCATION` dois avoir pour valeur l'hot du client définit dans le fichier de configuration de Nginx. **Exemple :** `HOME_LOCATION=http://kda.francoisdisubi.com/`
+  > Note : La Variable `HOME_LOCATION` dois avoir pour valeur l'hot du client définit dans le fichier de configuration de Nginx. **Exemple :** `HOME_LOCATION=http://frontend-location.com/`
 - **Variable :** `API_LOCATION`
-  > Note : La Variable `API_LOCATION` dois avoir pour valeur l'hot de l'api définit dans le fichier de configuration de Nginx. **Exemple :** `API_LOCATION=http://api.francoisdisubi.com/`
+  > Note : La Variable `API_LOCATION` dois avoir pour valeur l'hot de l'api définit dans le fichier de configuration de Nginx. **Exemple :** `API_LOCATION=http://backend-location.com/`
 
 ###### - Modifier la variable **LOCAL_MOCK_AUTH** dans le fichier **.env** en remplaçant la valeur `true` par `false`.
 
