@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from '../../../assets/icons/kda-learning-plateform.png';
+import Logo from '../../../assets/images/code-learning-platform-logo.svg';
 
 const NavLogo = (): JSX.Element => {
   const kdaLogo: string = Logo as never;

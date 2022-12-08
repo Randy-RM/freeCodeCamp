@@ -10,13 +10,14 @@ import {
   isSignedInSelector
 } from '../../redux';
 
-import AsSeenIn from './components/as-seen-in';
+// import AsSeenIn from './components/as-seen-in';
 import RegistrationToAcademy from './components/registration-to-academy';
 import LandingTop from './components/landing-top';
 import LandingDetails from './components/landing-details';
 import LandingLearn from './components/landing-learn';
 // import LandingGoals from './components/landing-goals';
 import WhatCanYouDo from './whatCanYouDo/what-can-you-do';
+// import YourCareer from './yourCareer/your-career';
 
 import './landing.css';
 
@@ -84,9 +85,11 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
           </Grid>
         </div>
 
-        <Grid fluid={true}>
-          <AsSeenIn isSignedIn={isSignedIn} />
-        </Grid>
+        {/* <div className='as-seen-in'>
+          <Grid>
+            <YourCareer isSignedIn={isSignedIn} />
+          </Grid>
+        </div> */}
       </main>
     </>
   );
