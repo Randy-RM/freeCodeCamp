@@ -19,6 +19,7 @@ import LandingLearn from './components/landing-learn';
 import WhatCanYouDo from './whatCanYouDo/what-can-you-do';
 // import YourCareer from './yourCareer/your-career';
 import Hero from './hero/hero';
+import StartCOding from './start-coding/start-coding';
 
 import './landing.css';
 
@@ -87,6 +88,8 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
             <WhatCanYouDo />
           </Grid>
         </div>
+
+        <StartCOding />
 
         {/* <div className='as-seen-in'>
           <Grid>

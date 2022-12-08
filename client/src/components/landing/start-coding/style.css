@@ -1,0 +1,117 @@
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+.start-coding-section {
+  padding-top: 100px;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: #2b292b;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.start-coding-container {
+  display: flex;
+  width: 1140px;
+  flex-wrap: wrap;
+}
+
+.start-coding-container > img {
+  width: 61%;
+}
+
+.start-coding-container__description {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-bottom: 100px;
+  width: 39%;
+}
+
+.start-coding-container__description > h3,
+.start-coding-container__description > p {
+  text-align: left;
+  letter-spacing: 0px;
+  margin-bottom: 30px;
+}
+
+.start-coding-container__description > h3 {
+  font-size: 48px;
+  /* line-height: 1; */
+}
+
+.start-coding-container__description > p {
+  font-size: 22;
+  line-height: 1.5;
+  padding-right: 3rem;
+}
+
+.start-coding-container__description--cta > a {
+  padding: 0.5rem 1.875rem;
+  background-color: #e60000;
+  border: 1px solid #e60000;
+  border-width: 1px;
+  box-shadow: 0px 0px 8px #e60000;
+  border-radius: 20px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #fff;
+  transition: ease-in-out 0.3s;
+}
+
+.start-coding-container__description--cta > a:hover {
+  border-color: #fff;
+  background-color: transparent;
+  box-shadow: none;
+}
+.start-coding-container > img {
+  margin-bottom: -50px;
+}
+
+@media (max-width: 1024px) {
+  .start-coding-container__description > h3 {
+    font-size: 1.5rem;
+  }
+  .start-coding-container__description--cta > a {
+    font-size: 1rem;
+  }
+  /* .start-coding-container {
+    justify-content: center;
+  }
+  .start-coding-container__description {
+    align-items: center;
+    padding-right: 0rem;
+  }
+  .start-coding-container__description > p {
+    padding-left: 3rem;
+  }
+  .start-coding-container__description > h3,
+  .start-coding-container__description > p {
+    text-align: center;
+  }
+  .start-coding-container > img {
+    margin-bottom: 0px;
+  } */
+}
+
+@media (max-width: 800px) {
+  .start-coding-container > img {
+    display: none;
+  }
+
+  .start-coding-container__description {
+    width: 100%;
+  }
+}
+
+@media (max-width: 320px) {
+  .start-coding-container__description--cta > a {
+    font-size: 0.7rem;
+  }
+}

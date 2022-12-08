@@ -21,7 +21,7 @@ import { UserFetchState, User } from '../../redux/prop-types';
 import Flash from '../Flash';
 import { flashMessageSelector, removeFlashMessage } from '../Flash/redux';
 
-import Footer from '../Footer';
+import Footer from '../FooterNew/footer';
 import Header from '../Header';
 import OfflineWarning from '../OfflineWarning';
 // import { Spacer } from '../helpers';
