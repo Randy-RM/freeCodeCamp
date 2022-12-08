@@ -1,6 +1,7 @@
 import { Row } from '@freecodecamp/react-bootstrap';
 import React from 'react';
 import Link from '../../helpers/link';
+import './registration-to-academy.css';
 
 const RegistrationToAcademy = (): JSX.Element => {
   return (
@@ -23,7 +24,7 @@ const RegistrationToAcademy = (): JSX.Element => {
               to='https://www.kinshasadigital.academy/inscription'
               external={true}
               sameTab={false}
-              className='btn-light link-button'
+              className='registration-academy-btn'
             >
               {'Rejoins notre académie ici'}
             </Link>

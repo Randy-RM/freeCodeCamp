@@ -9,6 +9,7 @@
   width: 1140px;
   flex-wrap: wrap;
   justify-content: space-between;
+  justify-content: center;
 }
 
 .footer-container__left-side {

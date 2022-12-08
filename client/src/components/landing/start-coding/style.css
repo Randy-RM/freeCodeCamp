@@ -10,7 +10,7 @@ li {
   padding-top: 100px;
   padding-left: 5%;
   padding-right: 5%;
-  background-color: #2b292b;
+  background-color: #202020;
   color: #fff;
   display: flex;
   justify-content: center;
@@ -23,7 +23,7 @@ li {
 }
 
 .start-coding-container > img {
-  width: 61%;
+  width: 50%;
 }
 
 .start-coding-container__description {
@@ -31,7 +31,7 @@ li {
   flex-direction: column;
   align-items: flex-start;
   padding-bottom: 100px;
-  width: 39%;
+  width: 50%;
 }
 
 .start-coding-container__description > h3,
@@ -71,7 +71,7 @@ li {
   box-shadow: none;
 }
 .start-coding-container > img {
-  margin-bottom: -50px;
+  margin-bottom: -15px;
 }
 
 @media (max-width: 1024px) {

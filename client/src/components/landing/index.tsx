@@ -12,14 +12,15 @@ import {
 
 // import AsSeenIn from './components/as-seen-in';
 import RegistrationToAcademy from './components/registration-to-academy';
-import LandingTop from './components/landing-top';
+// import LandingTop from './components/landing-top';
 import LandingDetails from './components/landing-details';
-import LandingLearn from './components/landing-learn';
+// import LandingLearn from './components/landing-learn';
 // import LandingGoals from './components/landing-goals';
 import WhatCanYouDo from './whatCanYouDo/what-can-you-do';
 // import YourCareer from './yourCareer/your-career';
 import Hero from './hero/hero';
 import StartCOding from './start-coding/start-coding';
+import HowWillYouLearn from './how-will-you-learn/how-will-you-learn';
 
 import './landing.css';
 
@@ -61,13 +62,13 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
         <title>{`Apprendre à coder - gratuitement | Code Learning Platform`}</title>
       </Helmet>
       <main className='landing-page bg-light'>
-        <Hero />
+        <Hero pageName={'landing'} isSignedIn={isSignedIn} />
 
-        <div className='bg-secondary'>
+        {/* <div className='bg-secondary'>
           <Grid>
             <LandingTop pageName={'landing'} isSignedIn={isSignedIn} />
           </Grid>
-        </div>
+        </div> */}
 
         <div className='as-seen-in'>
           <Grid>
@@ -79,9 +80,11 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
           <LandingDetails isSignedIn={isSignedIn} />
         </Grid>
 
-        <Grid>
+        {/* <Grid>
           <LandingLearn />
-        </Grid>
+        </Grid> */}
+
+        <HowWillYouLearn />
 
         <div className='bg-light-gray'>
           <Grid>
@@ -89,7 +92,7 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
           </Grid>
         </div>
 
-        <StartCOding />
+        <StartCOding isSignedIn={isSignedIn} />
 
         {/* <div className='as-seen-in'>
           <Grid>

@@ -2,7 +2,7 @@ import React from 'react';
 import Facebook from '../../assets/images/facebook.png';
 import Instagram from '../../assets/images/instagram.png';
 import Twitter from '../../assets/images/twitter.png';
-import Whatsapp from '../../assets/images/whatsapp.png';
+// import Whatsapp from '../../assets/images/whatsapp.png';
 import Logo from '../../assets/images/logo.png';
 import './style.css';
 
@@ -16,24 +16,31 @@ function Footer() {
           <div className='footer-container__left-side__social'>
             <ul className='footer-container__left-side__social-icons'>
               <li>
-                <a href='/'>
+                <a
+                  href='https://www.facebook.com/kda243'
+                  target='_blank'
+                  rel='noreferrer'
+                >
                   {' '}
                   <img src={Facebook} alt='facebook' />
                 </a>
               </li>
               <li>
-                <a href='/'>
+                <a
+                  href='https://www.instagram.com/kinshasadigitalacademy/'
+                  target='_blank'
+                  rel='noreferrer'
+                >
                   <img src={Instagram} alt='instagram' />
                 </a>
               </li>
               <li>
-                <a href='/'>
+                <a
+                  href='https://www.twitter.com/kda243'
+                  target='_blank'
+                  rel='noreferrer'
+                >
                   <img src={Twitter} alt='twitter' />
-                </a>
-              </li>
-              <li>
-                <a href='/'>
-                  <img src={Whatsapp} alt='whatsapp' />
                 </a>
               </li>
             </ul>
