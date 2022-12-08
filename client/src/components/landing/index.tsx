@@ -15,7 +15,8 @@ import RegistrationToAcademy from './components/registration-to-academy';
 import LandingTop from './components/landing-top';
 import LandingDetails from './components/landing-details';
 import LandingLearn from './components/landing-learn';
-import LandingGoals from './components/landing-goals';
+// import LandingGoals from './components/landing-goals';
+import WhatCanYouDo from './whatCanYouDo/what-can-you-do';
 
 import './landing.css';
 
@@ -77,9 +78,9 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
           <LandingLearn />
         </Grid>
 
-        <div className='bg-beige'>
+        <div className='bg-light-gray'>
           <Grid>
-            <LandingGoals />
+            <WhatCanYouDo />
           </Grid>
         </div>
 
