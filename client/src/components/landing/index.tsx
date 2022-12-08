@@ -18,6 +18,7 @@ import LandingLearn from './components/landing-learn';
 // import LandingGoals from './components/landing-goals';
 import WhatCanYouDo from './whatCanYouDo/what-can-you-do';
 // import YourCareer from './yourCareer/your-career';
+import Hero from './hero/hero';
 
 import './landing.css';
 
@@ -59,6 +60,8 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
         <title>{`Apprendre à coder - gratuitement | Code Learning Platform`}</title>
       </Helmet>
       <main className='landing-page bg-light'>
+        <Hero />
+
         <div className='bg-secondary'>
           <Grid>
             <LandingTop pageName={'landing'} isSignedIn={isSignedIn} />
