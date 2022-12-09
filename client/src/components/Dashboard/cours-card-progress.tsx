@@ -21,7 +21,7 @@ export function CoursCardProgress(props: CoursCardProgressProps): JSX.Element {
 
   return (
     <>
-      <div className='cours-card-progress bg-light p-4'>
+      <div className='cours-card-progress bg-light p-4 standard-radius-20'>
         <small className='text-love-light fw-bold'>
           Cours
           <br />
@@ -34,7 +34,7 @@ export function CoursCardProgress(props: CoursCardProgressProps): JSX.Element {
             <small>
               <Link
                 to={superBlockPath ? superBlockPath : ''}
-                className='cours-card-progress-btn'
+                className='cours-card-progress-btn standard-radius-20'
               >
                 Continuer le cours
               </Link>
@@ -56,7 +56,7 @@ export function CoursCardProgress(props: CoursCardProgressProps): JSX.Element {
           <small>
             <Link
               to={superBlockPath ? superBlockPath : ''}
-              className='cours-card-progress-btn'
+              className='cours-card-progress-btn standard-radius-20'
             >
               Continuer le cours
             </Link>

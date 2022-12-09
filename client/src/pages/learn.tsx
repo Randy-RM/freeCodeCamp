@@ -14,12 +14,17 @@ import {
   userSelector
 } from '../redux';
 
-import AsSeenIn from '../components/landing/components/as-seen-in';
+// import AsSeenIn from './components/as-seen-in';
 import RegistrationToAcademy from '../components/landing/components/registration-to-academy';
-import LandingTop from '../components/landing/components/landing-top';
+// import LandingTop from './components/landing-top';
 import LandingDetails from '../components/landing/components/landing-details';
-import LandingLearn from '../components/landing/components/landing-learn';
-import LandingGoals from '../components/landing/components/landing-goals';
+// import LandingLearn from './components/landing-learn';
+// import LandingGoals from './components/landing-goals';
+import WhatCanYouDo from '../components/landing/whatCanYouDo/what-can-you-do';
+// import YourCareer from './yourCareer/your-career';
+import Hero from '../components/landing/hero/hero';
+import StartCOding from '../components/landing/start-coding/start-coding';
+import HowWillYouLearn from '../components/landing/how-will-you-learn/how-will-you-learn';
 
 import '../components/landing/landing.css';
 
@@ -74,11 +79,13 @@ function LearnPage({ isSignedIn }: LearnPageProps) {
         title={`Apprendre à coder - gratuitement | Code Learning Platform`}
       />
       <main className='landing-page bg-light'>
-        <div className='bg-secondary'>
+        <Hero pageName={'landing'} isSignedIn={isSignedIn} />
+
+        {/* <div className='bg-secondary'>
           <Grid>
             <LandingTop pageName={'landing'} isSignedIn={isSignedIn} />
           </Grid>
-        </div>
+        </div> */}
 
         <div className='as-seen-in'>
           <Grid>
@@ -87,22 +94,28 @@ function LearnPage({ isSignedIn }: LearnPageProps) {
         </div>
 
         <Grid>
-          <LandingDetails />
+          <LandingDetails isSignedIn={isSignedIn} />
         </Grid>
 
-        <Grid>
+        {/* <Grid>
           <LandingLearn />
-        </Grid>
+        </Grid> */}
 
-        <div className='bg-beige'>
+        <HowWillYouLearn />
+
+        <div className='bg-light-gray'>
           <Grid>
-            <LandingGoals />
+            <WhatCanYouDo />
           </Grid>
         </div>
 
-        <Grid fluid={true}>
-          <AsSeenIn isSignedIn={isSignedIn} />
-        </Grid>
+        <StartCOding isSignedIn={isSignedIn} />
+
+        {/* <div className='as-seen-in'>
+          <Grid>
+            <YourCareer isSignedIn={isSignedIn} />
+          </Grid>
+        </div> */}
       </main>
     </LearnLayout>
   );

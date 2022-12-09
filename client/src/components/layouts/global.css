@@ -737,3 +737,17 @@ blockquote .small {
 .p-3-2 {
   padding: 3vh 2vw;
 }
+
+.standard-radius-20 {
+  border-radius: 20px !important;
+}
+
+.standard-radius-20-top {
+  border-top-left-radius: 20px !important;
+  border-top-right-radius: 20px !important;
+}
+
+.standard-radius-20-bottom {
+  border-bottom-left-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+}

@@ -76,7 +76,7 @@ function Challenges({
           >
             {!isProjectBlock ? (
               <Link
-                className='link-action'
+                className='link-action standard-radius-20'
                 onClick={() =>
                   handleChallengeClick(currentChallenge.fields.slug)
                 }
@@ -86,7 +86,7 @@ function Challenges({
               </Link>
             ) : (
               <Link
-                className='link-action'
+                className='link-action standard-radius-20'
                 onClick={() =>
                   handleChallengeClick(currentChallenge.fields.slug)
                 }

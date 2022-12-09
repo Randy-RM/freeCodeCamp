@@ -20,7 +20,7 @@
   min-width: 10%;
 }
 
-.footer-container__left-side > img {
+.footer-container__left-side .footer-logo {
   width: 180px;
   margin-bottom: 20px;
 }

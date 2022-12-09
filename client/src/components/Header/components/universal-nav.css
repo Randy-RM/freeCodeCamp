@@ -78,9 +78,9 @@
 
 .nav-list .nav-item .nav-signin-btn:hover,
 .nav-list .nav-item .nav-signin-btn:focus {
-  color: var(--love-light) !important;
+  color: var(--gray-00) !important;
   background: rgba(255, 255, 255, 0) !important;
-  border: solid 2px var(--love-light);
+  border: solid 2px var(--gray-00);
 }
 
 .nav-list .nav-item .nav-signout-btn {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from '../../components/helpers';
 import Facebook from '../../assets/images/facebook.png';
 import Instagram from '../../assets/images/instagram.png';
 import Twitter from '../../assets/images/twitter.png';
@@ -11,7 +12,13 @@ function Footer() {
     <section className='footer-section'>
       <div className='footer-container'>
         <div className='footer-container__left-side'>
-          <img src={Logo} alt='KDEA code learning plateform' />
+          <Link className='link-logo text-center' to='/'>
+            <img
+              className='footer-logo'
+              src={Logo}
+              alt='KDEA code learning plateform'
+            />
+          </Link>
 
           <div className='footer-container__left-side__social'>
             <ul className='footer-container__left-side__social-icons'>

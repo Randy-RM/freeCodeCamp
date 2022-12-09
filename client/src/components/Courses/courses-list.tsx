@@ -27,7 +27,7 @@ function CoursesList({ isSignedIn }: CoursesListProps): JSX.Element {
       <div className=''>
         <div className='card-container'>
           <div className='card-unit-col-6'>
-            <div className='bg-secondary card-py-5'>
+            <div className='bg-secondary card-py-5 standard-radius-20'>
               <div className='card-details-logo'>
                 <img src={HtmlCode} alt='LearnCode' className='img-fluid' />
               </div>
@@ -53,14 +53,14 @@ function CoursesList({ isSignedIn }: CoursesListProps): JSX.Element {
                     <Map
                       forLanding={true}
                       single={true}
-                      className='btn-primary link-button'
+                      className='btn-primary link-button standard-radius-20'
                       text='Suivre le cours'
                       keyPrefix='landing-details'
                     />
                   ) : (
                     <a
                       href={`${apiLocation}/signin`}
-                      className='btn-primary link-button'
+                      className='btn-primary link-button standard-radius-20'
                     >
                       {'Suivre le cours'}
                     </a>
@@ -71,7 +71,7 @@ function CoursesList({ isSignedIn }: CoursesListProps): JSX.Element {
           </div>
 
           <div className='card-unit-col-6'>
-            <div className='bg-secondary card-py-5'>
+            <div className='bg-secondary card-py-5 standard-radius-20'>
               <div className='card-details-logo'>
                 <img src={CssCode} alt='LearnCode' className='img-fluid' />
               </div>

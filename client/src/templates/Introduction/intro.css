@@ -433,7 +433,7 @@ button.map-title {
   background-color: var(--secondary-background);
   margin: 0 10px;
   width: 80%;
-  border-radius: 0;
+  border-radius: 20px;
 }
 
 .block-grid .progress-bar {
@@ -555,7 +555,7 @@ hr {
 }
 
 .progress {
-  border-radius: 0;
+  border-radius: 20px;
   -webkit-box-shadow: none;
   box-shadow: none;
   background: var(--quaternary-background) !important;

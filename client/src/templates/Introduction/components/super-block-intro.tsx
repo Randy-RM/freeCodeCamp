@@ -41,14 +41,17 @@ function SuperBlockIntro(props: SuperBlockIntroProps): JSX.Element {
           <Col className='' md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
             <div className=''>
               {superBlockNoteText && (
-                <div className='alert alert-info' style={{ marginTop: '2rem' }}>
+                <div
+                  className='alert alert-info standard-radius-20'
+                  style={{ marginTop: '2rem' }}
+                >
                   {superBlockNoteText}
                 </div>
               )}
             </div>
           </Col>
           <Col className='' md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
-            <div className='alert bg-secondary'>
+            <div className='alert bg-secondary standard-radius-20'>
               {superBlockIntroText.map((str, i) => (
                 <p key={i}>{str}</p>
               ))}

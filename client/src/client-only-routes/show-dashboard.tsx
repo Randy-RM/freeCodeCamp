@@ -104,7 +104,7 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
                           xs={12}
                         >
                           <Spacer size={1} />
-                          <div className='block-ui bg-secondary'>
+                          <div className='block-ui bg-secondary standard-radius-20'>
                             <CoursCardProgress
                               challengeCount={totalChallenges}
                               completedChallengeCount={totalCompletedChallenges}

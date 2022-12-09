@@ -136,7 +136,9 @@ export class BlockLastVisited extends Component<BlockProps> {
       <>
         {currentChallenge && !isBlockCompleted && (
           <>
-            <div className={`block ${isExpanded ? 'open' : ''}`}>
+            <div
+              className={`block ${isExpanded ? 'open' : ''} standard-radius-20`}
+            >
               <div className='card-challenge'>
                 <div className='card-challenge-header'>
                   <div className='card-challenge-index'>{blockIndex}</div>
@@ -164,7 +166,7 @@ export class BlockLastVisited extends Component<BlockProps> {
               <hr />
               <button
                 aria-expanded={isExpanded}
-                className='map-title'
+                className='map-title standard-radius-20-bottom'
                 onClick={() => {
                   this.handleBlockClick();
                 }}
