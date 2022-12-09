@@ -1,6 +1,7 @@
 import { Row } from '@freecodecamp/react-bootstrap';
 import React from 'react';
 import Link from '../../helpers/link';
+import { Spacer } from '../../../components/helpers';
 import './registration-to-academy.css';
 
 const RegistrationToAcademy = (): JSX.Element => {
@@ -13,7 +14,7 @@ const RegistrationToAcademy = (): JSX.Element => {
           <p className='text-registration'>
             {`
             Deviens Développeur.se ou Specialiste en 
-            Marketing Digital en 9 mois de formation certifiante 
+            Marketing Digital en 6 mois de formation certifiante 
             suivi de 3 à 6 mois de stage, et trouve un emploi dans 
             les meilleurs entreprises nationales et internationales.
             `}
@@ -30,6 +31,7 @@ const RegistrationToAcademy = (): JSX.Element => {
             </Link>
           </div>
         </div>
+        <Spacer size={1} />
       </div>
     </Row>
   );

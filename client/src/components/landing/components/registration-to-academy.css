@@ -15,3 +15,9 @@
   background: var(--love-light) !important;
   border: solid 2px var(--gray-00);
 }
+
+@media (max-width: 350px) {
+  .registration-academy-btn {
+    font-size: 0.8rem !important;
+  }
+}
