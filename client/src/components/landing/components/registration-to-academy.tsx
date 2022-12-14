@@ -27,7 +27,7 @@ const RegistrationToAcademy = (): JSX.Element => {
               sameTab={false}
               className='registration-academy-btn'
             >
-              {'Rejoins notre académie ici'}
+              {'Rejoins notre académie'}
             </Link>
           </div>
         </div>
