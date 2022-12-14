@@ -1,6 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import i18next from 'i18next';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { SuperBlocks } from '../../../../config/certification-settings';
 import envData from '../../../../config/env.json';
 import { isAuditedCert } from '../../../../utils/is-audited';
@@ -20,6 +20,7 @@ interface MapProps {
   className?: string;
   text?: string;
   keyPrefix?: string;
+  children?: ReactElement | undefined;
 }
 
 interface MapData {
@@ -70,7 +71,8 @@ function renderLandingMap(nodes: ChallengeNode[]) {
 function renderFirstLandingMap(
   nodes: ChallengeNode[],
   className?: string,
-  mapKeyAndText?: { text?: string; keyPrefix?: string }
+  mapKeyAndText?: { text?: string; keyPrefix?: string },
+  children?: ReactElement
 ) {
   nodes = nodes.filter(
     ({ challenge }) => challenge.superBlock !== SuperBlocks.CodingInterviewPrep
@@ -90,7 +92,11 @@ function renderFirstLandingMap(
         >
           {i === 0 && (
             <Link to={`/learn/${challenge.superBlock}/`} className={className}>
-              {mapKeyAndText && mapKeyAndText.text ? mapKeyAndText.text : 'ok'}
+              {children
+                ? children
+                : mapKeyAndText && mapKeyAndText.text
+                ? mapKeyAndText.text
+                : 'ok'}
             </Link>
           )}
         </span>
@@ -181,7 +187,8 @@ export function Map({
   className = '',
   text = '',
   keyPrefix = '',
-  currentSuperBlock = null
+  currentSuperBlock = null,
+  children = undefined
 }: MapProps): React.ReactElement {
   /*
    * this query gets the first challenge from each block and the first block
@@ -210,10 +217,15 @@ export function Map({
     <div className='map-ui' data-test-label='learn-curriculum-map'>
       {forLanding
         ? single
-          ? renderFirstLandingMap(nodes, className, {
-              text: text,
-              keyPrefix: keyPrefix
-            })
+          ? renderFirstLandingMap(
+              nodes,
+              className,
+              {
+                text: text,
+                keyPrefix: keyPrefix
+              },
+              children
+            )
           : renderLandingMap(nodes)
         : renderLearnMap(nodes, currentSuperBlock)}
     </div>

@@ -742,6 +742,10 @@ blockquote .small {
   border-radius: 20px !important;
 }
 
+.standard-radius-5 {
+  border-radius: 5px !important;
+}
+
 .standard-radius-20-top {
   border-top-left-radius: 20px !important;
   border-top-right-radius: 20px !important;

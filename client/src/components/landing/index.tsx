@@ -13,13 +13,14 @@ import {
 // import AsSeenIn from './components/as-seen-in';
 import RegistrationToAcademy from './components/registration-to-academy';
 // import LandingTop from './components/landing-top';
-import LandingDetails from './components/landing-details';
+// import LandingDetails from './components/landing-details';
 // import LandingLearn from './components/landing-learn';
 // import LandingGoals from './components/landing-goals';
 import WhatCanYouDo from './whatCanYouDo/what-can-you-do';
 // import YourCareer from './yourCareer/your-career';
 import Hero from './hero/hero';
 import StartCOding from './start-coding/start-coding';
+import WhatWillYouLearn from './what-will-you-learn/what-will-you-learn';
 import HowWillYouLearn from './how-will-you-learn/how-will-you-learn';
 
 import './landing.css';
@@ -76,17 +77,26 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
           </Grid>
         </div>
 
-        <Grid>
+        {/* <Grid>
           <LandingDetails isSignedIn={isSignedIn} />
-        </Grid>
+        </Grid> */}
+        <div className='dotted-bg'>
+          <Grid>
+            <WhatWillYouLearn isSignedIn={isSignedIn} />
+          </Grid>
+        </div>
 
         {/* <Grid>
           <LandingLearn />
         </Grid> */}
-
         <HowWillYouLearn />
 
-        <div className='bg-light-gray'>
+        {/* <div className='bg-light-gray'>
+          <Grid>
+            <WhatCanYouDo />
+          </Grid>
+        </div> */}
+        <div className=''>
           <Grid>
             <WhatCanYouDo />
           </Grid>
