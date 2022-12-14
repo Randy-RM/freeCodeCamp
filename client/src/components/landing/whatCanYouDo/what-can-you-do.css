@@ -24,9 +24,9 @@ img {
 }
 
 .card-index {
-  color: #f2f2f2 !important;
-  text-shadow: -1px -1px 0 #1f1d0d, 1px -1px 0 #1f1d0d, -1px 1px 0 #1f1d0d,
-    1px 1px 0 #1f1d0d !important;
+  color: rgb(255, 255, 255) !important;
+  text-shadow: -1px -1px 0 #2b292b, 1px -1px 0 #2b292b, -1px 1px 0 #2b292b,
+    1px 1px 0 #2b292b !important;
   font-weight: bold;
   font-size: 3rem;
   width: 10%;
