@@ -30,9 +30,10 @@
   transition: all 0.3s ease;
 }
 
-.tool-panel-group .btn-primary:hover {
+.tool-panel-group .btn-primary:hover,
+.tool-panel-group .btn-primary:active {
   color: var(--love-light) !important;
-  background: rgba(255, 255, 255, 0) !important;
+  background: rgba(255, 255, 255, 1) !important;
 }
 
 .tool-panel-group .btn-secondary {
@@ -42,7 +43,8 @@
   transition: all 0.3s ease;
 }
 
-.tool-panel-group .btn-secondary:hover {
+.tool-panel-group .btn-secondary:hover,
+.tool-panel-group .btn-secondary:active {
   color: var(--primary-background) !important;
   background: var(--love-light) !important;
 }
