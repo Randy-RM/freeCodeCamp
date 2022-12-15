@@ -19,17 +19,17 @@ function StartCOding({ isSignedIn }: AsSeenInProps): JSX.Element {
             {`Prêt à donner un coup de fouet à ta carrière ?`}
           </h3>
           <br />
-          <div className='start-coding-container__description--cta'>
+          <div className=''>
             {isSignedIn ? (
               <Map
                 forLanding={true}
                 single={true}
-                className='section-btn'
+                className='start-coding-cta'
                 text='Commence à apprendre'
                 keyPrefix='as-seen-in-top'
               />
             ) : (
-              <a href={`${apiLocation}/signin`} className='section-btn'>
+              <a href={`${apiLocation}/signin`} className='start-coding-cta'>
                 {'Commence à apprendre'}
               </a>
             )}
