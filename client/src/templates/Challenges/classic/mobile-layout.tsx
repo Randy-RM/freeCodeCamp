@@ -123,7 +123,12 @@ class MobileLayout extends Component<MobileLayoutProps, MobileLayoutState> {
           )}
         </Tabs>
         <Spacer size={1} />
-        <ToolPanel guideUrl={guideUrl} isMobile={true} videoUrl={videoUrl} />
+        <ToolPanel
+          guideUrl={guideUrl}
+          isMobile={true}
+          videoUrl={videoUrl}
+          switchOnTestOutputTab={this.switchTab}
+        />
       </>
     );
   }

@@ -18,12 +18,21 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
     dispatch
   );
 
+enum Tab {
+  Editor = 'editor',
+  Preview = 'preview',
+  Console = 'console',
+  Notes = 'notes',
+  Instructions = 'instructions'
+}
+
 interface ToolPanelProps {
   executeChallenge: (options?: { showCompletionModal: boolean }) => void;
   isMobile?: boolean;
   openHelpModal: () => void;
   openVideoModal: () => void;
   openResetModal: () => void;
+  switchOnTestOutputTab?: (tab: Tab) => void;
   guideUrl: string;
   videoUrl: string;
 }
@@ -31,9 +40,13 @@ interface ToolPanelProps {
 function ToolPanel({
   executeChallenge,
   isMobile,
-  openResetModal
+  openResetModal,
+  switchOnTestOutputTab
 }: ToolPanelProps) {
   const handleRunTests = () => {
+    if (switchOnTestOutputTab) {
+      switchOnTestOutputTab(Tab.Console);
+    }
     executeChallenge({ showCompletionModal: true });
   };
   return (
