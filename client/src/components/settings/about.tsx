@@ -351,6 +351,8 @@ class AboutSettings extends Component<AboutProps, AboutState> {
       isBlurAbout
     } = this.state;
 
+    console.log('name : ', name.length);
+
     return (
       <div className='about-settings'>
         <div>
@@ -380,9 +382,15 @@ class AboutSettings extends Component<AboutProps, AboutState> {
                 </HelpBlock>
               )}
               {isBlurName && !isValidName && (
-                <HelpBlock className='text-danger'>
-                  {`Le nom que vous avez entré n'est pas valide.`}
-                </HelpBlock>
+                <>
+                  {name.length > 0 ? (
+                    <HelpBlock className='text-danger'>
+                      {`Le nom que vous avez entré n'est pas valide.`}
+                    </HelpBlock>
+                  ) : (
+                    <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+                  )}
+                </>
               )}
               {isBlurName && isValidName && (
                 <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
