@@ -119,18 +119,19 @@ class AboutSettings extends Component<AboutProps, AboutState> {
     const {
       formValues,
       originalValues,
-      isValidName,
-      isValidLocation,
-      isValidGender,
-      isValidCodeTime,
-      isValidAbout
+      isValidName
+      // isValidLocation,
+      // isValidGender,
+      // isValidCodeTime,
+      // isValidAbout
     } = this.state;
     if (
-      isValidName === true &&
-      isValidLocation === true &&
-      isValidGender === true &&
-      isValidCodeTime === true &&
-      isValidAbout === true
+      isValidName === true
+      // isValidName === true &&
+      // isValidLocation === true &&
+      // isValidGender === true &&
+      // isValidCodeTime === true &&
+      // isValidAbout === true
     ) {
       return (Object.keys(originalValues) as Array<keyof FormValues>)
         .map(key => originalValues[key] === formValues[key])
@@ -351,8 +352,6 @@ class AboutSettings extends Component<AboutProps, AboutState> {
       isBlurAbout
     } = this.state;
 
-    console.log('name : ', name.length);
-
     return (
       <div className='about-settings'>
         <div>
@@ -403,12 +402,16 @@ class AboutSettings extends Component<AboutProps, AboutState> {
               </ControlLabel>
               <FormControl
                 // onFocus={this.focusHandlerLocation}
-                onBlur={this.blurHandlerLocation}
+                // onBlur={this.blurHandlerLocation}
                 onChange={this.handleLocationChange}
                 type='text'
                 value={location}
                 placeholder='63, av. Colonel Mondjiba, Ngaliema - Kinshasa'
               />
+              {location.length <= 0 && (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              )}
+
               {!isFocusLocation && !isBlurLocation && isValidLocation && (
                 <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
               )}
@@ -477,7 +480,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
               <FormControl
                 componentClass='textarea'
                 // onFocus={this.focusHandlerAbout}
-                onBlur={this.blurHandlerAbout}
+                // onBlur={this.blurHandlerAbout}
                 onChange={this.handleAboutChange}
                 value={about}
               />
