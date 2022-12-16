@@ -110,7 +110,7 @@ class EducationSettings extends Component<EducationProps, EducationState> {
         fieldOfStudy: value
       },
       isValidFieldOfStudy:
-        validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
+        validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
         validator.isLength(value, { min: 5, max: 255 })
     }));
   };
@@ -119,7 +119,7 @@ class EducationSettings extends Component<EducationProps, EducationState> {
     const value = (e.target as HTMLInputElement).value.slice(0);
 
     if (
-      validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
+      validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
       validator.isLength(value, { min: 5, max: 255 })
     ) {
       this.setState({
@@ -140,7 +140,7 @@ class EducationSettings extends Component<EducationProps, EducationState> {
     const value = (e.target as HTMLInputElement).value.slice(0);
 
     if (
-      validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
+      validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
       validator.isLength(value, { min: 5, max: 255 })
     ) {
       this.setState({
@@ -191,7 +191,7 @@ class EducationSettings extends Component<EducationProps, EducationState> {
                 <strong>{"Domaine d'études"}</strong>
               </ControlLabel>
               <FormControl
-                onFocus={this.focusHandlerFieldOfStudy}
+                // onFocus={this.focusHandlerFieldOfStudy}
                 onBlur={this.blurHandlerFieldOfStudy}
                 onChange={this.handleFieldOfStudyChange}
                 type='text'
@@ -211,9 +211,15 @@ class EducationSettings extends Component<EducationProps, EducationState> {
                 </HelpBlock>
               )}
               {isBlurFieldOfStudy && !isValidFieldOfStudy && (
-                <HelpBlock className='text-danger'>
-                  {`Le Domaine d'études que vous avez entré n'est pas valide.`}
-                </HelpBlock>
+                <>
+                  {fieldOfStudy.length > 0 ? (
+                    <HelpBlock className='text-danger'>
+                      {`Le Domaine d'études que vous avez entré n'est pas valide.`}
+                    </HelpBlock>
+                  ) : (
+                    <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+                  )}
+                </>
               )}
               {isBlurFieldOfStudy && isValidFieldOfStudy && (
                 <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
