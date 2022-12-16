@@ -130,8 +130,8 @@ class WorkExperienceSettings extends Component<
         employedWhere: value
       },
       isValidEmployedWhere:
-        validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
-        validator.isLength(value, { min: 5, max: 255 })
+        validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
+        validator.isLength(value, { min: 1, max: 255 })
     }));
   };
 
@@ -139,8 +139,8 @@ class WorkExperienceSettings extends Component<
     const value = (e.target as HTMLInputElement).value.slice(0);
 
     if (
-      validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
-      validator.isLength(value, { min: 5, max: 255 })
+      validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
+      validator.isLength(value, { min: 1, max: 255 })
     ) {
       this.setState({
         isValidEmployedWhere: true,
@@ -160,8 +160,8 @@ class WorkExperienceSettings extends Component<
     const value = (e.target as HTMLInputElement).value.slice(0);
 
     if (
-      validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
-      validator.isLength(value, { min: 5, max: 255 })
+      validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
+      validator.isLength(value, { min: 1, max: 255 })
     ) {
       this.setState({
         isValidEmployedWhere: true,
@@ -203,8 +203,8 @@ class WorkExperienceSettings extends Component<
         position: value
       },
       isValidPosition:
-        validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
-        validator.isLength(value, { min: 5, max: 255 })
+        validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
+        validator.isLength(value, { min: 2, max: 255 })
     }));
   };
 
@@ -212,8 +212,8 @@ class WorkExperienceSettings extends Component<
     const value = (e.target as HTMLInputElement).value.slice(0);
 
     if (
-      validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
-      validator.isLength(value, { min: 5, max: 255 })
+      validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
+      validator.isLength(value, { min: 2, max: 255 })
     ) {
       this.setState({
         isValidPosition: true,
@@ -233,8 +233,8 @@ class WorkExperienceSettings extends Component<
     const value = (e.target as HTMLInputElement).value.slice(0);
 
     if (
-      validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
-      validator.isLength(value, { min: 5, max: 255 })
+      validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
+      validator.isLength(value, { min: 2, max: 255 })
     ) {
       this.setState({
         isValidPosition: true,
@@ -270,12 +270,13 @@ class WorkExperienceSettings extends Component<
                 <strong>{'Employé où'}</strong>
               </ControlLabel>
               <FormControl
-                onFocus={this.focusHandlerEmployedWhere}
+                // onFocus={this.focusHandlerEmployedWhere}
                 onBlur={this.blurHandlerEmployedWhere}
                 onChange={this.handleEmployedWhereChange}
                 type='text'
                 value={employedWhere}
               />
+
               {!isFocusEmployedWhere &&
                 !isBlurEmployedWhere &&
                 isValidEmployedWhere && (
@@ -289,11 +290,19 @@ class WorkExperienceSettings extends Component<
                   }
                 </HelpBlock>
               )}
+
               {isBlurEmployedWhere && !isValidEmployedWhere && (
-                <HelpBlock className='text-danger'>
-                  {`Le nom de l'entreprise que vous avez entré n'est pas valide.`}
-                </HelpBlock>
+                <>
+                  {employedWhere.length > 0 ? (
+                    <HelpBlock className='text-danger'>
+                      {`Le nom de l'entreprise que vous avez entré n'est pas valide.`}
+                    </HelpBlock>
+                  ) : (
+                    <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+                  )}
+                </>
               )}
+
               {isBlurEmployedWhere && isValidEmployedWhere && (
                 <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
               )}
@@ -323,12 +332,13 @@ class WorkExperienceSettings extends Component<
                 <strong>{'Poste'}</strong>
               </ControlLabel>
               <FormControl
-                onFocus={this.focusHandlerPosition}
+                // onFocus={this.focusHandlerPosition}
                 onBlur={this.blurHandlerPosition}
                 onChange={this.handlePositionChange}
                 type='text'
                 value={position}
               />
+
               {!isFocusPosition && !isBlurPosition && isValidPosition && (
                 <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
               )}
@@ -340,11 +350,19 @@ class WorkExperienceSettings extends Component<
                   }
                 </HelpBlock>
               )}
+
               {isBlurPosition && !isValidPosition && (
-                <HelpBlock className='text-danger'>
-                  {`Le nom du poste que vous avez entré n'est pas valide.`}
-                </HelpBlock>
+                <>
+                  {position.length > 0 ? (
+                    <HelpBlock className='text-danger'>
+                      {`Le nom du poste que vous avez entré n'est pas valide.`}
+                    </HelpBlock>
+                  ) : (
+                    <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+                  )}
+                </>
               )}
+
               {isBlurPosition && isValidPosition && (
                 <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
               )}
