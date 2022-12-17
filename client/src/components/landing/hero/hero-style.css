@@ -1,6 +1,8 @@
 .main-container {
   background: url('../../../assets/images/BackgroundFirstSection.svg');
   color: #fff !important;
+  margin-top: -45px;
+  background-color: #202020;
 }
 
 .second-container {
@@ -73,6 +75,7 @@
   .first-section__content_text p {
     font-size: 1rem;
     font-weight: 400;
+    padding-top: 10rem !important;
   }
 }
 
@@ -82,6 +85,10 @@
   }
   .second-container {
     padding: 0;
+  }
+
+  .first-section__content_text p {
+    padding-top: 10rem !important;
   }
 
   .dotted-background {
@@ -101,6 +108,7 @@
   .first-section__content_text h1 {
     font-size: 1.7rem;
     line-height: 2.4rem;
+    padding-top: 5rem;
   }
 
   .first-section__content_text p {
@@ -110,5 +118,11 @@
 
   .image-container {
     display: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .first-section__content_text h1 {
+    padding-top: 2rem;
   }
 }

@@ -25,11 +25,13 @@
   margin-top: 0;
 }
 
+/* 
 .landing-page h1,
 .landing-page h2,
 .landing-page p {
-  /* font-family: 'Lato', sans-serif; */
+   font-family: 'Lato', sans-serif;
 }
+ */
 
 p.caption {
   margin: 10px 0 0;
