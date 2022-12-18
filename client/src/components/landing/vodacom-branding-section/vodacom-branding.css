@@ -1,0 +1,32 @@
+.vodacom-section {
+  background: url(../../../assets/images/vodacom_background.png);
+  padding: 2rem 0 3rem;
+  background-color: #991e13;
+}
+
+.vodacom-logo {
+  margin-right: 1rem;
+  margin-top: 4rem;
+}
+
+.vodacom-content {
+  display: flex;
+  align-items: center;
+}
+
+.vodacom-typography {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-top: 2rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .vodacom-logo {
+    width: 70px;
+    height: 70px;
+  }
+
+  .vodacom-typography {
+    font-size: 2.5rem;
+  }
+}

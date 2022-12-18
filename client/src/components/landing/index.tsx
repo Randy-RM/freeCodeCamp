@@ -22,6 +22,7 @@ import Hero from './hero/hero';
 import StartCOding from './start-coding/start-coding';
 import WhatWillYouLearn from './what-will-you-learn/what-will-you-learn';
 import HowWillYouLearn from './how-will-you-learn/how-will-you-learn';
+import Vodacom from './vodacom-branding-section/vodacom-branding';
 
 import './landing.css';
 
@@ -64,6 +65,7 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
       </Helmet>
       <main className='landing-page bg-light'>
         <Hero pageName={'landing'} isSignedIn={isSignedIn} />
+        <Vodacom />
 
         {/* <div className='bg-secondary'>
           <Grid>
