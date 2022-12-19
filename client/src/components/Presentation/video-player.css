@@ -1,0 +1,15 @@
+.video-player-container {
+  display: flex;
+  flex-direction: row;
+}
+.video-player-content {
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: max-content;
+}
+.video-player {
+  width: 100%;
+  height: 100%;
+}
