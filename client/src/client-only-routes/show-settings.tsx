@@ -131,7 +131,6 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
       <Helmet title={`Profil | Code Learning Platform`} />
       <Grid fluid={true} className='bg-light'>
         <main>
-          <Spacer size={2} />
           <div className=''>
             <Spacer size={1} />
             <Row className='super-block-intro-page'>

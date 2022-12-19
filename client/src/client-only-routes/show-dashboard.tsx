@@ -67,7 +67,6 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
       <Helmet title={`Tableau de bord | Code Learning Platform`} />
       <Grid fluid={true} className='bg-light'>
         <main>
-          <Spacer size={2} />
           <div className=''>
             <Spacer size={1} />
             <Row className='super-block-intro-page'>

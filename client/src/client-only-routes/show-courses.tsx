@@ -66,7 +66,6 @@ export function Courses(props: CoursesProps): JSX.Element {
       <Helmet title={`Nos cours | Code Learning Platform`} />
       <Grid className='bg-light'>
         <main>
-          <Spacer size={2} />
           <CoursesList isSignedIn={isSignedIn} />
           <Spacer size={2} />
         </main>

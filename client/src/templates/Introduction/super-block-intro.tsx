@@ -223,9 +223,8 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
         <title>{i18nTitle} | Code Learning Platform</title>
       </Helmet>
       <Grid fluid={true} className='bg-light'>
-        <Spacer size={3} />
+        <Spacer size={1} />
         <SuperBlockIntro superBlock={superBlock} />
-        <Spacer />
         <Spacer size={1} />
         <div className=''>
           <Spacer size={1} />
@@ -253,7 +252,6 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
                   </div>
                 </div>
               </div>
-              <Spacer size={1} />
             </Col>
           </Row>
           <Spacer size={1} />
@@ -294,7 +292,6 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
                   <Spacer size={1} />
                 </Col>
               </Row>
-              <Spacer size={1} />
             </div>
           )}
         <div className=''>
