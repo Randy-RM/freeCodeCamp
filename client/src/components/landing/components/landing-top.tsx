@@ -14,7 +14,7 @@ interface LandingTopProps {
 }
 function LandingTop({ pageName, isSignedIn }: LandingTopProps): JSX.Element {
   return (
-    <div className='landing-top'>
+    <div className='landing-top pt-pb-8'>
       <Row className='d-flex-hero align-items-center'>
         <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
           <div className='landing-top-content'>
@@ -25,7 +25,7 @@ function LandingTop({ pageName, isSignedIn }: LandingTopProps): JSX.Element {
               Apprends à coder et maximise tes chances {`d'être`} admis dans la{' '}
               meilleure école de codage.
             </h1>
-            <p className='hero-text text-responsive text-light'>
+            <p className='hero-text text-responsive text-light hero-description'>
               {`
             Concentre-toi sur ce qui est nécessaire 
             pour acquérir une compétence spécifique et applicable. 
