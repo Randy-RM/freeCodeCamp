@@ -48,6 +48,11 @@ export class NavLinks extends Component<NavLinksProps, {}> {
     this.setState({
       isDropdown: this.state.isDropdown ? false : true
     });
+    if (this.state.isDropdown) {
+      document.body.style.overflowY = null;
+    } else {
+      document.body.style.overflowY = 'hidden';
+    }
   };
 
   render() {

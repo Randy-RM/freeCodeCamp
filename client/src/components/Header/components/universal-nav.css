@@ -218,4 +218,8 @@
   .nav-bar .show-menu {
     display: block;
   }
+
+  .disable-scroll {
+    overflow-y: hidden;
+  }
 }
