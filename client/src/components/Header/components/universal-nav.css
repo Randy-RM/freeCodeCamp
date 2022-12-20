@@ -170,7 +170,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .nav-bar {
     padding: 10px 2%;
   }

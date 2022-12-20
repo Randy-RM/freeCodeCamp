@@ -56,12 +56,10 @@ export const NavLinks = (props: NavLinksProps): JSX.Element => {
   };
 
   useEffect(() => {
-    if (width > 768) {
+    if (width > 900) {
       document.body.style.overflowY = null;
     }
   }, [width]);
-
-  console.log('width :', width);
 
   return pending ? (
     <div className='nav-skeleton' />
