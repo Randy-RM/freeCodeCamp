@@ -188,7 +188,10 @@ class EducationSettings extends Component<EducationProps, EducationState> {
           <form id='camper-education' onSubmit={this.handleSubmit}>
             <FormGroup controlId='education-fieldOfStudy'>
               <ControlLabel>
-                <strong>{"Domaine d'études"}</strong>
+                <strong>
+                  {"Domaine d'études"}
+                  <span className='text-love-light'>*</span>
+                </strong>
               </ControlLabel>
               <FormControl
                 // onFocus={this.focusHandlerFieldOfStudy}
@@ -228,7 +231,10 @@ class EducationSettings extends Component<EducationProps, EducationState> {
 
             <FormGroup controlId='education-levelOfStudy'>
               <ControlLabel>
-                <strong>{"Niveau d'études"}</strong>
+                <strong>
+                  {"Niveau d'études"}
+                  <span className='text-love-light'>*</span>
+                </strong>
               </ControlLabel>
               <FormControl
                 componentClass='select'

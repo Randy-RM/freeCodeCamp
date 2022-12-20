@@ -14,7 +14,11 @@ function Banner(): JSX.Element {
   return (
     <div className='elearning-banner-section'>
       <div
-        className={showBanner ? 'elearning-banner container' : 'close-alert'}
+        className={
+          showBanner
+            ? 'elearning-banner container remove-container'
+            : 'close-alert'
+        }
       >
         <div className='banner-first-div baner-rigth-margin'>
           {' '}
