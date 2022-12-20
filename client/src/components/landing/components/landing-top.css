@@ -23,7 +23,7 @@
   padding: 1rem 0 2rem;
 }
 
-@media (max-width: 426px) {
+@media (max-width: 767px) {
   .hide-img-on-mobile {
     display: none;
   }

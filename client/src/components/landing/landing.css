@@ -352,7 +352,7 @@ p.caption {
   background-color: #202020;
 }
 
-@media (max-width: 426px) {
+@media (max-width: 767px) {
   .hero-main-bg {
     background: url('../../assets/images/dotted.svg'),
       url('../../assets/images/Element.svg');
