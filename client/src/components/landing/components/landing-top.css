@@ -18,3 +18,9 @@
   color: #fff !important;
   box-shadow: none;
 }
+
+@media (max-width: 426px) {
+  .hide-img-on-mobile {
+    display: none;
+  }
+}

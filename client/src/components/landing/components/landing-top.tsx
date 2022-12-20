@@ -50,7 +50,7 @@ function LandingTop({ pageName, isSignedIn }: LandingTopProps): JSX.Element {
             <Spacer />
           </div>
         </div>
-        <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
+        <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12 hide-img-on-mobile'>
           <div className=''>
             <img src={LearnCode} alt='LearnCode' className='img-fluid' />
           </div>

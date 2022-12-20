@@ -348,6 +348,18 @@ p.caption {
   background-color: #202020;
 }
 
+@media (max-width: 426px) {
+  .hero-main-bg {
+    background: url('../../assets/images/dotted.svg'),
+      url('../../assets/images/Element.svg');
+    /* color: #fff; */
+    /* background-position: center; */
+    background-size: contain, contain;
+    background-repeat: repeat, no-repeat;
+    background-color: #202020;
+  }
+}
+
 .dotted-bg-top-left {
   background-image: url('../../assets/images/startop.svg');
   background-repeat: no-repeat;
