@@ -351,12 +351,13 @@ export class CompletionModalInner extends Component<
       <Modal
         animation={false}
         bsSize='lg'
-        dialogClassName='challenge-success-modal'
+        dialogClassName='challenge-success-modal modal-dialog-centered'
         keyboard={true}
         onHide={close}
         // eslint-disable-next-line @typescript-eslint/unbound-method
         onKeyDown={isOpen ? this.handleKeypress : noop}
         show={isOpen}
+        centered
       >
         <Modal.Header
           className='challenge-list-header fcc-modal completion-header'
