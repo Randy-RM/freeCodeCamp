@@ -339,6 +339,15 @@ p.caption {
   }
 }
 
+.hero-main-bg {
+  background: url('../../assets/images/Element.svg');
+  color: #fff;
+  /* background-position: center; */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #202020;
+}
+
 .dotted-bg-top-left {
   background-image: url('../../assets/images/startop.svg');
   background-repeat: no-repeat;
