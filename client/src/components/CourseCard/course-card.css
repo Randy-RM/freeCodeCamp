@@ -21,6 +21,7 @@ img {
   /* padding:2%; */
   width: 47%;
   height: auto;
+  margin-bottom: 10%;
 }
 
 .card-course-detail-item {
@@ -92,7 +93,6 @@ img {
 @media (max-width: 768px) {
   .card-course-detail-back {
     width: 80%;
-    margin-bottom: 10%;
   }
 
   .card-course-detail-unit {
@@ -116,7 +116,6 @@ img {
 
   .card-course-detail-back {
     width: 90%;
-    margin-bottom: 10%;
   }
 
   .card-course-detail-container {
