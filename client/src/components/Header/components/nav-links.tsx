@@ -47,17 +47,20 @@ export const NavLinks = (props: NavLinksProps): JSX.Element => {
   // ------------IsDropdown Handler------------
 
   const handleIsDropdown = () => {
-    setIsDropdown(isDropdown ? false : true);
-    if (isDropdown) {
-      document.body.style.overflowY = null;
-    } else {
-      document.body.style.overflowY = 'hidden';
+    if (width < 900) {
+      setIsDropdown(isDropdown ? false : true);
+      if (isDropdown) {
+        document.body.style.overflowY = null;
+      } else {
+        document.body.style.overflowY = 'hidden';
+      }
     }
   };
 
   useEffect(() => {
     if (width > 900) {
       document.body.style.overflowY = null;
+      setIsDropdown(false);
     }
   }, [width]);
 
