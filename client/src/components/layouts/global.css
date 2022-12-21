@@ -754,3 +754,7 @@ blockquote .small {
   border-bottom-left-radius: 20px !important;
   border-bottom-right-radius: 20px !important;
 }
+
+.padding-bottom-0 {
+  padding-bottom: 0 !important;
+}
