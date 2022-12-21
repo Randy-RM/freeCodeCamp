@@ -106,8 +106,43 @@
     padding: 1rem 5% !important;
   }
 }
+
+@media (min-width: 1200px) {
+  .elearning-banner-section {
+    height: 80px;
+  }
+}
 @media (max-width: 800px) {
-  elearning-banner-section {
+  .elearning-banner-section {
     z-index: 999;
+  }
+  .remove-container {
+    justify-content: space-between;
+  }
+  .remove-container::before,
+  .remove-container::after {
+    display: none;
+  }
+  .banner-first-div {
+    width: 50% !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .banner-first-div-text {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .remove-container {
+    flex-wrap: wrap;
+  }
+  .elearning-inscription-button {
+    margin-top: 0.5rem;
+  }
+  .banner-first-div.baner-rigth-margin {
+    font-size: 0.7rem;
+    width: 100% !important;
   }
 }
