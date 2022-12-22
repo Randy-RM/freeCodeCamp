@@ -12,13 +12,13 @@ import {
 
 // import AsSeenIn from './components/as-seen-in';
 import RegistrationToAcademy from './components/registration-to-academy';
-import LandingTop from './components/landing-top';
+// import LandingTop from './components/landing-top';
 // import LandingDetails from './components/landing-details';
 // import LandingLearn from './components/landing-learn';
 // import LandingGoals from './components/landing-goals';
 import WhatCanYouDo from './whatCanYouDo/what-can-you-do';
 // import YourCareer from './yourCareer/your-career';
-// import Hero from './hero/hero';
+import Hero from './hero/hero';
 import StartCOding from './start-coding/start-coding';
 import WhatWillYouLearn from './what-will-you-learn/what-will-you-learn';
 import HowWillYouLearn from './how-will-you-learn/how-will-you-learn';
@@ -66,7 +66,7 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
       <main className='landing-page bg-light'>
         <div className='hero-main-bg'>
           <Grid>
-            <LandingTop pageName={'landing'} isSignedIn={isSignedIn} />
+            <Hero pageName={'landing'} isSignedIn={isSignedIn} />
           </Grid>
         </div>
         {/* <Hero pageName={'landing'} isSignedIn={isSignedIn} /> */}

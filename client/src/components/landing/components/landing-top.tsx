@@ -3,8 +3,7 @@ import React from 'react';
 import envData from '../../../../../config/env.json';
 import { Spacer } from '../../helpers';
 import Map from '../../Map/index';
-import LearnCode from '../../../assets/images/hero-img.png';
-import './landing-top.css';
+import LearnCode from '../../../assets/images/learn-code.png';
 
 const { apiLocation } = envData;
 
@@ -14,18 +13,17 @@ interface LandingTopProps {
 }
 function LandingTop({ pageName, isSignedIn }: LandingTopProps): JSX.Element {
   return (
-    <div className='landing-top pt-pb-5'>
+    <div className='landing-top landing-top-pt-pb'>
       <Row className='d-flex-hero align-items-center'>
         <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
           <div className='landing-top-content'>
-            <h1
-              className='hero-heading text-light'
-              data-test-label={`${pageName}-header`}
-            >
-              Apprends à coder et maximise tes chances {`d'être`} admis dans la{' '}
-              meilleure école de codage.
+            <h1 className='hero-heading' data-test-label={`${pageName}-header`}>
+              Apprends à <span className='text-love-light'>coder</span> et
+              maximise tes chances {`d'être`} admis dans la{' '}
+              <span className='text-love-light'>meilleure</span> école de
+              codage.
             </h1>
-            <p className='hero-text text-responsive text-light hero-description'>
+            <p className='hero-text text-responsive'>
               {`
             Concentre-toi sur ce qui est nécessaire 
             pour acquérir une compétence spécifique et applicable. 
@@ -37,12 +35,15 @@ function LandingTop({ pageName, isSignedIn }: LandingTopProps): JSX.Element {
                 <Map
                   forLanding={true}
                   single={true}
-                  className='section-btn'
+                  className='btn-primary link-button'
                   text='Lance-toi'
                   keyPrefix='landing-top'
                 />
               ) : (
-                <a href={`${apiLocation}/signin`} className='section-btn'>
+                <a
+                  href={`${apiLocation}/signin`}
+                  className='btn-primary link-button'
+                >
                   {'Lance-toi'}
                 </a>
               )}
@@ -50,7 +51,7 @@ function LandingTop({ pageName, isSignedIn }: LandingTopProps): JSX.Element {
             <Spacer />
           </div>
         </div>
-        <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12 hide-img-on-mobile'>
+        <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
           <div className=''>
             <img src={LearnCode} alt='LearnCode' className='img-fluid' />
           </div>
