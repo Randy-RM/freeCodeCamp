@@ -21,7 +21,7 @@ export function CoursCardProgress(props: CoursCardProgressProps): JSX.Element {
 
   return (
     <>
-      <div className='cours-card-progress bg-light p-4 standard-radius-20'>
+      <div className='cours-card-progress bg-light p-4 standard-radius-5'>
         <small className='text-love-light fw-bold'>
           Cours
           <br />
