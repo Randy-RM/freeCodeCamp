@@ -14,7 +14,7 @@ interface LandingTopProps {
 }
 function LandingTop({ pageName, isSignedIn }: LandingTopProps): JSX.Element {
   return (
-    <div className='landing-top pt-pb-8'>
+    <div className='landing-top pt-pb-5'>
       <Row className='d-flex-hero align-items-center'>
         <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
           <div className='landing-top-content'>
