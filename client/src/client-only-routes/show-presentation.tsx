@@ -1,4 +1,5 @@
 import React from 'react';
+import { Grid, Row } from '@freecodecamp/react-bootstrap';
 import '../components/Presentation/video-player.css';
 import Helmet from 'react-helmet';
 // import { useTranslation } from 'react-i18next';
@@ -57,14 +58,26 @@ export function ShowPresentation(props: ShowPresentationProps): JSX.Element {
   return (
     <>
       <Helmet title={`Tableau de bord | Code Learning Platform`} />
-      {/* <Grid fluid={true} className='bg-light'> */}
-      <Spacer size={1} />
-      <div className='video-player-container'>
-        <VideoPlayer />
-        <VideoList />
-      </div>
-      <Spacer size={1} />
-      {/* </Grid> */}
+      <Grid fluid={false} className='bg-light'>
+        <Row>
+          <Spacer size={2} />
+          <div className='col-lg-8 col-md-8 col-sm-12 col-xs-12'>
+            <div>
+              <Spacer size={1} />
+              <VideoPlayer />
+              <Spacer size={1} />
+            </div>
+          </div>
+          <div className='col-lg-4 col-md-4 col-sm-12 col-xs-12'>
+            <div>
+              <Spacer size={1} />
+              <VideoList />
+              <Spacer size={1} />
+            </div>
+          </div>
+        </Row>
+        <Spacer size={1} />
+      </Grid>
     </>
   );
 }
