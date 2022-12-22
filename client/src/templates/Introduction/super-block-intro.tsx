@@ -273,7 +273,7 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
                   xs={12}
                 >
                   <Spacer size={1} />
-                  <div className='block-ui bg-secondary standard-radius-20'>
+                  <div className='block-ui bg-secondary standard-radius-5'>
                     <BlockLastVisited
                       blockDashedName={
                         isCurrentSuperBlockProgressExist.blockDashedName
