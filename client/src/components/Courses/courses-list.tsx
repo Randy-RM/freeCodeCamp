@@ -39,11 +39,21 @@ const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
           icon={AlgoIcon}
           isAvailable={false}
           isSignedIn={isSignedIn}
+          title={`JavaScript Algorithms and Data Structures`}
           description={`Alors que HTML et CSS contrôlent le contenu et le style  d'une page, 
                 JavaScript est utilisé pour la rendre interactive. Dans le cadre de 
                 la certification JavaScript Algorithm and Data Structures, tu apprendras 
                 les principes fondamentaux de JavaScript, etc.`}
-          title={`JavaScript Algorithms and Data Structures`}
+        />
+        <CourseCard
+          icon={AlgoIcon}
+          isAvailable={false}
+          isSignedIn={isSignedIn}
+          title={`Raven360 network courses`}
+          description={`Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+            Nam, voluptas? Nemo animi quibusdam officiis, 
+            aut atque error nobis nulla rem accusantium dolorum minus delectus 
+            sequi consequatur dignissimos deserunt iste quas.`}
         />
       </div>
     </div>

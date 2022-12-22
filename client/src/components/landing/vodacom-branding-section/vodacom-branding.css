@@ -1,7 +1,13 @@
 .vodacom-section {
-  background: url(../../../assets/images/vodacom_background.png);
-  padding: 2rem 0 3rem;
+  /* background: url(../../../assets/images/vodacom_background.png); */
+  /* padding: 2rem 0 3rem; */
   background-color: #991e13;
+}
+
+.vodacom-bg-img {
+  background: url(../../../assets/images/vodacom_logo2.png);
+  background-repeat: no-repeat;
+  background-position: right bottom;
 }
 
 .vodacom-logo {
@@ -12,6 +18,7 @@
 .vodacom-content {
   display: flex;
   align-items: center;
+  padding: 2rem 0;
 }
 
 .vodacom-typography {
@@ -22,11 +29,12 @@
 
 @media only screen and (max-width: 500px) {
   .vodacom-logo {
-    width: 70px;
-    height: 70px;
+    width: 3rem;
+    height: auto;
+    margin-top: 3rem;
   }
 
   .vodacom-typography {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 }

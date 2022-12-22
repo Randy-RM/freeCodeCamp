@@ -358,7 +358,10 @@ class AboutSettings extends Component<AboutProps, AboutState> {
           <form id='camper-identity' onSubmit={this.handleSubmit}>
             <FormGroup controlId='about-name'>
               <ControlLabel>
-                <strong>{'Nom complet'}</strong>
+                <strong>
+                  {'Nom complet'}
+                  <span className='text-love-light'>*</span>
+                </strong>
               </ControlLabel>
               <FormControl
                 // onFocus={this.focusHandlerName}

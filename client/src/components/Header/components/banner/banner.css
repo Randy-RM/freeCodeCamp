@@ -24,8 +24,8 @@
 }
 
 .banner-first-div img {
-  width: 44px;
-  height: 38px;
+  width: 30px;
+  height: 28px;
   margin-right: 0.8rem;
 }
 
@@ -67,21 +67,27 @@
   display: none;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1024px) {
   .banner-first-div {
-    width: 50px !important;
+    width: 40% !important;
   }
 
-  .banner-first-div-text {
-    display: none;
-  }
+  /* .banner-first-div-text {
+    width: 40%;
+  } */
   .baner-rigth-margin {
     margin-right: 1rem;
+  }
+  .banner-second-div {
+    display: none;
   }
 }
 
 @media only screen and (max-width: 600px) {
-  .banner-first-div-text {
+  .elearning-banner {
+    padding: 1rem 0 !important;
+  }
+  .banner-first-div img {
     display: none;
   }
 
@@ -89,16 +95,54 @@
     margin-right: 0px;
   }
 
-  .banner-second-div {
+  /* .banner-second-div {
     display: none;
-  }
+  } */
 
   .banner-first-div {
     width: 50px !important;
   }
+  .remove-container {
+    padding: 1rem 5% !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .elearning-banner-section {
+    height: 80px;
+  }
 }
 @media (max-width: 800px) {
-  elearning-banner-section {
+  .elearning-banner-section {
     z-index: 999;
+  }
+  .remove-container {
+    justify-content: space-between;
+  }
+  .remove-container::before,
+  .remove-container::after {
+    display: none;
+  }
+  .banner-first-div {
+    width: 50% !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .banner-first-div-text {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .remove-container {
+    flex-wrap: wrap;
+  }
+  .elearning-inscription-button {
+    margin-top: 0.5rem;
+  }
+  .banner-first-div.baner-rigth-margin {
+    font-size: 0.7rem;
+    width: 100% !important;
   }
 }

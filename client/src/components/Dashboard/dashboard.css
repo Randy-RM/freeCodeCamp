@@ -33,12 +33,14 @@
   /* height: 0.4em; */
   background-color: var(--secondary-background);
   width: 100%;
-  border-radius: 20px;
+  /* border-radius: 20px; */
+  border-radius: 5px;
   margin-bottom: 0;
 }
 
 .progress {
-  border-radius: 20px;
+  /* border-radius: 20px; */
+  border-radius: 5px;
   -webkit-box-shadow: none;
   box-shadow: none;
   background: var(--quaternary-background) !important;

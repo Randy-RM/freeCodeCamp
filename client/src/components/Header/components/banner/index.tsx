@@ -12,12 +12,9 @@ function Banner(): JSX.Element {
   }
 
   return (
-    <div className='elearning-banner-section'>
-      <div
-        className={showBanner ? 'elearning-banner container' : 'close-alert'}
-      >
+    <div className={showBanner ? 'elearning-banner-section' : 'close-alert'}>
+      <div className='elearning-banner container remove-container'>
         <div className='banner-first-div baner-rigth-margin'>
-          {' '}
           <img src={KDALogo} alt='Logo KDA' />
           <div className='banner-first-div-text'>
             <span className=''>Inscris-toi</span> dans la meilleure école de
