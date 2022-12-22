@@ -47,7 +47,7 @@ export const NavLinks = (props: NavLinksProps): JSX.Element => {
   // ------------IsDropdown Handler------------
 
   const handleIsDropdown = () => {
-    if (width < 900) {
+    if (width < 1000) {
       setIsDropdown(isDropdown ? false : true);
       if (isDropdown) {
         document.body.style.overflowY = null;
@@ -58,7 +58,7 @@ export const NavLinks = (props: NavLinksProps): JSX.Element => {
   };
 
   useEffect(() => {
-    if (width > 900) {
+    if (width > 1000) {
       document.body.style.overflowY = null;
       setIsDropdown(false);
     }
