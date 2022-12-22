@@ -5,7 +5,7 @@ import VodacomLogo from '../../../assets/images/vodacom_logo.png';
 function VodacomBranding() {
   return (
     <div className='vodacom-section'>
-      <div className='container'>
+      <div className='container padding-bottom-0 vodacom-bg-img'>
         <div className='vodacom-content'>
           <div className='vodacom-logo'>
             <img src={VodacomLogo} alt='vodacom logo' />
