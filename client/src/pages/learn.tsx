@@ -5,7 +5,6 @@ import Helmet from 'react-helmet';
 // import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-
 import LearnLayout from '../components/layouts/learn';
 
 import {
@@ -26,6 +25,7 @@ import Hero from '../components/landing/hero/hero';
 import StartCOding from '../components/landing/start-coding/start-coding';
 import WhatWillYouLearn from '../components/landing/what-will-you-learn/what-will-you-learn';
 import HowWillYouLearn from '../components/landing/how-will-you-learn/how-will-you-learn';
+import Vodacom from '../components/landing/vodacom-branding-section/vodacom-branding';
 
 import '../components/landing/landing.css';
 
@@ -80,7 +80,13 @@ function LearnPage({ isSignedIn }: LearnPageProps) {
         title={`Apprendre à coder - gratuitement | Code Learning Platform`}
       />
       <main className='landing-page bg-light'>
-        <Hero pageName={'landing'} isSignedIn={isSignedIn} />
+        <div className='hero-main-bg'>
+          <Grid>
+            <Hero pageName={'landing'} isSignedIn={isSignedIn} />
+          </Grid>
+        </div>
+        {/* <Hero pageName={'landing'} isSignedIn={isSignedIn} /> */}
+        <Vodacom />
 
         {/* <div className='bg-secondary'>
           <Grid>

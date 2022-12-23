@@ -3,9 +3,16 @@
   color: var(--primary-color);
 }
 
-.margin-view-overlays {
-  /* background-color: var(--secondary-background); */
+/* .margin-view-overlays {
+  background-color: var(--secondary-background);
+  width: 70%;
 }
+
+.vs {
+  width: 100%;
+  margin-left: -5%;
+  padding-right: 2rem;
+} */
 
 .vs .monaco-scrollable-element > .scrollbar > .slider {
   z-index: 11;
