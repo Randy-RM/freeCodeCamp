@@ -10,7 +10,7 @@ import React, { Component } from 'react';
 import { TFunction, withTranslation } from 'react-i18next';
 import validator from 'validator/';
 
-import { maybeUrlRE } from '../../utils';
+import { validGitHubLinkRE, validLinkedInLinkRE } from '../../utils';
 
 import BlockSaveButton from '../helpers/form/block-save-button';
 
@@ -30,11 +30,18 @@ type InternetState = {
   formValues: InternetFormValues;
   originalValues: InternetFormValues;
   isValidLinkedin: boolean;
-  isFocusLinkedin: boolean;
-  isBlurLinkedin: boolean;
+  focusOnLinkedinField: boolean;
+  focusOffLinkedinField: boolean;
   isValidGithubProfile: boolean;
-  isFocusGithubProfile: boolean;
-  isBlurGithubProfile: boolean;
+  focusOnGithubField: boolean;
+  focusOffGithubField: boolean;
+};
+
+const isValidGithubLink = (url: string): boolean => {
+  return validator.isURL(url) && validGitHubLinkRE.test(url);
+};
+const isValidLinkedinLink = (url: string): boolean => {
+  return validator.isURL(url) && validLinkedInLinkRE.test(url);
 };
 
 class InternetSettings extends Component<InternetProps, InternetState> {
@@ -52,11 +59,11 @@ class InternetSettings extends Component<InternetProps, InternetState> {
       formValues: { githubProfile, linkedin, twitter, website },
       originalValues: { githubProfile, linkedin, twitter, website },
       isValidLinkedin: true,
-      isFocusLinkedin: false,
-      isBlurLinkedin: false,
+      focusOnLinkedinField: false,
+      focusOffLinkedinField: false,
       isValidGithubProfile: true,
-      isFocusGithubProfile: false,
-      isBlurGithubProfile: false
+      focusOnGithubField: false,
+      focusOffGithubField: false
     };
   }
 
@@ -84,65 +91,30 @@ class InternetSettings extends Component<InternetProps, InternetState> {
     return null;
   }
 
-  getValidationStateFor(maybeURl = '', inputName = '') {
-    const {
-      isValidLinkedin,
-      isFocusLinkedin,
-      isBlurLinkedin,
-      isValidGithubProfile,
-      isFocusGithubProfile,
-      isBlurGithubProfile
-    } = this.state;
+  getValidationStateFor(url = '', inputName = '') {
+    const { focusOffLinkedinField, focusOffGithubField } = this.state;
 
-    if (!maybeURl || !maybeUrlRE.test(maybeURl)) {
-      if (inputName === 'linkedIn' && isFocusLinkedin) {
-        return {
-          state: null,
-          message: `L'url dois être comme : https://www.linkedin.com/in/user-name`
-        };
-      }
-
-      if (inputName === 'githubProfile' && isFocusGithubProfile) {
-        return {
-          state: null,
-          message: `L'url dois être comme : https://github.com/user-name`
-        };
-      }
+    if (
+      inputName === 'linkedIn' &&
+      focusOffLinkedinField &&
+      !isValidLinkedinLink(url)
+    ) {
+      return {
+        state: 'error',
+        message:
+          'Lien LinkedIn invalide (exemple valide: https://www.linkedin.com/in/johndoe)'
+      };
     }
-    if (!validator.isURL(maybeURl)) {
-      if (inputName === 'linkedIn' && isBlurLinkedin && !isValidLinkedin) {
-        return {
-          state: 'error',
-          message: 'Veuillez vous assurer que votre URL est correcte.'
-        };
-      }
-      if (
-        inputName === 'githubProfile' &&
-        isBlurGithubProfile &&
-        !isValidGithubProfile
-      ) {
-        return {
-          state: 'error',
-          message: 'Veuillez vous assurer que votre URL est correcte.'
-        };
-      }
-    } else {
-      if (inputName === 'linkedIn' && isBlurLinkedin && isValidLinkedin) {
-        return {
-          state: null,
-          message: ''
-        };
-      }
-      if (
-        inputName === 'githubProfile' &&
-        isBlurGithubProfile &&
-        isValidGithubProfile
-      ) {
-        return {
-          state: null,
-          message: ''
-        };
-      }
+    if (
+      inputName === 'githubProfile' &&
+      focusOffGithubField &&
+      !isValidGithubLink(url)
+    ) {
+      return {
+        state: 'error',
+        message:
+          'Lien GitHub invalide (exemple valide: https://github.com/user-name)'
+      };
     }
     return {
       state: null,
@@ -160,7 +132,7 @@ class InternetSettings extends Component<InternetProps, InternetState> {
             ...state.formValues,
             [key]: value
           },
-          isValidLinkedin: validator.isURL(value) ? true : false
+          isValidLinkedin: isValidLinkedinLink(value)
         }));
       }
       if (key === 'githubProfile') {
@@ -169,7 +141,7 @@ class InternetSettings extends Component<InternetProps, InternetState> {
             ...state.formValues,
             [key]: value
           },
-          isValidGithubProfile: validator.isURL(value) ? true : false
+          isValidGithubProfile: isValidGithubLink(value)
         }));
       }
     };
@@ -177,107 +149,41 @@ class InternetSettings extends Component<InternetProps, InternetState> {
   // ------------Linkedin Handler------------
 
   focusHandlerLinkedin = (e: React.FocusEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value.slice(0);
-
-    if (value) {
-      if (validator.isURL(value)) {
-        this.setState({
-          isValidLinkedin: true,
-          isFocusLinkedin: true,
-          isBlurLinkedin: false
-        });
-      } else {
-        this.setState({
-          isValidLinkedin: false,
-          isFocusLinkedin: true,
-          isBlurLinkedin: false
-        });
-      }
-    } else {
-      this.setState({
-        isValidLinkedin: true,
-        isFocusLinkedin: true,
-        isBlurLinkedin: false
-      });
-    }
+    const url = (e.target as HTMLInputElement).value.slice(0);
+    this.setState({
+      isValidLinkedin: isValidLinkedinLink(url),
+      focusOnLinkedinField: true,
+      focusOffLinkedinField: false
+    });
   };
 
   blurHandlerLinkedin = (e: React.FocusEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value.slice(0);
-    if (value) {
-      if (validator.isURL(value)) {
-        this.setState({
-          isValidLinkedin: true,
-          isFocusLinkedin: false,
-          isBlurLinkedin: true
-        });
-      } else {
-        this.setState({
-          isValidLinkedin: false,
-          isFocusLinkedin: false,
-          isBlurLinkedin: true
-        });
-      }
-    } else {
-      this.setState({
-        isValidLinkedin: true,
-        isFocusLinkedin: false,
-        isBlurLinkedin: true
-      });
-    }
+    const url = (e.target as HTMLInputElement).value.slice(0);
+    this.setState({
+      isValidLinkedin: isValidLinkedinLink(url),
+      focusOnLinkedinField: false,
+      focusOffLinkedinField: true
+    });
   };
 
   // ------------GithubProfile Handler------------
 
   focusHandlerGithubProfile = (e: React.FocusEvent<HTMLInputElement>) => {
     const value = (e.target as HTMLInputElement).value.slice(0);
-
-    if (value) {
-      if (validator.isURL(value)) {
-        this.setState({
-          isValidGithubProfile: true,
-          isFocusGithubProfile: true,
-          isBlurGithubProfile: false
-        });
-      } else {
-        this.setState({
-          isValidGithubProfile: false,
-          isFocusGithubProfile: true,
-          isBlurGithubProfile: false
-        });
-      }
-    } else {
-      this.setState({
-        isValidGithubProfile: true,
-        isFocusGithubProfile: true,
-        isBlurGithubProfile: false
-      });
-    }
+    this.setState({
+      isValidGithubProfile: isValidGithubLink(value),
+      focusOnGithubField: true,
+      focusOffGithubField: false
+    });
   };
 
   blurHandlerGithubProfile = (e: React.FocusEvent<HTMLInputElement>) => {
     const value = (e.target as HTMLInputElement).value.slice(0);
-    if (value) {
-      if (validator.isURL(value)) {
-        this.setState({
-          isValidGithubProfile: true,
-          isFocusGithubProfile: false,
-          isBlurGithubProfile: true
-        });
-      } else {
-        this.setState({
-          isValidGithubProfile: false,
-          isFocusGithubProfile: false,
-          isBlurGithubProfile: true
-        });
-      }
-    } else {
-      this.setState({
-        isValidGithubProfile: true,
-        isFocusGithubProfile: false,
-        isBlurGithubProfile: true
-      });
-    }
+    this.setState({
+      isValidGithubProfile: isValidGithubLink(value),
+      focusOnGithubField: false,
+      focusOffGithubField: true
+    });
   };
 
   isFormPristine = () => {
@@ -376,10 +282,9 @@ class InternetSettings extends Component<InternetProps, InternetState> {
             >
               <ControlLabel>LinkedIn</ControlLabel>
               <FormControl
-                onFocus={this.focusHandlerLinkedin}
                 onBlur={this.blurHandlerLinkedin}
                 onChange={this.createHandleChange('linkedin')}
-                placeholder='https://www.linkedin.com/in/user-name'
+                placeholder='https://www.linkedin.com/in/john-doe'
                 type='url'
                 value={linkedin}
               />
@@ -394,7 +299,7 @@ class InternetSettings extends Component<InternetProps, InternetState> {
                 onFocus={this.focusHandlerGithubProfile}
                 onBlur={this.blurHandlerGithubProfile}
                 onChange={this.createHandleChange('githubProfile')}
-                placeholder='https://github.com/user-name'
+                placeholder='https://github.com/john-doe'
                 type='url'
                 value={githubProfile}
               />
