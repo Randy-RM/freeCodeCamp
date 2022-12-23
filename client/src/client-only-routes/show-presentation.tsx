@@ -20,6 +20,7 @@ import {
 } from '../redux';
 
 import { User } from '../redux/prop-types';
+import datas from '../components/Presentation/video-data.json';
 
 // TODO: update types for actions
 interface ShowPresentationProps {
@@ -50,6 +51,7 @@ const mapDispatchToProps = {
 export function ShowPresentation(props: ShowPresentationProps): JSX.Element {
   // const { t } = useTranslation();
   const { showLoading } = props;
+  const [selectedVideo, setSelectedVideo] = React.useState(datas.videos[0]);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
@@ -64,14 +66,19 @@ export function ShowPresentation(props: ShowPresentationProps): JSX.Element {
           <div className='col-lg-8 col-md-8 col-sm-12 col-xs-12'>
             <div>
               <Spacer size={1} />
-              <VideoPlayer />
+              <VideoPlayer videoLink={selectedVideo?.videoUrl} />
               <Spacer size={1} />
             </div>
           </div>
           <div className='col-lg-4 col-md-4 col-sm-12 col-xs-12'>
             <div>
               <Spacer size={1} />
-              <VideoList />
+              <VideoList
+                setSelectedVideo={setSelectedVideo}
+                id={0}
+                videoTitle={''}
+                videoTime={''}
+              />
               <Spacer size={1} />
             </div>
           </div>
