@@ -67,11 +67,14 @@ module.exports = function enableAuthentication(app) {
     req.logout();
     req.session.destroy(err => {
       if (err) {
-        throw wrapHandledError(new Error('could not destroy session'), {
-          type: 'info',
-          message: 'We could not log you out, please try again in a moment.',
-          redirectTo: origin
-        });
+        throw wrapHandledError(
+          new Error(`nous n'avons pas pu détruire la session`),
+          {
+            type: 'info',
+            message: `Nous n'avons pas pu vous déconnecter, veuillez réessayer dans un moment.`,
+            redirectTo: origin
+          }
+        );
       }
       removeCookies(req, res);
       res.redirect(returnTo);
