@@ -1,10 +1,10 @@
 .video-list-container {
   font-family: sans-serif;
-  width: 30%;
+  width: 100%;
 }
 ul li {
   border-bottom: 1px solid rgb(103, 103, 103);
-  padding: 1rem;
+  padding: 0.7rem;
 }
 ul li p {
   font-size: 0.7rem;
