@@ -418,7 +418,7 @@ export class CompletionModalInner extends Component<
               bsSize='lg'
               bsStyle='primary'
             >
-              {'Rejoins notre académie ici'}
+              {'Rejoins notre académie'}
             </Button>
           </Link>
         </Modal.Footer>
