@@ -9,7 +9,11 @@ const RegistrationToAcademy = (): JSX.Element => {
     <Row>
       <div className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <div>
-          <h2 className='big-heading text-ligth'>{`Inscris-toi dans la meilleure école de codage.`}</h2>
+          <h2 className='big-heading text-ligth'>
+            {`Inscris-toi à la Kinshasa Digital Academy,`}
+            <br />
+            {`la meilleure école de codage.`}
+          </h2>
           <br />
           <p className='text-registration'>
             {`
