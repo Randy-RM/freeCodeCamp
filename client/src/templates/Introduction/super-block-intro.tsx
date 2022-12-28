@@ -223,9 +223,8 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
         <title>{i18nTitle} | Code Learning Platform</title>
       </Helmet>
       <Grid fluid={true} className='bg-light'>
-        <Spacer size={3} />
+        <Spacer size={1} />
         <SuperBlockIntro superBlock={superBlock} />
-        <Spacer />
         <Spacer size={1} />
         <div className=''>
           <Spacer size={1} />
@@ -235,8 +234,8 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
             </Col>
             <Col className='' md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
               <Spacer size={1} />
-              <div className='block-ui bg-secondary standard-radius-20'>
-                <div className='card-challenge standard-radius-20'>
+              <div className='block-ui bg-secondary standard-radius-5'>
+                <div className='card-challenge standard-radius-5'>
                   <div>
                     <BlockProgressBar
                       challengeCount={
@@ -253,7 +252,6 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
                   </div>
                 </div>
               </div>
-              <Spacer size={1} />
             </Col>
           </Row>
           <Spacer size={1} />
@@ -275,7 +273,7 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
                   xs={12}
                 >
                   <Spacer size={1} />
-                  <div className='block-ui bg-secondary standard-radius-20'>
+                  <div className='block-ui bg-secondary standard-radius-5'>
                     <BlockLastVisited
                       blockDashedName={
                         isCurrentSuperBlockProgressExist.blockDashedName
@@ -294,7 +292,6 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
                   <Spacer size={1} />
                 </Col>
               </Row>
-              <Spacer size={1} />
             </div>
           )}
         <div className=''>
@@ -305,7 +302,7 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
             </Col>
             <Col className='' md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
               <Spacer size={1} />
-              <div className='block-ui bg-secondary standard-radius-20'>
+              <div className='block-ui bg-secondary standard-radius-5'>
                 {defaultCurriculumNames.map((blockDashedName, index) => {
                   // if (index < defaultCurriculumNames.length - 1) {
                   //   // delete the project module which is always at the end of the table with the condition if

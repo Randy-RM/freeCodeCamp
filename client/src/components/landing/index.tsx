@@ -64,7 +64,12 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
         <title>{`Apprendre à coder - gratuitement | Code Learning Platform`}</title>
       </Helmet>
       <main className='landing-page bg-light'>
-        <Hero pageName={'landing'} isSignedIn={isSignedIn} />
+        <div className='hero-main-bg'>
+          <Grid>
+            <Hero pageName={'landing'} isSignedIn={isSignedIn} />
+          </Grid>
+        </div>
+        {/* <Hero pageName={'landing'} isSignedIn={isSignedIn} /> */}
         <Vodacom />
 
         {/* <div className='bg-secondary'>

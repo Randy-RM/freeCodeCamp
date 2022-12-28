@@ -12,12 +12,9 @@ function Banner(): JSX.Element {
   }
 
   return (
-    <div className='elearning-banner-section'>
-      <div
-        className={showBanner ? 'elearning-banner container' : 'close-alert'}
-      >
+    <div className={showBanner ? 'elearning-banner-section' : 'close-alert'}>
+      <div className='elearning-banner container remove-container'>
         <div className='banner-first-div baner-rigth-margin'>
-          {' '}
           <img src={KDALogo} alt='Logo KDA' />
           <div className='banner-first-div-text'>
             <span className=''>Inscris-toi</span> dans la meilleure école de
@@ -25,7 +22,7 @@ function Banner(): JSX.Element {
           </div>
         </div>
         <div className='banner-second-div baner-rigth-margin'>
-          Deviens Développeur.se ou Specialiste en Marketing Digital en 9 mois
+          Deviens Développeur.se ou Specialiste en Marketing Digital en 6 mois
           de formation certifiante suivi de 3 à 6 mois de stage, et trouve un
           emploi dans les meilleurs entreprises nationales et internationales.
         </div>

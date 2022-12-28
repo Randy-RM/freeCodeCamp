@@ -42,16 +42,17 @@ function SuperBlockIntro(props: SuperBlockIntroProps): JSX.Element {
             <div className=''>
               {superBlockNoteText && (
                 <div
-                  className='alert alert-info standard-radius-20'
+                  className='alert alert-info standard-radius-5'
                   style={{ marginTop: '2rem' }}
                 >
                   {superBlockNoteText}
                 </div>
               )}
             </div>
+            <Spacer size={1} />
           </Col>
           <Col className='' md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
-            <div className='alert bg-secondary standard-radius-20'>
+            <div className='alert bg-secondary standard-radius-5'>
               {superBlockIntroText.map((str, i) => (
                 <p key={i}>{str}</p>
               ))}

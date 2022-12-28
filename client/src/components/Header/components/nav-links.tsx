@@ -11,12 +11,13 @@
 // @ts-nocheck
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { TFunction, withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import envData from '../../../../../config/env.json';
 import { hardGoTo as navigate } from '../../../redux';
 import { Link } from '../../helpers';
+import useWindowSize from './use-window-size';
 
 const { apiLocation } = envData;
 
@@ -32,132 +33,134 @@ const mapDispatchToProps = {
   navigate
 };
 
-export class NavLinks extends Component<NavLinksProps, {}> {
-  static displayName: string;
+export const NavLinks = (props: NavLinksProps): JSX.Element => {
+  const [isDropdown, setIsDropdown] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [width, height] = useWindowSize();
+  const {
+    fetchState,
+    user: { username }
+  }: NavLinksProps = props;
 
-  constructor(props: NavLinksProps) {
-    super(props);
-    this.state = {
-      isDropdown: false
-    };
-  }
+  const { pending } = fetchState;
 
   // ------------IsDropdown Handler------------
 
-  handleIsDropdown = () => {
-    this.setState({
-      isDropdown: this.state.isDropdown ? false : true
-    });
+  const handleIsDropdown = () => {
+    if (width < 1000) {
+      setIsDropdown(isDropdown ? false : true);
+      if (isDropdown) {
+        document.body.style.overflowY = null;
+      } else {
+        document.body.style.overflowY = 'hidden';
+      }
+    }
   };
 
-  render() {
-    const {
-      fetchState,
-      user: { username }
-    }: NavLinksProps = this.props;
+  useEffect(() => {
+    if (width > 1000) {
+      document.body.style.overflowY = null;
+      setIsDropdown(false);
+    }
+  }, [width]);
 
-    const { pending } = fetchState;
+  return pending ? (
+    <div className='nav-skeleton' />
+  ) : (
+    <div className=''>
+      <label htmlFor='show-menu' className='menu-icon'>
+        <FontAwesomeIcon
+          icon={isDropdown ? faXmark : faBars}
+          onClick={handleIsDropdown}
+        />
+      </label>
+      <input type='checkbox' id='show-menu' />
+      <ul className={isDropdown ? 'nav-list show-menu' : 'nav-list'}>
+        <li className='nav-item'>
+          <Link
+            onClick={handleIsDropdown}
+            className=''
+            key='learn'
+            to={'/'}
+            activeClassName='active'
+          >
+            {'Accueil'}
+          </Link>
+        </li>
 
-    const { isDropdown } = this.state;
+        <li className='nav-item'>
+          <Link
+            onClick={handleIsDropdown}
+            className=''
+            key='courses'
+            to='/courses'
+            activeClassName='active'
+          >
+            {'Cours'}
+          </Link>
+        </li>
 
-    return pending ? (
-      <div className='nav-skeleton' />
-    ) : (
-      <div className=''>
-        <label htmlFor='show-menu' className='menu-icon'>
-          <FontAwesomeIcon
-            icon={isDropdown ? faXmark : faBars}
-            onClick={this.handleIsDropdown}
-          />
-        </label>
-        <input type='checkbox' id='show-menu' />
-        <ul className={isDropdown ? 'nav-list show-menu' : 'nav-list'}>
+        {username && (
+          <Fragment key='profile-settings'>
+            <li className='nav-item'>
+              <Link
+                onClick={handleIsDropdown}
+                className=''
+                key='dashboard'
+                sameTab={false}
+                to={`/dashboard`}
+                activeClassName='active'
+              >
+                {'Tableau de bord'}
+              </Link>
+            </li>
+
+            <li className='nav-item'>
+              <Link
+                onClick={handleIsDropdown}
+                className=''
+                key='settings'
+                sameTab={false}
+                to={`/settings`}
+                activeClassName='active'
+              >
+                {'Profil'}
+              </Link>
+            </li>
+          </Fragment>
+        )}
+
+        {!username && (
           <li className='nav-item'>
-            <Link
-              onClick={this.handleIsDropdown}
-              className=''
-              key='learn'
-              to={'/'}
-              activeClassName='active'
+            <a
+              onClick={handleIsDropdown}
+              className='nav-signin-btn'
+              href={`${apiLocation}/signin`}
+              key='signin'
             >
-              {'Accueil'}
-            </Link>
+              {'Connexion'}
+            </a>
           </li>
+        )}
 
-          <li className='nav-item'>
-            <Link
-              onClick={this.handleIsDropdown}
-              className=''
-              key='courses'
-              to='/courses'
-              activeClassName='active'
-            >
-              {'Cours'}
-            </Link>
-          </li>
-
-          {username && (
-            <Fragment key='profile-settings'>
-              <li className='nav-item'>
-                <Link
-                  onClick={this.handleIsDropdown}
-                  className=''
-                  key='dashboard'
-                  sameTab={false}
-                  to={`/dashboard`}
-                  activeClassName='active'
-                >
-                  {'Tableau de bord'}
-                </Link>
-              </li>
-
-              <li className='nav-item'>
-                <Link
-                  onClick={this.handleIsDropdown}
-                  className=''
-                  key='settings'
-                  sameTab={false}
-                  to={`/settings`}
-                  activeClassName='active'
-                >
-                  {'Profil'}
-                </Link>
-              </li>
-            </Fragment>
-          )}
-
-          {!username && (
+        {username && (
+          <Fragment key='signout-frag'>
             <li className='nav-item'>
               <a
-                onClick={this.handleIsDropdown}
-                className='nav-signin-btn'
-                href={`${apiLocation}/signin`}
-                key='signin'
+                onClick={handleIsDropdown}
+                className='nav-signout-btn'
+                href={`${apiLocation}/signout`}
+                key='sign-out'
               >
-                {'Connexion'}
+                {'Déconnexion'}
               </a>
             </li>
-          )}
-
-          {username && (
-            <Fragment key='signout-frag'>
-              <li className='nav-item'>
-                <a
-                  onClick={this.handleIsDropdown}
-                  className='nav-signout-btn'
-                  href={`${apiLocation}/signout`}
-                  key='sign-out'
-                >
-                  {'Déconnexion'}
-                </a>
-              </li>
-            </Fragment>
-          )}
-        </ul>
-      </div>
-    );
-  }
-}
+          </Fragment>
+        )}
+      </ul>
+    </div>
+  );
+};
 
 NavLinks.displayName = 'NavLinks';
 

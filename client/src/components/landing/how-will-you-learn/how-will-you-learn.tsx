@@ -7,7 +7,7 @@ import './how-will-you-learn.css';
 const HowWillYouLearn = () => {
   return (
     <div className='learn-section'>
-      <div className='container'>
+      <div className='container padding-bottom-0'>
         <div className='big-heading title-color text-center'>
           {`Comment vas-tu apprendre ?`}
         </div>

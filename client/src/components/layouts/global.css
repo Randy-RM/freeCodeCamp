@@ -67,7 +67,6 @@ body {
 
 .default-layout {
   flex: 1 0 auto;
-  margin-top: var(--header-height, 0px);
   background: var(--primary-background);
 }
 
@@ -738,12 +737,22 @@ blockquote .small {
   padding: 3vh 2vw;
 }
 
-.standard-radius-20 {
-  border-radius: 20px !important;
-}
-
 .standard-radius-5 {
   border-radius: 5px !important;
+}
+
+.standard-radius-5-top {
+  border-top-left-radius: 5px !important;
+  border-top-right-radius: 5px !important;
+}
+
+.standard-radius-5-bottom {
+  border-bottom-left-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
+}
+
+.standard-radius-20 {
+  border-radius: 20px !important;
 }
 
 .standard-radius-20-top {
@@ -754,4 +763,8 @@ blockquote .small {
 .standard-radius-20-bottom {
   border-bottom-left-radius: 20px !important;
   border-bottom-right-radius: 20px !important;
+}
+
+.padding-bottom-0 {
+  padding-bottom: 0 !important;
 }

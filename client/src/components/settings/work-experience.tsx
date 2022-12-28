@@ -267,7 +267,10 @@ class WorkExperienceSettings extends Component<
           <form id='camper-work-experience' onSubmit={this.handleSubmit}>
             <FormGroup controlId='work-experience-employedWhere'>
               <ControlLabel>
-                <strong>{'Employé où'}</strong>
+                <strong>
+                  {'Employé où'}
+                  <span className='text-love-light'>*</span>
+                </strong>
               </ControlLabel>
               <FormControl
                 // onFocus={this.focusHandlerEmployedWhere}
@@ -329,7 +332,10 @@ class WorkExperienceSettings extends Component<
 
             <FormGroup controlId='work-experience-position'>
               <ControlLabel>
-                <strong>{'Poste'}</strong>
+                <strong>
+                  {'Poste'}
+                  <span className='text-love-light'>*</span>
+                </strong>
               </ControlLabel>
               <FormControl
                 // onFocus={this.focusHandlerPosition}

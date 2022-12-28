@@ -163,9 +163,9 @@ export class Block extends Component<BlockProps> {
         {' '}
         <ScrollableAnchor id={blockDashedName}>
           <div
-            className={`block ${isExpanded ? 'open' : ''} standard-radius-20`}
+            className={`block ${isExpanded ? 'open' : ''} standard-radius-5`}
           >
-            <div className='card-challenge'>
+            <div className='card-challenge standard-radius-5'>
               <div className='card-challenge-header'>
                 <div className='card-challenge-index'>{blockIndex}</div>
                 <div className='card-challenge-title'>
@@ -199,7 +199,7 @@ export class Block extends Component<BlockProps> {
             <hr />
             <button
               aria-expanded={isExpanded}
-              className='map-title standard-radius-20-bottom'
+              className='map-title standard-radius-5-bottom'
               onClick={() => {
                 this.handleBlockClick();
               }}
