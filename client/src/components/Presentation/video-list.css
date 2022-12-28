@@ -2,13 +2,13 @@
   font-family: sans-serif;
   width: 100%;
 }
-ul li {
-  border-bottom: 1px solid rgb(103, 103, 103);
+.video-item {
+  border-bottom: 10px solid rgb(255, 255, 255);
   padding: 0.7rem;
 }
-ul li p {
+.video-item p {
   font-size: 0.7rem;
 }
-ul li div {
+.video-item div {
   font-size: 0.8rem;
 }

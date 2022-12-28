@@ -14,7 +14,9 @@ export function VideoPlayer(props: { videoLink: string }): JSX.Element {
       <div className='video-player-content'>
         <ReactPlayer
           className='bg-warning video-player'
-          controls
+          width='100%'
+          height='100%'
+          controls={true}
           url={selectedVideo}
         />
       </div>

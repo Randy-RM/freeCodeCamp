@@ -18,11 +18,15 @@ export function VideoList(props: VideoProps): JSX.Element {
   };
   return (
     <>
-      <div className='video-list-container'>
+      <div className='video-list-container bg-secondary'>
         <ul>
           {datas.videos.map(data => (
             // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-            <li key={data.id} onClick={() => selectVideo(data)}>
+            <li
+              className='video-item'
+              key={data.id}
+              onClick={() => selectVideo(data)}
+            >
               <h4>{data.videoTitle}</h4>
               <p>{data.videoTime}</p>
               <div>Plus d&apos;infos</div>

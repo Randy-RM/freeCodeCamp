@@ -62,7 +62,6 @@ export function ShowPresentation(props: ShowPresentationProps): JSX.Element {
       <Helmet title={`Tableau de bord | Code Learning Platform`} />
       <Grid fluid={false} className='bg-light'>
         <Row>
-          <Spacer size={2} />
           <div className='col-lg-8 col-md-8 col-sm-12 col-xs-12'>
             <div>
               <Spacer size={1} />
