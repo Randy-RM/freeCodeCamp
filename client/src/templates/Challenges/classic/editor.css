@@ -111,3 +111,14 @@
 .accessibilityHelpWidget {
   z-index: 1;
 }
+
+@media (max-width: 768px) {
+  .monaco-scrollable-element.editor-scrollable.vs {
+    left: 55px !important;
+    width: 100% !important;
+  }
+
+  .scrollbar {
+    right: 56px !important;
+  }
+}
