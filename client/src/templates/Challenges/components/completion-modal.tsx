@@ -383,7 +383,7 @@ export class CompletionModalInner extends Component<
             </Login>
           )}
           <Button
-            className='action-btn btn-primary mb-1'
+            className='action-btn btn-primary mb-1 standard-radius-5'
             block={true}
             bsSize='large'
             bsStyle='primary'
@@ -410,10 +410,10 @@ export class CompletionModalInner extends Component<
             to='https://www.kinshasadigital.academy/inscription'
             external={true}
             sameTab={false}
-            className='link-resset-style'
+            className='link-resset-style standard-radius-5'
           >
             <Button
-              className='action-btn btn-secondary'
+              className='action-btn btn-secondary standard-radius-5'
               block={true}
               bsSize='lg'
               bsStyle='primary'
