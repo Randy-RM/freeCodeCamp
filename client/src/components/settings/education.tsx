@@ -199,6 +199,7 @@ class EducationSettings extends Component<EducationProps, EducationState> {
                 onChange={this.handleFieldOfStudyChange}
                 type='text'
                 value={fieldOfStudy}
+                className='standard-radius-5'
               />
               {!isFocusFieldOfStudy &&
                 !isBlurFieldOfStudy &&
@@ -240,6 +241,7 @@ class EducationSettings extends Component<EducationProps, EducationState> {
                 componentClass='select'
                 onChange={this.handleLevelOfStudyChange}
                 value={levelOfStudy.length === 0 ? '' : levelOfStudy}
+                className='standard-radius-5'
               >
                 <option value=''></option>
                 <option value={`Diplomé d'état`}>{`Diplomé d'état`}</option>
