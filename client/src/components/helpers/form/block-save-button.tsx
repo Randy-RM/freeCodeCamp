@@ -10,7 +10,7 @@ function BlockSaveButton({
 }): JSX.Element {
   return (
     <Button
-      className='btn-secondary'
+      className='btn-secondary standard-radius-5'
       block={true}
       bsSize='lg'
       bsStyle='primary'

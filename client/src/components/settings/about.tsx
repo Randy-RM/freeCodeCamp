@@ -370,6 +370,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
                 type='text'
                 value={name}
                 placeholder='John Doe'
+                className='standard-radius-5'
               />
 
               {!isFocusName && !isBlurName && isValidName && (
@@ -410,6 +411,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
                 type='text'
                 value={location}
                 placeholder='63, av. Colonel Mondjiba, Ngaliema - Kinshasa'
+                className='standard-radius-5'
               />
               {location.length <= 0 && (
                 <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
@@ -442,6 +444,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
                 componentClass='select'
                 onChange={this.handleGenderChange}
                 value={gender.length === 0 ? '' : gender}
+                className='standard-radius-5'
               >
                 <option value=''></option>
                 <option value='Femme'>Femme</option>
@@ -465,6 +468,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
                 onChange={this.handleCodeTimeChange}
                 type='date'
                 value={codeTime}
+                className='standard-radius-5'
               />
               {isValidCodeTime && (
                 <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
@@ -486,6 +490,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
                 // onBlur={this.blurHandlerAbout}
                 onChange={this.handleAboutChange}
                 value={about}
+                className='standard-radius-5'
               />
               {!isFocusAbout && !isBlurAbout && isValidAbout && (
                 <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
