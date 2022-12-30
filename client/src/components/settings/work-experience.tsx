@@ -278,6 +278,7 @@ class WorkExperienceSettings extends Component<
                 onChange={this.handleEmployedWhereChange}
                 type='text'
                 value={employedWhere}
+                className='standard-radius-5'
               />
 
               {!isFocusEmployedWhere &&
@@ -319,6 +320,7 @@ class WorkExperienceSettings extends Component<
                 onChange={this.handleSinceWhenChange}
                 type='date'
                 value={sinceWhen}
+                className='standard-radius-5'
               />
               {isValidSinceWhen && (
                 <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
@@ -343,6 +345,7 @@ class WorkExperienceSettings extends Component<
                 onChange={this.handlePositionChange}
                 type='text'
                 value={position}
+                className='standard-radius-5'
               />
 
               {!isFocusPosition && !isBlurPosition && isValidPosition && (
