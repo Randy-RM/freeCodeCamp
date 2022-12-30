@@ -287,6 +287,7 @@ class InternetSettings extends Component<InternetProps, InternetState> {
                 placeholder='https://www.linkedin.com/in/john-doe'
                 type='url'
                 value={linkedin}
+                className='standard-radius-5'
               />
               {this.renderHelpBlock(linkedinValidationMessage)}
             </FormGroup>
@@ -302,6 +303,7 @@ class InternetSettings extends Component<InternetProps, InternetState> {
                 placeholder='https://github.com/john-doe'
                 type='url'
                 value={githubProfile}
+                className='standard-radius-5'
               />
               {this.renderHelpBlock(githubProfileValidationMessage)}
             </FormGroup>
