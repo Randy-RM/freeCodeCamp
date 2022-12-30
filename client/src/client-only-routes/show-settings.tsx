@@ -146,7 +146,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
               </Col>
               <Col className='' md={8} mdOffset={2} sm={8} smOffset={2} xs={12}>
                 <Spacer size={1} />
-                <div className='block-ui bg-secondary'>
+                <div className='block-ui bg-secondary standard-radius-5'>
                   <About
                     about={about}
                     location={location}
@@ -179,7 +179,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
               </Col>
               <Col className='' md={8} mdOffset={2} sm={8} smOffset={2} xs={12}>
                 <Spacer size={1} />
-                <div className='block-ui bg-secondary'>
+                <div className='block-ui bg-secondary standard-radius-5'>
                   <Education
                     fieldOfStudy={fieldOfStudy}
                     levelOfStudy={levelOfStudy}
@@ -207,7 +207,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
               </Col>
               <Col className='' md={8} mdOffset={2} sm={8} smOffset={2} xs={12}>
                 <Spacer size={1} />
-                <div className='block-ui bg-secondary'>
+                <div className='block-ui bg-secondary standard-radius-5'>
                   <WorkExperience
                     employedWhere={employedWhere}
                     sinceWhen={sinceWhen}
@@ -236,7 +236,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
               </Col>
               <Col className='' md={8} mdOffset={2} sm={8} smOffset={2} xs={12}>
                 <Spacer size={1} />
-                <div className='block-ui bg-secondary'>
+                <div className='block-ui bg-secondary standard-radius-5'>
                   <Email
                     email={email}
                     isEmailVerified={isEmailVerified}
@@ -265,7 +265,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
               </Col>
               <Col className='' md={8} mdOffset={2} sm={8} smOffset={2} xs={12}>
                 <Spacer size={1} />
-                <div className='block-ui bg-secondary'>
+                <div className='block-ui bg-secondary standard-radius-5'>
                   <Internet
                     githubProfile={githubProfile}
                     linkedin={linkedin}

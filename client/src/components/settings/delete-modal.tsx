@@ -39,7 +39,7 @@ function DeleteModal(props: DeleteModalProps): JSX.Element {
         </p>
         <hr />
         <Button
-          className='action-btn btn-secondary'
+          className='action-btn btn-secondary standard-radius-5'
           block={true}
           bsSize='lg'
           bsStyle='primary'
@@ -50,7 +50,7 @@ function DeleteModal(props: DeleteModalProps): JSX.Element {
         </Button>
         <ButtonSpacer />
         <Button
-          className='action-btn btn-primary'
+          className='action-btn btn-primary standard-radius-5'
           block={true}
           bsSize='lg'
           bsStyle='danger'

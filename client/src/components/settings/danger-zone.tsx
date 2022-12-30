@@ -44,7 +44,7 @@ function DangerZone({ deleteAccount, resetProgress }: DangerZoneProps) {
   return (
     <div className='danger-zone text-center'>
       <FullWidthRow>
-        <Panel bsStyle='danger'>
+        <Panel bsStyle='danger' className='standard-radius-5'>
           <Panel.Heading>{'Zone à risque'}</Panel.Heading>
           <Spacer />
           <p>
@@ -54,7 +54,7 @@ function DangerZone({ deleteAccount, resetProgress }: DangerZoneProps) {
           </p>
           <FullWidthRow>
             <Button
-              className='action-btn btn-secondary'
+              className='action-btn btn-secondary standard-radius-5'
               block={true}
               bsSize='lg'
               bsStyle='danger'
@@ -65,7 +65,7 @@ function DangerZone({ deleteAccount, resetProgress }: DangerZoneProps) {
             </Button>
             <ButtonSpacer />
             <Button
-              className='action-btn btn-secondary'
+              className='action-btn btn-secondary standard-radius-5'
               block={true}
               bsSize='lg'
               bsStyle='danger'
