@@ -45,7 +45,7 @@ const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
                 la certification JavaScript Algorithm and Data Structures, tu apprendras 
                 les principes fondamentaux de JavaScript, etc.`}
         />
-        <CourseCard
+        {/* <CourseCard
           icon={AlgoIcon}
           isAvailable={false}
           isSignedIn={isSignedIn}
@@ -54,7 +54,7 @@ const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
             Nam, voluptas? Nemo animi quibusdam officiis, 
             aut atque error nobis nulla rem accusantium dolorum minus delectus 
             sequi consequatur dignissimos deserunt iste quas.`}
-        />
+        /> */}
       </div>
     </div>
   );
