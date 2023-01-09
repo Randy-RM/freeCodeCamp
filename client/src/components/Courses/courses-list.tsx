@@ -45,16 +45,15 @@ const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
                 la certification JavaScript Algorithm and Data Structures, tu apprendras 
                 les principes fondamentaux de JavaScript, etc.`}
         />
-        {/* <CourseCard
-          icon={AlgoIcon}
+        <CourseCard
           isAvailable={false}
           isSignedIn={isSignedIn}
-          title={`Raven360 network courses`}
-          description={`Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-            Nam, voluptas? Nemo animi quibusdam officiis, 
-            aut atque error nobis nulla rem accusantium dolorum minus delectus 
-            sequi consequatur dignissimos deserunt iste quas.`}
-        /> */}
+          title={`Raven360 courses`}
+          description={`Jetez un coup d'œil à Raven360 et découvrez 
+          comment une académie numérique peut vous aider à augmenter 
+          la vitesse de vente, à réduire le coût d'acquisition des clients 
+          et à générer davantage de prospects qualifiés.`}
+        />
       </div>
     </div>
   );

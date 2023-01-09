@@ -13,7 +13,7 @@ interface LandingDetailsProps {
   isAvailable: boolean;
   description: string;
   title: string;
-  icon: string;
+  icon?: string;
   alt?: string;
 }
 
