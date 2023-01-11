@@ -28,23 +28,24 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
           icon={LaptopIcon}
           isAvailable={true}
           isSignedIn={isSignedIn}
+          title={`Responsive Web Design`}
+          buttonText={`Suivre le cours  `}
           description={`
                 Dans cette formation, tu apprendras les langages que les développeurs 
                 utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
                 pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
                 Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
                 `}
-          title={`Responsive Web Design`}
         />
         <CourseCard
           icon={AlgoIcon}
           isAvailable={false}
           isSignedIn={isSignedIn}
+          title={`JavaScript Algorithms and Data Structures`}
           description={`Alors que HTML et CSS contrôlent le contenu et le style  d'une page, 
                 JavaScript est utilisé pour la rendre interactive. Dans le cadre de 
                 la certification JavaScript Algorithm and Data Structures, tu apprendras 
                 les principes fondamentaux de JavaScript, etc.`}
-          title={`JavaScript Algorithms and Data Structures`}
         />
       </div>
     </div>

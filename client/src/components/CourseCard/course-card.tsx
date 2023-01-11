@@ -3,6 +3,7 @@ import envData from '../../../../config/env.json';
 import PlayIcon from '../../assets/images/play.svg';
 
 import Map from '../Map/index';
+import { Link } from '../helpers';
 
 import './course-card.css';
 
@@ -15,6 +16,8 @@ interface LandingDetailsProps {
   title: string;
   icon?: string;
   alt?: string;
+  buttonText?: string;
+  link?: string;
 }
 
 const CourseCard = ({
@@ -23,7 +26,9 @@ const CourseCard = ({
   description,
   title,
   icon,
-  alt
+  alt,
+  buttonText,
+  link
 }: LandingDetailsProps): JSX.Element => {
   return (
     <div className='card-course-detail-back standard-radius-5 card-outlin-border bg-light'>
@@ -44,30 +49,50 @@ const CourseCard = ({
             <div className='push'>
               {isAvailable ? (
                 isSignedIn ? (
-                  <Map
-                    forLanding={true}
-                    single={true}
-                    className='link-course text-love-light fw-semi-bold text-responsive'
-                    keyPrefix='landing-details'
-                  >
-                    <div className='row-link'>
-                      <div className='row-link-text'>{'Suivre le cours  '}</div>
-                      <div>
-                        <img
-                          src={PlayIcon}
-                          alt='Laptop icon'
-                          className='play'
-                        />
-                      </div>
-                    </div>
-                  </Map>
+                  <>
+                    {link ? (
+                      <Link
+                        to={link}
+                        className='link-course text-love-light fw-semi-bold text-responsive'
+                      >
+                        <div className='row-link'>
+                          <div className='row-link-text'>{buttonText}</div>
+                          <div>
+                            <img
+                              src={PlayIcon}
+                              alt='Laptop icon'
+                              className='play'
+                            />
+                          </div>
+                        </div>
+                      </Link>
+                    ) : (
+                      <Map
+                        forLanding={true}
+                        single={true}
+                        className='link-course text-love-light fw-semi-bold text-responsive'
+                        keyPrefix='landing-details'
+                      >
+                        <div className='row-link'>
+                          <div className='row-link-text'>{buttonText}</div>
+                          <div>
+                            <img
+                              src={PlayIcon}
+                              alt='Laptop icon'
+                              className='play'
+                            />
+                          </div>
+                        </div>
+                      </Map>
+                    )}
+                  </>
                 ) : (
                   <a
                     href={`${apiLocation}/signin`}
                     className='link-course text-love-light fw-semi-bold text-responsive'
                   >
                     <div className='row-link'>
-                      <div className='row-link-text'>{'Suivre le cours  '}</div>
+                      <div className='row-link-text'>{buttonText}</div>
                       <div>
                         <img
                           src={PlayIcon}

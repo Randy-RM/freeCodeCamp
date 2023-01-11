@@ -27,13 +27,14 @@ const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
           icon={LaptopIcon}
           isAvailable={true}
           isSignedIn={isSignedIn}
+          title={`Responsive Web Design`}
+          buttonText={`Suivre le cours  `}
           description={`
                 Dans cette formation, tu apprendras les langages que les développeurs 
                 utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
                 pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
                 Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
                 `}
-          title={`Responsive Web Design`}
         />
         <CourseCard
           icon={AlgoIcon}
@@ -46,9 +47,11 @@ const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
                 les principes fondamentaux de JavaScript, etc.`}
         />
         <CourseCard
-          isAvailable={false}
+          isAvailable={true}
           isSignedIn={isSignedIn}
-          title={`Raven360 courses`}
+          title={`AWS Cours`}
+          buttonText={`Suivre le cours  `}
+          link={`/presentation`}
           description={`Jetez un coup d'œil à Raven360 et découvrez 
           comment une académie numérique peut vous aider à augmenter 
           la vitesse de vente, à réduire le coût d'acquisition des clients 
