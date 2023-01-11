@@ -12,7 +12,7 @@ const { apiLocation } = envData;
 interface LandingDetailsProps {
   isSignedIn?: boolean;
   isAvailable: boolean;
-  description: string;
+  description?: string;
   title: string;
   icon?: string;
   alt?: string;
@@ -40,7 +40,7 @@ const CourseCard = ({
             </div>
           </div>
           <div className='card-course-detail-item'>
-            <h4 className='fw-bold text-love-light card-title-w60'>{title}</h4>
+            <h4 className='fw-bold text-love-light'>{title}</h4>
           </div>
           <div className='card-course-detail-item  flexible'>
             <p className='text-responsive'>{description}</p>

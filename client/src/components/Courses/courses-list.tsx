@@ -51,11 +51,11 @@ const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
           isSignedIn={isSignedIn}
           title={`AWS Cours`}
           buttonText={`Suivre le cours  `}
-          link={`/presentation`}
-          description={`Jetez un coup d'œil à Raven360 et découvrez 
-          comment une académie numérique peut vous aider à augmenter 
-          la vitesse de vente, à réduire le coût d'acquisition des clients 
-          et à générer davantage de prospects qualifiés.`}
+          link={`/aws-courses`}
+          description={`Ce cours est conçu pour montrer aux participants comment 
+                  optimiser l'utilisation du cloud AWS grâce à la compréhension 
+                  de ces nombreux services et de leur intégration dans la création 
+                  de solutions basées sur le cloud.`}
         />
       </div>
     </div>
