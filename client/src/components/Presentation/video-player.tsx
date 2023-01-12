@@ -1,6 +1,7 @@
 import React from 'react';
 import './video-player.css';
 import ReactPlayer from 'react-player/file';
+// import { Spacer } from '../helpers';
 
 export function VideoPlayer(props: { videoLink: string }): JSX.Element {
   const [selectedVideo, setSelectedVideo] = React.useState(props.videoLink);
@@ -19,6 +20,10 @@ export function VideoPlayer(props: { videoLink: string }): JSX.Element {
           controls={true}
           url={selectedVideo}
         />
+      </div>
+      {/* <br /> */}
+      <div>
+        <h1>Video title</h1>
       </div>
     </>
   );
