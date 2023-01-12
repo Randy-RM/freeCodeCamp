@@ -126,15 +126,15 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
           </Col>
           <Col className='' md={10} mdOffset={1} sm={12} smOffset={-1} xs={12}>
             <div className='card-course-detail-container'>
-              {datatMock.courses.map(cours => {
+              {datatMock.courses.map((cours, index) => {
                 return (
                   <CourseCard
                     key={cours.learningpath_id}
                     isAvailable={true}
                     isSignedIn={isSignedIn}
-                    title={cours.display_name}
+                    title={`${index + 1}. ${cours.display_name}`}
                     buttonText={`Suivre le cours  `}
-                    link={`/presentation`}
+                    link={`/presentation/${cours.learningpath_id}`}
                   />
                 );
               })}

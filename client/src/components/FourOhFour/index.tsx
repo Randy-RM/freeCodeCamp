@@ -37,7 +37,7 @@ const FourOhFour = (): JSX.Element => {
         </blockquote> */}
       </div>
       <Spacer size={1} />
-      <Link className='btn btn-cta' to='/learn'>
+      <Link className='btn btn-cta standard-radius-20' to='/'>
         {/* {t('buttons.view-curriculum')} */}
         {`Retourner sur la page d'accueil`}
       </Link>
