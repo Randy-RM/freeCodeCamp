@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from '@reach/router';
 import { Grid, Row } from '@freecodecamp/react-bootstrap';
 import '../components/Presentation/video-player.css';
 import Helmet from 'react-helmet';
@@ -23,7 +24,7 @@ import { User } from '../redux/prop-types';
 import datas from '../components/Presentation/video-data.json';
 
 // TODO: update types for actions
-interface ShowPresentationProps {
+interface ShowAwsCourseProps {
   createFlashMessage: typeof createFlashMessage;
   isSignedIn: boolean;
   navigate: (location: string) => void;
@@ -48,14 +49,17 @@ const mapDispatchToProps = {
   navigate
 };
 
-export function ShowPresentation(props: ShowPresentationProps): JSX.Element {
+export function ShowAwsCourse(props: ShowAwsCourseProps): JSX.Element {
   // const { t } = useTranslation();
   const { showLoading } = props;
+  const params: string = useParams();
   const [selectedVideo, setSelectedVideo] = React.useState(datas.videos[0]);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
   }
+
+  console.log('params : ', params);
 
   return (
     <>
@@ -88,6 +92,6 @@ export function ShowPresentation(props: ShowPresentationProps): JSX.Element {
   );
 }
 
-ShowPresentation.displayName = 'ShowPresentation';
+ShowAwsCourse.displayName = 'ShowAwsCourse';
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowPresentation);
+export default connect(mapStateToProps, mapDispatchToProps)(ShowAwsCourse);

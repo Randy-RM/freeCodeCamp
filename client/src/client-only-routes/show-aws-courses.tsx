@@ -134,7 +134,7 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
                     isSignedIn={isSignedIn}
                     title={`${index + 1}. ${cours.display_name}`}
                     buttonText={`Suivre le cours  `}
-                    link={`/presentation/${cours.learningpath_id}`}
+                    link={`/aws-courses/course/${index + 1}`}
                   />
                 );
               })}
