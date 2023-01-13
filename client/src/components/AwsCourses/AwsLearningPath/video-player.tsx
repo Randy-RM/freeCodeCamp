@@ -23,7 +23,7 @@ export function VideoPlayer(props: { videoLink: string }): JSX.Element {
       </div>
       {/* <br /> */}
       <div>
-        <h1>Video title</h1>
+        <h2 className='h4'>Video title</h2>
       </div>
     </>
   );

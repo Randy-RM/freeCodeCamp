@@ -2,7 +2,7 @@
   "courses": [
     {
       "learningpath_id": "1",
-      "name": "Familiarisation avec le cloud AWS",
+      "name": "Familiarisation-avec-le-cloud-AWS",
       "display_name": "Familiarisation avec le cloud AWS",
       "thumbnail_url": "https://aws-thumbnail-url",
       "launch_url": "https://aws-cours-url",
@@ -11,7 +11,7 @@
     },
     {
       "learningpath_id": "2",
-      "name": "Présentation des concepts fondamentaux AWS",
+      "name": "Présentation-des-concepts-fondamentaux-AWS",
       "display_name": "Présentation des concepts fondamentaux AWS",
       "thumbnail_url": "https://aws-thumbnail-url",
       "launch_url": "https://aws-cours-url",
@@ -20,7 +20,7 @@
     },
     {
       "learningpath_id": "3",
-      "name": "Premiers pas sur l'architecture AWS",
+      "name": "Premiers-pas-sur-l-architecture-AWS",
       "display_name": "Premiers pas sur l'architecture AWS",
       "thumbnail_url": "https://aws-thumbnail-url",
       "launch_url": "https://aws-cours-url",
@@ -29,7 +29,7 @@
     },
     {
       "learningpath_id": "4",
-      "name": "Conception des architectures réseaux",
+      "name": "Conception-des-architectures-réseaux",
       "display_name": "Conception des architectures réseaux",
       "thumbnail_url": "https://aws-thumbnail-url",
       "launch_url": "https://aws-cours-url",
@@ -38,7 +38,7 @@
     },
     {
       "learningpath_id": "5",
-      "name": "Amélioration et automatisation des architectures réseaux",
+      "name": "Amélioration-et-automatisation-des-architectures-réseaux",
       "display_name": "Amélioration et automatisation des architectures réseaux",
       "thumbnail_url": "https://aws-thumbnail-url",
       "launch_url": "https://aws-cours-url",
