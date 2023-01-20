@@ -76,7 +76,7 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
 
   return (
     <>
-      <Helmet title={`AWS Cours | Code Learning Platform`} />
+      <Helmet title={`AWS Cours | Kadea Learn`} />
       <Grid fluid={true} className='bg-light'>
         <Spacer size={1} />
         <div>
