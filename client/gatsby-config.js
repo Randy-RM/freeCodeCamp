@@ -19,7 +19,7 @@ module.exports = {
     DEV_SSR: false
   },
   siteMetadata: {
-    title: 'Code Learning Platform',
+    title: 'Kadea Learn',
     siteUrl: homeLocation
   },
   pathPrefix: pathPrefix,
