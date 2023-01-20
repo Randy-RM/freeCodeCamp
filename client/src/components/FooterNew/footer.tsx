@@ -4,7 +4,7 @@ import Facebook from '../../assets/images/facebook.png';
 import Instagram from '../../assets/images/instagram.png';
 import Twitter from '../../assets/images/twitter.png';
 // import Whatsapp from '../../assets/images/whatsapp.png';
-import Logo from '../../assets/images/logo.png';
+import Logo from '../../assets/images/logo/kadea-learn-ligth.png';
 import './style.css';
 
 function Footer() {
