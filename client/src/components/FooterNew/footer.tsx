@@ -13,11 +13,7 @@ function Footer() {
       <div className='footer-container'>
         <div className='footer-container__left-side'>
           <Link className='link-logo text-center' to='/'>
-            <img
-              className='footer-logo'
-              src={Logo}
-              alt='KDEA code learning plateform'
-            />
+            <img className='footer-logo' src={Logo} alt='Logo Kadea Learn' />
           </Link>
 
           <div className='footer-container__left-side__social'>
@@ -52,7 +48,7 @@ function Footer() {
               </li>
             </ul>
             <p className='footer-container__left-side__description'>
-              Code Learning Platform © 2022
+              Kadea Learn © 2022
             </p>
           </div>
         </div>
