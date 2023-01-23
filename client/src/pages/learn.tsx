@@ -76,9 +76,7 @@ function LearnPage({ isSignedIn }: LearnPageProps) {
   return (
     <LearnLayout>
       {/* <Helmet title={t('metaTags:title')} /> */}
-      <Helmet
-        title={`Apprendre à coder - gratuitement | Code Learning Platform`}
-      />
+      <Helmet title={`Apprendre à coder - gratuitement | Kadea Learn`} />
       <main className='landing-page bg-light'>
         <div className='hero-main-bg'>
           <Grid>
