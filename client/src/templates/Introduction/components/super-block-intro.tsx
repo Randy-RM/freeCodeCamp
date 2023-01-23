@@ -28,7 +28,7 @@ function SuperBlockIntro(props: SuperBlockIntroProps): JSX.Element {
     <>
       <div>
         <Row className='super-block-intro-page'>
-          <Col md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+          <Col md={12} sm={12} xs={12}>
             <p className='text-love-light fw-bold'>
               {/* {t(`intro:misc-text.courses`)} */}
               Cours
@@ -38,7 +38,7 @@ function SuperBlockIntro(props: SuperBlockIntroProps): JSX.Element {
           </Col>
           {/* {generateIconComponent(superBlock, 'cert-header-icon')} */}
           {/* <Spacer /> */}
-          <Col className='' md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+          <Col className='' md={12} sm={12} xs={12}>
             <div className=''>
               {superBlockNoteText && (
                 <div
@@ -51,7 +51,7 @@ function SuperBlockIntro(props: SuperBlockIntroProps): JSX.Element {
             </div>
             <Spacer size={1} />
           </Col>
-          <Col className='' md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+          <Col className='' md={12} sm={12} xs={12}>
             <div className='alert bg-secondary standard-radius-5'>
               {superBlockIntroText.map((str, i) => (
                 <p key={i}>{str}</p>

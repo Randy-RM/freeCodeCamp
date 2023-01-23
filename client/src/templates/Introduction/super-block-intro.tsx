@@ -222,17 +222,17 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
       <Helmet>
         <title>{i18nTitle} | Kadea Learn</title>
       </Helmet>
-      <Grid fluid={true} className='bg-light'>
+      <Grid fluid={false} className='bg-light'>
         <Spacer size={1} />
         <SuperBlockIntro superBlock={superBlock} />
         <Spacer size={1} />
         <div className=''>
           <Spacer size={1} />
           <Row className='super-block-intro-page'>
-            <Col md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+            <Col md={12} sm={12} xs={12}>
               <h2 className='big-subheading'>{'Progression globale'}</h2>
             </Col>
-            <Col className='' md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+            <Col className='' md={12} sm={12} xs={12}>
               <Spacer size={1} />
               <div className='block-ui bg-secondary standard-radius-5'>
                 <div className='card-challenge standard-radius-5'>
@@ -261,17 +261,10 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
             <div className=''>
               <Spacer size={1} />
               <Row className='super-block-intro-page'>
-                <Col md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+                <Col md={12} sm={12} xs={12}>
                   <h2 className='big-subheading'>{'Module en cours'}</h2>
                 </Col>
-                <Col
-                  className=''
-                  md={10}
-                  mdOffset={1}
-                  sm={10}
-                  smOffset={1}
-                  xs={12}
-                >
+                <Col className='' md={12} sm={12} xs={12}>
                   <Spacer size={1} />
                   <div className='block-ui bg-secondary standard-radius-5'>
                     <BlockLastVisited
@@ -297,10 +290,10 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
         <div className=''>
           <Spacer size={1} />
           <Row className='super-block-intro-page'>
-            <Col md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+            <Col md={12} sm={12} xs={12}>
               <h2 className='big-subheading'>{'Syllabus'}</h2>
             </Col>
-            <Col className='' md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+            <Col className='' md={12} sm={12} xs={12}>
               <Spacer size={1} />
               <div className='block-ui bg-secondary standard-radius-5'>
                 {defaultCurriculumNames.map((blockDashedName, index) => {
