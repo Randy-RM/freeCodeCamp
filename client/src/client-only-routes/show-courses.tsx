@@ -63,7 +63,7 @@ export function Courses(props: CoursesProps): JSX.Element {
   return (
     <>
       {/* <Helmet title={`${t('buttons.settings')} | Code Learning Plateform`} /> */}
-      <Helmet title={`Nos cours | Code Learning Platform`} />
+      <Helmet title={`Nos cours | Kadea Learn`} />
       <Grid className='bg-light'>
         <main>
           <CoursesList isSignedIn={isSignedIn} />
