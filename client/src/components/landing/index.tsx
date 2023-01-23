@@ -61,7 +61,7 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
     <>
       <Helmet>
         {/* <title>{t('metaTags:title')}</title> */}
-        <title>{`Apprendre à coder - gratuitement | Code Learning Platform`}</title>
+        <title>{`Apprendre à coder - gratuitement | Kadea Learn`}</title>
       </Helmet>
       <main className='landing-page bg-light'>
         <div className='hero-main-bg'>
