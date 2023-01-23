@@ -44,7 +44,7 @@ function IntroDescription({ isSignedIn }: IntroDescriptionProps): JSX.Element {
     <div className='intro-description'>
       <h1>
         {`
-        Bienvenue sur Code Learning Platform !
+        Bienvenue sur Kadea Learn !
         `}
       </h1>
       <Spacer />
