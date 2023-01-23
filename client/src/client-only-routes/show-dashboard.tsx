@@ -65,12 +65,12 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
     <>
       {/* <Helmet title={`${t('buttons.settings')} | Code Learning Plateform`} /> */}
       <Helmet title={`Tableau de bord | Kadea Learn`} />
-      <Grid fluid={true} className='bg-light'>
+      <Grid fluid={false} className='bg-light'>
         <main>
           <div className=''>
             <Spacer size={1} />
             <Row className='super-block-intro-page'>
-              <Col md={8} mdOffset={2} sm={8} smOffset={2} xs={12}>
+              <Col md={12} sm={12} xs={12}>
                 <div className=''>
                   <h1
                     className='big-subheading'
@@ -93,15 +93,7 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
                       index
                     ) => {
                       return (
-                        <Col
-                          key={index}
-                          className=''
-                          md={8}
-                          mdOffset={2}
-                          sm={8}
-                          smOffset={2}
-                          xs={12}
-                        >
+                        <Col key={index} className='' md={12} sm={12} xs={12}>
                           <Spacer size={1} />
                           <div className='block-ui bg-secondary standard-radius-5'>
                             <CoursCardProgress
@@ -118,14 +110,7 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
                   )}
                 </>
               ) : (
-                <Col
-                  className=''
-                  md={8}
-                  mdOffset={2}
-                  sm={8}
-                  smOffset={2}
-                  xs={12}
-                >
+                <Col className='' md={12} sm={12} xs={12}>
                   <Spacer size={1} />
                   <div className='block-ui bg-secondary'>
                     <p className='h3'>{`Aucun cours suivi pour l'instant`}</p>
