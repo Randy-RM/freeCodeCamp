@@ -77,16 +77,16 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
   return (
     <>
       <Helmet title={`AWS Cours | Kadea Learn`} />
-      <Grid fluid={true} className='bg-light'>
+      <Grid fluid={false} className='bg-light'>
         <Spacer size={1} />
         <div>
           <Row className='super-block-intro-page'>
-            <Col md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+            <Col md={12} sm={12} xs={12}>
               <p className='text-love-light fw-bold'>Cours</p>
               <h1 className='big-heading'>{`AWS Cours`}</h1>
               <Spacer size={1} />
             </Col>
-            <Col className='' md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+            <Col className='' md={12} sm={12} xs={12}>
               <div className='alert bg-secondary standard-radius-5'>
                 <p>
                   {`
@@ -117,14 +117,14 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
         </div>
       </Grid>
 
-      <Grid fluid={true}>
+      <Grid fluid={false}>
         <Spacer size={1} />
         <Row>
-          <Col md={10} mdOffset={1} sm={10} smOffset={1} xs={12}>
+          <Col md={12} sm={12} xs={12}>
             <h2 className='big-subheading'>{`Parcours d'apprentissage`}</h2>
             <Spacer size={2} />
           </Col>
-          <Col className='' md={10} mdOffset={1} sm={12} smOffset={-1} xs={12}>
+          <Col className='' md={12} sm={12} xs={12}>
             <div className='card-course-detail-container'>
               {datatMock.courses.map((cours, index) => {
                 return (

@@ -93,7 +93,7 @@ img {
 
 @media (max-width: 768px) {
   .card-course-detail-back {
-    width: 80%;
+    width: 95%;
   }
 
   .card-course-detail-unit {
@@ -116,7 +116,7 @@ img {
   }
 
   .card-course-detail-back {
-    width: 90%;
+    width: 95%;
     margin-bottom: 20%;
   }
 
