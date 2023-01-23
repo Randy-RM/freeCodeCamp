@@ -66,7 +66,7 @@ export function ShowAwsLearningPath(
 
   return (
     <>
-      <Helmet title={`Tableau de bord | Code Learning Platform`} />
+      <Helmet title={`Tableau de bord | Kadea Learn`} />
       <Grid fluid={false} className='bg-light'>
         <Row>
           {'course' in params && (
