@@ -237,7 +237,7 @@ class ShowCodeAlly extends Component<ShowCodeAllyProps, ShowCodeAllyState> {
         prevChallengePath={prevChallengePath}
       >
         <LearnLayout>
-          <Helmet title={`${blockName}: ${title} | Code Learning Platform`} />
+          <Helmet title={`${blockName}: ${title} | Kadea Learn`} />
           <Grid>
             <Row>
               <Col md={8} mdOffset={2} sm={10} smOffset={1} xs={12}>
