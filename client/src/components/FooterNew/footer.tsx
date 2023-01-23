@@ -48,7 +48,7 @@ function Footer() {
               </li>
             </ul>
             <p className='footer-container__left-side__description'>
-              Kadea Learn © 2022
+              Kadea Learn © 2023
             </p>
           </div>
         </div>
