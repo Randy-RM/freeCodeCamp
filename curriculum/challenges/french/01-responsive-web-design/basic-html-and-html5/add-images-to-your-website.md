@@ -13,7 +13,7 @@ Vous pouvez ajouter des images à votre site Web en utilisant l'élément `img`,
 Voici un exemple :
 
 ```html
-<img src="https://kda-cms-develop.ams3.digitaloceanspaces.com/kda-learning-platform/kda-learning-platform-landing-logo%20%281%29.png">
+<img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/kadea_learn_landing_logo_f131d1e618.png">
 ```
 
 Notez que les éléments `img` sont auto-fermants.
@@ -27,7 +27,7 @@ Idéalement, l'attribut `alt` ne devrait pas contenir de caractères spéciaux, 
 Ajoutons un attribut `alt` à notre exemple `img` ci-dessus :
 
 ```html
-<img src="https://kda-cms-develop.ams3.digitaloceanspaces.com/kda-learning-platform/kda-learning-platform-landing-logo%20%281%29.png" alt="Le logo de Kadea Learn">
+<img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/kadea_learn_landing_logo_f131d1e618.png" alt="Le logo de Kadea Learn">
 ```
 
 # --instructions--
