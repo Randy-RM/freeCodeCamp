@@ -18,9 +18,7 @@ function ShowUnsubscribed({
   return (
     <>
       <Helmet>
-        <title>
-          {t('metaTags:youre-unsubscribed')} | Code Learning Platform
-        </title>
+        <title>{t('metaTags:youre-unsubscribed')} | Kadea Learn</title>
       </Helmet>
       <Grid>
         <main>
