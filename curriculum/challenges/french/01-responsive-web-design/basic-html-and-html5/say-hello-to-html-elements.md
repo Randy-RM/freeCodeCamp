@@ -9,7 +9,7 @@ dashedName: say-hello-to-html-elements
 
 # --description--
 
-Bienvenue aux défis de codage HTML de Code Learning Platform. Ces défis vous permettront de vous familiariser avec le développement Web, étape par étape.
+Bienvenue aux défis de codage HTML de Kadea Learn. Ces défis vous permettront de vous familiariser avec le développement Web, étape par étape.
 
 Tout d'abord, vous commencerez par créer une page Web simple en utilisant le langage HTML. Vous pouvez modifier le code dans votre éditeur de code, qui est intégré à cette page Web.
 
