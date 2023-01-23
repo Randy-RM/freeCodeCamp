@@ -447,9 +447,7 @@ class ShowClassic extends Component<ShowClassicProps, ShowClassicState> {
         usesMultifileEditor={usesMultifileEditor}
       >
         <LearnLayout>
-          <Helmet
-            title={`${this.getBlockNameTitle(t)} | Code Learning Platform`}
-          />
+          <Helmet title={`${this.getBlockNameTitle(t)} | Kadea Learn`} />
           <Media maxWidth={MAX_MOBILE_WIDTH}>
             <MobileLayout
               editor={this.renderEditor()}
