@@ -66,7 +66,11 @@ export function ShowAwsLearningPath(
 
   return (
     <>
-      <Helmet title={`Tableau de bord | Kadea Learn`} />
+      <Helmet
+        title={`${
+          awsCoursTitle ? awsCoursTitle.replace(/-/g, ' ') : 'AWS Course'
+        } | Kadea Learn`}
+      />
       <Grid fluid={false} className='bg-light'>
         <Row>
           {'course' in params && (
