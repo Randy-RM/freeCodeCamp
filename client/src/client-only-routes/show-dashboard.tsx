@@ -64,7 +64,7 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
   return (
     <>
       {/* <Helmet title={`${t('buttons.settings')} | Code Learning Plateform`} /> */}
-      <Helmet title={`Tableau de bord | Code Learning Platform`} />
+      <Helmet title={`Tableau de bord | Kadea Learn`} />
       <Grid fluid={true} className='bg-light'>
         <main>
           <div className=''>
