@@ -69,7 +69,7 @@ function UpdateEmail({ isNewEmail, t, updateMyEmail }: UpdateEmailProps) {
   return (
     <>
       <Helmet>
-        <title>{t('misc.update-email-1')} | Code Learning Platform</title>
+        <title>{t('misc.update-email-1')} | Kadea Learn</title>
       </Helmet>
       <Spacer />
       <h2 className='text-center'>{t('misc.update-email-2')}</h2>
