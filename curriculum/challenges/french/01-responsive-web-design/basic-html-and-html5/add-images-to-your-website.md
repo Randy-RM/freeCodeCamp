@@ -27,7 +27,7 @@ Idéalement, l'attribut `alt` ne devrait pas contenir de caractères spéciaux, 
 Ajoutons un attribut `alt` à notre exemple `img` ci-dessus :
 
 ```html
-<img src="https://kda-cms-develop.ams3.digitaloceanspaces.com/kda-learning-platform/kda-learning-platform-landing-logo%20%281%29.png" alt="Le logo de Code Learning Platform">
+<img src="https://kda-cms-develop.ams3.digitaloceanspaces.com/kda-learning-platform/kda-learning-platform-landing-logo%20%281%29.png" alt="Le logo de Kadea Learn">
 ```
 
 # --instructions--
