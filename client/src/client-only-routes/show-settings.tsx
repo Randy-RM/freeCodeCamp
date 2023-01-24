@@ -129,12 +129,12 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
     <>
       {/* <Helmet title={`${t('buttons.settings')} | Code Learning Plateform`} /> */}
       <Helmet title={`Profil | Kadea Learn`} />
-      <Grid fluid={true} className='bg-light'>
+      <Grid fluid={false} className='bg-light'>
         <main>
           <div className=''>
             <Spacer size={1} />
             <Row className='super-block-intro-page'>
-              <Col md={8} mdOffset={2} sm={8} smOffset={2} xs={12}>
+              <Col md={12} sm={12} xs={12}>
                 <div className=''>
                   <h1
                     className='big-subheading'
@@ -144,7 +144,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
                   </h1>
                 </div>
               </Col>
-              <Col className='' md={8} mdOffset={2} sm={8} smOffset={2} xs={12}>
+              <Col className='' md={12} sm={12} xs={12}>
                 <Spacer size={1} />
                 <div className='block-ui bg-secondary standard-radius-5'>
                   <About
@@ -167,7 +167,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
           <div className=''>
             <Spacer size={1} />
             <Row className='super-block-intro-page'>
-              <Col md={8} mdOffset={2} sm={8} smOffset={2} xs={12}>
+              <Col md={12} sm={12} xs={12}>
                 <div className=''>
                   <h1
                     className='big-subheading'
@@ -177,7 +177,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
                   </h1>
                 </div>
               </Col>
-              <Col className='' md={8} mdOffset={2} sm={8} smOffset={2} xs={12}>
+              <Col className='' md={12} sm={12} xs={12}>
                 <Spacer size={1} />
                 <div className='block-ui bg-secondary standard-radius-5'>
                   <Education
@@ -195,7 +195,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
           <div className=''>
             <Spacer size={1} />
             <Row className='super-block-intro-page'>
-              <Col md={8} mdOffset={2} sm={8} smOffset={2} xs={12}>
+              <Col md={12} sm={12} xs={12}>
                 <div className=''>
                   <h1
                     className='big-subheading'
@@ -205,7 +205,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
                   </h1>
                 </div>
               </Col>
-              <Col className='' md={8} mdOffset={2} sm={8} smOffset={2} xs={12}>
+              <Col className='' md={12} sm={12} xs={12}>
                 <Spacer size={1} />
                 <div className='block-ui bg-secondary standard-radius-5'>
                   <WorkExperience
@@ -224,7 +224,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
           <div className=''>
             <Spacer size={1} />
             <Row className='super-block-intro-page'>
-              <Col md={8} mdOffset={2} sm={8} smOffset={2} xs={12}>
+              <Col md={12} sm={12} xs={12}>
                 <div className=''>
                   <h2
                     className='big-subheading'
@@ -234,7 +234,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
                   </h2>
                 </div>
               </Col>
-              <Col className='' md={8} mdOffset={2} sm={8} smOffset={2} xs={12}>
+              <Col className='' md={12} sm={12} xs={12}>
                 <Spacer size={1} />
                 <div className='block-ui bg-secondary standard-radius-5'>
                   <Email
@@ -253,7 +253,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
           <div className=''>
             <Spacer size={1} />
             <Row className='super-block-intro-page'>
-              <Col md={8} mdOffset={2} sm={8} smOffset={2} xs={12}>
+              <Col md={12} sm={12} xs={12}>
                 <div className=''>
                   <h2
                     className='big-subheading'
@@ -263,7 +263,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
                   </h2>
                 </div>
               </Col>
-              <Col className='' md={8} mdOffset={2} sm={8} smOffset={2} xs={12}>
+              <Col className='' md={12} sm={12} xs={12}>
                 <Spacer size={1} />
                 <div className='block-ui bg-secondary standard-radius-5'>
                   <Internet
@@ -280,8 +280,14 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
             <Spacer size={1} />
           </div>
 
-          <Spacer />
-          <DangerZone />
+          <div>
+            <Spacer />
+            <Row>
+              <Col className='' md={12} sm={12} xs={12}>
+                <DangerZone />
+              </Col>
+            </Row>
+          </div>
         </main>
       </Grid>
     </>
