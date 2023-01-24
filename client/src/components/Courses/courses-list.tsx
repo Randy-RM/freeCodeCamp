@@ -47,7 +47,7 @@ const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
                 les principes fondamentaux de JavaScript, etc.`}
         />
         <CourseCard
-          isAvailable={true}
+          isAvailable={false}
           isSignedIn={isSignedIn}
           title={`AWS Cours`}
           buttonText={`Suivre le cours  `}
