@@ -23,8 +23,9 @@ function Banner(): JSX.Element {
         </div>
         <div className='banner-second-div baner-rigth-margin'>
           Deviens Développeur.se ou Specialiste en Marketing Digital en 6 mois
-          de formation certifiante suivi de 3 à 6 mois de stage, et trouve un
-          emploi dans les meilleurs entreprises nationales et internationales.
+          ou 12 mois de formation certifiante suivi de 3 à 6 mois de stage, et
+          trouve un emploi dans les meilleurs entreprises nationales et
+          internationales.
         </div>
         <div className='banner-third-div baner-rigth-margin'>
           <Link

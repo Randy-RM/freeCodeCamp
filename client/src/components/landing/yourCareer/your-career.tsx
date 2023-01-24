@@ -25,7 +25,7 @@ const YourCareer = ({ isSignedIn }: YourCareerProps): JSX.Element => {
           <p className='text-registration'>
             {`
             Deviens Développeur.se ou Specialiste en 
-            Marketing Digital en 9 mois de formation certifiante 
+            Marketing Digital en 6 mois ou 12 mois de formation certifiante 
             suivi de 3 à 6 mois de stage, et trouve un emploi dans 
             les meilleurs entreprises nationales et internationales.
             `}
