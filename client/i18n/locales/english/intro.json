@@ -211,10 +211,10 @@
     "note": "Note: Some browser extensions, such as ad-blockers and script-blockers can interfere with the tests. If you face issues, we recommend disabling extensions that modify or block the content of pages while taking the course.",
     "blocks": {
       "basic-javascript": {
-        "title": "Basic JavaScript",
+        "title": "JavaScript élémentaire",
         "intro": [
-          "JavaScript is a scripting language you can use to make web pages interactive. It is one of the core technologies of the web, along with HTML and CSS, and is supported by all modern browsers.",
-          "In this course, you'll learn fundamental programming concepts in JavaScript. You'll start with basic data structures like numbers and strings. Then you'll learn to work with arrays, objects, functions, loops, if/else statements, and more."
+          "JavaScript est un langage de script que vous pouvez utiliser pour rendre les pages web interactives. C'est l'une des technologies de base du web, avec HTML et CSS, et il est pris en charge par tous les navigateurs modernes.",
+          "Dans ce cours, vous apprendrez les concepts fondamentaux de la programmation en JavaScript. Vous commencerez par les structures de données de base comme les nombres et les chaînes de caractères. Ensuite, vous apprendrez à travailler avec des tableaux, des objets, des fonctions, des boucles, des instructions if/else, et bien plus encore. "
         ]
       },
       "es6": {
