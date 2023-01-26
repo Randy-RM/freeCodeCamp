@@ -63,10 +63,10 @@ if (typeof a != 'undefined') {
 ## --seed-contents--
 
 ```js
-// Setup
+// Configuration
 var a;
 
-// Only change code below this line
+// Ne modifiez que le code sous cette ligne
 ```
 
 # --solutions--
