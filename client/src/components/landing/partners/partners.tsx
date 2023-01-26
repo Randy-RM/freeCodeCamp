@@ -14,21 +14,21 @@ function Partners(): JSX.Element {
         <br />
       </div>
       <div className=''>
-        <div className='card-container'>
-          <div className='card-unit-col-4 card-py-5'>
-            <div className='card-item  flexible partner-logo-container'>
+        <div className='partner-card-container'>
+          <div className='partner-card-unit-col-4 card-py-5'>
+            <div className='partner-card-item  partner-flexible partner-logo-container'>
               <img src={VodacomLogo} alt='Start coding now!' />
             </div>
           </div>
 
-          <div className='card-unit-col-4 card-py-5'>
-            <div className='card-item  flexible partner-logo-container'>
+          <div className='partner-card-unit-col-4 card-py-5'>
+            <div className='partner-card-item  partner-flexible partner-logo-container'>
               <img src={AwsLogo} alt='Start coding now!' />
             </div>
           </div>
 
-          <div className='card-unit-col-4 card-py-5'>
-            <div className='card-item  flexible partner-logo-container'>
+          <div className='partner-card-unit-col-4 card-py-5'>
+            <div className='partner-card-item  partner-flexible partner-logo-container'>
               <img src={GizLogo} alt='Start coding now!' />
             </div>
           </div>
