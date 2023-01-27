@@ -208,7 +208,7 @@
       "Once you have the fundamentals down, you'll apply that knowledge by creating algorithms to manipulate strings, factorialize numbers, and even calculate the orbit of the International Space Station.",
       "Along the way, you'll also learn two important programming styles or paradigms: Object Oriented Programming (OOP) and Functional Programming (FP)."
     ],
-    "note": "Note: Some browser extensions, such as ad-blockers and script-blockers can interfere with the tests. If you face issues, we recommend disabling extensions that modify or block the content of pages while taking the course.",
+    "note": "Remarque : certaines extensions de navigateur, telles que les bloqueurs de publicité et de script, peuvent interférer avec les tests. Si vous rencontrez des problèmes, nous vous recommandons de désactiver les extensions qui modifient ou bloquent le contenu des pages pendant que vous suivez le cours.",
     "blocks": {
       "basic-javascript": {
         "title": "JavaScript élémentaire",
