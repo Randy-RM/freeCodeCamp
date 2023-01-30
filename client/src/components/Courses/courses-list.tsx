@@ -49,10 +49,10 @@ const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
         <CourseCard
           isAvailable={false}
           isSignedIn={isSignedIn}
-          title={`AWS Cours`}
+          title={`Parcours AWS`}
           buttonText={`Suivre le cours  `}
           link={`/aws-courses`}
-          description={`Ce cours est conçu pour montrer aux participants comment 
+          description={`Ce parcours est conçu pour montrer aux participants comment 
                   optimiser l'utilisation du cloud AWS grâce à la compréhension 
                   de ces nombreux services et de leur intégration dans la création 
                   de solutions basées sur le cloud.`}
