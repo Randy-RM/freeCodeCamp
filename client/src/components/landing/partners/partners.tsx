@@ -4,7 +4,7 @@ import React from 'react';
 import './partners.css';
 import VodacomLogo from '../../../assets/images/partners/vodacom_logo.svg';
 import AwsLogo from '../../../assets/images/partners/amazon_web_services_logo.svg';
-import GizLogo from '../../../assets/images/partners/giz.png';
+import GizLogo from '../../../assets/images/partners/giz_logo.png';
 
 function Partners(): JSX.Element {
   return (
@@ -15,21 +15,33 @@ function Partners(): JSX.Element {
       </div>
       <div className=''>
         <div className='partner-card-container'>
-          <div className='partner-card-unit-col-4 card-py-5'>
+          <div className='partner-card-unit-col-4'>
             <div className='partner-card-item  partner-flexible partner-logo-container'>
-              <img src={VodacomLogo} alt='Start coding now!' />
+              <img
+                src={GizLogo}
+                alt='Start coding now!'
+                className='card-py-5'
+              />
             </div>
           </div>
 
-          <div className='partner-card-unit-col-4 card-py-5'>
+          <div className='partner-card-unit-col-4'>
             <div className='partner-card-item  partner-flexible partner-logo-container'>
-              <img src={AwsLogo} alt='Start coding now!' />
+              <img
+                src={VodacomLogo}
+                alt='Start coding now!'
+                className='logo-vodacom card-py-5'
+              />
             </div>
           </div>
 
-          <div className='partner-card-unit-col-4 card-py-5'>
+          <div className='partner-card-unit-col-4'>
             <div className='partner-card-item  partner-flexible partner-logo-container'>
-              <img src={GizLogo} alt='Start coding now!' />
+              <img
+                src={AwsLogo}
+                alt='Start coding now!'
+                className='logo-aws card-py-5'
+              />
             </div>
           </div>
         </div>
