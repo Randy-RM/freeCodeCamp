@@ -3,8 +3,8 @@ import './courses-card.css';
 import CourseCard from '../CourseCard/course-card';
 import LaptopIcon from '../../assets/images/laptop.svg';
 import AlgoIcon from '../../assets/images/algorithmIcon.svg';
+import CloudShield from '../../assets/images/cloudShield.svg';
 import { Spacer } from '../helpers';
-
 interface CoursesListProps {
   isSignedIn?: boolean;
 }
@@ -47,6 +47,7 @@ const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
                 les principes fondamentaux de JavaScript, etc.`}
         />
         <CourseCard
+          icon={CloudShield}
           isAvailable={false}
           isSignedIn={isSignedIn}
           title={`Parcours AWS`}
