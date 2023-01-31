@@ -26,6 +26,7 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
       <div className='card-course-detail-container'>
         <CourseCard
           icon={LaptopIcon}
+          alt=''
           isAvailable={true}
           isSignedIn={isSignedIn}
           title={`Responsive Web Design`}
@@ -39,6 +40,7 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
         />
         <CourseCard
           icon={AlgoIcon}
+          alt=''
           isAvailable={false}
           isSignedIn={isSignedIn}
           title={`JavaScript Algorithms and Data Structures`}

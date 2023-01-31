@@ -19,7 +19,7 @@ function Partners(): JSX.Element {
             <div className='partner-card-item  partner-flexible partner-logo-container'>
               <img
                 src={GizLogo}
-                alt='Start coding now!'
+                alt='Logo Giz coopération allemande'
                 className='card-py-5'
               />
             </div>
@@ -29,7 +29,7 @@ function Partners(): JSX.Element {
             <div className='partner-card-item  partner-flexible partner-logo-container'>
               <img
                 src={VodacomLogo}
-                alt='Start coding now!'
+                alt='Logo Vodacom'
                 className='logo-vodacom card-py-5'
               />
             </div>
@@ -39,7 +39,7 @@ function Partners(): JSX.Element {
             <div className='partner-card-item  partner-flexible partner-logo-container'>
               <img
                 src={AwsLogo}
-                alt='Start coding now!'
+                alt='Logo Aws'
                 className='logo-aws card-py-5'
               />
             </div>

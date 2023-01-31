@@ -25,6 +25,7 @@ const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
       <div className='card-course-detail-container'>
         <CourseCard
           icon={LaptopIcon}
+          alt=''
           isAvailable={true}
           isSignedIn={isSignedIn}
           title={`Responsive Web Design`}
@@ -38,6 +39,7 @@ const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
         />
         <CourseCard
           icon={AlgoIcon}
+          alt=''
           isAvailable={false}
           isSignedIn={isSignedIn}
           title={`JavaScript Algorithms and Data Structures`}
@@ -48,6 +50,7 @@ const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
         />
         <CourseCard
           icon={CloudShield}
+          alt=''
           isAvailable={false}
           isSignedIn={isSignedIn}
           title={`Parcours AWS`}
