@@ -399,12 +399,14 @@ class AboutSettings extends Component<AboutProps, AboutState> {
               )}
               {isBlurName && !isValidName && (
                 <>
-                  {name.length >= 0 ? (
+                  {name.length > 0 ? (
                     <HelpBlock className='text-danger'>
                       {`Le nom que vous avez entré n'est pas valide.`}
                     </HelpBlock>
                   ) : (
-                    <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+                    <HelpBlock className='text-danger'>
+                      {'Ce champ est requis'}
+                    </HelpBlock>
                   )}
                 </>
               )}
