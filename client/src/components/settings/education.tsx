@@ -235,10 +235,12 @@ class EducationSettings extends Component<EducationProps, EducationState> {
                 <>
                   {fieldOfStudy.length > 0 ? (
                     <HelpBlock className='text-danger'>
-                      {`Le Domaine d'études que vous avez entré n'est pas valide.`}
+                      {`Le domaine d'études que vous avez entré n'est pas valide.`}
                     </HelpBlock>
                   ) : (
-                    <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+                    <HelpBlock className='text-danger'>
+                      {'Ce champ est requis'}
+                    </HelpBlock>
                   )}
                 </>
               )}
