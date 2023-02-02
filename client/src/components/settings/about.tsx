@@ -61,6 +61,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
       codeTime = '',
       about = ''
     } = props;
+
     const values = {
       name,
       location,
@@ -68,6 +69,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
       codeTime,
       about
     };
+
     this.state = {
       formValues: { ...values },
       originalValues: { ...values },

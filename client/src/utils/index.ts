@@ -9,6 +9,6 @@ export const maybeUrlRE = /https?:\/\/.*\..*/;
 export const hasProtocolRE = /^http/;
 export const hasToBeValidName = /^[a-zA-Z]+ [a-zA-Z]+$/;
 export const validLinkedInLinkRE =
-  /^(((https:\/\/|http:\/\/|))(www.|)linkedin.com\/in\/)([\w]{3,})/gi;
+  /^(((https:\/\/|http:\/\/|))(www.|)linkedin.com\/in\/)([\w-]{3,})/gi;
 export const validGitHubLinkRE =
-  /^(((https:\/\/|http:\/\/|))(www.|)github.com\/)([\w]{3,})/gi;
+  /^(((https:\/\/|http:\/\/|))(www.|)github.com\/)([\w-]{3,})/gi;
