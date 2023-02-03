@@ -222,6 +222,8 @@ class InternetSettings extends Component<InternetProps, InternetState> {
     }
   };
 
+  // ------------Render------------
+
   render() {
     const {
       formValues: { githubProfile, linkedin },
