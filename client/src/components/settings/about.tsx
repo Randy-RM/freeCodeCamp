@@ -118,24 +118,8 @@ class AboutSettings extends Component<AboutProps, AboutState> {
   }
 
   isFormPristine = () => {
-    const {
-      formValues,
-      originalValues,
-      isValidName
-      // isValidLocation,
-      // isValidGender,
-      // isValidCodeTime,
-      // isValidAbout
-    } = this.state;
-    if (
-      isValidName === true &&
-      formValues.name.length >= 5
-      // isValidName === true &&
-      // isValidLocation === true &&
-      // isValidGender === true &&
-      // isValidCodeTime === true &&
-      // isValidAbout === true
-    ) {
+    const { formValues, originalValues, isValidName } = this.state;
+    if (isValidName === true && formValues.name.length >= 5) {
       return (Object.keys(originalValues) as Array<keyof FormValues>)
         .map(key => originalValues[key] === formValues[key])
         .every(bool => bool);
@@ -152,51 +136,71 @@ class AboutSettings extends Component<AboutProps, AboutState> {
     );
   };
 
+  createHandleChange =
+    (key: keyof FormValues) => (e: React.FormEvent<HTMLInputElement>) => {
+      const value = (e.target as HTMLInputElement).value.slice(0);
+      if (key === 'name') {
+        return this.setState(state => ({
+          formValues: {
+            ...state.formValues,
+            [key]: value
+          },
+          isValidName:
+            validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
+            validator.isLength(value, { min: 5, max: 255 })
+        }));
+      }
+      if (key === 'location') {
+        return this.setState(state => ({
+          formValues: {
+            ...state.formValues,
+            [key]: value
+          },
+          isValidLocation: !validator.isEmpty(value)
+        }));
+      }
+      if (key === 'gender') {
+        return this.setState(state => ({
+          formValues: {
+            ...state.formValues,
+            [key]: value
+          },
+          isValidGender:
+            validator.equals(value, 'Homme') ||
+            validator.equals(value, 'Femme') ||
+            validator.equals(value, '')
+        }));
+      }
+      if (key === 'codeTime') {
+        return this.setState(state => ({
+          formValues: {
+            ...state.formValues,
+            [key]: value
+          },
+          isValidCodeTime: validator.isDate(value, {
+            format: 'YYYY-MM-DD',
+            strictMode: true
+          })
+        }));
+      }
+      if (key === 'about') {
+        return this.setState(state => ({
+          formValues: {
+            ...state.formValues,
+            [key]: value
+          },
+          isValidAbout: validator.isLength(value, { max: 300 })
+        }));
+      }
+    };
+
   // ------------Name Handler------------
 
-  handleNameChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value.slice(0);
-    return this.setState(state => ({
-      formValues: {
-        ...state.formValues,
-        name: value
-      },
-      isValidName:
-        validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
-        validator.isLength(value, { min: 5, max: 255 })
-    }));
-  };
-
-  focusHandlerName = (/*e: React.FocusEvent<HTMLInputElement>*/) => {
-    // const value = (e.target as HTMLInputElement).value.slice(0);
-
-    // if (
-    //   validator.isAlpha(value, 'fr-FR', { ignore: ' ' }) &&
-    //   validator.isLength(value, { min: 5, max: 255 })
-    // ) {
-    //   this.setState({
-    //     isValidName: true,
-    //     isFocusName: true,
-    //     isBlurName: false
-    //   });
-    // } else {
-    //   this.setState({
-    //     isValidName: false,
-    //     isFocusName: true,
-    //     isBlurName: false
-    //   });
-    // }
-    if (this.state.isBlurName) {
-      this.setState({
-        isFocusName: true,
-        isBlurName: false
-      });
-    } else {
-      this.setState({
-        isFocusName: true,
-        isBlurName: false
-      });
-    }
+  focusHandlerName = () => {
+    this.setState({
+      isFocusName: true,
+      isBlurName: false
+    });
   };
 
   blurHandlerName = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -222,33 +226,11 @@ class AboutSettings extends Component<AboutProps, AboutState> {
 
   // ------------Location Handler------------
 
-  handleLocationChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value.slice(0);
-    return this.setState(state => ({
-      formValues: {
-        ...state.formValues,
-        location: value
-      },
-      isValidLocation: !validator.isEmpty(value)
-    }));
-  };
-
-  focusHandlerLocation = (e: React.FocusEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value.slice(0);
-
-    if (!validator.isEmpty(value)) {
-      this.setState({
-        isValidLocation: true,
-        isFocusLocation: true,
-        isBlurLocation: false
-      });
-    } else {
-      this.setState({
-        isValidLocation: false,
-        isFocusLocation: true,
-        isBlurLocation: false
-      });
-    }
+  focusHandlerLocation = () => {
+    this.setState({
+      isFocusLocation: true,
+      isBlurLocation: false
+    });
   };
 
   blurHandlerLocation = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -269,65 +251,13 @@ class AboutSettings extends Component<AboutProps, AboutState> {
     }
   };
 
-  // ------------Gender Handler------------
-
-  handleGenderChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value.slice(0);
-    return this.setState(state => ({
-      formValues: {
-        ...state.formValues,
-        gender: value
-      },
-      isValidGender:
-        validator.equals(value, 'Homme') || validator.equals(value, 'Femme')
-    }));
-  };
-
-  // ------------CodeTime Handler------------
-
-  handleCodeTimeChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value.slice(0);
-    return this.setState(state => ({
-      formValues: {
-        ...state.formValues,
-        codeTime: value
-      },
-      isValidCodeTime: validator.isDate(value, {
-        format: 'YYYY-MM-DD',
-        strictMode: true
-      })
-    }));
-  };
-
   // ------------About Handler------------
 
-  handleAboutChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value.slice(0);
-    return this.setState(state => ({
-      formValues: {
-        ...state.formValues,
-        about: value
-      },
-      isValidAbout: validator.isLength(value, { max: 300 })
-    }));
-  };
-
-  focusHandlerAbout = (e: React.FocusEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value.slice(0);
-
-    if (validator.isLength(value, { min: 5, max: 300 })) {
-      this.setState({
-        isValidAbout: true,
-        isFocusAbout: true,
-        isBlurAbout: false
-      });
-    } else {
-      this.setState({
-        isValidAbout: false,
-        isFocusAbout: true,
-        isBlurAbout: false
-      });
-    }
+  focusHandlerAbout = () => {
+    this.setState({
+      isFocusAbout: true,
+      isBlurAbout: false
+    });
   };
 
   blurHandlerAbout = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -356,14 +286,6 @@ class AboutSettings extends Component<AboutProps, AboutState> {
       isValidName,
       isFocusName,
       isBlurName
-      // isValidLocation,
-      // isFocusLocation,
-      // isBlurLocation,
-      // isValidGender,
-      // isValidCodeTime,
-      // isValidAbout,
-      // isFocusAbout,
-      // isBlurAbout
     } = this.state;
 
     return (
@@ -380,7 +302,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
               <FormControl
                 onFocus={this.focusHandlerName}
                 onBlur={this.blurHandlerName}
-                onChange={this.handleNameChange}
+                onChange={this.createHandleChange('name')}
                 type='text'
                 value={name}
                 placeholder='John Doe'
@@ -392,11 +314,6 @@ class AboutSettings extends Component<AboutProps, AboutState> {
               )}
 
               {isFocusName && (
-                // <HelpBlock className='text-warning'>
-                //   {
-                //     'Seuls les lettres et les espaces sont acceptés | minimume 5 et maximum 255 caractères.'
-                //   }
-                // </HelpBlock>
                 <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
               )}
               {isBlurName && !isValidName && (
@@ -422,36 +339,15 @@ class AboutSettings extends Component<AboutProps, AboutState> {
                 <strong>{'Adresse'}</strong>
               </ControlLabel>
               <FormControl
-                // onFocus={this.focusHandlerLocation}
-                // onBlur={this.blurHandlerLocation}
-                onChange={this.handleLocationChange}
+                onFocus={this.focusHandlerLocation}
+                onBlur={this.blurHandlerLocation}
+                onChange={this.createHandleChange('location')}
                 type='text'
                 value={location}
                 placeholder='63, av. Colonel Mondjiba, Ngaliema - Kinshasa'
                 className='standard-radius-5'
               />
               <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
-              {/* {location.length <= 0 && (
-                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
-              )} */}
-
-              {/* {!isFocusLocation && !isBlurLocation && isValidLocation && (
-                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
-              )}
-
-              {isFocusLocation && (
-                <HelpBlock className='text-warning'>
-                  {`L'adresse ne peut être constituée que de caractère vide.`}
-                </HelpBlock>
-              )}
-              {isBlurLocation && !isValidLocation && (
-                <HelpBlock className='text-danger'>
-                  {`L'adresse que vous avez entré n'est pas valide.`}
-                </HelpBlock>
-              )}
-              {isBlurLocation && isValidLocation && (
-                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
-              )} */}
             </FormGroup>
 
             <FormGroup controlId='about-genre'>
@@ -460,7 +356,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
               </ControlLabel>
               <FormControl
                 componentClass='select'
-                onChange={this.handleGenderChange}
+                onChange={this.createHandleChange('gender')}
                 value={gender.length === 0 ? '' : gender}
                 className='standard-radius-5'
               >
@@ -469,14 +365,6 @@ class AboutSettings extends Component<AboutProps, AboutState> {
                 <option value='Homme'>Homme</option>
               </FormControl>
               <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
-              {/* {isValidGender && (
-                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
-              )}
-              {!isValidGender && (
-                <HelpBlock className='text-danger'>
-                  {`Les seuls genres autorisés sont Femme et Homme.`}
-                </HelpBlock>
-              )} */}
             </FormGroup>
 
             <FormGroup controlId='about-code'>
@@ -484,20 +372,12 @@ class AboutSettings extends Component<AboutProps, AboutState> {
                 <strong>{'Depuis quand codez-vous?'}</strong>
               </ControlLabel>
               <FormControl
-                onChange={this.handleCodeTimeChange}
+                onChange={this.createHandleChange('codeTime')}
                 type='date'
                 value={codeTime}
                 className='standard-radius-5'
               />
               <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
-              {/* {isValidCodeTime && (
-                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
-              )}
-              {!isValidCodeTime && (
-                <HelpBlock className='text-danger'>
-                  {`La date dois être au format Jour/Mois/Année`}
-                </HelpBlock>
-              )} */}
             </FormGroup>
 
             <FormGroup controlId='about-about'>
@@ -506,30 +386,13 @@ class AboutSettings extends Component<AboutProps, AboutState> {
               </ControlLabel>
               <FormControl
                 componentClass='textarea'
-                // onFocus={this.focusHandlerAbout}
-                // onBlur={this.blurHandlerAbout}
-                onChange={this.handleAboutChange}
+                onFocus={this.focusHandlerAbout}
+                onBlur={this.blurHandlerAbout}
+                onChange={this.createHandleChange('about')}
                 value={about}
                 className='standard-radius-5'
               />
               <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
-              {/* {!isFocusAbout && !isBlurAbout && isValidAbout && (
-                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
-              )}
-
-              {isFocusAbout && (
-                <HelpBlock className='text-warning'>
-                  {'Maximum 300 caractères pour ce champ.'}
-                </HelpBlock>
-              )}
-              {isBlurAbout && !isValidAbout && (
-                <HelpBlock className='text-danger'>
-                  {`Pas plus de 300 caractères toléré pour ce champ.`}
-                </HelpBlock>
-              )}
-              {isBlurAbout && isValidAbout && (
-                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
-              )} */}
             </FormGroup>
             <BlockSaveButton disabled={this.isFormPristine()} />
           </form>
