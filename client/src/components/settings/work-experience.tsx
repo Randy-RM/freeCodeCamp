@@ -121,51 +121,52 @@ class WorkExperienceSettings extends Component<
     );
   };
 
+  createHandleChange =
+    (key: keyof FormValues) => (e: React.FormEvent<HTMLInputElement>) => {
+      const value = (e.target as HTMLInputElement).value.slice(0);
+      if (key === 'employedWhere') {
+        return this.setState(state => ({
+          formValues: {
+            ...state.formValues,
+            [key]: value
+          },
+          isValidEmployedWhere:
+            validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
+            validator.isLength(value, { min: 1, max: 255 })
+        }));
+      }
+      if (key === 'sinceWhen') {
+        return this.setState(state => ({
+          formValues: {
+            ...state.formValues,
+            [key]: value
+          },
+          isValidSinceWhen: validator.isDate(value, {
+            format: 'YYYY-MM-DD',
+            strictMode: true
+          })
+        }));
+      }
+      if (key === 'position') {
+        return this.setState(state => ({
+          formValues: {
+            ...state.formValues,
+            [key]: value
+          },
+          isValidPosition:
+            validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
+            validator.isLength(value, { min: 2, max: 255 })
+        }));
+      }
+    };
+
   // ------------EmployedWhere Handler------------
 
-  handleEmployedWhereChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value.slice(0);
-    return this.setState(state => ({
-      formValues: {
-        ...state.formValues,
-        employedWhere: value
-      },
-      isValidEmployedWhere:
-        validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
-        validator.isLength(value, { min: 1, max: 255 })
-    }));
-  };
-
-  focusHandlerEmployedWhere = (/*e: React.FocusEvent<HTMLInputElement>*/) => {
-    // const value = (e.target as HTMLInputElement).value.slice(0);
-
-    // if (
-    //   validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
-    //   validator.isLength(value, { min: 1, max: 255 })
-    // ) {
-    //   this.setState({
-    //     isValidEmployedWhere: true,
-    //     isFocusEmployedWhere: true,
-    //     isBlurEmployedWhere: false
-    //   });
-    // } else {
-    //   this.setState({
-    //     isValidEmployedWhere: false,
-    //     isFocusEmployedWhere: true,
-    //     isBlurEmployedWhere: false
-    //   });
-    // }
-    if (this.state.isBlurEmployedWhere) {
-      this.setState({
-        isFocusEmployedWhere: true,
-        isBlurEmployedWhere: false
-      });
-    } else {
-      this.setState({
-        isFocusEmployedWhere: true,
-        isBlurEmployedWhere: false
-      });
-    }
+  focusHandlerEmployedWhere = () => {
+    this.setState({
+      isFocusEmployedWhere: true,
+      isBlurEmployedWhere: false
+    });
   };
 
   blurHandlerEmployedWhere = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -189,67 +190,13 @@ class WorkExperienceSettings extends Component<
     }
   };
 
-  // ------------SinceWhen Handler------------
-
-  handleSinceWhenChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value.slice(0);
-    return this.setState(state => ({
-      formValues: {
-        ...state.formValues,
-        sinceWhen: value
-      },
-      isValidSinceWhen: validator.isDate(value, {
-        format: 'YYYY-MM-DD',
-        strictMode: true
-      })
-    }));
-  };
-
   // ------------Position Handler------------
 
-  handlePositionChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value.slice(0);
-    return this.setState(state => ({
-      formValues: {
-        ...state.formValues,
-        position: value
-      },
-      isValidPosition:
-        validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
-        validator.isLength(value, { min: 2, max: 255 })
-    }));
-  };
-
-  focusHandlerPosition = (/*e: React.FocusEvent<HTMLInputElement>*/) => {
-    // const value = (e.target as HTMLInputElement).value.slice(0);
-
-    // if (
-    //   validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
-    //   validator.isLength(value, { min: 2, max: 255 })
-    // ) {
-    //   this.setState({
-    //     isValidPosition: true,
-    //     isFocusPosition: true,
-    //     isBlurPosition: false
-    //   });
-    // } else {
-    //   this.setState({
-    //     isValidPosition: false,
-    //     isFocusPosition: true,
-    //     isBlurPosition: false
-    //   });
-    // }
-    if (this.state.isBlurPosition) {
-      this.setState({
-        isFocusPosition: true,
-        isBlurPosition: false
-      });
-    } else {
-      this.setState({
-        isFocusPosition: true,
-        isBlurPosition: false
-      });
-    }
+  focusHandlerPosition = () => {
+    this.setState({
+      isFocusPosition: true,
+      isBlurPosition: false
+    });
   };
 
   blurHandlerPosition = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -273,13 +220,14 @@ class WorkExperienceSettings extends Component<
     }
   };
 
+  // ------------Render------------
+
   render() {
     const {
       formValues: { employedWhere, sinceWhen, position },
       isValidEmployedWhere,
       isFocusEmployedWhere,
       isBlurEmployedWhere,
-      // isValidSinceWhen,
       isValidPosition,
       isFocusPosition,
       isBlurPosition
@@ -298,7 +246,7 @@ class WorkExperienceSettings extends Component<
               <FormControl
                 onFocus={this.focusHandlerEmployedWhere}
                 onBlur={this.blurHandlerEmployedWhere}
-                onChange={this.handleEmployedWhereChange}
+                onChange={this.createHandleChange('employedWhere')}
                 type='text'
                 value={employedWhere}
                 className='standard-radius-5'
@@ -311,11 +259,6 @@ class WorkExperienceSettings extends Component<
                 )}
 
               {isFocusEmployedWhere && (
-                // <HelpBlock className='text-warning'>
-                //   {
-                //     'Seuls les lettres et les espaces sont acceptés | minimume 5 et maximum 255 caractères.'
-                //   }
-                // </HelpBlock>
                 <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
               )}
 
@@ -343,20 +286,12 @@ class WorkExperienceSettings extends Component<
                 <strong>{'Depuis quand'}</strong>
               </ControlLabel>
               <FormControl
-                onChange={this.handleSinceWhenChange}
+                onChange={this.createHandleChange('sinceWhen')}
                 type='date'
                 value={sinceWhen}
                 className='standard-radius-5'
               />
               <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
-              {/* {isValidSinceWhen && (
-                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
-              )}
-              {!isValidSinceWhen && (
-                <HelpBlock className='text-danger'>
-                  {`La date dois être au format Jour/Mois/Année`}
-                </HelpBlock>
-              )} */}
             </FormGroup>
 
             <FormGroup controlId='work-experience-position'>
@@ -369,7 +304,7 @@ class WorkExperienceSettings extends Component<
               <FormControl
                 onFocus={this.focusHandlerPosition}
                 onBlur={this.blurHandlerPosition}
-                onChange={this.handlePositionChange}
+                onChange={this.createHandleChange('position')}
                 type='text'
                 value={position}
                 className='standard-radius-5'
@@ -380,11 +315,6 @@ class WorkExperienceSettings extends Component<
               )}
 
               {isFocusPosition && (
-                // <HelpBlock className='text-warning'>
-                //   {
-                //     'Seuls les lettres et les espaces sont acceptés | minimume 5 et maximum 255 caractères.'
-                //   }
-                // </HelpBlock>
                 <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
               )}
 
