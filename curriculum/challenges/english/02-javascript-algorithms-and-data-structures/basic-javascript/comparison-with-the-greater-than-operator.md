@@ -24,7 +24,7 @@ Comme l'opérateur d'égalité, l'opérateur <dfn>supérieur à</dfn> convertit 
 
 # --instructions--
 
-Ajoutez l'opérateur plus grand que aux lignes indiquées afin que les déclarations de retour aient un sens.
+Ajoutez l'opérateur <dfn>plus grand que</dfn> aux lignes indiquées afin que les déclarations de retour aient un sens.
 
 # --hints--
 
