@@ -18,7 +18,7 @@ delete notrechien.aboie;
 Exemple:
 
 ```js
-const ourDog = {
+const notreChien = {
   "nom" : "Campeur",
   "pattes" : 4,
   "queues" : 1,
