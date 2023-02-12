@@ -20,7 +20,7 @@ function findGreater(a, b) {
     return "a est plus grand";
   }
   else {
-    return "b est plus petit ou égal";
+    return "b est plus grand ou égal";
   }
 }
 ```
@@ -29,7 +29,7 @@ Cela peut être réécrit en utilisant l'opérateur conditionnel :
 
 ```js
 function findGreater(a, b) {
-  return a > b ? "a est plus grand" : "b est plus petit ou égal";
+  return a > b ? "a est plus grand" : "b est plus grand ou égal";
 }
 ```
 
