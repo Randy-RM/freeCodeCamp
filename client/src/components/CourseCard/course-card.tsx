@@ -15,6 +15,7 @@ interface LandingDetailsProps {
   description?: string;
   title: string;
   icon?: string;
+  sponsorIcon?: string;
   alt?: string;
   buttonText?: string;
   link?: string;
@@ -26,6 +27,7 @@ const CourseCard = ({
   description,
   title,
   icon,
+  sponsorIcon,
   alt,
   buttonText,
   link
@@ -34,8 +36,13 @@ const CourseCard = ({
     <div className='card-course-detail-back standard-radius-5 card-outlin-border bg-light'>
       <div className='card-course-detail-unit position-relative'>
         <div className='card-outlin-border bg-light standard-radius-5'>
-          <div className='card-course-detail-header hide-small'>
-            <div className='card-course-detail-logo push'>
+          <div className='card-course-detail-header'>
+            {sponsorIcon && (
+              <div className='card-course-detail-logo-sponsor pull'>
+                <img src={sponsorIcon} alt='' className='img-fluid' />
+              </div>
+            )}
+            <div className='card-course-detail-logo push hide-small'>
               <img src={icon} alt={alt} className='img-fluid' />
             </div>
           </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Spacer } from '../../../components/helpers';
 import LaptopIcon from '../../../assets/images/laptop.svg';
 import AlgoIcon from '../../../assets/images/algorithmIcon.svg';
+import LaediesActIcon from '../../../assets/images/partners/ladies-act-logo.png';
 
 import './what-will-you-learn.css';
 import CourseCard from '../../CourseCard/course-card';
@@ -26,13 +27,14 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
       <div className='card-course-detail-container'>
         <CourseCard
           icon={LaptopIcon}
+          sponsorIcon={LaediesActIcon}
           alt=''
           isAvailable={true}
           isSignedIn={isSignedIn}
           title={`Responsive Web Design`}
           buttonText={`Suivre le cours  `}
           description={`
-                Dans cette formation, tu apprendras les langages que les développeurs 
+                Dans cette formation en ligne, tu apprendras les langages que les développeurs 
                 utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
                 pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
                 Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.

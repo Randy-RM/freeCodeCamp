@@ -10,9 +10,9 @@ const RegistrationToAcademy = (): JSX.Element => {
       <div className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <div>
           <h2 className='big-heading text-ligth'>
-            {`Inscris-toi à Kadea Academy,`}
+            {`Inscris-toi à KADEA EDUCATION,`}
             <br />
-            {`la meilleure école de codage.`}
+            {`une formation qui change une vie.`}
           </h2>
           <br />
           <p className='text-registration'>

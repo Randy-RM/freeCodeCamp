@@ -29,8 +29,8 @@
   padding: 10px 1rem;
 }
 .logo img {
-  width: 102.64px;
-  height: 40px;
+  width: 140px;
+  /* height: 40px; */
 }
 
 .nav-bar #show-menu,
@@ -195,8 +195,8 @@
 
   /* For mobile: */
   .logo img {
-    width: 76.97px;
-    height: 30px;
+    width: 120px;
+    /* height: 30px; */
   }
 
   .nav-bar .menu-icon {

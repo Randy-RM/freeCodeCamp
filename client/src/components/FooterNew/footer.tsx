@@ -4,10 +4,12 @@ import Facebook from '../../assets/images/facebook.png';
 import Instagram from '../../assets/images/instagram.png';
 import Twitter from '../../assets/images/twitter.png';
 // import Whatsapp from '../../assets/images/whatsapp.png';
-import Logo from '../../assets/images/logo/kadea-learn-ligth.png';
+import Logo from '../../assets/images/logo/kadea-learn-ligth.svg';
 import './style.css';
 
 function Footer() {
+  const date = new Date().getFullYear();
+
   return (
     <section className='footer-section'>
       <div className='footer-container'>
@@ -48,7 +50,7 @@ function Footer() {
               </li>
             </ul>
             <p className='footer-container__left-side__description'>
-              Kadea Learn © 2023
+              Kadea Learn © {date}
             </p>
           </div>
         </div>

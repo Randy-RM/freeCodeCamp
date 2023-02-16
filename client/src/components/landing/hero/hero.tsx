@@ -22,8 +22,11 @@ function Hero({ pageName, isSignedIn }: HeroProps): JSX.Element {
               className='hero-heading text-light'
               data-test-label={`${pageName}-header`}
             >
-              Apprends à coder et maximise tes chances {`d'être`} admis dans la{' '}
-              meilleure école de codage.
+              Apprends{' '}
+              <strong className='text-love-light'>GRATUITEMENT EN LIGNE</strong>{' '}
+              et augmente tes chances de rejoindre la{' '}
+              <strong className='text-love-light'>MEILLEURE</strong> école de
+              code.
             </h1>
             <p className='hero-text text-responsive text-light hero-description'>
               {`

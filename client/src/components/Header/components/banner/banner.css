@@ -18,7 +18,7 @@
   width: 30%;
   display: flex;
   align-items: center;
-  font-family: Montserrat, Verdana, Arial, Helvetica, sas-serif;
+  /* font-family: Montserrat, Verdana, Arial, Helvetica, sas-serif; */
   font-size: 17px;
   font-weight: bold;
 }
