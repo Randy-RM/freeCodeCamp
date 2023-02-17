@@ -10,7 +10,7 @@ dashedName: use-class-syntax-to-define-a-constructor-function
 
 ES6 fournit une nouvelle syntaxe pour créer des objets, en utilisant le mot-clé <dfn>class</dfn>.
 
-Il convient de noter que la syntaxe `class` n'est qu'une syntaxe, et non une implémentation à part entière, basée sur les classes, d'un paradigme orienté objet, contrairement à des langages tels que Java, Python, Ruby, etc.
+Il convient de noter que la syntaxe `class` n'est qu'un sucre syntaxique, et non une implémentation à part entière, basée sur les classes, d'un paradigme orienté objet, contrairement à des langages tels que Java, Python, Ruby, etc.
 
 Dans ES5, nous définissons généralement une fonction `constructeur` et utilisons le mot-clé `new` pour instancier un objet.
 
@@ -36,17 +36,17 @@ Il est à noter que le mot-clé `class` déclare une nouvelle fonction, à laque
 
 **Note:** Les majuscules doivent être utilisées par convention pour les noms de classes ES6, comme dans `SpaceShuttle` utilisé ci-dessus.
 
-La méthode `constructor` est une méthode spéciale pour créer et initialiser un objet créé avec une classe. Vous en apprendrez davantage à ce sujet dans la section Programmation orientée objet de la certification JavaScript Algorithms And Data Structures.
+La méthode `constructor` est une méthode spéciale pour créer et initialiser un objet créé avec une classe. Vous en apprendrez davantage à ce sujet dans la section Programmation orientée objet de la certification Algorithmes et Structures de données en JavaScript .
 
 # --instructions--
 
-Utilisez le mot-clé `class` et écrivez un `constructeur` pour créer la classe `Vegetable`.
+Utilisez le mot-clé `class` et écrivez un `constructor` pour créer la classe `Vegetable`.
 
-La classe `Vegetable` vous permet de créer un objet vegetable avec une propriété `name` qui est passée au `constructeur`.
+La classe `Vegetable` vous permet de créer un objet vegetable avec une propriété `name` qui est passée au `constructor`.
 
 # --hints--
 
-`Vegetable` devrait être une `classe` avec une méthode `constructrice` définie.
+`Vegetable` devrait être une `classe` avec une méthode `constructor` définie.
 
 ```js
 assert(
