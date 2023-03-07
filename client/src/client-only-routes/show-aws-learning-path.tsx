@@ -62,8 +62,6 @@ export function ShowAwsLearningPath(
     return <Loader fullScreen={true} />;
   }
 
-  console.log('params : ', params);
-
   return (
     <>
       <Helmet
