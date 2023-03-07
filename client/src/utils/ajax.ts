@@ -58,6 +58,28 @@ async function request<T>(
   return fetch(`${base}${path}`, options).then<T>(res => res.json());
 }
 
+// Make the `request` function generic
+// to specify the return data type:
+async function requestModule<TResponse>(
+  url: string,
+  // `RequestInit` is a type for configuring
+  // a `fetch` request. By default, an empty object.
+  config: RequestInit = {}
+
+  // This function is async, it will return a Promise:
+): Promise<TResponse> {
+  // Inside, we call the `fetch` function with
+  // a URL and config given:
+  const response = await fetch(url, config)
+    // When got a response call a `json` method on it
+    .then(response => response.json())
+    // and return the result data.
+    .then(data => data as TResponse);
+  // We also can use some post-response
+  // data-transformations in the last `then` clause.
+  return response;
+}
+
 /** GET **/
 
 interface SessionUser {
@@ -158,6 +180,44 @@ export function getShowCert(username: string, certSlug: string): Promise<Cert> {
 
 export function getUsernameExists(username: string): Promise<boolean> {
   return get(`/api/users/exists?username=${username}`);
+}
+
+interface MoodleCourse {
+  id: number;
+  shortname: string;
+  categoryid: number;
+  categorysortorder: number;
+  fullname: string;
+  displayname: string;
+  summary: string;
+}
+
+// interface MoodleCourse {
+//   userId: number;
+//   id: number;
+//   title: string;
+//   body: string;
+// }
+
+export async function getExternalCoursesCatalog(urlEndPoint: string) {
+  let response: MoodleCourse[] | null | never = [];
+  try {
+    response = await requestModule<MoodleCourse[]>(urlEndPoint, {
+      method: 'GET', //GET, POST, PUT, DELETE, etc.
+      mode: 'cors', //no-cors,cors, same-origin
+      cache: 'no-cache', //default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', //include, *same-origin, omit
+      // headers: {
+      //   "Content-Type": "application/json",
+      //   // 'Content-Type': 'application/x-www-form-urlencoded',
+      // },
+      redirect: 'follow', // manual, *follow, error
+      referrerPolicy: 'no-referrer' // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    });
+  } catch (error) {
+    response = null;
+  }
+  return response;
 }
 
 /** POST **/

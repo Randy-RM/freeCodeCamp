@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid, Row, Col } from '@freecodecamp/react-bootstrap';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+import { getExternalCoursesCatalog } from '../utils/ajax';
 
 import { createFlashMessage } from '../components/Flash/redux';
 import { Loader, Spacer } from '../components/helpers';
@@ -17,7 +18,9 @@ import {
 } from '../redux';
 
 import { User } from '../redux/prop-types';
-import data from '../components/AwsCourses/aws-courses-data.json';
+import envData from '../../../config/env.json';
+
+const { moodleBaseUrl, moodleApiBaseUrl, moodleApiToken } = envData;
 
 // TODO: update types for actions
 interface ShowAwsCoursesProps {
@@ -29,25 +32,22 @@ interface ShowAwsCoursesProps {
   path?: string;
 }
 
-type AwsCours = {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  learningpath_id: string;
-  name: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  display_name: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  thumbnail_url: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  launch_url: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  created_date: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  updated_date: string;
+type MoodleCourse = {
+  id: number;
+  shortname: string;
+  categoryid: number;
+  categorysortorder: number;
+  fullname: string;
+  displayname: string;
+  summary: string;
 };
 
-type AwsCourses = {
-  courses: AwsCours[];
-};
+// type MoodleCourse = {
+//   userId: number;
+//   id: number;
+//   title: string;
+//   body: string;
+// };
 
 const mapStateToProps = createSelector(
   signInLoadingSelector,
@@ -67,10 +67,25 @@ const mapDispatchToProps = {
 
 export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
   const { showLoading, isSignedIn } = props;
+  const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[]>([]);
 
-  const datatMock: AwsCourses = { ...data };
+  const getMoodleCourses = async () => {
+    const moodleCatalogue = await getExternalCoursesCatalog(
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses&moodlewsrestformat=json`
+    );
+    if (moodleCatalogue != null) {
+      setMoodleCourses(moodleCatalogue);
+    } else {
+      setMoodleCourses([]);
+    }
+  };
 
-  if (showLoading) {
+  useEffect(() => {
+    void getMoodleCourses();
+  }, []);
+
+  if (showLoading && moodleCourses.length == 0) {
     return <Loader fullScreen={true} />;
   }
 
@@ -126,18 +141,34 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
           </Col>
           <Col className='' md={12} sm={12} xs={12}>
             <div className='card-course-detail-container'>
-              {datatMock.courses.map((cours, index) => {
-                return (
-                  <CourseCard
-                    key={cours.learningpath_id}
-                    isAvailable={true}
-                    isSignedIn={isSignedIn}
-                    title={`${index + 1}. ${cours.display_name}`}
-                    buttonText={`Suivre le cours  `}
-                    link={`/aws-courses/learning-path/${cours.name}`}
-                  />
-                );
-              })}
+              {moodleCourses.length >= 0 &&
+                moodleCourses.map((course, index) => {
+                  return (
+                    // <CourseCard
+                    //   key={course.id}
+                    //   isAvailable={true}
+                    //   isSignedIn={isSignedIn}
+                    //   title={`${index + 1}. ${course.displayname}`}
+                    //   buttonText={`Suivre le cours  `}
+                    //   link={`/aws-courses/learning-path/${course.fullname.replace(
+                    //     / /g,
+                    //     '-'
+                    //   )}`}
+                    // />
+                    <>
+                      <CourseCard
+                        key={course.id}
+                        isAvailable={true}
+                        isSignedIn={isSignedIn}
+                        title={`${index + 1}. ${course.displayname}`}
+                        buttonText={`Suivre le cours  `}
+                        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                        link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
+                        description={course.summary}
+                      />
+                    </>
+                  );
+                })}
             </div>
           </Col>
         </Row>
