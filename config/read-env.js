@@ -32,7 +32,10 @@ const {
   //PATREON_CLIENT_ID: patreonClientId,
   DEPLOYMENT_ENV: deploymentEnv,
   SHOW_UPCOMING_CHANGES: showUpcomingChanges,
-  SHOW_NEW_CURRICULUM: showNewCurriculum
+  SHOW_NEW_CURRICULUM: showNewCurriculum,
+  MOODLE_BASE_URL: moodleBaseUrl,
+  MOODLE_API_BASE_URL: moodleApiBaseUrl,
+  MOODLE_API_TOKEN: moodleApiToken
 } = process.env;
 
 const locations = {
@@ -42,7 +45,10 @@ const locations = {
   newsLocation,
   radioLocation: !radioLocation
     ? 'https://coderadio.freecodecamp.org'
-    : radioLocation
+    : radioLocation,
+  moodleBaseUrl,
+  moodleApiBaseUrl,
+  moodleApiToken
 };
 
 module.exports = Object.assign(locations, {
