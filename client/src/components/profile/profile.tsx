@@ -126,7 +126,7 @@ function Profile({ user, isSessionUser }: ProfileProps): JSX.Element {
   return (
     <>
       <Helmet>
-        <title>{t('buttons.profile')} | Kadea Learn</title>
+        <title>{t('buttons.profile')} | Kadea Online</title>
       </Helmet>
       <Spacer />
       <Grid>

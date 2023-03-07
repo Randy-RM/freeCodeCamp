@@ -61,7 +61,7 @@ AcceptPrivacyTermsProps) {
     <>
       <Helmet>
         {/* <title>{t('misc.email-signup')} | Code Learning Plateform</title> */}
-        <title>{`Inscription réussie`} | Kadea Learn</title>
+        <title>{`Inscription réussie`} | Kadea Online</title>
       </Helmet>
       <Grid>
         <Row>

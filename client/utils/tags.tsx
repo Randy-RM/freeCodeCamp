@@ -20,7 +20,7 @@ export function getheadTagComponents(): JSX.Element[] {
       rel='preload'
     />,
     <link href={pathToBootstrap} key='bootstrap-min' rel='stylesheet' />,
-    <meta content='Kadea Learn' key='og:title' name='og:title' />,
+    <meta content='Kadea Online' key='og:title' name='og:title' />,
     <meta
       content={i18next.t('metaTags:social-description')}
       key='og:description'

@@ -67,7 +67,7 @@ export function ShowAwsLearningPath(
       <Helmet
         title={`${
           awsCoursTitle ? awsCoursTitle.replace(/-/g, ' ') : 'AWS Course'
-        } | Kadea Learn`}
+        } | Kadea Online`}
       />
       <Grid fluid={false} className='bg-light'>
         <Row>

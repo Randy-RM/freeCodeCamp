@@ -15,7 +15,7 @@ const FourOhFour = (): JSX.Element => {
   // const quote = randomQuote() as { quote: string; author: string };
   return (
     <div className='notfound-page-wrapper'>
-      <Helmet title={`La page n'a pas été trouvée | Kadea Learn`} />
+      <Helmet title={`La page n'a pas été trouvée | Kadea Online`} />
       {/* <img alt={t('404.not-found')} src={notFoundLogo} /> */}
       {/* <Spacer /> */}
       <p className='error-code'>

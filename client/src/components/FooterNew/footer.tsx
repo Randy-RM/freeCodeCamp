@@ -15,7 +15,7 @@ function Footer() {
       <div className='footer-container'>
         <div className='footer-container__left-side'>
           <Link className='link-logo text-center' to='/'>
-            <img className='footer-logo' src={Logo} alt='Logo Kadea Learn' />
+            <img className='footer-logo' src={Logo} alt='Logo Kadea Online' />
           </Link>
 
           <div className='footer-container__left-side__social'>
@@ -50,7 +50,7 @@ function Footer() {
               </li>
             </ul>
             <p className='footer-container__left-side__description'>
-              Kadea Learn © {date}
+              Kadea Online © {date}
             </p>
           </div>
         </div>

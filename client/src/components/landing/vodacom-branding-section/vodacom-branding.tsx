@@ -22,7 +22,7 @@ function VodacomBranding() {
                   Grâce à son programme ConnectU, Vodacom offre à tous ses
                   abonnés le privilège
                   <br />
-                  d’accéder gratuitement au contenu de KADEA LEARN sans forfait
+                  d’accéder gratuitement au contenu de KADEA ONLINE sans forfait
                   internet.
                 </strong>
               </p>

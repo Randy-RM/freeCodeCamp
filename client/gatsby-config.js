@@ -19,7 +19,7 @@ module.exports = {
     DEV_SSR: false
   },
   siteMetadata: {
-    title: 'Kadea Learn',
+    title: 'Kadea Online',
     siteUrl: homeLocation
   },
   pathPrefix: pathPrefix,
