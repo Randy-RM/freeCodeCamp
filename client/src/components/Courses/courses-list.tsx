@@ -53,7 +53,7 @@ const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
         <CourseCard
           icon={CloudShield}
           alt=''
-          isAvailable={true}
+          isAvailable={false}
           isSignedIn={isSignedIn}
           title={`Parcours AWS`}
           buttonText={`Suivre le cours  `}
