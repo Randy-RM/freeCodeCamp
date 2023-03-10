@@ -85,7 +85,7 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
     void getMoodleCourses();
   }, []);
 
-  if (showLoading && moodleCourses.length == 0) {
+  if (showLoading) {
     return <Loader fullScreen={true} />;
   }
 
