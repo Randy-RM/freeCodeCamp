@@ -1,6 +1,6 @@
 ---
 id: 587d7dae367417b2b2512b7c
-title: Use Prototype Properties to Reduce Duplicate Code
+title: Utiliser les propriétés des prototypes pour réduire le code dupliqué
 challengeType: 1
 forumTopicId: 301336
 dashedName: use-prototype-properties-to-reduce-duplicate-code
@@ -8,17 +8,17 @@ dashedName: use-prototype-properties-to-reduce-duplicate-code
 
 # --description--
 
-Since `numLegs` will probably have the same value for all instances of `Bird`, you essentially have a duplicated variable `numLegs` inside each `Bird` instance.
+Puisque `numLegs` aura probablement la même valeur pour toutes les instances de `Bird`, vous avez essentiellement une variable dupliquée `numLegs` à l'intérieur de chaque instance de `Bird`.
 
-This may not be an issue when there are only two instances, but imagine if there are millions of instances. That would be a lot of duplicated variables.
+Ce n'est peut-être pas un problème lorsqu'il n'y a que deux instances, mais imaginez qu'il y ait des millions d'instances. Cela ferait beaucoup de variables dupliquées.
 
-A better way is to use the `prototype` of `Bird`. Properties in the `prototype` are shared among ALL instances of `Bird`. Here's how to add `numLegs` to the `Bird prototype`:
+Une meilleure façon est d'utiliser le `prototype` de `Bird`. Les propriétés du `prototype` sont partagées par TOUTES les instances de `Bird`. Voici comment ajouter `numLegs` au `prototype` de Bird :
 
 ```js
 Bird.prototype.numLegs = 2;
 ```
 
-Now all instances of `Bird` have the `numLegs` property.
+Maintenant, toutes les instances de `Bird` ont la propriété `numLegs`.
 
 ```js
 console.log(duck.numLegs);
