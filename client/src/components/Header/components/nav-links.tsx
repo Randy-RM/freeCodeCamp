@@ -100,6 +100,18 @@ export const NavLinks = (props: NavLinksProps): JSX.Element => {
           </Link>
         </li>
 
+        <li className='nav-item'>
+          <Link
+            onClick={handleIsDropdown}
+            className=''
+            key='learning-path'
+            to='/learning-path'
+            activeClassName='active'
+          >
+            {'Parcours'}
+          </Link>
+        </li>
+
         {username && (
           <Fragment key='profile-settings'>
             <li className='nav-item'>
