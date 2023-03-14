@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from '@reach/router';
 import { Grid, Row, Col } from '@freecodecamp/react-bootstrap';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
@@ -23,13 +24,14 @@ import envData from '../../../config/env.json';
 const { moodleBaseUrl, moodleApiBaseUrl, moodleApiToken } = envData;
 
 // TODO: update types for actions
-interface ShowAwsCoursesProps {
+interface ShowLearningPathProps {
   createFlashMessage: typeof createFlashMessage;
   isSignedIn: boolean;
   navigate: (location: string) => void;
   showLoading: boolean;
   user: User;
   path?: string;
+  location?: { state: { description: string } };
 }
 
 type MoodleCourse = {
@@ -42,12 +44,9 @@ type MoodleCourse = {
   summary: string;
 };
 
-// type MoodleCourse = {
-//   userId: number;
-//   id: number;
-//   title: string;
-//   body: string;
-// };
+type MoodleCoursesCatalogue = {
+  courses: MoodleCourse[];
+};
 
 const mapStateToProps = createSelector(
   signInLoadingSelector,
@@ -65,17 +64,23 @@ const mapDispatchToProps = {
   navigate
 };
 
-export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
-  const { showLoading, isSignedIn } = props;
+export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
+  const { showLoading, isSignedIn, location } = props;
+  const params: Record<string, undefined> = useParams();
   const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[]>();
+  const categoryName: string | undefined =
+    'category' in params ? params.category : '';
+  const categoryId: string | undefined =
+    'categoryId' in params ? params.categoryId : '';
 
   const getMoodleCourses = async () => {
-    const moodleCatalogue = await getExternalCoursesCatalog<MoodleCourse[]>(
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses&moodlewsrestformat=json`
-    );
+    const moodleCatalogue =
+      await getExternalCoursesCatalog<MoodleCoursesCatalogue>(
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses_by_field&field=category&value=${categoryId}&moodlewsrestformat=json`
+      );
     if (moodleCatalogue != null) {
-      setMoodleCourses(moodleCatalogue);
+      setMoodleCourses(moodleCatalogue.courses);
     } else {
       setMoodleCourses([]);
     }
@@ -83,11 +88,15 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
 
   useEffect(() => {
     void getMoodleCourses();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
   }
+
+  console.log('moodleCatalogue : ', moodleCourses);
+  console.log('location : ', location);
 
   return (
     <>
@@ -97,34 +106,22 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
         <div>
           <Row className='super-block-intro-page'>
             <Col md={12} sm={12} xs={12}>
-              <p className='text-love-light fw-bold'>Cours</p>
-              <h1 className='big-heading'>{`AWS Cours`}</h1>
+              <p className='text-love-light fw-bold'>Parcours</p>
+              <h1 className='big-heading'>
+                {categoryName ? categoryName.replace(/-/g, ' ') : ''}
+              </h1>
               <Spacer size={1} />
             </Col>
             <Col className='' md={12} sm={12} xs={12}>
               <div className='alert bg-secondary standard-radius-5'>
-                <p>
-                  {`
-                  Ce cours est conçu pour montrer aux participants comment 
-                  optimiser l'utilisation du cloud AWS grâce à la compréhension 
-                  de ces nombreux services et de leur intégration dans la création 
-                  de solutions basées sur le cloud.
-                  `}
-                </p>
-                <Spacer size={1} />
-                <p>
-                  {`
-                  Etant donné que les solutions architecturales peuvent varier selon 
-                  le secteur, le type d'application et la taille de l'entreprise, 
-                  ce cours met l'accent sur les bonnes pratiques relatives au cloud AWS 
-                  afin d'aider les participants à construire des solutions informatiques 
-                  optimisées sur AWS. Cette formation présente également de nombreuses études 
-                  de cas expliquant comment certains clients AWS ont conçu leurs infrastructures, 
-                  mais aussi les stratégies et services qu'ils ont implémentés. 
-                  A l'issue de cette formation, vous serez en capacité de créer une grande variété 
-                  d'infrastructures en recourant aux différents services vu au travers de ce module.
-                  `}
-                </p>
+                {location && location.state && location.state.description && (
+                  <div
+                    className='text-responsive'
+                    dangerouslySetInnerHTML={{
+                      __html: location.state.description
+                    }}
+                  ></div>
+                )}
               </div>
             </Col>
             <Spacer />
@@ -136,7 +133,7 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
         <Spacer size={1} />
         <Row>
           <Col md={12} sm={12} xs={12}>
-            <h2 className='big-subheading'>{`Parcours d'apprentissage`}</h2>
+            <h2 className='big-subheading'>{`Cours`}</h2>
             <Spacer size={2} />
           </Col>
           <Col className='' md={12} sm={12} xs={12}>
@@ -145,17 +142,6 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
                 moodleCourses.length >= 0 &&
                 moodleCourses.map((course, index) => {
                   return (
-                    // <CourseCard
-                    //   key={course.id}
-                    //   isAvailable={true}
-                    //   isSignedIn={isSignedIn}
-                    //   title={`${index + 1}. ${course.displayname}`}
-                    //   buttonText={`Suivre le cours  `}
-                    //   link={`/aws-courses/learning-path/${course.fullname.replace(
-                    //     / /g,
-                    //     '-'
-                    //   )}`}
-                    // />
                     <>
                       <CourseCard
                         key={course.id}
@@ -178,6 +164,6 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
   );
 }
 
-ShowAwsCourses.displayName = 'ShowAwsCourses';
+ShowLearningPath.displayName = 'ShowLearningPath';
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowAwsCourses);
+export default connect(mapStateToProps, mapDispatchToProps)(ShowLearningPath);

@@ -182,15 +182,15 @@ export function getUsernameExists(username: string): Promise<boolean> {
   return get(`/api/users/exists?username=${username}`);
 }
 
-interface MoodleCourse {
-  id: number;
-  shortname: string;
-  categoryid: number;
-  categorysortorder: number;
-  fullname: string;
-  displayname: string;
-  summary: string;
-}
+// interface MoodleCourse {
+//   id: number;
+//   shortname: string;
+//   categoryid: number;
+//   categorysortorder: number;
+//   fullname: string;
+//   displayname: string;
+//   summary: string;
+// }
 
 // interface MoodleCourse {
 //   userId: number;
@@ -199,10 +199,10 @@ interface MoodleCourse {
 //   body: string;
 // }
 
-export async function getExternalCoursesCatalog(urlEndPoint: string) {
-  let response: MoodleCourse[] | null | never = [];
+export async function getExternalCoursesCatalog<T>(urlEndPoint: string) {
+  let response: T | null;
   try {
-    response = await requestModule<MoodleCourse[]>(urlEndPoint, {
+    response = await requestModule<T>(urlEndPoint, {
       method: 'GET', //GET, POST, PUT, DELETE, etc.
       mode: 'cors', //no-cors,cors, same-origin
       cache: 'no-cache', //default, no-cache, reload, force-cache, only-if-cached

@@ -47,13 +47,18 @@ const CourseCard = ({
             </div>
           </div>
           <div className='card-course-detail-item'>
-            <h4 className='fw-bold text-love-light'>{title}</h4>
+            <h4
+              className='fw-bold text-love-light'
+              dangerouslySetInnerHTML={{ __html: title }}
+            ></h4>
           </div>
           <div className='card-course-detail-item  flexible'>
             {description && (
               <p
                 className='text-responsive'
-                dangerouslySetInnerHTML={{ __html: description }}
+                dangerouslySetInnerHTML={{
+                  __html: `${description.substring(0, 300)}...`
+                }}
               ></p>
             )}
           </div>
@@ -65,6 +70,7 @@ const CourseCard = ({
                     {link ? (
                       <Link
                         to={link}
+                        state={{ description: description }}
                         className='link-course text-love-light fw-semi-bold text-responsive'
                       >
                         <div className='row-link'>
