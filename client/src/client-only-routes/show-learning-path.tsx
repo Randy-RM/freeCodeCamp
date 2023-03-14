@@ -108,9 +108,9 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
               alt=''
               isAvailable={true}
               isSignedIn={isSignedIn}
-              title={`Parcours Responsive Web Design`}
+              title={`Responsive Web Design`}
               buttonText={`Suivre le parcours  `}
-              link={`/learning-path/parcours-responsive-web-design`}
+              link={`/learning-path/responsive-web-design`}
               description={`
                 Dans ce parcours en ligne, tu apprendras les langages que les développeurs 
                 utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 

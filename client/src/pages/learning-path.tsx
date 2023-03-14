@@ -14,7 +14,7 @@ function Learningpath(): JSX.Element {
         path={withPrefix('/learning-path/:category/:categoryId')}
       />
       <ShowFccCourses
-        path={withPrefix('/learning-path/parcours-responsive-web-design')}
+        path={withPrefix('/learning-path/responsive-web-design')}
       />
       <ShowLearningPath path={withPrefix('/learning-path')} />
       {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}

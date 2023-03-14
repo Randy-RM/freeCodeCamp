@@ -70,7 +70,8 @@ export function ShowFccCourses(props: ShowFccCoursesProps): JSX.Element {
         <main>
           <div className='landing-top'>
             <div>
-              <h2 className='big-heading'>{`Parcours Responsive Web Design`}</h2>
+              <p className='text-love-light fw-bold'>Parcours</p>
+              <h1 className='big-heading'>{`Responsive Web Design`}</h1>
             </div>
             <Spacer size={2} />
             <div className='card-course-detail-container'>
