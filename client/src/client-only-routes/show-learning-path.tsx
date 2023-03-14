@@ -7,8 +7,10 @@ import { getExternalCoursesCatalog } from '../utils/ajax';
 import { createFlashMessage } from '../components/Flash/redux';
 import { Loader, Spacer } from '../components/helpers';
 // import '../components/CourseCard/courses-card.css';
+import LaptopIcon from '../assets/images/laptop.svg';
 import CloudShield from '../assets/images/cloudShield.svg';
 import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
+import LaediesActIcon from '../assets/images/partners/ladies-act-logo.png';
 import CourseCard from '../components/CourseCard/course-card';
 
 import {
@@ -86,7 +88,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
 
   return (
     <>
-      <Helmet title={`AWS Cours | Kadea Online`} />
+      <Helmet title={`Nos parcours | Kadea Online`} />
       <Grid className='bg-light'>
         <div className='landing-top'>
           <div>
@@ -101,12 +103,28 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
           <Spacer />
           <div className='card-course-detail-container'>
             <CourseCard
+              icon={LaptopIcon}
+              sponsorIcon={LaediesActIcon}
+              alt=''
+              isAvailable={true}
+              isSignedIn={isSignedIn}
+              title={`Parcours Responsive Web Design`}
+              buttonText={`Suivre le parcours  `}
+              link={`/learning-path/parcours-responsive-web-design`}
+              description={`
+                Dans ce parcours en ligne, tu apprendras les langages que les développeurs 
+                utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
+                pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
+                Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
+                `}
+            />
+            <CourseCard
               icon={CloudShield}
               alt=''
               isAvailable={false}
               isSignedIn={isSignedIn}
               title={`Parcours AWS`}
-              buttonText={`Suivre le cours  `}
+              buttonText={`Suivre le parcours  `}
               link={`/aws-courses`}
               description={`Ce parcours est conçu pour montrer aux participants comment 
                   optimiser l'utilisation du cloud AWS grâce à la compréhension 
