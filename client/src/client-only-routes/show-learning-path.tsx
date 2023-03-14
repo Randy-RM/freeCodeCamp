@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from '@reach/router';
-import { Grid, Row, Col } from '@freecodecamp/react-bootstrap';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+import { Grid } from '@freecodecamp/react-bootstrap';
 import { getExternalCoursesCatalog } from '../utils/ajax';
-
 import { createFlashMessage } from '../components/Flash/redux';
 import { Loader, Spacer } from '../components/helpers';
 // import '../components/CourseCard/courses-card.css';
+import CloudShield from '../assets/images/cloudShield.svg';
+import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
 import CourseCard from '../components/CourseCard/course-card';
 
 import {
@@ -21,7 +21,7 @@ import {
 import { User } from '../redux/prop-types';
 import envData from '../../../config/env.json';
 
-const { moodleBaseUrl, moodleApiBaseUrl, moodleApiToken } = envData;
+const { moodleApiBaseUrl, moodleApiToken } = envData;
 
 // TODO: update types for actions
 interface ShowLearningPathProps {
@@ -36,16 +36,10 @@ interface ShowLearningPathProps {
 
 type MoodleCourse = {
   id: number;
-  shortname: string;
-  categoryid: number;
-  categorysortorder: number;
-  fullname: string;
-  displayname: string;
-  summary: string;
-};
-
-type MoodleCoursesCatalogue = {
-  courses: MoodleCourse[];
+  name: string;
+  description: string;
+  coursecount: number;
+  visible: number;
 };
 
 const mapStateToProps = createSelector(
@@ -65,100 +59,84 @@ const mapDispatchToProps = {
 };
 
 export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
-  const { showLoading, isSignedIn, location } = props;
-  const params: Record<string, undefined> = useParams();
-  const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[]>();
-  const categoryName: string | undefined =
-    'category' in params ? params.category : '';
-  const categoryId: string | undefined =
-    'categoryId' in params ? params.categoryId : '';
-
-  const getMoodleCourses = async () => {
-    const moodleCatalogue =
-      await getExternalCoursesCatalog<MoodleCoursesCatalogue>(
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses_by_field&field=category&value=${categoryId}&moodlewsrestformat=json`
-      );
-    if (moodleCatalogue != null) {
-      setMoodleCourses(moodleCatalogue.courses);
+  const { showLoading, isSignedIn } = props;
+  const [moodleCoursesCategories, setMoodleCoursesCategories] =
+    useState<MoodleCourse[]>();
+  const getMoodleCoursesCategories = async () => {
+    const moodleCategoriesCatalogue = await getExternalCoursesCatalog<
+      MoodleCourse[]
+    >(
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_categories&moodlewsrestformat=json`
+    );
+    if (moodleCategoriesCatalogue != null) {
+      setMoodleCoursesCategories(moodleCategoriesCatalogue);
     } else {
-      setMoodleCourses([]);
+      setMoodleCoursesCategories([]);
     }
   };
 
   useEffect(() => {
-    void getMoodleCourses();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    void getMoodleCoursesCategories();
   }, []);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
   }
 
-  console.log('moodleCatalogue : ', moodleCourses);
-  console.log('location : ', location);
-
   return (
     <>
       <Helmet title={`AWS Cours | Kadea Online`} />
-      <Grid fluid={false} className='bg-light'>
-        <Spacer size={1} />
-        <div>
-          <Row className='super-block-intro-page'>
-            <Col md={12} sm={12} xs={12}>
-              <p className='text-love-light fw-bold'>Parcours</p>
-              <h1 className='big-heading'>
-                {categoryName ? categoryName.replace(/-/g, ' ') : ''}
-              </h1>
-              <Spacer size={1} />
-            </Col>
-            <Col className='' md={12} sm={12} xs={12}>
-              <div className='alert bg-secondary standard-radius-5'>
-                {location && location.state && location.state.description && (
-                  <div
-                    className='text-responsive'
-                    dangerouslySetInnerHTML={{
-                      __html: location.state.description
-                    }}
-                  ></div>
-                )}
-              </div>
-            </Col>
-            <Spacer />
-          </Row>
-        </div>
-      </Grid>
+      <Grid className='bg-light'>
+        <div className='landing-top'>
+          <div>
+            <h2 className='big-heading'>{`Nos parcours.`}</h2>
+            <br />
+            <p className='text-responsive'>
+              {`
+          Nos parcours te permettent d’apprendre par la pratique. Tu gagneras donc un véritable savoir-faire.
+          `}
+            </p>
+          </div>
+          <Spacer />
+          <div className='card-course-detail-container'>
+            <CourseCard
+              icon={CloudShield}
+              alt=''
+              isAvailable={false}
+              isSignedIn={isSignedIn}
+              title={`Parcours AWS`}
+              buttonText={`Suivre le cours  `}
+              link={`/aws-courses`}
+              description={`Ce parcours est conçu pour montrer aux participants comment 
+                  optimiser l'utilisation du cloud AWS grâce à la compréhension 
+                  de ces nombreux services et de leur intégration dans la création 
+                  de solutions basées sur le cloud.`}
+            />
 
-      <Grid fluid={false}>
-        <Spacer size={1} />
-        <Row>
-          <Col md={12} sm={12} xs={12}>
-            <h2 className='big-subheading'>{`Cours`}</h2>
-            <Spacer size={2} />
-          </Col>
-          <Col className='' md={12} sm={12} xs={12}>
-            <div className='card-course-detail-container'>
-              {moodleCourses &&
-                moodleCourses.length >= 0 &&
-                moodleCourses.map((course, index) => {
-                  return (
-                    <>
-                      <CourseCard
-                        key={course.id}
-                        isAvailable={true}
-                        isSignedIn={isSignedIn}
-                        title={`${index + 1}. ${course.displayname}`}
-                        buttonText={`Suivre le cours  `}
-                        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                        link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
-                        description={course.summary}
-                      />
-                    </>
-                  );
-                })}
-            </div>
-          </Col>
-        </Row>
+            {moodleCoursesCategories &&
+              moodleCoursesCategories.length >= 0 &&
+              moodleCoursesCategories.map((category, index) => {
+                return (
+                  <>
+                    <CourseCard
+                      key={category.id + index}
+                      icon={PhBookBookmark}
+                      isAvailable={category.visible == 1}
+                      isSignedIn={isSignedIn}
+                      title={category.name.replace(/&amp;/g, 'et')}
+                      buttonText={`Suivre le parcours  `}
+                      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                      link={`/learning-path/${category.name
+                        .replace(/ /g, '-')
+                        .replace(/&amp;/g, 'et')}/${category.id}`}
+                      description={category.description}
+                    />
+                  </>
+                );
+              })}
+          </div>
+        </div>
       </Grid>
     </>
   );
