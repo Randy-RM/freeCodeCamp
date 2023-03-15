@@ -10,6 +10,7 @@ import { createFlashMessage } from '../components/Flash/redux';
 import { Loader, Spacer } from '../components/helpers';
 // import '../components/CourseCard/courses-card.css';
 import CourseCard from '../components/CourseCard/course-card';
+import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
 
 import {
   signInLoadingSelector,
@@ -97,9 +98,6 @@ export function ShowLearningPathDetail(
     return <Loader fullScreen={true} />;
   }
 
-  console.log('moodleCatalogue : ', moodleCourses);
-  console.log('location : ', location);
-
   return (
     <>
       <Helmet title={`AWS Cours | Kadea Online`} />
@@ -139,25 +137,35 @@ export function ShowLearningPathDetail(
             <Spacer size={2} />
           </Col>
           <Col className='' md={12} sm={12} xs={12}>
-            <div className='card-course-detail-container'>
-              {moodleCourses &&
-                moodleCourses.length >= 0 &&
-                moodleCourses.map((course, index) => {
-                  return (
-                    <>
-                      <CourseCard
-                        key={course.id}
-                        isAvailable={true}
-                        isSignedIn={isSignedIn}
-                        title={`${index + 1}. ${course.displayname}`}
-                        buttonText={`Suivre le cours  `}
-                        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                        link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
-                        description={course.summary}
-                      />
-                    </>
-                  );
-                })}
+            <div>
+              {moodleCourses && moodleCourses.length > 0 ? (
+                <div className='card-course-detail-container'>
+                  {moodleCourses.map((course, index) => {
+                    return (
+                      <>
+                        <CourseCard
+                          key={index}
+                          icon={PhBookBookmark}
+                          isAvailable={true}
+                          isSignedIn={isSignedIn}
+                          title={`${course.displayname}`}
+                          buttonText={`Suivre le cours  `}
+                          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                          link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
+                          description={course.summary}
+                        />
+                      </>
+                    );
+                  })}
+                </div>
+              ) : (
+                <>
+                  <div className='block-ui bg-secondary'>
+                    <p className='h3'>{`Aucun cours pour l'instant`}</p>
+                  </div>
+                  <Spacer size={1} />
+                </>
+              )}
             </div>
           </Col>
         </Row>

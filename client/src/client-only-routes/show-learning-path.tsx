@@ -90,71 +90,73 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
     <>
       <Helmet title={`Nos parcours | Kadea Online`} />
       <Grid className='bg-light'>
-        <div className='landing-top'>
-          <div>
-            <h2 className='big-heading'>{`Nos parcours.`}</h2>
-            <br />
-            <p className='text-responsive'>
-              {`
+        <main>
+          <div className=''>
+            <Spacer size={1} />
+            <div>
+              <h1 className='big-subheading'>{`Nos parcours.`}</h1>
+              <p className='text-responsive'>
+                {`
           Nos parcours te permettent d’apprendre par la pratique. Tu gagneras donc un véritable savoir-faire.
           `}
-            </p>
-          </div>
-          <Spacer />
-          <div className='card-course-detail-container'>
-            <CourseCard
-              icon={LaptopIcon}
-              sponsorIcon={LaediesActIcon}
-              alt=''
-              isAvailable={true}
-              isSignedIn={isSignedIn}
-              title={`Responsive Web Design`}
-              buttonText={`Suivre le parcours  `}
-              link={`/learning-path/responsive-web-design`}
-              description={`
+              </p>
+            </div>
+            <Spacer />
+            <div className='card-course-detail-container'>
+              <CourseCard
+                icon={LaptopIcon}
+                sponsorIcon={LaediesActIcon}
+                alt=''
+                isAvailable={true}
+                isSignedIn={isSignedIn}
+                title={`Responsive Web Design`}
+                buttonText={`Suivre le parcours  `}
+                link={`/learning-path/responsive-web-design`}
+                description={`
                 Dans ce parcours en ligne, tu apprendras les langages que les développeurs 
                 utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
                 pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
                 Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
                 `}
-            />
-            <CourseCard
-              icon={CloudShield}
-              alt=''
-              isAvailable={false}
-              isSignedIn={isSignedIn}
-              title={`Parcours AWS`}
-              buttonText={`Suivre le parcours  `}
-              link={`/aws-courses`}
-              description={`Ce parcours est conçu pour montrer aux participants comment 
+              />
+              <CourseCard
+                icon={CloudShield}
+                alt=''
+                isAvailable={false}
+                isSignedIn={isSignedIn}
+                title={`Parcours AWS`}
+                buttonText={`Suivre le parcours  `}
+                link={`/aws-courses`}
+                description={`Ce parcours est conçu pour montrer aux participants comment 
                   optimiser l'utilisation du cloud AWS grâce à la compréhension 
                   de ces nombreux services et de leur intégration dans la création 
                   de solutions basées sur le cloud.`}
-            />
+              />
 
-            {moodleCoursesCategories &&
-              moodleCoursesCategories.length >= 0 &&
-              moodleCoursesCategories.map((category, index) => {
-                return (
-                  <>
-                    <CourseCard
-                      key={category.id + index}
-                      icon={PhBookBookmark}
-                      isAvailable={category.visible == 1}
-                      isSignedIn={isSignedIn}
-                      title={category.name.replace(/&amp;/g, 'et')}
-                      buttonText={`Suivre le parcours  `}
-                      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                      link={`/learning-path/${category.name
-                        .replace(/ /g, '-')
-                        .replace(/&amp;/g, 'et')}/${category.id}`}
-                      description={category.description}
-                    />
-                  </>
-                );
-              })}
+              {moodleCoursesCategories &&
+                moodleCoursesCategories.length >= 0 &&
+                moodleCoursesCategories.map((category, index) => {
+                  return (
+                    <>
+                      <CourseCard
+                        key={category.id + index}
+                        icon={PhBookBookmark}
+                        isAvailable={category.visible == 1}
+                        isSignedIn={isSignedIn}
+                        title={category.name.replace(/&amp;/g, 'et')}
+                        buttonText={`Suivre le parcours  `}
+                        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                        link={`/learning-path/${category.name
+                          .replace(/ /g, '-')
+                          .replace(/&amp;/g, 'et')}/${category.id}`}
+                        description={category.description}
+                      />
+                    </>
+                  );
+                })}
+            </div>
           </div>
-        </div>
+        </main>
       </Grid>
     </>
   );

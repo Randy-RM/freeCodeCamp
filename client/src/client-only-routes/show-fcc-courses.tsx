@@ -1,4 +1,4 @@
-import { Grid } from '@freecodecamp/react-bootstrap';
+import { Grid, Row, Col } from '@freecodecamp/react-bootstrap';
 import React from 'react';
 import Helmet from 'react-helmet';
 // import { useTranslation } from 'react-i18next';
@@ -66,14 +66,42 @@ export function ShowFccCourses(props: ShowFccCoursesProps): JSX.Element {
     <>
       {/* <Helmet title={`${t('buttons.settings')} | Code Learning Plateform`} /> */}
       <Helmet title={`Parcours Responsive Web Design | Kadea Online`} />
-      <Grid className='bg-light'>
-        <main>
-          <div className='landing-top'>
-            <div>
+      <Grid fluid={false} className='bg-light'>
+        <Spacer size={1} />
+        <div>
+          <Row className='super-block-intro-page'>
+            <Col md={12} sm={12} xs={12}>
               <p className='text-love-light fw-bold'>Parcours</p>
-              <h1 className='big-heading'>{`Responsive Web Design`}</h1>
-            </div>
+              <h1 className='big-heading'>Responsive Web Design</h1>
+              <Spacer size={1} />
+            </Col>
+            <Col className='' md={12} sm={12} xs={12}>
+              <div className='alert bg-secondary standard-radius-5'>
+                <div className='text-responsive'>
+                  {`
+                    Dans ce parcours, tu apprendras les langages que les développeurs 
+                utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
+                pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
+                Ensuite, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran et
+                enfin, Tu vas utiliser le JavaScript pour rendre tes sites interactifs. 
+                Tu apprendras les Algorithm, Data Structures, et les principes fondamentaux du langage de programmation JavaScript
+                    `}
+                </div>
+              </div>
+            </Col>
+            <Spacer />
+          </Row>
+        </div>
+      </Grid>
+
+      <Grid fluid={false}>
+        <Spacer size={1} />
+        <Row>
+          <Col md={12} sm={12} xs={12}>
+            <h2 className='big-subheading'>{`Cours`}</h2>
             <Spacer size={2} />
+          </Col>
+          <Col className='' md={12} sm={12} xs={12}>
             <div className='card-course-detail-container'>
               <CourseCard
                 icon={LaptopIcon}
@@ -84,7 +112,7 @@ export function ShowFccCourses(props: ShowFccCoursesProps): JSX.Element {
                 title={`Responsive Web Design`}
                 buttonText={`Suivre le cours  `}
                 description={`
-                Dans cette formation en ligne, tu apprendras les langages que les développeurs 
+                Dans ce cours, tu apprendras les langages que les développeurs 
                 utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
                 pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
                 Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
@@ -97,14 +125,13 @@ export function ShowFccCourses(props: ShowFccCoursesProps): JSX.Element {
                 isSignedIn={isSignedIn}
                 title={`JavaScript Algorithms and Data Structures`}
                 description={`Alors que HTML et CSS contrôlent le contenu et le style  d'une page, 
-                JavaScript est utilisé pour la rendre interactive. Dans le cadre de 
-                la certification JavaScript Algorithm and Data Structures, tu apprendras 
+                JavaScript est utilisé pour la rendre interactive. Dans le cadre du 
+                cours JavaScript Algorithm and Data Structures, tu apprendras 
                 les principes fondamentaux de JavaScript, etc.`}
               />
             </div>
-          </div>
-          <Spacer size={2} />
-        </main>
+          </Col>
+        </Row>
       </Grid>
     </>
   );
