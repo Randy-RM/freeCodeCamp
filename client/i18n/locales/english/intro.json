@@ -263,10 +263,10 @@
         ]
       },
       "functional-programming": {
-        "title": "Functional Programming",
+        "title": "Programmation fonctionnelle",
         "intro": [
-          "Functional Programming is another popular approach to software development. In Functional Programming, code is organized into smaller, basic functions that can be combined to build complex programs.",
-          "In this course, you'll learn the core concepts of Functional Programming including pure functions, how to avoid mutations, and how to write cleaner code with methods like <code>.map()</code> and <code>.filter()</code>."
+          "La programmation fonctionnelle est une autre approche populaire du développement de logiciels. Dans la programmation fonctionnelle, le code est organisé en fonctions de base plus petites qui peuvent être combinées pour créer des programmes complexes.",
+          "Dans ce cours, vous apprendrez les concepts fondamentaux de la programmation fonctionnelle, y compris les fonctions pures, comment éviter les mutations et comment écrire un code plus propre avec des méthodes comme <code>.map()</code> et <code>.filter()</code>."
         ]
       },
       "intermediate-algorithm-scripting": {
