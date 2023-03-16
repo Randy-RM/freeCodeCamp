@@ -248,11 +248,11 @@
         ]
       },
       "basic-algorithm-scripting": {
-        "title": "Basic Algorithm Scripting",
+        "title": "Script d'algorithmes de base",
         "intro": [
-          "An algorithm is a series of step-by-step instructions that describe how to do something.",
-          "To write an effective algorithm, it helps to break a problem down into smaller parts and think carefully about how to solve each part with code.",
-          "In this course, you'll learn the fundamentals of algorithmic thinking by writing algorithms that do everything from converting temperatures to handling complex 2D arrays."
+          "Un algorithme est une série d'instructions étape par étape qui décrivent comment faire quelque chose.",
+          "Pour écrire un algorithme efficace, il est utile de décomposer le problème en plusieurs parties et de réfléchir soigneusement à la manière de résoudre chaque partie à l'aide du code.",
+          "Dans ce cours, vous apprendrez les principes fondamentaux de la pensée algorithmique en écrivant des algorithmes qui font tout, de la conversion des températures à la manipulation de tableaux 2D complexes."
         ]
       },
       "object-oriented-programming": {
