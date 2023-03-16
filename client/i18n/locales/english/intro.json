@@ -270,9 +270,9 @@
         ]
       },
       "intermediate-algorithm-scripting": {
-        "title": "Intermediate Algorithm Scripting",
+        "title": "Script d'algorithmes intermédiaires",
         "intro": [
-          "Now that you know the basics of algorithmic thinking, along with OOP and Functional Programming, test your skills with the Intermediate Algorithm Scripting challenges."
+          "Maintenant que vous connaissez les bases de la pensée algorithmique, ainsi que la POO et la programmation fonctionnelle, testez vos compétences avec les défis de scriptage algorithmique intermédiaire."
         ]
       },
       "javascript-algorithms-and-data-structures-projects": {
