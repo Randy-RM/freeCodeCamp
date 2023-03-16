@@ -276,10 +276,10 @@
         ]
       },
       "javascript-algorithms-and-data-structures-projects": {
-        "title": "Algorithmes et structures de données en JavaScript Projects",
+        "title": "Projets Algorithmes et structures de données en JavaScript",
         "intro": [
-          "This is it — time to put your new JavaScript skills to work. These projects are similar to the algorithm scripting challenges you've done before – just much more difficult.",
-          "Complete these 5 JavaScript projects to earn the Algorithmes et structures de données en JavaScript certification."
+          "C'est le moment de mettre en pratique vos nouvelles compétences en matière de JavaScript. Ces projets sont similaires aux défis de script d'algorithme que vous avez déjà relevés, mais ils sont beaucoup plus difficiles.",
+          "Complétez ces 5 projets JavaScript pour obtenir la certification Algorithmes et structures de données en JavaScript."
         ]
       },
       "basic-javascript-rpg-game": {
