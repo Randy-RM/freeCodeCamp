@@ -241,10 +241,10 @@
         ]
       },
       "basic-data-structures": {
-        "title": "Basic Data Structures",
+        "title": "Structures de données de base",
         "intro": [
-          "Data can be stored and accessed in many ways. You already know some common JavaScript data structures — arrays and objects.",
-          "In this Basic Data Structures course, you'll learn more about the differences between arrays and objects, and which to use in different situations. You'll also learn how to use helpful JS methods like <code>splice()</code> and <code>Object.keys()</code> to access and manipulate data."
+          "Les données peuvent être stockées et consultées de différentes manières. Vous connaissez déjà certaines structures de données JavaScript courantes : les tableaux et les objets.",
+          "Dans ce cours sur les structures de données de base, vous en apprendrez plus sur les différences entre les tableaux et les objets, et sur ce qu'il convient d'utiliser dans différentes situations. Vous apprendrez également à utiliser des méthodes JS utiles telles que <code>splice()</code> et <code>Object.keys()</code> pour accéder aux données et les manipuler."
         ]
       },
       "basic-algorithm-scripting": {
