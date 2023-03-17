@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
@@ -80,6 +80,9 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
 
   useEffect(() => {
     void getMoodleCoursesCategories();
+    return () => {
+      setMoodleCoursesCategories([]); // cleanup useEffect to perform a React state update
+    };
   }, []);
 
   if (showLoading) {
@@ -137,21 +140,19 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                 moodleCoursesCategories.length >= 0 &&
                 moodleCoursesCategories.map((category, index) => {
                   return (
-                    <>
-                      <CourseCard
-                        key={category.id + index}
-                        icon={PhBookBookmark}
-                        isAvailable={category.visible == 1}
-                        isSignedIn={isSignedIn}
-                        title={category.name.replace(/&amp;/g, 'et')}
-                        buttonText={`Suivre le parcours  `}
-                        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                        link={`/learning-path/${category.name
-                          .replace(/ /g, '-')
-                          .replace(/&amp;/g, 'et')}/${category.id}`}
-                        description={category.description}
-                      />
-                    </>
+                    <CourseCard
+                      key={index + category.id}
+                      icon={PhBookBookmark}
+                      isAvailable={category.visible == 1}
+                      isSignedIn={isSignedIn}
+                      title={category.name.replace(/&amp;/g, 'et')}
+                      buttonText={`Suivre le parcours  `}
+                      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                      link={`/learning-path/${category.name
+                        .replace(/ /g, '-')
+                        .replace(/&amp;/g, 'et')}/${category.id}`}
+                      description={category.description}
+                    />
                   );
                 })}
             </div>
