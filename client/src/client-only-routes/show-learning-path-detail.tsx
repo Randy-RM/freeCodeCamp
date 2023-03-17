@@ -100,7 +100,11 @@ export function ShowLearningPathDetail(
 
   return (
     <>
-      <Helmet title={`AWS Cours | Kadea Online`} />
+      <Helmet
+        title={`${
+          categoryName ? categoryName.replace(/-/g, ' ') : ''
+        } | Kadea Online`}
+      />
       <Grid fluid={false} className='bg-light'>
         <Spacer size={1} />
         <div>
