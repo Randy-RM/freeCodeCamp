@@ -11,6 +11,15 @@ const HowWillYouLearn = () => {
         <div className='big-heading title-color text-center'>
           {`Comment vas-tu apprendre ?`}
         </div>
+        <div>
+          <p className='text-light text-center'>
+            <strong className='text-light'>GRATUITEMENT</strong>,{' '}
+            <strong className='text-light'>EN LIGNE</strong> et pas besoin de
+            connection internet.
+            <br />
+            Grâce à vodacom accède à la plateforme sans devoir utiliser de data.
+          </p>
+        </div>
         <div className='learn-cards-section'>
           <Card
             cardtitle='Étape par étape'

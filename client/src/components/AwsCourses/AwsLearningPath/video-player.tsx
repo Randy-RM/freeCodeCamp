@@ -23,7 +23,9 @@ export function VideoPlayer(props: { videoLink: string }): JSX.Element {
       </div>
       {/* <br /> */}
       <div>
-        <h2 className='h4'>Video title</h2>
+        <h2 className='h4'>
+          Twice the qualified leads at a quarter of the cost
+        </h2>
       </div>
     </>
   );

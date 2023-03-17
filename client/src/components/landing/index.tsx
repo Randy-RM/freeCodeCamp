@@ -23,6 +23,7 @@ import StartCOding from './start-coding/start-coding';
 import WhatWillYouLearn from './what-will-you-learn/what-will-you-learn';
 import HowWillYouLearn from './how-will-you-learn/how-will-you-learn';
 import Vodacom from './vodacom-branding-section/vodacom-branding';
+import Partners from './partners/partners';
 
 import './landing.css';
 
@@ -61,7 +62,7 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
     <>
       <Helmet>
         {/* <title>{t('metaTags:title')}</title> */}
-        <title>{`Apprendre à coder - gratuitement | Kadea Learn`}</title>
+        <title>{`Apprendre à coder - gratuitement | Kadea Online`}</title>
       </Helmet>
       <main className='landing-page bg-light'>
         <div className='hero-main-bg'>
@@ -110,6 +111,12 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
         </div>
 
         <StartCOding isSignedIn={isSignedIn} />
+
+        <div className=''>
+          <Grid>
+            <Partners />
+          </Grid>
+        </div>
 
         {/* <div className='as-seen-in'>
           <Grid>

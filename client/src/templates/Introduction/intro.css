@@ -1,5 +1,4 @@
 .super-block-intro-page p {
-  font-family: 'Lato', sans-serif;
   font-size: 1.17rem;
 }
 
@@ -334,7 +333,6 @@ button.map-title {
 
 .intro-layout p,
 .intro-layout li {
-  font-family: 'Lato', sans-serif;
 }
 
 .intro-toc .list-group-item {

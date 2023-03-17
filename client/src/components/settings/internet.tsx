@@ -1,5 +1,3 @@
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   HelpBlock,
   FormControl,
@@ -7,41 +5,62 @@ import {
   ControlLabel
 } from '@freecodecamp/react-bootstrap';
 import React, { Component } from 'react';
+// import validator from 'validator/';
+
 import { TFunction, withTranslation } from 'react-i18next';
-import validator from 'validator/';
-
-import { validGitHubLinkRE, validLinkedInLinkRE } from '../../utils';
-
+// import {
+//   validGitHubLinkRE,
+//   validLinkedInLinkRE,
+//   validMyLinkdIn
+// } from '../../utils';
 import BlockSaveButton from '../helpers/form/block-save-button';
 
-interface InternetFormValues {
+type FormValues = {
   githubProfile: string;
   linkedin: string;
   twitter: string;
   website: string;
-}
+};
 
-interface InternetProps extends InternetFormValues {
+type InternetProps = {
+  githubProfile: string;
+  linkedin: string;
+  twitter: string;
+  website: string;
   t: TFunction;
-  updateInternetSettings: (formValues: InternetFormValues) => void;
-}
+  updateInternetSettings: (formValues: FormValues) => void;
+};
 
 type InternetState = {
-  formValues: InternetFormValues;
-  originalValues: InternetFormValues;
+  formValues: FormValues;
+  originalValues: FormValues;
+  formClicked: boolean;
   isValidLinkedin: boolean;
-  focusOnLinkedinField: boolean;
-  focusOffLinkedinField: boolean;
+  isFocusLinkedin: boolean;
+  isBlurLinkedin: boolean;
   isValidGithubProfile: boolean;
-  focusOnGithubField: boolean;
-  focusOffGithubField: boolean;
+  isFocusGithub: boolean;
+  isBlurGithub: boolean;
 };
 
+// const isValidGithubLink = (url: string): boolean => {
+//   return validator.isURL(url) && validGitHubLinkRE.test(url);
+// };
+// const isValidLinkedinLink = (url: string): boolean => {
+//   return validator.isURL(url) && validLinkedInLinkRE.test(url);
+// };
+
 const isValidGithubLink = (url: string): boolean => {
-  return validator.isURL(url) && validGitHubLinkRE.test(url);
+  const validGitHubLinkRegex =
+    /^(((https:\/\/|http:\/\/|))(www.|)github.com\/)([\w-]{3,})/gi;
+  const isValidGitHubLink = validGitHubLinkRegex.test(url);
+  return isValidGitHubLink;
 };
 const isValidLinkedinLink = (url: string): boolean => {
-  return validator.isURL(url) && validLinkedInLinkRE.test(url);
+  const validLinkedInLinkRegex =
+    /^(((https:\/\/|http:\/\/|))(www.|)linkedin.com\/in\/)([\w-]{3,})/gi;
+  const isValidLinkedin = validLinkedInLinkRegex.test(url);
+  return isValidLinkedin;
 };
 
 class InternetSettings extends Component<InternetProps, InternetState> {
@@ -55,76 +74,80 @@ class InternetSettings extends Component<InternetProps, InternetState> {
       website = ''
     } = props;
 
+    const values = {
+      githubProfile,
+      linkedin,
+      twitter,
+      website
+    };
+
     this.state = {
-      formValues: { githubProfile, linkedin, twitter, website },
-      originalValues: { githubProfile, linkedin, twitter, website },
+      formValues: { ...values },
+      originalValues: { ...values },
+      formClicked: false,
       isValidLinkedin: true,
-      focusOnLinkedinField: false,
-      focusOffLinkedinField: false,
+      isFocusLinkedin: false,
+      isBlurLinkedin: false,
       isValidGithubProfile: true,
-      focusOnGithubField: false,
-      focusOffGithubField: false
+      isFocusGithub: false,
+      isBlurGithub: false
     };
   }
 
   componentDidUpdate() {
-    const {
-      githubProfile = '',
-      linkedin = '',
-      twitter = '',
-      website = ''
-    } = this.props;
-
-    const { originalValues } = this.state;
+    const { githubProfile, linkedin, twitter, website } = this.props;
+    const { formValues, formClicked } = this.state;
 
     if (
-      githubProfile !== originalValues.githubProfile ||
-      linkedin !== originalValues.linkedin ||
-      twitter !== originalValues.twitter ||
-      website !== originalValues.website
+      formClicked &&
+      githubProfile === formValues.githubProfile &&
+      linkedin === formValues.linkedin &&
+      twitter === formValues.twitter &&
+      website === formValues.website
     ) {
       // eslint-disable-next-line react/no-did-update-set-state
       return this.setState({
-        originalValues: { githubProfile, linkedin, twitter, website }
+        originalValues: { githubProfile, linkedin, twitter, website },
+        formClicked: false
       });
     }
     return null;
   }
 
-  getValidationStateFor(url = '', inputName = '') {
-    const { focusOffLinkedinField, focusOffGithubField } = this.state;
+  isFormPristine = () => {
+    const {
+      formValues,
+      originalValues,
+      isValidLinkedin,
+      isValidGithubProfile
+    } = this.state;
+    if (isValidLinkedin || isValidGithubProfile) {
+      return (Object.keys(originalValues) as Array<keyof FormValues>)
+        .map(key => originalValues[key] === formValues[key])
+        .every(bool => bool);
+    }
+    return true;
+  };
 
-    if (
-      inputName === 'linkedIn' &&
-      focusOffLinkedinField &&
-      !isValidLinkedinLink(url)
-    ) {
-      return {
-        state: 'error',
-        message:
-          'Lien LinkedIn invalide (exemple valide: https://www.linkedin.com/in/johndoe)'
-      };
-    }
-    if (
-      inputName === 'githubProfile' &&
-      focusOffGithubField &&
-      !isValidGithubLink(url)
-    ) {
-      return {
-        state: 'error',
-        message:
-          'Lien GitHub invalide (exemple valide: https://github.com/user-name)'
-      };
-    }
-    return {
-      state: null,
-      message: ''
+  handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const { formValues, isValidLinkedin, isValidGithubProfile } = this.state;
+    const isSocial = {
+      isGithub: !!formValues.githubProfile,
+      isLinkedIn: !!formValues.linkedin,
+      isTwitter: !!formValues.twitter,
+      isWebsite: !!formValues.website
     };
-  }
+    const { updateInternetSettings } = this.props;
+    if (isValidLinkedin && isValidGithubProfile) {
+      return this.setState({ formClicked: true }, () =>
+        updateInternetSettings({ ...isSocial, ...formValues })
+      );
+    }
+  };
 
   createHandleChange =
-    (key: keyof InternetFormValues) =>
-    (e: React.FormEvent<HTMLInputElement>) => {
+    (key: keyof FormValues) => (e: React.FormEvent<HTMLInputElement>) => {
       const value = (e.target as HTMLInputElement).value.slice(0);
       if (key === 'linkedin') {
         return this.setState(state => ({
@@ -148,153 +171,108 @@ class InternetSettings extends Component<InternetProps, InternetState> {
 
   // ------------Linkedin Handler------------
 
-  focusHandlerLinkedin = (e: React.FocusEvent<HTMLInputElement>) => {
-    const url = (e.target as HTMLInputElement).value.slice(0);
+  focusHandlerLinkedin = () => {
     this.setState({
-      isValidLinkedin: isValidLinkedinLink(url),
-      focusOnLinkedinField: true,
-      focusOffLinkedinField: false
+      isFocusLinkedin: true,
+      isBlurLinkedin: false
     });
   };
 
   blurHandlerLinkedin = (e: React.FocusEvent<HTMLInputElement>) => {
     const url = (e.target as HTMLInputElement).value.slice(0);
-    this.setState({
-      isValidLinkedin: isValidLinkedinLink(url),
-      focusOnLinkedinField: false,
-      focusOffLinkedinField: true
-    });
+
+    if (isValidLinkedinLink(url)) {
+      this.setState({
+        isValidLinkedin: true,
+        isFocusLinkedin: false,
+        isBlurLinkedin: true
+      });
+    } else {
+      this.setState({
+        isValidLinkedin: false,
+        isFocusLinkedin: false,
+        isBlurLinkedin: true
+      });
+    }
   };
 
   // ------------GithubProfile Handler------------
 
-  focusHandlerGithubProfile = (e: React.FocusEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value.slice(0);
+  focusHandlerGithubProfile = () => {
     this.setState({
-      isValidGithubProfile: isValidGithubLink(value),
-      focusOnGithubField: true,
-      focusOffGithubField: false
+      isFocusGithub: true,
+      isBlurGithub: false
     });
   };
 
   blurHandlerGithubProfile = (e: React.FocusEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value.slice(0);
-    this.setState({
-      isValidGithubProfile: isValidGithubLink(value),
-      focusOnGithubField: false,
-      focusOffGithubField: true
-    });
-  };
-
-  isFormPristine = () => {
-    const {
-      formValues,
-      originalValues,
-      isValidLinkedin,
-      isValidGithubProfile
-    } = this.state;
-    if (isValidLinkedin === true && isValidGithubProfile === true) {
-      return (Object.keys(originalValues) as Array<keyof InternetFormValues>)
-        .map(key => originalValues[key] === formValues[key])
-        .every(bool => bool);
+    const url = (e.target as HTMLInputElement).value.slice(0);
+    if (isValidGithubLink(url)) {
+      this.setState({
+        isValidGithubProfile: true,
+        isFocusGithub: false,
+        isBlurGithub: true
+      });
+    } else {
+      this.setState({
+        isValidGithubProfile: false,
+        isFocusGithub: false,
+        isBlurGithub: true
+      });
     }
-    return true;
   };
 
-  isFormValid = (): boolean => {
-    const { formValues, originalValues } = this.state;
-    const valueReducer = (obj: InternetFormValues) => {
-      return Object.values(obj).reduce(
-        (acc, cur): boolean => (acc ? acc : cur !== ''),
-        false
-      ) as boolean;
-    };
-
-    const formHasValues = valueReducer(formValues);
-    const OriginalHasValues = valueReducer(originalValues);
-
-    // check if user had values but wants to delete them all
-    if (OriginalHasValues && !formHasValues) return true;
-
-    return (Object.keys(formValues) as Array<keyof InternetFormValues>).reduce(
-      (bool: boolean, key: keyof InternetFormValues): boolean => {
-        const maybeUrl = formValues[key];
-        return maybeUrl ? validator.isURL(maybeUrl) : bool;
-      },
-      false
-    );
-  };
-
-  handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!this.isFormPristine() && this.isFormValid()) {
-      // // Only submit the form if is has changed, and if it is valid
-      const { formValues } = this.state;
-      const isSocial = {
-        isGithub: !!formValues.githubProfile,
-        isLinkedIn: !!formValues.linkedin,
-        isTwitter: !!formValues.twitter,
-        isWebsite: !!formValues.website
-      };
-
-      const { updateInternetSettings } = this.props;
-      return updateInternetSettings({ ...isSocial, ...formValues });
-    }
-    return null;
-  };
-
-  renderHelpBlock = (validationMessage: string) =>
-    validationMessage ? (
-      <HelpBlock>{validationMessage}</HelpBlock>
-    ) : (
-      <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
-    );
-
-  renderCheck = (url: string, validation: string | null) =>
-    url && validation === 'success' ? (
-      <FormControl.Feedback>
-        <span>
-          <FontAwesomeIcon icon={faCheck} size='1x' />
-        </span>
-      </FormControl.Feedback>
-    ) : null;
+  // ------------Render------------
 
   render() {
     const {
-      formValues: { githubProfile, linkedin }
+      formValues: { githubProfile, linkedin },
+      isValidLinkedin,
+      isFocusLinkedin,
+      isBlurLinkedin,
+      isValidGithubProfile,
+      isFocusGithub,
+      isBlurGithub
     } = this.state;
-
-    const {
-      state: githubProfileValidation,
-      message: githubProfileValidationMessage
-    } = this.getValidationStateFor(githubProfile, 'githubProfile');
-
-    const { state: linkedinValidation, message: linkedinValidationMessage } =
-      this.getValidationStateFor(linkedin, 'linkedIn');
 
     return (
       <>
         <div>
           <form id='internet-presence' onSubmit={this.handleSubmit}>
-            <FormGroup
-              controlId='internet-linkedin'
-              validationState={linkedinValidation}
-            >
+            <FormGroup controlId='internet-linkedin'>
               <ControlLabel>LinkedIn</ControlLabel>
               <FormControl
+                onFocus={this.focusHandlerLinkedin}
                 onBlur={this.blurHandlerLinkedin}
                 onChange={this.createHandleChange('linkedin')}
                 placeholder='https://www.linkedin.com/in/john-doe'
                 type='url'
                 value={linkedin}
                 className='standard-radius-5'
+                name='linkedin'
               />
-              {this.renderHelpBlock(linkedinValidationMessage)}
+              {!isFocusLinkedin && !isBlurLinkedin && isValidLinkedin && (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              )}
+              {isFocusLinkedin && (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              )}
+              {isBlurLinkedin && !isValidLinkedin && (
+                <>
+                  {linkedin.length > 0 ? (
+                    <HelpBlock className='text-danger'>
+                      {`Lien LinkedIn invalide (exemple valide: https://www.linkedin.com/in/johndoe)`}
+                    </HelpBlock>
+                  ) : (
+                    <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+                  )}
+                </>
+              )}
+              {isBlurLinkedin && isValidLinkedin && (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              )}
             </FormGroup>
-            <FormGroup
-              controlId='internet-github'
-              validationState={githubProfileValidation}
-            >
+            <FormGroup controlId='internet-github'>
               <ControlLabel>GitHub</ControlLabel>
               <FormControl
                 onFocus={this.focusHandlerGithubProfile}
@@ -304,12 +282,30 @@ class InternetSettings extends Component<InternetProps, InternetState> {
                 type='url'
                 value={githubProfile}
                 className='standard-radius-5'
+                name='githubProfile'
               />
-              {this.renderHelpBlock(githubProfileValidationMessage)}
+              {!isFocusGithub && !isBlurGithub && isValidGithubProfile && (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              )}
+              {isFocusGithub && (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              )}
+              {isBlurGithub && !isValidGithubProfile && (
+                <>
+                  {githubProfile.length > 0 ? (
+                    <HelpBlock className='text-danger'>
+                      {`Lien GitHub invalide (exemple valide: https://github.com/user-name)`}
+                    </HelpBlock>
+                  ) : (
+                    <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+                  )}
+                </>
+              )}
+              {isBlurGithub && isValidGithubProfile && (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              )}
             </FormGroup>
-            <BlockSaveButton
-              disabled={this.isFormPristine() || !this.isFormValid()}
-            />
+            <BlockSaveButton disabled={this.isFormPristine()} />
           </form>
         </div>
       </>

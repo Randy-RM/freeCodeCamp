@@ -74,13 +74,8 @@ class EducationSettings extends Component<EducationProps, EducationState> {
   }
 
   isFormPristine = () => {
-    const {
-      formValues,
-      originalValues,
-      isValidFieldOfStudy,
-      isValidLevelOfStudy
-    } = this.state;
-    if (isValidFieldOfStudy === true && isValidLevelOfStudy === true) {
+    const { formValues, originalValues, isValidFieldOfStudy } = this.state;
+    if (isValidFieldOfStudy === true && formValues.fieldOfStudy.length >= 5) {
       return (Object.keys(originalValues) as Array<keyof FormValues>)
         .map(key => originalValues[key] === formValues[key])
         .every(bool => bool);
@@ -100,40 +95,42 @@ class EducationSettings extends Component<EducationProps, EducationState> {
     );
   };
 
+  createHandleChange =
+    (key: keyof FormValues) => (e: React.FormEvent<HTMLInputElement>) => {
+      const value = (e.target as HTMLInputElement).value.slice(0);
+      if (key === 'fieldOfStudy') {
+        return this.setState(state => ({
+          formValues: {
+            ...state.formValues,
+            [key]: value
+          },
+          isValidFieldOfStudy:
+            validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
+            validator.isLength(value, { min: 5, max: 255 })
+        }));
+      }
+      if (key === 'levelOfStudy') {
+        return this.setState(state => ({
+          formValues: {
+            ...state.formValues,
+            [key]: value
+          },
+          isValidLevelOfStudy:
+            validator.equals(value, `Diplomé d'état`) ||
+            validator.equals(value, `Gradué`) ||
+            validator.equals(value, `Licencié`) ||
+            validator.equals(value, ``)
+        }));
+      }
+    };
+
   // ------------FieldOfStudy Handler------------
 
-  handleFieldOfStudyChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value.slice(0);
-    return this.setState(state => ({
-      formValues: {
-        ...state.formValues,
-        fieldOfStudy: value
-      },
-      isValidFieldOfStudy:
-        validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
-        validator.isLength(value, { min: 5, max: 255 })
-    }));
-  };
-
-  focusHandlerFieldOfStudy = (e: React.FocusEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value.slice(0);
-
-    if (
-      validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
-      validator.isLength(value, { min: 5, max: 255 })
-    ) {
-      this.setState({
-        isValidFieldOfStudy: true,
-        isFocusFieldOfStudy: true,
-        isBlurFieldOfStudy: false
-      });
-    } else {
-      this.setState({
-        isValidFieldOfStudy: false,
-        isFocusFieldOfStudy: true,
-        isBlurFieldOfStudy: false
-      });
-    }
+  focusHandlerFieldOfStudy = () => {
+    this.setState({
+      isFocusFieldOfStudy: true,
+      isBlurFieldOfStudy: false
+    });
   };
 
   blurHandlerFieldOfStudy = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -157,30 +154,14 @@ class EducationSettings extends Component<EducationProps, EducationState> {
     }
   };
 
-  // ------------LevelOfStudy Handler------------
-
-  handleLevelOfStudyChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value.slice(0);
-    return this.setState(state => ({
-      formValues: {
-        ...state.formValues,
-        levelOfStudy: value
-      },
-      isValidLevelOfStudy:
-        validator.equals(value, `Diplomé d'état`) ||
-        validator.equals(value, `Gradué`) ||
-        validator.equals(value, `Licencié`) ||
-        validator.equals(value, ``)
-    }));
-  };
+  // ------------Render------------
 
   render() {
     const {
       formValues: { fieldOfStudy, levelOfStudy },
       isValidFieldOfStudy,
       isFocusFieldOfStudy,
-      isBlurFieldOfStudy,
-      isValidLevelOfStudy
+      isBlurFieldOfStudy
     } = this.state;
     return (
       <div className='about-settings'>
@@ -194,9 +175,9 @@ class EducationSettings extends Component<EducationProps, EducationState> {
                 </strong>
               </ControlLabel>
               <FormControl
-                // onFocus={this.focusHandlerFieldOfStudy}
+                onFocus={this.focusHandlerFieldOfStudy}
                 onBlur={this.blurHandlerFieldOfStudy}
-                onChange={this.handleFieldOfStudyChange}
+                onChange={this.createHandleChange('fieldOfStudy')}
                 type='text'
                 value={fieldOfStudy}
                 className='standard-radius-5'
@@ -208,20 +189,18 @@ class EducationSettings extends Component<EducationProps, EducationState> {
                 )}
 
               {isFocusFieldOfStudy && (
-                <HelpBlock className='text-warning'>
-                  {
-                    'Seuls les lettres et les espaces sont acceptés | minimume 5 et maximum 255 caractères.'
-                  }
-                </HelpBlock>
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
               )}
               {isBlurFieldOfStudy && !isValidFieldOfStudy && (
                 <>
                   {fieldOfStudy.length > 0 ? (
                     <HelpBlock className='text-danger'>
-                      {`Le Domaine d'études que vous avez entré n'est pas valide.`}
+                      {`Le domaine d'études que vous avez entré n'est pas valide.`}
                     </HelpBlock>
                   ) : (
-                    <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+                    <HelpBlock className='text-danger'>
+                      {'Ce champ est requis'}
+                    </HelpBlock>
                   )}
                 </>
               )}
@@ -232,14 +211,11 @@ class EducationSettings extends Component<EducationProps, EducationState> {
 
             <FormGroup controlId='education-levelOfStudy'>
               <ControlLabel>
-                <strong>
-                  {"Niveau d'études"}
-                  <span className='text-love-light'>*</span>
-                </strong>
+                <strong>{"Niveau d'études"}</strong>
               </ControlLabel>
               <FormControl
                 componentClass='select'
-                onChange={this.handleLevelOfStudyChange}
+                onChange={this.createHandleChange('levelOfStudy')}
                 value={levelOfStudy.length === 0 ? '' : levelOfStudy}
                 className='standard-radius-5'
               >
@@ -248,14 +224,7 @@ class EducationSettings extends Component<EducationProps, EducationState> {
                 <option value={`Gradué`}>{`Gradué`}</option>
                 <option value={`Licencié`}>{`Licencié`}</option>
               </FormControl>
-              {isValidLevelOfStudy && (
-                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
-              )}
-              {!isValidLevelOfStudy && (
-                <HelpBlock className='text-danger'>
-                  {`Les seuls Niveau d'études autorisés sont ceux dans la liste déroulante.`}
-                </HelpBlock>
-              )}
+              <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
             </FormGroup>
             <BlockSaveButton disabled={this.isFormPristine()} />
           </form>

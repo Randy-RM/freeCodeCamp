@@ -26,6 +26,7 @@ import StartCOding from '../components/landing/start-coding/start-coding';
 import WhatWillYouLearn from '../components/landing/what-will-you-learn/what-will-you-learn';
 import HowWillYouLearn from '../components/landing/how-will-you-learn/how-will-you-learn';
 import Vodacom from '../components/landing/vodacom-branding-section/vodacom-branding';
+import Partners from '../components/landing/partners/partners';
 
 import '../components/landing/landing.css';
 
@@ -76,7 +77,7 @@ function LearnPage({ isSignedIn }: LearnPageProps) {
   return (
     <LearnLayout>
       {/* <Helmet title={t('metaTags:title')} /> */}
-      <Helmet title={`Apprendre à coder - gratuitement | Kadea Learn`} />
+      <Helmet title={`Apprendre à coder - gratuitement | Kadea Online`} />
       <main className='landing-page bg-light'>
         <div className='hero-main-bg'>
           <Grid>
@@ -124,6 +125,12 @@ function LearnPage({ isSignedIn }: LearnPageProps) {
         </div>
 
         <StartCOding isSignedIn={isSignedIn} />
+
+        <div className=''>
+          <Grid>
+            <Partners />
+          </Grid>
+        </div>
 
         {/* <div className='as-seen-in'>
           <Grid>

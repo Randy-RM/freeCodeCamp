@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Link from '../../../helpers/link';
-import KDALogo from '../../../../assets/images/kda_logo.png';
+import KadeaLogo from '../../../../assets/images/logo/kadea-triangle.svg';
 import CloseButton from '../../../../assets/images/close.png';
 import './banner.css';
 
@@ -15,10 +15,10 @@ function Banner(): JSX.Element {
     <div className={showBanner ? 'elearning-banner-section' : 'close-alert'}>
       <div className='elearning-banner container remove-container'>
         <div className='banner-first-div baner-rigth-margin'>
-          <img src={KDALogo} alt='Logo KDA' />
+          <img src={KadeaLogo} alt='Logo KDA' />
           <div className='banner-first-div-text'>
-            <span className=''>Inscris-toi</span> dans la meilleure école de
-            codage.
+            <span className=''>Inscris-toi</span> dans la meilleure <br /> école
+            de code.
           </div>
         </div>
         <div className='banner-second-div baner-rigth-margin'>

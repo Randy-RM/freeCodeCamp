@@ -220,7 +220,7 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
   return (
     <>
       <Helmet>
-        <title>{i18nTitle} | Kadea Learn</title>
+        <title>{i18nTitle} | Kadea Online</title>
       </Helmet>
       <Grid fluid={false} className='bg-light'>
         <Spacer size={1} />

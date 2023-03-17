@@ -62,14 +62,12 @@ export function ShowAwsLearningPath(
     return <Loader fullScreen={true} />;
   }
 
-  console.log('params : ', params);
-
   return (
     <>
       <Helmet
         title={`${
           awsCoursTitle ? awsCoursTitle.replace(/-/g, ' ') : 'AWS Course'
-        } | Kadea Learn`}
+        } | Kadea Online`}
       />
       <Grid fluid={false} className='bg-light'>
         <Row>

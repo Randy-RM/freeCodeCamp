@@ -77,7 +77,31 @@ module.exports = function enableAuthentication(app) {
         );
       }
       removeCookies(req, res);
-      res.redirect(returnTo);
+
+      /**
+       * logout user session from Auth0
+       * doc url: https://auth0.com/blog/create-a-simple-and-secure-node-express-app/
+       */
+      // make url for login out to Auth0
+      const logoutURL = new URL(
+        `https://${process.env.AUTH0_DOMAIN}/v2/logout`
+      );
+
+      /**
+       * make params for auth0 logout url
+       * URLSearchParams nodjs object tuto :
+       * https://www.linkedin.com/pulse/how-migrate-from-querystring-urlsearchparams-nodejs-vladim%C3%ADr-gorej/?trk=articles_directory
+       */
+      const searchString = new URLSearchParams({
+        client_id: process.env.AUTH0_CLIENT_ID,
+        returnTo: returnTo
+      }).toString();
+      // add params to logoutURL
+      logoutURL.search = searchString;
+      // make Api call for login out user to Auth0
+      res.redirect(logoutURL);
+      // End logout user from Auth0
+      // res.redirect(returnTo);
     });
   });
 

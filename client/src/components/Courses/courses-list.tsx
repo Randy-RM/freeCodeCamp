@@ -3,11 +3,12 @@ import './courses-card.css';
 import CourseCard from '../CourseCard/course-card';
 import LaptopIcon from '../../assets/images/laptop.svg';
 import AlgoIcon from '../../assets/images/algorithmIcon.svg';
+import LaediesActIcon from '../../assets/images/partners/ladies-act-logo.png';
 import { Spacer } from '../helpers';
-
 interface CoursesListProps {
   isSignedIn?: boolean;
 }
+
 const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
   return (
     <div className='landing-top'>
@@ -25,12 +26,14 @@ const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
       <div className='card-course-detail-container'>
         <CourseCard
           icon={LaptopIcon}
+          sponsorIcon={LaediesActIcon}
+          alt=''
           isAvailable={true}
           isSignedIn={isSignedIn}
           title={`Responsive Web Design`}
           buttonText={`Suivre le cours  `}
           description={`
-                Dans cette formation, tu apprendras les langages que les développeurs
+                Dans cette formation en ligne, tu apprendras les langages que les développeurs
                 utilisent pour créer des pages Web : HTML (Hypertext Markup Language)
                 pour le contenu, et CSS (Cascading Style Sheets) pour la conception.
                 Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
@@ -38,6 +41,7 @@ const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
         />
         <CourseCard
           icon={AlgoIcon}
+          alt=''
           isAvailable={false}
           isSignedIn={isSignedIn}
           title={`JavaScript Algorithms and Data Structures`}
@@ -45,17 +49,6 @@ const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
                 JavaScript est utilisé pour la rendre interactive. Dans le cadre de
                 la certification JavaScript Algorithm and Data Structures, tu apprendras
                 les principes fondamentaux de JavaScript, etc.`}
-        />
-        <CourseCard
-          isAvailable={false}
-          isSignedIn={isSignedIn}
-          title={`AWS Cours`}
-          buttonText={`Suivre le cours  `}
-          link={`/aws-courses`}
-          description={`Ce cours est conçu pour montrer aux participants comment
-                  optimiser l'utilisation du cloud AWS grâce à la compréhension
-                  de ces nombreux services et de leur intégration dans la création
-                  de solutions basées sur le cloud.`}
         />
       </div>
     </div>
