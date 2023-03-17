@@ -34,9 +34,9 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
           title={`Responsive Web Design`}
           buttonText={`Suivre le cours  `}
           description={`
-                Dans ce cours, tu apprendras les langages que les développeurs 
-                utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
-                pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
+                Dans ce cours, tu apprendras les langages que les développeurs
+                utilisent pour créer des pages Web : HTML (Hypertext Markup Language)
+                pour le contenu, et CSS (Cascading Style Sheets) pour la conception.
                 Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
                 `}
         />
@@ -46,9 +46,9 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
           isAvailable={false}
           isSignedIn={isSignedIn}
           title={`JavaScript Algorithms and Data Structures`}
-          description={`Alors que HTML et CSS contrôlent le contenu et le style  d'une page, 
-                JavaScript est utilisé pour la rendre interactive. Dans le cadre du 
-                cours JavaScript Algorithm and Data Structures, tu apprendras 
+          description={`Alors que HTML et CSS contrôlent le contenu et le style  d'une page,
+                JavaScript est utilisé pour la rendre interactive. Dans le cadre du
+                cours JavaScript Algorithm and Data Structures, tu apprendras
                 les principes fondamentaux de JavaScript, etc.`}
         />
       </div>
