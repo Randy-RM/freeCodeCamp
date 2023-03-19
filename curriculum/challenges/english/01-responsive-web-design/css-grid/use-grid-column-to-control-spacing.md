@@ -1,6 +1,6 @@
 ---
 id: 5a90372638fddaf9a66b5d38
-title: Use grid-column to Control Spacing
+title: Utilisez la grid-column pour contrôler l'espacement
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pByETK/cnzkDSr'
 forumTopicId: 301136
@@ -9,31 +9,31 @@ dashedName: use-grid-column-to-control-spacing
 
 # --description--
 
-Up to this point, all the properties that have been discussed are for grid containers. The `grid-column` property is the first one for use on the grid items themselves.
+Jusqu'à ce point, toutes les propriétés qui ont été discutées concernent les conteneurs de grille. La propriété `grid-column` est la première à être utilisée sur les éléments de la grille eux-mêmes.
 
-The hypothetical horizontal and vertical lines that create the grid are referred to as <dfn>lines</dfn>. These lines are numbered starting with 1 at the top left corner of the grid and move right for columns and down for rows, counting upward.
+Les lignes horizontales et verticales hypothétiques qui créent la grille sont appelées <dfn>lignes</dfn>. Ces lignes sont numérotées en commençant par 1 dans le coin supérieur gauche de la grille et se déplacent vers la droite pour les colonnes et vers le bas pour les lignes, en comptant vers le haut.
 
-This is what the lines look like for a 3x3 grid:
+Voici à quoi ressemblent les lignes d'une grille 3x3 :
 
 <div style='position:relative;margin:auto;background:Gainsboro;display:block;margin-top:100px;margin-bottom:50px;width:200px;height:200px;'><p style='left:25%;top:-30%;font-size:130%;position:absolute;color:RoyalBlue;'>column lines</p><p style='left:0%;top:-15%;font-size:130%;position:absolute;color:RoyalBlue;'>1</p><p style='left:30%;top:-15%;font-size:130%;position:absolute;color:RoyalBlue;'>2</p><p style='left:63%;top:-15%;font-size:130%;position:absolute;color:RoyalBlue;'>3</p><p style='left:95%;top:-15%;font-size:130%;position:absolute;color:RoyalBlue;'>4</p><p style='left:-40%;top:45%;font-size:130%;transform:rotateZ(-90deg);position:absolute;'>row lines</p><p style='left:-10%;top:-10%;font-size:130%;position:absolute;'>1</p><p style='left:-10%;top:21%;font-size:130%;position:absolute;'>2</p><p style='left:-10%;top:53%;font-size:130%;position:absolute;'>3</p><p style='left:-10%;top:85%;font-size:130%;position:absolute;'>4</p><div style='left:0%;top:0%;width:5%;height:100%;background:RoyalBlue;position:absolute;'></div><div style='left:31%;top:0%;width:5%;height:100%;background:RoyalBlue;position:absolute;'></div><div style='left:63%;top:0%;width:5%;height:100%;background:RoyalBlue;position:absolute;'></div><div style='left:95%;top:0%;width:5%;height:100%;background:RoyalBlue;position:absolute;'></div><div style='left:0%;top:0%;width:100%;height:5%;background:black;position:absolute;'></div><div style='left:0%;top:31%;width:100%;height:5%;background:black;position:absolute;'></div><div style='left:0%;top:63%;width:100%;height:5%;background:black;position:absolute;'></div><div style='left:0%;top:95%;width:100%;height:5%;background:black;position:absolute;'></div></div>
 
-To control the number of columns an item will consume, you can use the `grid-column` property in conjunction with the line numbers you want the item to start and stop at.
+Pour contrôler le nombre de colonnes qu'un élément consommera, vous pouvez utiliser la propriété `grid-column` en conjonction avec les numéros de ligne auxquels vous voulez que l'élément commence et s'arrête.
 
-Here's an example:
+Voici un exemple :
 
 ```css
 grid-column: 1 / 3;
 ```
 
-This will make the item start at the first vertical line of the grid on the left and span to the 3rd line of the grid, consuming two columns.
+Ainsi, l'élément commencera à la première ligne verticale de la grille à gauche et s'étendra jusqu'à la troisième ligne de la grille, consommant ainsi deux colonnes.
 
 # --instructions--
 
-Make the item with the class `item5` consume the last two columns of the grid.
+Faites en sorte que l'élément avec la classe `item5` consomme les deux dernières colonnes de la grille.
 
 # --hints--
 
-`item5` class should have a `grid-column` property.
+La classe `item5` devrait avoir une propriété `grid-column`.
 
 ```js
 assert(
@@ -43,7 +43,7 @@ assert(
 );
 ```
 
-`item5` class should have a `grid-column` property which results in it consuming the last two columns of the grid.
+La classe `item5` doit avoir une propriété `grid-column` qui fait qu'elle consomme les deux dernières colonnes de la grille.
 
 ```js
 const colStart = getComputedStyle($('.item5')[0]).gridColumnStart;

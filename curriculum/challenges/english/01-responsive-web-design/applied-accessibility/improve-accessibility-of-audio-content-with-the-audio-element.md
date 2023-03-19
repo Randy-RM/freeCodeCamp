@@ -1,6 +1,6 @@
 ---
 id: 587d7789367417b2b2512aa4
-title: Improve Accessibility of Audio Content with the audio Element
+title: Améliorer l'accessibilité du contenu audio avec l'élément audio
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cVJVkcZ'
 forumTopicId: 301014
@@ -9,11 +9,11 @@ dashedName: improve-accessibility-of-audio-content-with-the-audio-element
 
 # --description--
 
-HTML5's `audio` element gives semantic meaning when it wraps sound or audio stream content in your markup. Audio content also needs a text alternative to be accessible to people who are deaf or hard of hearing. This can be done with nearby text on the page or a link to a transcript.
+L'élément `audio` de HTML5 donne un sens sémantique lorsqu'il enveloppe le contenu du son ou du flux audio dans votre balisage. Le contenu audio a également besoin d'une alternative textuelle pour être accessible aux personnes sourdes ou malentendantes. Cela peut être fait avec un texte proche sur la page ou un lien vers une transcription.
 
-The `audio` tag supports the `controls` attribute. This shows the browser default play, pause, and other controls, and supports keyboard functionality. This is a boolean attribute, meaning it doesn't need a value, its presence on the tag turns the setting on.
+La balise `audio` prend en charge l'attribut `controls`. Il indique les commandes de lecture, de pause et autres par défaut du navigateur, et prend en charge la fonctionnalité du clavier. Il s'agit d'un attribut booléen, ce qui signifie qu'il n'a pas besoin de valeur, sa présence dans la balise active le paramètre.
 
-Here's an example:
+Voici un exemple:
 
 ```html
 <audio id="meowClip" controls>
@@ -22,23 +22,23 @@ Here's an example:
 </audio>
 ```
 
-**Note:** Multimedia content usually has both visual and auditory components. It needs synchronized captions and a transcript so users with visual and/or auditory impairments can access it. Generally, a web developer is not responsible for creating the captions or transcript, but needs to know to include them.
+**Note:** Le contenu multimédia comporte généralement des éléments visuels et auditifs. Il nécessite des sous-titres synchronisés et une transcription pour que les utilisateurs souffrant de déficiences visuelles et/ou auditives puissent y accéder. En général, un développeur web n'est pas responsable de la création des sous-titres ou de la transcription, mais il doit savoir qu'il faut les inclure.
 
 # --instructions--
 
-Time to take a break from Camper Cat and meet fellow camper Zersiax (@zersiax), a champion of accessibility and a screen reader user. To hear a clip of his screen reader in action, add an `audio` element after the `p`. Include the `controls` attribute. Then place a `source` tag inside the `audio` tags with the `src` attribute set to `https://s3.amazonaws.com/freecodecamp/screen-reader.mp3` and `type` attribute set to `"audio/mpeg"`.
+Il est temps de faire une pause dans la vie de Camper Cat et de rencontrer un autre campeur, Zersiax (@zersiax), champion de l'accessibilité et utilisateur d'un lecteur d'écran. Pour écouter un extrait de son lecteur d'écran en action, ajoutez un élément `audio` après le `p`. Incluez l'attribut `controls`. Placez ensuite une balise `source` à l'intérieur de la balise `audio` avec l'attribut `src` réglé sur `https://kda-certificats.s3.eu-west-3.amazonaws.com/screen_reader_bdc86cfc4c.mp3` et l'attribut `type` défini à `"audio/mpeg"`.
 
-**Note:** The audio clip may sound fast and be difficult to understand, but that is a normal speed for screen reader users.
+**Note:** Le clip audio peut sembler rapide et difficile à comprendre, mais il s'agit d'une vitesse normale pour les utilisateurs de lecteurs d'écran.
 
 # --hints--
 
-Your code should have one `audio` tag.
+Votre code devrait avoir une balise `audio`.
 
 ```js
 assert($('audio').length === 1);
 ```
 
-Your `audio` element should have a closing tag.
+Votre élément `audio` devrait avoir une balise fermante.
 
 ```js
 assert(
@@ -47,34 +47,34 @@ assert(
 );
 ```
 
-The `audio` tag should have the `controls` attribute.
+La balise `audio` devrait avoir l'attribut `controls`.
 
 ```js
 assert($('audio').attr('controls'));
 ```
 
-Your code should have one `source` tag.
+Votre code devrait avoir une balise `source`.
 
 ```js
 assert($('source').length === 1);
 ```
 
-Your `source` tag should be inside the `audio` tags.
+Votre balise `source` doit être à l'intérieur des balises `audio`.
 
 ```js
 assert($('audio').children('source').length === 1);
 ```
 
-The value for the `src` attribute on the `source` tag should match the link in the instructions exactly.
+La valeur de l'attribut `src` de la balise `source` doit correspondre exactement au lien figurant dans les instructions.
 
 ```js
 assert(
   $('source').attr('src') ===
-    'https://s3.amazonaws.com/freecodecamp/screen-reader.mp3'
+    'https://kda-certificats.s3.eu-west-3.amazonaws.com/screen_reader_bdc86cfc4c.mp3'
 );
 ```
 
-Your code should include a `type` attribute on the `source` tag with a value of audio/mpeg.
+Votre code devrait inclure un attribut `type` sur la balise `source` avec une valeur de `audio/mpeg`.
 
 ```js
 assert($('source').attr('type') === 'audio/mpeg');
@@ -87,10 +87,10 @@ assert($('source').attr('type') === 'audio/mpeg');
 ```html
 <body>
   <header>
-    <h1>Real Coding Ninjas</h1>
+    <h1>De vrais ninjas du code</h1>
   </header>
   <main>
-    <p>A sound clip of Zersiax's screen reader in action.</p>
+    <p>Un clip sonore du lecteur d'écran de Zersiax en action.</p>
 
 
 
@@ -103,12 +103,12 @@ assert($('source').attr('type') === 'audio/mpeg');
 ```html
 <body>
   <header>
-    <h1>Real Coding Ninjas</h1>
+    <h1>De vrais ninjas du code</h1>
   </header>
   <main>
-    <p>A sound clip of Zersiax's screen reader in action.</p>
+    <p>Un clip sonore du lecteur d'écran de Zersiax en action.</p>
     <audio controls>
-      <source src="https://s3.amazonaws.com/freecodecamp/screen-reader.mp3" type="audio/mpeg"/>
+      <source src="https://kda-certificats.s3.eu-west-3.amazonaws.com/screen_reader_bdc86cfc4c.mp3" type="audio/mpeg"/>
     </audio>
   </main>
 </body>

@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aedf08824
-title: Add Different Padding to Each Side of an Element
+title: Ajouter une marge interne différente de chaque côté d'un élément
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cB7mwUw'
 forumTopicId: 16634
@@ -9,35 +9,35 @@ dashedName: add-different-padding-to-each-side-of-an-element
 
 # --description--
 
-Sometimes you will want to customize an element so that it has different amounts of `padding` on each of its sides.
+Parfois, vous voudrez personnaliser un élément pour qu'il ait une quantité différente de `padding` sur chacun de ses côtés.
 
-CSS allows you to control the `padding` of all four individual sides of an element with the `padding-top`, `padding-right`, `padding-bottom`, and `padding-left` properties.
+Le CSS vous permet de contrôler le `padding` des quatre côtés d'un élément grâce aux propriétés `padding-top`, `padding-right`, `padding-bottom` et `padding-left`.
 
 # --instructions--
 
-Give the blue box a `padding` of `40px` on its top and left side, but only `20px` on its bottom and right side.
+Donnez au conteneur bleue un `padding` de `40px` sur son haut et son côté gauche, mais seulement `20px` sur son bas et son côté droit.
 
 # --hints--
 
-Your `blue-box` class should give the top of the elements `40px` of `padding`.
+Votre classe `blue-box` devrait donner au sommet de l'élément `40px` de `padding`.
 
 ```js
 assert($('.blue-box').css('padding-top') === '40px');
 ```
 
-Your `blue-box` class should give the right of the elements `20px` of `padding`.
+Votre classe `blue-box` devrait donner à la droite de l'élément `20px` de `padding`.
 
 ```js
 assert($('.blue-box').css('padding-right') === '20px');
 ```
 
-Your `blue-box` class should give the bottom of the elements `20px` of `padding`.
+Votre classe `blue-box` devrait donner au bas de l'élément `20px` de `padding`.
 
 ```js
 assert($('.blue-box').css('padding-bottom') === '20px');
 ```
 
-Your `blue-box` class should give the left of the elements `40px` of `padding`.
+Votre classe `blue-box` devrait donner à la gauche de l'élément `40px` de `padding`.
 
 ```js
 assert($('.blue-box').css('padding-left') === '40px');
@@ -80,11 +80,11 @@ assert($('.blue-box').css('padding-left') === '40px');
     color: #fff;
   }
 </style>
-<h5 class="injected-text">margin</h5>
+<h5 class="injected-text">marge externe</h5>
 
 <div class="box yellow-box">
-  <h5 class="box red-box">padding</h5>
-  <h5 class="box blue-box">padding</h5>
+  <h5 class="box red-box">marge interne</h5>
+  <h5 class="box blue-box">marge interne</h5>
 </div>
 ```
 
@@ -127,10 +127,10 @@ assert($('.blue-box').css('padding-left') === '40px');
     padding-left: 40px;
   }
 </style>
-<h5 class="injected-text">margin</h5>
+<h5 class="injected-text">marge externe</h5>
 
 <div class="box yellow-box">
-  <h5 class="box red-box">padding</h5>
-  <h5 class="box blue-box">padding</h5>
+  <h5 class="box red-box">marge interne</h5>
+  <h5 class="box blue-box">marge interne</h5>
 </div>
 ```

@@ -1,6 +1,6 @@
 ---
 id: 587d78a9367417b2b2512ae8
-title: Learn How Bezier Curves Work
+title: Apprendre comment fonctionnent les courbes de Bézier
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/c9bDrs8'
 forumTopicId: 301058
@@ -9,25 +9,25 @@ dashedName: learn-how-bezier-curves-work
 
 # --description--
 
-The last challenge introduced the `animation-timing-function` property and a few keywords that change the speed of an animation over its duration. CSS offers an option other than keywords that provides even finer control over how the animation plays out, through the use of Bezier curves.
+Le dernier défi a introduit la propriété `animation-timing-function` et quelques mots-clés qui modifient la vitesse d'une animation sur sa durée. CSS offre une option autre que les mots-clés qui permet un contrôle encore plus fin de la façon dont l'animation se déroule, grâce à l'utilisation des courbes de Bézier.
 
-In CSS animations, Bezier curves are used with the `cubic-bezier` function. The shape of the curve represents how the animation plays out. The curve lives on a 1 by 1 coordinate system. The X-axis of this coordinate system is the duration of the animation (think of it as a time scale), and the Y-axis is the change in the animation.
+Dans les animations CSS, les courbes de Bezier sont utilisées avec la fonction `cubic-bezier`. La forme de la courbe représente le déroulement de l'animation. La courbe vit sur un système de coordonnées 1 par 1. L'axe X de ce système de coordonnées est la durée de l'animation (pensez-y comme à une échelle de temps), et l'axe Y est le changement dans l'animation.
 
-The `cubic-bezier` function consists of four main points that sit on this 1 by 1 grid: `p0`, `p1`, `p2`, and `p3`. `p0` and `p3` are set for you - they are the beginning and end points which are always located respectively at the origin (0, 0) and (1, 1). You set the x and y values for the other two points, and where you place them in the grid dictates the shape of the curve for the animation to follow. This is done in CSS by declaring the x and y values of the `p1` and `p2` "anchor" points in the form: `(x1, y1, x2, y2)`. Pulling it all together, here's an example of a Bezier curve in CSS code:
+La fonction `cubic-bezier` consiste en quatre points principaux qui se trouvent sur cette grille 1 par 1 : `p0`, `p1`, `p2`, et `p3`. `p0` et `p3` sont définis pour vous - ce sont les points de début et de fin qui sont toujours situés respectivement à l'origine (0, 0) et (1, 1). Vous définissez les valeurs x et y des deux autres points, et l'endroit où vous les placez dans la grille détermine la forme de la courbe que l'animation doit suivre. Pour ce faire, en CSS, vous déclarez les valeurs x et y des points d'ancrage `p1` et `p2` sous la forme suivante : `(x1, y1, x2, y2)`. Pour résumer, voici un exemple de courbe de Bézier en code CSS :
 
 ```css
 animation-timing-function: cubic-bezier(0.25, 0.25, 0.75, 0.75);
 ```
 
-In the example above, the x and y values are equivalent for each point (x1 = 0.25 = y1 and x2 = 0.75 = y2), which if you remember from geometry class, results in a line that extends from the origin to point (1, 1). This animation is a linear change of an element during the length of an animation, and is the same as using the `linear` keyword. In other words, it changes at a constant speed.
+Dans l'exemple ci-dessus, les valeurs x et y sont équivalentes pour chaque point (x1 = 0,25 = y1 et x2 = 0,75 = y2), ce qui, si vous vous souvenez du cours de géométrie, donne une ligne qui s'étend de l'origine au point (1, 1). Cette animation est un changement linéaire d'un élément pendant la durée d'une animation, et c'est la même chose que d'utiliser le mot-clé `linear`. En d'autres termes, elle change à une vitesse constante.
 
 # --instructions--
 
-For the element with the id of `ball1`, change the value of the `animation-timing-function` property from `linear` to its equivalent `cubic-bezier` function value. Use the point values given in the example above.
+Pour l'élément avec l'id de `ball1`, changez la valeur de la propriété `animation-timing-function` de `linear` à sa valeur équivalente de fonction `cubic-bezier`. Utilisez les valeurs de points données dans l'exemple ci-dessus.
 
 # --hints--
 
-The value of the `animation-timing-function` property for the element with the id `ball1` should be the linear-equivalent `cubic-bezier` function.
+La valeur de la propriété `animation-timing-function` pour l'élément ayant l'id `ball1` doit être la fonction `cubic-bezier` équivalente à une fonction linéaire.
 
 ```js
 assert(
@@ -36,7 +36,7 @@ assert(
 );
 ```
 
-The value of the `animation-timing-function` property for the element with the id `ball2` should not change.
+La valeur de la propriété `animation-timing-function` pour l'élément avec l'id `ball2` ne doit pas changer.
 
 ```js
 const ball2Animation = __helpers.removeWhiteSpace(

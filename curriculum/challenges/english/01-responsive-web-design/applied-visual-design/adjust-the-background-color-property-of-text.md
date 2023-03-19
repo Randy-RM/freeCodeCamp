@@ -1,6 +1,6 @@
 ---
 id: 587d781b367417b2b2512abc
-title: Adjust the background-color Property of Text
+title: Ajustez la propriété de couleur d'arrière-plan du texte
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cEDqwA6'
 forumTopicId: 301032
@@ -9,23 +9,23 @@ dashedName: adjust-the-background-color-property-of-text
 
 # --description--
 
-Instead of adjusting your overall background or the color of the text to make the foreground easily readable, you can add a `background-color` to the element holding the text you want to emphasize. This challenge uses `rgba()` instead of `hex` codes or normal `rgb()`.
+Au lieu d'ajuster l'arrière-plan général ou la couleur du texte pour rendre le premier plan facilement lisible, vous pouvez ajouter une `background-color` à l'élément contenant le texte que vous voulez mettre en valeur. Ce défi utilise `rgba()` au lieu des codes `hex` ou du `rgb()` normal.
 
-<blockquote>rgba stands for:<br>  r = red<br>  g = green<br>  b = blue<br>  a = alpha/level of opacity</blockquote>
+<blockquote>rgba signifie :<br>  r = red<br>  g = green<br>  b = blue<br>  a = alpha/degré d'opacité</blockquote>
 
-The RGB values can range from 0 to 255. The alpha value can range from 1, which is fully opaque or a solid color, to 0, which is fully transparent or clear. `rgba()` is great to use in this case, as it allows you to adjust the opacity. This means you don't have to completely block out the background.
+Les valeurs RVB peuvent aller de 0 à 255. La valeur alpha peut être comprise entre 1, ce qui correspond à une opacité totale ou à une couleur unie, et 0, ce qui correspond à une transparence totale ou à une clarté. `rgba()` est très utile dans ce cas, car il vous permet d'ajuster l'opacité. Cela signifie que vous n'avez pas à bloquer complètement l'arrière-plan.
 
-You'll use `background-color: rgba(45, 45, 45, 0.1)` for this challenge. It produces a dark gray color that is nearly transparent given the low opacity value of 0.1.
+Vous utiliserez `background-color : rgba(45, 45, 45, 0.1)` pour ce défi. Il produit une couleur gris foncé qui est presque transparente étant donné la faible valeur d'opacité de 0,1.
 
 # --instructions--
 
-To make the text stand out more, adjust the `background-color` of the `h4` element to the given `rgba()` value.
+Pour faire ressortir davantage le texte, ajustez le `background-color` de l'élément `h4` à la valeur donnée par `rgba()`.
 
-Also for the `h4`, remove the `height` property and add `padding` of 10px.
+De même, pour l'élément `h4`, supprimez la propriété `height` et ajoutez un `padding` de 10px.
 
 # --hints--
 
-Your code should add a `background-color` property to the `h4` element set to `rgba(45, 45, 45, 0.1)`.
+Votre code devrait ajouter une propriété `background-color` à l'élément `h4` définie sur `rgba(45, 45, 45, 0.1)`.
 
 ```js
 assert(
@@ -35,7 +35,7 @@ assert(
 );
 ```
 
-Your code should add a `padding` property to the `h4` element and set it to 10 pixels.
+Votre code devrait ajouter une propriété `padding` à l'élément `h4` et la définir à 10 pixels.
 
 ```js
 assert(
@@ -46,7 +46,7 @@ assert(
 );
 ```
 
-The `height` property on the `h4` element should be removed.
+La propriété `height` de l'élément `h4` doit être supprimée.
 
 ```js
 assert(!($('h4').css('height') == '25px'));
@@ -90,7 +90,7 @@ assert(!($('h4').css('height') == '25px'));
     <div class="cardText">
       <h4>Alphabet</h4>
       <hr>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+      <p><em>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient <u>étudiants en doctorat</u> à <strong>l'université de Stanford</strong>.</em></p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
@@ -135,7 +135,7 @@ assert(!($('h4').css('height') == '25px'));
     <div class="cardText">
       <h4>Alphabet</h4>
       <hr>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+      <p><em>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient <u>étudiants en doctorat</u> à <strong>l'université de Stanford</strong>.</em></p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>

@@ -1,6 +1,6 @@
 ---
 id: 587d78a5367417b2b2512ada
-title: Use the CSS Transform scale Property to Scale an Element on Hover
+title: Utilisez la propriété CSS Transform scale pour mettre à l'échelle un élément au survol de celui-ci.
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cyLPJuM'
 forumTopicId: 301077
@@ -9,9 +9,9 @@ dashedName: use-the-css-transform-scale-property-to-scale-an-element-on-hover
 
 # --description--
 
-The `transform` property has a variety of functions that let you scale, move, rotate, skew, etc., your elements. When used with pseudo-classes such as `:hover` that specify a certain state of an element, the `transform` property can easily add interactivity to your elements.
+La propriété `transform` possède une variété de fonctions qui vous permettent de mettre à l'échelle, de déplacer, de faire pivoter, d'incliner, etc. vos éléments. Lorsqu'elle est utilisée avec des pseudo-classes telles que `:hover` qui spécifient un certain état d'un élément, la propriété `transform` peut facilement ajouter de l'interactivité à vos éléments.
 
-Here's an example to scale the paragraph elements to 2.1 times their original size when a user hovers over them:
+Voici un exemple de mise à l'échelle des éléments de paragraphe à 2.1 fois leur taille d'origine lorsqu'un utilisateur les survole :
 
 ```css
 p:hover {
@@ -19,15 +19,15 @@ p:hover {
 }
 ```
 
-**Note:** Applying a transform to a `div` element will also affect any child elements contained in the div.
+**Note:** L'application d'une transformation à un élément `div` affectera également tous les éléments enfants contenus dans le div.
 
 # --instructions--
 
-Add a CSS rule for the `hover` state of the `div` and use the `transform` property to scale the `div` element to 1.1 times its original size when a user hovers over it.
+Ajoutez une règle CSS pour l'état `hover` de l'élément `div` et utilisez la propriété `transform` pour redimensionner l'élément `div` à 1.1 fois sa taille originale lorsqu'un utilisateur le survole.
 
 # --hints--
 
-The size of the `div` element should scale 1.1 times when the user hovers over it.
+La taille de l'élément `div` doit être multipliée par 1.1 lorsque l'utilisateur le survole.
 
 ```js
 assert(code.match(/div:hover\s*?{\s*?transform:\s*?scale\(1\.1\);/gi));

@@ -1,6 +1,6 @@
 ---
 id: 587d78a7367417b2b2512ae0
-title: Use CSS Animation to Change the Hover State of a Button
+title: Utiliser l'animation CSS pour modifier l'état de survol d'un bouton
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cg4vZAa'
 forumTopicId: 301073
@@ -9,9 +9,9 @@ dashedName: use-css-animation-to-change-the-hover-state-of-a-button
 
 # --description--
 
-You can use CSS `@keyframes` to change the color of a button in its hover state.
+Vous pouvez utiliser les `@keyframes` CSS pour changer la couleur d'un bouton au survol.
 
-Here's an example of changing the width of an image on hover:
+Voici un exemple de modification de la largeur d'une image au survol :
 
 ```html
 <style>
@@ -35,19 +35,19 @@ Here's an example of changing the width of an image on hover:
 
 # --instructions--
 
-Note that `ms` stands for milliseconds, where 1000ms is equal to 1s.
+Notez que `ms` signifie millisecondes, où 1000ms est égal à 1s.
 
-Use CSS `@keyframes` to change the `background-color` of the `button` element so it becomes `#4791d0` when a user hovers over it. The `@keyframes` rule should only have an entry for `100%`.
+Utilisez la règle CSS `@keyframes` pour modifier le `background-color` de l'élément `button` afin qu'elle devienne `#4791d0` lorsque l'utilisateur la survole. La règle `@keyframes` ne doit comporter qu'une entrée pour `100%`.
 
 # --hints--
 
-The @keyframes rule should use the `animation-name` background-color.
+La règle @keyframes doit utiliser la couleur de fond `animation-name`.
 
 ```js
 assert(code.match(/@keyframes\s+?background-color\s*?{/g));
 ```
 
-There should be one rule under `@keyframes` that changes the `background-color` to `#4791d0` at 100%.
+Il devrait y avoir une règle sous `@keyframes` qui change la `background-color` en `#4791d0` à 100%.
 
 ```js
 assert(code.match(/100%\s*?{\s*?background-color:\s*?#4791d0;\s*?}/gi));
@@ -74,7 +74,7 @@ assert(code.match(/100%\s*?{\s*?background-color:\s*?#4791d0;\s*?}/gi));
 
 </style>
 
-<button>Register</button>
+<button>Enregistrer</button>
 ```
 
 # --solutions--
@@ -99,5 +99,5 @@ assert(code.match(/100%\s*?{\s*?background-color:\s*?#4791d0;\s*?}/gi));
     }
   }
 </style>
-<button>Register</button>
+<button>Enregistrer</button>
 ```

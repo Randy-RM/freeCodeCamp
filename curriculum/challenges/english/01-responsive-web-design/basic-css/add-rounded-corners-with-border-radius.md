@@ -1,38 +1,38 @@
 ---
 id: bad87fee1348bd9aedf08814
-title: Add Rounded Corners with border-radius
+title: Ajouter des coins arrondis avec border-radius
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cbZm2hg'
+videoUrl: "https://scrimba.com/c/cbZm2hg"
 forumTopicId: 16649
 dashedName: add-rounded-corners-with-border-radius
 ---
 
 # --description--
 
-Your cat photo currently has sharp corners. We can round out those corners with a CSS property called `border-radius`.
+Votre photo de chat présente actuellement des angles vifs. Nous pouvons arrondir ces coins avec une propriété CSS appelée `border-radius`.
 
 # --instructions--
 
-You can specify a `border-radius` with pixels. Give your cat photo a `border-radius` of `10px`.
+Vous pouvez spécifier un `border-radius` en pixels. Donnez à votre photo de chat un `border-radius` de `10px`.
 
-**Note:** This challenge allows for multiple possible solutions. For example, you may add `border-radius` to either the `.thick-green-border` class or the `.smaller-image` class.
+**Note:** Ce défi permet plusieurs solutions possibles. Par exemple, vous pouvez ajouter `border-radius` à la classe `.thick-green-border` ou à la classe `.smaller-image`.
 
 # --hints--
 
-Your image element should have the class `thick-green-border`.
+Votre élément image doit avoir la classe `thick-green-border`.
 
 ```js
-assert($('img').hasClass('thick-green-border'));
+assert($("img").hasClass("thick-green-border"));
 ```
 
-Your image should have a border radius of `10px`.
+Le rayon de la bordure de votre image doit être de `10px`.
 
 ```js
 assert(
-  $('img').css('border-top-left-radius') === '10px' &&
-    $('img').css('border-top-right-radius') === '10px' &&
-    $('img').css('border-bottom-left-radius') === '10px' &&
-    $('img').css('border-bottom-right-radius') === '10px'
+  $("img").css("border-top-left-radius") === "10px" &&
+    $("img").css("border-top-right-radius") === "10px" &&
+    $("img").css("border-bottom-left-radius") === "10px" &&
+    $("img").css("border-bottom-right-radius") === "10px"
 );
 ```
 
@@ -41,7 +41,11 @@ assert(
 ## --seed-contents--
 
 ```html
-<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+<link
+  href="https://fonts.googleapis.com/css?family=Lobster"
+  rel="stylesheet"
+  type="text/css"
+/>
 <style>
   .red-text {
     color: red;
@@ -69,33 +73,41 @@ assert(
 
 <h2 class="red-text">CatPhotoApp</h2>
 <main>
-  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+  <p class="red-text">
+    Cliquez ici pour voir plus <a href="#">photos de chats</a>.
+  </p>
 
-  <a href="#"><img class="smaller-image thick-green-border" src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"
+    ><img
+      class="smaller-image thick-green-border"
+      src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."
+  /></a>
 
   <div>
-    <p>Things cats love:</p>
+    <p>Les choses que les chats aiment :</p>
     <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
+      <li>cataire</li>
+      <li>pointeurs laser</li>
+      <li>lasagnes</li>
     </ul>
-    <p>Top 3 things cats hate:</p>
+    <p>Les 3 choses que les chats détestent le plus :</p>
     <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
+      <li>traitement contre les puces</li>
+      <li>tonnerre</li>
+      <li>autres chats</li>
     </ol>
   </div>
 
   <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
+    <label
+      ><input type="radio" name="indoor-outdoor" checked /> Intérieur</label
+    >
+    <label><input type="radio" name="indoor-outdoor" /> Extérieur</label><br />
+    <label><input type="checkbox" name="personality" checked /> Aimant</label>
+    <label><input type="checkbox" name="personality" /> Paresseux</label>
+    <label><input type="checkbox" name="personality" /> Énergique</label><br />
+    <input type="text" placeholder="cat photo URL" required />
+    <button type="submit">Soumettre</button>
   </form>
 </main>
 ```
@@ -103,7 +115,11 @@ assert(
 # --solutions--
 
 ```html
-<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+<link
+  href="https://fonts.googleapis.com/css?family=Lobster"
+  rel="stylesheet"
+  type="text/css"
+/>
 <style>
   .red-text {
     color: red;
@@ -132,33 +148,41 @@ assert(
 
 <h2 class="red-text">CatPhotoApp</h2>
 <main>
-  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+  <p class="red-text">
+    Cliquez ici pour en savoir plus <a href="#">photos de chats</a>.
+  </p>
 
-  <a href="#"><img class="smaller-image thick-green-border" src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"
+    ><img
+      class="smaller-image thick-green-border"
+      src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."
+  /></a>
 
   <div>
-    <p>Things cats love:</p>
+    <p>Les choses que les chats aiment :</p>
     <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
+      <li>cataire</li>
+      <li>pointeurs laser</li>
+      <li>lasagnes</li>
     </ul>
-    <p>Top 3 things cats hate:</p>
+    <p>Les 3 choses que les chats détestent le plus :</p>
     <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
+      <li>traitement contre les puces</li>
+      <li>tonnerre</li>
+      <li>autres chats</li>
     </ol>
   </div>
 
   <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
+    <label
+      ><input type="radio" name="indoor-outdoor" checked /> Intérieur</label
+    >
+    <label><input type="radio" name="indoor-outdoor" /> Extérieur</label><br />
+    <label><input type="checkbox" name="personality" checked /> Aimant</label>
+    <label><input type="checkbox" name="personality" /> Paresseux</label>
+    <label><input type="checkbox" name="personality" /> Énergique</label><br />
+    <input type="text" placeholder="cat photo URL" required />
+    <button type="submit">Soumettre</button>
   </form>
 </main>
 ```

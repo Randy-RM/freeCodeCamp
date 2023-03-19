@@ -1,6 +1,6 @@
 ---
 id: 5c6c06847491271903d37cfd
-title: Use the value attribute with Radio Buttons and Checkboxes
+title: Utilisez l'attribut value avec les boutons radio et les cases à cocher.
 challengeType: 0
 forumTopicId: 301099
 dashedName: use-the-value-attribute-with-radio-buttons-and-checkboxes
@@ -8,73 +8,73 @@ dashedName: use-the-value-attribute-with-radio-buttons-and-checkboxes
 
 # --description--
 
-When a form gets submitted, the data is sent to the server and includes entries for the options selected. Inputs of type `radio` and `checkbox` report their values from the `value` attribute.
+Lorsqu'un formulaire est soumis, les données sont envoyées au serveur et comprennent des entrées pour les options sélectionnées. Les entrées de type `radio` et `checkbox` renvoient leurs valeurs à partir de l'attribut `value`.
 
-For example:
+Par exemple :
 
 ```html
-<label for="indoor">
-  <input id="indoor" value="indoor" type="radio" name="indoor-outdoor">Indoor
+<label for="interieur">
+  <input id="interieur" value="interieur" type="radio" name="interieur-exterieur"> Interieur
 </label>
-<label for="outdoor">
-  <input id="outdoor" value="outdoor" type="radio" name="indoor-outdoor">Outdoor
+<label for="exterieur">
+  <input id="exterieur" value="exterieur" type="radio" name="interieur-exterieur"> Extérieur
 </label>
 ```
 
-Here, you have two `radio` inputs. When the user submits the form with the `indoor` option selected, the form data will include the line: `indoor-outdoor=indoor`. This is from the `name` and `value` attributes of the "indoor" input.
+Ici, vous avez deux entrées `radio`. Lorsque l'utilisateur soumet le formulaire avec l'option `interieur` sélectionnée, les données du formulaire comprendront la ligne : `interieur-exterieur=interieur`. Cela provient des attributs `name` et `value` de l'entrée "interieur".
 
-If you omit the `value` attribute, the submitted form data uses the default value, which is `on`. In this scenario, if the user clicked the "indoor" option and submitted the form, the resulting form data would be `indoor-outdoor=on`, which is not useful. So the `value` attribute needs to be set to something to identify the option.
+Si vous omettez l'attribut `value`, les données du formulaire soumis utilisent la valeur par défaut, qui est `on`. Dans ce scénario, si l'utilisateur clique sur l'option "interieur" et soumet le formulaire, les données de formulaire résultantes seront `interieur-exterieur=on`, ce qui n'est pas utile. L'attribut "value" doit donc être défini sur une valeur permettant d'identifier l'option.
 
 # --instructions--
 
-Give each of the existing `radio` and `checkbox` inputs the `value` attribute. Do not create any new radio or checkbox elements. Use the input label text, in lowercase, as the value for the attribute.
+Donnez à chacune des entrées existantes `radio` et `checkbox` l'attribut `value`. Ne créez pas de nouveaux éléments radio ou case à cocher. Utilisez le texte du label de l'entrée, en minuscules, comme valeur de l'attribut.
 
 # --hints--
 
-One of your radio buttons should have the `value` attribute of `indoor`.
+L'un de vos boutons radio doit avoir l'attribut `value` de `interieur`.
 
 ```js
 assert(
-  $('label:contains("Indoor") > input[type="radio"]').filter("[value='indoor']")
+  $('label:contains("Interieur") > input[type="radio"]').filter("[value='interieur']")
     .length > 0
 );
 ```
 
-One of your radio buttons should have the `value` attribute of `outdoor`.
+L'un de vos boutons radio doit avoir l'attribut `value` avec la valeur `exterieur`.
 
 ```js
 assert(
-  $('label:contains("Outdoor") > input[type="radio"]').filter(
-    "[value='outdoor']"
+  $('label:contains("Extérieur") > input[type="radio"]').filter(
+    "[value='exterieur']"
   ).length > 0
 );
 ```
 
-One of your checkboxes should have the `value` attribute of `loving`.
+L'une de vos cases à cocher doit avoir l'attribut `value` avec la valeur `aimable`.
 
 ```js
 assert(
-  $('label:contains("Loving") > input[type="checkbox"]').filter(
-    "[value='loving']"
+  $('label:contains("Aimable") > input[type="checkbox"]').filter(
+    "[value='aimable']"
   ).length > 0
 );
 ```
 
-One of your checkboxes should have the `value` attribute of `lazy`.
+L'une de vos cases à cocher devrait avoir l'attribut `value` de `paresseux`.
 
 ```js
 assert(
-  $('label:contains("Lazy") > input[type="checkbox"]').filter("[value='lazy']")
+  $('label:contains("Paresseux") > input[type="checkbox"]').filter("[value='paresseux']")
     .length > 0
 );
 ```
 
-One of your checkboxes should have the `value` attribute of `energetic`.
+L'une de vos cases à cocher doit avoir l'attribut `value` avec la valeur `energetique`.
 
 ```js
 assert(
-  $('label:contains("Energetic") > input[type="checkbox"]').filter(
-    "[value='energetic']"
+  $('label:contains("Énergétique") > input[type="checkbox"]').filter(
+    "[value='energetique']"
   ).length > 0
 );
 ```
@@ -86,28 +86,28 @@ assert(
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  </p>Cliquez ici pour voir plus de <a href="#">photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
-  <p>Things cats love:</p>
+  <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
   <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
+    <li>le traitement contre les puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
-    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor"> Indoor</label>
-    <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label for="loving"><input id="loving" type="checkbox" name="personality"> Loving</label>
-    <label for="lazy"><input id="lazy" type="checkbox" name="personality"> Lazy</label>
-    <label for="energetic"><input id="energetic" type="checkbox" name="personality"> Energetic</label><br>
+    <label for="interieur"><input id="interieur" type="radio" name="interieur-exterieur">  Interieur</label>
+    <label for="exterieur"><input id="exterieur" type="radio" name="interieur-exterieur"> Extérieur</label><br>
+    <label for="aimable"><input id="aimable" type="checkbox" name="personality"> Aimable</label>
+    <label for="paresseux"><input id="paresseux" type="checkbox" name="personality"> Paresseux</label>
+    <label for="energetique"><input id="energetique" type="checkbox" name="personality"> Énergétique</label><br>
     <input type="text" placeholder="cat photo URL" required>
     <button type="submit">Submit</button>
   </form>
@@ -119,28 +119,28 @@ assert(
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  </p>Cliquez ici pour voir plus de <a href="#">photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
-  <p>Things cats love:</p>
+  <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
   <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
+    <li>le traitement contre les puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
-    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor" value="indoor"> Indoor</label>
-    <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label><br>
-    <label for="loving"><input id="loving" type="checkbox" name="personality" value="loving"> Loving</label>
-    <label for="lazy"><input id="lazy" type="checkbox" name="personality" value="lazy"> Lazy</label>
-    <label for="energetic"><input id="energetic" type="checkbox" name="personality" value="energetic"> Energetic</label><br>
+    <label for="interieur"><input id="interieur" type="radio" name="interieur-exterieur" value="interieur"> Interieur</label>
+    <label for="exterieur"><input id="exterieur" type="radio" name="interieur-exterieur" value="exterieur"> Extérieur</label><br>
+    <label for="aimable"><input id="aimable" type="checkbox" name="personality" value="aimable"> Aimable</label>
+    <label for="paresseux"><input id="paresseux" type="checkbox" name="personality" value="paresseux"> Paresseux</label>
+    <label for="energetique"><input id="energetique" type="checkbox" name="personality" value="energetique"> Énergétique</label><br>
     <input type="text" placeholder="cat photo URL" required>
     <button type="submit">Submit</button>
   </form>

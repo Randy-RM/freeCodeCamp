@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aedc08830
-title: Use HTML5 to Require a Field
+title: Utilisez HTML5 pour rendre un champ obligatoire
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVMPUv/cMd4EcQ'
 forumTopicId: 18360
@@ -9,19 +9,18 @@ dashedName: use-html5-to-require-a-field
 
 # --description--
 
-You can require specific form fields so that your user will not be able to submit your form until he or she has filled them out.
+Vous pouvez rendre obligatoires des champs de formulaire spécifiques afin que votre utilisateur ne puisse pas soumettre votre formulaire tant qu'il ne les a pas remplis.
 
-For example, if you wanted to make a text input field required, you can just add the attribute `required` within your `input` element, like this: `<input type="text" required>`
+Par exemple, si vous voulez rendre un champ de saisie de texte obligatoire, vous pouvez simplement ajouter l'attribut `required` dans votre élément `input`, comme ceci : `<input type="text" required>` 
 
 # --instructions--
 
-Make your text `input` a `required` field, so that your user can't submit the form without completing this field.
+Faites de votre `input` de type texte un champ `required`, de sorte que votre utilisateur ne puisse pas soumettre le formulaire sans remplir ce champ.
 
-Then try to submit the form without inputting any text. See how your HTML5 form notifies you that the field is required?
-
+Essayez ensuite de soumettre le formulaire sans saisir de texte. Vous voyez comment votre formulaire HTML5 vous signale que le champ est obligatoire ?
 # --hints--
 
-Your text `input` element should have the `required` attribute.
+Votre élément `input` de type texte doit avoir l'attribut `required`
 
 ```js
 assert($('input').prop('required'));
@@ -34,25 +33,25 @@ assert($('input').prop('required'));
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
-  <p>Things cats love:</p>
+  <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
   <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
+    <li>le traitement des puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
-    <input type="text" placeholder="cat photo URL">
-    <button type="submit">Submit</button>
+    <input type="text" placeholder="URL de la photo de chat">
+    <button type="submit">Envoyer</button>
   </form>
 </main>
 ```
@@ -62,25 +61,25 @@ assert($('input').prop('required'));
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
-  
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
-  
-  <p>Things cats love:</p>
+  <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
+
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
+
+  <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
   <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
+    <li>le traitement des puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
-    <input type="text" required placeholder="cat photo URL">
-    <button type="submit">Submit</button>
+    <input type="text" placeholder="URL de la photo de chat" required>
+    <button type="submit">Envoyer</button>
   </form>
 </main>
 ```

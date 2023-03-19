@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aede08817
-title: Nest an Anchor Element within a Paragraph
+title: Incorporer un élément d'ancrage dans un paragraphe
 challengeType: 0
 forumTopicId: 18244
 dashedName: nest-an-anchor-element-within-a-paragraph
@@ -8,49 +8,49 @@ dashedName: nest-an-anchor-element-within-a-paragraph
 
 # --description--
 
-You can nest links within other text elements.
+Vous pouvez incorporer des liens dans d'autres éléments de texte.
 
 ```html
 <p>
-  Here's a <a target="_blank" href="https://www.freecodecamp.org"> link to www.freecodecamp.org</a> for you to follow.
+  Voici un <a target="_blank" href="https://www.google.com"> lien vers www.google.com</a> pour que vous puissiez le suivre.
 </p>
 ```
 
-Let's break down the example. Normal text is wrapped in the `p` element:
+Prenons un exemple. Le texte normal est inséré dans l'élément `p` :
 
 ```html
-<p> Here's a ... for you to follow. </p>
+<p> Voici un ... que vous pouvez suivre. </p>
 ```
 
-Next is the *anchor* element `<a>` (which requires a closing tag `</a>`):  
+Vient ensuite l'élément *ancre* `<a>` (qui nécessite une balise de fermeture `</a>`) :  
 
 ```html
 <a> ... </a>
 ```
 
-`target` is an anchor tag attribute that specifies where to open the link. The value `_blank` specifies to open the link in a new tab. The `href` is an anchor tag attribute that contains the URL address of the link:  
+`target` est un attribut de la balise d'ancrage qui indique où ouvrir le lien. La valeur `_blank` indique qu'il faut ouvrir le lien dans un nouvel onglet. La valeur `href` est un attribut de la balise d'ancrage qui contient l'adresse URL du lien :  
 
 ```html
-<a href="https://www.freecodecamp.org" target="_blank"> ... </a>
+<a href="https://www.google.com" target="_blank"> ... </a>
 ```
 
-The text, `link to www.freecodecamp.org`, within the `a` element is called <dfn>anchor text</dfn>, and will display the link to click:
+Le texte, `lien vers www.google.com`, dans l'élément `a` est appelé <dfn>texte d'ancrage</dfn>, et affichera le lien à cliquer :
 
 ```html
-<a href=" ... " target="...">link to freecodecamp.org</a>
+<a href=" ... " target="...">lien vers www.google.com</a>
 ```
 
-The final output of the example will look like this:  
+La résultante finale de l'exemple ressemblera à ceci :  
 
-Here's a <a href="https://www.freecodecamp.org" target="_blank">link to www.freecodecamp.org</a> for you to follow.
+Voici un <a href="https://www.google.com" target="_blank">lien vers www.google.com</a> à suivre.
 
 # --instructions--
 
-Nest the existing `a` element within a new `p` element. Do not create a new anchor tag. The new paragraph should have text that says `View more cat photos`, where `cat photos` is a link, and the rest is plain text.
+Placez l'élément `a` existant dans un nouvel élément `p`. Ne créez pas de nouvelle balise d'ancrage. Le nouveau paragraphe doit contenir le texte suivant : `Voir plus de photos de chats`, où `photos de chats` est un lien, le reste étant du texte brut.
 
 # --hints--
 
-You should only have one `a` element.
+Vous ne devez avoir qu'un seul élément `a`.
 
 ```js
 assert(
@@ -58,7 +58,7 @@ assert(
 );
 ```
 
-The `a` element should link to "`https://www.freecatphotoapp.com`".
+L'élément `a` doit renvoyer au site "`https://www.freecatphotoapp.com`".
 
 ```js
 assert(
@@ -66,23 +66,23 @@ assert(
 );
 ```
 
-Your `a` element should have the anchor text of `cat photos`
+Votre élément `a` doit contenir le texte d'ancrage `photos de chats`.
 
 ```js
 assert(
   $('a')
     .text()
-    .match(/cat\sphotos/gi)
+    .match(/photos\sde\schats/gi)
 );
 ```
 
-You should create a new `p` element. There should be at least 3 total `p` tags in your HTML code.
+Vous devez créer un nouvel élément `p`. Il devrait y avoir au moins 3 balises `p` au total dans votre code HTML.
 
 ```js
 assert($('p') && $('p').length > 2);
 ```
 
-Your `a` element should be nested within your new `p` element.
+Votre élément `a` doit être inclus dans votre nouvel élément `p`.
 
 ```js
 assert(
@@ -90,28 +90,28 @@ assert(
 );
 ```
 
-Your `p` element should have the text `View more ` (with a space after it).
+Votre élément `p` doit contenir le texte `Voir plus de` (avec un espace après).
 
 ```js
 assert(
   $('a[href="https://www.freecatphotoapp.com"]')
     .parent()
     .text()
-    .match(/View\smore\s/gi)
+    .match(/Voir\splus\sde\s/gi)
 );
 ```
 
-Your `a` element should <em>not</em> have the text `View more`.
+Votre élément `a` ne devrait <em>pas</em> avoir le texte `Voir plus de`. 
 
 ```js
 assert(
   !$('a')
     .text()
-    .match(/View\smore/gi)
+    .match(/Voir\splus\sde\s/gi)
 );
 ```
 
-Each of your `p` elements should have a closing tag.
+Chacun de vos éléments `p` doit avoir une balise de fermeture.
 
 ```js
 assert(
@@ -121,7 +121,7 @@ assert(
 );
 ```
 
-Each of your `a` elements should have a closing tag.
+Chacun de vos éléments `a` doit avoir une balise de fermeture.
 
 ```js
 assert(
@@ -139,9 +139,9 @@ assert(
 <h2>CatPhotoApp</h2>
 <main>
 
-  <a href="https://www.freecatphotoapp.com" target="_blank">cat photos</a>
+  <a href="https://www.freecatphotoapp.com" target="_blank">photos de chats</a>
 
-  <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back.">
+  <img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos.">
 
   <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
   <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>
@@ -153,9 +153,9 @@ assert(
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>View more <a target="_blank" href="https://www.freecatphotoapp.com">cat photos</a></p>
+  <p>Voir plus de <a target="_blank" href="https://www.freecatphotoapp.com">photos de chats</a></p>
 
-  <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back.">
+  <img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos.">
 
   <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
   <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>

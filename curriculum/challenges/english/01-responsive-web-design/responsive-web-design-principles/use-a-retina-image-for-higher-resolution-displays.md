@@ -1,6 +1,6 @@
 ---
 id: 587d78b1367417b2b2512b0a
-title: Use a Retina Image for Higher Resolution Displays
+title: Utilisez une image Retina pour les écrans à plus haute résolution
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pzrPu4/cVZ4Rfp'
 forumTopicId: 301142
@@ -9,30 +9,30 @@ dashedName: use-a-retina-image-for-higher-resolution-displays
 
 # --description--
 
-With the increase of internet connected devices, their sizes and specifications vary, and the displays they use could be different externally and internally. Pixel density is an aspect that could be different on one device from others and this density is known as Pixel Per Inch(PPI) or Dots Per Inch(DPI). The most famous such display is the one known as a "Retina Display" on the latest Apple MacBook Pro notebooks, and recently iMac computers. Due to the difference in pixel density between a "Retina" and "Non-Retina" displays, some images that have not been made with a High-Resolution Display in mind could look "pixelated" when rendered on a High-Resolution display.
+Avec l'augmentation du nombre d'appareils connectés à Internet, leurs tailles et leurs spécifications varient, et les écrans qu'ils utilisent peuvent être différents à l'extérieur et à l'intérieur. La densité des pixels est un aspect qui peut être différent d'un appareil à l'autre. Cette densité est connue sous le nom de pixel par pouce (PPI) ou de points par pouce (DPI). Le plus célèbre de ces écrans est celui connu sous le nom de "Retina Display" sur les derniers ordinateurs portables MacBook Pro d'Apple, et récemment sur les ordinateurs iMac. En raison de la différence de densité de pixels entre un écran "Retina" et un écran "Non-Retina", certaines images qui n'ont pas été créées dans l'optique d'un écran haute résolution peuvent sembler "pixellisées" lorsqu'elles sont rendues sur un écran haute résolution.
 
-The simplest way to make your images properly appear on High-Resolution Displays, such as the MacBook Pros "retina display" is to define their `width` and `height` values as only half of what the original file is. Here is an example of an image that is only using half of the original height and width:
+La façon la plus simple de faire apparaître correctement vos images sur des écrans haute résolution, tels que l'écran "retina" du MacBook Pros, est de définir leurs valeurs de "largeur" et de "hauteur" comme étant seulement la moitié de ce que le fichier original est. Voici un exemple d'une image qui n'utilise que la moitié de la hauteur et de la largeur d'origine :
 
 ```html
 <style>
   img { height: 250px; width: 250px; }
 </style>
-<img src="coolPic500x500" alt="A most excellent picture">
+<img src="coolPic500x500" alt="Une excellente photo">
 ```
 
 # --instructions--
 
-Set the `width` and `height` of the `img` tag to half of their original values. In this case, both the original `height` and the original `width` are `200px`.
+Définissez le `height` et le `height` de la balise `img` à la moitié de leurs valeurs d'origine. Dans ce cas, les valeurs originales de `height` et de `width` sont toutes deux de `200px`.
 
 # --hints--
 
-Your `img` tag should have a `width` of 100 pixels.
+Votre balise `img` doit avoir un `width` de 100 pixels.
 
 ```js
 assert(document.querySelector('img').width === 100);
 ```
 
-Your `img` tag should have a `height` of 100 pixels.
+Votre balise `img` doit avoir un `height` de 100 pixels.
 
 ```js
 assert(document.querySelector('img').height === 100);
@@ -47,7 +47,7 @@ assert(document.querySelector('img').height === 100);
 
 </style>
 
-<img src="https://s3.amazonaws.com/freecodecamp/FCCStickers-CamperBot200x200.jpg" alt="freeCodeCamp sticker that says 'Because CamperBot Cares'">
+<img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/FCC_Stickers_Camper_Bot200x200_845a03f022.jpg" alt="un autocollant qui dit 'Because CamperBot Cares'.">
 ```
 
 # --solutions--
@@ -60,5 +60,5 @@ assert(document.querySelector('img').height === 100);
   }
 </style>
 
-<img src="https://s3.amazonaws.com/freecodecamp/FCCStickers-CamperBot200x200.jpg" alt="freeCodeCamp sticker that says 'Because CamperBot Cares'">
+<img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/FCC_Stickers_Camper_Bot200x200_845a03f022.jpg" alt="un autocollant qui dit 'Because CamperBot Cares'.">
 ```

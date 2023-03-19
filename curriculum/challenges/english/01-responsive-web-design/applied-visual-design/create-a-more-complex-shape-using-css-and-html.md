@@ -1,6 +1,6 @@
 ---
 id: 587d78a6367417b2b2512ade
-title: Create a More Complex Shape Using CSS and HTML
+title: Créer une forme plus complexe à l'aide de CSS et HTML
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cPpz4fr'
 forumTopicId: 301050
@@ -9,7 +9,7 @@ dashedName: create-a-more-complex-shape-using-css-and-html
 
 # --description--
 
-One of the most popular shapes in the world is the heart shape, and in this challenge you'll create one using pure CSS. But first, you need to understand the `::before` and `::after` pseudo-elements. `::before` creates a pseudo-element that is the first child of the selected element; `::after` creates a pseudo-element that is the last child of the selected element. In the following example, a `::before` pseudo-element is used to add a rectangle to an element with the class `heart`:
+L'une des formes les plus populaires au monde est celle du cœur. Dans ce défi, vous allez en créer un en utilisant du pur CSS. Mais d'abord, vous devez comprendre les pseudo-éléments `::before` et `::after`. `::before` crée un pseudo-élément qui est le premier enfant de l'élément sélectionné ; `::after` crée un pseudo-élément qui est le dernier enfant de l'élément sélectionné. Dans l'exemple suivant, un pseudo-élément `::before` est utilisé pour ajouter un rectangle à un élément de la classe `heart` :
 
 ```css
 .heart::before {
@@ -24,19 +24,19 @@ One of the most popular shapes in the world is the heart shape, and in this chal
 }
 ```
 
-For the `::before` and `::after` pseudo-elements to function properly, they must have a defined `content` property. This property is usually used to add things like a photo or text to the selected element. When the `::before` and `::after` pseudo-elements are used to make shapes, the `content` property is still required, but it's set to an empty string. In the above example, the element with the class of `heart` has a `::before` pseudo-element that produces a yellow rectangle with height and width of `50px` and `70px`, respectively. This rectangle has round corners due to its 25% `border-radius` and is positioned absolutely at `5px` from the left and `50px` above the top of the element.
+Pour que les pseudo-éléments `::before` et `::after` fonctionnent correctement, ils doivent avoir une propriété `content` définie. Cette propriété est généralement utilisée pour ajouter des éléments comme une photo ou du texte à l'élément sélectionné. Lorsque les pseudo-éléments `::before` et `::after` sont utilisés pour créer des formes, la propriété `content` est toujours nécessaire, mais elle est définie comme une chaîne vide. Dans l'exemple ci-dessus, l'élément avec la classe `heart` a un pseudo-élément `::before` qui produit un rectangle jaune avec une hauteur et une largeur de `50px` et `70px`, respectivement. Ce rectangle a des coins arrondis grâce à son `border-radius` de 25% et est positionné de manière absolue à `5px` de la gauche et `50px` au-dessus du haut de l'élément.
 
 # --instructions--
 
-Transform the element on the screen to a heart. In the `heart::after` selector, change the `background-color` to `pink` and the `border-radius` to 50%.
+Transformez l'élément à l'écran en un cœur. Dans le sélecteur `heart::after`, changez la `background-color` en `pink` et la `border-radius` en 50%.
 
-Next, target the element with the class `heart` (just `heart`) and fill in the `transform` property. Use the `rotate()` function with -45 degrees.
+Ensuite, ciblez l'élément avec la classe `heart` (juste `heart`) et remplissez la propriété `transform`. Utilisez la fonction `rotate()` avec -45 degrés.
 
-Finally, in the `heart::before` selector, set its `content` property to an empty string.
+Enfin, dans le sélecteur `heart::before`, définissez sa propriété `content` à une chaîne vide.
 
 # --hints--
 
-The `background-color` property of the `heart::after` selector should be `pink`.
+La propriété `background-color` du sélecteur `heart::after` doit être `pink`.
 
 ```js
 const heartAfter = code.match(/\.heart::after\s*{[\s\S]+?[^\}]}/g)[0];
@@ -45,19 +45,19 @@ assert(
 );
 ```
 
-The `border-radius` of the `heart::after` selector should be 50%.
+La valeur de `border-radius` du sélecteur `heart::after` devrait être de 50 %.
 
 ```js
 assert(code.match(/border-radius\s*?:\s*?50%/gi).length == 2);
 ```
 
-The `transform` property for the `heart` class should use a `rotate()` function set to -45 degrees.
+La propriété `transform` de la classe `heart` devrait utiliser une fonction `rotate()` réglée sur -45 degrés.
 
 ```js
 assert(code.match(/transform\s*?:\s*?rotate\(\s*?-45deg\s*?\)/gi));
 ```
 
-The `content` of the `heart::before` selector should be an empty string.
+Le `contenu` du sélecteur `heart::before` doit être une chaîne vide.
 
 ```js
 assert(code.match(/\.heart::before\s*?{\s*?content\s*?:\s*?("|')\1\s*?;/gi));

@@ -1,6 +1,6 @@
 ---
 id: 5a9036ee38fddaf9a66b5d36
-title: Create a Row Gap using grid-row-gap
+title: Créer un écart de ligne à l'aide de grid-row-gap
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pByETK/cPbJ2Cv'
 forumTopicId: 301125
@@ -9,15 +9,15 @@ dashedName: create-a-row-gap-using-grid-row-gap
 
 # --description--
 
-You can add a gap in between the rows of a grid using `grid-row-gap` in the same way that you added a gap in between columns in the previous challenge.
+Vous pouvez ajouter un espace entre les lignes d'une grille en utilisant `grid-row-gap` de la même manière que vous avez ajouté un espace entre les colonnes dans le défi précédent.
 
 # --instructions--
 
-Create a gap for the rows that is `5px` tall.
+Créez un espace de `5px` de hauteur pour les rangées.
 
 # --hints--
 
-`container` class should have a `grid-row-gap` property that has the value of `5px`.
+La classe `container` doit avoir une propriété `grid-row-gap` dont la valeur est `5px`.
 
 ```js
 assert(

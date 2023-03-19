@@ -1,6 +1,6 @@
 ---
 id: 587d78a4367417b2b2512ad2
-title: Learn about Tertiary Colors
+title: Découvrez les couleurs tertiaires
 challengeType: 0
 forumTopicId: 301057
 dashedName: learn-about-tertiary-colors
@@ -8,41 +8,41 @@ dashedName: learn-about-tertiary-colors
 
 # --description--
 
-Computer monitors and device screens create different colors by combining amounts of red, green, and blue light. This is known as the RGB additive color model in modern color theory. Red (R), green (G), and blue (B) are called primary colors. Mixing two primary colors creates the secondary colors cyan (G + B), magenta (R + B) and yellow (R + G). You saw these colors in the Complementary Colors challenge. These secondary colors happen to be the complement to the primary color not used in their creation, and are opposite to that primary color on the color wheel. For example, magenta is made with red and blue, and is the complement to green.
+Les moniteurs d'ordinateurs et les écrans d'appareils créent différentes couleurs en combinant des quantités de lumière rouge, verte et bleue. C'est ce qu'on appelle le modèle de couleur additif RVB dans la théorie moderne des couleurs. Le rouge (R), le vert (G) et le bleu (B) sont appelés couleurs primaires. Le mélange de deux couleurs primaires crée les couleurs secondaires cyan (G + B), magenta (R + B) et jaune (R + G). Vous avez vu ces couleurs dans le défi des couleurs complémentaires. Ces couleurs secondaires sont le complément de la couleur primaire qui n'a pas été utilisée dans leur création, et sont opposées à cette couleur primaire sur le cercle chromatique. Par exemple, le magenta est fait avec du rouge et du bleu, et est le complément du vert.
 
-Tertiary colors are the result of combining a primary color with one of its secondary color neighbors. For example, within the RGB color model, red (primary) and yellow (secondary) make orange (tertiary). This adds six more colors to a simple color wheel for a total of twelve.
+Les couleurs tertiaires sont le résultat de la combinaison d'une couleur primaire avec une de ses voisines de couleur secondaire. Par exemple, dans le modèle de couleurs RVB, le rouge (primaire) et le jaune (secondaire) donnent l'orange (tertiaire). Cela ajoute six couleurs supplémentaires à une roue chromatique simple, pour un total de douze.
 
-There are various methods of selecting different colors that result in a harmonious combination in design. One example that can use tertiary colors is called the split-complementary color scheme. This scheme starts with a base color, then pairs it with the two colors that are adjacent to its complement. The three colors provide strong visual contrast in a design, but are more subtle than using two complementary colors.
+Il existe plusieurs méthodes de sélection des différentes couleurs qui permettent d'obtenir une combinaison harmonieuse dans le design. Un exemple d'utilisation des couleurs tertiaires est le schéma de couleurs fractionnées-complémentaires. Ce schéma part d'une couleur de base, puis l'associe aux deux couleurs adjacentes à sa complémentaire. Les trois couleurs offrent un fort contraste visuel dans un dessin, mais sont plus subtiles que l'utilisation de deux couleurs complémentaires.
 
-Here are three colors created using the split-complement scheme:
+Voici trois couleurs créées à l'aide du schéma split-complémentaire :
 
 <table class='table table-striped'><thead><tr><th>Color</th><th>Hex Code</th></tr></thead><thead></thead><tbody><tr><td>orange</td><td>#FF7F00</td></tr><tr><td>cyan</td><td>#00FFFF</td></tr><tr><td>raspberry</td><td>#FF007F</td></tr></tbody></table>
 
 # --instructions--
 
-Change the `background-color` property of the `orange`, `cyan`, and `raspberry` classes to their respective colors. Make sure to use the hex codes and not the color names.
+Changez la propriété `background-color` des classes `orange`, `cyan`, et `raspberry` pour leurs couleurs respectives. Veillez à utiliser les codes hexadécimaux et non les noms des couleurs.
 
 # --hints--
 
-The `div` element with class `orange` should have a `background-color` of orange.
+L'élément `div` avec la classe `orange` doit avoir un `background-color` de couleur orange.
 
 ```js
 assert($('.orange').css('background-color') == 'rgb(255, 127, 0)');
 ```
 
-The `div` element with class `cyan` should have a `background-color` of cyan.
+L'élément `div` de la classe `cyan` doit avoir un `background-color` de couleur cyan.
 
 ```js
 assert($('.cyan').css('background-color') == 'rgb(0, 255, 255)');
 ```
 
-The `div` element with class `raspberry` should have a `background-color` of raspberry.
+L'élément `div` de la classe `raspberry` doit avoir un `background-color` de raspberry.
 
 ```js
 assert($('.raspberry').css('background-color') == 'rgb(255, 0, 127)');
 ```
 
-All `background-color` values for the color classes should be hex codes and not color names.
+Toutes les valeurs `background-color` pour les classes de couleurs doivent être des codes hexadécimaux et non des noms de couleurs.
 
 ```js
 assert(!/background-color:\s(orange|cyan|raspberry)/.test(code));

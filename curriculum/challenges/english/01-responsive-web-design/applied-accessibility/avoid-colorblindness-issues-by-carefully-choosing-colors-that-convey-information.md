@@ -1,8 +1,7 @@
 ---
 id: 587d778f367417b2b2512aad
 title: >-
-  Avoid Colorblindness Issues by Carefully Choosing Colors that Convey
-  Information
+  Éviter les problèmes de daltonisme en choisissant soigneusement les couleurs qui véhiculent les informations
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/c437as3'
 forumTopicId: 301011
@@ -12,19 +11,19 @@ dashedName: >-
 
 # --description--
 
-There are various forms of colorblindness. These can range from a reduced sensitivity to a certain wavelength of light to the inability to see color at all. The most common form is a reduced sensitivity to detect greens.
+Il existe plusieurs formes de daltonisme. Elles peuvent aller d'une sensibilité réduite à une certaine longueur d'onde de la lumière à l'incapacité de voir les couleurs du tout. La forme la plus courante est une sensibilité réduite à la détection des verts.
 
-For example, if two similar green colors are the foreground and background color of your content, a colorblind user may not be able to distinguish them. Close colors can be thought of as neighbors on the color wheel, and those combinations should be avoided when conveying important information.
+Par exemple, si deux couleurs vertes similaires constituent la couleur d'avant-plan et d'arrière-plan de votre contenu, un utilisateur daltonien peut ne pas être en mesure de les distinguer. Les couleurs proches peuvent être considérées comme des voisines sur la roue chromatique, et ces combinaisons doivent être évitées lorsque vous transmettez des informations importantes.
 
-**Note:** Some online color picking tools include visual simulations of how colors appear for different types of colorblindness. These are great resources in addition to online contrast checking calculators.
+**Note:** Certains outils de sélection des couleurs en ligne comprennent des simulations visuelles de l'apparence des couleurs pour différents types de daltonisme. Ce sont d'excellentes ressources en plus des calculateurs de contraste en ligne.
 
 # --instructions--
 
-Camper Cat is testing different styles for an important button, but the yellow (`#FFFF33`) `background-color` and the green (`#33FF33`) text `color` are neighboring hues on the color wheel and virtually indistinguishable for some colorblind users. (Their similar lightness also fails the contrast ratio check). Change the text `color` to a dark blue (`#003366`) to solve both problems.
+Camper Cat teste différents styles pour un bouton important, mais la couleur d'arrière-plan jaune (`#FFFF33`) et la couleur de texte verte (`#33FF33`) sont des teintes voisines sur la roue chromatique et pratiquement indiscernables pour certains utilisateurs daltoniens. (Leur luminosité similaire ne permet pas non plus de vérifier le rapport de contraste). Changez l'attribut `color` du texte en bleu foncé (`#003366`) pour résoudre les deux problèmes.
 
 # --hints--
 
-Your code should change the text `color` for the `button` to the dark blue.
+Votre code devrait changer l'attribut `color` du texte du `button` en bleu foncé.
 
 ```js
 assert($('button').css('color') == 'rgb(0, 51, 102)');
@@ -49,7 +48,7 @@ assert($('button').css('color') == 'rgb(0, 51, 102)');
   <header>
     <h1>Danger!</h1>
   </header>
-  <button>Delete Internet</button>
+  <button>Supprimer Internet</button>
 </body>
 ```
 
@@ -70,6 +69,6 @@ assert($('button').css('color') == 'rgb(0, 51, 102)');
   <header>
     <h1>Danger!</h1>
   </header>
-  <button>Delete Internet</button>
+  <button>Supprimer Internet</button>
 </body>
 ```

@@ -1,6 +1,6 @@
 ---
 id: 587d78a7367417b2b2512ae1
-title: Create Movement Using CSS Animation
+title: Créer du mouvement à l'aide de l'animation CSS
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/c7amZfW'
 forumTopicId: 301051
@@ -9,9 +9,9 @@ dashedName: create-movement-using-css-animation
 
 # --description--
 
-When elements have a specified `position`, such as `fixed` or `relative`, the CSS offset properties `right`, `left`, `top`, and `bottom` can be used in animation rules to create movement.
+Lorsque des éléments ont une `position` spécifiée, comme `fixe` ou `relative`, les propriétés de décalage CSS `droite`, `gauche`, `haut` et `basse` peuvent être utilisées dans les règles d'animation pour créer un mouvement.
 
-As shown in the example below, you can push the item downwards then upwards by setting the `top` property of the `50%` keyframe to 50px, but having it set to 0px for the first (`0%`) and the last (`100%`) keyframe.
+Comme le montre l'exemple ci-dessous, vous pouvez pousser l'élément vers le bas puis vers le haut en fixant la propriété `top` de l'image-clé `50%` à 50px, mais en la fixant à 0px pour la première (`0%`) et la dernière (`100%`) image-clé.
 
 ```css
 @keyframes rainbow {
@@ -32,23 +32,23 @@ As shown in the example below, you can push the item downwards then upwards by s
 
 # --instructions--
 
-Add a horizontal motion to the `div` animation. Using the `left` offset property, add to the `@keyframes` rule so rainbow starts at 0 pixels at `0%`, moves to 25 pixels at `50%`, and ends at -25 pixels at `100%`. Don't replace the `top` property in the editor - the animation should have both vertical and horizontal motion.
+Ajoutez un mouvement horizontal à l'animation `div`. En utilisant la propriété `left` offset, ajoutez à la règle `@keyframes` pour que l'arc-en-ciel commence à 0 pixel à `0%`, se déplace à 25 pixels à `50%`, et se termine à -25 pixels à `100%`. Ne remplacez pas la propriété `top` dans l'éditeur - l'animation doit avoir un mouvement vertical et horizontal.
 
 # --hints--
 
-The `@keyframes` rule for `0%` should use the `left` offset of 0px.
+La règle `@keyframes` pour `0%` devrait utiliser le décalage `left` de 0px.
 
 ```js
 assert(code.match(/[^50]0%\s*?{[\s\S]*?left:\s*?0px(;[\s\S]*?|\s*?)}/gi));
 ```
 
-The `@keyframes` rule for `50%` should use the `left` offset of 25px.
+La règle `@keyframes` pour `50%` devrait utiliser le décalage `left` de 25px.
 
 ```js
 assert(code.match(/50%\s*?{[\s\S]*?left:\s*?25px(;[\s\S]*?|\s*?)}/gi));
 ```
 
-The `@keyframes` rule for `100%` should use the `left` offset of -25px.
+La règle `@keyframes` pour `100%` devrait utiliser le décalage `left` de -25px.
 
 ```js
 assert(code.match(/100%\s*?{[\s\S]*?left:\s*?-25px(;[\s\S]*?|\s*?)}/gi));

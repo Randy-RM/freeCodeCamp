@@ -1,6 +1,6 @@
 ---
 id: bad87eee1348bd9aede07836
-title: Set the id of an Element
+title: Définir l'identifiant d'un élément
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cN6MEc2'
 forumTopicId: 18279
@@ -9,13 +9,13 @@ dashedName: set-the-id-of-an-element
 
 # --description--
 
-In addition to classes, each HTML element can also have an `id` attribute.
+En plus des classes, chaque élément HTML peut également avoir un attribut `id`.
 
-There are several benefits to using `id` attributes: You can use an `id` to style a single element and later you'll learn that you can use them to select and modify specific elements with JavaScript.
+L'utilisation des attributs `id` présente plusieurs avantages : Vous pouvez utiliser un `id` pour styliser un seul élément et vous apprendrez plus tard que vous pouvez les utiliser pour sélectionner et modifier des éléments spécifiques avec JavaScript.
 
-`id` attributes should be unique. Browsers won't enforce this, but it is a widely agreed upon best practice. So please don't give more than one element the same `id` attribute.
+Les attributs `id` doivent être uniques. Les navigateurs n'imposent pas cette règle, mais il s'agit d'une bonne pratique largement reconnue. Ne donnez donc pas le même attribut `id` à plusieurs éléments.
 
-Here's an example of how you give your `h2` element the id of `cat-photo-app`:
+Voici un exemple de la façon dont vous donnez à votre élément `h2` l'id de `cat-photo-app` :
 
 ```html
 <h2 id="cat-photo-app">
@@ -23,11 +23,11 @@ Here's an example of how you give your `h2` element the id of `cat-photo-app`:
 
 # --instructions--
 
-Give your `form` element the id `cat-photo-form`.
+Donnez à votre élément `form` l'id `cat-photo-form`.
 
 # --hints--
 
-Your `form` element should have the id of `cat-photo-form`.
+Votre élément `form` devrait avoir l'id de `cat-photo-form`.
 
 ```js
 assert($('form').attr('id') === 'cat-photo-form');
@@ -71,33 +71,33 @@ assert($('form').attr('id') === 'cat-photo-form');
 
 <h2 class="red-text">CatPhotoApp</h2>
 <main>
-  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+  <p class="red-text">Cliquez ici pour voir plus <a href="#">photos de chats</a>.</p>
 
-  <a href="#"><img class="smaller-image thick-green-border" src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img class="smaller-image thick-green-border" src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <div class="silver-background">
-    <p>Things cats love:</p>
+    <p>Les choses que les chats aiment :</p>
     <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
+      <li>cataire</li>
+      <li>pointeurs laser</li>
+      <li>lasagnes</li>
     </ul>
-    <p>Top 3 things cats hate:</p>
+    <p>Les 3 choses que les chats détestent le plus :</p>
     <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
+      <li>traitement contre les puces</li>
+      <li>tonnerre</li>
+      <li>autres chats</li>
     </ol>
   </div>
 
   <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
+    <label><input type="radio" name="indoor-outdoor" checked> Intérieur</label>
+    <label><input type="radio" name="indoor-outdoor"> Extérieur</label><br>
+    <label><input type="checkbox" name="personality" checked> Aimant</label>
+    <label><input type="checkbox" name="personality"> Paresseux</label>
+    <label><input type="checkbox" name="personality"> Énergique</label><br>
     <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
+    <button type="submit">Soumettre</button>
   </form>
 </main>
 ```
@@ -138,33 +138,33 @@ assert($('form').attr('id') === 'cat-photo-form');
 
 <h2 class="red-text">CatPhotoApp</h2>
 <main>
-  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+  <p class="red-text">Cliquez ici pour voir plus <a href="#">photos de chats</a>.</p>
   
-  <a href="#"><img class="smaller-image thick-green-border" src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img class="smaller-image thick-green-border" src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
   
   <div class="silver-background">
-    <p>Things cats love:</p>
+    <p>Les choses que les chats aiment :</p>
     <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
+      <li>cataire</li>
+      <li>pointeurs laser</li>
+      <li>lasagnes</li>
     </ul>
-    <p>Top 3 things cats hate:</p>
+    <p>Les 3 choses que les chats détestent le plus :</p>
     <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
+      <li>traitement contre les puces</li>
+      <li>tonnerre</li>
+      <li>autres chats</li>
     </ol>
   </div>
   
   <form action="https://freecatphotoapp.com/submit-cat-photo" id="cat-photo-form">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
+    <label><input type="radio" name="indoor-outdoor" checked> Intérieur</label>
+    <label><input type="radio" name="indoor-outdoor"> Extérieur</label><br>
+    <label><input type="checkbox" name="personality" checked> Aimant</label>
+    <label><input type="checkbox" name="personality"> Paresseux</label>
+    <label><input type="checkbox" name="personality"> Énergique</label><br>
     <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
+    <button type="submit">Soumettre</button>
   </form>
 </main>
 ```

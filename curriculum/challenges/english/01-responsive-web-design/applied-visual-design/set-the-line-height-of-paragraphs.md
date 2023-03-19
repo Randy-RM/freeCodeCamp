@@ -1,6 +1,6 @@
 ---
 id: 587d781d367417b2b2512ac5
-title: Set the line-height of Paragraphs
+title: Définir la hauteur de ligne des Paragraphes
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/crVWdcv'
 forumTopicId: 301070
@@ -9,15 +9,15 @@ dashedName: set-the-line-height-of-paragraphs
 
 # --description--
 
-CSS offers the `line-height` property to change the height of each line in a block of text. As the name suggests, it changes the amount of vertical space that each line of text gets.
+CSS propose la propriété `line-height` pour modifier la hauteur de chaque ligne d'un bloc de texte. Comme son nom l'indique, elle modifie la quantité d'espace vertical dont dispose chaque ligne de texte.
 
 # --instructions--
 
-Add a `line-height` property to the `p` tag and set it to 25px.
+Ajoutez une propriété `line-height` à la balise `p` et définissez-la à 25px.
 
 # --hints--
 
-Your code should set the `line-height` of the `p` tag to 25 pixels.
+Votre code doit définir le `line-height` de la balise `p` à 25 pixels.
 
 ```js
 assert($('p').css('line-height') == '25px');

@@ -1,6 +1,6 @@
 ---
 id: 587d78b1367417b2b2512b0c
-title: Make Typography Responsive
+title: Rendre la typographie responsive
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pzrPu4/crzN7T8'
 forumTopicId: 301141
@@ -9,13 +9,13 @@ dashedName: make-typography-responsive
 
 # --description--
 
-Instead of using `em` or `px` to size text, you can use viewport units for responsive typography. Viewport units, like percentages, are relative units, but they are based off different items. Viewport units are relative to the viewport dimensions (width or height) of a device, and percentages are relative to the size of the parent container element.
+Dimensionner le texte, vous pouvez utiliser les unités de visualisation pour une typographie responsive. Les unités de visualisation, comme les pourcentages, sont des unités relatives, mais elles sont basées sur des éléments différents. Les unités de visualisation sont relatives aux dimensions de la fenêtre d'affichage (largeur ou hauteur) d'un périphérique, tandis que les pourcentages sont relatifs à la taille de l'élément conteneur parent.
 
-The four different viewport units are:
+Les quatre unités d'affichage différentes sont les suivantes :
 
-<ul><li><code>vw</code> (viewport width): <code>10vw</code> would be 10% of the viewport's width.</li><li><code>vh</code> (viewport height): <code>3vh</code> would be 3% of the viewport's height.</li><li><code>vmin</code> (viewport minimum): <code>70vmin</code> would be 70% of the viewport's smaller dimension (height or width).</li><li><code>vmax</code> (viewport maximum): <code>100vmax</code> would be 100% of the viewport's bigger dimension (height or width).</li></ul>
+<ul><li><code>vw</code> (viewport width): <code>10vw</code> serait de 10 % de la largeur de la fenêtre.</li><li><code>vh</code> (viewport height): <code>3vh</code> serait égale à 3 % de la hauteur de la fenêtre.</li><li><code>vmin</code> (viewport minimum): <code>70vmin</code> correspondrait à 70 % de la plus petite dimension (hauteur ou largeur) de la fenêtre d'affichage.</li><li><code>vmax</code> (viewport maximum): <code>100vmax</code> serait égal à 100 % de la plus grande dimension (hauteur ou largeur) de la fenêtre d'affichage.</li></ul>
 
-Here is an example that sets a `body` tag to 30% of the viewport's width.
+Voici un exemple qui définit une balise `body` à 30% de la largeur de la fenêtre d'affichage.
 
 ```css
 body { width: 30vw; }
@@ -23,11 +23,11 @@ body { width: 30vw; }
 
 # --instructions--
 
-Set the `width` of the `h2` tag to 80% of the viewport's width and the `width` of the paragraph as 75% of the viewport's smaller dimension.
+Définissez le `width` de la balise `h2` à 80 % de la largeur de la fenêtre d'affichage et le `width` du paragraphe à 75 % de la plus petite dimension de la fenêtre d'affichage.
 
 # --hints--
 
-Your `h2` tag should have a `width` of 80vw.
+Votre balise `h2` doit avoir un `width` de 80vw.
 
 ```js
 assert(
@@ -37,7 +37,7 @@ assert(
 );
 ```
 
-Your `p` tag should have a `width` of 75vmin.
+Votre balise `p` doit avoir un `width` de 75vmin.
 
 ```js
 assert(
