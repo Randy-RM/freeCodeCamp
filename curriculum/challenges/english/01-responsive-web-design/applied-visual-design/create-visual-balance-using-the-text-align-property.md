@@ -1,6 +1,6 @@
 ---
 id: 587d7791367417b2b2512ab3
-title: Create Visual Balance Using the text-align Property
+title: Créer un équilibre visuel en utilisant la propriété text-align
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/c3b4EAp'
 forumTopicId: 301053
@@ -9,31 +9,31 @@ dashedName: create-visual-balance-using-the-text-align-property
 
 # --description--
 
-This section of the curriculum focuses on Applied Visual Design. The first group of challenges build on the given card layout to show a number of core principles.
+Cette section du programme se concentre sur la conception visuelle appliquée. Le premier groupe de défis s'appuie sur la mise en page d'une carte donnée pour montrer un certain nombre de principes fondamentaux.
 
-Text is often a large part of web content. CSS has several options for how to align it with the `text-align` property.
+Le texte constitue souvent une part importante du contenu Web. Le CSS propose plusieurs options pour l'aligner avec la propriété `text-align`.
 
-`text-align: justify;` spaces the text so that each line has equal width.
+`text-align : justify;` espace le texte de sorte que chaque ligne ait la même largeur.
 
-`text-align: center;` centers the text
+`text-align : center;` centre le texte.
 
-`text-align: right;` right-aligns the text
+`text-align : right;` aligne le texte à droite.
 
-And `text-align: left;` (the default) left-aligns the text.
+Et `text-align : left;` (par défaut) aligne le texte à gauche.
 
 # --instructions--
 
-Align the `h4` tag's text, which says "Google", to the center. Then justify the paragraph tag which contains information about how Google was founded.
+Alignez le texte de la balise `h4`, qui indique "Google", au centre. Justifiez ensuite la balise de paragraphe qui contient des informations sur la création de Google.
 
 # --hints--
 
-Your code should use the text-align property on the `h4` tag to set it to `center`.
+Votre code doit utiliser la propriété text-align de la balise `h4` pour la définir sur `center`.
 
 ```js
 assert($('h4').css('text-align') == 'center');
 ```
 
-Your code should use the text-align property on the `p` tag to set it to `justify`.
+Votre code doit utiliser la propriété text-align de la balise `p` pour lui donner la valeur `justify`.
 
 ```js
 assert($('p').css('text-align') == 'justify');
@@ -69,7 +69,7 @@ assert($('p').css('text-align') == 'justify');
   <div class="cardContent">
     <div class="cardText">
       <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University.</p>
+      <p>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient doctorants à l'université de Stanford./p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a>
@@ -107,7 +107,7 @@ assert($('p').css('text-align') == 'justify');
   <div class="cardContent">
     <div class="cardText">
       <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University.</p>
+      <p>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient doctorants à l'université de Stanford./p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a>

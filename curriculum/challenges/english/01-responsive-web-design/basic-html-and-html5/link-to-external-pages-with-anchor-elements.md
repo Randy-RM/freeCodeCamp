@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aedf08816
-title: Link to External Pages with Anchor Elements
+title: Créer des liens vers des pages externes avec des éléments d'ancrage
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVMPUv/c8EkncB'
 forumTopicId: 18226
@@ -9,35 +9,35 @@ dashedName: link-to-external-pages-with-anchor-elements
 
 # --description--
 
-You can use `a` (*anchor*) elements to link to content outside of your web page.
+Vous pouvez utiliser des éléments `a` (*ancre*) pour créer un lien vers un contenu extérieur à votre page Web.
 
-`a` elements need a destination web address called an `href` attribute. They also need anchor text. Here's an example:
+Les éléments `a` ont besoin d'une adresse Web de destination appelée attribut `href`. Ils ont également besoin d'un texte d'ancrage. Voici un exemple :
 
 ```html
-<a href="https://www.freecodecamp.org">this links to freecodecamp.org</a>
+<a href="https://www.google.com">ce lien pointe vers google.com</a>
 ```
 
-Then your browser will display the text `this links to freecodecamp.org` as a link you can click. And that link will take you to the web address `https://www.freecodecamp.org`.
+Votre navigateur affichera alors le texte "**ce lien pointe vers google.com**" comme un lien sur lequel vous pouvez cliquer. Et ce lien vous mènera à l'adresse web `https://www.google.com`.
 
 # --instructions--
 
-Create an `a` element that links to `https://www.freecatphotoapp.com` and has "cat photos" as its anchor text.
+Créez un élément `a` qui renvoie à `https://www.freecatphotoapp.com` et dont le texte d'ancrage est "cat photos".
 
 # --hints--
 
-Your `a` element should have the anchor text of `cat photos`.
+Votre élément `a` devrait avoir le texte d'ancrage suivant: `cat photos`.
 
 ```js
 assert(/cat photos/gi.test($('a').text()));
 ```
 
-You need an `a` element that links to `https://www.freecatphotoapp.com`
+Vous avez besoin d'un élément `a` qui pointe vers `https://www.freecatphotoapp.com`.
 
 ```js
 assert(/^https?:\/\/(www\.)?freecatphotoapp\.com\/?$/i.test($('a').attr('href')));
 ```
 
-Your `a` element should have a closing tag.
+Votre élément `a` doit avoir une balise de fermeture.
 
 ```js
 assert(
@@ -56,7 +56,7 @@ assert(
 
 
 
-  <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back.">
+  <img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos.">
 
   <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
   <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>
@@ -69,7 +69,7 @@ assert(
 <h2>CatPhotoApp</h2>
 <main>
   
-  <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back.">
+  <img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos.">
   
   <a href="https://www.freecatphotoapp.com">cat photos</a>
   <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>

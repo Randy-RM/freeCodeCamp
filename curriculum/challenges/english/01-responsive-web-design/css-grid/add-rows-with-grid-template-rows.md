@@ -1,6 +1,6 @@
 ---
 id: 5a9036e138fddaf9a66b5d33
-title: Add Rows with grid-template-rows
+title: Ajouter des lignes avec grid-template-rows
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pByETK/cbp9Pua'
 forumTopicId: 301119
@@ -9,15 +9,15 @@ dashedName: add-rows-with-grid-template-rows
 
 # --description--
 
-The grid you created in the last challenge will set the number of rows automatically. To adjust the rows manually, use the `grid-template-rows` property in the same way you used `grid-template-columns` in the previous challenge.
+La grille que vous avez créée dans le dernier défi définira automatiquement le nombre de lignes. Pour ajuster les lignes manuellement, utilisez la propriété `grid-template-rows` de la même manière que vous avez utilisé `grid-template-columns` dans le défi précédent.
 
 # --instructions--
 
-Add two rows to the grid that are `50px` tall each.
+Ajoutez à la grille deux lignes d'une hauteur de `50px` chacune.
 
 # --hints--
 
-`container` class should have a `grid-template-rows` property with two units of `50px`.
+La classe `container` doit avoir une propriété `grid-template-rows` avec deux unités de `50px`.
 
 ```js
 assert(

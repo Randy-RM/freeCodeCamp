@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aedf08833
-title: Fill in the Blank with Placeholder Text
+title: Remplir le vide avec du texte de remplacement
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVMPUv/cgR7Dc7'
 forumTopicId: 18178
@@ -9,19 +9,19 @@ dashedName: fill-in-the-blank-with-placeholder-text
 
 # --description--
 
-Web developers traditionally use <dfn>lorem ipsum text</dfn> as placeholder text. The lorem ipsum text is randomly scraped from a famous passage by Cicero of Ancient Rome.
+Les développeurs Web utilisent traditionnellement le texte <dfn>lorem ipsum</dfn> comme texte de remplacement. Le texte lorem ipsum est extrait au hasard d'un célèbre passage de Cicéron, de la Rome antique.
 
-Lorem ipsum text has been used as placeholder text by typesetters since the 16th century, and this tradition continues on the web.
+Le texte lorem ipsum est utilisé comme texte de remplacement par les typographes depuis le 16e siècle, et cette tradition se poursuit sur le Web.
 
-Well, 5 centuries is long enough. Since we're building a CatPhotoApp, let's use something called "kitty ipsum" text.
+Cinq siècles, c'est assez long. Puisque nous construisons une CatPhotoApp, utilisons un texte appelé "kitty ipsum".
 
 # --instructions--
 
-Replace the text inside your `p` element with the first few words of this kitty ipsum text: `Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.`
+Remplacez le texte de votre élément `p` par les premiers mots de ce texte kitty ipsum : `Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.`
 
 # --hints--
 
-Your `p` element should contain the first few words of the provided "kitty ipsum" text.
+Votre élément `p` doit contenir les premiers mots du texte "kitty ipsum" fourni.
 
 ```js
 assert.isTrue(/Kitty(\s)+ipsum/gi.test($('p').text()));
@@ -32,17 +32,17 @@ assert.isTrue(/Kitty(\s)+ipsum/gi.test($('p').text()));
 ## --seed-contents--
 
 ```html
-<h1>Hello World</h1>
+<h1>Bonjour le monde</h1>
 
 <h2>CatPhotoApp</h2>
 
-<p>Hello Paragraph</p>
+<p>Bonjour Paragraphe</p>
 ```
 
 # --solutions--
 
 ```html
-<h1>Hello World</h1>
+<h1>Bonjour le monde</h1>
 
 <h2>CatPhotoApp</h2>
 

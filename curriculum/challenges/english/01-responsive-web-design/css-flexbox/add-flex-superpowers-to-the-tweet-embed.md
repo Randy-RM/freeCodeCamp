@@ -1,6 +1,6 @@
 ---
 id: 587d78ab367417b2b2512af1
-title: Add Flex Superpowers to the Tweet Embed
+title: Ajouter les superpouvoirs de Flex au Tweet embarqué
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVaDAv/c9W7MhM'
 forumTopicId: 301100
@@ -9,59 +9,59 @@ dashedName: add-flex-superpowers-to-the-tweet-embed
 
 # --description--
 
-To the right is the tweet embed that will be used as a practical example. Some of the elements would look better with a different layout. The last challenge demonstrated `display: flex`. Here you'll add it to several components in the tweet embed to start adjusting their positioning.
+À droite se trouve le tweet embarqué qui sera utilisé comme exemple pratique. Certains éléments seraient plus jolis avec une mise en page différente. Le dernier défi a démontré `display : flex`. Ici, vous allez l'ajouter à plusieurs composants dans le tweet embarqué pour commencer à ajuster leur positionnement.
 
 # --instructions--
 
-Add the CSS property `display: flex` to all of the following items - note that the selectors are already set up in the CSS:
+Ajoutez la propriété CSS `display : flex` à tous les éléments suivants - notez que les sélecteurs sont déjà configurés dans le CSS :
 
-`header`, the header's `.profile-name`, the header's `.follow-btn`, the header's `h3` and `h4`, the `footer`, and the footer's `.stats`.
+`header`, `.profile-name` de l'en-tête, `.follow-btn` de l'en-tête, `h3` et `h4` de l'en-tête, le `footer`, et `.stats` du pied de page.
 
 # --hints--
 
-Your `.follow-btn` should be rendered on the page. Be sure to turn off any extensions such as ad blockers.
+Votre `.follow-btn` devrait être rendu sur la page. Assurez-vous de désactiver toute extension telle que les bloqueurs de publicité.
 
 ```js
 assert($('.follow-btn').length > 0 && $('.follow-btn').css('display') !== 'none');
 ```
 
-Your `header` should have a `display` property set to `flex`.
+Votre `header` doit avoir une propriété `display` définie sur `flex`.
 
 ```js
 assert($('header').css('display') == 'flex');
 ```
 
-Your `footer` should have a `display` property set to `flex`.
+Votre `footer` doit avoir une propriété `display` définie sur `flex`.
 
 ```js
 assert($('footer').css('display') == 'flex');
 ```
 
-Your `h3` should have a `display` property set to `flex`.
+Votre `h3` devrait avoir une propriété `display` définie sur `flex`.
 
 ```js
 assert($('h3').css('display') == 'flex');
 ```
 
-Your `h4` should have a `display` property set to `flex`.
+Votre `h4` devrait avoir une propriété `display` définie sur `flex`.
 
 ```js
 assert($('h4').css('display') == 'flex');
 ```
 
-Your `.profile-name` should have a `display` property set to `flex`.
+Votre `.profile-name` devrait avoir une propriété `display` définie sur `flex`.
 
 ```js
 assert($('.profile-name').css('display') == 'flex');
 ```
 
-Your `.follow-btn` should have a `display` property set to `flex`.
+Votre `.follow-btn` devrait avoir une propriété `display` définie sur `flex`.
 
 ```js
 assert($('.follow-btn').css('display') == 'flex');
 ```
 
-Your `.stats` should have a `display` property set to `flex`.
+Votre `.stats` devrait avoir une propriété `display` définie sur `flex`.
 
 ```js
 assert($('.stats').css('display') == 'flex');
@@ -138,11 +138,11 @@ assert($('.stats').css('display') == 'flex');
     <h4>@ossia</h4>
   </div>
   <div class="follow-btn">
-    <button>Follow</button>
+    <button>Suivre</button>
   </div>
 </header>
 <div id="inner">
-  <p>I meet so many people who are in search of that one trick that will help them work smart. Even if you work smart, you still have to work hard.</p>
+  <p>Je rencontre tellement de gens qui sont à la recherche de l'astuce qui les aidera à travailler intelligemment. Même si vous travaillez intelligemment, vous devez toujours travailler dur.</p>
   <span class="date">1:32 PM - 12 Jan 2018</span>
   <hr>
 </div>
@@ -156,9 +156,9 @@ assert($('.stats').css('display') == 'flex');
     </div>
   </div>
   <div class="cta">
-    <button class="share-btn">Share</button>
+    <button class="share-btn">Partager</button>
     <button class="retweet-btn">Retweet</button>
-    <button class="like-btn">Like</button>
+    <button class="like-btn">J'aime</button>
   </div>
 </footer>
 ```
@@ -232,11 +232,11 @@ assert($('.stats').css('display') == 'flex');
     <h4>@ossia</h4>
   </div>
   <div class="follow-btn">
-    <button>Follow</button>
+    <button>Suivre</button>
   </div>
 </header>
 <div id="inner">
-  <p>I meet so many people who are in search of that one trick that will help them work smart. Even if you work smart, you still have to work hard.</p>
+  <p>Je rencontre tellement de gens qui sont à la recherche de l'astuce qui les aidera à travailler intelligemment. Même si vous travaillez intelligemment, vous devez toujours travailler dur.</p>
   <span class="date">1:32 PM - 12 Jan 2018</span>
   <hr>
 </div>
@@ -250,9 +250,9 @@ assert($('.stats').css('display') == 'flex');
     </div>
   </div>
   <div class="cta">
-    <button class="share-btn">Share</button>
+    <button class="share-btn">Partager</button>
     <button class="retweet-btn">Retweet</button>
-    <button class="like-btn">Like</button>
+    <button class="like-btn">J'aime</button>
   </div>
 </footer>
 ```

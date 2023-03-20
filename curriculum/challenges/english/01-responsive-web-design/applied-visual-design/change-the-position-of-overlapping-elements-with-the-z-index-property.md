@@ -1,6 +1,6 @@
 ---
 id: 587d78a3367417b2b2512acf
-title: Change the Position of Overlapping Elements with the z-index Property
+title: Modifier la position des éléments superposés avec la propriété z-index
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cM94aHk'
 forumTopicId: 301046
@@ -9,15 +9,15 @@ dashedName: change-the-position-of-overlapping-elements-with-the-z-index-propert
 
 # --description--
 
-When elements are positioned to overlap (i.e. using `position: absolute | relative | fixed | sticky`), the element coming later in the HTML markup will, by default, appear on the top of the other elements. However, the `z-index` property can specify the order of how elements are stacked on top of one another. It must be an integer (i.e. a whole number and not a decimal), and higher values for the `z-index` property of an element move it higher in the stack than those with lower values.
+Lorsque des éléments sont positionnés de manière à se chevaucher (c'est-à-dire en utilisant la propriété `position : absolute | relative | fixed | sticky`), l'élément venant en dernier dans le balisage HTML apparaîtra, par défaut, au dessus des autres éléments. Toutefois, la propriété `z-index` permet de spécifier l'ordre dans lequel les éléments sont empilés les uns sur les autres. Il doit s'agir d'un nombre entier (c'est-à-dire un nombre entier et non décimal), et les valeurs les plus élevées de la propriété `z-index` d'un élément le déplacent plus haut dans la pile que les valeurs inférieures.
 
 # --instructions--
 
-Add a `z-index` property to the element with the class name of `first` (the red rectangle) and set it to a value of 2 so it covers the other element (blue rectangle).
+Ajoutez une propriété `z-index` à l'élément dont le nom de classe est `first` (le rectangle rouge) et donnez-lui une valeur de 2 pour qu'il couvre l'autre élément (le rectangle bleu).
 
 # --hints--
 
-The element with class `first` should have a `z-index` value of 2.
+L'élément avec la classe `first` devrait avoir une valeur `z-index` de 2.
 
 ```js
 assert($('.first').css('z-index') == '2');

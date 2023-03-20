@@ -1,6 +1,6 @@
 ---
 id: 587d778f367417b2b2512aae
-title: Give Links Meaning by Using Descriptive Link Text
+title: Donnez du sens aux liens en utilisant un texte de lien descriptif
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/c437DcV'
 forumTopicId: 301013
@@ -9,33 +9,33 @@ dashedName: give-links-meaning-by-using-descriptive-link-text
 
 # --description--
 
-Screen reader users have various options for what type of content their device reads. These options include skipping to (or over) landmark elements, jumping to the main content, or getting a page summary from the headings. Another option is to only hear the links available on a page.
+Les utilisateurs de lecteurs d'écran disposent de plusieurs options pour le type de contenu que leur appareil lit. Ces options comprennent le saut vers (ou au-dessus) des éléments marquants, le saut vers le contenu principal ou l'obtention d'un résumé de la page à partir des titres. Une autre option consiste à n'entendre que les liens disponibles sur une page.
 
-Screen readers do this by reading the link text, or what's between the anchor (`a`) tags. Having a list of "click here" or "read more" links isn't helpful. Instead, use brief but descriptive text within the `a` tags to provide more meaning for these users.
+Les lecteurs d'écran lisent le texte du lien, ou ce qui se trouve entre les balises d'ancrage (`a`). Une liste de liens "cliquez ici" ou "en savoir plus" n'est pas utile. Utilisez plutôt un texte bref mais descriptif dans les balises `a` pour donner plus de sens à ces utilisateurs.
 
 # --instructions--
 
-The link text that Camper Cat is using is not very descriptive without the surrounding context. Move the anchor (`a`) tags so they wrap around the text `information about batteries` instead of `Click here`.
+Le texte du lien utilisé par Camper Cat n'est pas très descriptif sans le contexte environnant. Déplacez les balises d'ancrage (`a`) pour qu'elles entourent le texte `informations sur les piles` au lieu de `Cliquez ici`.
 
 # --hints--
 
-Your code should move the anchor `a` tags from around the words `Click here` to wrap around the words `information about batteries`.
+Votre code devrait déplacer les balises d'ancrage `a` autour des mots `Cliquez ici` pour les placer autour des mots `informations sur les piles`.
 
 ```js
 assert(
   $('a')
     .text()
-    .match(/^(information about batteries)$/g)
+    .match(/^(informations sur les piles)$/g)
 );
 ```
 
-The `a` element should have an `href` attribute with a value of an empty string `""`.
+L'élément `a` doit avoir un attribut `href` dont la valeur est une chaîne vide `""`.
 
 ```js
 assert($('a').attr('href') === '');
 ```
 
-The `a` element should have a closing tag.
+L'élément `a` doit avoir une balise fermante.
 
 ```js
 assert(
@@ -51,11 +51,11 @@ assert(
 ```html
 <body>
   <header>
-    <h1>Deep Thoughts with Master Camper Cat</h1>
+    <h1>Réflexions profondes avec Master Camper Cat</h1>
   </header>
   <article>
-    <h2>Defeating your Foe: the Red Dot is Ours!</h2>
-    <p>Felines the world over have been waging war on the most persistent of foes. This red nemesis combines both cunning stealth and lightning speed. But chin up, fellow fighters, our time for victory may soon be near. <a href="">Click here</a> for information about batteries</p>
+    <h2>Vaincre l'ennemi : le point rouge est à nous!</h2>
+    <p>Les félins du monde entier ont fait la guerre aux ennemis les plus tenaces. Cette némésis rouge combine à la fois l'astuce, la discrétion et la vitesse de l'éclair. Mais tenez bon, camarades combattants, l'heure de la victoire pourrait bientôt sonner. <a href="">Cliquez ici</a> pour des informations sur les piles</p>
   </article>
 </body>
 ```
@@ -65,11 +65,11 @@ assert(
 ```html
 <body>
   <header>
-    <h1>Deep Thoughts with Master Camper Cat</h1>
+    <h1>Réflexions profondes avec Master Camper Cat</h1>
   </header>
   <article>
-    <h2>Defeating your Foe: the Red Dot is Ours!</h2>
-    <p>Felines the world over have been waging war on the most persistent of foes. This red nemesis combines both cunning stealth and lightning speed. But chin up, fellow fighters, our time for victory may soon be near. Click here for <a href="">information about batteries</a></p>
+    <h2>Vaincre l'ennemi : le point rouge est à nous!</h2>
+    <p>Les félins du monde entier ont fait la guerre aux ennemis les plus tenaces. Cette némésis rouge combine à la fois l'astuce, la discrétion et la vitesse de l'éclair. Mais tenez bon, camarades combattants, l'heure de la victoire pourrait bientôt sonner. Cliquez ici pour des <a href="">informations sur les piles</a></p>
   </article>
 </body>
 ```

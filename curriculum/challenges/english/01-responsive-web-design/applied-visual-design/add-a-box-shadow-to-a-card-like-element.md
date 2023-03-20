@@ -1,49 +1,49 @@
 ---
 id: 587d781b367417b2b2512abe
-title: Add a box-shadow to a Card-like Element
+title: Ajouter un  box-shadow à un élément de type carte
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cvVZdUd'
+videoUrl: "https://scrimba.com/c/cvVZdUd"
 forumTopicId: 301031
 dashedName: add-a-box-shadow-to-a-card-like-element
 ---
 
 # --description--
 
-The `box-shadow` property applies one or more shadows to an element.
+La propriété `box-shadow` applique une ou plusieurs ombres à un élément.
 
-The `box-shadow` property takes values for
+La propriété `box-shadow` prend les valeurs suivantes
 
 <ul>
-  <li><code>offset-x</code> (how far to push the shadow horizontally from the element),</li>
-  <li><code>offset-y</code> (how far to push the shadow vertically from the element),</li>
+  <li><code>offset-x</code> (jusqu'où pousser l'ombre horizontalement par rapport à l'élément),</li>
+  <li><code>offset-y</code> (à quelle distance l'ombre doit être poussée verticalement de l'élément),</li>
   <li><code>blur-radius</code>,</li>
-  <li><code>spread-radius</code> and</li>
-  <li><code>color</code>, in that order.</li>
+  <li><code>spread-radius</code> et</li>
+  <li><code>color</code>, dans cet ordre.</li>
 </ul>
 
-The `blur-radius` and `spread-radius` values are optional.
+Les valeurs `blur-radius` et `spread-radius` sont facultatives.
 
-Multiple box-shadows can be created by using commas to separate properties of each `box-shadow` element.
+Il est possible de créer plusieurs ombres en utilisant des virgules pour séparer les propriétés de chaque élément `box-shadow`.
 
-Here's an example of the CSS to create multiple shadows with some blur, at mostly-transparent black colors:
+Voici un exemple de CSS permettant de créer plusieurs ombres avec un certain flou, sur des couleurs noires essentiellement transparentes :
 
 ```css
-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 ```
 
 # --instructions--
 
-The element now has an id of `thumbnail`. With this selector, use the example CSS values above to place a `box-shadow` on the card.
+L'élément a maintenant un id qui vaut `thumbnail`. Avec ce sélecteur, utilisez les valeurs CSS de l'exemple ci-dessus pour placer un `box-shadow` sur la carte.
 
 # --hints--
 
-Your code should add a `box-shadow` property for the `thumbnail` id.
+Votre code devrait ajouter une propriété `box-shadow` pour l'id `thumbnail`.
 
 ```js
 assert(code.match(/#thumbnail\s*?{\s*?box-shadow/g));
 ```
 
-You should use the given CSS for the `box-shadow` value.
+Vous devez utiliser le CSS donné pour la valeur `box-shadow`.
 
 ```js
 assert(
@@ -73,8 +73,6 @@ assert(
     color: black;
   }
 
-
-
   .fullCard {
     width: 245px;
     border: 1px solid #ccc;
@@ -93,12 +91,27 @@ assert(
   <div class="cardContent">
     <div class="cardText">
       <h4>Alphabet</h4>
-      <hr>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+      <hr />
+      <p>
+        <em
+          >at <strong>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient
+          <u>étudiants en doctorat</u> à <strong>l'université de Stanford</strong>.</em
+        >
+      </p>
     </div>
     <div class="cardLinks">
-      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
-      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
+      <a
+        href="https://en.wikipedia.org/wiki/Larry_Page"
+        target="_blank"
+        class="links"
+        >Larry Page</a
+      ><br /><br />
+      <a
+        href="https://en.wikipedia.org/wiki/Sergey_Brin"
+        target="_blank"
+        class="links"
+        >Sergey Brin</a
+      >
     </div>
   </div>
 </div>
@@ -122,7 +135,7 @@ assert(
     color: black;
   }
   #thumbnail {
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   }
   .fullCard {
     width: 245px;
@@ -142,12 +155,28 @@ assert(
   <div class="cardContent">
     <div class="cardText">
       <h4>Alphabet</h4>
-      <hr>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+      <hr />
+      <p>
+        <em
+          >Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient
+          <u>étudiants en doctorat</u> à 
+          <strong>l'université de Stanford</strong>.</em
+        >
+      </p>
     </div>
     <div class="cardLinks">
-      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
-      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
+      <a
+        href="https://en.wikipedia.org/wiki/Larry_Page"
+        target="_blank"
+        class="links"
+        >Larry Page</a
+      ><br /><br />
+      <a
+        href="https://en.wikipedia.org/wiki/Sergey_Brin"
+        target="_blank"
+        class="links"
+        >Sergey Brin</a
+      >
     </div>
   </div>
 </div>

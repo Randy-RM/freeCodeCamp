@@ -1,6 +1,6 @@
 ---
 id: 587d78ae367417b2b2512afd
-title: Use the flex-basis Property to Set the Initial Size of an Item
+title: Utiliser la propriété flex-basis pour définir la taille initiale d'un élément
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVaDAv/c3d9nCa'
 forumTopicId: 301108
@@ -9,35 +9,35 @@ dashedName: use-the-flex-basis-property-to-set-the-initial-size-of-an-item
 
 # --description--
 
-The `flex-basis` property specifies the initial size of the item before CSS makes adjustments with `flex-shrink` or `flex-grow`.
+La propriété `flex-basis` spécifie la taille initiale de l'élément avant que CSS ne fasse des ajustements avec `flex-shrink` ou `flex-grow`.
 
-The units used by the `flex-basis` property are the same as other size properties (`px`, `em`, `%`, etc.). The value `auto` sizes items based on the content.
+Les unités utilisées par la propriété `flex-basis` sont les mêmes que celles des autres propriétés de taille (`px`, `em`, `%`, etc.). La valeur `auto` permet de dimensionner les éléments en fonction de leur contenu.
 
 # --instructions--
 
-Set the initial size of the boxes using `flex-basis`. Add the CSS property `flex-basis` to both `#box-1` and `#box-2`. Give `#box-1` a value of `10em` and `#box-2` a value of `20em`.
+Définissez la taille initiale des boîtes en utilisant `flex-basis`. Ajoutez la propriété CSS `flex-basis` à `#box-1` et `#box-2`. Donnez à `#box-1` une valeur de `10em` et à `#box-2` une valeur de `20em`.
 
 # --hints--
 
-The `#box-1` element should have the `flex-basis` property.
+L'élément `#box-1` doit avoir la propriété `flex-basis`.
 
 ```js
 assert($('#box-1').css('flex-basis') != 'auto');
 ```
 
-The `#box-1` element should have a `flex-basis` value of `10em`.
+L'élément `#box-1` doit avoir une valeur `flex-basis` de `10em`.
 
 ```js
 assert(code.match(/#box-1\s*?{\s*?.*?\s*?.*?\s*?flex-basis:\s*?10em;/g));
 ```
 
-The `#box-2` element should have the `flex-basis` property.
+L'élément `#box-2` doit avoir la propriété `flex-basis`.
 
 ```js
 assert($('#box-2').css('flex-basis') != 'auto');
 ```
 
-The `#box-2` element should have a `flex-basis` value of `20em`.
+L'élément `#box-2` doit avoir une valeur `flex-basis` de `20em`.
 
 ```js
 assert(code.match(/#box-2\s*?{\s*?.*?\s*?.*?\s*?flex-basis:\s*?20em;/g));

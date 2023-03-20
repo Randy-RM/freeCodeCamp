@@ -1,6 +1,6 @@
 ---
 id: 5a94fe3669fb03452672e45f
-title: Reduce Repetition Using the repeat Function
+title: Réduire les répétitions à l'aide de la fonction repeat
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pByETK/cQvqyHR'
 forumTopicId: 301133
@@ -9,37 +9,37 @@ dashedName: reduce-repetition-using-the-repeat-function
 
 # --description--
 
-When you used `grid-template-columns` and `grid-template-rows` to define the structure of a grid, you entered a value for each row or column you created.
+Lorsque vous avez utilisé `grid-template-columns` et `grid-template-rows` pour définir la structure d'une grille, vous avez saisi une valeur pour chaque ligne ou colonne que vous avez créée.
 
-Let's say you want a grid with 100 rows of the same height. It isn't very practical to insert 100 values individually. Fortunately, there's a better way - by using the `repeat` function to specify the number of times you want your column or row to be repeated, followed by a comma and the value you want to repeat.
+Disons que vous voulez une grille avec 100 lignes de la même hauteur. Il n'est pas très pratique d'insérer 100 valeurs individuellement. Heureusement, il y a un meilleur moyen - en utilisant la fonction `repeat` pour spécifier le nombre de fois que vous voulez que votre colonne ou ligne soit répétée, suivi d'une virgule et de la valeur que vous voulez répéter.
 
-Here's an example that would create the 100 row grid, each row at 50px tall.
+Voici un exemple qui créerait une grille de 100 lignes, chaque ligne ayant une hauteur de 50 pixels.
 
 ```css
 grid-template-rows: repeat(100, 50px);
 ```
 
-You can also repeat multiple values with the repeat function and insert the function amongst other values when defining a grid structure. Here's what that looks like:
+Vous pouvez également répéter plusieurs valeurs avec la fonction repeat et insérer la fonction parmi d'autres valeurs lorsque vous définissez une structure de grille. Voici à quoi cela ressemble :
 
 ```css
 grid-template-columns: repeat(2, 1fr 50px) 20px;
 ```
 
-This translates to:
+Cela se traduit par :
 
 ```css
 grid-template-columns: 1fr 50px 1fr 50px 20px;
 ```
 
-**Note:** The `1fr 50px` is repeated twice followed by 20px.
+**Note:** Le `1fr 50px` est répété deux fois suivi de 20px.
 
 # --instructions--
 
-Use `repeat` to remove repetition from the `grid-template-columns` property.
+Utilisez `repeat` pour supprimer la répétition de la propriété `grid-template-columns`.
 
 # --hints--
 
-`container` class should have a `grid-template-columns` property that is set to repeat 3 columns with the width of `1fr`.
+La classe `container` doit avoir une propriété `grid-template-columns` qui est définie pour répéter 3 colonnes avec la largeur de `1fr`.
 
 ```js
 assert(

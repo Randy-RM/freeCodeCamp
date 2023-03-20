@@ -1,6 +1,6 @@
 ---
 id: 587d78b0367417b2b2512b08
-title: Create a Media Query
+title: Créer une requête média (media query)
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pzrPu4/cqwKrtm'
 forumTopicId: 301139
@@ -9,45 +9,45 @@ dashedName: create-a-media-query
 
 # --description--
 
-Media Queries are a new technique introduced in CSS3 that change the presentation of content based on different viewport sizes. The viewport is a user's visible area of a web page, and is different depending on the device used to access the site.
+Les requêtes multimédias sont une nouvelle technique introduite dans CSS3 qui modifie la présentation du contenu en fonction de la taille des fenêtres d'affichage. La fenêtre d'affichage est la zone visible d'une page Web pour l'utilisateur. Elle varie en fonction du périphérique utilisé pour accéder au site.
 
-Media Queries consist of a media type, and if that media type matches the type of device the document is displayed on, the styles are applied. You can have as many selectors and styles inside your media query as you want.
+Les requêtes de médias se composent d'un type de média, et si ce type de média correspond au type de périphérique sur lequel le document est affiché, les styles sont appliqués. Vous pouvez avoir autant de sélecteurs et de styles que vous le souhaitez dans votre requête média.
 
-Here's an example of a media query that returns the content when the device's width is less than or equal to `100px`:
+Voici un exemple de requête média qui renvoie le contenu lorsque la largeur de l'appareil est inférieure ou égale à `100px` :
 
 ```css
 @media (max-width: 100px) { /* CSS Rules */ }
 ```
 
-and the following media query returns the content when the device's height is more than or equal to `350px`:
+et la requête média suivante renvoie le contenu lorsque la hauteur de l'appareil est supérieure ou égale à `350px` :
 
 ```css
 @media (min-height: 350px) { /* CSS Rules */ }
 ```
 
-Remember, the CSS inside the media query is applied only if the media type matches that of the device being used.
+N'oubliez pas que le CSS contenu dans la requête média n'est appliqué que si le type de média correspond à celui du périphérique utilisé.
 
 # --instructions--
 
-Add a media query, so that the `p` tag has a `font-size` of `10px` when the device's height is less than or equal to `800px`.
+Ajoutez une requête média, afin que la balise `p` ait une `font-size` de `10px` lorsque la hauteur du périphérique est inférieure ou égale à `800px`.
 
 # --hints--
 
-You should declare a `@media` query for devices with a `height` less than or equal to `800px`.
+Vous devez déclarer une requête `@media` pour les appareils dont la `hauteur` est inférieure ou égale à `800px`.
 
 ```js
 const media = new __helpers.CSSHelp(document).getCSSRules('media');
 assert(media.some(x => x.media?.mediaText?.includes('(max-height: 800px)')));
 ```
 
-Your `p` element should have a `font-size` of `10px` when the device `height` is less than or equal to `800px`.
+Votre élément `p` doit avoir une `font-size` de `10px` lorsque la `height` du périphérique est inférieure ou égale à `800px`.
 
 ```js
 const rules = new __helpers.CSSHelp(document).getRuleListsWithinMedia('(max-height: 800px)');
 assert(rules?.find(x => x.selectorText === 'p')?.style?.fontSize === "10px");
 ```
 
-Your `p` element should have an initial `font-size` of `20px` when the device `height` is more than `800px`.
+Votre élément `p` doit avoir une `font-size` initiale de `20px` lorsque la `height` du périphérique est supérieure à `800px`.
 
 ```js
 const ifPFirst = new __helpers.CSSHelp(document).getCSSRules()?.find(x => x?.selectorText === 'p' || x?.media);

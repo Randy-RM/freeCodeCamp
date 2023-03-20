@@ -1,6 +1,6 @@
 ---
 id: 587d781d367417b2b2512ac8
-title: Adjust the Hover State of an Anchor Tag
+title: Ajuster l'état de survol d'une balise d'ancrage
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cakRGcm'
 forumTopicId: 301035
@@ -9,9 +9,9 @@ dashedName: adjust-the-hover-state-of-an-anchor-tag
 
 # --description--
 
-This challenge will touch on the usage of pseudo-classes. A pseudo-class is a keyword that can be added to selectors, in order to select a specific state of the element.
+Ce défi portera sur l'utilisation des pseudo-classes. Une pseudo-classe est un mot clé qui peut être ajouté aux sélecteurs, afin de sélectionner un état spécifique de l'élément.
 
-For example, the styling of an anchor tag can be changed for its hover state using the `:hover` pseudo-class selector. Here's the CSS to change the `color` of the anchor tag to red during its hover state:
+Par exemple, le style d'une balise d'ancrage peut être modifié pour son état de survol en utilisant le sélecteur de pseudo-classe `:hover`. Voici la feuille de style CSS qui modifie le `color` de la balise d'ancrage en rouge lors de son survol :
 
 ```css
 a:hover {
@@ -21,17 +21,17 @@ a:hover {
 
 # --instructions--
 
-The code editor has a CSS rule to style all `a` tags black. Add a rule so that when the user hovers over the `a` tag, the `color` is blue.
+L'éditeur de code possède une règle CSS qui donne un style noir à toutes les balises `a`. Ajoutez une règle pour que, lorsque l'utilisateur survole la balise `a`, la `color` soit bleue.
 
 # --hints--
 
-The anchor tag `color` should remain black, only add CSS rules for the `:hover` state.
+La balise d'ancrage `color` doit rester noire, ajoutez seulement des règles CSS pour l'état `:hover`.
 
 ```js
 assert($('a').css('color') == 'rgb(0, 0, 0)');
 ```
 
-The anchor tag should have a `color` of blue on hover.
+La balise d'ancrage doit avoir une `color` bleue au survol.
 
 ```js
 assert(

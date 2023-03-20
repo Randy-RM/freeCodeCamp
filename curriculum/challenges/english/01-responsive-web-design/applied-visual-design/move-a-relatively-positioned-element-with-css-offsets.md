@@ -1,6 +1,6 @@
 ---
 id: 587d781e367417b2b2512aca
-title: Move a Relatively Positioned Element with CSS Offsets
+title: Déplacer un élément positionné de façon relative avec les décalages CSS
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/c9bQEA4'
 forumTopicId: 301065
@@ -9,21 +9,21 @@ dashedName: move-a-relatively-positioned-element-with-css-offsets
 
 # --description--
 
-The CSS offsets of `top` or `bottom`, and `left` or `right` tell the browser how far to offset an item relative to where it would sit in the normal flow of the document. You're offsetting an element away from a given spot, which moves the element away from the referenced side (effectively, the opposite direction). As you saw in the last challenge, using the `top` offset moved the `h2` downwards. Likewise, using a `left` offset moves an item to the right.
+Les décalages CSS de `top` ou `bottom`, et `left` ou `right` indiquent au navigateur de combien il doit décaler un élément par rapport à l'endroit où il se trouverait dans le flux normal du document. Vous décalez un élément par rapport à un endroit donné, ce qui éloigne l'élément du côté référencé (en fait, dans la direction opposée). Comme vous l'avez vu dans le dernier défi, l'utilisation du décalage `top` a déplacé le `h2` vers le bas. De même, l'utilisation d'un décalage `gauche` déplace un élément vers la droite.
 
 # --instructions--
 
-Use CSS offsets to move the `h2` 15 pixels to the right and 10 pixels up.
+Utilisez les décalages CSS pour déplacer le `h2` de 15 pixels vers la droite et de 10 pixels vers le haut.
 
 # --hints--
 
-Your code should use a CSS offset to relatively position the `h2` 10px upwards. In other words, move it 10px away from the `bottom` of where it normally sits.
+Votre code doit utiliser un décalage CSS pour positionner le `h2` 10px plus haut. En d'autres termes, déplacez-le de 10px par rapport au `bas` où il se trouve normalement.
 
 ```js
 assert($('h2').css('bottom') == '10px');
 ```
 
-Your code should use a CSS offset to relatively position the `h2` 15px towards the right. In other words, move it 15px away from the `left` of where it normally sits.
+Votre code doit utiliser un décalage CSS pour positionner le `h2` 15px relativement à droite. En d'autres termes, il faut le déplacer de 15px par rapport à sa position normale.
 
 ```js
 assert($('h2').css('left') == '15px');
@@ -44,9 +44,9 @@ assert($('h2').css('left') == '15px');
 </style>
 </head>
 <body>
-  <h1>On Being Well-Positioned</h1>
-  <h2>Move me!</h2>
-  <p>I still think the h2 is where it normally sits.</p>
+  <h1>Être bien positionné</h1>
+  <h2>Bougez-moi !</h2>
+  <p>Je pense toujours que le h2 est là où il se trouve normalement.</p>
 </body>
 ```
 
@@ -63,8 +63,8 @@ assert($('h2').css('left') == '15px');
 </style>
 </head>
 <body>
-  <h1>On Being Well-Positioned</h1>
-  <h2>Move me!</h2>
-  <p>I still think the h2 is where it normally sits.</p>
+  <h1>Être bien positionné</h1>
+  <h2>Bougez-moi !</h2>
+  <p>Je pense toujours que le h2 est là où il se trouve normalement.</p>
 </body>
 ```

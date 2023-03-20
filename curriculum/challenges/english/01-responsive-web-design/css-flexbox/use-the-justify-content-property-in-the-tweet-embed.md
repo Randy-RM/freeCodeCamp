@@ -1,6 +1,6 @@
 ---
 id: 587d78ac367417b2b2512af7
-title: Use the justify-content Property in the Tweet Embed
+title: Utilisez la propriété justify-content dans le Tweet embarqué
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVaDAv/c43GgTa'
 forumTopicId: 301115
@@ -9,21 +9,21 @@ dashedName: use-the-justify-content-property-in-the-tweet-embed
 
 # --description--
 
-The last challenge showed an example of the `justify-content` property. For the tweet embed, this property can be applied to align the items in the `.profile-name` element.
+Le dernier défi montrait un exemple de la propriété `justify-content`. Pour le tweet embarqué, cette propriété peut être appliquée pour aligner les éléments de l'élément `.profile-name`.
 
 # --instructions--
 
-Add the CSS property `justify-content` to the header's `.profile-name` element and set the value to any of the options from the last challenge.
+Ajoutez la propriété CSS `justify-content` à l'élément `.profile-name` de l'en-tête et définissez la valeur de l'une des options du dernier défi.
 
 # --hints--
 
-Your `.follow-btn` should be rendered on the page. Be sure to turn off any extensions such as ad blockers.
+Votre `.follow-btn` devrait être rendu sur la page. Assurez-vous de désactiver toute extension telle que les bloqueurs de publicité.
 
 ```js
 assert($('.follow-btn').length > 0 && $('.follow-btn').css('display') !== 'none');
 ```
 
-The `.profile-name` element should have the `justify-content` property set to any of these values: `center`, `flex-start`, `flex-end`, `space-between`, `space-around`, or `space-evenly`.
+L'élément `.profile-name` doit avoir la propriété `justify-content` définie sur l'une de ces valeurs : `center`, `flex-start`, `flex-end`, `space-between`, `space-around`, ou `space-evenly`.
 
 ```js
 assert(
@@ -104,11 +104,11 @@ assert(
     <h4>@ossia</h4>
   </div>
   <div class="follow-btn">
-    <button>Follow</button>
+    <button>Suivre</button>
   </div>
 </header>
 <div id="inner">
-  <p>I meet so many people who are in search of that one trick that will help them work smart. Even if you work smart, you still have to work hard.</p>
+  <p>Je rencontre tellement de gens qui sont à la recherche de l'astuce qui les aidera à travailler intelligemment. Même si vous travaillez intelligemment, vous devez toujours travailler dur.</p>
   <span class="date">1:32 PM - 12 Jan 2018</span>
   <hr>
 </div>
@@ -122,9 +122,9 @@ assert(
     </div>
   </div>
   <div class="cta">
-    <button class="share-btn">Share</button>
+    <button class="share-btn">Partager</button>
     <button class="retweet-btn">Retweet</button>
-    <button class="like-btn">Like</button>
+    <button class="like-btn">J'aime</button>
   </div>
 </footer>
 ```
@@ -198,11 +198,11 @@ assert(
     <h4>@ossia</h4>
   </div>
   <div class="follow-btn">
-    <button>Follow</button>
+    <button>Suivre</button>
   </div>
 </header>
 <div id="inner">
-  <p>I meet so many people who are in search of that one trick that will help them work smart. Even if you work smart, you still have to work hard.</p>
+  <p>Je rencontre tellement de gens qui sont à la recherche de l'astuce qui les aidera à travailler intelligemment. Même si vous travaillez intelligemment, vous devez toujours travailler dur.</p>
   <span class="date">1:32 PM - 12 Jan 2018</span>
   <hr>
 </div>
@@ -216,9 +216,9 @@ assert(
     </div>
   </div>
   <div class="cta">
-    <button class="share-btn">Share</button>
+    <button class="share-btn">Partager</button>
     <button class="retweet-btn">Retweet</button>
-    <button class="like-btn">Like</button>
+    <button class="like-btn">J'aime</button>
   </div>
 </footer>
 ```
