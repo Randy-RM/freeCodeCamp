@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from '@reach/router';
 import { Grid, Row, Col } from '@freecodecamp/react-bootstrap';
 import Helmet from 'react-helmet';
@@ -91,6 +91,9 @@ export function ShowLearningPathDetail(
 
   useEffect(() => {
     void getMoodleCourses();
+    return () => {
+      setMoodleCourses([]); // cleanup useEffect to perform a React state update
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -100,7 +103,11 @@ export function ShowLearningPathDetail(
 
   return (
     <>
-      <Helmet title={`AWS Cours | Kadea Online`} />
+      <Helmet
+        title={`${
+          categoryName ? categoryName.replace(/-/g, ' ') : ''
+        } | Kadea Online`}
+      />
       <Grid fluid={false} className='bg-light'>
         <Spacer size={1} />
         <div>
@@ -142,19 +149,17 @@ export function ShowLearningPathDetail(
                 <div className='card-course-detail-container'>
                   {moodleCourses.map((course, index) => {
                     return (
-                      <>
-                        <CourseCard
-                          key={index}
-                          icon={PhBookBookmark}
-                          isAvailable={true}
-                          isSignedIn={isSignedIn}
-                          title={`${course.displayname}`}
-                          buttonText={`Suivre le cours  `}
-                          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                          link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
-                          description={course.summary}
-                        />
-                      </>
+                      <CourseCard
+                        key={index + course.id}
+                        icon={PhBookBookmark}
+                        isAvailable={true}
+                        isSignedIn={isSignedIn}
+                        title={`${course.displayname}`}
+                        buttonText={`Suivre le cours  `}
+                        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                        link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
+                        description={course.summary}
+                      />
                     );
                   })}
                 </div>

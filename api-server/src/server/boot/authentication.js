@@ -93,6 +93,7 @@ module.exports = function enableAuthentication(app) {
        * https://www.linkedin.com/pulse/how-migrate-from-querystring-urlsearchparams-nodejs-vladim%C3%ADr-gorej/?trk=articles_directory
        */
       const searchString = new URLSearchParams({
+        // federated: 'federated',
         client_id: process.env.AUTH0_CLIENT_ID,
         returnTo: returnTo
       }).toString();
