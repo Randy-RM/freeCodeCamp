@@ -1,15 +1,15 @@
-import React /*, { useState, useEffect }*/ from 'react';
+import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { Grid } from '@freecodecamp/react-bootstrap';
-// import { getExternalCoursesCatalog } from '../utils/ajax';
+import { getExternalCoursesCatalog } from '../utils/ajax';
 import { createFlashMessage } from '../components/Flash/redux';
 import { Loader, Spacer } from '../components/helpers';
 // import '../components/CourseCard/courses-card.css';
 import LaptopIcon from '../assets/images/laptop.svg';
 import CloudShield from '../assets/images/cloudShield.svg';
-// import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
+import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
 import CourseCard from '../components/CourseCard/course-card';
 
 import {
@@ -20,9 +20,9 @@ import {
 } from '../redux';
 
 import { User } from '../redux/prop-types';
-// import envData from '../../../config/env.json';
+import envData from '../../../config/env.json';
 
-// const { moodleApiBaseUrl, moodleApiToken } = envData;
+const { moodleApiBaseUrl, moodleApiToken } = envData;
 
 // TODO: update types for actions
 interface ShowLearningPathProps {
@@ -35,13 +35,13 @@ interface ShowLearningPathProps {
   location?: { state: { description: string } };
 }
 
-// type MoodleCourse = {
-//   id: number;
-//   name: string;
-//   description: string;
-//   coursecount: number;
-//   visible: number;
-// };
+type MoodleCourse = {
+  id: number;
+  name: string;
+  description: string;
+  coursecount: number;
+  visible: number;
+};
 
 const mapStateToProps = createSelector(
   signInLoadingSelector,
@@ -61,28 +61,28 @@ const mapDispatchToProps = {
 
 export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
   const { showLoading, isSignedIn } = props;
-  // const [moodleCoursesCategories, setMoodleCoursesCategories] =
-  //   useState<MoodleCourse[]>();
-  // const getMoodleCoursesCategories = async () => {
-  //   const moodleCategoriesCatalogue = await getExternalCoursesCatalog<
-  //     MoodleCourse[]
-  //   >(
-  //     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-  //     `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_categories&moodlewsrestformat=json`
-  //   );
-  //   if (moodleCategoriesCatalogue != null) {
-  //     setMoodleCoursesCategories(moodleCategoriesCatalogue);
-  //   } else {
-  //     setMoodleCoursesCategories([]);
-  //   }
-  // };
+  const [moodleCoursesCategories, setMoodleCoursesCategories] =
+    useState<MoodleCourse[]>();
+  const getMoodleCoursesCategories = async () => {
+    const moodleCategoriesCatalogue = await getExternalCoursesCatalog<
+      MoodleCourse[]
+    >(
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_categories&moodlewsrestformat=json`
+    );
+    if (moodleCategoriesCatalogue != null) {
+      setMoodleCoursesCategories(moodleCategoriesCatalogue);
+    } else {
+      setMoodleCoursesCategories([]);
+    }
+  };
 
-  // useEffect(() => {
-  //   void getMoodleCoursesCategories();
-  //   return () => {
-  //     setMoodleCoursesCategories([]); // cleanup useEffect to perform a React state update
-  //   };
-  // }, []);
+  useEffect(() => {
+    void getMoodleCoursesCategories();
+    return () => {
+      setMoodleCoursesCategories([]); // cleanup useEffect to perform a React state update
+    };
+  }, []);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
@@ -136,7 +136,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                   de solutions basées sur le cloud.`}
               />
 
-              {/* {moodleCoursesCategories &&
+              {moodleCoursesCategories &&
                 moodleCoursesCategories.length >= 0 &&
                 moodleCoursesCategories.map((category, index) => {
                   return (
@@ -155,7 +155,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                       description={category.description}
                     />
                   );
-                })} */}
+                })}
             </div>
           </div>
         </main>
