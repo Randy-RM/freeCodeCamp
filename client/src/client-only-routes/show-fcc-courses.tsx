@@ -65,14 +65,14 @@ export function ShowFccCourses(props: ShowFccCoursesProps): JSX.Element {
   return (
     <>
       {/* <Helmet title={`${t('buttons.settings')} | Code Learning Plateform`} /> */}
-      <Helmet title={`Parcours Responsive Web Design | Kadea Online`} />
+      <Helmet title={`Parcours Développement Web | Kadea Online`} />
       <Grid fluid={false} className='bg-light'>
         <Spacer size={1} />
         <div>
           <Row className='super-block-intro-page'>
             <Col md={12} sm={12} xs={12}>
               <p className='text-love-light fw-bold'>Parcours</p>
-              <h1 className='big-heading'>Responsive Web Design</h1>
+              <h1 className='big-heading'>Développement Web</h1>
               <Spacer size={1} />
             </Col>
             <Col className='' md={12} sm={12} xs={12}>

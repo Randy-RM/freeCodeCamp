@@ -168,7 +168,7 @@ export function MapFccCourses({
    * superblock
    */
   const data: MapFccCoursesData = useStaticQuery(graphql`
-    query SuperBlockNodes {
+    query SuperBlockNodesFccCourses {
       allChallengeNode(
         sort: { fields: [challenge___superOrder] }
         filter: { challenge: { order: { eq: 0 }, challengeOrder: { eq: 0 } } }

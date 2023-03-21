@@ -9,6 +9,11 @@ import './course-card.css';
 
 const { apiLocation } = envData;
 
+enum CardStyle {
+  Path = 'parcours',
+  Courses = 'cours'
+}
+
 interface LandingDetailsProps {
   isSignedIn?: boolean;
   isAvailable: boolean;
@@ -19,6 +24,7 @@ interface LandingDetailsProps {
   alt?: string;
   buttonText?: string;
   link?: string;
+  cardType?: string;
 }
 
 const CourseCard = ({
@@ -30,12 +36,23 @@ const CourseCard = ({
   sponsorIcon,
   alt,
   buttonText,
-  link
+  link,
+  cardType
 }: LandingDetailsProps): JSX.Element => {
   return (
     <div className='card-course-detail-back standard-radius-5 card-outlin-border bg-light'>
       <div className='card-course-detail-unit position-relative'>
         <div className='card-outlin-border bg-light standard-radius-5'>
+          {cardType && cardType == CardStyle.Path ? (
+            <div className='bg-pretty-dark'>
+              <div className='card-course-detail-item text-light'>Parcours</div>
+            </div>
+          ) : (
+            <div className='bg-love-light'>
+              <div className='card-course-detail-item text-light'>Cours</div>
+            </div>
+          )}
+
           <div className='card-course-detail-header'>
             {sponsorIcon && (
               <div className='card-course-detail-logo-sponsor pull'>

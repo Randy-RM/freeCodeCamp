@@ -10,7 +10,6 @@ import { Loader, Spacer } from '../components/helpers';
 import LaptopIcon from '../assets/images/laptop.svg';
 import CloudShield from '../assets/images/cloudShield.svg';
 import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
-import LaediesActIcon from '../assets/images/partners/ladies-act-logo.png';
 import CourseCard from '../components/CourseCard/course-card';
 
 import {
@@ -108,13 +107,13 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
             <div className='card-course-detail-container'>
               <CourseCard
                 icon={LaptopIcon}
-                sponsorIcon={LaediesActIcon}
                 alt=''
                 isAvailable={true}
                 isSignedIn={isSignedIn}
-                title={`Responsive Web Design`}
+                title={`Développement Web`}
                 buttonText={`Suivre le parcours  `}
-                link={`/learning-path/responsive-web-design`}
+                link={`/learning-path/developpement-web`}
+                cardType='parcours'
                 description={`
                 Dans ce parcours en ligne, tu apprendras les langages que les développeurs 
                 utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
@@ -130,6 +129,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                 title={`Parcours AWS`}
                 buttonText={`Suivre le parcours  `}
                 link={`/aws-courses`}
+                cardType='parcours'
                 description={`Ce parcours est conçu pour montrer aux participants comment 
                   optimiser l'utilisation du cloud AWS grâce à la compréhension 
                   de ces nombreux services et de leur intégration dans la création 
@@ -151,6 +151,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                       link={`/learning-path/${category.name
                         .replace(/ /g, '-')
                         .replace(/&amp;/g, 'et')}/${category.id}`}
+                      cardType='parcours'
                       description={category.description}
                     />
                   );
