@@ -45,11 +45,15 @@ const CourseCard = ({
         <div className='card-outlin-border bg-light standard-radius-5'>
           {cardType && cardType == CardStyle.Path ? (
             <div className='bg-pretty-dark'>
-              <div className='card-course-detail-item text-light'>Parcours</div>
+              <div className='card-course-detail-item text-light fw-bold'>
+                Parcours
+              </div>
             </div>
           ) : (
             <div className='bg-love-light'>
-              <div className='card-course-detail-item text-light'>Cours</div>
+              <div className='card-course-detail-item text-light fw-bold'>
+                Cours
+              </div>
             </div>
           )}
 
