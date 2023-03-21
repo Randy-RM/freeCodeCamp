@@ -1,15 +1,15 @@
 ---
 id: 587d7791367417b2b2512ab5
-title: Adjust the Height of an Element Using the height Property
+title: Ajuster la hauteur d'un élément à l'aide de la propriété height
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cEDaDTN'
+videoUrl: "https://scrimba.com/c/cEDaDTN"
 forumTopicId: 301034
 dashedName: adjust-the-height-of-an-element-using-the-height-property
 ---
 
 # --description--
 
-You can specify the height of an element using the `height` property in CSS, similar to the `width` property. Here's an example that changes the height of an image to 20px:
+Vous pouvez spécifier la hauteur d'un élément en utilisant la propriété `height` en CSS, comme pour la propriété `width`. Voici un exemple qui modifie la hauteur d'une image à 20px :
 
 ```css
 img {
@@ -19,19 +19,19 @@ img {
 
 # --instructions--
 
-Add a `height` property to the `h4` tag and set it to 25px.
+Ajoutez une propriété `height` à la balise `h4` et définissez-la à 25px.
 
-**Note:** You may need to be at 100% zoom to pass the test on this challenge.
+**Note:** Il se peut que vous ayez besoin d'un zoom à 100% pour réussir le test de ce défi.
 
 # --hints--
 
-Your code should change the `h4` `height` property to a value of 25 pixels.
+Votre code devrait changer la propriété `h4` `height` à une valeur de 25 pixels.
 
 ```js
 assert(
-  Math.round(document.querySelector('h4').getBoundingClientRect().height) ===
+  Math.round(document.querySelector("h4").getBoundingClientRect().height) ===
     25 &&
-    /h4{\S*height:25px(;\S*}|})/.test($('style').text().replace(/\s/g, ''))
+    /h4{\S*height:25px(;\S*}|})/.test($("style").text().replace(/\s/g, ""))
 );
 ```
 
@@ -43,7 +43,6 @@ assert(
 <style>
   h4 {
     text-align: center;
-
   }
   p {
     text-align: justify;
@@ -67,11 +66,24 @@ assert(
   <div class="cardContent">
     <div class="cardText">
       <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University.</p>
+      <p>
+        Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient
+        étudiants en doctorat à l'université de Stanford
+      </p>
     </div>
     <div class="cardLinks">
-      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a>
-      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
+      <a
+        href="https://en.wikipedia.org/wiki/Larry_Page"
+        target="_blank"
+        class="links"
+        >Larry Page</a
+      >
+      <a
+        href="https://en.wikipedia.org/wiki/Sergey_Brin"
+        target="_blank"
+        class="links"
+        >Sergey Brin</a
+      >
     </div>
   </div>
 </div>
@@ -107,11 +119,24 @@ assert(
   <div class="cardContent">
     <div class="cardText">
       <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University.</p>
+      <p>
+        Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient
+        étudiants en doctorat à l'université de Stanford
+      </p>
     </div>
     <div class="cardLinks">
-      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a>
-      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
+      <a
+        href="https://en.wikipedia.org/wiki/Larry_Page"
+        target="_blank"
+        class="links"
+        >Larry Page</a
+      >
+      <a
+        href="https://en.wikipedia.org/wiki/Sergey_Brin"
+        target="_blank"
+        class="links"
+        >Sergey Brin</a
+      >
     </div>
   </div>
 </div>

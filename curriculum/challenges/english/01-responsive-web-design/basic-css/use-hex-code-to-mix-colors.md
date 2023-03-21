@@ -1,75 +1,81 @@
 ---
 id: bad87fee1348bd9aedf08721
-title: Use Hex Code to Mix Colors
+title: Utilisez le code hexadécimal pour mélanger les couleurs
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cK89PhP'
+videoUrl: "https://scrimba.com/c/cK89PhP"
 forumTopicId: 18359
 dashedName: use-hex-code-to-mix-colors
 ---
 
 # --description--
 
-To review, hex codes use 6 hexadecimal digits to represent colors, two each for red (R), green (G), and blue (B) components.
+Pour rappel, les codes hexadécimaux utilisent 6 chiffres hexadécimaux pour représenter les couleurs, deux pour les composantes rouge (R), verte (G) et bleue (B).
 
-From these three pure colors (red, green, and blue), we can vary the amounts of each to create over 16 million other colors!
+À partir de ces trois couleurs pures (rouge, vert et bleu), nous pouvons faire varier les quantités de chacune d'elles pour créer plus de 16 millions d'autres couleurs !
 
-For example, orange is pure red, mixed with some green, and no blue. In hex code, this translates to being `#FFA500`.
+Par exemple, l'orange est un rouge pur, mélangé à un peu de vert et à aucun bleu. En code hexadécimal, cela se traduit par `#FFA500`.
 
-The digit `0` is the lowest number in hex code, and represents a complete absence of color.
+Le chiffre `0` est le plus petit chiffre du code hexadécimal et représente une absence totale de couleur.
 
-The digit `F` is the highest number in hex code, and represents the maximum possible brightness.
+Le chiffre `F` est le chiffre le plus élevé du code hexadécimal et représente la luminosité maximale possible.
 
 # --instructions--
 
-Replace the color words in our `style` element with their correct hex codes.
+Remplacez les mots de couleur dans notre élément `style` par leurs codes hexadécimaux corrects.
 
 <table class='table table-striped'><tbody><tr><th>Color</th><th>Hex Code</th></tr><tr><td>Dodger Blue</td><td><code>#1E90FF</code></td></tr><tr><td>Green</td><td><code>#00FF00</code></td></tr><tr><td>Orange</td><td><code>#FFA500</code></td></tr><tr><td>Red</td><td><code>#FF0000</code></td></tr></tbody></table>
 
 # --hints--
 
-Your `h1` element with the text `I am red!` should be given the `color` red.
+Votre élément `h1` avec le texte `Je suis rouge!` devrait recevoir la `couleur` rouge.
 
 ```js
-assert($('.red-text').css('color') === 'rgb(255, 0, 0)');
+assert($(".red-text").css("color") === "rgb(255, 0, 0)");
 ```
 
-The `hex code` for the color red should be used instead of the word `red`.
+Le `code hex` de la couleur rouge doit être utilisé à la place du mot `red`.
 
 ```js
-assert(code.match(/\.red-text\s*?{\s*?color\s*:\s*?(#FF0000|#F00)\s*?;?\s*?}/gi));
+assert(
+  code.match(/\.red-text\s*?{\s*?color\s*:\s*?(#FF0000|#F00)\s*?;?\s*?}/gi)
+);
 ```
 
-Your `h1` element with the text `I am green!` should be given the `color` green.
+Votre élément `h1` avec le texte `Je suis vert!` devrait recevoir la `couleur` verte.
 
 ```js
-assert($('.green-text').css('color') === 'rgb(0, 255, 0)');
+assert($(".green-text").css("color") === "rgb(0, 255, 0)");
 ```
 
-The `hex code` for the color green should be used instead of the word `green`.
+Le `code hex` de la couleur verte doit être utilisé à la place du mot `green`.
 
 ```js
-assert(code.match(/\.green-text\s*?{\s*?color\s*:\s*?(#00FF00|#0F0)\s*?;?\s*?}/gi));
+assert(
+  code.match(/\.green-text\s*?{\s*?color\s*:\s*?(#00FF00|#0F0)\s*?;?\s*?}/gi)
+);
 ```
 
-Your `h1` element with the text `I am dodger blue!` should be given the `color` dodger blue.
+Votre élément `h1` avec le texte `Je suis dodger blue!` devrait recevoir la `couleur` dodger blue.
 
 ```js
-assert($('.dodger-blue-text').css('color') === 'rgb(30, 144, 255)');
+assert($(".dodger-blue-text").css("color") === "rgb(30, 144, 255)");
 ```
 
-The `hex code` for the color dodger blue should be used instead of the word `dodgerblue`.
+Le `code hex` de la couleur dodger blue doit être utilisé à la place du mot `dodgerblue`.
 
 ```js
-assert(code.match(/\.dodger-blue-text\s*?{\s*?color\s*:\s*?#1E90FF\s*?;?\s*?}/gi));
+assert(
+  code.match(/\.dodger-blue-text\s*?{\s*?color\s*:\s*?#1E90FF\s*?;?\s*?}/gi)
+);
 ```
 
-Your `h1` element with the text `I am orange!` should be given the `color` orange.
+Votre élément `h1` avec le texte `Je suis orange!` devrait recevoir la `couleur` orange.
 
 ```js
-assert($('.orange-text').css('color') === 'rgb(255, 165, 0)');
+assert($(".orange-text").css("color") === "rgb(255, 165, 0)");
 ```
 
-The `hex code` for the color orange should be used instead of the word `orange`.
+Le `code hex`de la couleur orange doit être utilisé à la place du mot `orange`.
 
 ```js
 assert(code.match(/\.orange-text\s*?{\s*?color\s*:\s*?#FFA500\s*?;?\s*?}/gi));
@@ -95,13 +101,14 @@ assert(code.match(/\.orange-text\s*?{\s*?color\s*:\s*?#FFA500\s*?;?\s*?}/gi));
   }
 </style>
 
-<h1 class="red-text">I am red!</h1>
+<h1 class="red-text">Je suis rouge</h1>
 
-<h1 class="green-text">I am green!</h1>
+<h1 class="green-text">
+  Je suis vert!
+  <h1 class="dodger-blue-text">Je suis dodger blue!</h1>
 
-<h1 class="dodger-blue-text">I am dodger blue!</h1>
-
-<h1 class="orange-text">I am orange!</h1>
+  <h1 class="orange-text">Je suis orange!</h1>
+</h1>
 ```
 
 # --solutions--
@@ -109,24 +116,25 @@ assert(code.match(/\.orange-text\s*?{\s*?color\s*:\s*?#FFA500\s*?;?\s*?}/gi));
 ```html
 <style>
   .red-text {
-    color: #FF0000;
+    color: #ff0000;
   }
   .green-text {
-    color: #00FF00;
+    color: #00ff00;
   }
   .dodger-blue-text {
-    color: #1E90FF;
+    color: #1e90ff;
   }
   .orange-text {
-    color: #FFA500;
+    color: #ffa500;
   }
 </style>
 
-<h1 class="red-text">I am red!</h1>
+<h1 class="red-text">Je suis rouge</h1>
 
-<h1 class="green-text">I am green!</h1>
+<h1 class="green-text">
+  Je suis vert!
+  <h1 class="dodger-blue-text">Je suis dodger blue!</h1>
 
-<h1 class="dodger-blue-text">I am dodger blue!</h1>
-
-<h1 class="orange-text">I am orange!</h1>
+  <h1 class="orange-text">Je suis orange!</h1>
+</h1>
 ```

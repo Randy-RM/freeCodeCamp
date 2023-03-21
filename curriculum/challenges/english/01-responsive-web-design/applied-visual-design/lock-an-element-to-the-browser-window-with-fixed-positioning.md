@@ -1,6 +1,6 @@
 ---
 id: 587d781e367417b2b2512acc
-title: Lock an Element to the Browser Window with Fixed Positioning
+title: Verrouiller un élément dans la fenêtre du navigateur avec un positionnement fixe
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/c2MDNUR'
 forumTopicId: 301061
@@ -9,29 +9,29 @@ dashedName: lock-an-element-to-the-browser-window-with-fixed-positioning
 
 # --description--
 
-The next layout scheme that CSS offers is the `fixed` position, which is a type of absolute positioning that locks an element relative to the browser window. Similar to absolute positioning, it's used with the CSS offset properties and also removes the element from the normal flow of the document. Other items no longer "realize" where it is positioned, which may require some layout adjustments elsewhere.
+Le schéma de disposition suivant proposé par CSS est la position `fixed`, qui est un type de positionnement absolu qui verrouille un élément par rapport à la fenêtre du navigateur. Comme le positionnement absolu, il est utilisé avec les propriétés de décalage CSS et supprime également l'élément du flux normal du document. L'élément ne "réalise" plus où il est positionné, ce qui peut nécessiter quelques ajustements de mise en page ailleurs.
 
-One key difference between the `fixed` and `absolute` positions is that an element with a fixed position won't move when the user scrolls.
+Une différence essentielle entre les positions `fixed` et `absolute` est qu'un élément avec une position fixe ne se déplacera pas lorsque l'utilisateur fait défiler la page.
 
 # --instructions--
 
-The navigation bar in the code is labeled with an id of `navbar`. Change its `position` to `fixed`, and offset it 0 pixels from the `top` and 0 pixels from the `left`. After you have added the code, scroll the preview window to see how the navigation stays in place.
+La barre de navigation dans le code est étiquetée avec un id de `navbar`. Changez sa `position` en `fixed`, et décalez-la de 0 pixel du `top` et de 0 pixel de la `left`. Après avoir ajouté le code, faites défiler la fenêtre d'aperçu pour voir comment la navigation reste en place.
 
 # --hints--
 
-The `#navbar` element should have a `position` set to `fixed`.
+L'élément `#navbar` doit avoir une `position` définie sur `fixed`.
 
 ```js
 assert($('#navbar').css('position') == 'fixed');
 ```
 
-Your code should use the `top` CSS offset of 0 pixels on the `#navbar` element.
+Votre code doit utiliser le décalage CSS `top` de 0 pixel sur l'élément `#navbar`.
 
 ```js
 assert($('#navbar').css('top') == '0px');
 ```
 
-Your code should use the `left` CSS offset of 0 pixels on the `#navbar` element.
+Votre code doit utiliser le décalage CSS `left` de 0 pixel sur l'élément `#navbar`.
 
 ```js
 assert($('#navbar').css('left') == '0px');
@@ -67,15 +67,15 @@ assert($('#navbar').css('left') == '0px');
 </style>
 <body>
   <header>
-    <h1>Welcome!</h1>
+    <h1>Bienvenu.e!</h1>
     <nav id="navbar">
       <ul>
-        <li><a href="">Home</a></li>
+        <li><a href="">Accueil</a></li>
         <li><a href="">Contact</a></li>
       </ul>
     </nav>
   </header>
-  <p>I shift up when the #navbar is fixed to the browser window.</p>
+  <p>Je me décale quand la #navbar est fixée à la fenêtre du navigateur.</p>
 </body>
 ```
 
@@ -107,14 +107,14 @@ assert($('#navbar').css('left') == '0px');
 </style>
 <body>
   <header>
-    <h1>Welcome!</h1>
+    <h1>Bienvenu.e!</h1>
     <nav id="navbar">
       <ul>
-        <li><a href="">Home</a></li>
+        <li><a href="">Accueil</a></li>
         <li><a href="">Contact</a></li>
       </ul>
     </nav>
   </header>
-  <p>I shift up when the #navbar is fixed to the browser window.</p>
+  <p>Je me décale quand la #navbar est fixée à la fenêtre du navigateur.</p>
 </body>
 ```

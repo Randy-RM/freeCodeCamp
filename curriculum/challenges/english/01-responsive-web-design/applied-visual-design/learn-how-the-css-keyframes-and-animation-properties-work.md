@@ -1,6 +1,6 @@
 ---
 id: 587d78a7367417b2b2512adf
-title: Learn How the CSS @keyframes and animation Properties Work
+title: Apprenez comment fonctionnent les propriétés CSS @keyframes et animation.
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cakprhv'
 forumTopicId: 301059
@@ -9,13 +9,13 @@ dashedName: learn-how-the-css-keyframes-and-animation-properties-work
 
 # --description--
 
-To animate an element, you need to know about the animation properties and the `@keyframes` rule. The animation properties control how the animation should behave and the `@keyframes` rule controls what happens during that animation. There are eight animation properties in total. This challenge will keep it simple and cover the two most important ones first:
+Pour animer un élément, vous devez connaître les propriétés d'animation et la règle `@keyframes`. Les propriétés d'animation contrôlent le comportement de l'animation et la règle `@keyframes` contrôle ce qui se passe pendant cette animation. Il y a huit propriétés d'animation au total. Dans ce défi, nous allons rester simples et couvrir les deux propriétés les plus importantes en premier :
 
-`animation-name` sets the name of the animation, which is later used by `@keyframes` to tell CSS which rules go with which animations.
+`animation-name` définit le nom de l'animation, qui est ensuite utilisé par `@keyframes` pour indiquer à CSS quelles règles vont avec quelles animations.
 
-`animation-duration` sets the length of time for the animation.
+`animation-duration` définit la durée de l'animation.
 
-`@keyframes` is how to specify exactly what happens within the animation over the duration. This is done by giving CSS properties for specific "frames" during the animation, with percentages ranging from 0% to 100%. If you compare this to a movie, the CSS properties for 0% is how the element displays in the opening scene. The CSS properties for 100% is how the element appears at the end, right before the credits roll. Then CSS applies the magic to transition the element over the given duration to act out the scene. Here's an example to illustrate the usage of `@keyframes` and the animation properties:
+`@keyframes` permet de spécifier exactement ce qui se passe dans l'animation pendant cette durée. Cela se fait en donnant des propriétés CSS pour des "cadres" spécifiques pendant l'animation, avec des pourcentages allant de 0% à 100%. Si vous comparez cela à un film, les propriétés CSS pour 0% correspondent à l'affichage de l'élément dans la scène d'ouverture. Les propriétés CSS pour 100 % correspondent à la façon dont l'élément apparaît à la fin, juste avant le générique de fin. Ensuite, CSS applique la magie de la transition de l'élément pendant la durée donnée pour jouer la scène. Voici un exemple pour illustrer l'utilisation des `@keyframes` et des propriétés d'animation :
 
 ```css
 #anim {
@@ -33,45 +33,45 @@ To animate an element, you need to know about the animation properties and the `
 }
 ```
 
-For the element with the `anim` id, the code snippet above sets the `animation-name` to `colorful` and sets the `animation-duration` to 3 seconds. Then the `@keyframes` rule links to the animation properties with the name `colorful`. It sets the color to blue at the beginning of the animation (0%) which will transition to yellow by the end of the animation (100%). You aren't limited to only beginning-end transitions, you can set properties for the element for any percentage between 0% and 100%.
+Pour l'élément avec l'identifiant `anim`, le bout de code ci-dessus définit le `animation-name` à `colorful` et définit le `animation-duration` à 3 secondes. Ensuite, la règle `@keyframes` établit un lien avec les propriétés de l'animation portant le nom `colorful`. Elle définit la couleur bleue au début de l'animation (0 %), qui passera au jaune à la fin de l'animation (100 %). Vous n'êtes pas limité aux transitions début-fin, vous pouvez définir les propriétés de l'élément pour n'importe quel pourcentage entre 0 % et 100 %.
 
 # --instructions--
 
-Create an animation for the element with the id `rect`, by setting the `animation-name` to `rainbow` and the `animation-duration` to 4 seconds. Next, declare a `@keyframes` rule, and set the `background-color` at the beginning of the animation (`0%`) to blue, the middle of the animation (`50%`) to green, and the end of the animation (`100%`) to yellow.
+Créez une animation pour l'élément avec l'id `rect`, en définissant le `animation-name` à `rainbow` et le `animation-duration` à 4 secondes. Ensuite, déclarez une règle `@keyframes`, et définissez le `background-color` au début de l'animation (`0%`) sur bleu, au milieu de l'animation (`50%`) sur vert, et à la fin de l'animation (`100%`) sur jaune.
 
 # --hints--
 
-The element with id of `rect` should have an `animation-name` property with a value of `rainbow`.
+L'élément avec l'id de `rect` devrait avoir une propriété `animation-name` avec une valeur de `rainbow`.
 
 ```js
 assert($('#rect').css('animation-name') == 'rainbow');
 ```
 
-The element with id of `rect` should have an `animation-duration` property with a value of 4s.
+L'élément avec l'id de `rect` devrait avoir une propriété `animation-duration` avec une valeur de 4s.
 
 ```js
 assert($('#rect').css('animation-duration') == '4s');
 ```
 
-The `@keyframes` rule should use the `animation-name` of `rainbow`.
+La règle `@keyframes` doit utiliser le `animation-name` de `rainbow`.
 
 ```js
 assert(code.match(/@keyframes\s+?rainbow\s*?{/g));
 ```
 
-The `@keyframes` rule for `rainbow` should use a `background-color` of `blue` at 0%.
+La règle `@keyframes` pour `rainbow` devrait utiliser un `background-color` de `blue` à 0%.
 
 ```js
 assert(code.match(/0%\s*?{\s*?background-color:\s*?blue;\s*?}/gi));
 ```
 
-The `@keyframes` rule for `rainbow` should use a `background-color` of `green` at 50%.
+La règle `@keyframes` pour `rainbow` devrait utiliser un `background-color` de `green` à 50%.
 
 ```js
 assert(code.match(/50%\s*?{\s*?background-color:\s*?green;\s*?}/gi));
 ```
 
-The `@keyframes` rule for rainbow should use a `background-color` of `yellow` at 100%.
+La règle `@keyframes` pour l'arc-en-ciel devrait utiliser un `background-color` de `yellow` à 100%.
 
 ```js
 assert(code.match(/100%\s*?{\s*?background-color:\s*?yellow;\s*?}/gi));

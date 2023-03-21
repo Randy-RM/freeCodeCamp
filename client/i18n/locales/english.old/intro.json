@@ -204,11 +204,11 @@
   "javascript-algorithms-and-data-structures": {
     "title": "JavaScript Algorithms and Data Structures",
     "intro": [
-      "While HTML and CSS control the content and styling of a page, JavaScript is used to make it interactive. In the JavaScript Algorithm and Data Structures Certification, you'll learn the fundamentals of JavaScript including variables, arrays, objects, loops, and functions.",
-      "Once you have the fundamentals down, you'll apply that knowledge by creating algorithms to manipulate strings, factorialize numbers, and even calculate the orbit of the International Space Station.",
-      "Along the way, you'll also learn two important programming styles or paradigms: Object Oriented Programming (OOP) and Functional Programming (FP)."
+      "Alors que HTML et CSS contrôlent le contenu et le style d'une page, JavaScript est utilisé pour la rendre interactive. Dans le cadre de la certification Algorithme et structures de données JavaScript, vous apprendrez les principes fondamentaux de JavaScript, notamment les variables, les tableaux, les objets, les boucles et les fonctions.",
+      "Une fois que vous aurez assimilé les principes fondamentaux, vous appliquerez ces connaissances en créant des algorithmes pour manipuler des chaînes de caractères, factoriser des nombres et même calculer l'orbite de la Station spatiale internationale.",
+      "En cours de route, vous apprendrez également deux styles ou paradigmes de programmation importants : la programmation orientée objet (POO) et la programmation fonctionnelle (PF)."
     ],
-    "note": "Note: Some browser extensions, such as ad-blockers and script-blockers can interfere with the tests. If you face issues, we recommend disabling extensions that modify or block the content of pages while taking the course.",
+    "note": "Remarque : certaines extensions de navigateur, telles que les bloqueurs de publicité et de script, peuvent interférer avec les tests. Si vous rencontrez des problèmes, nous vous recommandons de désactiver les extensions qui modifient ou bloquent le contenu des pages pendant que vous suivez le cours.",
     "blocks": {
       "basic-javascript": {
         "title": "Basic JavaScript",

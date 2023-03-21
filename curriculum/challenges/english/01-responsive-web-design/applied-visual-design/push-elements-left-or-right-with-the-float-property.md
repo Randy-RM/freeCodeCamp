@@ -1,6 +1,6 @@
 ---
 id: 587d78a3367417b2b2512ace
-title: Push Elements Left or Right with the float Property
+title: Pousser les éléments à gauche ou à droite avec la propriété float
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/c2MDqu2'
 forumTopicId: 301066
@@ -9,28 +9,27 @@ dashedName: push-elements-left-or-right-with-the-float-property
 
 # --description--
 
-The next positioning tool does not actually use `position`, but sets the `float` property of an element. Floating elements are removed from the normal flow of a document and pushed to either the `left` or `right` of their containing parent element. It's commonly used with the `width` property to specify how much horizontal space the floated element requires.
+L'outil de positionnement suivant n'utilise pas réellement `position`, mais définit la propriété `float` d'un élément. Les éléments flottants sont retirés du flux normal d'un document et poussés vers le `left` ou le `right` de l'élément parent qui les contient. Elle est généralement utilisée avec la propriété `width` pour spécifier l'espace horizontal nécessaire à l'élément flottant.
 
 # --instructions--
 
-The given markup would work well as a two-column layout, with the `section` and `aside` elements next to each other. Give the `#left` item a `float` of `left` and the `#right` item a `float` of `right`.
+Le balisage donné fonctionnerait bien dans une mise en page à deux colonnes, avec les éléments `section` et `aside` l'un à côté de l'autre. Donnez à l'élément `#left` un `float` de `left` et à l'élément `#right` un `float` de `right`.
 
 # --hints--
 
-The element with id `left` should have a `float` value of `left`.
+L'élément avec l'id `left` devrait avoir une valeur `float` de `left`.
 
 ```js
 assert($('#left').css('float') == 'left');
 ```
 
-The element with id `right` should have a `float` value of `right`.
+L'élément avec l'id `right` devrait avoir une valeur `float` de `right`.
 
 ```js
 assert($('#right').css('float') == 'right');
 ```
 
 # --seed--
-
 ## --seed-contents--
 
 ```html
@@ -52,15 +51,15 @@ assert($('#right').css('float') == 'right');
 </head>
 <body>
   <header>
-    <h1>Welcome!</h1>
+    <h1>Bienvenu.e!</h1>
   </header>
   <section id="left">
-    <h2>Content</h2>
-    <p>Good stuff</p>
+    <h2>Contenu</h2>
+    <p>Bonne chose</p>
   </section>
   <aside id="right">
-    <h2>Sidebar</h2>
-    <p>Links</p>
+    <h2>Barre latérale</h2>
+    <p>Liens</p>
   </aside>
 </body>
 ```
@@ -86,15 +85,15 @@ assert($('#right').css('float') == 'right');
 </head>
 <body>
   <header>
-    <h1>Welcome!</h1>
+    <h1>Bienvenu.e!</h1>
   </header>
   <section id="left">
-    <h2>Content</h2>
-    <p>Good stuff</p>
+    <h2>Contenu</h2>
+    <p>Bonne chose</p>
   </section>
   <aside id="right">
-    <h2>Sidebar</h2>
-    <p>Links</p>
+    <h2>Barre latérale</h2>
+    <p>Liens</p>
   </aside>
 </body>
 ```

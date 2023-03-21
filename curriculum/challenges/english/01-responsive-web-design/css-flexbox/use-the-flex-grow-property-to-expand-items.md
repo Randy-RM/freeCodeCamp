@@ -1,6 +1,6 @@
 ---
 id: 587d78ae367417b2b2512afc
-title: Use the flex-grow Property to Expand Items
+title: Utilisez la propriété flex-grow pour étendre des éléments
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVaDAv/c2p78cg'
 forumTopicId: 301111
@@ -9,23 +9,23 @@ dashedName: use-the-flex-grow-property-to-expand-items
 
 # --description--
 
-The opposite of `flex-shrink` is the `flex-grow` property. Recall that `flex-shrink` controls the size of the items when the container shrinks. The `flex-grow` property controls the size of items when the parent container expands.
+L'opposé de `flex-shrink` est la propriété `flex-grow`. Rappelez-vous que la propriété `flex-shrink` contrôle la taille des éléments lorsque le conteneur rétrécit. La propriété `flex-grow` contrôle la taille des éléments lorsque le conteneur parent s'étend.
 
-Using a similar example from the last challenge, if one item has a `flex-grow` value of `1` and the other has a `flex-grow` value of `3`, the one with the value of `3` will grow three times as much as the other.
+En utilisant un exemple similaire au dernier défi, si un élément a une valeur `flex-grow` de `1` et l'autre une valeur `flex-grow` de `3`, celui qui a la valeur `3` va grandir trois fois plus que l'autre.
 
 # --instructions--
 
-Add the CSS property `flex-grow` to both `#box-1` and `#box-2`. Give `#box-1` a value of `1` and `#box-2` a value of `2`.
+Ajoutez la propriété CSS `flex-grow` à la fois à `#box-1` et `#box-2`. Donnez à `#box-1` une valeur de `1` et à `#box-2` une valeur de `2`.
 
 # --hints--
 
-The `#box-1` element should have the `flex-grow` property set to a value of `1`.
+L'élément `#box-1` doit avoir la propriété `flex-grow` définie sur une valeur de `1`.
 
 ```js
 assert($('#box-1').css('flex-grow') == '1');
 ```
 
-The `#box-2` element should have the `flex-grow` property set to a value of `2`.
+L'élément `#box-2` doit avoir la propriété `flex-grow` définie sur une valeur de `2`.
 
 ```js
 assert($('#box-2').css('flex-grow') == '2');

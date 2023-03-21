@@ -1,6 +1,6 @@
 ---
 id: 587d781a367417b2b2512ab7
-title: Use the strong Tag to Make Text Bold
+title: Utilisez la balise strong pour mettre le texte en gras
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/ceJNBSb'
 forumTopicId: 301080
@@ -9,27 +9,27 @@ dashedName: use-the-strong-tag-to-make-text-bold
 
 # --description--
 
-To make text bold, you can use the `strong` tag. This is often used to draw attention to text and symbolize that it is important. With the `strong` tag, the browser applies the CSS of `font-weight: bold;` to the element.
+Pour mettre du texte en gras, vous pouvez utiliser la balise `strong`. Celle-ci est souvent utilisée pour attirer l'attention sur un texte et symboliser qu'il est important. Avec la balise `strong`, le navigateur applique le CSS de `font-weight : bold;` à l'élément.
 
 # --instructions--
 
-Wrap a `strong` tag around the text `Stanford University` inside the `p` tag (do not include the period).
+Placez une balise `strong` autour du texte `Stanford University` à l'intérieur de la balise `p` (n'incluez pas le point).
 
 # --hints--
 
-Your code should add one `strong` tag to the markup.
+Votre code doit ajouter une balise `strong` au balisage.
 
 ```js
 assert($('strong').length == 1);
 ```
 
-The `strong` tag should be inside the `p` tag.
+La balise `strong` doit se trouver à l'intérieur de la balise `p`.
 
 ```js
 assert($('p').children('strong').length == 1);
 ```
 
-The `strong` tag should wrap around the words `Stanford University`.
+La balise `strong` doit entourer les mots `Stanford University`.
 
 ```js
 assert(
@@ -74,7 +74,7 @@ assert(
   <div class="cardContent">
     <div class="cardText">
       <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University.</p>
+      <p>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient étudiants en doctorat à la Stanford University</p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
@@ -117,7 +117,7 @@ assert(
   <div class="cardContent">
     <div class="cardText">
       <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at <strong>Stanford University</strong>.</p>
+      <p>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient étudiants en doctorat à  la <strong>Stanford University</strong>.</p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>

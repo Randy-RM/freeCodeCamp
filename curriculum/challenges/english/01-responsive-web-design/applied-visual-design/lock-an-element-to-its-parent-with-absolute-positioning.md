@@ -1,6 +1,6 @@
 ---
 id: 587d781e367417b2b2512acb
-title: Lock an Element to its Parent with Absolute Positioning
+title: Verrouiller un élément à son parent avec le positionnement absolu
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cyLJ7c3'
 forumTopicId: 301060
@@ -9,29 +9,29 @@ dashedName: lock-an-element-to-its-parent-with-absolute-positioning
 
 # --description--
 
-The next option for the CSS `position` property is `absolute`, which locks the element in place relative to its parent container. Unlike the `relative` position, this removes the element from the normal flow of the document, so surrounding items ignore it. The CSS offset properties (top or bottom and left or right) are used to adjust the position.
+L'option suivante pour la propriété CSS `position` est `absolue`, qui verrouille l'élément en place par rapport à son conteneur parent. Contrairement à la position `relative`, cette option retire l'élément du flux normal du document, de sorte que les éléments environnants l'ignorent. Les propriétés de décalage CSS (haut ou bas et gauche ou droite) sont utilisées pour ajuster la position.
 
-One nuance with absolute positioning is that it will be locked relative to its closest *positioned* ancestor. If you forget to add a position rule to the parent item, (this is typically done using `position: relative;`), the browser will keep looking up the chain and ultimately default to the `body` tag.
+Une nuance avec le positionnement absolu est qu'il sera verrouillé par rapport à son ancêtre *positionné* le plus proche. Si vous oubliez d'ajouter une règle de positionnement à l'élément parent (ce qui est généralement fait en utilisant `position : relative;`), le navigateur continuera à chercher en haut de la chaîne et finira par utiliser par défaut la balise `body`.
 
 # --instructions--
 
-Lock the `#searchbar` element to the top-right of its `section` parent by declaring its `position` as `absolute`. Give it `top` and `right` offsets of 50 pixels each.
+Verrouillez l'élément `#searchbar` en haut à droite de son parent `section` en déclarant sa `position` comme `absolue`. Donnez-lui des décalages de 50 pixels chacun pour les éléments `top` et `right`.
 
 # --hints--
 
-The `#searchbar` element should have a `position` set to `absolute`.
+L'élément `#searchbar` doit avoir une `position` définie sur `absolute`.
 
 ```js
 assert($('#searchbar').css('position') == 'absolute');
 ```
 
-Your code should use the `top` CSS offset of 50 pixels on the `#searchbar` element.
+Votre code doit utiliser le décalage CSS `top` de 50 pixels sur l'élément `#searchbar`.
 
 ```js
 assert($('#searchbar').css('top') == '50px');
 ```
 
-Your code should use the `right` CSS offset of 50 pixels on the `#searchbar` element.
+Votre code doit utiliser le décalage CSS `droit` de 50 pixels sur l'élément `#searchbar`.
 
 ```js
 assert($('#searchbar').css('right') == '50px');
@@ -53,10 +53,10 @@ assert($('#searchbar').css('right') == '50px');
   }
 </style>
 <body>
-  <h1>Welcome!</h1>
+  <h1>Bienvenu.e!</h1>
   <section>
     <form id="searchbar">
-      <label for="search">Search:</label>
+      <label for="search">Recherche :</label>
       <input type="search" id="search" name="search">
       <input type="submit" name="submit" value="Go!">
     </form>
@@ -78,10 +78,10 @@ assert($('#searchbar').css('right') == '50px');
   }
 </style>
 <body>
-  <h1>Welcome!</h1>
+  <h1>Bienvenu.e!</h1>
   <section>
     <form id="searchbar">
-      <label for="search">Search:</label>
+      <label for="search">Recherche :</label>
       <input type="search" id="search" name="search">
       <input type="submit" name="submit" value="Go!">
     </form>

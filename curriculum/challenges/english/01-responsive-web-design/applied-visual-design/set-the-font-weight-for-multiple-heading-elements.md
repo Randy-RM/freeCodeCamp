@@ -1,6 +1,6 @@
 ---
 id: 587d781c367417b2b2512ac3
-title: Set the font-weight for Multiple Heading Elements
+title: Définir le poids de la police pour plusieurs éléments d'en-tête
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/crVWRHq'
 forumTopicId: 301069
@@ -9,47 +9,47 @@ dashedName: set-the-font-weight-for-multiple-heading-elements
 
 # --description--
 
-You set the `font-size` of each heading tag in the last challenge, here you'll adjust the `font-weight`.
+Vous avez défini la `font-size` de chaque balise de titre dans le dernier défi, ici vous allez ajuster le `font-weight`.
 
-The `font-weight` property sets how thick or thin characters are in a section of text.
+La propriété `font-weight` définit l'épaisseur ou la finesse des caractères dans une section de texte.
 
 # --instructions--
 
-<ul><li>Set the <code>font-weight</code> of the <code>h1</code> tag to 800.</li><li>Set the <code>font-weight</code> of the <code>h2</code> tag to 600.</li><li>Set the <code>font-weight</code> of the <code>h3</code> tag to 500.</li><li>Set the <code>font-weight</code> of the <code>h4</code> tag to 400.</li><li>Set the <code>font-weight</code> of the <code>h5</code> tag to 300.</li><li>Set the <code>font-weight</code> of the <code>h6</code> tag to 200.</li></ul>
+<ul><li>Définir le <code>font-weight</code> de la balise <code>h1</code> à 800.</li><li>Définir le <code>font-weight</code> de la balise <code>h2</code> à 600.</li><li>Définir le <code>font-weight</code> de la balise <code>h3</code> à 500.</li><li>Définir le <code>font-weight</code> de la balise <code>h4</code> à 400.</li><li>Définir le <code>font-weight</code> de la balise <code>h5</code> à 300.</li><li>Définir le <code>font-weight</code> de la balise <code>h6</code> à 200.</li></ul>
 
 # --hints--
 
-Your code should set the `font-weight` property for the `h1` tag to 800.
+Votre code devrait définir la propriété `font-weight` de la balise `h1` à 800.
 
 ```js
 assert($('h1').css('font-weight') == '800');
 ```
 
-Your code should set the `font-weight` property for the `h2` tag to 600.
+Votre code devrait définir la propriété `font-weight` de la balise `h2` à 600.
 
 ```js
 assert($('h2').css('font-weight') == '600');
 ```
 
-Your code should set the `font-weight` property for the `h3` tag to 500.
+Votre code devrait définir la propriété `font-weight` de la balise  `h3` à 500.
 
 ```js
 assert($('h3').css('font-weight') == '500');
 ```
 
-Your code should set the `font-weight` property for the `h4` tag to 400.
+Votre code devrait définir la propriété `font-weight` de la balise  `h4` à 400.
 
 ```js
 assert($('h4').css('font-weight') == '400');
 ```
 
-Your code should set the `font-weight` property for the `h5` tag to 300.
+Votre code devrait définir la propriété `font-weight` de la balise  `h5` à 300.
 
 ```js
 assert($('h5').css('font-weight') == '300');
 ```
 
-Your code should set the `font-weight` property for the `h6` tag to 200.
+Votre code devrait définir la propriété `font-weight` de la balise  `h6` à 200.
 
 ```js
 assert($('h6').css('font-weight') == '200');
@@ -86,12 +86,12 @@ assert($('h6').css('font-weight') == '200');
 
   }
 </style>
-<h1>This is h1 text</h1>
-<h2>This is h2 text</h2>
-<h3>This is h3 text</h3>
-<h4>This is h4 text</h4>
-<h5>This is h5 text</h5>
-<h6>This is h6 text</h6>
+<h1>Ceci est le texte h1</h1>
+<h2>Ceci est le texte h2</h2>
+<h3>Ceci est le texte h3</h3>
+<h4>Ceci est le texte h4</h4>
+<h5>Ceci est le texte h5</h5>
+<h6>Ceci est le texte h6</h6>
 ```
 
 # --solutions--
@@ -123,10 +123,10 @@ assert($('h6').css('font-weight') == '200');
     font-weight: 200;
   }
 </style>
-<h1>This is h1 text</h1>
-<h2>This is h2 text</h2>
-<h3>This is h3 text</h3>
-<h4>This is h4 text</h4>
-<h5>This is h5 text</h5>
-<h6>This is h6 text</h6>
+<h1>Ceci est le texte h1</h1>
+<h2>Ceci est le texte h2</h2>
+<h3>Ceci est le texte h3</h3>
+<h4>Ceci est le texte h4</h4>
+<h5>Ceci est le texte h5</h5>
+<h6>Ceci est le texte h6</h6>
 ```

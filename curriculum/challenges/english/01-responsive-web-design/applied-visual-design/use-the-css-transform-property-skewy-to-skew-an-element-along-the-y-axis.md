@@ -1,6 +1,6 @@
 ---
 id: 587d78a6367417b2b2512adc
-title: Use the CSS Transform Property skewY to Skew an Element Along the Y-Axis
+title: Utiliser la propriété de transformation CSS skewY pour incliner un élément le long de l'axe des Y
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/c2MZ2uB'
 forumTopicId: 301075
@@ -9,15 +9,15 @@ dashedName: use-the-css-transform-property-skewy-to-skew-an-element-along-the-y-
 
 # --description--
 
-Given that the `skewX()` function skews the selected element along the X-axis by a given degree, it is no surprise that the `skewY()` property skews an element along the Y (vertical) axis.
+Étant donné que la fonction `skewX()` incline l'élément sélectionné selon l'axe des X d'un degré donné, il n'est pas surprenant que la propriété `skewY()` incline un élément selon l'axe des Y (vertical).
 
 # --instructions--
 
-Skew the element with the id of `top` -10 degrees along the Y-axis by using the `transform` property.
+Inclinez l'élément avec l'id de `top` de -10 degrés le long de l'axe Y en utilisant la propriété `transform`.
 
 # --hints--
 
-The element with id `top` should be skewed by -10 degrees along its Y-axis.
+L'élément avec id `top` doit être incliné de -10 degrés le long de son axe Y.
 
 ```js
 assert(code.match(/#top\s*?{\s*?.*?\s*?transform:\s*?skewY\(-10deg\);/g));

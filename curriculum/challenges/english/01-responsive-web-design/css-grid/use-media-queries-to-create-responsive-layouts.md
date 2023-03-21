@@ -1,25 +1,25 @@
 ---
 id: 5a94fe7769fb03452672e463
-title: Use Media Queries to Create Responsive Layouts
+title: Utilisez les requêtes multimédia pour créer des mises en page réactives
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pByETK/cMbqeHk'
+videoUrl: "https://scrimba.com/p/pByETK/cMbqeHk"
 forumTopicId: 301138
 dashedName: use-media-queries-to-create-responsive-layouts
 ---
 
 # --description--
 
-CSS Grid can be an easy way to make your site more responsive by using media queries to rearrange grid areas, change dimensions of a grid, and rearrange the placement of items.
+La grille CSS peut être un moyen simple de rendre votre site plus réactif en utilisant des requêtes média pour réorganiser les zones de la grille, modifier les dimensions d'une grille et réorganiser le placement des éléments.
 
-In the preview, when the viewport width is 300px or more, the number of columns changes from 1 to 2. The advertisement area then occupies the left column completely.
+Dans l'aperçu, lorsque la largeur de la fenêtre d'affichage est de 300px ou plus, le nombre de colonnes passe de 1 à 2. La zone de publicité occupe alors entièrement la colonne de gauche.
 
 # --instructions--
 
-When the viewport width is `400px` or more, make the header area occupy the top row completely and the footer area occupy the bottom row completely.
+Lorsque la largeur de la fenêtre d'affichage est égale ou supérieure à `400px`, la zone d'en-tête doit occuper entièrement la ligne supérieure et la zone de pied de page, la ligne inférieure.
 
 # --hints--
 
-When the viewport is `400px` or more, `container` class should have a `grid-template-areas` property in which the header and footer areas occupy the top and bottom rows respectively and advert and content occupy the left and right columns of the middle row.
+Lorsque la fenêtre d'affichage est de `400px` ou plus, la classe `container` doit avoir une propriété `grid-template-areas` dans laquelle les zones d'en-tête et de pied de page occupent respectivement les rangées du haut et du bas et la publicité et le contenu occupent les colonnes de gauche et de droite de la rangée du milieu.
 
 ```js
 assert(
@@ -73,8 +73,8 @@ assert(
       "footer";
   }
 
-  @media (min-width: 300px){
-    .container{
+  @media (min-width: 300px) {
+    .container {
       grid-template-columns: auto 1fr;
       grid-template-rows: auto 1fr auto;
       grid-template-areas:
@@ -84,8 +84,8 @@ assert(
     }
   }
 
-  @media (min-width: 400px){
-    .container{
+  @media (min-width: 400px) {
+    .container {
       grid-template-areas:
       /* Only change code below this line */
         "advert header"
@@ -97,10 +97,10 @@ assert(
 </style>
 
 <div class="container">
-  <div class="item1">header</div>
-  <div class="item2">advert</div>
-  <div class="item3">content</div>
-  <div class="item4">footer</div>
+  <div class="item1">en-tête</div>
+  <div class="item2">annonce</div>
+  <div class="item3">contenu</div>
+  <div class="item4">pied de page</div>
 </div>
 ```
 
@@ -144,8 +144,8 @@ assert(
       "footer";
   }
 
-  @media (min-width: 300px){
-    .container{
+  @media (min-width: 300px) {
+    .container {
       grid-template-columns: auto 1fr;
       grid-template-rows: auto 1fr auto;
       grid-template-areas:
@@ -155,8 +155,8 @@ assert(
     }
   }
 
-  @media (min-width: 400px){
-    .container{
+  @media (min-width: 400px) {
+    .container {
       grid-template-areas:
         "header header"
         "advert content"
@@ -166,9 +166,9 @@ assert(
 </style>
 
 <div class="container">
-  <div class="item1">header</div>
-  <div class="item2">advert</div>
-  <div class="item3">content</div>
-  <div class="item4">footer</div>
+  <div class="item1">en-tête</div>
+  <div class="item2">annonce</div>
+  <div class="item3">contenu</div>
+  <div class="item4">pied de page</div>
 </div>
 ```

@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9bedf08813
-title: Add Borders Around Your Elements
+title: Ajoutez des bordures autour de vos éléments
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/c2MvnHZ'
 forumTopicId: 16630
@@ -9,9 +9,9 @@ dashedName: add-borders-around-your-elements
 
 # --description--
 
-CSS borders have properties like `style`, `color` and `width`.
+Les bordures CSS ont des propriétés comme `style`, `color` et `width`.
 
-For example, if we wanted to create a red, 5 pixel border around an HTML element, we could use this class:
+Par exemple, si nous voulons créer une bordure rouge de 5 pixels autour d'un élément HTML, nous pouvons utiliser cette classe :
 
 ```html
 <style>
@@ -25,9 +25,9 @@ For example, if we wanted to create a red, 5 pixel border around an HTML element
 
 # --instructions--
 
-Create a class called `thick-green-border`. This class should add a 10px, solid, green border around an HTML element. Apply the class to your cat photo.
+Créez une classe appelée `thick-green-border`. Cette classe doit ajouter une bordure verte solide de 10px autour d'un élément HTML. Appliquez la classe à votre photo de chat.
 
-Remember that you can apply multiple classes to an element using its `class` attribute, by separating each class name with a space. For example:
+N'oubliez pas que vous pouvez appliquer plusieurs classes à un élément en utilisant son attribut `class`, en séparant chaque nom de classe par un espace. Par exemple :
 
 ```html
 <img class="class1 class2">
@@ -35,19 +35,19 @@ Remember that you can apply multiple classes to an element using its `class` att
 
 # --hints--
 
-Your `img` element should have the class `smaller-image`.
+Votre élément `img` doit avoir la classe `smaller-image`.
 
 ```js
 assert($('img').hasClass('smaller-image'));
 ```
 
-Your `img` element should have the class `thick-green-border`.
+Votre élément `img` doit avoir la classe `thick-green-border`.
 
 ```js
 assert($('img').hasClass('thick-green-border'));
 ```
 
-Your image should have a border width of `10px`.
+Votre image doit avoir une largeur de bordure de `10px`.
 
 ```js
 assert(
@@ -57,13 +57,13 @@ assert(
 );
 ```
 
-Your image should have a border style of `solid`.
+Votre image devrait avoir un style de bordure `solid`.
 
 ```js
 assert($('img').css('border-right-style') === 'solid');
 ```
 
-The border around your `img` element should be green.
+La bordure de votre élément `img` doit être verte.
 
 ```js
 assert($('img').css('border-left-color') === 'rgb(0, 128, 0)');
@@ -96,33 +96,33 @@ assert($('img').css('border-left-color') === 'rgb(0, 128, 0)');
 
 <h2 class="red-text">CatPhotoApp</h2>
 <main>
-  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+  <p class="red-text">Cliquez ici pour voir d'autres <a href="#">photos de chats</a>.</p>.
 
-  <a href="#"><img class="smaller-image" src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img class="smaller-image" src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <div>
-    <p>Things cats love:</p>
+    <p>Les choses que les chats aiment :</p>
     <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
+      <li>l'herbe à chat</li>
+      <li>les laser pointers</li>
+      <li>les lasagnes</li>
     </ul>
-    <p>Top 3 things cats hate:</p>
+    <p>Le top 3 des choses que les chats détestent :</p>
     <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
+      <li>le traitement contre les puces</li>
+      <li>le tonnerre</li>
+      <li>les autres chats</li>
     </ol>
   </div>
 
   <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
+    <label><input type="radio" name="indoor-outdoor" checked> Intérieur</label>
+    <label><input type="radio" name="indoor-outdoor"> Extérieur</label><br>
+    <label><input type="checkbox" name="personality" checked> Aimant</label>
+    <label><input type="checkbox" name="personality"> Paresseux</label>
+    <label><input type="checkbox" name="personality"> Énergique</label><br>
     <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
+    <button type="submit">Soumettre</button>
   </form>
 </main>
 ```
@@ -158,33 +158,34 @@ assert($('img').css('border-left-color') === 'rgb(0, 128, 0)');
 
 <h2 class="red-text">CatPhotoApp</h2>
 <main>
-  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+    <p class="red-text">Cliquez ici pour voir d'autres <a href="#">photos de chats</a>.</p>.
 
-  <a href="#"><img class="smaller-image thick-green-border" src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+
+  <a href="#"><img class="smaller-image thick-green-border" src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
   <div>
-    <p>Things cats love:</p>
+    <p>Les choses que les chats aiment :</p>
     <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
+      <li>l'herbe à chat</li>
+      <li>les pointeurs laser</li>
+      <li>les lasagnes</li>
     </ul>
-    <p>Top 3 things cats hate:</p>
+    <p>Le top 3 des choses que les chats détestent :</p>
     <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
+      <li>le traitement contre les puces</li>
+      <li>le tonnerre</li>
+      <li>les autres chats</li>
     </ol>
   </div>
 
   <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
+    <label><input type="radio" name="indoor-outdoor" checked> Intérieur</label>
+    <label><input type="radio" name="indoor-outdoor"> Extérieur</label><br>
+    <label><input type="checkbox" name="personality" checked> Aimant</label>
+    <label><input type="checkbox" name="personality"> Paresseux</label>
+    <label><input type="checkbox" name="personality"> Énergique</label><br>
     <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
+    <button type="submit">Soumettre</button>
   </form>
 </main>
 ```

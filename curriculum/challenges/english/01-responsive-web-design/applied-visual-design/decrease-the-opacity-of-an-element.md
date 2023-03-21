@@ -1,6 +1,6 @@
 ---
 id: 587d781c367417b2b2512abf
-title: Decrease the Opacity of an Element
+title: Diminuer l'opacité d'un élément
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/c7aKqu4'
 forumTopicId: 301055
@@ -9,19 +9,19 @@ dashedName: decrease-the-opacity-of-an-element
 
 # --description--
 
-The `opacity` property in CSS is used to adjust the opacity, or conversely, the transparency for an item.
+La propriété `opacity` en CSS est utilisée pour ajuster l'opacité, ou inversement, la transparence pour un élément.
 
-<blockquote>A value of 1 is opaque, which isn't transparent at all.<br>A value of 0.5 is half see-through.<br>A value of 0 is completely transparent.</blockquote>
+<blockquote>Une valeur de 1 est opaque, ce qui n'est pas du tout transparent.<br>Une valeur de 0,5 est à moitié transparente.<br>Une valeur de 0 est complètement transparente.</blockquote>
 
-The value given will apply to the entire element, whether that's an image with some transparency, or the foreground and background colors for a block of text.
+La valeur donnée s'applique à l'élément entier, qu'il s'agisse d'une image avec une certaine transparence ou des couleurs d'avant-plan et d'arrière-plan d'un bloc de texte.
 
 # --instructions--
 
-Set the `opacity` of the anchor tags to 0.7 using `links` class to select them.
+Définissez le `opacity` des balises d'ancrage à 0,7 en utilisant la classe `links` pour les sélectionner.
 
 # --hints--
 
-Your code should set the `opacity` property to 0.7 on the anchor tags by selecting the class of `links`.
+Votre code devrait définir la propriété `opacity` à 0.7 sur les balises d'ancrage en sélectionnant la classe de `links`.
 
 ```js
 assert(
@@ -73,7 +73,7 @@ assert(
     <div class="cardText">
       <h4>Alphabet</h4>
       <hr>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+      <p><em>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient  <u>étudiants en doctorat</u> à <strong>l'université de Stanford</strong>.</em></p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
@@ -123,7 +123,7 @@ assert(
     <div class="cardText">
       <h4>Alphabet</h4>
       <hr>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+      <p><em>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient  <u>étudiants en doctorat</u> à <strong>l'université de Stanford</strong>.</em></p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>

@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aedf08830
-title: Add Placeholder Text to a Text Field
+title: Ajouter un texte de remplacement à un champ de texte
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVMPUv/cKdJDhg'
 forumTopicId: 16647
@@ -9,29 +9,29 @@ dashedName: add-placeholder-text-to-a-text-field
 
 # --description--
 
-Placeholder text is what is displayed in your `input` element before your user has inputted anything.
+Le texte de remplacement est ce qui est affiché dans votre élément `input` avant que l'utilisateur n'ait saisi quoi que ce soit.
 
-You can create placeholder text like so:
+Vous pouvez créer un texte de remplacement ( **placeholder** ) comme suit :
 
 ```html
-<input type="text" placeholder="this is placeholder text">
+<input type="text" placeholder="ceci est un texte de remplacement">
 ```
 
-**Note:** Remember that `input` elements are self-closing.
+**Note:** Rappelez-vous que les éléments `input` sont auto-fermants.
 
 # --instructions--
 
-Set the `placeholder` value of your text `input` to "cat photo URL".
+Mettez la valeur `placeholder` de votre `input` textuel à "URL de la photo de chat".
 
 # --hints--
 
-You should add a `placeholder` attribute to the existing text `input` element.
+Vous devez ajouter un attribut `placeholder` à l'élément textuel `input` existant.
 
 ```js
 assert($('input[placeholder]').length > 0);
 ```
 
-You should set the value of your `placeholder` attribute to `cat photo URL`.
+Vous devez définir la valeur de votre attribut `placeholder` à `URL de la photo de chat`.
 
 ```js
 assert(
@@ -39,17 +39,17 @@ assert(
     $('input').attr('placeholder') &&
     $('input')
       .attr('placeholder')
-      .match(/cat\s+photo\s+URL/gi)
+      .match(/URL\s+de\s+la\s+photo\s+de\s+chat/gi)
 );
 ```
 
-The finished `input` element should not have a closing tag.
+L'élément `input` final ne doit pas avoir de balise de fermeture.
 
 ```js
 assert(!code.match(/<input.*\/?>.*<\/input>/gi));
 ```
 
-The finished `input` element should have valid syntax.
+L'élément `input` final doit avoir une syntaxe valide.
 
 ```js
 assert($('input[type=text]').length > 0);
@@ -62,21 +62,21 @@ assert($('input[type=text]').length > 0);
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
-  <p>Things cats love:</p>
+  <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
   <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
+    <li>le traitement contre les puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
   </ol>
   <input type="text">
 </main>
@@ -87,22 +87,22 @@ assert($('input[type=text]').length > 0);
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
   
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
   
-  <p>Things cats love:</p>
+  <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
   <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
+    <li>le traitement contre les puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
   </ol>
-  <input type="text" placeholder="cat photo URL">
+  <input type="text" placeholder="URL de la photo de chat">
 </main>
 ```

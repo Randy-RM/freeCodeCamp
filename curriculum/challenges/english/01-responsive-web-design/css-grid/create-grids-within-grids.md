@@ -1,6 +1,6 @@
 ---
 id: 5a94fe8569fb03452672e464
-title: Create Grids within Grids
+title: Créer des grilles (Grids) dans des grilles (Grids)
 challengeType: 0
 forumTopicId: 301128
 dashedName: create-grids-within-grids
@@ -8,17 +8,17 @@ dashedName: create-grids-within-grids
 
 # --description--
 
-Turning an element into a grid only affects the behavior of its direct descendants. So by turning a direct descendant into a grid, you have a grid within a grid.
+Transformer un élément en grille n'affecte que le comportement de ses descendants directs. Ainsi, en transformant un descendant direct en grille, on obtient une grille dans une grille.
 
-For example, by setting the `display` and `grid-template-columns` properties of the element with the `item3` class, you create a grid within your grid.
+Par exemple, en définissant les propriétés `display` et `grid-template-columns` de l'élément avec la classe `item3`, vous créez une grille dans votre grille.
 
 # --instructions--
 
-Turn the element with the `item3` class into a grid with two columns with a width of `auto` and `1fr` using `display` and `grid-template-columns`.
+Transformez l'élément avec la classe `item3` en une grille avec deux colonnes avec une largeur de `auto` et `1fr` en utilisant `display` et `grid-template-columns`.
 
 # --hints--
 
-`item3` class should have a `grid-template-columns` property with `auto` and `1fr` as values.
+La classe `item3` devrait avoir une propriété `grid-template-columns` avec `auto` et `1fr` comme valeurs.
 
 ```js
 assert(
@@ -28,7 +28,7 @@ assert(
 );
 ```
 
-`item3` class should have a `display` property with the value of `grid`.
+La classe `item3` devrait avoir une propriété `display` avec la valeur de `grid`.
 
 ```js
 assert(code.match(/.item3\s*?{[\s\S]*display\s*?:\s*?grid\s*?;[\s\S]*}/gi));
@@ -89,13 +89,13 @@ assert(code.match(/.item3\s*?{[\s\S]*display\s*?:\s*?grid\s*?;[\s\S]*}/gi));
 </style>
 
 <div class="container">
-  <div class="item1">header</div>
-  <div class="item2">advert</div>
+  <div class="item1">en-tête</div>
+  <div class="item2">publicité</div>
   <div class="item3">
-    <div class="itemOne">paragraph1</div>
-    <div class="itemTwo">paragraph2</div>
+    <div class="itemOne">paragraphe1</div>
+    <div class="itemTwo">paragraphe2</div>
   </div>
-  <div class="item4">footer</div>
+  <div class="item4">pied de page</div>
 </div>
 ```
 

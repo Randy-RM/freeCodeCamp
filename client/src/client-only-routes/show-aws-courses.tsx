@@ -67,10 +67,10 @@ const mapDispatchToProps = {
 
 export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
   const { showLoading, isSignedIn } = props;
-  const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[]>([]);
+  const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[]>();
 
   const getMoodleCourses = async () => {
-    const moodleCatalogue = await getExternalCoursesCatalog(
+    const moodleCatalogue = await getExternalCoursesCatalog<MoodleCourse[]>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses&moodlewsrestformat=json`
     );
@@ -141,7 +141,8 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
           </Col>
           <Col className='' md={12} sm={12} xs={12}>
             <div className='card-course-detail-container'>
-              {moodleCourses.length >= 0 &&
+              {moodleCourses &&
+                moodleCourses.length >= 0 &&
                 moodleCourses.map((course, index) => {
                   return (
                     // <CourseCard

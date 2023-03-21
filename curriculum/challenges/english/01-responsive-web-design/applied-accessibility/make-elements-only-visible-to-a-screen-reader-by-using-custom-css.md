@@ -1,6 +1,6 @@
 ---
 id: 587d778d367417b2b2512aaa
-title: Make Elements Only Visible to a Screen Reader by Using Custom CSS
+title: Rendre les éléments uniquement visibles pour un lecteur d'écran à l'aide d'un CSS personnalisé
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cJ8QGkhJ'
 forumTopicId: 301020
@@ -9,11 +9,11 @@ dashedName: make-elements-only-visible-to-a-screen-reader-by-using-custom-css
 
 # --description--
 
-Have you noticed that all of the applied accessibility challenges so far haven't used any CSS? This shows the importance of using a logical document outline and semantically meaningful tags around your content before introducing the visual design aspect.
+Avez-vous remarqué que tous les défis d'accessibilité appliqués jusqu'à présent n'ont pas utilisé de CSS ? Cela montre l'importance d'utiliser un plan de document logique et des balises sémantiquement significatives autour de votre contenu avant d'introduire l'aspect conception visuelle.
 
-However, CSS's magic can also improve accessibility on your page when you want to visually hide content meant only for screen readers. This happens when information is in a visual format (like a chart), but screen reader users need an alternative presentation (like a table) to access the data. CSS is used to position the screen reader-only elements off the visual area of the browser window.
+Toutefois, la magie de CSS peut également améliorer l'accessibilité de votre page lorsque vous souhaitez masquer visuellement un contenu destiné uniquement aux lecteurs d'écran. C'est le cas lorsque les informations sont présentées dans un format visuel (comme un graphique), mais que les utilisateurs de lecteurs d'écran ont besoin d'une autre présentation (comme un tableau) pour accéder aux données. Le CSS est utilisé pour positionner les éléments réservés aux lecteurs d'écran en dehors de la zone visuelle de la fenêtre du navigateur.
 
-Here's an example of the CSS rules that accomplish this:
+Voici un exemple des règles CSS qui permettent d'y parvenir:
 
 ```css
 .sr-only {
@@ -26,38 +26,38 @@ Here's an example of the CSS rules that accomplish this:
 }
 ```
 
-**Note:** The following CSS approaches will NOT do the same thing:
+**Note:** Les approches CSS suivantes ne feront PAS la même chose :
 
 <ul>
-<li><code>display: none;</code> or <code>visibility: hidden;</code> hides content for everyone, including screen reader users</li>
-<li>Zero values for pixel sizes, such as <code>width: 0px; height: 0px;</code> removes that element from the flow of your document, meaning screen readers will ignore it</li>
+<li><code>display: none;</code> ou <code>visibility: hidden;</code> cache le contenu pour tout le monde, y compris les utilisateurs de lecteurs d'écran</li>
+<li>Les valeurs nulles pour les tailles de pixel, telles que <code>width: 0px; height: 0px;</code> retire cet élément du contenu de votre document, ce qui signifie que les lecteurs d'écran l'ignoreront.</li>
 </ul>
 
 # --instructions--
 
-Camper Cat created a really cool stacked bar chart for his training page, and put the data into a table for his visually impaired users. The table already has an `sr-only` class, but the CSS rules aren't filled in yet. Give the `position` an `absolute` value, the `left` a `-10000px` value, and the `width` and `height` both `1px` values.
+Camper Cat a créé un diagramme à barres empilées vraiment cool pour sa page de formation, et a mis les données dans un tableau pour ses utilisateurs malvoyants. Le tableau a déjà une classe `sr-only`, mais les règles CSS ne sont pas encore remplies. Donnez à la `position` une valeur `absolute`, à  `left`  une valeur `-10000px`, et à la `width` et à la `height` des valeurs `1px`.
 
 # --hints--
 
-Your code should set the `position` property of the `sr-only` class to a value of `absolute`.
+Votre code devrait définir la propriété `position` de la classe `sr-only` à une valeur de `absolute`.
 
 ```js
 assert($('.sr-only').css('position') == 'absolute');
 ```
 
-Your code should set the `left` property of the `sr-only` class to a value of `-10000px`.
+Votre code devrait définir la propriété `left` de la classe `sr-only` à une valeur de `-10000px`.
 
 ```js
 assert($('.sr-only').css('left') == '-10000px');
 ```
 
-Your code should set the `width` property of the `sr-only` class to a value of `1` pixel.
+Votre code devrait définir la propriété `width` de la classe `sr-only` à une valeur de `1` pixel.
 
 ```js
 assert(code.match(/width:\s*?1px/gi));
 ```
 
-Your code should set the `height` property of the `sr-only` class to a value of `1` pixel.
+Votre code devrait définir la propriété `height` de la classe `sr-only` à une valeur de `1` pixel.
 
 ```js
 assert(code.match(/height:\s*?1px/gi));
@@ -82,51 +82,51 @@ assert(code.match(/height:\s*?1px/gi));
 </head>
 <body>
   <header>
-    <h1>Training</h1>
+    <h1>Entraînement</h1>
     <nav>
       <ul>
-        <li><a href="#stealth">Stealth &amp; Agility</a></li>
+        <li><a href="#stealth">Furtivité &amp; Agilité</a></li>
         <li><a href="#combat">Combat</a></li>
-        <li><a href="#weapons">Weapons</a></li>
+        <li><a href="#weapons">Armes</a></li>
       </ul>
     </nav>
   </header>
   <section>
-    <h2>Master Camper Cat's Beginner Three Week Training Program</h2>
+    <h2>Programme de formation de trois semaines pour les débutants de Master Camper Cat</h2>
     <figure>
       <!-- Stacked bar chart of weekly training -->
-      <p>[Stacked bar chart]</p>
+      <p>[Diagramme à barres empilées]</p>
       <br />
-      <figcaption>Breakdown per week of time to spend training in stealth, combat, and weapons.</figcaption>
+      <figcaption>Répartition par semaine du temps à consacrer à l'entraînement à la furtivité, au combat et aux armes.</figcaption>
     </figure>
     <table class="sr-only">
-      <caption>Hours of Weekly Training in Stealth, Combat, and Weapons</caption>
+      <caption>Des heures d'entraînement hebdomadaire à la furtivité, au combat et aux armes.</caption>
       <thead>
         <tr>
           <th></th>
-          <th scope="col">Stealth &amp; Agility</th>
+          <th scope="col">Furtivité &amp; Agilité</th>
           <th scope="col">Combat</th>
-          <th scope="col">Weapons</th>
+          <th scope="col">Armes</th>
           <th scope="col">Total</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <th scope="row">Week One</th>
+          <th scope="row">Première semaine</th>
           <td>3</td>
           <td>5</td>
           <td>2</td>
           <td>10</td>
         </tr>
         <tr>
-          <th scope="row">Week Two</th>
+          <th scope="row">Deuxième semaine</th>
           <td>4</td>
           <td>5</td>
           <td>3</td>
           <td>12</td>
         </tr>
         <tr>
-          <th scope="row">Week Three</th>
+          <th scope="row">Troisième semaine</th>
           <td>4</td>
           <td>6</td>
           <td>3</td>
@@ -136,19 +136,19 @@ assert(code.match(/height:\s*?1px/gi));
     </table>
   </section>
   <section id="stealth">
-    <h2>Stealth &amp; Agility Training</h2>
-    <article><h3>Climb foliage quickly using a minimum spanning tree approach</h3></article>
-    <article><h3>No training is NP-complete without parkour</h3></article>
+    <h2>Entraînement de furtivité &amp; d'agilité</h2>
+    <article><h3>Grimper rapidement sur le feuillage en utilisant une approche par arbre à portée minimale</h3></article>
+    <article><h3>Aucun entraînement n'est NP-complet sans parkour</h3></article>
   </section>
   <section id="combat">
-    <h2>Combat Training</h2>
-    <article><h3>Dispatch multiple enemies with multithreaded tactics</h3></article>
-    <article><h3>Goodbye, world: 5 proven ways to knock out an opponent</h3></article>
+    <h2>Entraînement au combat</h2>
+    <article><h3>Affrontez de nombreux ennemis grâce à des tactiques multithreads.</h3></article>
+    <article><h3>Goodbye world : 5 façons éprouvées d'assommer un adversaire</h3></article>
   </section>
   <section id="weapons">
-    <h2>Weapons Training</h2>
-    <article><h3>Swords: the best tool to literally divide and conquer</h3></article>
-    <article><h3>Breadth-first or depth-first in multi-weapon training?</h3></article>
+    <h2>Entraînement aux armes</h2>
+    <article><h3>Les épées : le meilleur outil pour littéralement diviser et conquérir</h3></article>
+    <article><h3>Formation aux armes multiples : priorité à l'élargissement ou à la profondeur ?</h3></article>
   </section>
   <footer>&copy; 2018 Camper Cat</footer>
 </body>
@@ -171,51 +171,51 @@ assert(code.match(/height:\s*?1px/gi));
 </head>
 <body>
   <header>
-    <h1>Training</h1>
+    <h1>Entraînements</h1>
     <nav>
       <ul>
-        <li><a href="#stealth">Stealth &amp; Agility</a></li>
+        <li><a href="#stealth">Furtivité &amp; Agilité</a></li>
         <li><a href="#combat">Combat</a></li>
-        <li><a href="#weapons">Weapons</a></li>
+        <li><a href="#weapons">Armes</a></li>
       </ul>
     </nav>
   </header>
   <section>
-    <h2>Master Camper Cat's Beginner Three Week Training Program</h2>
+    <h2>Programme de formation de trois semaines pour les débutants de Master Camper Cat</h2>
     <figure>
-      <!-- Stacked bar chart of weekly training -->
-      <p>[Stacked bar chart]</p>
+      <!-- Diagramme à barres empilées de l'entraînement hebdomadaire -->
+      <p>[Diagramme à barres empilées]</p>
       <br />
-      <figcaption>Breakdown per week of time to spend training in stealth, combat, and weapons.</figcaption>
+      <figcaption>Répartition par semaine du temps à consacrer à l'entraînement à la furtivité, au combat et aux armes.</figcaption>
     </figure>
     <table class="sr-only">
-      <caption>Hours of Weekly Training in Stealth, Combat, and Weapons</caption>
+      <caption>Des heures d'entraînement hebdomadaire à la furtivité, au combat et aux armes.</caption>
       <thead>
         <tr>
           <th></th>
-          <th scope="col">Stealth &amp; Agility</th>
+          <th scope="col">Furtivité &amp; Agilité</th>
           <th scope="col">Combat</th>
-          <th scope="col">Weapons</th>
+          <th scope="col">Armes</th>
           <th scope="col">Total</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <th scope="row">Week One</th>
+          <th scope="row">Première semaine</th>
           <td>3</td>
           <td>5</td>
           <td>2</td>
           <td>10</td>
         </tr>
         <tr>
-          <th scope="row">Week Two</th>
+          <th scope="row">Deuxième semaine</th>
           <td>4</td>
           <td>5</td>
           <td>3</td>
           <td>12</td>
         </tr>
         <tr>
-          <th scope="row">Week Three</th>
+          <th scope="row">Troisième semaine</th>
           <td>4</td>
           <td>6</td>
           <td>3</td>
@@ -225,19 +225,19 @@ assert(code.match(/height:\s*?1px/gi));
     </table>
   </section>
   <section id="stealth">
-    <h2>Stealth &amp; Agility Training</h2>
-    <article><h3>Climb foliage quickly using a minimum spanning tree approach</h3></article>
-    <article><h3>No training is NP-complete without parkour</h3></article>
+    <h2>Entraînement de furtivité &amp; d'agilité</h2>
+    <article><h3>Grimper rapidement sur le feuillage en utilisant une approche par arbre à portée minimale</h3></article>
+    <article><h3>Aucun entraînement n'est NP-complet sans parkour</h3></article>
   </section>
   <section id="combat">
-    <h2>Combat Training</h2>
-    <article><h3>Dispatch multiple enemies with multithreaded tactics</h3></article>
-    <article><h3>Goodbye, world: 5 proven ways to knock out an opponent</h3></article>
+    <h2>Entraînement au combat</h2>
+    <article><h3>Affrontez de nombreux ennemis grâce à des tactiques multithreads.</h3></article>
+    <article><h3>Goodbye world : 5 façons éprouvées d'assommer un adversaire</h3></article>
   </section>
   <section id="weapons">
-    <h2>Weapons Training</h2>
-    <article><h3>Swords: the best tool to literally divide and conquer</h3></article>
-    <article><h3>Breadth-first or depth-first in multi-weapon training?</h3></article>
+    <h2>Entraînement aux armes</h2>
+    <article><h3>Les épées : le meilleur outil pour littéralement diviser et conquérir</h3></article>
+    <article><h3>Formation aux armes multiples : priorité à l'élargissement ou à la profondeur ?</h3></article>
   </section>
   <footer>&copy; 2018 Camper Cat</footer>
 </body>

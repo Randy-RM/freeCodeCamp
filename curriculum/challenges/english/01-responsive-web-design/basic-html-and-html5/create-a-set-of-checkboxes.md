@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aedf08835
-title: Create a Set of Checkboxes
+title: Créer un ensemble de cases à cocher
 challengeType: 0
 videoUrl: 'https://scrimba.com/p/pVMPUv/cqrkJsp'
 forumTopicId: 16821
@@ -9,41 +9,41 @@ dashedName: create-a-set-of-checkboxes
 
 # --description--
 
-Forms commonly use <dfn>checkboxes</dfn> for questions that may have more than one answer.
+Les formulaires utilisent couramment des <dfn>cases à cocher</dfn> pour les questions qui peuvent avoir plus d'une réponse.
 
-Checkboxes are a type of `input`.
+Les cases à cocher sont un type de `input`.
 
-Each of your checkboxes can be nested within its own `label` element. By wrapping an `input` element inside of a `label` element it will automatically associate the checkbox input with the label element surrounding it.
+Chacune de vos cases à cocher peut être imbriquée dans son propre élément `label`. En enveloppant un élément `input` à l'intérieur d'un élément `label`, on associe automatiquement la case à cocher à l'élément label qui l'entoure.
 
-All related checkbox inputs should have the same `name` attribute.
+Toutes les entrées de case à cocher associées doivent avoir le même attribut `name`.
 
-It is considered best practice to explicitly define the relationship between a checkbox `input` and its corresponding `label` by setting the `for` attribute on the `label` element to match the `id` attribute of the associated `input` element.
+La meilleure pratique consiste à définir explicitement la relation entre une entrée de type case à cocher et l'élément `label` qui lui correspond, en définissant l'attribut `for` de l'élément `label` pour qu'il corresponde à l'attribut `id` de l'élément `input` associé.
 
-Here's an example of a checkbox:
+Voici un exemple de case à cocher :
 
 ```html
-<label for="loving"><input id="loving" type="checkbox" name="personality"> Loving</label>
+<label for="aimable"><input id="aimable" type="checkbox" name="personnalite"> Aimable</label>
 ```
 
 # --instructions--
 
-Add to your form a set of three checkboxes. Each checkbox should be nested within its own `label` element. All three should share the `name` attribute of `personality`.
+Ajoutez à votre formulaire un ensemble de trois cases à cocher. Chaque case à cocher doit être imbriquée dans son propre élément `label`. Toutes les trois doivent avoir l'attribut `name` avec comme valeur `personnalite`.
 
 # --hints--
 
-Your page should have three checkbox elements.
+Votre page doit comporter trois éléments de case à cocher.
 
 ```js
 assert($('input[type="checkbox"]').length > 2);
 ```
 
-Each of your three checkbox elements should be nested in its own `label` element.
+Chacun de vos trois éléments de case à cocher doit être imbriqué dans son propre élément `label`.
 
 ```js
 assert($('label > input[type="checkbox"]:only-child').length > 2);
 ```
 
-Make sure each of your `label` elements has a closing tag.
+Assurez-vous que chacun de vos éléments `label` possède une balise de fermeture.
 
 ```js
 assert(
@@ -53,15 +53,15 @@ assert(
 );
 ```
 
-Your checkboxes should be given the `name` attribute of `personality`.
+Vos cases à cocher doivent recevoir l'attribut `name` égal à `personnalite`.
 
 ```js
 assert(
-  $('label > input[type="checkbox"]').filter('[name="personality"]').length > 2
+  $('label > input[type="checkbox"]').filter('[name="personnalite"]').length > 2
 );
 ```
 
-Each of your checkboxes should be added within the `form` tag.
+Chacune de vos cases à cocher doit être ajoutée dans la balise `form`.
 
 ```js
 assert($('label').parent().get(0).tagName.match('FORM'));
@@ -74,27 +74,27 @@ assert($('label').parent().get(0).tagName.match('FORM'));
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+ <p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
 
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
 
-  <p>Things cats love:</p>
+ <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
   <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
+    <li>le traitement des puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
-    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor"> Indoor</label>
-    <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
+    <label for="interieur"><input id="interieur" type="radio" name="interieur-exterieur"> Interieur</label>
+    <label for="exterieur"><input id="exterieur" type="radio" name="interieur-exterieur"> Extérieur</label><br>
+    <input type="text" placeholder="URL de la photo de chat" required>
+    <button type="submit">Envoyer</button>
   </form>
 </main>
 ```
@@ -104,32 +104,32 @@ assert($('label').parent().get(0).tagName.match('FORM'));
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+<p>Cliquez ici pour voir plus <a href="#">des photos de chats</a>.</p>
   
-  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/relaxing_cat_4b5892f189.jpg?7969519" alt="Un joli chat orange couché sur le dos."></a>
   
-  <p>Things cats love:</p>
+  <p>Les choses que les chats aiment :</p>
   <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
+    <li>l'herbe à chat</li>
+    <li>les pointeurs laser</li>
+    <li>les lasagnes</li>
   </ul>
-  <p>Top 3 things cats hate:</p>
+  <p>Le top 3 des choses que les chats détestent :</p>
   <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
+    <li>le traitement des puces</li>
+    <li>le tonnerre</li>
+    <li>les autres chats</li>
   </ol>
   <form action="https://www.freecatphotoapp.com/submit-cat-photo">
-    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor"> Indoor</label>
-    <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label for="playful"><input id="playful" type="checkbox" name="personality">Playful</label>
-    <label for="lazy"><input id="lazy" type="checkbox" 
-name="personality">Lazy</label>
-    <label for="evil"><input id="evil" type="checkbox" 
-name="personality">Evil</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
+    <label for="interieur"><input id="interieur" type="radio" name="interieur-exterieur"> Interieur</label>
+    <label for="exterieur"><input id="exterieur" type="radio" name="interieur-exterieur"> Extérieur</label><br>
+    <label for="aimable"><input id="aimable" type="checkbox" name="personnalite"> Aimable</label>
+    <label for="paresseux"><input id="paresseux" type="checkbox" 
+name="personnalite"> Paresseux</label>
+    <label for="mauvais"><input id="mauvais" type="checkbox" 
+name="personnalite"> Mauvais</label><br>
+    <input type="text" placeholder="URL de la photo de chat" required>
+    <button type="submit">Envoyer</button>
   </form>
 </main>
 ```

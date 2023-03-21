@@ -1,6 +1,6 @@
 ---
 id: 587d781b367417b2b2512abd
-title: Adjust the Size of a Heading Element Versus a Paragraph Element
+title: Ajuster la taille d'un élément d'en-tête par rapport à un élément de paragraphe
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/c3bRPTz'
 forumTopicId: 301037
@@ -9,15 +9,15 @@ dashedName: adjust-the-size-of-a-heading-element-versus-a-paragraph-element
 
 # --description--
 
-The font size of heading elements (`h1` through `h6`) should generally be larger than the font size of paragraph tags. This makes it easier for the user to visually understand the layout and level of importance of everything on the page. You use the `font-size` property to adjust the size of the text in an element.
+La taille de la police des éléments de titre (`h1` à `h6`) doit généralement être plus grande que celle des balises de paragraphe. Cela permet à l'utilisateur de mieux comprendre visuellement la disposition et le niveau d'importance de chaque élément de la page. Vous utilisez la propriété `font-size` pour ajuster la taille du texte d'un élément.
 
 # --instructions--
 
-To make the heading significantly larger than the paragraph, change the `font-size` of the `h4` element to 27 pixels.
+Pour que le titre soit nettement plus grand que le paragraphe, modifiez le `font-size` de l'élément `h4` à 27 pixels.
 
 # --hints--
 
-Your code should add a `font-size` property to the `h4` element set to 27 pixels.
+Votre code devrait ajouter une propriété `font-size` à l'élément `h4` définie à 27 pixels.
 
 ```js
 assert($('h4').css('font-size') == '27px');
@@ -61,7 +61,7 @@ assert($('h4').css('font-size') == '27px');
     <div class="cardText">
       <h4>Alphabet</h4>
       <hr>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+      <p><em>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient <u>étudiants en doctorat</u> à <strong>l'université de Stanford</strong>.</em></p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
@@ -107,7 +107,7 @@ assert($('h4').css('font-size') == '27px');
     <div class="cardText">
       <h4>Alphabet</h4>
       <hr>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+      <p><em>Google a été fondé par Larry Page et Sergey Brin alors qu'ils étaient <u>étudiants en doctorat</u> à <strong>l'université de Stanford</strong>.</em></p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>

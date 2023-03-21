@@ -3,12 +3,12 @@ import './courses-card.css';
 import CourseCard from '../CourseCard/course-card';
 import LaptopIcon from '../../assets/images/laptop.svg';
 import AlgoIcon from '../../assets/images/algorithmIcon.svg';
-import CloudShield from '../../assets/images/cloudShield.svg';
 import LaediesActIcon from '../../assets/images/partners/ladies-act-logo.png';
 import { Spacer } from '../helpers';
 interface CoursesListProps {
   isSignedIn?: boolean;
 }
+
 const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
   return (
     <div className='landing-top'>
@@ -17,7 +17,7 @@ const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
         <br />
         <p className='text-responsive'>
           {`
-          Concentre-toi sur ce qui est nécessaire pour acquérir une compétence spécifique et applicable. 
+          Concentre-toi sur ce qui est nécessaire pour acquérir une compétence spécifique et applicable.
           Tu seras mieux outillé pour construire une carrière.
           `}
         </p>
@@ -33,35 +33,24 @@ const CoursesList = ({ isSignedIn }: CoursesListProps): JSX.Element => {
           title={`Responsive Web Design`}
           buttonText={`Suivre le cours  `}
           description={`
-                Dans cette formation en ligne, tu apprendras les langages que les développeurs 
-                utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
-                pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
+                Dans cette formation en ligne, tu apprendras les langages que les développeurs
+                utilisent pour créer des pages Web : HTML (Hypertext Markup Language)
+                pour le contenu, et CSS (Cascading Style Sheets) pour la conception.
                 Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
                 `}
         />
         <CourseCard
           icon={AlgoIcon}
           alt=''
-          isAvailable={false}
+          isAvailable={true}
           isSignedIn={isSignedIn}
           title={`JavaScript Algorithms and Data Structures`}
-          description={`Alors que HTML et CSS contrôlent le contenu et le style  d'une page, 
-                JavaScript est utilisé pour la rendre interactive. Dans le cadre de 
-                la certification JavaScript Algorithm and Data Structures, tu apprendras 
-                les principes fondamentaux de JavaScript, etc.`}
-        />
-        <CourseCard
-          icon={CloudShield}
-          alt=''
-          isAvailable={false}
-          isSignedIn={isSignedIn}
-          title={`Parcours AWS`}
           buttonText={`Suivre le cours  `}
-          link={`/aws-courses`}
-          description={`Ce parcours est conçu pour montrer aux participants comment 
-                  optimiser l'utilisation du cloud AWS grâce à la compréhension 
-                  de ces nombreux services et de leur intégration dans la création 
-                  de solutions basées sur le cloud.`}
+          link={`/learn/javascript-algorithms-and-data-structures`}
+          description={`Alors que HTML et CSS contrôlent le contenu et le style  d'une page, 
+                JavaScript est utilisé pour la rendre interactive. Dans le cadre du 
+                cours JavaScript Algorithm and Data Structures, tu apprendras 
+                les principes fondamentaux de JavaScript, etc.`}
         />
       </div>
     </div>

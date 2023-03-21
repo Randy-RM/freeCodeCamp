@@ -1,6 +1,6 @@
 ---
 id: 5a94fe0569fb03452672e45c
-title: Divide the Grid Into an Area Template
+title: Diviser la grille (Grid) en un modèle de zone
 challengeType: 0
 forumTopicId: 301130
 dashedName: divide-the-grid-into-an-area-template
@@ -8,7 +8,7 @@ dashedName: divide-the-grid-into-an-area-template
 
 # --description--
 
-You can group cells of your grid together into an <dfn>area</dfn> and give the area a custom name. Do this by using `grid-template-areas` on the container like this:
+Vous pouvez regrouper les cellules de votre grille dans une <dfn>area</dfn> et donner à la zone un nom personnalisé. Faites-le en utilisant `grid-template-areas` sur le conteneur comme ceci :
 
 ```css
 grid-template-areas:
@@ -17,15 +17,15 @@ grid-template-areas:
   "advert footer footer";
 ```
 
-The code above groups the cells of the grid into four areas; `header`, `advert`, `content`, and `footer`. Every word represents a cell and every pair of quotation marks represent a row.
+Le code ci-dessus regroupe les cellules de la grille en quatre zones : `header`, `advert`, `content`, et `footer`. Chaque mot représente une cellule et chaque paire de guillemets représente une ligne.
 
 # --instructions--
 
-Change the template so the `footer` area spans the entire bottom row. Defining the areas won't have any visual effect right now. Later, you will make an item use an area to see how it works.
+Modifiez le modèle pour que la zone `footer` s'étende sur toute la ligne inférieure. La définition des zones n'aura pas d'effet visuel pour l'instant. Plus tard, vous ferez en sorte qu'un élément utilise une zone pour voir comment cela fonctionne.
 
 # --hints--
 
-`container` class should have a `grid-template-areas` property similar to the example but with the `footer` area spanning the whole bottom row.
+La classe `container` doit avoir une propriété `grid-template-areas` similaire à celle de l'exemple, mais avec la zone `footer` qui s'étend sur toute la ligne inférieure.
 
 ```js
 assert(
