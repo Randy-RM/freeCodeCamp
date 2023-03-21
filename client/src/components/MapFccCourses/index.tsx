@@ -6,18 +6,18 @@ import { SuperBlocks } from '../../../../config/certification-settings';
 import envData from '../../../../config/env.json';
 import { isAuditedCert } from '../../../../utils/is-audited';
 import { generateIconComponent } from '../../assets/icons';
-import LinkButton from '../../assets/icons/link-button';
+// import CourseCard from '../CourseCard/course-card';
 import { ChallengeNode } from '../../redux/prop-types';
 import { Link, Spacer } from '../helpers';
 
 const { curriculumLocale } = envData;
 
-interface MapProps {
+interface MapFccCoursesProps {
   currentSuperBlock?: SuperBlocks | null;
   forLanding?: boolean;
 }
 
-interface MapData {
+interface MapFccCoursesData {
   allChallengeNode: {
     nodes: ChallengeNode[];
   };
@@ -32,39 +32,59 @@ function createSuperBlockTitle(superBlock: SuperBlocks) {
     : i18next.t('learn.cert-map-estimates.certs', { title: superBlockTitle });
 }
 
-const linkSpacingStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center'
-};
-
-function renderLandingMap(nodes: ChallengeNode[]) {
+function renderLandingMapFccCourses(nodes: ChallengeNode[]) {
   nodes = nodes.filter(
     ({ challenge }) => challenge.superBlock !== SuperBlocks.CodingInterviewPrep
   );
   return (
-    <ul data-test-label='certifications'>
+    <div data-test-label='certifications'>
       {nodes.map(({ challenge }, i) => (
-        <li key={i}>
-          <Link
-            className='btn link-btn btn-lg'
-            to={`/learn/${challenge.superBlock}/`}
-          >
-            <div style={linkSpacingStyle}>
-              {generateIconComponent(challenge.superBlock, 'map-icon')}
-              {i18next.t(`intro:${challenge.superBlock}.title`)}
+        // <li key={i}>
+        //   <Link
+        //     className='btn link-btn btn-lg'
+        //     to={`/learn/${challenge.superBlock}/`}
+        //   >
+        //     <div>
+        //       {generateIconComponent(challenge.superBlock, 'map-icon')}
+        //       {i18next.t(`intro:${challenge.superBlock}.title`)}
+        //     </div>
+        //   </Link>
+        // </li>
+        <div
+          key={i}
+          className='card-course-detail-back standard-radius-5 card-outlin-border bg-light'
+        >
+          <div className='card-course-detail-unit position-relative'>
+            <div className='card-outlin-border bg-light standard-radius-5'>
+              <div className='card-course-detail-header'></div>
+              <div className='card-course-detail-item'>
+                <h4 className='fw-bold text-love-light'>
+                  {i18next.t(`intro:${challenge.superBlock}.title`)}
+                </h4>
+              </div>
+              <div className='card-course-detail-item  flexible'>
+                <p className='text-responsive'>
+                  {/* {`${description.substring(0, 300)}...`} */}
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem
+                  asperiores dolores ducimus consectetur error? Alias, vitae! In
+                  aliquam doloribus et dolor soluta, eaque a accusantium cumque
+                  porro officiis nemo delectus?
+                </p>
+              </div>
+              <div className='card-course-detail-footer'>
+                <div className='push'></div>
+              </div>
             </div>
-            <LinkButton />
-          </Link>
-        </li>
+          </div>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 }
 
-function renderLearnMap(
+function renderLearnMapFccCourses(
   nodes: ChallengeNode[],
-  currentSuperBlock: MapProps['currentSuperBlock']
+  currentSuperBlock: MapFccCoursesProps['currentSuperBlock']
 ) {
   nodes = nodes.filter(
     ({ challenge }) => challenge.superBlock !== currentSuperBlock
@@ -77,7 +97,7 @@ function renderLearnMap(
             className='btn link-btn btn-lg'
             to={`/learn/${challenge.superBlock}/`}
           >
-            <div style={linkSpacingStyle}>
+            <div>
               {generateIconComponent(challenge.superBlock, 'map-icon')}
               {createSuperBlockTitle(challenge.superBlock)}
             </div>
@@ -97,7 +117,7 @@ function renderLearnMap(
               className='btn link-btn btn-lg'
               to={`/learn/${challenge.superBlock}/`}
             >
-              <div style={linkSpacingStyle}>
+              <div>
                 {generateIconComponent(challenge.superBlock, 'map-icon')}
                 {createSuperBlockTitle(challenge.superBlock)}
               </div>
@@ -127,7 +147,7 @@ function renderLearnMap(
               className='btn link-btn btn-lg'
               to={`/learn/${challenge.superBlock}/`}
             >
-              <div style={linkSpacingStyle}>
+              <div>
                 {generateIconComponent(challenge.superBlock, 'map-icon')}
                 {createSuperBlockTitle(challenge.superBlock)}
               </div>
@@ -138,16 +158,16 @@ function renderLearnMap(
   );
 }
 
-export function Map({
+export function MapFccCourses({
   forLanding = false,
   currentSuperBlock = null
-}: MapProps): React.ReactElement {
+}: MapFccCoursesProps): React.ReactElement {
   /*
    * this query gets the first challenge from each block and the first block
    * from each superblock, leaving you with one challenge from each
    * superblock
    */
-  const data: MapData = useStaticQuery(graphql`
+  const data: MapFccCoursesData = useStaticQuery(graphql`
     query SuperBlockNodes {
       allChallengeNode(
         sort: { fields: [challenge___superOrder] }
@@ -171,12 +191,12 @@ export function Map({
       data-test-label='learn-curriculum-map'
     >
       {forLanding
-        ? renderLandingMap(nodes)
-        : renderLearnMap(nodes, currentSuperBlock)}
+        ? renderLandingMapFccCourses(nodes)
+        : renderLearnMapFccCourses(nodes, currentSuperBlock)}
     </div>
   );
 }
 
-Map.displayName = 'Map';
+MapFccCourses.displayName = 'MapFccCourses';
 
-export default Map;
+export default MapFccCourses;
