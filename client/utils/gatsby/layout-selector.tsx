@@ -20,8 +20,6 @@ export default function layoutSelector({
     location: { pathname }
   } = props;
 
-  console.log('path : ', pathname);
-
   if (element.type === FourOhFourPage) {
     return (
       <DefaultLayout pathname={pathname} showFooter={true}>
