@@ -141,7 +141,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                 moodleCoursesCategories.map((category, index) => {
                   return (
                     <CourseCard
-                      key={index + category.id}
+                      key={index}
                       icon={PhBookBookmark}
                       isAvailable={category.visible == 1}
                       isSignedIn={isSignedIn}
