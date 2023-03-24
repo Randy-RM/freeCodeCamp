@@ -306,6 +306,7 @@ export function putUpdateMyUsername(username: string): Promise<void> {
 
 interface CurrentSuperBlock {
   superBlockName: string;
+  superBlockTranslatedName: string;
   superBlockDashedName: string;
   blockName: string;
   blockDashedName: string;

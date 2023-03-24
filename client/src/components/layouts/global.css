@@ -78,6 +78,22 @@ h6 {
   background: var(--primary-background);
 }
 
+.default-admin-warper {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  flex-direction: row;
+  background: #d92950 !important;
+}
+
+.admin-content {
+  padding-left: 50%;
+  width: 80%;
+  background: var(--primary-background);
+  /* padding: 1px 16px; */
+  /* height: 100%; */
+}
+
 h1 {
   color: var(--secondary-color);
   font-weight: 700;

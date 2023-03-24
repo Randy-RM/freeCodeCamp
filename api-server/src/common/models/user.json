@@ -276,6 +276,10 @@
             "type": "string",
             "default": ""
           },
+          "superBlockTranslatedName": {
+            "type": "string",
+            "default": ""
+          },
           "superBlockDashedName": {
             "type": "string",
             "default": ""

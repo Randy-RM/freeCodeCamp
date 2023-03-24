@@ -188,6 +188,7 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
       : t(`intro:misc-text.certification`, {
           cert: i18nSuperBlock
         });
+  const originalSuperBlockTitle = t(`intro:${superBlock}.OriginalTitle`);
 
   const defaultCurriculumNames = blockDashedNames;
 
@@ -197,7 +198,7 @@ const SuperBlockIntroductionPage = (props: SuperBlockProp) => {
     currentsSuperBlock &&
     currentsSuperBlock.find(
       currentsSuperBlockItem =>
-        currentsSuperBlockItem.superBlockName === i18nSuperBlock
+        currentsSuperBlockItem.superBlockName === originalSuperBlockTitle
     );
 
   // delete the project module which is always at the end of the table

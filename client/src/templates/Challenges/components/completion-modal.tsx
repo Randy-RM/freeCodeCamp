@@ -284,7 +284,8 @@ export class CompletionModalInner extends Component<
       blockName,
       block,
       superBlock,
-      id
+      id,
+      t
     } = this.props;
 
     const { completedPercent } = this.state;
@@ -297,6 +298,7 @@ export class CompletionModalInner extends Component<
 
     const currentSuperBlockValue: CurrentSuperBlock = {
       superBlockName: currentSuperBlock?.frontmatter.title,
+      superBlockTranslatedName: t(`intro:${superBlock}.title`),
       superBlockDashedName: superBlock,
       blockName: blockName,
       blockDashedName: block,
@@ -306,6 +308,7 @@ export class CompletionModalInner extends Component<
       totalChallenges: challengeCount,
       totalCompletedChallenges: completedChallengeCount + 1
     };
+    console.log(t(`intro:${superBlock}.title`));
     this.props.submitChallenge();
     this.checkBlockCompletion();
     this.handleUpdateSuperBlockProgress(currentSuperBlockValue);

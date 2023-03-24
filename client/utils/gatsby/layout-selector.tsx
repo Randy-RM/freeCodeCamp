@@ -2,7 +2,8 @@ import React from 'react';
 
 import {
   CertificationLayout,
-  DefaultLayout
+  DefaultLayout,
+  AdminDefaultLayout
 } from '../../src/components/layouts';
 import FourOhFourPage from '../../src/pages/404';
 import { isChallenge } from '../../src/utils/path-parsers';
@@ -34,6 +35,12 @@ export default function layoutSelector({
       <DefaultLayout pathname={pathname} showFooter={false}>
         {element}
       </DefaultLayout>
+    );
+  } else if (pathname == '/admin/admin-home') {
+    return (
+      <AdminDefaultLayout pathname={pathname} showFooter={false}>
+        {element}
+      </AdminDefaultLayout>
     );
   } else {
     return (

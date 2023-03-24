@@ -67,6 +67,7 @@ export const UserPropType = PropTypes.shape({
   currentsSuperBlock: PropTypes.arrayOf(
     PropTypes.shape({
       superBlockName: PropTypes.string,
+      superBlockTranslatedName: PropTypes.string,
       superBlockDashedName: PropTypes.string,
       blockName: PropTypes.string,
       blockDashedName: PropTypes.string,
@@ -392,6 +393,7 @@ export type Portfolio = {
 
 export type CurrentSuperBlock = {
   superBlockName?: string;
+  superBlockTranslatedName?: string;
   superBlockDashedName?: string;
   blockName?: string;
   blockDashedName?: string;

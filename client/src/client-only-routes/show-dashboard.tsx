@@ -88,6 +88,7 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
                         totalChallenges,
                         totalCompletedChallenges,
                         superBlockName,
+                        superBlockTranslatedName,
                         superBlockPath
                       },
                       index
@@ -99,7 +100,12 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
                             <CoursCardProgress
                               challengeCount={totalChallenges}
                               completedChallengeCount={totalCompletedChallenges}
-                              coursName={superBlockName}
+                              coursName={
+                                superBlockTranslatedName &&
+                                superBlockTranslatedName?.length > 0
+                                  ? superBlockTranslatedName
+                                  : superBlockName
+                              }
                               superBlockPath={superBlockPath}
                             />
                           </div>
