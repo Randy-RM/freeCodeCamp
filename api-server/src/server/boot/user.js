@@ -17,6 +17,7 @@ import {
 } from '../utils/publicUserProps';
 import { getRedirectParams } from '../utils/redirection';
 import { trimTags } from '../utils/validators';
+import { getAllUsers } from '../utils/user-stats';
 
 const log = debugFactory('fcc:boot:user');
 const sendNonUserToHome = ifNoUserRedirectHome();
@@ -31,6 +32,7 @@ function bootUser(app) {
   const deleteWebhookToken = createDeleteWebhookToken(app);
 
   api.get('/account', sendNonUserToHome, getAccount);
+  api.get('/all-users', getUserList);
   api.get('/account/unlink/:social', sendNonUserToHome, getUnlinkSocial);
   api.get('/user/get-session-user', getSessionUser);
 
@@ -166,6 +168,11 @@ function createReadSessionUser(app) {
 function getAccount(req, res) {
   const { username } = req.user;
   return res.redirect('/' + username);
+}
+
+async function getUserList(req, res) {
+  const userList = await getAllUsers();
+  return res.json(userList);
 }
 
 function getUnlinkSocial(req, res, next) {

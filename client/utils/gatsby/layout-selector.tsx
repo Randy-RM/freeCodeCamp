@@ -36,7 +36,10 @@ export default function layoutSelector({
         {element}
       </DefaultLayout>
     );
-  } else if (pathname == '/admin/admin-home') {
+  } else if (
+    pathname == '/admin/admin-home' ||
+    pathname == '/admin/admin-members'
+  ) {
     return (
       <AdminDefaultLayout pathname={pathname} showFooter={false}>
         {element}

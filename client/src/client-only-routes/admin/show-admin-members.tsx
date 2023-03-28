@@ -1,4 +1,4 @@
-import { Row, Col } from '@freecodecamp/react-bootstrap';
+import { Row, Col, Table } from '@freecodecamp/react-bootstrap';
 import React from 'react';
 import Helmet from 'react-helmet';
 // import { useTranslation } from 'react-i18next';
@@ -21,7 +21,7 @@ import { User } from '../../redux/prop-types';
 const { apiLocation } = envData;
 
 // TODO: update types for actions
-interface ShowAdminHomeProps {
+interface ShowAdminMembersProps {
   createFlashMessage: typeof createFlashMessage;
   isSignedIn: boolean;
   navigate: (location: string) => void;
@@ -46,10 +46,8 @@ const mapDispatchToProps = {
   navigate
 };
 
-export function ShowAdminHome(props: ShowAdminHomeProps): JSX.Element {
-  // const { t } = useTranslation();
-  const { isSignedIn, /*user,*/ navigate, showLoading } = props;
-  // const { currentsSuperBlock } = user;
+export function ShowAdminMembers(props: ShowAdminMembersProps): JSX.Element {
+  const { isSignedIn, navigate, showLoading } = props;
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
@@ -62,7 +60,7 @@ export function ShowAdminHome(props: ShowAdminHomeProps): JSX.Element {
 
   return (
     <>
-      <Helmet title={`Tableau de bord | Kadea Online`} />
+      <Helmet title={`Tableau de bord - Membres | Kadea Online`} />
 
       <div className=''>
         <Row>
@@ -72,41 +70,45 @@ export function ShowAdminHome(props: ShowAdminHomeProps): JSX.Element {
                 className='big-subheading'
                 style={{ overflowWrap: 'break-word' }}
               >
-                {'Dashboard'}
+                {'Membres'}
               </h1>
             </div>
           </Col>
         </Row>
         <Spacer size={1} />
         <Row>
-          <Col md={6} sm={6} xs={6}>
+          <Col md={12} sm={12} xs={12}>
             <div className=''>
-              <p
-                className='text-responsive'
-                style={{ overflowWrap: 'break-word' }}
-              >
-                {`
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Rem repellat excepturi itaque nulla optio quisquam quaerat
-                    iusto qui cumque, deleniti necessitatibus et magni ab
-                    tenetur amet in totam ut. Voluptatum?
-                    `}
-              </p>
-            </div>
-          </Col>
-          <Col md={6} sm={6} xs={6}>
-            <div className=''>
-              <p
-                className='text-responsive'
-                style={{ overflowWrap: 'break-word' }}
-              >
-                {`
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Rem repellat excepturi itaque nulla optio quisquam quaerat
-                    iusto qui cumque, deleniti necessitatibus et magni ab
-                    tenetur amet in totam ut. Voluptatum?
-                    `}
-              </p>
+              <Table striped responsive hover>
+                <thead className='bg-dark-gray'>
+                  <tr>
+                    <th className='text-light'>#</th>
+                    <th className='text-light'>First Name</th>
+                    <th className='text-light'>Last Name</th>
+                    <th className='text-light'>Username</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Larry the Bird</td>
+                    <td>Bird</td>
+                    <td>@twitter</td>
+                  </tr>
+                </tbody>
+              </Table>
             </div>
           </Col>
         </Row>
@@ -116,6 +118,6 @@ export function ShowAdminHome(props: ShowAdminHomeProps): JSX.Element {
   );
 }
 
-ShowAdminHome.displayName = 'ShowAdminHome';
+ShowAdminMembers.displayName = 'ShowAdminMembers';
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowAdminHome);
+export default connect(mapStateToProps, mapDispatchToProps)(ShowAdminMembers);

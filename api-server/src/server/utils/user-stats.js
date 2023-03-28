@@ -120,6 +120,17 @@ export function getUserById(id, User = loopback.getModelByType('User')) {
   );
 }
 
+export function getAllUsers(User = loopback.getModelByType('User')) {
+  return new Promise((resolve, reject) =>
+    User.find((err, instance) => {
+      if (err || isEmpty(instance)) {
+        return reject(err || 'No users found');
+      }
+      return resolve(instance);
+    })
+  );
+}
+
 function getCompletedCertCount(user) {
   return [
     'isApisMicroservicesCert',
