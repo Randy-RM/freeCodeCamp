@@ -1,10 +1,10 @@
 import { Row, Col, Table } from '@freecodecamp/react-bootstrap';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
 // import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-
+import { getDatabaseResource } from '../../utils/ajax';
 import envData from '../../../../config/env.json';
 import { createFlashMessage } from '../../components/Flash/redux';
 import { Loader, Spacer } from '../../components/helpers';
@@ -46,8 +46,47 @@ const mapDispatchToProps = {
   navigate
 };
 
+type Member = {
+  id: string;
+  email: string;
+  name: string;
+  gender: string;
+};
+
+type UserList = {
+  userList: Member[];
+  totalPages: number;
+  currentPage: number;
+};
+
 export function ShowAdminMembers(props: ShowAdminMembersProps): JSX.Element {
   const { isSignedIn, navigate, showLoading } = props;
+
+  const [members, setMembers] = useState<Member[]>();
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const getMembers = async () => {
+    const memberList = await getDatabaseResource<UserList>(
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      `/all-users?page=${currentPage}`
+    );
+    if (memberList != null) {
+      setMembers(memberList.userList);
+      setTotalPages(Number(memberList.totalPages));
+      setCurrentPage(Number(memberList.currentPage));
+    } else {
+      setMembers([]);
+    }
+  };
+
+  useEffect(() => {
+    void getMembers();
+    // return () => {
+    //   setMembers([]); // cleanup useEffect to perform a React state update
+    // };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
@@ -57,6 +96,10 @@ export function ShowAdminMembers(props: ShowAdminMembersProps): JSX.Element {
     navigate(`${apiLocation}/signin`);
     return <Loader fullScreen={true} />;
   }
+
+  console.log('totalPages : ', totalPages);
+  console.log('currentPage : ', currentPage);
+  console.log('members : ', members);
 
   return (
     <>
@@ -79,37 +122,46 @@ export function ShowAdminMembers(props: ShowAdminMembersProps): JSX.Element {
         <Row>
           <Col md={12} sm={12} xs={12}>
             <div className=''>
-              <Table striped responsive hover>
-                <thead className='bg-dark-gray'>
-                  <tr>
-                    <th className='text-light'>#</th>
-                    <th className='text-light'>First Name</th>
-                    <th className='text-light'>Last Name</th>
-                    <th className='text-light'>Username</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry the Bird</td>
-                    <td>Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                </tbody>
-              </Table>
+              {members && members.length > 0 ? (
+                <Table striped responsive hover>
+                  <thead className='bg-dark-gray'>
+                    <tr>
+                      <th className='text-light'>Email</th>
+                      <th className='text-light'>Name</th>
+                      <th className='text-light'>Genre</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {members.map((member, index) => {
+                      return (
+                        <tr key={index}>
+                          <td>{member.email}</td>
+                          <td>{member.name}</td>
+                          <td>{member.gender}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </Table>
+              ) : (
+                <></>
+              )}
             </div>
+          </Col>
+          <Col md={12} sm={12} xs={12}>
+            <button
+              onClick={() => {
+                setCurrentPage(Number(currentPage - 1));
+                void getMembers();
+              }}
+            >{`<-`}</button>
+            {`  ${currentPage}...${totalPages}  `}
+            <button
+              onClick={() => {
+                setCurrentPage(Number(currentPage + 1));
+                void getMembers();
+              }}
+            >{`->`}</button>
           </Col>
         </Row>
         <Spacer size={1} />

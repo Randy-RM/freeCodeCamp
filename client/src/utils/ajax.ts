@@ -207,13 +207,24 @@ export async function getExternalCoursesCatalog<T>(urlEndPoint: string) {
       mode: 'cors', //no-cors,cors, same-origin
       cache: 'no-cache', //default, no-cache, reload, force-cache, only-if-cached
       credentials: 'same-origin', //include, *same-origin, omit
-      // headers: {
-      //   "Content-Type": "application/json",
-      //   // 'Content-Type': 'application/x-www-form-urlencoded',
-      // },
+      headers: {
+        // 'CSRF-Token': getCSRFToken(),
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
       redirect: 'follow', // manual, *follow, error
       referrerPolicy: 'no-referrer' // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     });
+  } catch (error) {
+    response = null;
+  }
+  return response;
+}
+
+export async function getDatabaseResource<T>(urlEndPoint: string) {
+  let response: T | null;
+  try {
+    response = await get(urlEndPoint);
   } catch (error) {
     response = null;
   }

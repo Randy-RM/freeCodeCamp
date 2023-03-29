@@ -120,15 +120,51 @@ export function getUserById(id, User = loopback.getModelByType('User')) {
   );
 }
 
-export function getAllUsers(User = loopback.getModelByType('User')) {
+export function getAllUsers(
+  page,
+  limit,
+  User = loopback.getModelByType('User')
+) {
   return new Promise((resolve, reject) =>
-    User.find((err, instance) => {
-      if (err || isEmpty(instance)) {
-        return reject(err || 'No users found');
+    User.find(
+      { skip: (page - 1) * limit, limit: limit * 1 },
+      (err, instance) => {
+        if (err || isEmpty(instance)) {
+          return reject(err || 'No users found');
+        }
+        return resolve(instance);
       }
-      return resolve(instance);
+    )
+  );
+}
+
+export function countUserDocuments(User = loopback.getModelByType('User')) {
+  return new Promise((resolve, reject) =>
+    User.find((err, count) => {
+      if (err || isEmpty(count)) {
+        return reject(err || 'can not count user collection');
+      }
+      return resolve(count);
     })
   );
+
+  // return new Promise((resolve, reject) =>
+  //   User.count((err, count) => {
+  //     if (err || isEmpty(count)) {
+  //       return reject(err || 'can not count user collection');
+  //     }
+  //     return resolve(count);
+  //   })
+  // );
+
+  // return await User.count(function (err, count) {
+  //   if (err) {
+  //     return err || 'can not count user collection';
+  //   } else {
+  //     // console.log('Count :', count);
+  //     return count;
+  //   }
+  // });
 }
 
 function getCompletedCertCount(user) {
