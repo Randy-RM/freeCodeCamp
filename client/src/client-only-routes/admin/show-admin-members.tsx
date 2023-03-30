@@ -67,10 +67,9 @@ export function ShowAdminMembers(props: ShowAdminMembersProps): JSX.Element {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const getMembers = async () => {
-    const pageNumber = currentPage;
     const memberList = await getDatabaseResource<UserList>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      `/all-users?page=${pageNumber}`
+      `/all-users?page=${currentPage}`
     );
     if (memberList != null) {
       setMembers(memberList.userList);
@@ -83,15 +82,17 @@ export function ShowAdminMembers(props: ShowAdminMembersProps): JSX.Element {
     }
   };
 
-  // const navigateToPage = (forwardOrBackward: boolean) => {
-  //   if (forwardOrBackward) {
-  //     setCurrentPage(Number(currentPage + 1));
-  //     void getMembers();
-  //   } else {
-  //     setCurrentPage(Number(currentPage - 1));
-  //     void getMembers();
-  //   }
-  // };
+  const navigateToPage = (forwardOrBackward: boolean) => {
+    if (forwardOrBackward) {
+      setCurrentPage(
+        Number(currentPage >= totalPages ? totalPages : currentPage + 1)
+      );
+      void getMembers();
+    } else {
+      setCurrentPage(Number(currentPage <= 1 ? 1 : currentPage - 1));
+      void getMembers();
+    }
+  };
 
   useEffect(() => {
     void getMembers();
@@ -99,7 +100,7 @@ export function ShowAdminMembers(props: ShowAdminMembersProps): JSX.Element {
       setMembers([]); // cleanup useEffect to perform a React state update
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentPage]);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
@@ -109,10 +110,6 @@ export function ShowAdminMembers(props: ShowAdminMembersProps): JSX.Element {
     navigate(`${apiLocation}/signin`);
     return <Loader fullScreen={true} />;
   }
-
-  console.log('totalPages : ', totalPages);
-  console.log('currentPage : ', currentPage);
-  console.log('members : ', members);
 
   return (
     <>
@@ -157,23 +154,38 @@ export function ShowAdminMembers(props: ShowAdminMembersProps): JSX.Element {
                   </tbody>
                 </Table>
               ) : (
-                <></>
+                <Table striped responsive hover>
+                  <thead className='bg-dark-gray'>
+                    <tr>
+                      <th className='text-light'>Email</th>
+                      <th className='text-light'>Name</th>
+                      <th className='text-light'>Genre</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </Table>
               )}
             </div>
           </Col>
-          {/* <Col md={12} sm={12} xs={12}>
+          <Col md={12} sm={12} xs={12}>
             <button
               onClick={() => {
                 navigateToPage(false);
               }}
-            >{`<-`}</button>
-            {`  ${currentPage}...${totalPages}  `}
+            >{` <- `}</button>
+            {`  ${currentPage} sur ${totalPages}  `}
             <button
               onClick={() => {
                 navigateToPage(true);
               }}
-            >{`->`}</button>
-          </Col> */}
+            >{` -> `}</button>
+          </Col>
         </Row>
         <Spacer size={1} />
       </div>
