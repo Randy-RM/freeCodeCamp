@@ -67,24 +67,37 @@ export function ShowAdminMembers(props: ShowAdminMembersProps): JSX.Element {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const getMembers = async () => {
+    const pageNumber = currentPage;
     const memberList = await getDatabaseResource<UserList>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      `/all-users?page=${currentPage}`
+      `/all-users?page=${pageNumber}`
     );
     if (memberList != null) {
       setMembers(memberList.userList);
-      setTotalPages(Number(memberList.totalPages));
-      setCurrentPage(Number(memberList.currentPage));
+      if (totalPages == 0) {
+        setTotalPages(Number(memberList.totalPages));
+        setCurrentPage(Number(memberList.currentPage));
+      }
     } else {
       setMembers([]);
     }
   };
 
+  // const navigateToPage = (forwardOrBackward: boolean) => {
+  //   if (forwardOrBackward) {
+  //     setCurrentPage(Number(currentPage + 1));
+  //     void getMembers();
+  //   } else {
+  //     setCurrentPage(Number(currentPage - 1));
+  //     void getMembers();
+  //   }
+  // };
+
   useEffect(() => {
     void getMembers();
-    // return () => {
-    //   setMembers([]); // cleanup useEffect to perform a React state update
-    // };
+    return () => {
+      setMembers([]); // cleanup useEffect to perform a React state update
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -148,21 +161,19 @@ export function ShowAdminMembers(props: ShowAdminMembersProps): JSX.Element {
               )}
             </div>
           </Col>
-          <Col md={12} sm={12} xs={12}>
+          {/* <Col md={12} sm={12} xs={12}>
             <button
               onClick={() => {
-                setCurrentPage(Number(currentPage - 1));
-                void getMembers();
+                navigateToPage(false);
               }}
             >{`<-`}</button>
             {`  ${currentPage}...${totalPages}  `}
             <button
               onClick={() => {
-                setCurrentPage(Number(currentPage + 1));
-                void getMembers();
+                navigateToPage(true);
               }}
             >{`->`}</button>
-          </Col>
+          </Col> */}
         </Row>
         <Spacer size={1} />
       </div>
