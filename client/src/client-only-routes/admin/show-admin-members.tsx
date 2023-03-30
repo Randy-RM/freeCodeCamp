@@ -4,6 +4,15 @@ import Helmet from 'react-helmet';
 // import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+
+// import { makeStyles, createStyles } from '@material-ui/core/styles';
+// import Pagination from '@material-ui/lab/Pagination';
+// import {
+//   DataGrid,
+//   GridColDef,
+//   GridValueGetterParams
+// } from '@material-ui/data-grid/dist/data-grid';
+
 import { getDatabaseResource } from '../../utils/ajax';
 import envData from '../../../../config/env.json';
 import { createFlashMessage } from '../../components/Flash/redux';
@@ -84,13 +93,15 @@ export function ShowAdminMembers(props: ShowAdminMembersProps): JSX.Element {
 
   const navigateToPage = (forwardOrBackward: boolean) => {
     if (forwardOrBackward) {
-      setCurrentPage(
-        Number(currentPage >= totalPages ? totalPages : currentPage + 1)
-      );
-      void getMembers();
+      if (currentPage < totalPages) {
+        setCurrentPage(Number(currentPage + 1));
+        void getMembers();
+      }
     } else {
-      setCurrentPage(Number(currentPage <= 1 ? 1 : currentPage - 1));
-      void getMembers();
+      if (currentPage > 1) {
+        setCurrentPage(Number(currentPage - 1));
+        void getMembers();
+      }
     }
   };
 
