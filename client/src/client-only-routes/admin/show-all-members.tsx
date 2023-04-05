@@ -213,7 +213,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
               <thead className='bg-dark-gray'>
                 <tr>
                   <th className='text-light'>Email</th>
-                  <th className='text-light'>Name</th>
+                  <th className='text-light'>Nom</th>
                   <th className='text-light'>Genre</th>
                   <th className='text-light'>Actions</th>
                 </tr>
