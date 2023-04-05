@@ -7,6 +7,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { createSelector } from 'reselect';
 import { Grid, Row, Col } from '@freecodecamp/react-bootstrap';
 import { isBrowser } from '../../../utils';
+import { Spacer } from '../../components/helpers';
 import {
   fetchUser,
   isSignedInSelector,
@@ -167,14 +168,14 @@ class AdminDefaultLayout extends Component<AdminDefaultLayoutProps> {
             />
           </>
         ) : null}
-        <Grid fluid={true} className='bg-light margin-0'>
+        <Grid fluid={true} className='bg-dark-gray margin-0'>
           <main>
             <div className=''>
               <Row>
                 <Col md={2} sm={2} xs={2} className='text-light bg-dark-gray'>
                   <SideBar fetchState={fetchState} user={user} />
                 </Col>
-                <Col md={10} sm={10} xs={10} className=''>
+                <Col md={10} sm={10} xs={10} className='bg-light'>
                   <Row className='admin-profile-bar'>
                     <Col md={6} sm={6} xs={6} className='padding-0'>
                       <div></div>
@@ -185,7 +186,7 @@ class AdminDefaultLayout extends Component<AdminDefaultLayoutProps> {
                       xs={6}
                       className='padding-0 admin-profil-item'
                     >
-                      <div className='profile-name'>Jhon Doe</div>
+                      <div className='profile-name'>{user.name}</div>
                       <div>
                         <img
                           src={ProfilePlaceholder}
@@ -195,7 +196,8 @@ class AdminDefaultLayout extends Component<AdminDefaultLayoutProps> {
                       </div>
                     </Col>
                   </Row>
-                  <div className={`default-layout`}>{children}</div>
+                  <div className={`admin-default-layout`}>{children}</div>
+                  <Spacer />
                 </Col>
               </Row>
             </div>

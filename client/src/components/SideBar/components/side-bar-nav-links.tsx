@@ -33,7 +33,7 @@ export const SideBarNavLinks = (): JSX.Element => {
   return (
     <div className=''>
       <ul className='side-bar-nav-list'>
-        <li className='side-bar-nav-item'>
+        {/* <li className='side-bar-nav-item'>
           <Link
             className=''
             key='admin-home'
@@ -42,13 +42,13 @@ export const SideBarNavLinks = (): JSX.Element => {
           >
             {'Accueil'}
           </Link>
-        </li>
+        </li> */}
 
         <li className='side-bar-nav-item'>
           <Link
             className=''
             key='admin-members'
-            to='/admin/admin-members'
+            to='/admin/all-members'
             activeClassName='active'
           >
             {'Membres'}

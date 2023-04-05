@@ -176,16 +176,17 @@ async function getUserList(req, res) {
   try {
     const userList = await getAllUsers(page, limit);
     const usersCount = await countUserDocuments();
-    console.log('usersCount : ', usersCount.length);
     return res.json({
       userList: userList,
       totalPages: Math.ceil(usersCount.length / limit),
-      currentPage: page
+      currentPage: page,
+      countUsers: usersCount.length
     });
   } catch (error) {
-    console.log('error : ', error);
+    return res.json({
+      error: error
+    });
   }
-  return;
 }
 
 function getUnlinkSocial(req, res, next) {
