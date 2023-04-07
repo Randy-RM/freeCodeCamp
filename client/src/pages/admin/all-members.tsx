@@ -9,6 +9,7 @@ function AllMembers(): JSX.Element {
   return (
     <Router>
       <ShowAllMembers path={withPrefix('/admin/all-members')} />
+      <ShowAllMembers path={withPrefix('/admin/all-members/')} />
       {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
       {/* @ts-ignore */}
       <RedirectHome default={true} />
