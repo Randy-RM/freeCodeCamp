@@ -52,6 +52,8 @@ module.exports = function enableAuthentication(app) {
   } else {
     api.get('/signin', ifUserRedirect, (req, res, next) => {
       const { returnTo, origin, pathPrefix } = getRedirectParams(req);
+      // console.log('origin : ', origin);
+      // console.log('pathPrefix : ', pathPrefix);
       const state = jwt.sign({ returnTo, origin, pathPrefix }, jwtSecret);
       return passport.authenticate('auth0-login', { state })(req, res, next);
     });
