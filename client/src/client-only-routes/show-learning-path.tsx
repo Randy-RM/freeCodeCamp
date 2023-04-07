@@ -41,6 +41,7 @@ type MoodleCourse = {
   description: string;
   coursecount: number;
   visible: number;
+  parent: number;
 };
 
 const mapStateToProps = createSelector(
@@ -71,7 +72,11 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
       `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_categories&moodlewsrestformat=json`
     );
     if (moodleCategoriesCatalogue != null) {
-      setMoodleCoursesCategories(moodleCategoriesCatalogue);
+      setMoodleCoursesCategories(
+        moodleCategoriesCatalogue.filter(moodleCourse => {
+          return moodleCourse.parent != 0;
+        })
+      );
     } else {
       setMoodleCoursesCategories([]);
     }

@@ -97,7 +97,6 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
 
   const showMemberDetails = (member: Member | null) => {
     setCurrentMember(member);
-    console.log(currentMember);
   };
 
   const returnToTable = () => {
