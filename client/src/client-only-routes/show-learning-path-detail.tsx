@@ -154,6 +154,8 @@ export function ShowLearningPathDetail(
                         icon={PhBookBookmark}
                         isAvailable={true}
                         isSignedIn={isSignedIn}
+                        sameTab={true}
+                        external={true}
                         title={`${course.displayname}`}
                         buttonText={`Suivre le cours  `}
                         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
