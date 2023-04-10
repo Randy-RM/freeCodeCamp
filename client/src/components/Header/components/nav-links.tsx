@@ -112,6 +112,18 @@ export const NavLinks = (props: NavLinksProps): JSX.Element => {
           </Link>
         </li>
 
+        <li className='nav-item'>
+          <Link
+            onClick={handleIsDropdown}
+            external={true}
+            className=''
+            key='Kadea-academy'
+            to='https://www.kinshasadigital.academy/'
+          >
+            {'Académie'}
+          </Link>
+        </li>
+
         {username && (
           <Fragment key='profile-settings'>
             <li className='nav-item'>
