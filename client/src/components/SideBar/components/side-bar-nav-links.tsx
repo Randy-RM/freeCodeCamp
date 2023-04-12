@@ -48,7 +48,8 @@ export const SideBarNavLinks = (): JSX.Element => {
           <Link
             className=''
             key='admin-members'
-            to='/admin/all-members/'
+            to='/admin/all-members'
+            partiallyActive={true}
             activeClassName='active'
           >
             {'Membres'}
