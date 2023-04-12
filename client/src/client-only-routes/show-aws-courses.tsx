@@ -3,7 +3,7 @@ import { Grid, Row, Col } from '@freecodecamp/react-bootstrap';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { getExternalCoursesCatalog } from '../utils/ajax';
+import { getExternalResource } from '../utils/ajax';
 
 import { createFlashMessage } from '../components/Flash/redux';
 import { Loader, Spacer } from '../components/helpers';
@@ -70,7 +70,7 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
   const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[]>();
 
   const getMoodleCourses = async () => {
-    const moodleCatalogue = await getExternalCoursesCatalog<MoodleCourse[]>(
+    const moodleCatalogue = await getExternalResource<MoodleCourse[]>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses&moodlewsrestformat=json`
     );

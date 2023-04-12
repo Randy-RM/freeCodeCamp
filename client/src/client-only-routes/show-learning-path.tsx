@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { Grid } from '@freecodecamp/react-bootstrap';
-import { getExternalCoursesCatalog } from '../utils/ajax';
+import { getExternalResource } from '../utils/ajax';
 import { createFlashMessage } from '../components/Flash/redux';
 import { Loader, Spacer } from '../components/helpers';
 // import '../components/CourseCard/courses-card.css';
@@ -65,9 +65,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
   const [moodleCoursesCategories, setMoodleCoursesCategories] =
     useState<MoodleCourse[]>();
   const getMoodleCoursesCategories = async () => {
-    const moodleCategoriesCatalogue = await getExternalCoursesCatalog<
-      MoodleCourse[]
-    >(
+    const moodleCategoriesCatalogue = await getExternalResource<MoodleCourse[]>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_categories&moodlewsrestformat=json`
     );

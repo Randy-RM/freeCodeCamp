@@ -199,7 +199,7 @@ export function getUsernameExists(username: string): Promise<boolean> {
 //   body: string;
 // }
 
-export async function getExternalCoursesCatalog<T>(urlEndPoint: string) {
+export async function getExternalResource<T>(urlEndPoint: string) {
   let response: T | null;
   try {
     response = await requestModule<T>(urlEndPoint, {

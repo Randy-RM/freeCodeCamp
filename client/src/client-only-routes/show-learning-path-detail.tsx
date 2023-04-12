@@ -4,7 +4,7 @@ import { Grid, Row, Col } from '@freecodecamp/react-bootstrap';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { getExternalCoursesCatalog } from '../utils/ajax';
+import { getExternalResource } from '../utils/ajax';
 
 import { createFlashMessage } from '../components/Flash/redux';
 import { Loader, Spacer } from '../components/helpers';
@@ -77,11 +77,10 @@ export function ShowLearningPathDetail(
     'categoryId' in params ? params.categoryId : '';
 
   const getMoodleCourses = async () => {
-    const moodleCatalogue =
-      await getExternalCoursesCatalog<MoodleCoursesCatalogue>(
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses_by_field&field=category&value=${categoryId}&moodlewsrestformat=json`
-      );
+    const moodleCatalogue = await getExternalResource<MoodleCoursesCatalogue>(
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses_by_field&field=category&value=${categoryId}&moodlewsrestformat=json`
+    );
     if (moodleCatalogue != null) {
       setMoodleCourses(moodleCatalogue.courses);
     } else {
