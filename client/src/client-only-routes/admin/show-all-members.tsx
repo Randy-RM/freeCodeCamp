@@ -10,7 +10,7 @@ import {
   faChevronRight,
   faUsers
 } from '@fortawesome/free-solid-svg-icons';
-import { getDatabaseResource } from '../../utils/ajax';
+import { getDatabaseResource, getExternalResource } from '../../utils/ajax';
 import envData from '../../../../config/env.json';
 import { createFlashMessage } from '../../components/Flash/redux';
 import { Loader, Spacer } from '../../components/helpers';
@@ -26,7 +26,7 @@ import {
 import { CurrentSuperBlock, User } from '../../redux/prop-types';
 import './admin-global.css';
 
-const { apiLocation } = envData;
+const { apiLocation, moodleApiBaseUrl, moodleApiToken } = envData;
 
 // TODO: update types for actions
 interface ShowAllMembersProps {
@@ -293,8 +293,55 @@ interface MemberProps {
   returnToTable: () => void;
 }
 
+type MoodleUser = {
+  id: number;
+  email: string;
+};
+
+type MoodleCourse = {
+  id: number;
+  displayname: string;
+  progress: number;
+};
+
 export function DetailMember(props: MemberProps): JSX.Element {
   const { member, returnToTable } = props;
+
+  const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[] | null>();
+
+  const getMoodleProgressCourses = async () => {
+    const moodleUser = await getExternalResource<MoodleUser[]>(
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_user_get_users_by_field&moodlewsrestformat=json&field=email&values[0]=${member?.email}`
+    );
+    if (moodleUser != null && moodleUser.length > 0) {
+      console.log('moodleUser : ', moodleUser[0]);
+      const moodleUserCoursesProgress = await getExternalResource<
+        MoodleCourse[]
+      >(
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_enrol_get_users_courses&moodlewsrestformat=json&userid=${moodleUser[0].id}`
+      );
+      if (
+        moodleUserCoursesProgress != null &&
+        moodleUserCoursesProgress.length > 0
+      ) {
+        setMoodleCourses(moodleUserCoursesProgress);
+      } else {
+        setMoodleCourses(null);
+      }
+    } else {
+      setMoodleCourses(null);
+    }
+  };
+
+  useEffect(() => {
+    void getMoodleProgressCourses();
+    return () => {
+      setMoodleCourses([]); // cleanup useEffect to perform a React state update
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Row>
@@ -341,14 +388,20 @@ export function DetailMember(props: MemberProps): JSX.Element {
         </div>
         <Spacer size={1} />
       </Col>
+
+      {(moodleCourses != null && moodleCourses?.length > 0) ||
+      (member?.currentsSuperBlock != undefined &&
+        member?.currentsSuperBlock.length > 0) ? (
+        <Col md={12} sm={12} xs={12}>
+          <p>
+            <span className='fw-bold'>{'Cours suivie'}</span>
+          </p>
+        </Col>
+      ) : null}
+
       {member?.currentsSuperBlock != undefined &&
         member?.currentsSuperBlock.length > 0 && (
           <>
-            <Col md={12} sm={12} xs={12}>
-              <p>
-                <span className='fw-bold'>{'Cours suivie'}</span>
-              </p>
-            </Col>
             {member.currentsSuperBlock.map((currentSuperBlock, index) => {
               return (
                 <Col md={6} sm={12} xs={12} key={index}>
@@ -366,6 +419,24 @@ export function DetailMember(props: MemberProps): JSX.Element {
             })}
           </>
         )}
+
+      {moodleCourses != null && moodleCourses?.length > 0 && (
+        <>
+          {moodleCourses.map((moodleCourse, index) => {
+            return (
+              <Col md={6} sm={12} xs={12} key={index}>
+                <div className=''>
+                  <CourseProgressBar
+                    challengeCount={100}
+                    completedChallengeCount={moodleCourse.progress}
+                    coursName={moodleCourse.displayname}
+                  />
+                </div>
+              </Col>
+            );
+          })}
+        </>
+      )}
     </Row>
   );
 }
