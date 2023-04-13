@@ -66,6 +66,9 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
   const { currentsSuperBlock, email } = user;
 
   const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[] | null>();
+  const [dataLoadingMessage, setDataLoadingMessage] = useState<string>(
+    'Chargement en cours'
+  );
 
   const getMoodleProgressCourses = async () => {
     const moodleUser = await getExternalResource<MoodleUser[]>(
@@ -94,8 +97,17 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
 
   useEffect(() => {
     void getMoodleProgressCourses();
+    const timer = setTimeout(() => {
+      if (
+        (!currentsSuperBlock || currentsSuperBlock.length == 0) &&
+        moodleCourses == null
+      ) {
+        setDataLoadingMessage(`Aucun cours suivi pour l'instant`);
+      }
+    }, 3000);
     return () => {
       setMoodleCourses([]); // cleanup useEffect to perform a React state update
+      clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -194,7 +206,7 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
                   <Col className='' md={12} sm={12} xs={12}>
                     <Spacer size={1} />
                     <div className='block-ui bg-secondary'>
-                      <p className='h3'>{`Aucun cours suivi pour l'instant`}</p>
+                      <p className='h3'>{dataLoadingMessage}</p>
                     </div>
                     <Spacer size={1} />
                   </Col>
