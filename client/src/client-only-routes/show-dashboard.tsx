@@ -176,6 +176,8 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
                             challengeCount={100}
                             completedChallengeCount={moodleCourse.progress}
                             coursName={moodleCourse.displayname}
+                            sameTab={true}
+                            external={true}
                             // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
                             superBlockPath={`${moodleBaseUrl}/course/view.php?id=${moodleCourse.id}`}
                           />
