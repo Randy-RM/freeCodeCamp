@@ -315,7 +315,6 @@ export function DetailMember(props: MemberProps): JSX.Element {
       `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_user_get_users_by_field&moodlewsrestformat=json&field=email&values[0]=${member?.email}`
     );
     if (moodleUser != null && moodleUser.length > 0) {
-      console.log('moodleUser : ', moodleUser[0]);
       const moodleUserCoursesProgress = await getExternalResource<
         MoodleCourse[]
       >(
