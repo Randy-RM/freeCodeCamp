@@ -186,7 +186,9 @@ class AdminDefaultLayout extends Component<AdminDefaultLayoutProps> {
                       xs={6}
                       className='padding-0 admin-profil-item'
                     >
-                      <div className='profile-name'>{user.name}</div>
+                      <div className='profile-name'>
+                        {user.name?.length > 0 ? user.name : user.email}
+                      </div>
                       <div>
                         <img
                           src={ProfilePlaceholder}
