@@ -67,7 +67,7 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
 
   const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[] | null>();
   const [dataLoadingMessage, setDataLoadingMessage] = useState<string>(
-    'Chargement en cours'
+    'Chargement en cours ...'
   );
 
   const getMoodleProgressCourses = async () => {
