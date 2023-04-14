@@ -7,6 +7,7 @@ import { createSelector } from 'reselect';
 
 // import envData from '../../../config/env.json';
 import CourseCard from '../components/CourseCard/course-card';
+import CourseCardSkeleton from '../components/CourseCard/course-card-skeleton';
 import LaptopIcon from '../assets/images/laptop.svg';
 import AlgoIcon from '../assets/images/algorithmIcon.svg';
 import LaediesActIcon from '../assets/images/partners/ladies-act-logo.png';
@@ -109,6 +110,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                 cours JavaScript Algorithm and Data Structures, tu apprendras 
                 les principes fondamentaux de JavaScript, etc.`}
               />
+              <CourseCardSkeleton />
             </div>
           </div>
           <Spacer size={2} />
