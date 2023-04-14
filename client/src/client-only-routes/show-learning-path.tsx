@@ -11,6 +11,7 @@ import LaptopIcon from '../assets/images/laptop.svg';
 import CloudShield from '../assets/images/cloudShield.svg';
 import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
 import CourseCard from '../components/CourseCard/course-card';
+import CourseCardSkeleton from '../components/CourseCard/course-card-skeleton';
 
 import {
   signInLoadingSelector,
@@ -64,6 +65,8 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
   const { showLoading, isSignedIn } = props;
   const [moodleCoursesCategories, setMoodleCoursesCategories] =
     useState<MoodleCourse[]>();
+  const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
+
   const getMoodleCoursesCategories = async () => {
     const moodleCategoriesCatalogue = await getExternalResource<MoodleCourse[]>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -82,9 +85,16 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
 
   useEffect(() => {
     void getMoodleCoursesCategories();
+    const timer = setTimeout(() => {
+      if (isDataOnLoading) {
+        setIsDataOnLoading(false);
+      }
+    }, 3000);
     return () => {
       setMoodleCoursesCategories([]); // cleanup useEffect to perform a React state update
+      clearTimeout(timer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (showLoading) {
@@ -107,59 +117,66 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
               </p>
             </div>
             <Spacer />
-            <div className='card-course-detail-container'>
-              <CourseCard
-                icon={LaptopIcon}
-                alt=''
-                isAvailable={true}
-                isSignedIn={isSignedIn}
-                title={`Développement Web`}
-                buttonText={`Suivre le parcours  `}
-                link={`/learning-path/developpement-web`}
-                cardType='parcours'
-                description={`
+            {!isDataOnLoading ? (
+              <div className='card-course-detail-container'>
+                <CourseCard
+                  icon={LaptopIcon}
+                  alt=''
+                  isAvailable={true}
+                  isSignedIn={isSignedIn}
+                  title={`Développement Web`}
+                  buttonText={`Suivre le parcours  `}
+                  link={`/learning-path/developpement-web`}
+                  cardType='parcours'
+                  description={`
                 Dans ce parcours en ligne, tu apprendras les langages que les développeurs 
                 utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
                 pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
                 Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
                 `}
-              />
-              <CourseCard
-                icon={CloudShield}
-                alt=''
-                isAvailable={false}
-                isSignedIn={isSignedIn}
-                title={`Parcours AWS`}
-                buttonText={`Suivre le parcours  `}
-                link={`/aws-courses`}
-                cardType='parcours'
-                description={`Ce parcours est conçu pour montrer aux participants comment 
+                />
+                <CourseCard
+                  icon={CloudShield}
+                  alt=''
+                  isAvailable={false}
+                  isSignedIn={isSignedIn}
+                  title={`Parcours AWS`}
+                  buttonText={`Suivre le parcours  `}
+                  link={`/aws-courses`}
+                  cardType='parcours'
+                  description={`Ce parcours est conçu pour montrer aux participants comment 
                   optimiser l'utilisation du cloud AWS grâce à la compréhension 
                   de ces nombreux services et de leur intégration dans la création 
                   de solutions basées sur le cloud.`}
-              />
+                />
 
-              {moodleCoursesCategories &&
-                moodleCoursesCategories.length >= 0 &&
-                moodleCoursesCategories.map((category, index) => {
-                  return (
-                    <CourseCard
-                      key={index}
-                      icon={PhBookBookmark}
-                      isAvailable={category.visible == 1}
-                      isSignedIn={isSignedIn}
-                      title={category.name.replace(/&amp;/g, 'et')}
-                      buttonText={`Suivre le parcours  `}
-                      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                      link={`/learning-path/${category.name
-                        .replace(/ /g, '-')
-                        .replace(/&amp;/g, 'et')}/${category.id}`}
-                      cardType='parcours'
-                      description={category.description}
-                    />
-                  );
-                })}
-            </div>
+                {moodleCoursesCategories &&
+                  moodleCoursesCategories.length >= 0 &&
+                  moodleCoursesCategories.map((category, index) => {
+                    return (
+                      <CourseCard
+                        key={index}
+                        icon={PhBookBookmark}
+                        isAvailable={category.visible == 1}
+                        isSignedIn={isSignedIn}
+                        title={category.name.replace(/&amp;/g, 'et')}
+                        buttonText={`Suivre le parcours  `}
+                        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                        link={`/learning-path/${category.name
+                          .replace(/ /g, '-')
+                          .replace(/&amp;/g, 'et')}/${category.id}`}
+                        cardType='parcours'
+                        description={category.description}
+                      />
+                    );
+                  })}
+              </div>
+            ) : (
+              <div className='card-course-detail-container'>
+                <CourseCardSkeleton />
+                <CourseCardSkeleton />
+              </div>
+            )}
           </div>
         </main>
       </Grid>
