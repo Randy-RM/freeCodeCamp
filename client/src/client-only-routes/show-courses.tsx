@@ -1,5 +1,5 @@
 import { Grid } from '@freecodecamp/react-bootstrap';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
 // import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
@@ -53,6 +53,19 @@ const mapDispatchToProps = {
 export function Courses(props: CoursesProps): JSX.Element {
   // const { t } = useTranslation();
   const { isSignedIn, /*navigate,*/ showLoading } = props;
+  const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (isDataOnLoading) {
+        setIsDataOnLoading(false);
+      }
+    }, 3000);
+    return () => {
+      clearTimeout(timer); // cleanup useEffect to perform a React state update
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
@@ -81,37 +94,43 @@ export function Courses(props: CoursesProps): JSX.Element {
               </p>
             </div>
             <Spacer />
-            <div className='card-course-detail-container'>
-              <CourseCard
-                icon={LaptopIcon}
-                sponsorIcon={LaediesActIcon}
-                alt=''
-                isAvailable={true}
-                isSignedIn={isSignedIn}
-                title={`Responsive Web Design`}
-                buttonText={`Suivre le cours  `}
-                description={`
+            {!isDataOnLoading ? (
+              <div className='card-course-detail-container'>
+                <CourseCard
+                  icon={LaptopIcon}
+                  sponsorIcon={LaediesActIcon}
+                  alt=''
+                  isAvailable={true}
+                  isSignedIn={isSignedIn}
+                  title={`Responsive Web Design`}
+                  buttonText={`Suivre le cours  `}
+                  description={`
                 Dans ce cours, tu apprendras les langages que les développeurs 
                 utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
                 pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
                 Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
                 `}
-              />
-              <CourseCard
-                icon={AlgoIcon}
-                alt=''
-                isAvailable={true}
-                isSignedIn={isSignedIn}
-                title={`JavaScript Algorithms and Data Structures`}
-                buttonText={`Suivre le cours  `}
-                link={`/learn/javascript-algorithms-and-data-structures`}
-                description={`Alors que HTML et CSS contrôlent le contenu et le style  d'une page, 
+                />
+                <CourseCard
+                  icon={AlgoIcon}
+                  alt=''
+                  isAvailable={true}
+                  isSignedIn={isSignedIn}
+                  title={`JavaScript Algorithms and Data Structures`}
+                  buttonText={`Suivre le cours  `}
+                  link={`/learn/javascript-algorithms-and-data-structures`}
+                  description={`Alors que HTML et CSS contrôlent le contenu et le style  d'une page, 
                 JavaScript est utilisé pour la rendre interactive. Dans le cadre du 
                 cours JavaScript Algorithm and Data Structures, tu apprendras 
                 les principes fondamentaux de JavaScript, etc.`}
-              />
-              <CourseCardSkeleton />
-            </div>
+                />
+              </div>
+            ) : (
+              <div className='card-course-detail-container'>
+                <CourseCardSkeleton />
+                <CourseCardSkeleton />
+              </div>
+            )}
           </div>
           <Spacer size={2} />
         </main>
