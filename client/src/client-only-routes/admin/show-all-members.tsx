@@ -26,7 +26,7 @@ import {
 import { CurrentSuperBlock, User } from '../../redux/prop-types';
 import './admin-global.css';
 
-const { apiLocation, moodleApiBaseUrl, moodleApiToken } = envData;
+const { apiLocation, homeLocation, moodleApiBaseUrl, moodleApiToken } = envData;
 
 // TODO: update types for actions
 interface ShowAllMembersProps {
@@ -70,7 +70,7 @@ type UserList = {
 };
 
 export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
-  const { isSignedIn, navigate, showLoading } = props;
+  const { isSignedIn, navigate, showLoading, user } = props;
 
   const [members, setMembers] = useState<Member[]>();
   const [currentMember, setCurrentMember] = useState<Member | null>(null);
@@ -131,6 +131,11 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
 
   if (!isSignedIn) {
     navigate(`${apiLocation}/signin`);
+    return <Loader fullScreen={true} />;
+  }
+
+  if (!user.email.endsWith('@kinshasadigital.com')) {
+    navigate(`${homeLocation}`);
     return <Loader fullScreen={true} />;
   }
 

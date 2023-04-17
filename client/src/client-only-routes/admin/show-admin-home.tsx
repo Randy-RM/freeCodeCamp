@@ -18,7 +18,7 @@ import {
 
 import { User } from '../../redux/prop-types';
 
-const { apiLocation } = envData;
+const { apiLocation, homeLocation } = envData;
 
 // TODO: update types for actions
 interface ShowAdminHomeProps {
@@ -48,7 +48,7 @@ const mapDispatchToProps = {
 
 export function ShowAdminHome(props: ShowAdminHomeProps): JSX.Element {
   // const { t } = useTranslation();
-  const { isSignedIn, /*user,*/ navigate, showLoading } = props;
+  const { isSignedIn, user, navigate, showLoading } = props;
   // const { currentsSuperBlock } = user;
 
   if (showLoading) {
@@ -57,6 +57,11 @@ export function ShowAdminHome(props: ShowAdminHomeProps): JSX.Element {
 
   if (!isSignedIn) {
     navigate(`${apiLocation}/signin`);
+    return <Loader fullScreen={true} />;
+  }
+
+  if (!user.email.endsWith('@kinshasadigital.com')) {
+    navigate(`${homeLocation}`);
     return <Loader fullScreen={true} />;
   }
 

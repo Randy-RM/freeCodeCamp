@@ -137,6 +137,14 @@ class AdminDefaultLayout extends Component<AdminDefaultLayoutProps> {
       useTheme = true
     } = this.props;
 
+    if (!isSignedIn) {
+      return <>{children}</>;
+    }
+
+    if (!user.email.endsWith('@kinshasadigital.com')) {
+      return <>{children}</>;
+    }
+
     return (
       <div className='page-wrapper'>
         <Helmet
