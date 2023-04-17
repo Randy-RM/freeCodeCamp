@@ -130,6 +130,10 @@
     "twitter": {
       "type": "string"
     },
+    "role": {
+      "type": "string",
+      "default": ""
+    },
     "acceptedPrivacyTerms": {
       "type": "boolean",
       "default": false

@@ -77,7 +77,8 @@ export const UserPropType = PropTypes.shape({
       totalChallenges: PropTypes.number,
       totalCompletedChallenges: PropTypes.number
     })
-  )
+  ),
+  role: PropTypes.string
 });
 
 export const CurrentCertsPropType = PropTypes.arrayOf(
@@ -323,6 +324,7 @@ export type User = {
   sinceWhen: string;
   position: string;
   currentsSuperBlock: CurrentSuperBlock[];
+  role: string;
 } & ClaimedCertifications;
 
 export type ProfileUI = {
