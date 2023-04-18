@@ -10,6 +10,7 @@ import { createFlashMessage } from '../components/Flash/redux';
 import { Loader, Spacer } from '../components/helpers';
 // import '../components/CourseCard/courses-card.css';
 import CourseCard from '../components/CourseCard/course-card';
+import CourseCardSkeleton from '../components/CourseCard/course-card-skeleton';
 import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
 
 import {
@@ -22,7 +23,8 @@ import {
 import { User } from '../redux/prop-types';
 import envData from '../../../config/env.json';
 
-const { moodleBaseUrl, moodleApiBaseUrl, moodleApiToken } = envData;
+const { apiLocation, moodleBaseUrl, moodleApiBaseUrl, moodleApiToken } =
+  envData;
 
 // TODO: update types for actions
 interface ShowLearningPathDetailProps {
@@ -71,6 +73,8 @@ export function ShowLearningPathDetail(
   const { showLoading, isSignedIn, location } = props;
   const params: Record<string, undefined> = useParams();
   const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[]>();
+  const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
+
   const categoryName: string | undefined =
     'category' in params ? params.category : '';
   const categoryId: string | undefined =
@@ -90,13 +94,24 @@ export function ShowLearningPathDetail(
 
   useEffect(() => {
     void getMoodleCourses();
+    const timer = setTimeout(() => {
+      if (isDataOnLoading) {
+        setIsDataOnLoading(false);
+      }
+    }, 3000);
     return () => {
       setMoodleCourses([]); // cleanup useEffect to perform a React state update
+      clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (showLoading) {
+    return <Loader fullScreen={true} />;
+  }
+
+  if (!isSignedIn) {
+    navigate(`${apiLocation}/signin`);
     return <Loader fullScreen={true} />;
   }
 
@@ -143,36 +158,43 @@ export function ShowLearningPathDetail(
             <Spacer size={2} />
           </Col>
           <Col className='' md={12} sm={12} xs={12}>
-            <div>
-              {moodleCourses && moodleCourses.length > 0 ? (
-                <div className='card-course-detail-container'>
-                  {moodleCourses.map((course, index) => {
-                    return (
-                      <CourseCard
-                        key={index + course.id}
-                        icon={PhBookBookmark}
-                        isAvailable={true}
-                        isSignedIn={isSignedIn}
-                        sameTab={true}
-                        external={true}
-                        title={`${course.displayname}`}
-                        buttonText={`Suivre le cours  `}
-                        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                        link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
-                        description={course.summary}
-                      />
-                    );
-                  })}
-                </div>
-              ) : (
-                <>
-                  <div className='block-ui bg-secondary'>
-                    <p className='h3'>{`Aucun cours pour l'instant`}</p>
+            {!isDataOnLoading ? (
+              <div>
+                {moodleCourses && moodleCourses.length > 0 ? (
+                  <div className='card-course-detail-container'>
+                    {moodleCourses.map((course, index) => {
+                      return (
+                        <CourseCard
+                          key={index + course.id}
+                          icon={PhBookBookmark}
+                          isAvailable={true}
+                          isSignedIn={isSignedIn}
+                          sameTab={true}
+                          external={true}
+                          title={`${course.displayname}`}
+                          buttonText={`Suivre le cours  `}
+                          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                          link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
+                          description={course.summary}
+                        />
+                      );
+                    })}
                   </div>
-                  <Spacer size={1} />
-                </>
-              )}
-            </div>
+                ) : (
+                  <>
+                    <div className='block-ui bg-secondary'>
+                      <p className='h3'>{`Aucun cours pour l'instant`}</p>
+                    </div>
+                    <Spacer size={1} />
+                  </>
+                )}
+              </div>
+            ) : (
+              <div className='card-course-detail-container'>
+                <CourseCardSkeleton />
+                <CourseCardSkeleton />
+              </div>
+            )}
           </Col>
         </Row>
       </Grid>
