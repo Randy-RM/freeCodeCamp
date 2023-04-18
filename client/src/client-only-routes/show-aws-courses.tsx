@@ -20,7 +20,8 @@ import {
 import { User } from '../redux/prop-types';
 import envData from '../../../config/env.json';
 
-const { moodleBaseUrl, moodleApiBaseUrl, moodleApiToken } = envData;
+const { apiLocation, moodleBaseUrl, moodleApiBaseUrl, moodleApiToken } =
+  envData;
 
 // TODO: update types for actions
 interface ShowAwsCoursesProps {
@@ -86,6 +87,11 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
   }, []);
 
   if (showLoading) {
+    return <Loader fullScreen={true} />;
+  }
+
+  if (!isSignedIn) {
+    navigate(`${apiLocation}/signin`);
     return <Loader fullScreen={true} />;
   }
 
