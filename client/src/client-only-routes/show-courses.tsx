@@ -7,12 +7,15 @@ import { createSelector } from 'reselect';
 
 // import envData from '../../../config/env.json';
 import CourseCard from '../components/CourseCard/course-card';
-import CourseCardSkeleton from '../components/CourseCard/course-card-skeleton';
 import LaptopIcon from '../assets/images/laptop.svg';
 import AlgoIcon from '../assets/images/algorithmIcon.svg';
 import LaediesActIcon from '../assets/images/partners/ladies-act-logo.png';
 import { createFlashMessage } from '../components/Flash/redux';
-import { Loader, Spacer } from '../components/helpers';
+import {
+  Loader,
+  Spacer,
+  renderCourseCardSkeletons
+} from '../components/helpers';
 import {
   signInLoadingSelector,
   userSelector,
@@ -127,8 +130,7 @@ export function Courses(props: CoursesProps): JSX.Element {
               </div>
             ) : (
               <div className='card-course-detail-container'>
-                <CourseCardSkeleton />
-                <CourseCardSkeleton />
+                {renderCourseCardSkeletons(2)}
               </div>
             )}
           </div>

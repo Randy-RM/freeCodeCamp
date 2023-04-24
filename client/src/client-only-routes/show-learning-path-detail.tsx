@@ -7,10 +7,12 @@ import { createSelector } from 'reselect';
 import { getExternalResource } from '../utils/ajax';
 
 import { createFlashMessage } from '../components/Flash/redux';
-import { Loader, Spacer } from '../components/helpers';
-// import '../components/CourseCard/courses-card.css';
+import {
+  Loader,
+  Spacer,
+  renderCourseCardSkeletons
+} from '../components/helpers';
 import CourseCard from '../components/CourseCard/course-card';
-import CourseCardSkeleton from '../components/CourseCard/course-card-skeleton';
 import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
 
 import {
@@ -191,8 +193,7 @@ export function ShowLearningPathDetail(
               </div>
             ) : (
               <div className='card-course-detail-container'>
-                <CourseCardSkeleton />
-                <CourseCardSkeleton />
+                {renderCourseCardSkeletons(2)}
               </div>
             )}
           </Col>

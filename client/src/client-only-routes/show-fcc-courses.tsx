@@ -7,9 +7,12 @@ import { createSelector } from 'reselect';
 
 import envData from '../../../config/env.json';
 import { createFlashMessage } from '../components/Flash/redux';
-import { Loader, Spacer } from '../components/helpers';
+import {
+  Loader,
+  Spacer,
+  renderCourseCardSkeletons
+} from '../components/helpers';
 import CourseCard from '../components/CourseCard/course-card';
-import CourseCardSkeleton from '../components/CourseCard/course-card-skeleton';
 import LaptopIcon from '../assets/images/laptop.svg';
 import AlgoIcon from '../assets/images/algorithmIcon.svg';
 import LaediesActIcon from '../assets/images/partners/ladies-act-logo.png';
@@ -149,8 +152,7 @@ export function ShowFccCourses(props: ShowFccCoursesProps): JSX.Element {
               </div>
             ) : (
               <div className='card-course-detail-container'>
-                <CourseCardSkeleton />
-                <CourseCardSkeleton />
+                {renderCourseCardSkeletons(2)}
               </div>
             )}
           </Col>

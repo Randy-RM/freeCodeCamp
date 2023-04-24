@@ -5,13 +5,15 @@ import { createSelector } from 'reselect';
 import { Grid } from '@freecodecamp/react-bootstrap';
 import { getExternalResource } from '../utils/ajax';
 import { createFlashMessage } from '../components/Flash/redux';
-import { Loader, Spacer } from '../components/helpers';
-// import '../components/CourseCard/courses-card.css';
+import {
+  Loader,
+  Spacer,
+  renderCourseCardSkeletons
+} from '../components/helpers';
 import LaptopIcon from '../assets/images/laptop.svg';
 import CloudShield from '../assets/images/cloudShield.svg';
 import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
 import CourseCard from '../components/CourseCard/course-card';
-import CourseCardSkeleton from '../components/CourseCard/course-card-skeleton';
 
 import {
   signInLoadingSelector,
@@ -65,6 +67,8 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
   const { showLoading, isSignedIn } = props;
   const [moodleCoursesCategories, setMoodleCoursesCategories] =
     useState<MoodleCourse[]>();
+  // const [coursesCategoriesCount, setCoursesCategoriesCount] =
+  //   useState<number>(3);
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
 
   const getMoodleCoursesCategories = async () => {
@@ -173,8 +177,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
               </div>
             ) : (
               <div className='card-course-detail-container'>
-                <CourseCardSkeleton />
-                <CourseCardSkeleton />
+                {renderCourseCardSkeletons(3)}
               </div>
             )}
           </div>
