@@ -1,20 +1,23 @@
 import { Grid } from '@freecodecamp/react-bootstrap';
 import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
-// import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';PhBookBookmark
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
-// import envData from '../../../config/env.json';
+import envData from '../../../config/env.json';
 import CourseCard from '../components/CourseCard/course-card';
 import LaptopIcon from '../assets/images/laptop.svg';
 import AlgoIcon from '../assets/images/algorithmIcon.svg';
+import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
+
 import LaediesActIcon from '../assets/images/partners/ladies-act-logo.png';
 import { createFlashMessage } from '../components/Flash/redux';
 import {
   Loader,
   Spacer,
-  renderCourseCardSkeletons
+  renderCourseCardSkeletons,
+  splitArray
 } from '../components/helpers';
 import {
   signInLoadingSelector,
@@ -24,8 +27,9 @@ import {
 } from '../redux';
 
 import { User } from '../redux/prop-types';
+import { getExternalResource } from '../utils/ajax';
 
-// const { apiLocation } = envData;
+const { moodleApiBaseUrl, moodleApiToken, moodleBaseUrl } = envData;
 
 // TODO: update types for actions
 interface CoursesProps {
@@ -36,6 +40,20 @@ interface CoursesProps {
   user: User;
   path?: string;
 }
+
+type MoodleCourse = {
+  id: number;
+  shortname: string;
+  categoryid: number;
+  categorysortorder: number;
+  fullname: string;
+  displayname: string;
+  summary: string;
+};
+
+// type MoodleCoursesCatalogue = {
+//   courses: MoodleCourse[];
+// };
 
 const mapStateToProps = createSelector(
   signInLoadingSelector,
@@ -53,19 +71,45 @@ const mapDispatchToProps = {
   navigate
 };
 
+// function splitArray<T>(arrayToSplit: T[], chunkSize: number) {
+//   const result: T[][] = [];
+//   for (let i = 0; i < arrayToSplit.length; i += chunkSize) {
+//     const chunk = arrayToSplit.slice(i, i + chunkSize);
+//     result.push(chunk);
+//   }
+//   return { result: result, size: result.length };
+// }
+
 export function Courses(props: CoursesProps): JSX.Element {
   // const { t } = useTranslation();
   const { isSignedIn, /*navigate,*/ showLoading } = props;
+  const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[]>();
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
 
+  const getMoodleCourses = async () => {
+    const moodleCatalogue = await getExternalResource<MoodleCourse[]>(
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses&moodlewsrestformat=json`
+    );
+    if (moodleCatalogue != null) {
+      setMoodleCourses(moodleCatalogue);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      console.log(splitArray<MoodleCourse>(moodleCatalogue, 4));
+    } else {
+      setMoodleCourses([]);
+    }
+  };
+
   useEffect(() => {
+    void getMoodleCourses();
     const timer = setTimeout(() => {
       if (isDataOnLoading) {
         setIsDataOnLoading(false);
       }
     }, 3000);
     return () => {
-      clearTimeout(timer); // cleanup useEffect to perform a React state update
+      setMoodleCourses([]); // cleanup useEffect to perform a React state update
+      clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -127,10 +171,29 @@ export function Courses(props: CoursesProps): JSX.Element {
                 cours JavaScript Algorithm and Data Structures, tu apprendras 
                 les principes fondamentaux de JavaScript, etc.`}
                 />
+                {moodleCourses &&
+                  moodleCourses.length > 0 &&
+                  moodleCourses.map((course, index) => {
+                    return (
+                      <CourseCard
+                        key={index + course.id}
+                        icon={PhBookBookmark}
+                        isAvailable={true}
+                        isSignedIn={isSignedIn}
+                        sameTab={true}
+                        external={true}
+                        title={`${course.displayname}`}
+                        buttonText={`Suivre le cours  `}
+                        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                        link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
+                        description={course.summary}
+                      />
+                    );
+                  })}
               </div>
             ) : (
               <div className='card-course-detail-container'>
-                {renderCourseCardSkeletons(2)}
+                {renderCourseCardSkeletons(6)}
               </div>
             )}
           </div>
