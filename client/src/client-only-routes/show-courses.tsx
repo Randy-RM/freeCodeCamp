@@ -1,9 +1,14 @@
-import { Grid } from '@freecodecamp/react-bootstrap';
+import { Grid, Row, Col } from '@freecodecamp/react-bootstrap';
 import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
 // import { useTranslation } from 'react-i18next';PhBookBookmark
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faChevronLeft,
+  faChevronRight
+} from '@fortawesome/free-solid-svg-icons';
 
 import envData from '../../../config/env.json';
 import CourseCard from '../components/CourseCard/course-card';
@@ -51,9 +56,10 @@ type MoodleCourse = {
   summary: string;
 };
 
-// type MoodleCoursesCatalogue = {
-//   courses: MoodleCourse[];
-// };
+type MoodleCoursesCatalogue = {
+  result: MoodleCourse[][];
+  size: number;
+};
 
 const mapStateToProps = createSelector(
   signInLoadingSelector,
@@ -71,20 +77,13 @@ const mapDispatchToProps = {
   navigate
 };
 
-// function splitArray<T>(arrayToSplit: T[], chunkSize: number) {
-//   const result: T[][] = [];
-//   for (let i = 0; i < arrayToSplit.length; i += chunkSize) {
-//     const chunk = arrayToSplit.slice(i, i + chunkSize);
-//     result.push(chunk);
-//   }
-//   return { result: result, size: result.length };
-// }
-
 export function Courses(props: CoursesProps): JSX.Element {
   // const { t } = useTranslation();
   const { isSignedIn, /*navigate,*/ showLoading } = props;
-  const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[]>();
+  const [moodleCourses, setMoodleCourses] =
+    useState<MoodleCoursesCatalogue | null>();
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const getMoodleCourses = async () => {
     const moodleCatalogue = await getExternalResource<MoodleCourse[]>(
@@ -92,12 +91,25 @@ export function Courses(props: CoursesProps): JSX.Element {
       `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses&moodlewsrestformat=json`
     );
     if (moodleCatalogue != null) {
-      setMoodleCourses(moodleCatalogue);
+      setMoodleCourses(splitArray<MoodleCourse>(moodleCatalogue, 4));
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       console.log(splitArray<MoodleCourse>(moodleCatalogue, 4));
     } else {
-      setMoodleCourses([]);
+      setMoodleCourses(null);
     }
+  };
+
+  const navigateToPage = (forwardOrBackward: boolean) => {
+    if (forwardOrBackward) {
+      if (moodleCourses && currentPage < moodleCourses?.size) {
+        setCurrentPage(Number(currentPage + 1));
+      }
+    } else {
+      if (currentPage > 1) {
+        setCurrentPage(Number(currentPage - 1));
+      }
+    }
+    setIsDataOnLoading(true);
   };
 
   useEffect(() => {
@@ -108,11 +120,25 @@ export function Courses(props: CoursesProps): JSX.Element {
       }
     }, 3000);
     return () => {
-      setMoodleCourses([]); // cleanup useEffect to perform a React state update
+      setMoodleCourses(null); // cleanup useEffect to perform a React state update
+      setIsDataOnLoading(true); // cleanup useEffect to perform a React state update
       clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (isDataOnLoading) {
+        setIsDataOnLoading(false);
+      }
+    }, 3000);
+    return () => {
+      setIsDataOnLoading(true); // cleanup useEffect to perform a React state update
+      clearTimeout(timer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
@@ -143,37 +169,41 @@ export function Courses(props: CoursesProps): JSX.Element {
             <Spacer />
             {!isDataOnLoading ? (
               <div className='card-course-detail-container'>
-                <CourseCard
-                  icon={LaptopIcon}
-                  sponsorIcon={LaediesActIcon}
-                  alt=''
-                  isAvailable={true}
-                  isSignedIn={isSignedIn}
-                  title={`Responsive Web Design`}
-                  buttonText={`Suivre le cours  `}
-                  description={`
+                {currentPage == 1 && (
+                  <>
+                    <CourseCard
+                      icon={LaptopIcon}
+                      sponsorIcon={LaediesActIcon}
+                      alt=''
+                      isAvailable={true}
+                      isSignedIn={isSignedIn}
+                      title={`Responsive Web Design`}
+                      buttonText={`Suivre le cours  `}
+                      description={`
                 Dans ce cours, tu apprendras les langages que les développeurs 
                 utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
                 pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
                 Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
                 `}
-                />
-                <CourseCard
-                  icon={AlgoIcon}
-                  alt=''
-                  isAvailable={true}
-                  isSignedIn={isSignedIn}
-                  title={`JavaScript Algorithms and Data Structures`}
-                  buttonText={`Suivre le cours  `}
-                  link={`/learn/javascript-algorithms-and-data-structures`}
-                  description={`Alors que HTML et CSS contrôlent le contenu et le style  d'une page, 
+                    />
+                    <CourseCard
+                      icon={AlgoIcon}
+                      alt=''
+                      isAvailable={true}
+                      isSignedIn={isSignedIn}
+                      title={`JavaScript Algorithms and Data Structures`}
+                      buttonText={`Suivre le cours  `}
+                      link={`/learn/javascript-algorithms-and-data-structures`}
+                      description={`Alors que HTML et CSS contrôlent le contenu et le style  d'une page, 
                 JavaScript est utilisé pour la rendre interactive. Dans le cadre du 
                 cours JavaScript Algorithm and Data Structures, tu apprendras 
                 les principes fondamentaux de JavaScript, etc.`}
-                />
+                    />
+                  </>
+                )}
                 {moodleCourses &&
-                  moodleCourses.length > 0 &&
-                  moodleCourses.map((course, index) => {
+                  moodleCourses.result.length > 0 &&
+                  moodleCourses.result[currentPage - 1].map((course, index) => {
                     return (
                       <CourseCard
                         key={index + course.id}
@@ -197,8 +227,35 @@ export function Courses(props: CoursesProps): JSX.Element {
               </div>
             )}
           </div>
-          <Spacer size={2} />
         </main>
+        {moodleCourses && moodleCourses.size > 0 && (
+          <Row>
+            <Col md={12} sm={12} xs={12}>
+              {currentPage > 1 && (
+                <FontAwesomeIcon
+                  icon={faChevronLeft}
+                  className='pagination-chevron'
+                  onClick={() => {
+                    navigateToPage(false);
+                  }}
+                />
+              )}
+              &nbsp;
+              {`  ${currentPage} sur ${moodleCourses?.size}  `}
+              &nbsp;
+              {currentPage < moodleCourses?.size && (
+                <FontAwesomeIcon
+                  icon={faChevronRight}
+                  className='pagination-chevron'
+                  onClick={() => {
+                    navigateToPage(true);
+                  }}
+                />
+              )}
+              <Spacer size={2} />
+            </Col>
+          </Row>
+        )}
       </Grid>
     </>
   );
