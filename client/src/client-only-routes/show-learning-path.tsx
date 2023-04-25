@@ -8,7 +8,8 @@ import { createFlashMessage } from '../components/Flash/redux';
 import {
   Loader,
   Spacer,
-  renderCourseCardSkeletons
+  renderCourseCardSkeletons,
+  splitArray
 } from '../components/helpers';
 import LaptopIcon from '../assets/images/laptop.svg';
 import CloudShield from '../assets/images/cloudShield.svg';
@@ -38,13 +39,18 @@ interface ShowLearningPathProps {
   location?: { state: { description: string } };
 }
 
-type MoodleCourse = {
+type MoodleCourseCategorie = {
   id: number;
   name: string;
   description: string;
   coursecount: number;
   visible: number;
   parent: number;
+};
+
+type MoodleCoursesCatalogue = {
+  result: MoodleCourseCategorie[][];
+  size: number;
 };
 
 const mapStateToProps = createSelector(
@@ -66,26 +72,47 @@ const mapDispatchToProps = {
 export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
   const { showLoading, isSignedIn } = props;
   const [moodleCoursesCategories, setMoodleCoursesCategories] =
-    useState<MoodleCourse[]>();
-  // const [coursesCategoriesCount, setCoursesCategoriesCount] =
-  //   useState<number>(3);
+    useState<MoodleCoursesCatalogue | null>();
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const getMoodleCoursesCategories = async () => {
-    const moodleCategoriesCatalogue = await getExternalResource<MoodleCourse[]>(
+    const moodleCategoriesCatalogue = await getExternalResource<
+      MoodleCourseCategorie[]
+    >(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_categories&moodlewsrestformat=json`
     );
     if (moodleCategoriesCatalogue != null) {
       setMoodleCoursesCategories(
-        moodleCategoriesCatalogue.filter(moodleCourse => {
-          return moodleCourse.parent != 0;
-        })
+        splitArray<MoodleCourseCategorie>(
+          moodleCategoriesCatalogue.filter(moodleCourse => {
+            return moodleCourse.parent != 0;
+          }),
+          20
+        )
       );
     } else {
-      setMoodleCoursesCategories([]);
+      setMoodleCoursesCategories(null);
     }
   };
+
+  // const navigateToPage = (forwardOrBackward: boolean) => {
+  //   if (forwardOrBackward) {
+  //     if (
+  //       moodleCoursesCategories &&
+  //       currentPage < moodleCoursesCategories?.size
+  //     ) {
+  //       setCurrentPage(Number(currentPage + 1));
+  //     }
+  //   } else {
+  //     if (currentPage > 1) {
+  //       setCurrentPage(Number(currentPage - 1));
+  //     }
+  //   }
+  //   setIsDataOnLoading(true);
+  // };
 
   useEffect(() => {
     void getMoodleCoursesCategories();
@@ -95,7 +122,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
       }
     }, 3000);
     return () => {
-      setMoodleCoursesCategories([]); // cleanup useEffect to perform a React state update
+      setMoodleCoursesCategories(null); // cleanup useEffect to perform a React state update
       clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -155,25 +182,27 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                 />
 
                 {moodleCoursesCategories &&
-                  moodleCoursesCategories.length >= 0 &&
-                  moodleCoursesCategories.map((category, index) => {
-                    return (
-                      <CourseCard
-                        key={index}
-                        icon={PhBookBookmark}
-                        isAvailable={category.visible == 1}
-                        isSignedIn={isSignedIn}
-                        title={category.name.replace(/&amp;/g, 'et')}
-                        buttonText={`Suivre le parcours  `}
-                        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                        link={`/learning-path/${category.name
-                          .replace(/ /g, '-')
-                          .replace(/&amp;/g, 'et')}/${category.id}`}
-                        cardType='parcours'
-                        description={category.description}
-                      />
-                    );
-                  })}
+                  moodleCoursesCategories.result.length >= 0 &&
+                  moodleCoursesCategories.result[currentPage - 1].map(
+                    (category, index) => {
+                      return (
+                        <CourseCard
+                          key={index}
+                          icon={PhBookBookmark}
+                          isAvailable={category.visible == 1}
+                          isSignedIn={isSignedIn}
+                          title={category.name.replace(/&amp;/g, 'et')}
+                          buttonText={`Suivre le parcours  `}
+                          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                          link={`/learning-path/${category.name
+                            .replace(/ /g, '-')
+                            .replace(/&amp;/g, 'et')}/${category.id}`}
+                          cardType='parcours'
+                          description={category.description}
+                        />
+                      );
+                    }
+                  )}
               </div>
             ) : (
               <div className='card-course-detail-container'>

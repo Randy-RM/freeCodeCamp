@@ -92,8 +92,6 @@ export function Courses(props: CoursesProps): JSX.Element {
     );
     if (moodleCatalogue != null) {
       setMoodleCourses(splitArray<MoodleCourse>(moodleCatalogue, 4));
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      console.log(splitArray<MoodleCourse>(moodleCatalogue, 4));
     } else {
       setMoodleCourses(null);
     }
