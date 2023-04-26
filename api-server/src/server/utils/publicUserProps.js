@@ -51,7 +51,8 @@ export const publicUserProps = [
   'sinceWhen',
   'position',
   'currentsSuperBlock',
-  'role'
+  'role',
+  'userGroup'
 ];
 
 export const userPropsForSession = [

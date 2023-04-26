@@ -134,6 +134,10 @@
       "type": "string",
       "default": ""
     },
+    "userGroup": {
+      "type": "array",
+      "default": []
+    },
     "acceptedPrivacyTerms": {
       "type": "boolean",
       "default": false
