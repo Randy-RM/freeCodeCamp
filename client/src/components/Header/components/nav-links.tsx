@@ -9,7 +9,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 // @ts-nocheck
-import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBars,
+  faXmark,
+  faExternalLink
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { Fragment, useState, useEffect } from 'react';
 import { TFunction, withTranslation } from 'react-i18next';
@@ -109,6 +113,19 @@ export const NavLinks = (props: NavLinksProps): JSX.Element => {
             activeClassName='active'
           >
             {'Parcours'}
+          </Link>
+        </li>
+
+        <li className='nav-item'>
+          <Link
+            onClick={handleIsDropdown}
+            external={true}
+            className=''
+            key='Kadea-academy'
+            to='https://www.kinshasadigital.academy/'
+          >
+            {'Académie '}
+            <FontAwesomeIcon icon={faExternalLink} />
           </Link>
         </li>
 

@@ -1,4 +1,4 @@
-import { Grid, Row, Col } from '@freecodecamp/react-bootstrap';
+import { Row, Col } from '@freecodecamp/react-bootstrap';
 import React from 'react';
 import Helmet from 'react-helmet';
 // import { useTranslation } from 'react-i18next';
@@ -18,7 +18,7 @@ import {
 
 import { User } from '../../redux/prop-types';
 
-const { apiLocation } = envData;
+const { apiLocation, homeLocation } = envData;
 
 // TODO: update types for actions
 interface ShowAdminHomeProps {
@@ -48,7 +48,7 @@ const mapDispatchToProps = {
 
 export function ShowAdminHome(props: ShowAdminHomeProps): JSX.Element {
   // const { t } = useTranslation();
-  const { isSignedIn, /*user,*/ navigate, showLoading } = props;
+  const { isSignedIn, user, navigate, showLoading } = props;
   // const { currentsSuperBlock } = user;
 
   if (showLoading) {
@@ -60,31 +60,63 @@ export function ShowAdminHome(props: ShowAdminHomeProps): JSX.Element {
     return <Loader fullScreen={true} />;
   }
 
+  if (!user.email.endsWith('@kinshasadigital.com')) {
+    navigate(`${homeLocation}`);
+    return <Loader fullScreen={true} />;
+  }
+
   return (
     <>
-      {/* <Helmet title={`${t('buttons.settings')} | Code Learning Plateform`} /> */}
       <Helmet title={`Tableau de bord | Kadea Online`} />
-      <Grid fluid={false} className='bg-light'>
-        <main>
-          <div className=''>
-            <Spacer size={1} />
-            <Row className='super-block-intro-page'>
-              <Col md={12} sm={12} xs={12}>
-                <div className=''>
-                  <h1
-                    className='big-subheading'
-                    style={{ overflowWrap: 'break-word' }}
-                  >
-                    {'Admin'}
-                  </h1>
-                </div>
-              </Col>
-            </Row>
-            <Spacer size={1} />
-          </div>
-          <Spacer size={2} />
-        </main>
-      </Grid>
+
+      <div className=''>
+        <Row>
+          <Col md={12} sm={12} xs={12}>
+            <div className=''>
+              <h1
+                className='big-subheading'
+                style={{ overflowWrap: 'break-word' }}
+              >
+                {'Dashboard'}
+              </h1>
+            </div>
+          </Col>
+        </Row>
+        <Spacer size={1} />
+        <Row>
+          <Col md={6} sm={6} xs={6}>
+            <div className=''>
+              <p
+                className='text-responsive'
+                style={{ overflowWrap: 'break-word' }}
+              >
+                {`
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Rem repellat excepturi itaque nulla optio quisquam quaerat
+                    iusto qui cumque, deleniti necessitatibus et magni ab
+                    tenetur amet in totam ut. Voluptatum?
+                    `}
+              </p>
+            </div>
+          </Col>
+          <Col md={6} sm={6} xs={6}>
+            <div className=''>
+              <p
+                className='text-responsive'
+                style={{ overflowWrap: 'break-word' }}
+              >
+                {`
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Rem repellat excepturi itaque nulla optio quisquam quaerat
+                    iusto qui cumque, deleniti necessitatibus et magni ab
+                    tenetur amet in totam ut. Voluptatum?
+                    `}
+              </p>
+            </div>
+          </Col>
+        </Row>
+        <Spacer size={1} />
+      </div>
     </>
   );
 }

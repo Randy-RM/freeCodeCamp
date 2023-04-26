@@ -1,0 +1,31 @@
+.pagination-chevron {
+  cursor: pointer;
+}
+
+.action-btn-detail {
+  background: rgba(255, 255, 255, 0);
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--highlight-color);
+}
+
+.action-btn-detail:hover {
+  background: rgba(255, 255, 255, 0);
+  color: var(--highlight-color);
+}
+
+.section-block-padding {
+  padding: 20px 15px 2px 15px !important;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-big {
+  font-size: 3rem !important;
+}

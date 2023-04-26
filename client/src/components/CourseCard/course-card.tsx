@@ -17,6 +17,8 @@ enum CardStyle {
 interface LandingDetailsProps {
   isSignedIn?: boolean;
   isAvailable: boolean;
+  sameTab?: boolean;
+  external?: boolean;
   description?: string;
   title: string;
   icon?: string;
@@ -30,6 +32,8 @@ interface LandingDetailsProps {
 const CourseCard = ({
   isSignedIn,
   isAvailable,
+  sameTab,
+  external,
   description,
   title,
   icon,
@@ -91,6 +95,8 @@ const CourseCard = ({
                     {link ? (
                       <Link
                         to={link}
+                        sameTab={sameTab ? true : false}
+                        external={external ? true : false}
                         state={{ description: description }}
                         className='link-course text-love-light fw-semi-bold text-responsive'
                       >

@@ -130,6 +130,14 @@
     "twitter": {
       "type": "string"
     },
+    "role": {
+      "type": "string",
+      "default": ""
+    },
+    "userGroup": {
+      "type": "array",
+      "default": []
+    },
     "acceptedPrivacyTerms": {
       "type": "boolean",
       "default": false

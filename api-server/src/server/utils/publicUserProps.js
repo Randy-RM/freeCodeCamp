@@ -50,7 +50,9 @@ export const publicUserProps = [
   'employedWhere',
   'sinceWhen',
   'position',
-  'currentsSuperBlock'
+  'currentsSuperBlock',
+  'role',
+  'userGroup'
 ];
 
 export const userPropsForSession = [

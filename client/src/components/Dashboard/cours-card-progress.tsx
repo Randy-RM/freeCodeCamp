@@ -7,12 +7,20 @@ interface CoursCardProgressProps {
   challengeCount?: number;
   completedChallengeCount?: number;
   coursName?: string;
+  sameTab?: boolean;
+  external?: boolean;
   superBlockPath?: string;
 }
 
 export function CoursCardProgress(props: CoursCardProgressProps): JSX.Element {
-  const { challengeCount, completedChallengeCount, coursName, superBlockPath } =
-    props;
+  const {
+    challengeCount,
+    completedChallengeCount,
+    coursName,
+    sameTab,
+    external,
+    superBlockPath
+  } = props;
 
   const percentageCompleted: number =
     completedChallengeCount && challengeCount
@@ -34,6 +42,8 @@ export function CoursCardProgress(props: CoursCardProgressProps): JSX.Element {
             <small>
               <Link
                 to={superBlockPath ? superBlockPath : ''}
+                sameTab={sameTab ? true : false}
+                external={external ? true : false}
                 className='cours-card-progress-btn standard-radius-20'
               >
                 Continuer le cours
@@ -56,6 +66,8 @@ export function CoursCardProgress(props: CoursCardProgressProps): JSX.Element {
           <small>
             <Link
               to={superBlockPath ? superBlockPath : ''}
+              sameTab={sameTab ? true : false}
+              external={external ? true : false}
               className='cours-card-progress-btn standard-radius-20'
             >
               Continuer le cours

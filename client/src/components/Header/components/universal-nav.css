@@ -186,6 +186,10 @@
   .nav-bar {
     padding: 10px 1rem;
   }
+
+  .nav-list .nav-item a {
+    font-size: medium;
+  }
 }
 
 @media (max-width: 1000px) {

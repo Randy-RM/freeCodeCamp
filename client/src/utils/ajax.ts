@@ -199,7 +199,7 @@ export function getUsernameExists(username: string): Promise<boolean> {
 //   body: string;
 // }
 
-export async function getExternalCoursesCatalog<T>(urlEndPoint: string) {
+export async function getExternalResource<T>(urlEndPoint: string) {
   let response: T | null;
   try {
     response = await requestModule<T>(urlEndPoint, {
@@ -208,12 +208,24 @@ export async function getExternalCoursesCatalog<T>(urlEndPoint: string) {
       cache: 'no-cache', //default, no-cache, reload, force-cache, only-if-cached
       credentials: 'same-origin', //include, *same-origin, omit
       // headers: {
-      //   "Content-Type": "application/json",
+      //   // 'CSRF-Token': getCSRFToken(),
+      //   // 'Content-Type': 'application/json'
+      //   // 'Access-Control-Allow-Origin': '*'
       //   // 'Content-Type': 'application/x-www-form-urlencoded',
       // },
       redirect: 'follow', // manual, *follow, error
       referrerPolicy: 'no-referrer' // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     });
+  } catch (error) {
+    response = null;
+  }
+  return response;
+}
+
+export async function getDatabaseResource<T>(urlEndPoint: string) {
+  let response: T | null;
+  try {
+    response = await get(urlEndPoint);
   } catch (error) {
     response = null;
   }

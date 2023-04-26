@@ -20,7 +20,17 @@ export default function layoutSelector({
     location: { pathname }
   } = props;
 
-  if (element.type === FourOhFourPage) {
+  if (
+    pathname === '/admin/admin-home' ||
+    pathname === '/admin/all-members' ||
+    pathname === '/admin/all-members/'
+  ) {
+    return (
+      <AdminDefaultLayout pathname={pathname} showFooter={false}>
+        {element}
+      </AdminDefaultLayout>
+    );
+  } else if (element.type === FourOhFourPage) {
     return (
       <DefaultLayout pathname={pathname} showFooter={true}>
         {element}
@@ -35,12 +45,6 @@ export default function layoutSelector({
       <DefaultLayout pathname={pathname} showFooter={false}>
         {element}
       </DefaultLayout>
-    );
-  } else if (pathname == '/admin/admin-home') {
-    return (
-      <AdminDefaultLayout pathname={pathname} showFooter={false}>
-        {element}
-      </AdminDefaultLayout>
     );
   } else {
     return (

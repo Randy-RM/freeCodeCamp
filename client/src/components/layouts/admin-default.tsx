@@ -5,7 +5,9 @@ import { TFunction, withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { createSelector } from 'reselect';
+import { Grid, Row, Col } from '@freecodecamp/react-bootstrap';
 import { isBrowser } from '../../../utils';
+import { Spacer } from '../../components/helpers';
 import {
   fetchUser,
   isSignedInSelector,
@@ -24,12 +26,14 @@ import { flashMessageSelector, removeFlashMessage } from '../Flash/redux';
 // import Footer from '../FooterNew/footer';
 import SideBar from '../SideBar';
 import OfflineWarning from '../OfflineWarning';
+import ProfilePlaceholder from '../../assets/images/undraw_profile.svg';
 // import { Spacer } from '../helpers';
 
 // preload common fonts
 import './fonts.css';
 import './global.css';
 import './variables.css';
+import './admin.css';
 
 fontawesome.config.autoAddCss = false;
 
@@ -127,12 +131,19 @@ class AdminDefaultLayout extends Component<AdminDefaultLayoutProps> {
       isServerOnline,
       isSignedIn,
       removeFlashMessage,
-      // showFooter = true,
       t,
       theme = 'default',
       user,
       useTheme = true
     } = this.props;
+
+    if (!isSignedIn) {
+      return <>{children}</>;
+    }
+
+    if (!user.email.endsWith('@kinshasadigital.com')) {
+      return <>{children}</>;
+    }
 
     return (
       <div className='page-wrapper'>
@@ -165,13 +176,43 @@ class AdminDefaultLayout extends Component<AdminDefaultLayoutProps> {
             />
           </>
         ) : null}
-        <div className='default-admin-warper'>
-          <SideBar fetchState={fetchState} user={user} />
-          <div className='admin-content'>
-            <div className={`default-layout`}>{children}</div>
-          </div>
-        </div>
-        {/* {showFooter && <Footer />} */}
+        <Grid fluid={true} className='bg-dark-gray margin-0'>
+          <main>
+            <div className=''>
+              <Row>
+                <Col md={2} sm={2} xs={2} className='text-light bg-dark-gray'>
+                  <SideBar fetchState={fetchState} user={user} />
+                </Col>
+                <Col md={10} sm={10} xs={10} className='bg-light'>
+                  <Row className='admin-profile-bar'>
+                    <Col md={6} sm={6} xs={6} className='padding-0'>
+                      <div></div>
+                    </Col>
+                    <Col
+                      md={6}
+                      sm={6}
+                      xs={6}
+                      className='padding-0 admin-profil-item'
+                    >
+                      <div className='profile-name'>
+                        {user.name?.length > 0 ? user.name : user.email}
+                      </div>
+                      <div>
+                        <img
+                          src={ProfilePlaceholder}
+                          alt='Profil'
+                          className='img-profile rounded-circle'
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+                  <div className={`admin-default-layout`}>{children}</div>
+                  <Spacer />
+                </Col>
+              </Row>
+            </div>
+          </main>
+        </Grid>
       </div>
     );
   }

@@ -3,11 +3,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/unbound-method */
 import React from 'react';
-import Helmet from 'react-helmet';
-
-// import UniversalNav from './components/universal-nav';
 
 import './sidebar.css';
+import SideBarNavLinks from './components/side-bar-nav-links';
 
 export interface SideBarProps {
   fetchState: { pending: boolean };
@@ -61,20 +59,18 @@ export class SideBar extends React.Component<
     }));
   }
   render(): JSX.Element {
-    // const { displayMenu } = this.state;
-    // const { fetchState, user } = this.props;
     return (
       <>
-        <Helmet>{/* <style>{':root{--header-height: 38px}'}</style> */}</Helmet>
         <header className='side-bar'>
-          <h1>Hello</h1>
-          {/*
-          <UniversalNav
-            displayMenu={displayMenu}
-            fetchState={fetchState}
-            toggleDisplayMenu={this.toggleDisplayMenu}
-            user={user}
-          /> */}
+          <p
+            className='big-subheading text-light side-bar-title'
+            style={{ overflowWrap: 'break-word' }}
+          >
+            {'Dashboard'}
+          </p>
+          <p className='text-light'>Kadea Online</p>
+          <hr />
+          <SideBarNavLinks />
         </header>
       </>
     );

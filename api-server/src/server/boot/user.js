@@ -17,6 +17,7 @@ import {
 } from '../utils/publicUserProps';
 import { getRedirectParams } from '../utils/redirection';
 import { trimTags } from '../utils/validators';
+import { getAllUsers, countUserDocuments } from '../utils/user-stats';
 
 const log = debugFactory('fcc:boot:user');
 const sendNonUserToHome = ifNoUserRedirectHome();
@@ -31,6 +32,7 @@ function bootUser(app) {
   const deleteWebhookToken = createDeleteWebhookToken(app);
 
   api.get('/account', sendNonUserToHome, getAccount);
+  api.get('/all-users', sendNonUserToHome, getUserList);
   api.get('/account/unlink/:social', sendNonUserToHome, getUnlinkSocial);
   api.get('/user/get-session-user', getSessionUser);
 
@@ -166,6 +168,25 @@ function createReadSessionUser(app) {
 function getAccount(req, res) {
   const { username } = req.user;
   return res.redirect('/' + username);
+}
+
+async function getUserList(req, res) {
+  // destructure page and limit and set default values
+  const { page = 1, limit = 2 } = req.query;
+  try {
+    const userList = await getAllUsers(page, limit);
+    const usersCount = await countUserDocuments();
+    return res.json({
+      userList: userList,
+      totalPages: Math.ceil(usersCount.length / limit),
+      currentPage: page,
+      countUsers: usersCount.length
+    });
+  } catch (error) {
+    return res.json({
+      error: error
+    });
+  }
 }
 
 function getUnlinkSocial(req, res, next) {
