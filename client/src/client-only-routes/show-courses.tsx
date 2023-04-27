@@ -54,6 +54,7 @@ type MoodleCourse = {
   fullname: string;
   displayname: string;
   summary: string;
+  visible: number;
 };
 
 type MoodleCoursesCatalogue = {
@@ -91,7 +92,14 @@ export function Courses(props: CoursesProps): JSX.Element {
       `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses&moodlewsrestformat=json`
     );
     if (moodleCatalogue != null) {
-      setMoodleCourses(splitArray<MoodleCourse>(moodleCatalogue, 4));
+      setMoodleCourses(
+        splitArray<MoodleCourse>(
+          moodleCatalogue.filter(moodleCourse => {
+            return moodleCourse.visible == 1;
+          }),
+          4
+        )
+      );
     } else {
       setMoodleCourses(null);
     }
@@ -206,7 +214,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                       <CourseCard
                         key={index + course.id}
                         icon={PhBookBookmark}
-                        isAvailable={true}
+                        isAvailable={course.visible == 1}
                         isSignedIn={isSignedIn}
                         sameTab={true}
                         external={true}

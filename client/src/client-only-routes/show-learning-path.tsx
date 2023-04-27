@@ -88,7 +88,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
       setMoodleCoursesCategories(
         splitArray<MoodleCourseCategorie>(
           moodleCategoriesCatalogue.filter(moodleCourse => {
-            return moodleCourse.parent != 0;
+            return moodleCourse.parent != 0 && moodleCourse.visible == 1;
           }),
           20
         )
