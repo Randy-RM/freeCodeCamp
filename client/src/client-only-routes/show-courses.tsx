@@ -55,6 +55,7 @@ type MoodleCourse = {
   displayname: string;
   summary: string;
   visible: number;
+  format: string;
 };
 
 type MoodleCoursesCatalogue = {
@@ -95,7 +96,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       setMoodleCourses(
         splitArray<MoodleCourse>(
           moodleCatalogue.filter(moodleCourse => {
-            return moodleCourse.visible == 1;
+            return moodleCourse.visible == 1 && moodleCourse.format != 'site';
           }),
           4
         )
