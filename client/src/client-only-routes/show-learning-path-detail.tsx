@@ -47,6 +47,7 @@ type MoodleCourse = {
   fullname: string;
   displayname: string;
   summary: string;
+  visible: number;
 };
 
 type MoodleCoursesCatalogue = {
@@ -88,7 +89,11 @@ export function ShowLearningPathDetail(
       `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses_by_field&field=category&value=${categoryId}&moodlewsrestformat=json`
     );
     if (moodleCatalogue != null) {
-      setMoodleCourses(moodleCatalogue.courses);
+      setMoodleCourses(
+        moodleCatalogue.courses.filter(moodleCourse => {
+          return moodleCourse.visible == 1;
+        })
+      );
     } else {
       setMoodleCourses([]);
     }
@@ -169,7 +174,7 @@ export function ShowLearningPathDetail(
                         <CourseCard
                           key={index + course.id}
                           icon={PhBookBookmark}
-                          isAvailable={true}
+                          isAvailable={course.visible == 1}
                           isSignedIn={isSignedIn}
                           sameTab={true}
                           external={true}
