@@ -60,7 +60,10 @@ export function ShowAdminHome(props: ShowAdminHomeProps): JSX.Element {
     return <Loader fullScreen={true} />;
   }
 
-  if (!user.email.endsWith('@kinshasadigital.com')) {
+  if (
+    !user.email.endsWith('@kinshasadigital.com') ||
+    !user.email.endsWith('@kadea.co')
+  ) {
     navigate(`${homeLocation}`);
     return <Loader fullScreen={true} />;
   }
