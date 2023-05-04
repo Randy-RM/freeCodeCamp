@@ -233,7 +233,7 @@ export class Block extends Component<BlockProps> {
             <div className='block-header'>
               <a className='block-link' href={`#${blockDashedName}`}>
                 <h3 className='big-block-title'>
-                  {blockTitle}
+                  {blockTitle} je suis la
                   <span className='block-link-icon'>#</span>
                 </h3>
               </a>
