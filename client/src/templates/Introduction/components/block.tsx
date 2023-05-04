@@ -226,6 +226,7 @@ export class Block extends Component<BlockProps> {
       </>
     );
 
+    // Block for Project
     const ProjectBlock = (
       <>
         <ScrollableAnchor id={blockDashedName}>
@@ -233,7 +234,7 @@ export class Block extends Component<BlockProps> {
             <div className='block-header'>
               <a className='block-link' href={`#${blockDashedName}`}>
                 <h3 className='big-block-title'>
-                  {blockTitle} je suis la
+                  {blockTitle}
                   <span className='block-link-icon'>#</span>
                 </h3>
               </a>
