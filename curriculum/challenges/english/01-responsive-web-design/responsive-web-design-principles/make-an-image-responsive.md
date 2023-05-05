@@ -53,8 +53,8 @@ img {
 }
 </style>
 
-<img class="responsive-img" src="https://kda-certificats.s3.eu-west-3.amazonaws.com/FCC_Sticker_Pack_c862308d05.jpg" alt="ensemble d'autocollants">
-<img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/FCC_Sticker_Pack_c862308d05.jpg" alt="ensemble d'autocollants">
+<img class="responsive-img" src="https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/FCCStickerPack.jpg" alt="ensemble d'autocollants">
+<img src="https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/FCCStickerPack.jpg" alt="ensemble d'autocollants">
 ```
 
 # --solutions--
@@ -71,6 +71,6 @@ img {
 }
 </style>
 
-<img class="responsive-img" src="https://kda-certificats.s3.eu-west-3.amazonaws.com/FCC_Sticker_Pack_c862308d05.jpg" alt="ensemble d'autocollants">
-<img src="https://kda-certificats.s3.eu-west-3.amazonaws.com/FCC_Sticker_Pack_c862308d05.jpg" alt="ensemble d'autocollants">
+<img class="responsive-img" src="https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/FCCStickerPack.jpg" alt="ensemble d'autocollants">
+<img src="https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/FCCStickerPack.jpg" alt="ensemble d'autocollants">
 ```
