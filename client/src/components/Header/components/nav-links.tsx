@@ -15,7 +15,7 @@ import {
   faExternalLink
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, RefObject } from 'react';
 import { TFunction, withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import envData from '../../../../../config/env.json';
@@ -28,6 +28,7 @@ const { apiLocation } = envData;
 export interface NavLinksProps {
   fetchState?: { pending: boolean };
   i18n: Object;
+  innerRef?: RefObject<HTMLButtonElement>;
   t: TFunction;
   user?: Record<string, unknown>;
   navigate?: (location: string) => void;
@@ -42,6 +43,7 @@ export const NavLinks = (props: NavLinksProps): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [width, height] = useWindowSize();
   const {
+    innerRef,
     fetchState,
     user: { username }
   }: NavLinksProps = props;
@@ -86,6 +88,7 @@ export const NavLinks = (props: NavLinksProps): JSX.Element => {
             className=''
             key='learn'
             to={'/'}
+            ref={innerRef}
             activeClassName='active'
           >
             {'Accueil'}
@@ -98,6 +101,7 @@ export const NavLinks = (props: NavLinksProps): JSX.Element => {
             className=''
             key='courses'
             to='/courses'
+            ref={innerRef}
             activeClassName='active'
           >
             {'Cours'}
@@ -110,6 +114,7 @@ export const NavLinks = (props: NavLinksProps): JSX.Element => {
             className=''
             key='learning-path'
             to='/learning-path'
+            ref={innerRef}
             activeClassName='active'
           >
             {'Parcours'}
@@ -138,6 +143,7 @@ export const NavLinks = (props: NavLinksProps): JSX.Element => {
                 key='dashboard'
                 sameTab={false}
                 to={`/dashboard`}
+                ref={innerRef}
                 activeClassName='active'
               >
                 {'Tableau de bord'}
@@ -151,6 +157,7 @@ export const NavLinks = (props: NavLinksProps): JSX.Element => {
                 key='settings'
                 sameTab={false}
                 to={`/settings`}
+                ref={innerRef}
                 activeClassName='active'
               >
                 {'Profil'}
@@ -166,6 +173,7 @@ export const NavLinks = (props: NavLinksProps): JSX.Element => {
               className='nav-signin-btn'
               href={`${apiLocation}/signin`}
               key='signin'
+              ref={innerRef}
             >
               {'Connexion'}
             </a>
@@ -180,6 +188,7 @@ export const NavLinks = (props: NavLinksProps): JSX.Element => {
                 className='nav-signout-btn'
                 href={`${apiLocation}/signout`}
                 key='sign-out'
+                ref={innerRef}
               >
                 {'Déconnexion'}
               </a>

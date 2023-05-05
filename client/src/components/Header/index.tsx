@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import React from 'react';
 import Helmet from 'react-helmet';
-import Banner from './components/banner';
+// import Banner from './components/banner';
 
 import UniversalNav from './components/universal-nav';
 
@@ -70,7 +70,7 @@ export class Header extends React.Component<
           <style>{':root{--header-height: 38px}'}</style>
         </Helmet>
         <header>
-          <Banner />
+          {/* <Banner /> */}
           <UniversalNav
             displayMenu={displayMenu}
             fetchState={fetchState}

@@ -226,6 +226,7 @@ export class Block extends Component<BlockProps> {
       </>
     );
 
+    // Block for Project
     const ProjectBlock = (
       <>
         <ScrollableAnchor id={blockDashedName}>

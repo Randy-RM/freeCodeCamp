@@ -141,7 +141,10 @@ class AdminDefaultLayout extends Component<AdminDefaultLayoutProps> {
       return <>{children}</>;
     }
 
-    if (!user.email.endsWith('@kinshasadigital.com')) {
+    if (
+      !user.email.endsWith('@kinshasadigital.com') ||
+      !user.email.endsWith('@kadea.co')
+    ) {
       return <>{children}</>;
     }
 
