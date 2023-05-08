@@ -26,7 +26,7 @@ Voici un exemple:
 
 # --instructions--
 
-Il est temps de faire une pause dans la vie de Camper Cat et de rencontrer un autre campeur, Zersiax (@zersiax), champion de l'accessibilité et utilisateur d'un lecteur d'écran. Pour écouter un extrait de son lecteur d'écran en action, ajoutez un élément `audio` après le `p`. Incluez l'attribut `controls`. Placez ensuite une balise `source` à l'intérieur de la balise `audio` avec l'attribut `src` réglé sur `https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/screen-reader.mp3` et l'attribut `type` défini à `"audio/mpeg"`.
+Il est temps de faire une pause dans la vie de Camper Cat et de rencontrer un autre campeur, Zersiax (@zersiax), champion de l'accessibilité et utilisateur d'un lecteur d'écran. Pour écouter un extrait de son lecteur d'écran en action, ajoutez un élément `audio` après le `p`. Incluez l'attribut `controls`. Placez ensuite une balise `source` à l'intérieur de la balise `audio` avec l'attribut `src` réglé sur `https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/screen-reader.mp3` et l'attribut `type` défini à `"audio/mpeg"`.
 
 **Note:** Le clip audio peut sembler rapide et difficile à comprendre, mais il s'agit d'une vitesse normale pour les utilisateurs de lecteurs d'écran.
 
@@ -70,7 +70,7 @@ La valeur de l'attribut `src` de la balise `source` doit correspondre exactement
 ```js
 assert(
   $('source').attr('src') ===
-    'https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/screen-reader.mp3'
+    'https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/screen-reader.mp3'
 );
 ```
 
@@ -108,7 +108,7 @@ assert($('source').attr('type') === 'audio/mpeg');
   <main>
     <p>Un clip sonore du lecteur d'écran de Zersiax en action.</p>
     <audio controls>
-      <source src="https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/screen-reader.mp3" type="audio/mpeg"/>
+      <source src="https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/screen-reader.mp3" type="audio/mpeg"/>
     </audio>
   </main>
 </body>

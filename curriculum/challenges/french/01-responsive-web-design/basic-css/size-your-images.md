@@ -30,7 +30,7 @@ Votre élément `img` doit avoir la classe `smaller-image`.
 
 ```js
 assert(
-  $("img[src='https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg']").attr('class')
+  $("img[src='https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg']").attr('class')
     .trim().split(/\s+/g).includes('smaller-image')
 );
 ```
@@ -69,7 +69,7 @@ assert(
 <main>
   <p class="red-text">Cliquez ici pour voir plus <a href="#">photos de chats</a>.</p>
 
-  <a href="#"><img src="https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg" alt="Un joli chat orange couché sur le dos."></a>
+  <a href="#"><img src="https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg" alt="Un joli chat orange couché sur le dos."></a>
 
   <div>
     <p>Les choses que les chats aiment :</p>
@@ -125,7 +125,7 @@ assert(
 <main>
   <p class="red-text">Cliquez ici pour voir plus <a href="#">photos de chats</a>.</p>
   
-  <a href="#"><img class="smaller-image" src="https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg" alt="Un joli chat orange couché sur le dos."></a>
+  <a href="#"><img class="smaller-image" src="https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg" alt="Un joli chat orange couché sur le dos."></a>
   
   <div>
     <<p>Les choses que les chats aiment :</p>

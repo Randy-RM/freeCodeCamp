@@ -58,7 +58,7 @@ assert($("h2").attr("style") && $("h2").attr("style").endsWith(";"));
 
   <a href="#"
     ><img
-      src="https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg" alt="Un joli chat orange couché sur le dos."
+      src="https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg" alt="Un joli chat orange couché sur le dos."
   /></a>
 
   <div>
@@ -99,7 +99,7 @@ assert($("h2").attr("style") && $("h2").attr("style").endsWith(";"));
 
   <a href="#"
     ><img
-      src="https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg" alt="Un joli chat orange couché sur le dos."
+      src="https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg" alt="Un joli chat orange couché sur le dos."
   /></a>
 
   <div>

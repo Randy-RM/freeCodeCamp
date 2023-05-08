@@ -44,7 +44,7 @@ assert(code.match(/p\s*{\s*font-size\s*:\s*16\s*px\s*;\s*}/i));
 <main>
   <p class="red-text">Les choses que les chats aiment :<a href="#">photos de chats</a>.</p>
 
-  <a href="#"><img src="https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg" alt="Un joli chat orange couché sur le dos."></a>
+  <a href="#"><img src="https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg" alt="Un joli chat orange couché sur le dos."></a>
 
   <div>
     <p>Les choses que les chats aiment :</p>
@@ -89,7 +89,7 @@ assert(code.match(/p\s*{\s*font-size\s*:\s*16\s*px\s*;\s*}/i));
 <main>
   <p class="red-text">Les choses que les chats aiment :<a href="#">photos de chats</a>.</p>
 
-  <a href="#"><img src="https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg" alt="Un joli chat orange couché sur le dos."></a>
+  <a href="#"><img src="https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg" alt="Un joli chat orange couché sur le dos."></a>
 
   <div>
     <p>Les choses que les chats aiment :</p>

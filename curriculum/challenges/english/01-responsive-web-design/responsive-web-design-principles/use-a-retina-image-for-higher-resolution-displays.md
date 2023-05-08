@@ -47,7 +47,7 @@ assert(document.querySelector('img').height === 100);
 
 </style>
 
-<img src="https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/FCCStickers-CamperBot200x200.jpg" alt="un autocollant qui dit 'Because CamperBot Cares'.">
+<img src="https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/FCCStickers-CamperBot200x200.jpg" alt="un autocollant qui dit 'Because CamperBot Cares'.">
 ```
 
 # --solutions--
@@ -60,5 +60,5 @@ assert(document.querySelector('img').height === 100);
   }
 </style>
 
-<img src="https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/FCCStickers-CamperBot200x200.jpg" alt="un autocollant qui dit 'Because CamperBot Cares'.">
+<img src="https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/FCCStickers-CamperBot200x200.jpg" alt="un autocollant qui dit 'Because CamperBot Cares'.">
 ```

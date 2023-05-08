@@ -13,7 +13,7 @@ Vous pouvez ajouter des images à votre site Web en utilisant l'élément `img`,
 Voici un exemple :
 
 ```html
-<img src="https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/online-kadea-brand-resources/kda-learning-plateform-landing-logo.png">
+<img src="https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/online-kadea-brand-resources/kda-learning-plateform-landing-logo.png">
 ```
 
 Notez que les éléments `img` sont auto-fermants.
@@ -27,7 +27,7 @@ Idéalement, l'attribut `alt` ne devrait pas contenir de caractères spéciaux, 
 Ajoutons un attribut `alt` à notre exemple `img` ci-dessus :
 
 ```html
-<img src="https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/online-kadea-brand-resources/kda-learning-plateform-landing-logo.png" alt="Le logo de Kadea Online">
+<img src="https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/online-kadea-brand-resources/kda-learning-plateform-landing-logo.png" alt="Le logo de Kadea Online">
 ```
 
 # --instructions--
@@ -36,7 +36,7 @@ Essayons d'ajouter une image à notre site Web :
 
 Dans l'élément `main` existant, insérez un élément `img` avant les éléments `p` existants.
 
-Maintenant, définissez l'attribut `src` de façon à ce qu'il pointe sur l'url suivante `https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg`
+Maintenant, définissez l'attribut `src` de façon à ce qu'il pointe sur l'url suivante `https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg`
 
 Enfin, n'oubliez pas de donner à votre élément `img` un attribut `alt` avec un texte adéquat.
 
@@ -51,7 +51,7 @@ assert($('img').length);
 Votre image doit avoir un attribut `src` qui pointe vers l'image du chaton.
 
 ```js
-assert(/^https:\/\/kda-certificats\.s3\.eu-west-3\.amazonaws\.com\/relaxing_cat_4b5892f189\.jpg\?7969519$/i.test($('img').attr('src')));
+assert(/^https:\/\/online-kadea-resources\.fra1\.cdn\.digitaloceanspaces\.com\/challenges-resources\/relaxing-cat\.jpg$/i.test($('img').attr('src')));
 ```
 
 L'attribut `alt` de votre élément image ne doit pas être vide.
@@ -85,7 +85,7 @@ assert(
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <a href="#"><img src="https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg" alt="Un joli chat orange couché sur le dos."></a>
+  <a href="#"><img src="https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg" alt="Un joli chat orange couché sur le dos."></a>
   <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
   <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>
 </main>
