@@ -141,12 +141,12 @@ class AdminDefaultLayout extends Component<AdminDefaultLayoutProps> {
       return <>{children}</>;
     }
 
-    if (
-      !user.email.endsWith('@kinshasadigital.com') ||
-      !user.email.endsWith('@kadea.co')
-    ) {
-      return <>{children}</>;
-    }
+    // if (
+    //   !user.email.endsWith('@kinshasadigital.com') ||
+    //   !user.email.endsWith('@kadea.co')
+    // ) {
+    //   return <>{children}</>;
+    // }
 
     return (
       <div className='page-wrapper'>

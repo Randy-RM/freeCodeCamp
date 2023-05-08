@@ -98,7 +98,7 @@ assert($('img').css('border-left-color') === 'rgb(0, 128, 0)');
 <main>
   <p class="red-text">Cliquez ici pour voir d'autres <a href="#">photos de chats</a>.</p>.
 
-  <a href="#"><img class="smaller-image" src="https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg" alt="Un joli chat orange couché sur le dos."></a>
+  <a href="#"><img class="smaller-image" src="https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg" alt="Un joli chat orange couché sur le dos."></a>
 
   <div>
     <p>Les choses que les chats aiment :</p>
@@ -161,7 +161,7 @@ assert($('img').css('border-left-color') === 'rgb(0, 128, 0)');
     <p class="red-text">Cliquez ici pour voir d'autres <a href="#">photos de chats</a>.</p>.
 
 
-  <a href="#"><img class="smaller-image thick-green-border" src="https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg" alt="Un joli chat orange couché sur le dos."></a>
+  <a href="#"><img class="smaller-image thick-green-border" src="https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/relaxing-cat.jpg" alt="Un joli chat orange couché sur le dos."></a>
 
   <div>
     <p>Les choses que les chats aiment :</p>

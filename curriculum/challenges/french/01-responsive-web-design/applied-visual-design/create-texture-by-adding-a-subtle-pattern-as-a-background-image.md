@@ -13,7 +13,7 @@ Une façon d'ajouter de la texture et de l'intérêt à un arrière-plan et de l
 
 # --instructions--
 
-En utilisant l'url de `https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/MJAkxbh.png`, définissez le `background` de la page entière avec le sélecteur `body`.
+En utilisant l'url de `https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/MJAkxbh.png`, définissez le `background` de la page entière avec le sélecteur `body`.
 
 # --hints--
 
@@ -44,7 +44,7 @@ assert(
 ```html
 <style>
   body {
-    background: url("https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/MJAkxbh.png");
+    background: url("https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/challenges-resources/MJAkxbh.png");
   }
 </style>
 ```

@@ -8,7 +8,7 @@ const { homeLocation } = env;
 
 export function getheadTagComponents(): JSX.Element[] {
   const socialImage =
-    'https://online.kadea.resources.fra1.cdn.digitaloceanspaces.com/online-kadea-brand-resources/kda-learning-plateform-landing-logo.png';
+    'https://online-kadea-resources.fra1.cdn.digitaloceanspaces.com/online-kadea-brand-resources/kda-learning-plateform-landing-logo.png';
 
   const pathToBootstrap = withPrefix('/css/bootstrap.min.css');
 
