@@ -226,7 +226,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                 <tr>
                   <th className='text-light'>Email</th>
                   <th className='text-light'>Nom</th>
-                  <th className='text-light'>Genre</th>
+                  {/* <th className='text-light'>Genre</th> */}
                   <th className='text-light'>Responsive Web Design Progrès</th>
                   <th className='text-light'>Actions</th>
                 </tr>
@@ -258,9 +258,9 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                         {member.email}
                       </td>
                       <td style={{ verticalAlign: 'middle' }}>{member.name}</td>
-                      <td style={{ verticalAlign: 'middle' }}>
+                      {/* <td style={{ verticalAlign: 'middle' }}>
                         {member.gender}
-                      </td>
+                      </td> */}
                       <td style={{ verticalAlign: 'middle' }}>
                         {responsiveWebDesignBlock ? (
                           <div
