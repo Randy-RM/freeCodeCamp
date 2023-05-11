@@ -78,9 +78,6 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [countUsers, setCountUsers] = useState<number>();
 
-  // const isAdminEmail = !user.email.endsWith('@kinshasadigital.com');
-  // !user.email.endsWith('@kadea.co');
-
   const getMembers = async () => {
     const memberList = await getDatabaseResource<UserList>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions

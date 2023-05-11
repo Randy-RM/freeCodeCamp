@@ -171,11 +171,12 @@ function getAccount(req, res) {
 }
 
 async function getUserList(req, res) {
-  // destructure page and limit and set default values
+  // destructure page and limit and set default values userDocumentsFiltered
   const { page = 1, limit = 2 } = req.query;
   try {
     const userList = await getAllUsers(page, limit);
     const usersCount = await countUserDocuments();
+
     return res.json({
       userList: userList,
       totalPages: Math.ceil(usersCount.length / limit),
