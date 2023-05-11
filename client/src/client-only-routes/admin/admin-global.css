@@ -29,3 +29,10 @@
 .icon-big {
   font-size: 3rem !important;
 }
+
+.custom-progress-bloc {
+  /* margin-bottom: 0px; */
+  height: 16px !important;
+  font-size: 13px;
+  font-weight: bold;
+}

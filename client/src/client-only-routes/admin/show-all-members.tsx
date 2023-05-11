@@ -78,9 +78,6 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [countUsers, setCountUsers] = useState<number>();
 
-  // const isAdminEmail = !user.email.endsWith('@kinshasadigital.com');
-  // !user.email.endsWith('@kadea.co');
-
   const getMembers = async () => {
     const memberList = await getDatabaseResource<UserList>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -221,23 +218,94 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
       <Col md={12} sm={12} xs={12}>
         <div className=''>
           {members && members.length > 0 ? (
-            <Table striped responsive hover>
+            <Table responsive hover>
               <thead className='bg-dark-gray'>
                 <tr>
                   <th className='text-light'>Email</th>
                   <th className='text-light'>Nom</th>
-                  <th className='text-light'>Genre</th>
+                  {/* <th className='text-light'>Genre</th> */}
+                  <th className='text-light'>Responsive Web Design Progrès</th>
                   <th className='text-light'>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {members.map((member, index) => {
+                  const responsiveWebDesignBlock =
+                    member.currentsSuperBlock.find(superBlock => {
+                      return (
+                        superBlock.superBlockDashedName ==
+                        'responsive-web-design'
+                      );
+                    });
+
+                  const percentageCompleted: number =
+                    responsiveWebDesignBlock &&
+                    responsiveWebDesignBlock.totalCompletedChallenges &&
+                    responsiveWebDesignBlock.totalChallenges
+                      ? Math.floor(
+                          (responsiveWebDesignBlock.totalCompletedChallenges /
+                            responsiveWebDesignBlock.totalChallenges) *
+                            100
+                        )
+                      : 0;
+
                   return (
                     <tr key={index}>
-                      <td>{member.email}</td>
-                      <td>{member.name}</td>
-                      <td>{member.gender}</td>
-                      <td>
+                      <td style={{ verticalAlign: 'middle' }}>
+                        {member.email}
+                      </td>
+                      <td style={{ verticalAlign: 'middle' }}>{member.name}</td>
+                      {/* <td style={{ verticalAlign: 'middle' }}>
+                        {member.gender}
+                      </td> */}
+                      <td style={{ verticalAlign: 'middle' }}>
+                        {responsiveWebDesignBlock ? (
+                          <div
+                            className='progress-bar-wrap custom-progress-bloc standard-radius-5'
+                            aria-label={`${percentageCompleted}`}
+                          >
+                            <div
+                              className='progress-bar-background custom-progress-bloc standard-radius-5'
+                              aria-hidden='true'
+                            >
+                              {`${percentageCompleted}%`}
+                            </div>
+                            <div
+                              aria-hidden='true'
+                              className='progress-bar-percent custom-progress-bloc standard-radius-5'
+                              data-testid='fcc-progress-bar-percent'
+                              style={{ width: `${percentageCompleted}%` }}
+                            >
+                              <div className='progress-bar-foreground custom-progress-bloc'>
+                                {`${percentageCompleted}%`}
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <div
+                            className='progress-bar-wrap custom-progress-bloc standard-radius-5'
+                            aria-label={`${percentageCompleted}`}
+                          >
+                            <div
+                              className='progress-bar-background custom-progress-bloc standard-radius-5'
+                              aria-hidden='true'
+                            >
+                              {`${percentageCompleted}%`}
+                            </div>
+                            <div
+                              aria-hidden='true'
+                              className='progress-bar-percent custom-progress-bloc standard-radius-5'
+                              data-testid='fcc-progress-bar-percent'
+                              style={{ width: `${percentageCompleted}%` }}
+                            >
+                              <div className='progress-bar-foreground custom-progress-bloc'>
+                                {`${percentageCompleted}%`}
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </td>
+                      <td style={{ verticalAlign: 'middle' }}>
                         <button
                           className='action-btn-detail'
                           onClick={() => {
@@ -256,6 +324,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
             <Table striped responsive hover>
               <thead className='bg-dark-gray'>
                 <tr>
+                  <th className='text-light'></th>
                   <th className='text-light'></th>
                   <th className='text-light'></th>
                   <th className='text-light'></th>
