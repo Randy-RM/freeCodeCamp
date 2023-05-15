@@ -171,11 +171,20 @@ function getAccount(req, res) {
 }
 
 async function getUserList(req, res) {
-  // destructure page and limit and set default values userDocumentsFiltered
-  const { page = 1, limit = 2 } = req.query;
+  // destructure page and limit and set default values
+  const { page = 1, limit = 2, classRoom = null } = req.query;
   try {
-    const userList = await getAllUsers(page, limit);
-    const usersCount = await countUserDocuments();
+    let userList = [];
+    let usersCount = [];
+    const filter = {};
+    if (classRoom && classRoom != 'all') {
+      filter.about = new RegExp(`${classRoom}`, 'i');
+      userList = await getAllUsers(page, limit, filter);
+      usersCount = await countUserDocuments(filter);
+    } else {
+      userList = await getAllUsers(page, limit);
+      usersCount = await countUserDocuments();
+    }
 
     return res.json({
       userList: userList,

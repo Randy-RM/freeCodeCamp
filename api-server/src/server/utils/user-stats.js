@@ -123,46 +123,71 @@ export function getUserById(id, User = loopback.getModelByType('User')) {
 export function getAllUsers(
   page,
   limit,
+  filter,
   User = loopback.getModelByType('User')
 ) {
-  return new Promise((resolve, reject) =>
-    User.find(
-      /*{ where: { about: 'kadea-dev-web', gender: 'Homme' } },*/
-      { skip: (page - 1) * limit, limit: limit * 1 },
-      (err, instance) => {
-        if (err || isEmpty(instance)) {
-          return reject(err || 'No users found');
+  return new Promise((resolve, reject) => {
+    if (filter) {
+      User.find(
+        {
+          where: filter,
+          skip: (page - 1) * limit,
+          limit: limit * 1
+        },
+        (err, instance) => {
+          if (err || isEmpty(instance)) {
+            return reject(err || 'No users found');
+          }
+          return resolve(instance);
         }
-        return resolve(instance);
-      }
-    )
-  );
+      );
+    } else {
+      User.find(
+        { skip: (page - 1) * limit, limit: limit * 1 },
+        (err, instance) => {
+          if (err || isEmpty(instance)) {
+            return reject(err || 'No users found');
+          }
+          return resolve(instance);
+        }
+      );
+    }
+  });
 }
 
-export function countUserDocuments(User = loopback.getModelByType('User')) {
-  return new Promise((resolve, reject) =>
-    User.find(
-      /*{ where: { about: 'kadea-dev-web', gender: 'Homme' } },*/
-      (err, count) => {
+export function countUserDocuments(
+  filter,
+  User = loopback.getModelByType('User')
+) {
+  return new Promise((resolve, reject) => {
+    if (filter) {
+      User.find({ where: filter }, (err, count) => {
         if (err || isEmpty(count)) {
           return reject(err || 'can not count user collection');
         }
         return resolve(count);
-      }
-    )
-  );
+      });
+    } else {
+      User.find((err, count) => {
+        if (err || isEmpty(count)) {
+          return reject(err || 'can not count user collection');
+        }
+        return resolve(count);
+      });
+    }
+  });
 }
 
-export function userDocumentsFiltered(User = loopback.getModelByType('User')) {
-  return new Promise((resolve, reject) =>
-    User.find({ where: { about: 'kadea-dev-web' } }, (err, instance) => {
-      if (err || isEmpty(instance)) {
-        return reject(err || 'can not count user collection');
-      }
-      return resolve(instance);
-    })
-  );
-}
+// export function userDocumentsFiltered(User = loopback.getModelByType('User')) {
+//   return new Promise((resolve, reject) =>
+//     User.find({ where: { about: 'kadea-dev-web' } }, (err, instance) => {
+//       if (err || isEmpty(instance)) {
+//         return reject(err || 'can not count user collection');
+//       }
+//       return resolve(instance);
+//     })
+//   );
+// }
 
 function getCompletedCertCount(user) {
   return [
