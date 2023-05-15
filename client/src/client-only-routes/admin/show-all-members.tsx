@@ -1,4 +1,12 @@
-import { Row, Col, Table } from '@freecodecamp/react-bootstrap';
+import {
+  Row,
+  Col,
+  Table,
+  FormGroup,
+  ControlLabel,
+  FormControl,
+  HelpBlock
+} from '@freecodecamp/react-bootstrap';
 import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
 // import { useTranslation } from 'react-i18next';
@@ -74,24 +82,28 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
 
   const [members, setMembers] = useState<Member[]>();
   const [currentMember, setCurrentMember] = useState<Member | null>(null);
-  const [totalPages, setTotalPages] = useState<number>(0);
+  const [totalPages, setTotalPages] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [countUsers, setCountUsers] = useState<number>();
+  const [groupMembers, setGroupMembers] = useState<string>('all');
 
   const getMembers = async () => {
     const memberList = await getDatabaseResource<UserList>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      `/all-users?page=${currentPage}&limit=10`
+      `/all-users?page=${currentPage}&limit=10&classRoom=${groupMembers}`
     );
-    if (memberList != null) {
+    if (memberList != null && !('error' in memberList)) {
       setMembers(memberList.userList);
       setCountUsers(memberList.countUsers);
-      if (totalPages == 0) {
+      if (totalPages == 1) {
         setTotalPages(Number(memberList.totalPages));
         setCurrentPage(Number(memberList.currentPage));
       }
     } else {
       setMembers([]);
+      setCountUsers(0);
+      // setTotalPages(0);
+      // setCurrentPage(0);
     }
   };
 
@@ -107,23 +119,34 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     if (forwardOrBackward) {
       if (currentPage < totalPages) {
         setCurrentPage(Number(currentPage + 1));
-        void getMembers();
+        // void getMembers();
       }
     } else {
       if (currentPage > 1) {
         setCurrentPage(Number(currentPage - 1));
-        void getMembers();
+        // void getMembers();
       }
     }
+  };
+
+  const handleChangeGroupMembers = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    event.preventDefault();
+    const groupMembersInput = event.target.value.slice();
+    setGroupMembers(groupMembersInput);
+    setCurrentPage(1);
+    setTotalPages(1);
   };
 
   useEffect(() => {
     void getMembers();
     return () => {
       setMembers([]); // cleanup useEffect to perform a React state update
+      // setGroupMembers('all');
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
+  }, [currentPage, groupMembers]);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
@@ -170,6 +193,8 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
             totalPages={totalPages}
             navigateToPage={navigateToPage}
             showMemberDetails={showMemberDetails}
+            handleChangeGroup={handleChangeGroupMembers}
+            currentGroupMembers={groupMembers}
           />
         ) : (
           <DetailMember member={currentMember} returnToTable={returnToTable} />
@@ -185,8 +210,10 @@ interface TableMembersProps {
   countUsers?: number;
   currentPage: number;
   totalPages: number;
+  currentGroupMembers: string;
   showMemberDetails: (member: Member) => void;
   navigateToPage: (forwardOrBackward: boolean) => void;
+  handleChangeGroup: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export function TableMembers(props: TableMembersProps): JSX.Element {
@@ -196,177 +223,217 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
     navigateToPage,
     currentPage,
     totalPages,
-    showMemberDetails
+    currentGroupMembers,
+    showMemberDetails,
+    handleChangeGroup
   } = props;
 
   return (
-    <Row>
-      <Col md={4} sm={12} xs={12}>
-        <div className='section-block-padding bg-secondary stat-card'>
-          <p>
-            <span className='fw-bold'>{`Nombre total d'utilisateurs`}</span>
-            <br />
-            <span className='h1 fw-bold'>{countUsers}</span>
-          </p>
-          <p>
-            <FontAwesomeIcon icon={faUsers} className='icon-big' />
-          </p>
-        </div>
-        <Spacer size={1} />
-      </Col>
+    <>
+      <Row>
+        <Col md={4} sm={12} xs={12}>
+          <div className='section-block-padding bg-secondary stat-card'>
+            <p>
+              <span className='fw-bold'>{`Nombre total d'utilisateurs`}</span>
+              <br />
+              <span className='h1 fw-bold'>{countUsers}</span>
+            </p>
+            <p>
+              <FontAwesomeIcon icon={faUsers} className='icon-big' />
+            </p>
+          </div>
+          <Spacer size={1} />
+        </Col>
+      </Row>
+      <Row>
+        <Col md={6} sm={12} xs={12}>
+          <div className=''>
+            <div>
+              <form>
+                <FormGroup controlId='class-room-filter'>
+                  <ControlLabel>
+                    <strong>{'Group'}</strong>
+                  </ControlLabel>
+                  <FormControl
+                    componentClass='select'
+                    onChange={handleChangeGroup}
+                    value={currentGroupMembers}
+                    className='standard-radius-5'
+                  >
+                    <option value='all'>Tout les membres</option>
+                    <option value='dev-web-c1'>Dev web c1</option>
+                    <option value='dev-web-c2'>Dev web c2</option>
+                    <option value='smd-matin'>smd matin</option>
+                    <option value='smd-midi'>smd midi</option>
+                  </FormControl>
+                  <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+                </FormGroup>
+              </form>
+            </div>
+          </div>
+        </Col>
+        {/* <Col md={6} sm={12} xs={12}>
+          <div className='section-block-padding bg-secondary stat-card'></div>
+        </Col> */}
+      </Row>
+      <Row>
+        <Col md={12} sm={12} xs={12}>
+          <div className=''>
+            {members && members.length > 0 ? (
+              <Table responsive hover>
+                <thead className='bg-dark-gray'>
+                  <tr>
+                    <th className='text-light'>Email</th>
+                    <th className='text-light'>Nom</th>
+                    {/* <th className='text-light'>Genre</th> */}
+                    <th className='text-light'>
+                      Responsive Web Design Progrès
+                    </th>
+                    <th className='text-light'>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {members.map((member, index) => {
+                    const responsiveWebDesignBlock =
+                      member.currentsSuperBlock.find(superBlock => {
+                        return (
+                          superBlock.superBlockDashedName ==
+                          'responsive-web-design'
+                        );
+                      });
 
-      <Col md={12} sm={12} xs={12}>
-        <div className=''>
-          {members && members.length > 0 ? (
-            <Table responsive hover>
-              <thead className='bg-dark-gray'>
-                <tr>
-                  <th className='text-light'>Email</th>
-                  <th className='text-light'>Nom</th>
-                  {/* <th className='text-light'>Genre</th> */}
-                  <th className='text-light'>Responsive Web Design Progrès</th>
-                  <th className='text-light'>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {members.map((member, index) => {
-                  const responsiveWebDesignBlock =
-                    member.currentsSuperBlock.find(superBlock => {
-                      return (
-                        superBlock.superBlockDashedName ==
-                        'responsive-web-design'
-                      );
-                    });
+                    const percentageCompleted: number =
+                      responsiveWebDesignBlock &&
+                      responsiveWebDesignBlock.totalCompletedChallenges &&
+                      responsiveWebDesignBlock.totalChallenges
+                        ? Math.floor(
+                            (responsiveWebDesignBlock.totalCompletedChallenges /
+                              responsiveWebDesignBlock.totalChallenges) *
+                              100
+                          )
+                        : 0;
 
-                  const percentageCompleted: number =
-                    responsiveWebDesignBlock &&
-                    responsiveWebDesignBlock.totalCompletedChallenges &&
-                    responsiveWebDesignBlock.totalChallenges
-                      ? Math.floor(
-                          (responsiveWebDesignBlock.totalCompletedChallenges /
-                            responsiveWebDesignBlock.totalChallenges) *
-                            100
-                        )
-                      : 0;
-
-                  return (
-                    <tr key={index}>
-                      <td style={{ verticalAlign: 'middle' }}>
-                        {member.email}
-                      </td>
-                      <td style={{ verticalAlign: 'middle' }}>{member.name}</td>
-                      {/* <td style={{ verticalAlign: 'middle' }}>
+                    return (
+                      <tr key={index}>
+                        <td style={{ verticalAlign: 'middle' }}>
+                          {member.email}
+                        </td>
+                        <td style={{ verticalAlign: 'middle' }}>
+                          {member.name}
+                        </td>
+                        {/* <td style={{ verticalAlign: 'middle' }}>
                         {member.gender}
                       </td> */}
-                      <td style={{ verticalAlign: 'middle' }}>
-                        {responsiveWebDesignBlock ? (
-                          <div
-                            className='progress-bar-wrap custom-progress-bloc standard-radius-5'
-                            aria-label={`${percentageCompleted}`}
-                          >
+                        <td style={{ verticalAlign: 'middle' }}>
+                          {responsiveWebDesignBlock ? (
                             <div
-                              className='progress-bar-background custom-progress-bloc standard-radius-5'
-                              aria-hidden='true'
+                              className='progress-bar-wrap custom-progress-bloc standard-radius-5'
+                              aria-label={`${percentageCompleted}`}
                             >
-                              {`${percentageCompleted}%`}
-                            </div>
-                            <div
-                              aria-hidden='true'
-                              className='progress-bar-percent custom-progress-bloc standard-radius-5'
-                              data-testid='fcc-progress-bar-percent'
-                              style={{ width: `${percentageCompleted}%` }}
-                            >
-                              <div className='progress-bar-foreground custom-progress-bloc'>
+                              <div
+                                className='progress-bar-background custom-progress-bloc standard-radius-5'
+                                aria-hidden='true'
+                              >
                                 {`${percentageCompleted}%`}
                               </div>
-                            </div>
-                          </div>
-                        ) : (
-                          <div
-                            className='progress-bar-wrap custom-progress-bloc standard-radius-5'
-                            aria-label={`${percentageCompleted}`}
-                          >
-                            <div
-                              className='progress-bar-background custom-progress-bloc standard-radius-5'
-                              aria-hidden='true'
-                            >
-                              {`${percentageCompleted}%`}
-                            </div>
-                            <div
-                              aria-hidden='true'
-                              className='progress-bar-percent custom-progress-bloc standard-radius-5'
-                              data-testid='fcc-progress-bar-percent'
-                              style={{ width: `${percentageCompleted}%` }}
-                            >
-                              <div className='progress-bar-foreground custom-progress-bloc'>
-                                {`${percentageCompleted}%`}
+                              <div
+                                aria-hidden='true'
+                                className='progress-bar-percent custom-progress-bloc standard-radius-5'
+                                data-testid='fcc-progress-bar-percent'
+                                style={{ width: `${percentageCompleted}%` }}
+                              >
+                                <div className='progress-bar-foreground custom-progress-bloc'>
+                                  {`${percentageCompleted}%`}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        )}
-                      </td>
-                      <td style={{ verticalAlign: 'middle' }}>
-                        <button
-                          className='action-btn-detail'
-                          onClick={() => {
-                            showMemberDetails(member);
-                          }}
-                        >
-                          Voir plus
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </Table>
-          ) : (
-            <Table striped responsive hover>
-              <thead className='bg-dark-gray'>
-                <tr>
-                  <th className='text-light'></th>
-                  <th className='text-light'></th>
-                  <th className='text-light'></th>
-                  <th className='text-light'></th>
-                  <th className='text-light'></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </Table>
+                          ) : (
+                            <div
+                              className='progress-bar-wrap custom-progress-bloc standard-radius-5'
+                              aria-label={`${percentageCompleted}`}
+                            >
+                              <div
+                                className='progress-bar-background custom-progress-bloc standard-radius-5'
+                                aria-hidden='true'
+                              >
+                                {`${percentageCompleted}%`}
+                              </div>
+                              <div
+                                aria-hidden='true'
+                                className='progress-bar-percent custom-progress-bloc standard-radius-5'
+                                data-testid='fcc-progress-bar-percent'
+                                style={{ width: `${percentageCompleted}%` }}
+                              >
+                                <div className='progress-bar-foreground custom-progress-bloc'>
+                                  {`${percentageCompleted}%`}
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </td>
+                        <td style={{ verticalAlign: 'middle' }}>
+                          <button
+                            className='action-btn-detail'
+                            onClick={() => {
+                              showMemberDetails(member);
+                            }}
+                          >
+                            Voir plus
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
+            ) : (
+              <Table striped responsive hover>
+                <thead className='bg-dark-gray'>
+                  <tr>
+                    <th className='text-light'></th>
+                    <th className='text-light'></th>
+                    <th className='text-light'></th>
+                    <th className='text-light'></th>
+                    {/* <th className='text-light'></th> */}
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </Table>
+            )}
+          </div>
+        </Col>
+        <Col md={12} sm={12} xs={12}>
+          {currentPage > 1 && (
+            <FontAwesomeIcon
+              icon={faChevronLeft}
+              className='pagination-chevron'
+              onClick={() => {
+                navigateToPage(false);
+              }}
+            />
           )}
-        </div>
-      </Col>
-      <Col md={12} sm={12} xs={12}>
-        {currentPage > 1 && (
-          <FontAwesomeIcon
-            icon={faChevronLeft}
-            className='pagination-chevron'
-            onClick={() => {
-              navigateToPage(false);
-            }}
-          />
-        )}
-        &nbsp;
-        {`  ${currentPage} sur ${totalPages}  `}
-        &nbsp;
-        {currentPage < totalPages && (
-          <FontAwesomeIcon
-            icon={faChevronRight}
-            className='pagination-chevron'
-            onClick={() => {
-              navigateToPage(true);
-            }}
-          />
-        )}
-      </Col>
-    </Row>
+          &nbsp;
+          {`  ${currentPage} sur ${totalPages}  `}
+          &nbsp;
+          {currentPage < totalPages && (
+            <FontAwesomeIcon
+              icon={faChevronRight}
+              className='pagination-chevron'
+              onClick={() => {
+                navigateToPage(true);
+              }}
+            />
+          )}
+        </Col>
+      </Row>
+    </>
   );
 }
 

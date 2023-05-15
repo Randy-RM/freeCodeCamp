@@ -177,8 +177,8 @@ async function getUserList(req, res) {
     let userList = [];
     let usersCount = [];
     const filter = {};
-    if (classRoom) {
-      filter.about = classRoom;
+    if (classRoom && classRoom != 'all') {
+      filter.about = new RegExp(`${classRoom}`, 'i');
       userList = await getAllUsers(page, limit, filter);
       usersCount = await countUserDocuments(filter);
     } else {

@@ -129,8 +129,11 @@ export function getAllUsers(
   return new Promise((resolve, reject) => {
     if (filter) {
       User.find(
-        { where: filter },
-        { skip: (page - 1) * limit, limit: limit * 1 },
+        {
+          where: filter,
+          skip: (page - 1) * limit,
+          limit: limit * 1
+        },
         (err, instance) => {
           if (err || isEmpty(instance)) {
             return reject(err || 'No users found');
