@@ -263,8 +263,10 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                     <option value='all'>Tout les membres</option>
                     <option value='dev-web-c1'>Dev web c1</option>
                     <option value='dev-web-c2'>Dev web c2</option>
-                    <option value='smd-matin'>smd matin</option>
-                    <option value='smd-midi'>smd midi</option>
+                    <option value='smd-classe-a-matin'>
+                      Smd classe a matin
+                    </option>
+                    <option value='smd-classe-a-midi'>Smd classe a midi</option>
                   </FormControl>
                   <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
                 </FormGroup>
