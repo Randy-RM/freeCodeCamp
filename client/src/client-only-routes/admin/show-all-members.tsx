@@ -5,7 +5,9 @@ import {
   FormGroup,
   ControlLabel,
   FormControl,
-  HelpBlock
+  HelpBlock,
+  Button
+  // InputGroup
 } from '@freecodecamp/react-bootstrap';
 import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
@@ -16,7 +18,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faChevronLeft,
   faChevronRight,
-  faUsers
+  faUsers,
+  faSearch
 } from '@fortawesome/free-solid-svg-icons';
 import { getDatabaseResource, getExternalResource } from '../../utils/ajax';
 import envData from '../../../../config/env.json';
@@ -274,9 +277,29 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
             </div>
           </div>
         </Col>
-        {/* <Col md={6} sm={12} xs={12}>
-          <div className='section-block-padding bg-secondary stat-card'></div>
-        </Col> */}
+        <Col md={6} sm={12} xs={12}>
+          <div className=''>
+            <div>
+              <form>
+                <FormGroup controlId='class-room-filter'>
+                  <ControlLabel>
+                    <strong>{'Membre'}</strong>
+                  </ControlLabel>
+                  <div className='d-flex'>
+                    <FormControl
+                      type='search'
+                      placeholder='Rechercher un membre'
+                      className='standard-radius-5'
+                    />
+                    <Button className='standard-radius-5' id='button-addon2'>
+                      <FontAwesomeIcon icon={faSearch} />
+                    </Button>
+                  </div>
+                </FormGroup>
+              </form>
+            </div>
+          </div>
+        </Col>
       </Row>
       <Row>
         <Col md={12} sm={12} xs={12}>
