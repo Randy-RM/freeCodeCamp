@@ -285,7 +285,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                   <ControlLabel>
                     <strong>{'Membre'}</strong>
                   </ControlLabel>
-                  <div className='d-flex'>
+                  <div className='d-flex search-bar'>
                     <FormControl
                       type='search'
                       placeholder='Rechercher un membre'

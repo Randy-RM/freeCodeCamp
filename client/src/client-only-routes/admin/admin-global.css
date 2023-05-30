@@ -36,3 +36,21 @@
   font-size: 13px;
   font-weight: bold;
 }
+
+.search-bar {
+  gap: 2%;
+}
+
+.search-bar button,
+.search-bar button:focus {
+  border: none;
+  color: #ffffff;
+  background-color: #282c34;
+  transition: all ease-in-out 0.3s;
+}
+
+.search-bar button:hover {
+  border: none;
+  color: #ffffff;
+  background-color: #585f6d;
+}
