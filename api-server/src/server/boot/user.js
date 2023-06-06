@@ -172,13 +172,25 @@ function getAccount(req, res) {
 
 async function getUserList(req, res) {
   // destructure page and limit and set default values
-  const { page = 1, limit = 2, classRoom = null } = req.query;
+  const {
+    page = 1,
+    limit = 2,
+    classRoom = null,
+    memberName = null
+  } = req.query;
   try {
     let userList = [];
     let usersCount = [];
     const filter = {};
     if (classRoom && classRoom != 'all') {
       filter.about = new RegExp(`${classRoom}`, 'i');
+      if (memberName) {
+        filter.name = new RegExp(`${memberName}`, 'i');
+      }
+      userList = await getAllUsers(page, limit, filter);
+      usersCount = await countUserDocuments(filter);
+    } else if (classRoom == 'all' && memberName) {
+      filter.name = new RegExp(`${memberName}`, 'i');
       userList = await getAllUsers(page, limit, filter);
       usersCount = await countUserDocuments(filter);
     } else {

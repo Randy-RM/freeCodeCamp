@@ -19,7 +19,8 @@ import {
   faChevronLeft,
   faChevronRight,
   faUsers,
-  faSearch
+  faSearch,
+  faXmark
 } from '@fortawesome/free-solid-svg-icons';
 import { getDatabaseResource, getExternalResource } from '../../utils/ajax';
 import envData from '../../../../config/env.json';
@@ -88,12 +89,13 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   const [totalPages, setTotalPages] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [countUsers, setCountUsers] = useState<number>();
+  const [memberNameToSearch, setMemberNameToSearch] = useState<string>('');
   const [groupMembers, setGroupMembers] = useState<string>('all');
 
   const getMembers = async () => {
     const memberList = await getDatabaseResource<UserList>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      `/all-users?page=${currentPage}&limit=10&classRoom=${groupMembers}`
+      `/all-users?page=${currentPage}&limit=10&classRoom=${groupMembers}&memberName=${memberNameToSearch}`
     );
     if (memberList != null && !('error' in memberList)) {
       setMembers(memberList.userList);
@@ -105,8 +107,6 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     } else {
       setMembers([]);
       setCountUsers(0);
-      // setTotalPages(0);
-      // setCurrentPage(0);
     }
   };
 
@@ -122,12 +122,10 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     if (forwardOrBackward) {
       if (currentPage < totalPages) {
         setCurrentPage(Number(currentPage + 1));
-        // void getMembers();
       }
     } else {
       if (currentPage > 1) {
         setCurrentPage(Number(currentPage - 1));
-        // void getMembers();
       }
     }
   };
@@ -142,6 +140,12 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     setTotalPages(1);
   };
 
+  const searchMember = (memberNameInput = '') => {
+    console.log('member name : ', memberNameInput);
+    const memberName = memberNameInput;
+    setMemberNameToSearch(memberName);
+  };
+
   useEffect(() => {
     void getMembers();
     return () => {
@@ -149,7 +153,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
       // setGroupMembers('all');
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, groupMembers]);
+  }, [currentPage, groupMembers, memberNameToSearch]);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
@@ -159,11 +163,6 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     navigate(`${apiLocation}/signin`);
     return <Loader fullScreen={true} />;
   }
-
-  // if (!user.email.endsWith('@kinshasadigital.com')) {
-  //   navigate(`${homeLocation}`);
-  //   return <Loader fullScreen={true} />;
-  // }
 
   if (!user.email.endsWith('@kadea.co')) {
     navigate(`${homeLocation}`);
@@ -197,6 +196,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
             navigateToPage={navigateToPage}
             showMemberDetails={showMemberDetails}
             handleChangeGroup={handleChangeGroupMembers}
+            searchMember={searchMember}
             currentGroupMembers={groupMembers}
           />
         ) : (
@@ -217,6 +217,7 @@ interface TableMembersProps {
   showMemberDetails: (member: Member) => void;
   navigateToPage: (forwardOrBackward: boolean) => void;
   handleChangeGroup: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  searchMember: (memberName: string) => void;
 }
 
 export function TableMembers(props: TableMembersProps): JSX.Element {
@@ -228,8 +229,28 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
     totalPages,
     currentGroupMembers,
     showMemberDetails,
-    handleChangeGroup
+    handleChangeGroup,
+    searchMember
   } = props;
+
+  const [memberName, setMemberName] = useState<string>('');
+
+  const handleSearchMember = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    searchMember(memberName);
+  };
+
+  const handleClearSearchMemberInput = () => {
+    setMemberName('');
+    searchMember('');
+  };
+
+  const handleChangeSearchMemberInput = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const currentMemberName = event.target.value;
+    setMemberName(currentMemberName);
+  };
 
   return (
     <>
@@ -280,7 +301,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
         <Col md={6} sm={12} xs={12}>
           <div className=''>
             <div>
-              <form>
+              <form onSubmit={handleSearchMember}>
                 <FormGroup controlId='class-room-filter'>
                   <ControlLabel>
                     <strong>{'Membre'}</strong>
@@ -290,9 +311,23 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                       type='search'
                       placeholder='Rechercher un membre'
                       className='standard-radius-5'
+                      name='memberName'
+                      value={memberName}
+                      onChange={handleChangeSearchMemberInput}
                     />
-                    <Button className='standard-radius-5' id='button-addon2'>
+                    <Button
+                      type='submit'
+                      className='standard-radius-5 input-search'
+                      id='button-addon2'
+                    >
                       <FontAwesomeIcon icon={faSearch} />
+                    </Button>
+                    <Button
+                      className='standard-radius-5 clear-input-search'
+                      id='button-addon2'
+                      onClick={handleClearSearchMemberInput}
+                    >
+                      <FontAwesomeIcon icon={faXmark} />
                     </Button>
                   </div>
                 </FormGroup>

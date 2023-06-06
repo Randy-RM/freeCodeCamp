@@ -41,16 +41,30 @@
   gap: 2%;
 }
 
-.search-bar button,
-.search-bar button:focus {
+.search-bar .input-search,
+.search-bar .input-search:focus {
   border: none;
   color: #ffffff;
   background-color: #282c34;
   transition: all ease-in-out 0.3s;
 }
 
-.search-bar button:hover {
+.search-bar .input-search:hover {
   border: none;
   color: #ffffff;
   background-color: #585f6d;
+}
+
+.search-bar .clear-input-search,
+.search-bar .clear-input-search:focus {
+  border: none;
+  color: #ffffff;
+  background-color: #a8351b;
+  transition: all ease-in-out 0.3s;
+}
+
+.search-bar .clear-input-search:hover {
+  border: none;
+  color: #ffffff;
+  background-color: rgb(215, 60, 29);
 }
