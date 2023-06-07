@@ -41,29 +41,29 @@
   gap: 2%;
 }
 
-.search-bar .input-search,
-.search-bar .input-search:focus {
+.btn-black,
+.btn-black:focus {
   border: none;
   color: #ffffff;
   background-color: #282c34;
   transition: all ease-in-out 0.3s;
 }
 
-.search-bar .input-search:hover {
+.btn-black:hover {
   border: none;
   color: #ffffff;
   background-color: #585f6d;
 }
 
-.search-bar .clear-input-search,
-.search-bar .clear-input-search:focus {
+.btn-red,
+.btn-red:focus {
   border: none;
   color: #ffffff;
   background-color: #a8351b;
   transition: all ease-in-out 0.3s;
 }
 
-.search-bar .clear-input-search:hover {
+.btn-red:hover {
   border: none;
   color: #ffffff;
   background-color: rgb(215, 60, 29);

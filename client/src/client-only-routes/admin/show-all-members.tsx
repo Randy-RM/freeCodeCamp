@@ -317,13 +317,13 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                     />
                     <Button
                       type='submit'
-                      className='standard-radius-5 input-search'
+                      className='standard-radius-5 btn-black'
                       id='button-addon2'
                     >
                       <FontAwesomeIcon icon={faSearch} />
                     </Button>
                     <Button
-                      className='standard-radius-5 clear-input-search'
+                      className='standard-radius-5 btn-red'
                       id='button-addon2'
                       onClick={handleClearSearchMemberInput}
                     >
