@@ -18,6 +18,7 @@ import {
 import { getRedirectParams } from '../utils/redirection';
 import { trimTags } from '../utils/validators';
 import { getAllUsers, countUserDocuments } from '../utils/user-stats';
+// import { insertUserGroup } from '../utils/user-group';
 
 const log = debugFactory('fcc:boot:user');
 const sendNonUserToHome = ifNoUserRedirectHome();
@@ -182,10 +183,15 @@ async function getUserList(req, res) {
     let userList = [];
     let usersCount = [];
     const filter = {};
+    // let memberGroup;
     if (classRoom && classRoom != 'all') {
       filter.about = new RegExp(`${classRoom}`, 'i');
       if (memberName) {
+        // console.log('******* memberName *******', memberName);
         filter.name = new RegExp(`${memberName}`, 'i');
+        // insertUserGroup({ userGroupName: 'test-rm' });
+        // memberGroup = await insertUserGroup({ userGroupName: 'test-rm' });
+        // console.log('**** memberGroup : ****', memberGroup);
       }
       userList = await getAllUsers(page, limit, filter);
       usersCount = await countUserDocuments(filter);
