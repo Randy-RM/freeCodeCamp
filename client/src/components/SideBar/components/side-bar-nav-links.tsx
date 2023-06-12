@@ -55,6 +55,17 @@ export const SideBarNavLinks = (): JSX.Element => {
             {'Membres'}
           </Link>
         </li>
+
+        <li className='side-bar-nav-item'>
+          <Link
+            className=''
+            key='admin-home'
+            to={'/admin/all-groups'}
+            activeClassName='active'
+          >
+            {'Groups'}
+          </Link>
+        </li>
       </ul>
       <hr />
       <ul className='side-bar-nav-list'>
