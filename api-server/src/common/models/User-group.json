@@ -1,0 +1,15 @@
+{
+  "name": "userGroup",
+  "plural": "userGroups",
+  "base": "PersistedModel",
+  "strict": "filter",
+  "idInjection": true,
+  "properties": {
+    "userGroupName": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "acls": [],
+  "methods": {}
+}
