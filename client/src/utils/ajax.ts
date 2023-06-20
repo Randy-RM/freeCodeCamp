@@ -279,6 +279,35 @@ export function postWebhookToken(): Promise<void> {
   return post('/user/webhook-token', {});
 }
 
+interface UserGroup {
+  userGroupName: string;
+}
+
+interface UserGroupResponse {
+  userGroup: UserGroup | null;
+  error: string | undefined;
+}
+
+export async function createUserGroup(
+  body: UserGroup
+): Promise<UserGroupResponse | void | unknown> {
+  try {
+    const response = await post<UserGroupResponse>('/user-group/create', body);
+
+    if (!response.userGroup) {
+      throw new Error(response.error);
+    }
+    return response;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: unknown | any) {
+    return {
+      userGroup: null,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+      error: error.message
+    };
+  }
+}
+
 /** PUT **/
 
 interface MyAbout {
