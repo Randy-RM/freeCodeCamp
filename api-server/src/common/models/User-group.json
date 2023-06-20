@@ -2,14 +2,19 @@
   "name": "userGroup",
   "plural": "userGroups",
   "base": "PersistedModel",
-  "strict": "filter",
   "idInjection": true,
   "properties": {
     "userGroupName": {
-      "type": "string"
+      "type": "string",
+      "index": {
+        "mongodb": {
+          "unique": true
+        }
+      }
     }
   },
   "validations": [],
+  "relations": {},
   "acls": [],
   "methods": {}
 }
