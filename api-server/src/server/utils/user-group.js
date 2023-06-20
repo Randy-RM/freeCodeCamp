@@ -23,15 +23,15 @@ export async function insertUserGroup(
   }
 }
 
-export function getAllUserGroup(
+export function getAllUsersGroup(
   page,
   limit,
   filter,
-  UserGroup = loopback.getModelByType('userGroup')
+  UsersGroup = loopback.getModelByType('userGroup')
 ) {
   return new Promise((resolve, reject) => {
     if (filter) {
-      UserGroup.find(
+      UsersGroup.find(
         {
           where: filter,
           skip: (page - 1) * limit,
@@ -45,7 +45,7 @@ export function getAllUserGroup(
         }
       );
     } else {
-      UserGroup.find(
+      UsersGroup.find(
         { skip: (page - 1) * limit, limit: limit * 1 },
         (err, instance) => {
           if (err || isEmpty(instance)) {
@@ -58,20 +58,20 @@ export function getAllUserGroup(
   });
 }
 
-export function countUserGroupDocuments(
+export function countUsersGroupDocuments(
   filter,
-  UserGroup = loopback.getModelByType('userGroup')
+  UsersGroup = loopback.getModelByType('userGroup')
 ) {
   return new Promise((resolve, reject) => {
     if (filter) {
-      UserGroup.find({ where: filter }, (err, count) => {
+      UsersGroup.find({ where: filter }, (err, count) => {
         if (err || isEmpty(count)) {
           return reject(err || 'can not count user group collection');
         }
         return resolve(count);
       });
     } else {
-      UserGroup.find((err, count) => {
+      UsersGroup.find((err, count) => {
         if (err || isEmpty(count)) {
           return reject(err || 'can not count user group collection');
         }
