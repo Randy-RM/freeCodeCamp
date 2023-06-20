@@ -85,7 +85,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   const { isSignedIn, navigate, showLoading, user } = props;
 
   const [members, setMembers] = useState<Member[]>();
-  const [currentMember, setCurrentMember] = useState<Member | null>(null);
+  const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [countUsers, setCountUsers] = useState<number>();
@@ -111,11 +111,11 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   };
 
   const showMemberDetails = (member: Member | null) => {
-    setCurrentMember(member);
+    setSelectedMember(member);
   };
 
   const returnToTable = () => {
-    setCurrentMember(null);
+    setSelectedMember(null);
   };
 
   const navigateToPage = (forwardOrBackward: boolean) => {
@@ -141,7 +141,6 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   };
 
   const searchMember = (memberNameInput = '') => {
-    console.log('member name : ', memberNameInput);
     const memberName = memberNameInput;
     setMemberNameToSearch(memberName);
   };
@@ -181,13 +180,13 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
                 className='big-subheading'
                 style={{ overflowWrap: 'break-word' }}
               >
-                {!currentMember ? 'Membres' : 'Détail membre'}
+                {!selectedMember ? 'Membres' : 'Détail membre'}
               </h1>
             </div>
           </Col>
         </Row>
         <Spacer size={1} />
-        {!currentMember ? (
+        {!selectedMember ? (
           <TableMembers
             members={members}
             countUsers={countUsers}
@@ -200,7 +199,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
             currentGroupMembers={groupMembers}
           />
         ) : (
-          <DetailMember member={currentMember} returnToTable={returnToTable} />
+          <DetailMember member={selectedMember} returnToTable={returnToTable} />
         )}
         <Spacer size={1} />
       </div>
@@ -248,8 +247,8 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
   const handleChangeSearchMemberInput = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const currentMemberName = event.target.value;
-    setMemberName(currentMemberName);
+    const memberNameInputValue = event.target.value;
+    setMemberName(memberNameInputValue);
   };
 
   return (
