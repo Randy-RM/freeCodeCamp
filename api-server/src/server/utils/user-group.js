@@ -35,7 +35,8 @@ export function getAllUsersGroup(
         {
           where: filter,
           skip: (page - 1) * limit,
-          limit: limit * 1
+          limit: limit * 1,
+          order: 'id DESC'
         },
         (err, instance) => {
           if (err || isEmpty(instance)) {
@@ -46,7 +47,7 @@ export function getAllUsersGroup(
       );
     } else {
       UsersGroup.find(
-        { skip: (page - 1) * limit, limit: limit * 1 },
+        { skip: (page - 1) * limit, limit: limit * 1, order: 'id DESC' },
         (err, instance) => {
           if (err || isEmpty(instance)) {
             return reject(err || 'No users group found');
@@ -78,5 +79,19 @@ export function countUsersGroupDocuments(
         return resolve(count);
       });
     }
+  });
+}
+
+export function deleteUserGroup(
+  userGroupId,
+  UserGroup = loopback.getModelByType('userGroup')
+) {
+  return new Promise((resolve, reject) => {
+    UserGroup.destroyById(userGroupId, (error, countUserGroupDeleted) => {
+      if (error /* || isEmpty(count)*/) {
+        return reject(error || 'Error in deleting Documents');
+      }
+      return resolve(countUserGroupDeleted);
+    });
   });
 }

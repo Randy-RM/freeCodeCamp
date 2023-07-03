@@ -6,21 +6,23 @@ import {
   FormGroup,
   ControlLabel,
   FormControl,
-  Button
+  Button,
+  HelpBlock
 } from '@freecodecamp/react-bootstrap';
 import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
-// import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faChevronLeft,
   faChevronRight
-  // faSearch,
-  // faXmark
 } from '@fortawesome/free-solid-svg-icons';
-import { createUserGroup, getDatabaseResource } from '../../utils/ajax';
+import {
+  createUserGroup,
+  getDatabaseResource,
+  deleteMemberGroup
+} from '../../utils/ajax';
 
 import envData from '../../../../config/env.json';
 import { createFlashMessage } from '../../components/Flash/redux';
@@ -76,8 +78,12 @@ type MemberGroupList = {
   countUsersGroup: number;
 };
 
+interface UserGroupResponse {
+  userGroup: MemberGroup | null;
+  error: string | undefined;
+}
+
 export function ShowAllGroups(props: ShowAllGroupsProps): JSX.Element {
-  // const { t } = useTranslation();
   const { isSignedIn, user, navigate, showLoading } = props;
   const [groupName, setGroupName] = useState<string>('');
   const [membersGroup, setMembersGroup] = useState<MemberGroup[]>();
@@ -87,6 +93,9 @@ export function ShowAllGroups(props: ShowAllGroupsProps): JSX.Element {
   const [countUsersGroup, setCountUsersGroup] = useState<number>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [memberGroupNameToSearch, setMemberGroupNameToSearch] =
+    useState<string>('');
+  const [groupRecentlyTreated, setGroupRecentlyTreated] = useState<string>('');
+  const [errorOnUpdateGroupList, setErrorOnUpdateGroupList] =
     useState<string>('');
 
   const getMembersGroup = async () => {
@@ -100,6 +109,9 @@ export function ShowAllGroups(props: ShowAllGroupsProps): JSX.Element {
       if (totalPages == 1) {
         setTotalPages(Number(groupList.totalPages));
         setCurrentPage(Number(groupList.currentPage));
+      }
+      if (totalPages > 1) {
+        setTotalPages(Number(groupList.totalPages));
       }
     } else {
       setMembersGroup([]);
@@ -122,26 +134,52 @@ export function ShowAllGroups(props: ShowAllGroupsProps): JSX.Element {
   const handleChangeGroupNameInput = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const currentGroupName = event.target.value;
+    const currentGroupName = (
+      event.target as HTMLInputElement
+    ).value.trimStart();
     setGroupName(currentGroupName);
   };
 
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const response = await createUserGroup({
-      userGroupName: groupName
-    });
+    if (groupName.length != 0) {
+      const groupToCreate = groupName;
+      const response = (await createUserGroup({
+        userGroupName: groupToCreate.trim()
+      })) as UserGroupResponse;
+      if (response.userGroup) {
+        setGroupRecentlyTreated(response.userGroup.id);
+        setCurrentPage(1);
+        setGroupName('');
+        setErrorOnUpdateGroupList('');
+      } else {
+        setErrorOnUpdateGroupList(
+          typeof response.error === 'string' ? response.error : ''
+        );
+      }
+    } else {
+      setErrorOnUpdateGroupList('This field should not be empty.');
+    }
+  };
+
+  const handleDeleteMemberGroup = async (memberGroup: MemberGroup) => {
+    const isMemberGroupDeleted = await deleteMemberGroup(memberGroup);
+    if (isMemberGroupDeleted?.isDeleted) {
+      setGroupRecentlyTreated(
+        groupRecentlyTreated != memberGroup.id ? memberGroup.id : ''
+      );
+    } else {
+      setGroupRecentlyTreated('');
+    }
   };
 
   useEffect(() => {
     void getMembersGroup();
     return () => {
       setMembersGroup([]); // cleanup useEffect to perform a React state update
-      // setGroupMembers('all');
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
+  }, [currentPage, groupRecentlyTreated]);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
@@ -192,9 +230,18 @@ export function ShowAllGroups(props: ShowAllGroupsProps): JSX.Element {
                           placeholder='Nom du group'
                           className='standard-radius-5'
                           name='groupName'
+                          value={groupName}
                           onChange={handleChangeGroupNameInput}
                         />
-                        <br />
+                        {errorOnUpdateGroupList.length == 0 ? (
+                          <HelpBlock className='none-help-block'>
+                            {`none`}
+                          </HelpBlock>
+                        ) : (
+                          <HelpBlock className='text-danger'>
+                            {`${errorOnUpdateGroupList}`}
+                          </HelpBlock>
+                        )}
                         <Button
                           type='submit'
                           className='standard-radius-5 btn-black'
@@ -211,53 +258,12 @@ export function ShowAllGroups(props: ShowAllGroupsProps): JSX.Element {
             <Spacer size={1} />
           </Col>
         </Row>
-        {/* <Row>
-          <Col md={12} sm={12} xs={12}>
-            <div className=''>
-              <Table responsive hover>
-                <thead className='bg-dark-gray'>
-                  <tr>
-                    <th className='text-light'>Group</th>
-                    <th className='text-light'>Nombre de membres</th>
-                    <th className='text-light'>Date de création</th>
-                    <th className='text-light'>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Kadea class c matin</td>
-                    <td>35 Membres</td>
-                    <td>06/06/2023</td>
-                    <td>Supprimer</td>
-                  </tr>
-                </tbody>
-              </Table>
-            </div>
-          </Col>
-          <Col md={12} sm={12} xs={12}>
-            <FontAwesomeIcon
-              icon={faChevronLeft}
-              className='pagination-chevron'
-            />
-            &nbsp;
-            {`  1 sur 1  `}
-            &nbsp;
-            <FontAwesomeIcon
-              icon={faChevronRight}
-              className='pagination-chevron'
-            />
-          </Col>
-        </Row> */}
         <TableMembers
           membersGroup={membersGroup}
-          // countUsers={countUsers}
           currentPage={currentPage}
           totalPages={totalPages}
           navigateToPage={navigateToPage}
-          // showMemberDetails={showMemberDetails}
-          // handleChangeGroup={handleChangeGroupMembers}
-          // searchMember={searchMember}
-          // currentGroupMembers={groupMembers}
+          deleteMemberGroup={handleDeleteMemberGroup}
         />
         <Spacer size={1} />
       </div>
@@ -267,87 +273,23 @@ export function ShowAllGroups(props: ShowAllGroupsProps): JSX.Element {
 
 interface TableMembersGroupProps {
   membersGroup?: MemberGroup[];
-  // countUsers?: number;
   currentPage: number;
   totalPages: number;
-  // showMemberDetails: (member: MemberGroup) => void;
+  deleteMemberGroup: (memberGroup: MemberGroup) => void;
   navigateToPage: (forwardOrBackward: boolean) => void;
-  // handleChangeGroup: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  // searchMember: (memberName: string) => void;
 }
 
 export function TableMembers(props: TableMembersGroupProps): JSX.Element {
   const {
     membersGroup,
-    // countUsers,
     navigateToPage,
     currentPage,
-    totalPages
-    // showMemberDetails,
-    // handleChangeGroup,
-    // searchMember
+    totalPages,
+    deleteMemberGroup
   } = props;
-
-  // const [memberName, setMemberName] = useState<string>('');
-
-  // const handleSearchMember = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   searchMember(memberName);
-  // };
-
-  // const handleClearSearchMemberInput = () => {
-  //   setMemberName('');
-  //   searchMember('');
-  // };
-
-  // const handleChangeSearchMemberInput = (
-  //   event: React.ChangeEvent<HTMLInputElement>
-  // ) => {
-  //   const currentMemberName = event.target.value;
-  //   setMemberName(currentMemberName);
-  // };
 
   return (
     <>
-      {/* <Row>
-        <Col md={6} sm={12} xs={12}>
-          <div className=''>
-            <div>
-              <form onSubmit={handleSearchMember}>
-                <FormGroup controlId='class-room-filter'>
-                  <ControlLabel>
-                    <strong>{'Membre'}</strong>
-                  </ControlLabel>
-                  <div className='d-flex search-bar'>
-                    <FormControl
-                      type='search'
-                      placeholder='Rechercher un membre'
-                      className='standard-radius-5'
-                      name='memberName'
-                      value={memberName}
-                      onChange={handleChangeSearchMemberInput}
-                    />
-                    <Button
-                      type='submit'
-                      className='standard-radius-5 btn-black'
-                      id='button-addon2'
-                    >
-                      <FontAwesomeIcon icon={faSearch} />
-                    </Button>
-                    <Button
-                      className='standard-radius-5 btn-red'
-                      id='button-addon2'
-                      onClick={handleClearSearchMemberInput}
-                    >
-                      <FontAwesomeIcon icon={faXmark} />
-                    </Button>
-                  </div>
-                </FormGroup>
-              </form>
-            </div>
-          </div>
-        </Col>
-      </Row> */}
       <Row>
         <Col md={12} sm={12} xs={12}>
           <div className=''>
@@ -370,7 +312,7 @@ export function TableMembers(props: TableMembersGroupProps): JSX.Element {
                           <button
                             className='action-btn-detail'
                             onClick={() => {
-                              return;
+                              deleteMemberGroup(group);
                             }}
                           >
                             Supprimer

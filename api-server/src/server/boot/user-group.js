@@ -3,7 +3,8 @@ import { ifNoUserRedirectHome } from '../utils/middleware';
 import {
   insertUserGroup,
   getAllUsersGroup,
-  countUsersGroupDocuments
+  countUsersGroupDocuments,
+  deleteUserGroup
 } from '../utils/user-group';
 
 const log = debug('fcc:boot:user-group');
@@ -15,6 +16,7 @@ function bootUserGroup(app) {
 
   api.get('/all-users-group', sendNonUserToHome, getUserGroupList);
   api.post('/user-group/create', sendNonUserToHome, createOneUserGroup);
+  api.delete('/user-group/delete', sendNonUserToHome, removeUserGroup);
 
   app.use(api);
 }
@@ -24,6 +26,9 @@ async function createOneUserGroup(req, res) {
   log(userGroupName);
 
   try {
+    if (userGroupName.length == 0) {
+      throw new Error('This field should not be empty.');
+    }
     let newUserGroup = null;
     newUserGroup = await insertUserGroup({ userGroupName: userGroupName });
     if (!newUserGroup.userGroup) {
@@ -64,6 +69,34 @@ async function getUserGroupList(req, res) {
   } catch (error) {
     return res.json({
       error: error
+    });
+  }
+}
+
+async function removeUserGroup(req, res) {
+  const { id } = req.body;
+  log(req.body);
+  try {
+    if (!id || id.length == 0) {
+      throw new Error('Please select a group');
+    }
+    const userGroupDeleted = await deleteUserGroup(id);
+    if (
+      userGroupDeleted &&
+      // eslint-disable-next-line no-prototype-builtins
+      userGroupDeleted.hasOwnProperty('count') &&
+      userGroupDeleted.count == 1
+    ) {
+      return res.json({
+        isDeleted: true,
+        message: null
+      });
+    }
+    throw new Error('Error in deleting Group');
+  } catch (error) {
+    return res.json({
+      isDeleted: false,
+      message: error.message
     });
   }
 }

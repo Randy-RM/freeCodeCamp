@@ -280,6 +280,7 @@ export function postWebhookToken(): Promise<void> {
 }
 
 interface UserGroup {
+  id?: string;
   userGroupName: string;
 }
 
@@ -398,4 +399,35 @@ export function putVerifyCert(certSlug: string): Promise<void> {
 /** DELETE **/
 export function deleteWebhookToken(): Promise<void> {
   return deleteRequest('/user/webhook-token', {});
+}
+
+interface DeletionGroupResponse {
+  isDeleted: boolean;
+  message: string | unknown;
+}
+
+export async function deleteMemberGroup(
+  body: UserGroup
+): Promise<DeletionGroupResponse | undefined> {
+  try {
+    const isMemberGroupDeleted = await deleteRequest<DeletionGroupResponse>(
+      '/user-group/delete',
+      body
+    );
+    if (!isMemberGroupDeleted.isDeleted) {
+      throw new Error('Deletion of the group failed.');
+    }
+    return isMemberGroupDeleted;
+  } catch (error) {
+    if (error instanceof Error) {
+      return {
+        isDeleted: false,
+        message: error.message
+      };
+    }
+    return {
+      isDeleted: false,
+      message: 'Deletion of the group failed.'
+    };
+  }
 }
