@@ -15,6 +15,32 @@
   color: var(--highlight-color);
 }
 
+.action-btn-update {
+  background: rgba(255, 255, 255, 0);
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  color: #198754;
+}
+
+.action-btn-update:hover {
+  background: rgba(255, 255, 255, 0);
+  color: #0c9c71;
+}
+
+.action-btn-delete {
+  background: rgba(255, 255, 255, 0);
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  color: #a8351b;
+}
+
+.action-btn-delete:hover {
+  background: rgba(255, 255, 255, 0);
+  color: rgb(215, 60, 29);
+}
+
 .section-block-padding {
   padding: 20px 15px 2px 15px !important;
 }
@@ -67,4 +93,26 @@
   border: none;
   color: #ffffff;
   background-color: rgb(215, 60, 29);
+}
+
+.btn-green,
+.btn-green:focus {
+  border: none;
+  color: #ffffff;
+  background-color: #198754;
+  transition: all ease-in-out 0.3s;
+}
+
+.btn-green:hover {
+  border: none;
+  color: #ffffff;
+  background-color: #0c9c71;
+}
+
+.text-error {
+  color: #a8351b;
+}
+
+.text-success {
+  color: #198754;
 }

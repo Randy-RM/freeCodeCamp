@@ -279,6 +279,36 @@ export function postWebhookToken(): Promise<void> {
   return post('/user/webhook-token', {});
 }
 
+interface UserGroup {
+  id?: string;
+  userGroupName: string;
+}
+
+interface UserGroupResponse {
+  userGroup: UserGroup | null;
+  error: string | undefined;
+}
+
+export async function createUserGroup(
+  body: UserGroup
+): Promise<UserGroupResponse | void | unknown> {
+  try {
+    const response = await post<UserGroupResponse>('/user-group/create', body);
+
+    if (!response.userGroup) {
+      throw new Error(response.error);
+    }
+    return response;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: unknown | any) {
+    return {
+      userGroup: null,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+      error: error.message
+    };
+  }
+}
+
 /** PUT **/
 
 interface MyAbout {
@@ -366,7 +396,72 @@ export function putVerifyCert(certSlug: string): Promise<void> {
   return put('/certificate/verify', { certSlug });
 }
 
+interface UpdateGroupResponse {
+  isUpdated: boolean;
+  error: string | unknown;
+}
+
+export async function updateMemberGroup(
+  body: UserGroup
+): Promise<UpdateGroupResponse | undefined> {
+  try {
+    const isMemberGroupUpdated = await put<UpdateGroupResponse>(
+      '/user-group/update',
+      body
+    );
+    if (!isMemberGroupUpdated.isUpdated) {
+      if (typeof isMemberGroupUpdated.error === 'string') {
+        throw new Error(isMemberGroupUpdated.error);
+      }
+      throw new Error('Update of the group failed.');
+    }
+    return isMemberGroupUpdated;
+  } catch (error) {
+    if (error instanceof Error) {
+      return {
+        isUpdated: false,
+        error: error.message
+      };
+    }
+    return {
+      isUpdated: false,
+      error: 'Update of the group failed.'
+    };
+  }
+}
+
 /** DELETE **/
 export function deleteWebhookToken(): Promise<void> {
   return deleteRequest('/user/webhook-token', {});
+}
+
+interface DeletionGroupResponse {
+  isDeleted: boolean;
+  message: string | unknown;
+}
+
+export async function deleteMemberGroup(
+  body: UserGroup
+): Promise<DeletionGroupResponse | undefined> {
+  try {
+    const isMemberGroupDeleted = await deleteRequest<DeletionGroupResponse>(
+      '/user-group/delete',
+      body
+    );
+    if (!isMemberGroupDeleted.isDeleted) {
+      throw new Error('Deletion of the group failed.');
+    }
+    return isMemberGroupDeleted;
+  } catch (error) {
+    if (error instanceof Error) {
+      return {
+        isDeleted: false,
+        message: error.message
+      };
+    }
+    return {
+      isDeleted: false,
+      message: 'Deletion of the group failed.'
+    };
+  }
 }
