@@ -23,6 +23,36 @@ export async function insertUserGroup(
   }
 }
 
+export function updateUserGroup(
+  userGroup,
+  UserGroup = loopback.getModelByType('userGroup')
+) {
+  return new Promise((resolve, reject) => {
+    return UserGroup.find(
+      { where: { userGroupName: userGroup.userGroupName } },
+      (error, userGroupFound) => {
+        if (userGroupFound.length != 0) {
+          return reject(
+            new Error('Failed to update, a group already exists with this name')
+          );
+        }
+        return UserGroup.upsertWithWhere(
+          {
+            id: userGroup.id
+          },
+          userGroup,
+          (error, countUserGroupUpdated) => {
+            if (error) {
+              return reject(error || 'Error in Updated Document');
+            }
+            return resolve(countUserGroupUpdated);
+          }
+        );
+      }
+    );
+  });
+}
+
 export function getAllUsersGroup(
   page,
   limit,

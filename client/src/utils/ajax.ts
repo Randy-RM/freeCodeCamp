@@ -396,6 +396,40 @@ export function putVerifyCert(certSlug: string): Promise<void> {
   return put('/certificate/verify', { certSlug });
 }
 
+interface UpdateGroupResponse {
+  isUpdated: boolean;
+  error: string | unknown;
+}
+
+export async function updateMemberGroup(
+  body: UserGroup
+): Promise<UpdateGroupResponse | undefined> {
+  try {
+    const isMemberGroupUpdated = await put<UpdateGroupResponse>(
+      '/user-group/update',
+      body
+    );
+    if (!isMemberGroupUpdated.isUpdated) {
+      if (typeof isMemberGroupUpdated.error === 'string') {
+        throw new Error(isMemberGroupUpdated.error);
+      }
+      throw new Error('Update of the group failed.');
+    }
+    return isMemberGroupUpdated;
+  } catch (error) {
+    if (error instanceof Error) {
+      return {
+        isUpdated: false,
+        error: error.message
+      };
+    }
+    return {
+      isUpdated: false,
+      error: 'Update of the group failed.'
+    };
+  }
+}
+
 /** DELETE **/
 export function deleteWebhookToken(): Promise<void> {
   return deleteRequest('/user/webhook-token', {});

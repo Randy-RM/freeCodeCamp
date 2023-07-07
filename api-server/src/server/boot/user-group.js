@@ -2,6 +2,7 @@ import debug from 'debug';
 import { ifNoUserRedirectHome } from '../utils/middleware';
 import {
   insertUserGroup,
+  updateUserGroup,
   getAllUsersGroup,
   countUsersGroupDocuments,
   deleteUserGroup
@@ -14,8 +15,9 @@ const sendNonUserToHome = ifNoUserRedirectHome();
 function bootUserGroup(app) {
   const api = app.loopback.Router();
 
-  api.get('/all-users-group', sendNonUserToHome, getUserGroupList);
   api.post('/user-group/create', sendNonUserToHome, createOneUserGroup);
+  api.put('/user-group/update', sendNonUserToHome, updateOneUserGroup);
+  api.get('/all-users-group', sendNonUserToHome, getUserGroupList);
   api.delete('/user-group/delete', sendNonUserToHome, removeUserGroup);
 
   app.use(api);
@@ -39,6 +41,30 @@ async function createOneUserGroup(req, res) {
   } catch (error) {
     return res.json({
       newUserGroup: null,
+      error: error.message
+    });
+  }
+}
+
+async function updateOneUserGroup(req, res) {
+  // object req.body is { id: string, userGroupName: string }
+  const { id } = req.body;
+  log(req.body);
+  try {
+    if (!id || id.length == 0) {
+      throw new Error('Please select a group');
+    }
+    const userGroupUpdated = await updateUserGroup(req.body);
+    if (userGroupUpdated) {
+      return res.json({
+        isUpdated: true,
+        error: null
+      });
+    }
+    throw new Error('Error in updating Group');
+  } catch (error) {
+    return res.json({
+      isUpdated: false,
       error: error.message
     });
   }

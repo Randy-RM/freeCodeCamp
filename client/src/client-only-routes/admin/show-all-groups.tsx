@@ -20,6 +20,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {
   createUserGroup,
+  updateMemberGroup,
   getDatabaseResource,
   deleteMemberGroup
 } from '../../utils/ajax';
@@ -86,6 +87,7 @@ interface UserGroupResponse {
 export function ShowAllGroups(props: ShowAllGroupsProps): JSX.Element {
   const { isSignedIn, user, navigate, showLoading } = props;
   const [groupName, setGroupName] = useState<string>('');
+  const [groupId, setGroupId] = useState<string>('');
   const [membersGroup, setMembersGroup] = useState<MemberGroup[]>();
   const [totalPages, setTotalPages] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -95,8 +97,9 @@ export function ShowAllGroups(props: ShowAllGroupsProps): JSX.Element {
   const [memberGroupNameToSearch, setMemberGroupNameToSearch] =
     useState<string>('');
   const [groupRecentlyTreated, setGroupRecentlyTreated] = useState<string>('');
-  const [errorOnUpdateGroupList, setErrorOnUpdateGroupList] =
-    useState<string>('');
+  const [inputHelpBlock, setInputHelpBlock] =
+    useState<{ isError: boolean; message: string }>();
+  const [isUpdateAction, setIsUpdateAction] = useState<boolean>(false);
 
   const getMembersGroup = async () => {
     const groupList = await getDatabaseResource<MemberGroupList>(
@@ -140,7 +143,7 @@ export function ShowAllGroups(props: ShowAllGroupsProps): JSX.Element {
     setGroupName(currentGroupName);
   };
 
-  const handleSubmit = async (event: React.FormEvent): Promise<void> => {
+  const handleCreateGroupe = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
     if (groupName.length != 0) {
       const groupToCreate = groupName;
@@ -151,15 +154,82 @@ export function ShowAllGroups(props: ShowAllGroupsProps): JSX.Element {
         setGroupRecentlyTreated(response.userGroup.id);
         setCurrentPage(1);
         setGroupName('');
-        setErrorOnUpdateGroupList('');
+        setInputHelpBlock({
+          isError: false,
+          message: 'Group successfully create'
+        });
+        setTimeout(() => {
+          setInputHelpBlock({
+            isError: false,
+            message: ''
+          });
+        }, 3000);
       } else {
-        setErrorOnUpdateGroupList(
-          typeof response.error === 'string' ? response.error : ''
-        );
+        setInputHelpBlock({
+          isError: true,
+          message: typeof response.error === 'string' ? response.error : ''
+        });
+        setTimeout(() => {
+          setInputHelpBlock({
+            isError: true,
+            message: ''
+          });
+        }, 3000);
       }
     } else {
-      setErrorOnUpdateGroupList('This field should not be empty.');
+      setInputHelpBlock({
+        isError: true,
+        message: 'This field should not be empty.'
+      });
+      setTimeout(() => {
+        setInputHelpBlock({
+          isError: true,
+          message: ''
+        });
+      }, 3000);
     }
+  };
+
+  const handleUpdateGroupe = async (event: React.FormEvent): Promise<void> => {
+    event.preventDefault();
+    setIsUpdateAction(false);
+    setGroupName('');
+    const response = await updateMemberGroup({
+      id: groupId,
+      userGroupName: groupName
+    });
+    if (response && response.isUpdated) {
+      setGroupRecentlyTreated(groupRecentlyTreated != groupId ? groupId : '');
+      setInputHelpBlock({
+        isError: false,
+        message: 'Update sucessfuly'
+      });
+      setTimeout(() => {
+        setInputHelpBlock({
+          isError: false,
+          message: ''
+        });
+      }, 3000);
+    } else {
+      setGroupRecentlyTreated('');
+      setInputHelpBlock({
+        isError: true,
+        message:
+          response && typeof response.error === 'string' ? response.error : ''
+      });
+      setTimeout(() => {
+        setInputHelpBlock({
+          isError: true,
+          message: ''
+        });
+      }, 3000);
+    }
+  };
+
+  const handleSelectMemberGroupToUpdate = (memberGroup: MemberGroup) => {
+    setGroupId(memberGroup.id);
+    setGroupName(memberGroup.userGroupName);
+    setIsUpdateAction(true);
   };
 
   const handleDeleteMemberGroup = async (memberGroup: MemberGroup) => {
@@ -219,7 +289,7 @@ export function ShowAllGroups(props: ShowAllGroupsProps): JSX.Element {
               <p className=''>Créer un groupe</p>
               <div className=''>
                 <div>
-                  <form onSubmit={handleSubmit}>
+                  <form>
                     <FormGroup controlId='class-room-filter'>
                       <ControlLabel>
                         <strong>{'Nom du group'}</strong>
@@ -233,22 +303,52 @@ export function ShowAllGroups(props: ShowAllGroupsProps): JSX.Element {
                           value={groupName}
                           onChange={handleChangeGroupNameInput}
                         />
-                        {errorOnUpdateGroupList.length == 0 ? (
-                          <HelpBlock className='none-help-block'>
-                            {`none`}
-                          </HelpBlock>
+                        {!inputHelpBlock?.isError ? (
+                          <>
+                            {!inputHelpBlock ||
+                            inputHelpBlock?.message.length == 0 ? (
+                              <HelpBlock className='none-help-block'>
+                                {`none`}
+                              </HelpBlock>
+                            ) : (
+                              <HelpBlock className='text-success'>
+                                {`${inputHelpBlock.message}`}
+                              </HelpBlock>
+                            )}
+                          </>
                         ) : (
-                          <HelpBlock className='text-danger'>
-                            {`${errorOnUpdateGroupList}`}
-                          </HelpBlock>
+                          <>
+                            {!inputHelpBlock ||
+                            inputHelpBlock?.message.length == 0 ? (
+                              <HelpBlock className='none-help-block'>
+                                {`none`}
+                              </HelpBlock>
+                            ) : (
+                              <HelpBlock className='text-error'>
+                                {`${inputHelpBlock?.message}`}
+                              </HelpBlock>
+                            )}
+                          </>
                         )}
                         <Button
                           type='submit'
                           className='standard-radius-5 btn-black'
-                          id='button-addon2'
+                          id='button-create'
+                          onClick={handleCreateGroupe}
                         >
                           Créer un nouveau group
                         </Button>
+                        &nbsp; &nbsp; &nbsp;
+                        {isUpdateAction && (
+                          <Button
+                            type='submit'
+                            className='standard-radius-5 btn-green'
+                            id='button-update'
+                            onClick={handleUpdateGroupe}
+                          >
+                            Mettre à jour le group
+                          </Button>
+                        )}
                       </div>
                     </FormGroup>
                   </form>
@@ -264,6 +364,7 @@ export function ShowAllGroups(props: ShowAllGroupsProps): JSX.Element {
           totalPages={totalPages}
           navigateToPage={navigateToPage}
           deleteMemberGroup={handleDeleteMemberGroup}
+          handleSelectMemberGroupToUpdate={handleSelectMemberGroupToUpdate}
         />
         <Spacer size={1} />
       </div>
@@ -276,6 +377,7 @@ interface TableMembersGroupProps {
   currentPage: number;
   totalPages: number;
   deleteMemberGroup: (memberGroup: MemberGroup) => void;
+  handleSelectMemberGroupToUpdate: (memberGroup: MemberGroup) => void;
   navigateToPage: (forwardOrBackward: boolean) => void;
 }
 
@@ -285,7 +387,8 @@ export function TableMembers(props: TableMembersGroupProps): JSX.Element {
     navigateToPage,
     currentPage,
     totalPages,
-    deleteMemberGroup
+    deleteMemberGroup,
+    handleSelectMemberGroupToUpdate
   } = props;
 
   return (
@@ -310,7 +413,16 @@ export function TableMembers(props: TableMembersGroupProps): JSX.Element {
                         </td>
                         <td style={{ verticalAlign: 'middle' }}>
                           <button
-                            className='action-btn-detail'
+                            className='action-btn-update'
+                            onClick={() => {
+                              handleSelectMemberGroupToUpdate(group);
+                            }}
+                          >
+                            Mettre à jour
+                          </button>
+                          &nbsp; | &nbsp;
+                          <button
+                            className='action-btn-delete'
                             onClick={() => {
                               deleteMemberGroup(group);
                             }}
