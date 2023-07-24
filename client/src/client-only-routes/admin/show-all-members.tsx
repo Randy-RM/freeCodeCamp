@@ -328,6 +328,21 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                     <option value='smd-classe-a-midi'>Smd classe a midi</option>
                   </FormControl>
                   <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+                  {/* <Button
+                    disabled
+                    type='submit'
+                    className='standard-radius-5 btn-black'
+                  >
+                    Ajouter au groupe
+                  </Button>
+                  &nbsp;&nbsp;&nbsp;
+                  <Button
+                    disabled
+                    type='submit'
+                    className='standard-radius-5 btn-red'
+                  >
+                    Retirer du groupe
+                  </Button> */}
                 </FormGroup>
               </form>
             </div>
