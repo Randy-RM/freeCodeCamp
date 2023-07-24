@@ -95,7 +95,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   const getMembers = async () => {
     const memberList = await getDatabaseResource<UserList>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      `/all-users?page=${currentPage}&limit=10&classRoom=${groupMembers}&memberName=${memberNameToSearch}`
+      `/all-users?page=${currentPage}&limit=2&classRoom=${groupMembers}&memberName=${memberNameToSearch}`
     );
     if (memberList != null && !('error' in memberList)) {
       setMembers(memberList.userList);
@@ -233,6 +233,9 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
   } = props;
 
   const [memberName, setMemberName] = useState<string>('');
+  const [selectedGroupMembers, setSelectedGroupMembers] = useState<string[]>(
+    []
+  );
 
   const handleSearchMember = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -250,6 +253,39 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
     const memberNameInputValue = event.target.value;
     setMemberName(memberNameInputValue);
   };
+
+  const handleSelectedGroupMembers = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    const isMemberCheked = selectedGroupMembers.find(
+      selectedGroupMemberId =>
+        selectedGroupMemberId == event.target.value.slice()
+    );
+    if (isMemberCheked) {
+      const selectedGroupMembersFiltered = selectedGroupMembers.filter(
+        selectedGroupMember => {
+          return selectedGroupMember != event.target.value.slice();
+        }
+      );
+      setSelectedGroupMembers([...selectedGroupMembersFiltered]);
+    } else {
+      setSelectedGroupMembers([
+        ...selectedGroupMembers,
+        event.target.value.slice()
+      ]);
+    }
+  };
+
+  const isMemberCheked = (memberId: string): boolean => {
+    const isMemberCheked = selectedGroupMembers.find(
+      selectedGroupMemberId => selectedGroupMemberId == memberId
+    );
+    return isMemberCheked ? true : false;
+  };
+
+  useEffect(() => {
+    return;
+  }, [selectedGroupMembers]);
 
   return (
     <>
@@ -292,6 +328,21 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                     <option value='smd-classe-a-midi'>Smd classe a midi</option>
                   </FormControl>
                   <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+                  {/* <Button
+                    disabled
+                    type='submit'
+                    className='standard-radius-5 btn-black'
+                  >
+                    Ajouter au groupe
+                  </Button>
+                  &nbsp;&nbsp;&nbsp;
+                  <Button
+                    disabled
+                    type='submit'
+                    className='standard-radius-5 btn-red'
+                  >
+                    Retirer du groupe
+                  </Button> */}
                 </FormGroup>
               </form>
             </div>
@@ -342,9 +393,9 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
               <Table responsive hover>
                 <thead className='bg-dark-gray'>
                   <tr>
+                    <th className='text-light'></th>
                     <th className='text-light'>Email</th>
                     <th className='text-light'>Nom</th>
-                    {/* <th className='text-light'>Genre</th> */}
                     <th className='text-light'>
                       Responsive Web Design Progrès
                     </th>
@@ -375,14 +426,24 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                     return (
                       <tr key={index}>
                         <td style={{ verticalAlign: 'middle' }}>
+                          <div className='form-check'>
+                            <input
+                              className='form-check-input'
+                              type='checkbox'
+                              checked={isMemberCheked(member.id)}
+                              value={`${member.id}`}
+                              id={`${index}`}
+                              name={`${index}`}
+                              onChange={handleSelectedGroupMembers}
+                            />
+                          </div>
+                        </td>
+                        <td style={{ verticalAlign: 'middle' }}>
                           {member.email}
                         </td>
                         <td style={{ verticalAlign: 'middle' }}>
                           {member.name}
                         </td>
-                        {/* <td style={{ verticalAlign: 'middle' }}>
-                        {member.gender}
-                      </td> */}
                         <td style={{ verticalAlign: 'middle' }}>
                           {responsiveWebDesignBlock ? (
                             <div
