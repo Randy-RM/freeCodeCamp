@@ -396,6 +396,7 @@
       "foreignKey": "",
       "modal": "donation"
     },
+
     "credentials": {
       "type": "hasMany",
       "model": "userCredential",
