@@ -37,6 +37,8 @@ import {
 
 import { CurrentSuperBlock, User } from '../../redux/prop-types';
 import './admin-global.css';
+import { group } from 'console';
+import { Index } from 'react-instantsearch-dom';
 
 const { apiLocation, homeLocation, moodleApiBaseUrl, moodleApiToken } = envData;
 
@@ -80,6 +82,17 @@ type UserList = {
   currentPage: number;
   countUsers: number;
 };
+type Group={
+  id: String;
+  userGroupName:string;
+}
+type GroupList={
+  [x: string]: any;
+  groupList:Group[]
+  totalPages: number;
+  currentPage: number;
+  countUsers: number;
+}
 
 export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   const { isSignedIn, navigate, showLoading, user } = props;
@@ -91,6 +104,9 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   const [countUsers, setCountUsers] = useState<number>();
   const [memberNameToSearch, setMemberNameToSearch] = useState<string>('');
   const [groupMembers, setGroupMembers] = useState<string>('all');
+  const  [groups ,setGroups]=useState<Group[]>([]);
+  console.log(groups);
+  
 
   const getMembers = async () => {
     const memberList = await getDatabaseResource<UserList>(
@@ -100,6 +116,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     if (memberList != null && !('error' in memberList)) {
       setMembers(memberList.userList);
       setCountUsers(memberList.countUsers);
+      console.log("les membre", memberList)
       if (totalPages == 1) {
         setTotalPages(Number(memberList.totalPages));
         setCurrentPage(Number(memberList.currentPage));
@@ -109,6 +126,16 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
       setCountUsers(0);
     }
   };
+
+  const getAllGroups= async()=>{
+    console.log('avant',groups)
+    const allGroups= await getDatabaseResource<GroupList>(`/all-users-group?page=${currentPage}`)
+    if(allGroups){
+      console.log('les groupes', allGroups.userGroupList)
+      setGroups([...allGroups.userGroupList])
+        console.log('apres', groups)
+    } 
+  }
 
   const showMemberDetails = (member: Member | null) => {
     setSelectedMember(member);
@@ -146,13 +173,16 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   };
 
   useEffect(() => {
-    void getMembers();
+   getAllGroups()
+          void getMembers();
     return () => {
-      setMembers([]); // cleanup useEffect to perform a React state update
+                setMembers([]); // cleanup useEffect to perform a React state update
       // setGroupMembers('all');
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, groupMembers, memberNameToSearch]);
+
+  
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
@@ -189,6 +219,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
         {!selectedMember ? (
           <TableMembers
             members={members}
+            groups={groups}
             countUsers={countUsers}
             currentPage={currentPage}
             totalPages={totalPages}
@@ -209,6 +240,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
 
 interface TableMembersProps {
   members?: Member[];
+  groups?:Group[];
   countUsers?: number;
   currentPage: number;
   totalPages: number;
@@ -223,6 +255,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
   const {
     members,
     countUsers,
+    groups,
     navigateToPage,
     currentPage,
     totalPages,
@@ -319,7 +352,13 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                     value={currentGroupMembers}
                     className='standard-radius-5'
                   >
+                     { groups&& groups.map((group)=>{
+
+                      return(
+                       <option value={group.userGroupName}>{group.userGroupName}</option>)
+                     })}
                     <option value='all'>Tout les membres</option>
+                    
                     <option value='dev-web-c1'>Dev web c1</option>
                     <option value='dev-web-c2'>Dev web c2</option>
                     <option value='smd-classe-a-matin'>
