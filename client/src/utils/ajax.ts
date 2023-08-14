@@ -444,14 +444,14 @@ export async function deleteMemberGroup(
   body: UserGroup
 ): Promise<DeletionGroupResponse | undefined> {
   try {
-    const isMemberGroupDeleted = await deleteRequest<DeletionGroupResponse>(
+    const groupIsAdded = await deleteRequest<DeletionGroupResponse>(
       '/user-group/delete',
       body
     );
-    if (!isMemberGroupDeleted.isDeleted) {
+    if (!groupIsAdded.isDeleted) {
       throw new Error('Deletion of the group failed.');
     }
-    return isMemberGroupDeleted;
+    return groupIsAdded;
   } catch (error) {
     if (error instanceof Error) {
       return {
@@ -462,6 +462,35 @@ export async function deleteMemberGroup(
     return {
       isDeleted: false,
       message: 'Deletion of the group failed.'
+    };
+  }
+}
+interface AddUserInGRoupData {
+  id: string;
+  userGroup: string;
+}
+interface AddUserInGRoupReponse {
+  isAdded: boolean;
+  message: string | unknown;
+}
+
+export async function addUserInGRoup(
+  body: AddUserInGRoupData
+): Promise<AddUserInGRoupReponse | undefined> {
+  try {
+    const groupIsAdded = await put<AddUserInGRoupReponse>(
+      '/user-group/add-user',
+      body
+    );
+
+    console.log('ffg', groupIsAdded);
+    return groupIsAdded;
+  } catch (error) {
+    console.log(error);
+
+    return {
+      isAdded: false,
+      message: 'user is not added in the group'
     };
   }
 }

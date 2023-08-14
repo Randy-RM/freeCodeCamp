@@ -135,8 +135,8 @@
       "default": ""
     },
     "userGroup": {
-      "type": "array",
-      "default": []
+      "type": "string",
+      "default": ""
     },
     "acceptedPrivacyTerms": {
       "type": "boolean",
@@ -395,6 +395,11 @@
       "type": "hasMany",
       "foreignKey": "",
       "modal": "donation"
+    },
+    "userGroup": {
+      "type": "belongsTo",
+      "model": "userGroup",
+      "foreignKey": "userGroup"
     },
 
     "credentials": {

@@ -125,3 +125,26 @@ export function deleteUserGroup(
     });
   });
 }
+export function putUserInGroup(
+  id,
+  userGroup,
+  User = loopback.getModelByType('User')
+) {
+  return new Promise((resolve, reject) => {
+    User.updateAll({ id: id }, { userGroup }, function (err, instance) {
+      if (err) return reject(err);
+      resolve(console.log('Updated', instance, 'instances of', User.name));
+    });
+  });
+}
+
+export function getUserByGroup(filter, User = loopback.getModelByType('User')) {
+  return new Promise((resolve, reject) =>
+    User.find({ where: { userGroup: filter } }, (err, instance) => {
+      if (err || isEmpty(instance)) {
+        return reject(err || 'can not find user in this group');
+      }
+      return resolve(instance);
+    })
+  );
+}

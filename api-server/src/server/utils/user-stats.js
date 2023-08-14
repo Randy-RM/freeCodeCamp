@@ -128,6 +128,7 @@ export function getAllUsers(
 ) {
   return new Promise((resolve, reject) => {
     if (filter) {
+      console.log('fx', filter);
       User.find(
         {
           where: filter,
@@ -178,7 +179,7 @@ export function countUserDocuments(
   });
 }
 
-// export function userDocumentsFiltered(User = loopback.getModelByType('User')) {
+// export function userDocumentsFiltered(User = loopback.getModeb lByType('User')) {
 //   return new Promise((resolve, reject) =>
 //     User.find({ where: { about: 'kadea-dev-web' } }, (err, instance) => {
 //       if (err || isEmpty(instance)) {

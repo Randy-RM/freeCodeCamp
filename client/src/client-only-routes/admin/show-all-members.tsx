@@ -22,7 +22,11 @@ import {
   faSearch,
   faXmark
 } from '@fortawesome/free-solid-svg-icons';
-import { getDatabaseResource, getExternalResource } from '../../utils/ajax';
+import {
+  addUserInGRoup,
+  getDatabaseResource,
+  getExternalResource
+} from '../../utils/ajax';
 import envData from '../../../../config/env.json';
 import { createFlashMessage } from '../../components/Flash/redux';
 import { Loader, Spacer } from '../../components/helpers';
@@ -37,8 +41,6 @@ import {
 
 import { CurrentSuperBlock, User } from '../../redux/prop-types';
 import './admin-global.css';
-import { group } from 'console';
-import { Index } from 'react-instantsearch-dom';
 
 const { apiLocation, homeLocation, moodleApiBaseUrl, moodleApiToken } = envData;
 
@@ -82,17 +84,16 @@ type UserList = {
   currentPage: number;
   countUsers: number;
 };
-type Group={
-  id: String;
-  userGroupName:string;
-}
-type GroupList={
-  [x: string]: any;
-  groupList:Group[]
+type Group = {
+  id: string;
+  userGroupName: string;
+};
+type GroupList = {
+  userGroupList: Group[];
   totalPages: number;
   currentPage: number;
   countUsers: number;
-}
+};
 
 export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   const { isSignedIn, navigate, showLoading, user } = props;
@@ -104,9 +105,14 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   const [countUsers, setCountUsers] = useState<number>();
   const [memberNameToSearch, setMemberNameToSearch] = useState<string>('');
   const [groupMembers, setGroupMembers] = useState<string>('all');
-  const  [groups ,setGroups]=useState<Group[]>([]);
+  const [groups, setGroups] = useState<Group[]>([]);
+
   console.log(groups);
-  
+
+  // const data={
+  //   id:"64d39b958b1fd17adc0e8f28",
+  //   userGroup:"C3"
+  // }
 
   const getMembers = async () => {
     const memberList = await getDatabaseResource<UserList>(
@@ -116,7 +122,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     if (memberList != null && !('error' in memberList)) {
       setMembers(memberList.userList);
       setCountUsers(memberList.countUsers);
-      console.log("les membre", memberList)
+      console.log('les membre', memberList);
       if (totalPages == 1) {
         setTotalPages(Number(memberList.totalPages));
         setCurrentPage(Number(memberList.currentPage));
@@ -127,15 +133,16 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     }
   };
 
-  const getAllGroups= async()=>{
-    console.log('avant',groups)
-    const allGroups= await getDatabaseResource<GroupList>(`/all-users-group?page=${currentPage}`)
-    if(allGroups){
-      console.log('les groupes', allGroups.userGroupList)
-      setGroups([...allGroups.userGroupList])
-        console.log('apres', groups)
-    } 
-  }
+  const getAllGroups = async () => {
+    console.log('avant', groups);
+    const allGroups = await getDatabaseResource<GroupList>(
+      `/all-users-group?page=${currentPage}`
+    );
+    if (allGroups) {
+      console.log('les groupes', allGroups.userGroupList);
+      setGroups([...allGroups.userGroupList]);
+    }
+  };
 
   const showMemberDetails = (member: Member | null) => {
     setSelectedMember(member);
@@ -171,18 +178,47 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     const memberName = memberNameInput;
     setMemberNameToSearch(memberName);
   };
+  // const handleChangeGroupName = (
+  //   event: React.ChangeEvent<HTMLInputElement>
+  // ): void => {
+  //   event.preventDefault();
+  //   const groupMembersInput = event.target.value.slice();
+  //   setSelectedGroupName(groupMembersInput);
+
+  // };
+
+  const addUser = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    groupName: string,
+    userId: string[]
+  ) => {
+    event.preventDefault();
+    const data = {
+      id: '',
+      userGroup: groupName
+    };
+    console.log('daata', userId);
+
+    console.log('ok');
+
+    if (userId.length !== 0) {
+      userId.map(id => {
+        data.id = id;
+        void addUserInGRoup(data);
+      });
+    }
+  };
 
   useEffect(() => {
-   getAllGroups()
-          void getMembers();
+    void getAllGroups();
+
+    void getMembers();
     return () => {
-                setMembers([]); // cleanup useEffect to perform a React state update
+      setMembers([]); // cleanup useEffect to perform a React state update
       // setGroupMembers('all');
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, groupMembers, memberNameToSearch]);
-
-  
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
@@ -227,6 +263,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
             showMemberDetails={showMemberDetails}
             handleChangeGroup={handleChangeGroupMembers}
             searchMember={searchMember}
+            addUsers={addUser}
             currentGroupMembers={groupMembers}
           />
         ) : (
@@ -240,7 +277,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
 
 interface TableMembersProps {
   members?: Member[];
-  groups?:Group[];
+  groups?: Group[];
   countUsers?: number;
   currentPage: number;
   totalPages: number;
@@ -248,7 +285,13 @@ interface TableMembersProps {
   showMemberDetails: (member: Member) => void;
   navigateToPage: (forwardOrBackward: boolean) => void;
   handleChangeGroup: (event: React.ChangeEvent<HTMLInputElement>) => void;
+
   searchMember: (memberName: string) => void;
+  addUsers: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    groupName: string,
+    userId: string[]
+  ) => void;
 }
 
 export function TableMembers(props: TableMembersProps): JSX.Element {
@@ -262,13 +305,15 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
     currentGroupMembers,
     showMemberDetails,
     handleChangeGroup,
-    searchMember
+    searchMember,
+    addUsers
   } = props;
 
   const [memberName, setMemberName] = useState<string>('');
   const [selectedGroupMembers, setSelectedGroupMembers] = useState<string[]>(
     []
   );
+  const [selectedGroupName, setSelectedGroupName] = useState<string>('');
 
   const handleSearchMember = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -287,6 +332,13 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
     setMemberName(memberNameInputValue);
   };
 
+  const handleChangeGroupName = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    event.preventDefault();
+    const groupMembersInput = event.target.value.slice();
+    setSelectedGroupName(groupMembersInput);
+  };
   const handleSelectedGroupMembers = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
@@ -307,6 +359,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
         event.target.value.slice()
       ]);
     }
+    console.log('membres ', selectedGroupMembers);
   };
 
   const isMemberCheked = (memberId: string): boolean => {
@@ -352,13 +405,19 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                     value={currentGroupMembers}
                     className='standard-radius-5'
                   >
-                     { groups&& groups.map((group)=>{
-
-                      return(
-                       <option value={group.userGroupName}>{group.userGroupName}</option>)
-                     })}
+                    {' '}
                     <option value='all'>Tout les membres</option>
-                    
+                    {groups &&
+                      groups.map(group => {
+                        return (
+                          <option
+                            key={group.userGroupName}
+                            value={group.userGroupName}
+                          >
+                            {group.userGroupName}
+                          </option>
+                        );
+                      })}
                     <option value='dev-web-c1'>Dev web c1</option>
                     <option value='dev-web-c2'>Dev web c2</option>
                     <option value='smd-classe-a-matin'>
@@ -367,10 +426,31 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                     <option value='smd-classe-a-midi'>Smd classe a midi</option>
                   </FormControl>
                   <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
-                  {/* <Button
-                    disabled
+                  <FormControl
+                    componentClass='select'
+                    className='standard-radius-5'
+                    onChange={handleChangeGroupName}
+                  >
+                    <option value=''>Selecltionnez un groupe</option>
+
+                    {groups &&
+                      groups.map(group => {
+                        return (
+                          <option
+                            key={group.userGroupName}
+                            value={group.userGroupName}
+                          >
+                            {group.userGroupName}
+                          </option>
+                        );
+                      })}
+                  </FormControl>
+                  <Button
                     type='submit'
                     className='standard-radius-5 btn-black'
+                    onClick={(event: React.ChangeEvent<HTMLInputElement>) =>
+                      addUsers(event, selectedGroupName, selectedGroupMembers)
+                    }
                   >
                     Ajouter au groupe
                   </Button>
@@ -381,7 +461,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                     className='standard-radius-5 btn-red'
                   >
                     Retirer du groupe
-                  </Button> */}
+                  </Button>
                 </FormGroup>
               </form>
             </div>
