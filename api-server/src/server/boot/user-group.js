@@ -74,7 +74,7 @@ async function updateOneUserGroup(req, res) {
 
 async function getUserGroupList(req, res) {
   // destructure page and limit and set default values
-  const { page = 1, limit = 2, classRoom = null } = req.query;
+  const { page, limit, classRoom } = req.query;
   try {
     let userGroupList = [];
     let usersGroupCount = [];
