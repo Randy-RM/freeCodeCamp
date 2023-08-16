@@ -427,25 +427,35 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                   </FormControl>
                   <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
                   <div className='add-group-section'>
-                    <FormControl
-                      componentClass='select'
-                      className='standard-radius-5'
-                      onChange={handleChangeGroupName}
-                    >
-                      <option value=''>Selecltionnez un groupe</option>
+                    {selectedGroupMembers.length == 0 ? (
+                      <FormControl
+                        componentClass='select'
+                        className='standard-radius-5'
+                        disabled
+                      >
+                        <option value=''>Selecltionnez un groupe</option>
+                      </FormControl>
+                    ) : (
+                      <FormControl
+                        componentClass='select'
+                        className='standard-radius-5'
+                        onChange={handleChangeGroupName}
+                      >
+                        <option value=''>Selecltionnez un groupe</option>
 
-                      {groups &&
-                        groups.map(group => {
-                          return (
-                            <option
-                              key={group.userGroupName}
-                              value={group.userGroupName}
-                            >
-                              {group.userGroupName}
-                            </option>
-                          );
-                        })}
-                    </FormControl>
+                        {groups &&
+                          groups.map(group => {
+                            return (
+                              <option
+                                key={group.userGroupName}
+                                value={group.userGroupName}
+                              >
+                                {group.userGroupName}
+                              </option>
+                            );
+                          })}
+                      </FormControl>
+                    )}
 
                     <div className='btn-group'>
                       {selectedGroupMembers.length == 0 ||
