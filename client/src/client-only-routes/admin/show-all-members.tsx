@@ -431,7 +431,6 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                       componentClass='select'
                       className='standard-radius-5'
                       onChange={handleChangeGroupName}
-                      disabled
                     >
                       <option value=''>Selecltionnez un groupe</option>
 
