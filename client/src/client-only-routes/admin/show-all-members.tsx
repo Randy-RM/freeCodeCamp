@@ -426,42 +426,75 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                     <option value='smd-classe-a-midi'>Smd classe a midi</option>
                   </FormControl>
                   <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
-                  <FormControl
-                    componentClass='select'
-                    className='standard-radius-5'
-                    onChange={handleChangeGroupName}
-                  >
-                    <option value=''>Selecltionnez un groupe</option>
+                  <div className='add-group-section'>
+                    <FormControl
+                      componentClass='select'
+                      className='standard-radius-5'
+                      onChange={handleChangeGroupName}
+                      disabled
+                    >
+                      <option value=''>Selecltionnez un groupe</option>
 
-                    {groups &&
-                      groups.map(group => {
-                        return (
-                          <option
-                            key={group.userGroupName}
-                            value={group.userGroupName}
-                          >
-                            {group.userGroupName}
-                          </option>
-                        );
-                      })}
-                  </FormControl>
-                  <Button
-                    type='submit'
-                    className='standard-radius-5 btn-black'
-                    onClick={(event: React.ChangeEvent<HTMLInputElement>) =>
-                      addUsers(event, selectedGroupName, selectedGroupMembers)
-                    }
-                  >
-                    Ajouter au groupe
-                  </Button>
-                  &nbsp;&nbsp;&nbsp;
-                  <Button
-                    disabled
-                    type='submit'
-                    className='standard-radius-5 btn-red'
-                  >
-                    Retirer du groupe
-                  </Button>
+                      {groups &&
+                        groups.map(group => {
+                          return (
+                            <option
+                              key={group.userGroupName}
+                              value={group.userGroupName}
+                            >
+                              {group.userGroupName}
+                            </option>
+                          );
+                        })}
+                    </FormControl>
+
+                    <div className='btn-group'>
+                      {selectedGroupMembers.length == 0 ||
+                      selectedGroupName == '' ? (
+                        <Button
+                          disabled
+                          type='submit'
+                          className='standard-radius-5 btn-black'
+                          onClick={(
+                            event: React.ChangeEvent<HTMLInputElement>
+                          ) =>
+                            addUsers(
+                              event,
+                              selectedGroupName,
+                              selectedGroupMembers
+                            )
+                          }
+                        >
+                          {' '}
+                          Ajouter au groupe
+                        </Button>
+                      ) : (
+                        <Button
+                          type='submit'
+                          className='standard-radius-5 btn-black'
+                          onClick={(
+                            event: React.ChangeEvent<HTMLInputElement>
+                          ) =>
+                            addUsers(
+                              event,
+                              selectedGroupName,
+                              selectedGroupMembers
+                            )
+                          }
+                        >
+                          Ajouter au groupe
+                        </Button>
+                      )}
+                      &nbsp;&nbsp;&nbsp;
+                      <Button
+                        disabled
+                        type='submit'
+                        className='standard-radius-5 btn-red'
+                      >
+                        Retirer du groupe
+                      </Button>
+                    </div>
+                  </div>
                 </FormGroup>
               </form>
             </div>
