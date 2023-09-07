@@ -466,7 +466,7 @@ export async function deleteMemberGroup(
   }
 }
 interface AddUserInGRoupData {
-  id: string;
+  ids: string[];
   userGroup: string;
 }
 interface AddUserInGRoupReponse {

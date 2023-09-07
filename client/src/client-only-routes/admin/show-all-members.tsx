@@ -194,7 +194,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   ) => {
     event.preventDefault();
     const data = {
-      id: '',
+      ids: userId,
       userGroup: groupName
     };
     console.log('daata', userId);
@@ -202,10 +202,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     console.log('ok');
 
     if (userId.length !== 0) {
-      userId.map(id => {
-        data.id = id;
-        void addUserInGRoup(data);
-      });
+      void addUserInGRoup(data);
     }
   };
 
@@ -359,7 +356,6 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
         event.target.value.slice()
       ]);
     }
-    console.log('membres ', selectedGroupMembers);
   };
 
   const isMemberCheked = (memberId: string): boolean => {

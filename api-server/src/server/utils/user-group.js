@@ -126,14 +126,16 @@ export function deleteUserGroup(
   });
 }
 export function putUserInGroup(
-  id,
+  ids,
   userGroup,
   User = loopback.getModelByType('User')
 ) {
   return new Promise((resolve, reject) => {
-    User.updateAll({ id: id }, { userGroup }, function (err, instance) {
-      if (err) return reject(err);
-      resolve(console.log('Updated', instance, 'instances of', User.name));
+    ids.map(id => {
+      User.updateAll({ id: id }, { userGroup }, function (err, instance) {
+        if (err) return reject(err);
+        resolve(console.log('Updated', instance, 'instances of', User.name));
+      });
     });
   });
 }
