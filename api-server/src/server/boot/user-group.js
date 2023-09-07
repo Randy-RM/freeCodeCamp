@@ -6,7 +6,8 @@ import {
   getAllUsersGroup,
   countUsersGroupDocuments,
   deleteUserGroup,
-  putUserInGroup
+  putUserInGroup,
+  deleteUserInGroup
 } from '../utils/user-group';
 
 const log = debug('fcc:boot:user-group');
@@ -21,6 +22,7 @@ function bootUserGroup(app) {
   api.get('/all-users-group', sendNonUserToHome, getUserGroupList);
   api.delete('/user-group/delete', sendNonUserToHome, removeUserGroup);
   api.put('/user-group/add-user', sendNonUserToHome, addUserIngroup);
+  api.put('user-group/remove-user', sendNonUserToHome, removeUserINGroup);
 
   app.use(api);
 }
@@ -151,7 +153,28 @@ async function addUserIngroup(req, res) {
     }
   } catch (error) {
     return res.json({
-      isDeleted: false,
+      isAdded: false,
+      message: error.message
+    });
+  }
+}
+
+async function removeUserINGroup(req, res) {
+  const ids = req.body.id;
+  try {
+    if (!ids || ids.length == 0) {
+      throw new Error('Please select user');
+    }
+    const userGroupRemoved = await deleteUserInGroup(ids);
+    if (userGroupRemoved) {
+      res.json({
+        isRemoved: true,
+        message: null
+      });
+    }
+  } catch (error) {
+    return res.json({
+      isRemoved: false,
       message: error.message
     });
   }

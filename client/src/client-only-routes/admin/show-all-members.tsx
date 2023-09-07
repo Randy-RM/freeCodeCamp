@@ -106,8 +106,8 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   const [memberNameToSearch, setMemberNameToSearch] = useState<string>('');
   const [groupMembers, setGroupMembers] = useState<string>('all');
   const [groups, setGroups] = useState<Group[]>([]);
-
-  console.log(groups);
+  // const [updating, setupdating] =
+  //   useState<{ isError: boolean; message: string }>();
 
   // const data={
   //   id:"64d39b958b1fd17adc0e8f28",
