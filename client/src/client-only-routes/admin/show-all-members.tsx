@@ -25,7 +25,8 @@ import {
 import {
   addUserInGRoup,
   getDatabaseResource,
-  getExternalResource
+  getExternalResource,
+  remoevUserInGRoup
 } from '../../utils/ajax';
 import envData from '../../../../config/env.json';
 import { createFlashMessage } from '../../components/Flash/redux';
@@ -201,9 +202,19 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
 
     console.log('ok');
 
-    if (userId.length !== 0) {
-      void addUserInGRoup(data);
-    }
+    if (userId.length !== 0) void addUserInGRoup(data);
+  };
+
+  const removeUser = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    userIds: string[]
+  ) => {
+    event.preventDefault();
+    const data = {
+      ids: userIds
+    };
+
+    if (userIds.length !== 0) void remoevUserInGRoup(data);
   };
 
   useEffect(() => {
@@ -261,6 +272,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
             handleChangeGroup={handleChangeGroupMembers}
             searchMember={searchMember}
             addUsers={addUser}
+            removeUsers={removeUser}
             currentGroupMembers={groupMembers}
           />
         ) : (
@@ -289,6 +301,10 @@ interface TableMembersProps {
     groupName: string,
     userId: string[]
   ) => void;
+  removeUsers: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    userIds: string[]
+  ) => void;
 }
 
 export function TableMembers(props: TableMembersProps): JSX.Element {
@@ -303,7 +319,8 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
     showMemberDetails,
     handleChangeGroup,
     searchMember,
-    addUsers
+    addUsers,
+    removeUsers
   } = props;
 
   const [memberName, setMemberName] = useState<string>('');
@@ -460,15 +477,6 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                           disabled
                           type='submit'
                           className='standard-radius-5 btn-black'
-                          onClick={(
-                            event: React.ChangeEvent<HTMLInputElement>
-                          ) =>
-                            addUsers(
-                              event,
-                              selectedGroupName,
-                              selectedGroupMembers
-                            )
-                          }
                         >
                           {' '}
                           Ajouter au groupe
@@ -491,13 +499,26 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                         </Button>
                       )}
                       &nbsp;&nbsp;&nbsp;
-                      <Button
-                        disabled
-                        type='submit'
-                        className='standard-radius-5 btn-red'
-                      >
-                        Retirer du groupe
-                      </Button>
+                      {selectedGroupMembers.length == 0 ||
+                      selectedGroupName !== '' ? (
+                        <Button
+                          disabled
+                          type='submit'
+                          className='standard-radius-5 btn-red'
+                        >
+                          Retirer du groupe
+                        </Button>
+                      ) : (
+                        <Button
+                          type='submit'
+                          className='standard-radius-5 btn-red'
+                          onClick={(
+                            event: React.ChangeEvent<HTMLInputElement>
+                          ) => removeUsers(event, selectedGroupMembers)}
+                        >
+                          Retirer du groupe
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </FormGroup>

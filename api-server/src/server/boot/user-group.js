@@ -22,7 +22,7 @@ function bootUserGroup(app) {
   api.get('/all-users-group', sendNonUserToHome, getUserGroupList);
   api.delete('/user-group/delete', sendNonUserToHome, removeUserGroup);
   api.put('/user-group/add-user', sendNonUserToHome, addUserIngroup);
-  api.put('user-group/remove-user', sendNonUserToHome, removeUserINGroup);
+  api.put('/user-group/remove-user', sendNonUserToHome, removeUserINGroup);
 
   app.use(api);
 }
@@ -160,7 +160,7 @@ async function addUserIngroup(req, res) {
 }
 
 async function removeUserINGroup(req, res) {
-  const ids = req.body.id;
+  const ids = req.body.ids;
   try {
     if (!ids || ids.length == 0) {
       throw new Error('Please select user');

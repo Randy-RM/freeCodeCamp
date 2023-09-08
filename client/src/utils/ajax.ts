@@ -494,3 +494,31 @@ export async function addUserInGRoup(
     };
   }
 }
+
+interface RemoveUserInGRoupData {
+  ids: string[];
+}
+interface RemoveUserInGRoupReponse {
+  isRemoved: boolean;
+  message: string | unknown;
+}
+export async function remoevUserInGRoup(
+  body: RemoveUserInGRoupData
+): Promise<RemoveUserInGRoupReponse | undefined> {
+  try {
+    const groupIsAdded = await put<RemoveUserInGRoupReponse>(
+      '/user-group/remove-user',
+      body
+    );
+
+    console.log('ffg', groupIsAdded);
+    return groupIsAdded;
+  } catch (error) {
+    console.log(error);
+
+    return {
+      isRemoved: false,
+      message: 'user is not added in the group'
+    };
+  }
+}
