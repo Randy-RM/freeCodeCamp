@@ -22,7 +22,12 @@ import {
   faSearch,
   faXmark
 } from '@fortawesome/free-solid-svg-icons';
-import { getDatabaseResource, getExternalResource } from '../../utils/ajax';
+import {
+  addUserInGRoup,
+  getDatabaseResource,
+  getExternalResource,
+  remoevUserInGRoup
+} from '../../utils/ajax';
 import envData from '../../../../config/env.json';
 import { createFlashMessage } from '../../components/Flash/redux';
 import { Loader, Spacer } from '../../components/helpers';
@@ -80,6 +85,16 @@ type UserList = {
   currentPage: number;
   countUsers: number;
 };
+type Group = {
+  id: string;
+  userGroupName: string;
+};
+type GroupList = {
+  userGroupList: Group[];
+  totalPages: number;
+  currentPage: number;
+  countUsers: number;
+};
 
 export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   const { isSignedIn, navigate, showLoading, user } = props;
@@ -91,6 +106,14 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   const [countUsers, setCountUsers] = useState<number>();
   const [memberNameToSearch, setMemberNameToSearch] = useState<string>('');
   const [groupMembers, setGroupMembers] = useState<string>('all');
+  const [groups, setGroups] = useState<Group[]>([]);
+  // const [updating, setupdating] =
+  //   useState<{ isError: boolean; message: string }>();
+
+  // const data={
+  //   id:"64d39b958b1fd17adc0e8f28",
+  //   userGroup:"C3"
+  // }
 
   const getMembers = async () => {
     const memberList = await getDatabaseResource<UserList>(
@@ -100,6 +123,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     if (memberList != null && !('error' in memberList)) {
       setMembers(memberList.userList);
       setCountUsers(memberList.countUsers);
+
       if (totalPages == 1) {
         setTotalPages(Number(memberList.totalPages));
         setCurrentPage(Number(memberList.currentPage));
@@ -107,6 +131,15 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     } else {
       setMembers([]);
       setCountUsers(0);
+    }
+  };
+
+  const getAllGroups = async () => {
+    const allGroups = await getDatabaseResource<GroupList>(
+      `/all-users-group?page=${currentPage}`
+    );
+    if (allGroups) {
+      setGroups([...allGroups.userGroupList]);
     }
   };
 
@@ -144,8 +177,44 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     const memberName = memberNameInput;
     setMemberNameToSearch(memberName);
   };
+  // const handleChangeGroupName = (
+  //   event: React.ChangeEvent<HTMLInputElement>
+  // ): void => {
+  //   event.preventDefault();
+  //   const groupMembersInput = event.target.value.slice();
+  //   setSelectedGroupName(groupMembersInput);
+
+  // };
+
+  const addUser = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    groupName: string,
+    userId: string[]
+  ) => {
+    event.preventDefault();
+    const data = {
+      ids: userId,
+      userGroup: groupName
+    };
+
+    if (userId.length !== 0) void addUserInGRoup(data);
+  };
+
+  const removeUser = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    userIds: string[]
+  ) => {
+    event.preventDefault();
+    const data = {
+      ids: userIds
+    };
+
+    if (userIds.length !== 0) void remoevUserInGRoup(data);
+  };
 
   useEffect(() => {
+    void getAllGroups();
+
     void getMembers();
     return () => {
       setMembers([]); // cleanup useEffect to perform a React state update
@@ -189,6 +258,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
         {!selectedMember ? (
           <TableMembers
             members={members}
+            groups={groups}
             countUsers={countUsers}
             currentPage={currentPage}
             totalPages={totalPages}
@@ -196,6 +266,8 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
             showMemberDetails={showMemberDetails}
             handleChangeGroup={handleChangeGroupMembers}
             searchMember={searchMember}
+            addUsers={addUser}
+            removeUsers={removeUser}
             currentGroupMembers={groupMembers}
           />
         ) : (
@@ -209,6 +281,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
 
 interface TableMembersProps {
   members?: Member[];
+  groups?: Group[];
   countUsers?: number;
   currentPage: number;
   totalPages: number;
@@ -216,26 +289,40 @@ interface TableMembersProps {
   showMemberDetails: (member: Member) => void;
   navigateToPage: (forwardOrBackward: boolean) => void;
   handleChangeGroup: (event: React.ChangeEvent<HTMLInputElement>) => void;
+
   searchMember: (memberName: string) => void;
+  addUsers: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    groupName: string,
+    userId: string[]
+  ) => void;
+  removeUsers: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    userIds: string[]
+  ) => void;
 }
 
 export function TableMembers(props: TableMembersProps): JSX.Element {
   const {
     members,
     countUsers,
+    groups,
     navigateToPage,
     currentPage,
     totalPages,
     currentGroupMembers,
     showMemberDetails,
     handleChangeGroup,
-    searchMember
+    searchMember,
+    addUsers,
+    removeUsers
   } = props;
 
   const [memberName, setMemberName] = useState<string>('');
   const [selectedGroupMembers, setSelectedGroupMembers] = useState<string[]>(
     []
   );
+  const [selectedGroupName, setSelectedGroupName] = useState<string>('');
 
   const handleSearchMember = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -254,6 +341,13 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
     setMemberName(memberNameInputValue);
   };
 
+  const handleChangeGroupName = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    event.preventDefault();
+    const groupMembersInput = event.target.value.slice();
+    setSelectedGroupName(groupMembersInput);
+  };
   const handleSelectedGroupMembers = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
@@ -319,7 +413,19 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                     value={currentGroupMembers}
                     className='standard-radius-5'
                   >
+                    {' '}
                     <option value='all'>Tout les membres</option>
+                    {groups &&
+                      groups.map(group => {
+                        return (
+                          <option
+                            key={group.userGroupName}
+                            value={group.userGroupName}
+                          >
+                            {group.userGroupName}
+                          </option>
+                        );
+                      })}
                     <option value='dev-web-c1'>Dev web c1</option>
                     <option value='dev-web-c2'>Dev web c2</option>
                     <option value='smd-classe-a-matin'>
@@ -328,21 +434,88 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                     <option value='smd-classe-a-midi'>Smd classe a midi</option>
                   </FormControl>
                   <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
-                  {/* <Button
-                    disabled
-                    type='submit'
-                    className='standard-radius-5 btn-black'
-                  >
-                    Ajouter au groupe
-                  </Button>
-                  &nbsp;&nbsp;&nbsp;
-                  <Button
-                    disabled
-                    type='submit'
-                    className='standard-radius-5 btn-red'
-                  >
-                    Retirer du groupe
-                  </Button> */}
+                  <div className='add-group-section'>
+                    {selectedGroupMembers.length == 0 ? (
+                      <FormControl
+                        componentClass='select'
+                        className='standard-radius-5'
+                        disabled
+                      >
+                        <option value=''>Selecltionnez un groupe</option>
+                      </FormControl>
+                    ) : (
+                      <FormControl
+                        componentClass='select'
+                        className='standard-radius-5'
+                        onChange={handleChangeGroupName}
+                      >
+                        <option value=''>Selecltionnez un groupe</option>
+
+                        {groups &&
+                          groups.map(group => {
+                            return (
+                              <option
+                                key={group.userGroupName}
+                                value={group.userGroupName}
+                              >
+                                {group.userGroupName}
+                              </option>
+                            );
+                          })}
+                      </FormControl>
+                    )}
+
+                    <div className='btn-group'>
+                      {selectedGroupMembers.length == 0 ||
+                      selectedGroupName == '' ? (
+                        <Button
+                          disabled
+                          type='submit'
+                          className='standard-radius-5 btn-black'
+                        >
+                          {' '}
+                          Ajouter au groupe
+                        </Button>
+                      ) : (
+                        <Button
+                          type='submit'
+                          className='standard-radius-5 btn-black'
+                          onClick={(
+                            event: React.ChangeEvent<HTMLInputElement>
+                          ) =>
+                            addUsers(
+                              event,
+                              selectedGroupName,
+                              selectedGroupMembers
+                            )
+                          }
+                        >
+                          Ajouter au groupe
+                        </Button>
+                      )}
+                      &nbsp;&nbsp;&nbsp;
+                      {selectedGroupMembers.length == 0 ||
+                      selectedGroupName !== '' ? (
+                        <Button
+                          disabled
+                          type='submit'
+                          className='standard-radius-5 btn-red'
+                        >
+                          Retirer du groupe
+                        </Button>
+                      ) : (
+                        <Button
+                          type='submit'
+                          className='standard-radius-5 btn-red'
+                          onClick={(
+                            event: React.ChangeEvent<HTMLInputElement>
+                          ) => removeUsers(event, selectedGroupMembers)}
+                        >
+                          Retirer du groupe
+                        </Button>
+                      )}
+                    </div>
+                  </div>
                 </FormGroup>
               </form>
             </div>
