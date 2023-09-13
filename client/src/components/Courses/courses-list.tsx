@@ -3,7 +3,7 @@ import './courses-card.css';
 import CourseCard from '../CourseCard/course-card';
 import LaptopIcon from '../../assets/images/laptop.svg';
 import AlgoIcon from '../../assets/images/algorithmIcon.svg';
-import LaediesActIcon from '../../assets/images/partners/ladies-act-logo.png';
+import LaediesActIcon from '../../assets/images/partners/we-act-logo.png';
 import { Spacer } from '../helpers';
 interface CoursesListProps {
   isSignedIn?: boolean;

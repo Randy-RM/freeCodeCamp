@@ -16,7 +16,7 @@ import LaptopIcon from '../assets/images/laptop.svg';
 import AlgoIcon from '../assets/images/algorithmIcon.svg';
 import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
 
-import LaediesActIcon from '../assets/images/partners/ladies-act-logo.png';
+import LaediesActIcon from '../assets/images/partners/we-act-logo.png';
 import { createFlashMessage } from '../components/Flash/redux';
 import {
   Loader,
