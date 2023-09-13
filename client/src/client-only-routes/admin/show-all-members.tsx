@@ -123,7 +123,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     if (memberList != null && !('error' in memberList)) {
       setMembers(memberList.userList);
       setCountUsers(memberList.countUsers);
-      console.log('les membre', memberList);
+
       if (totalPages == 1) {
         setTotalPages(Number(memberList.totalPages));
         setCurrentPage(Number(memberList.currentPage));
@@ -135,12 +135,10 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   };
 
   const getAllGroups = async () => {
-    console.log('avant', groups);
     const allGroups = await getDatabaseResource<GroupList>(
       `/all-users-group?page=${currentPage}`
     );
     if (allGroups) {
-      console.log('les groupes', allGroups.userGroupList);
       setGroups([...allGroups.userGroupList]);
     }
   };
@@ -198,9 +196,6 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
       ids: userId,
       userGroup: groupName
     };
-    console.log('daata', userId);
-
-    console.log('ok');
 
     if (userId.length !== 0) void addUserInGRoup(data);
   };

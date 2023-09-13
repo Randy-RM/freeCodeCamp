@@ -135,7 +135,6 @@ async function removeUserGroup(req, res) {
 async function addUserIngroup(req, res) {
   const id = req.body.ids;
   const group = req.body.userGroup;
-  console.log('req', req.body, group);
   try {
     if (!group) {
       throw new Error('Please select group');
