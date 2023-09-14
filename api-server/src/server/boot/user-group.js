@@ -8,6 +8,8 @@ import {
   deleteUserGroup,
   putUserInGroup,
   deleteUserInGroup
+
+ 
 } from '../utils/user-group';
 
 const log = debug('fcc:boot:user-group');
@@ -21,8 +23,10 @@ function bootUserGroup(app) {
   api.put('/user-group/update', sendNonUserToHome, updateOneUserGroup);
   api.get('/all-users-group', sendNonUserToHome, getUserGroupList);
   api.delete('/user-group/delete', sendNonUserToHome, removeUserGroup);
+
   api.put('/user-group/add-user', sendNonUserToHome, addUserIngroup);
   api.put('/user-group/remove-user', sendNonUserToHome, removeUserINGroup);
+
 
   app.use(api);
 }
@@ -76,7 +80,10 @@ async function updateOneUserGroup(req, res) {
 
 async function getUserGroupList(req, res) {
   // destructure page and limit and set default values
+
   const { page, limit, classRoom } = req.query;
+
+
   try {
     let userGroupList = [];
     let usersGroupCount = [];
@@ -132,6 +139,7 @@ async function removeUserGroup(req, res) {
   }
 }
 
+
 async function addUserIngroup(req, res) {
   const id = req.body.ids;
   const group = req.body.userGroup;
@@ -178,5 +186,6 @@ async function removeUserINGroup(req, res) {
     });
   }
 }
+
 
 export default bootUserGroup;

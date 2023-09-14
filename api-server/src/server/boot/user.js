@@ -182,13 +182,15 @@ async function getUserList(req, res) {
   try {
     let userList = [];
     let usersCount = [];
+
     const filter = { userGroup: classRoom };
     if (classRoom && classRoom != 'all') {
       console.log('class', classRoom, 'filtre', filter);
       // // filter.about = new RegExp(`${classRoom}`, 'i');
       // // if (memberName) {
       // //   filter.name = new RegExp(`${memberName}`, 'i');
-      // }
+    
+   
       userList = await getAllUsers(page, limit, filter);
       usersCount = await countUserDocuments(filter);
     } else if (classRoom == 'all' && memberName) {

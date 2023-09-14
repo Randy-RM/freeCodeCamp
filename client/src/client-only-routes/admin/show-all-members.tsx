@@ -322,7 +322,9 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
   const [selectedGroupMembers, setSelectedGroupMembers] = useState<string[]>(
     []
   );
+
   const [selectedGroupName, setSelectedGroupName] = useState<string>('');
+
 
   const handleSearchMember = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -339,6 +341,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
   ) => {
     const memberNameInputValue = event.target.value;
     setMemberName(memberNameInputValue);
+
   };
 
   const handleChangeGroupName = (
@@ -369,6 +372,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
       ]);
     }
   };
+
 
   const isMemberCheked = (memberId: string): boolean => {
     const isMemberCheked = selectedGroupMembers.find(
@@ -434,6 +438,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                     <option value='smd-classe-a-midi'>Smd classe a midi</option>
                   </FormControl>
                   <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+
                   <div className='add-group-section'>
                     {selectedGroupMembers.length == 0 ? (
                       <FormControl
@@ -516,6 +521,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                       )}
                     </div>
                   </div>
+
                 </FormGroup>
               </form>
             </div>
