@@ -5,7 +5,11 @@ import {
   updateUserGroup,
   getAllUsersGroup,
   countUsersGroupDocuments,
-  deleteUserGroup
+  deleteUserGroup,
+  putUserInGroup,
+  deleteUserInGroup
+
+ 
 } from '../utils/user-group';
 
 const log = debug('fcc:boot:user-group');
@@ -19,6 +23,10 @@ function bootUserGroup(app) {
   api.put('/user-group/update', sendNonUserToHome, updateOneUserGroup);
   api.get('/all-users-group', sendNonUserToHome, getUserGroupList);
   api.delete('/user-group/delete', sendNonUserToHome, removeUserGroup);
+
+  api.put('/user-group/add-user', sendNonUserToHome, addUserIngroup);
+  api.put('/user-group/remove-user', sendNonUserToHome, removeUserINGroup);
+
 
   app.use(api);
 }
@@ -72,7 +80,10 @@ async function updateOneUserGroup(req, res) {
 
 async function getUserGroupList(req, res) {
   // destructure page and limit and set default values
-  const { page = 1, limit = 2, classRoom = null } = req.query;
+
+  const { page, limit, classRoom } = req.query;
+
+
   try {
     let userGroupList = [];
     let usersGroupCount = [];
@@ -102,6 +113,7 @@ async function getUserGroupList(req, res) {
 async function removeUserGroup(req, res) {
   const { id } = req.body;
   log(req.body);
+
   try {
     if (!id || id.length == 0) {
       throw new Error('Please select a group');
@@ -126,5 +138,54 @@ async function removeUserGroup(req, res) {
     });
   }
 }
+
+
+async function addUserIngroup(req, res) {
+  const id = req.body.ids;
+  const group = req.body.userGroup;
+  try {
+    if (!group) {
+      throw new Error('Please select group');
+    }
+    if (id.length == 0) {
+      throw new Error('Please select user');
+    }
+
+    const userGroupAdded = await putUserInGroup(id, group);
+    if (userGroupAdded) {
+      return res.json({
+        isAdded: true,
+        message: null
+      });
+    }
+  } catch (error) {
+    return res.json({
+      isAdded: false,
+      message: error.message
+    });
+  }
+}
+
+async function removeUserINGroup(req, res) {
+  const ids = req.body.ids;
+  try {
+    if (!ids || ids.length == 0) {
+      throw new Error('Please select user');
+    }
+    const userGroupRemoved = await deleteUserInGroup(ids);
+    if (userGroupRemoved) {
+      res.json({
+        isRemoved: true,
+        message: null
+      });
+    }
+  } catch (error) {
+    return res.json({
+      isRemoved: false,
+      message: error.message
+    });
+  }
+}
+
 
 export default bootUserGroup;

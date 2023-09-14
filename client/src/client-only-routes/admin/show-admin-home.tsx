@@ -55,14 +55,14 @@ export function ShowAdminHome(props: ShowAdminHomeProps): JSX.Element {
     return <Loader fullScreen={true} />;
   }
 
-  if (!isSignedIn) {
+  if (isSignedIn) {
     navigate(`${apiLocation}/signin`);
     return <Loader fullScreen={true} />;
   }
 
   if (
     !user.email.endsWith('@kinshasadigital.com') ||
-    !user.email.endsWith('@kadea.co')
+    !user.email.endsWith('@kadea.co') 
   ) {
     navigate(`${homeLocation}`);
     return <Loader fullScreen={true} />;

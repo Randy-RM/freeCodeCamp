@@ -444,14 +444,16 @@ export async function deleteMemberGroup(
   body: UserGroup
 ): Promise<DeletionGroupResponse | undefined> {
   try {
-    const isMemberGroupDeleted = await deleteRequest<DeletionGroupResponse>(
+
+    const groupIsAdded = await deleteRequest<DeletionGroupResponse>(
       '/user-group/delete',
       body
     );
-    if (!isMemberGroupDeleted.isDeleted) {
+    if (!groupIsAdded.isDeleted) {
       throw new Error('Deletion of the group failed.');
     }
-    return isMemberGroupDeleted;
+    return groupIsAdded;
+
   } catch (error) {
     if (error instanceof Error) {
       return {
@@ -465,3 +467,62 @@ export async function deleteMemberGroup(
     };
   }
 }
+
+interface AddUserInGRoupData {
+  ids: string[];
+  userGroup: string;
+}
+interface AddUserInGRoupReponse {
+  isAdded: boolean;
+  message: string | unknown;
+}
+
+export async function addUserInGRoup(
+  body: AddUserInGRoupData
+): Promise<AddUserInGRoupReponse | undefined> {
+  try {
+    const groupIsAdded = await put<AddUserInGRoupReponse>(
+      '/user-group/add-user',
+      body
+    );
+
+    console.log('ffg', groupIsAdded);
+    return groupIsAdded;
+  } catch (error) {
+    console.log(error);
+
+    return {
+      isAdded: false,
+      message: 'user is not added in the group'
+    };
+  }
+}
+
+interface RemoveUserInGRoupData {
+  ids: string[];
+}
+interface RemoveUserInGRoupReponse {
+  isRemoved: boolean;
+  message: string | unknown;
+}
+export async function remoevUserInGRoup(
+  body: RemoveUserInGRoupData
+): Promise<RemoveUserInGRoupReponse | undefined> {
+  try {
+    const groupIsAdded = await put<RemoveUserInGRoupReponse>(
+      '/user-group/remove-user',
+      body
+    );
+
+    console.log('ffg', groupIsAdded);
+    return groupIsAdded;
+  } catch (error) {
+    console.log(error);
+
+    return {
+      isRemoved: false,
+      message: 'user is not added in the group'
+    };
+  }
+}
+
