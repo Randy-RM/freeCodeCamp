@@ -117,10 +117,8 @@
   color: #198754;
 }
 
-
 .btn-group {
   display: flex;
-  justify-content: space-between;
 }
 .add-group-section {
   display: flex;
@@ -128,4 +126,3 @@
   gap: 1rem;
   justify-content: space-between;
 }
-

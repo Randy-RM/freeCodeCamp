@@ -480,7 +480,8 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
 
                     <div className='btn-group'>
                       {selectedGroupMembers.length == 0 ||
-                      selectedGroupName == '' ? (
+                      selectedGroupName == '' ||
+                      currentGroupMembers == selectedGroupName ? (
                         <Button
                           disabled
                           type='submit'
@@ -509,7 +510,8 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                       &nbsp;&nbsp;&nbsp;
                       {selectedGroupMembers.length == 0 ||
                       selectedGroupName !== '' ||
-                      groups.length <= 1 ? (
+                      groups.length <= 1 ||
+                      currentGroupMembers == 'all' ? (
                         <Button
                           disabled
                           type='submit'
