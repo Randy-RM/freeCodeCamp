@@ -138,8 +138,13 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     const allGroups = await getDatabaseResource<GroupList>(
       `/all-users-group?page=${currentPage}`
     );
-    if (allGroups) {
-      setGroups([...allGroups.userGroupList]);
+    if (allGroups?.userGroupList != null) {
+      setGroups([
+        { id: '0', userGroupName: 'all' },
+        ...allGroups.userGroupList
+      ]);
+    } else {
+      setGroups([{ id: '0', userGroupName: 'all' }]);
     }
   };
 
@@ -281,7 +286,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
 
 interface TableMembersProps {
   members?: Member[];
-  groups?: Group[];
+  groups: Group[];
   countUsers?: number;
   currentPage: number;
   totalPages: number;
@@ -325,7 +330,6 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
 
   const [selectedGroupName, setSelectedGroupName] = useState<string>('');
 
-
   const handleSearchMember = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     searchMember(memberName);
@@ -341,7 +345,6 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
   ) => {
     const memberNameInputValue = event.target.value;
     setMemberName(memberNameInputValue);
-
   };
 
   const handleChangeGroupName = (
@@ -372,7 +375,6 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
       ]);
     }
   };
-
 
   const isMemberCheked = (memberId: string): boolean => {
     const isMemberCheked = selectedGroupMembers.find(
@@ -418,24 +420,26 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                     className='standard-radius-5'
                   >
                     {' '}
-                    <option value='all'>Tout les membres</option>
-                    {groups &&
+                    {/* <option value='all'>Tout les membres</option> */}
+                    {groups.length !== 0 &&
                       groups.map(group => {
                         return (
                           <option
                             key={group.userGroupName}
                             value={group.userGroupName}
                           >
-                            {group.userGroupName}
+                            {group.userGroupName == 'all'
+                              ? 'Tout les membres'
+                              : group.userGroupName}
                           </option>
                         );
                       })}
-                    <option value='dev-web-c1'>Dev web c1</option>
+                    {/* <option value='dev-web-c1'>Dev web c1</option>
                     <option value='dev-web-c2'>Dev web c2</option>
                     <option value='smd-classe-a-matin'>
                       Smd classe a matin
                     </option>
-                    <option value='smd-classe-a-midi'>Smd classe a midi</option>
+                    <option value='smd-classe-a-midi'>Smd classe a midi</option> */}
                   </FormControl>
                   <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
 
@@ -456,15 +460,19 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                       >
                         <option value=''>Selecltionnez un groupe</option>
 
-                        {groups &&
+                        {groups.length !== 0 &&
                           groups.map(group => {
                             return (
-                              <option
-                                key={group.userGroupName}
-                                value={group.userGroupName}
-                              >
-                                {group.userGroupName}
-                              </option>
+                              <>
+                                {group.userGroupName !== 'all' && (
+                                  <option
+                                    key={group.userGroupName}
+                                    value={group.userGroupName}
+                                  >
+                                    {group.userGroupName}
+                                  </option>
+                                )}
+                              </>
                             );
                           })}
                       </FormControl>
@@ -500,7 +508,8 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                       )}
                       &nbsp;&nbsp;&nbsp;
                       {selectedGroupMembers.length == 0 ||
-                      selectedGroupName !== '' ? (
+                      selectedGroupName !== '' ||
+                      groups.length <= 1 ? (
                         <Button
                           disabled
                           type='submit'
@@ -521,7 +530,6 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                       )}
                     </div>
                   </div>
-
                 </FormGroup>
               </form>
             </div>
