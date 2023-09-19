@@ -153,7 +153,7 @@ async function addUserIngroup(req, res) {
     if (userGroupAdded) {
       return res.json({
         isAdded: true,
-        message: 'User is added in group'
+        message: `User is added in group ${group}`
       });
     }
   } catch (error) {

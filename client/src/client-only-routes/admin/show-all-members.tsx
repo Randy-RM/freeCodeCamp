@@ -565,6 +565,35 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                       )}
                     </div>
                   </div>
+                  {updatingMembersGroup?.isAddedStatus ? (
+                    <>
+                      {' '}
+                      {!updatingMembersGroup ||
+                      updatingMembersGroup.message.length == 0 ? (
+                        <HelpBlock className='none-help-block'>
+                          {`none`}
+                        </HelpBlock>
+                      ) : (
+                        <HelpBlock className='text-success'>
+                          {`${updatingMembersGroup.message}`}
+                        </HelpBlock>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {' '}
+                      {!updatingMembersGroup ||
+                      updatingMembersGroup.message.length == 0 ? (
+                        <HelpBlock className='none-help-block'>
+                          {`none`}
+                        </HelpBlock>
+                      ) : (
+                        <HelpBlock className='text-error'>
+                          {`${updatingMembersGroup.message}`}
+                        </HelpBlock>
+                      )}
+                    </>
+                  )}
                 </FormGroup>
               </form>
             </div>
