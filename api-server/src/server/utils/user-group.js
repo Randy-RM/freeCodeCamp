@@ -72,7 +72,7 @@ export function getAllUsersGroup(
           if (err || isEmpty(instance)) {
             return reject(err || 'No users group found');
           }
-          return resolve(instance);
+          resolve(console.log(instance));
         }
       );
     } else {
@@ -140,11 +140,7 @@ export function putUserInGroup(
   });
 }
 
-export function deleteUserInGroup(
-  ids,
-
-  User = loopback.getModelByType('User')
-) {
+export function deleteUserInGroup(ids, User = loopback.getModelByType('User')) {
   return new Promise((resolve, reject) => {
     ids.map(id => {
       User.updateAll({ id: id }, { userGroup: '' }, function (err, instance) {

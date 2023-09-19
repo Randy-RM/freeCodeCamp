@@ -444,7 +444,6 @@ export async function deleteMemberGroup(
   body: UserGroup
 ): Promise<DeletionGroupResponse | undefined> {
   try {
-
     const groupIsAdded = await deleteRequest<DeletionGroupResponse>(
       '/user-group/delete',
       body
@@ -453,7 +452,6 @@ export async function deleteMemberGroup(
       throw new Error('Deletion of the group failed.');
     }
     return groupIsAdded;
-
   } catch (error) {
     if (error instanceof Error) {
       return {
@@ -474,7 +472,7 @@ interface AddUserInGRoupData {
 }
 interface AddUserInGRoupReponse {
   isAdded: boolean;
-  message: string | unknown;
+  message: string;
 }
 
 export async function addUserInGRoup(
@@ -503,7 +501,7 @@ interface RemoveUserInGRoupData {
 }
 interface RemoveUserInGRoupReponse {
   isRemoved: boolean;
-  message: string | unknown;
+  message: string;
 }
 export async function remoevUserInGRoup(
   body: RemoveUserInGRoupData
@@ -525,4 +523,3 @@ export async function remoevUserInGRoup(
     };
   }
 }
-

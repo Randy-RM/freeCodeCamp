@@ -8,8 +8,6 @@ import {
   deleteUserGroup,
   putUserInGroup,
   deleteUserInGroup
-
- 
 } from '../utils/user-group';
 
 const log = debug('fcc:boot:user-group');
@@ -26,7 +24,6 @@ function bootUserGroup(app) {
 
   api.put('/user-group/add-user', sendNonUserToHome, addUserIngroup);
   api.put('/user-group/remove-user', sendNonUserToHome, removeUserINGroup);
-
 
   app.use(api);
 }
@@ -83,7 +80,6 @@ async function getUserGroupList(req, res) {
 
   const { page, limit, classRoom } = req.query;
 
-
   try {
     let userGroupList = [];
     let usersGroupCount = [];
@@ -105,7 +101,10 @@ async function getUserGroupList(req, res) {
     });
   } catch (error) {
     return res.json({
-      error: error
+      userGroupList: null,
+      totalPages: null,
+      currentPage: null,
+      countUsersGroup: null
     });
   }
 }
@@ -139,7 +138,6 @@ async function removeUserGroup(req, res) {
   }
 }
 
-
 async function addUserIngroup(req, res) {
   const id = req.body.ids;
   const group = req.body.userGroup;
@@ -155,13 +153,13 @@ async function addUserIngroup(req, res) {
     if (userGroupAdded) {
       return res.json({
         isAdded: true,
-        message: null
+        message: `User is added in group ${group}`
       });
     }
   } catch (error) {
     return res.json({
       isAdded: false,
-      message: error.message
+      message: 'User is not added in group'
     });
   }
 }
@@ -176,16 +174,15 @@ async function removeUserINGroup(req, res) {
     if (userGroupRemoved) {
       res.json({
         isRemoved: true,
-        message: null
+        message: 'User is removed in group'
       });
     }
   } catch (error) {
     return res.json({
       isRemoved: false,
-      message: error.message
+      message: 'User is not removed in group'
     });
   }
 }
-
 
 export default bootUserGroup;
