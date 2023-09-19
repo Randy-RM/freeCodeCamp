@@ -153,13 +153,13 @@ async function addUserIngroup(req, res) {
     if (userGroupAdded) {
       return res.json({
         isAdded: true,
-        message: null
+        message: 'User is added in group'
       });
     }
   } catch (error) {
     return res.json({
       isAdded: false,
-      message: error.message
+      message: 'User is not added in group'
     });
   }
 }
@@ -174,13 +174,13 @@ async function removeUserINGroup(req, res) {
     if (userGroupRemoved) {
       res.json({
         isRemoved: true,
-        message: null
+        message: 'User is removed in group'
       });
     }
   } catch (error) {
     return res.json({
       isRemoved: false,
-      message: error.message
+      message: 'User is not removed in group'
     });
   }
 }

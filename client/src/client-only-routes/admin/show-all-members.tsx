@@ -202,7 +202,16 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
       userGroup: groupName
     };
 
-    if (userId.length !== 0) void addUserInGRoup(data);
+    if (userId.length !== 0) {
+      let res;
+      void (async () => {
+        res = await addUserInGRoup(data);
+
+        if (res && res.isAdded) {
+          console.log(res, 'jsj');
+        }
+      })();
+    }
   };
 
   const removeUser = (
