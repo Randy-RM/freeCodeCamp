@@ -301,6 +301,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
             addUsers={addUser}
             removeUsers={removeUser}
             currentGroupMembers={groupMembers}
+            updatingMembersGroup={updating}
           />
         ) : (
           <DetailMember member={selectedMember} returnToTable={returnToTable} />
@@ -332,6 +333,7 @@ interface TableMembersProps {
     event: React.ChangeEvent<HTMLInputElement>,
     userIds: string[]
   ) => void;
+  updatingMembersGroup?: { isAddedStatus: boolean; message: string };
 }
 
 export function TableMembers(props: TableMembersProps): JSX.Element {
@@ -347,7 +349,8 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
     handleChangeGroup,
     searchMember,
     addUsers,
-    removeUsers
+    removeUsers,
+    updatingMembersGroup
   } = props;
 
   const [memberName, setMemberName] = useState<string>('');
@@ -414,6 +417,9 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
     return;
   }, [selectedGroupMembers]);
 
+  useEffect(() => {
+    setSelectedGroupMembers([]);
+  }, [currentGroupMembers, updatingMembersGroup]);
   return (
     <>
       <Row>
