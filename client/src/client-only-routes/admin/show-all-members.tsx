@@ -218,6 +218,12 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
             isAddedStatus: res.isAdded,
             message: res.message
           });
+          setTimeout(() => {
+            setupdating({
+              isAddedStatus: false,
+              message: ''
+            });
+          }, 5000);
         }
       })();
     }
@@ -243,6 +249,12 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
           isAddedStatus: res.isRemoved,
           message: res.message
         });
+        setTimeout(() => {
+          setupdating({
+            isAddedStatus: false,
+            message: ''
+          });
+        }, 5000);
       }
     })();
   };
@@ -746,9 +758,14 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                             </div>
                           )}
                         </td>
-                        <td style={{ verticalAlign: 'middle' }}>
-                          {member.userGroup}
-                        </td>
+                        {member.userGroup ? (
+                          <td style={{ verticalAlign: 'middle' }}>
+                            {member.userGroup}
+                          </td>
+                        ) : (
+                          <td style={{ verticalAlign: 'middle' }}>{'Aucun'}</td>
+                        )}
+
                         <td style={{ verticalAlign: 'middle' }}>
                           <button
                             className='action-btn-detail'
@@ -779,7 +796,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                   <tr>
                     <td></td>
                     <td></td>
-                    <td></td>
+                    <td>{"Pas d'utilisateurs"}</td>
                     <td></td>
                   </tr>
                 </tbody>
