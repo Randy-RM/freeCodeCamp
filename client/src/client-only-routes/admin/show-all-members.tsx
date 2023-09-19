@@ -488,7 +488,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                           className='standard-radius-5 btn-black'
                         >
                           {' '}
-                          Ajouter au groupe
+                          Ajouter
                         </Button>
                       ) : (
                         <Button
@@ -504,7 +504,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                             )
                           }
                         >
-                          Ajouter au groupe
+                          Ajouter
                         </Button>
                       )}
                       &nbsp;&nbsp;&nbsp;
@@ -517,7 +517,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                           type='submit'
                           className='standard-radius-5 btn-red'
                         >
-                          Retirer du groupe
+                          Retirer
                         </Button>
                       ) : (
                         <Button
@@ -527,7 +527,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                             event: React.ChangeEvent<HTMLInputElement>
                           ) => removeUsers(event, selectedGroupMembers)}
                         >
-                          Retirer du groupe
+                          Retirer
                         </Button>
                       )}
                     </div>

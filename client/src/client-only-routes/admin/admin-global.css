@@ -122,7 +122,7 @@
 }
 .add-group-section {
   display: flex;
-  flex-direction: column;
+
   gap: 1rem;
   justify-content: space-between;
 }
