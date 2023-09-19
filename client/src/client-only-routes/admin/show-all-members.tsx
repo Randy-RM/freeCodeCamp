@@ -107,8 +107,8 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   const [memberNameToSearch, setMemberNameToSearch] = useState<string>('');
   const [groupMembers, setGroupMembers] = useState<string>('all');
   const [groups, setGroups] = useState<Group[]>([]);
-  // const [updating, setupdating] =
-  //   useState<{ isError: boolean; message: string }>();
+  const [updating, setupdating] =
+    useState<{ isAddedStatus: boolean; message: string }>();
 
   // const data={
   //   id:"64d39b958b1fd17adc0e8f28",
@@ -209,6 +209,11 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
 
         if (res && res.isAdded) {
           console.log(res, 'jsj');
+
+          setupdating({
+            isAddedStatus: res.isAdded,
+            message: res.message
+          });
         }
       })();
     }
@@ -223,7 +228,19 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
       ids: userIds
     };
 
-    if (userIds.length !== 0) void remoevUserInGRoup(data);
+    let res;
+    void (async () => {
+      res = await remoevUserInGRoup(data);
+
+      if (res && res.isRemoved) {
+        console.log(res, 'jsj');
+
+        setupdating({
+          isAddedStatus: res.isRemoved,
+          message: res.message
+        });
+      }
+    })();
   };
 
   useEffect(() => {
@@ -235,7 +252,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
       // setGroupMembers('all');
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, groupMembers, memberNameToSearch]);
+  }, [currentPage, groupMembers, memberNameToSearch, updating]);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
