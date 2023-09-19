@@ -211,7 +211,6 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
         res = await addUserInGRoup(data);
 
         if (res && res.isAdded) {
-          console.log(res, 'jsj');
           setCountMemberGroupUpdate(countMemberGroupUpdate + 1);
 
           setupdating({
@@ -241,10 +240,9 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     let res;
     void (async () => {
       res = await remoevUserInGRoup(data);
+      setCountMemberGroupUpdate(countMemberGroupUpdate + 1);
 
       if (res && res.isRemoved) {
-        console.log(res, 'jsj');
-
         setupdating({
           isAddedStatus: res.isRemoved,
           message: res.message
