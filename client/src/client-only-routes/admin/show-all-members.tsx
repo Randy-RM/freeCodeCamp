@@ -77,6 +77,7 @@ type Member = {
   name: string;
   gender: string;
   currentsSuperBlock: CurrentSuperBlock[];
+  userGroup: string;
 };
 
 type UserList = {
@@ -614,6 +615,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                     <th className='text-light'>
                       Responsive Web Design Progrès
                     </th>
+                    <th className='text-light'>Groupe</th>
                     <th className='text-light'>Actions</th>
                   </tr>
                 </thead>
@@ -705,6 +707,9 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                               </div>
                             </div>
                           )}
+                        </td>
+                        <td style={{ verticalAlign: 'middle' }}>
+                          {member.userGroup}
                         </td>
                         <td style={{ verticalAlign: 'middle' }}>
                           <button
