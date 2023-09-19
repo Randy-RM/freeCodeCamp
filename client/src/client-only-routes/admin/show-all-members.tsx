@@ -110,6 +110,8 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   const [groups, setGroups] = useState<Group[]>([]);
   const [updating, setupdating] =
     useState<{ isAddedStatus: boolean; message: string }>();
+  const [countMemberGroupUpdate, setCountMemberGroupUpdate] =
+    useState<number>(1);
 
   // const data={
   //   id:"64d39b958b1fd17adc0e8f28",
@@ -210,6 +212,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
 
         if (res && res.isAdded) {
           console.log(res, 'jsj');
+          setCountMemberGroupUpdate(countMemberGroupUpdate + 1);
 
           setupdating({
             isAddedStatus: res.isAdded,
@@ -253,7 +256,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
       // setGroupMembers('all');
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, groupMembers, memberNameToSearch, updating]);
+  }, [currentPage, groupMembers, memberNameToSearch, countMemberGroupUpdate]);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
