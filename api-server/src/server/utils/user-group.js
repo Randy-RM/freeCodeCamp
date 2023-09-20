@@ -25,9 +25,11 @@ export async function insertUserGroup(
 
 export function updateUserGroup(
   userGroup,
-  UserGroup = loopback.getModelByType('userGroup')
+  UserGroup = loopback.getModelByType('userGroup'),
+  User = loopback.getModelByType('User')
 ) {
   return new Promise((resolve, reject) => {
+    console.log(userGroup, 'les goup avant');
     return UserGroup.find(
       { where: { userGroupName: userGroup.userGroupName } },
       (error, userGroupFound) => {
@@ -44,6 +46,24 @@ export function updateUserGroup(
           (error, countUserGroupUpdated) => {
             if (error) {
               return reject(error || 'Error in Updated Document');
+            }
+            if (countUserGroupUpdated) {
+              UserGroup.find(
+                { where: { id: userGroup.id } },
+                function (err, userGroupFound) {
+                  if (err) return reject(err);
+                  if (userGroupFound) {
+                    User.updateAll(
+                      { userGroup: userGroupFound.userGroupName },
+                      { userGroup: userGroup.userGroupName },
+                      function (err, instance) {
+                        if (err) return reject(err);
+                        return resolve(instance);
+                      }
+                    );
+                  }
+                }
+              );
             }
             return resolve(countUserGroupUpdated);
           }
