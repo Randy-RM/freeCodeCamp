@@ -25,9 +25,11 @@ export async function insertUserGroup(
 
 export function updateUserGroup(
   userGroup,
-  UserGroup = loopback.getModelByType('userGroup')
+  UserGroup = loopback.getModelByType('userGroup'),
+  User = loopback.getModelByType('User')
 ) {
   return new Promise((resolve, reject) => {
+    console.log(userGroup, 'les goup avant');
     return UserGroup.find(
       { where: { userGroupName: userGroup.userGroupName } },
       (error, userGroupFound) => {
@@ -44,6 +46,24 @@ export function updateUserGroup(
           (error, countUserGroupUpdated) => {
             if (error) {
               return reject(error || 'Error in Updated Document');
+            }
+            if (countUserGroupUpdated) {
+              UserGroup.find(
+                { where: { id: userGroup.id } },
+                function (err, userGroupFound) {
+                  if (err) return reject(err);
+                  if (userGroupFound) {
+                    User.updateAll(
+                      { userGroup: userGroupFound.userGroupName },
+                      { userGroup: userGroup.userGroupName },
+                      function (err, instance) {
+                        if (err) return reject(err);
+                        return resolve(instance);
+                      }
+                    );
+                  }
+                }
+              );
             }
             return resolve(countUserGroupUpdated);
           }
@@ -114,12 +134,31 @@ export function countUsersGroupDocuments(
 
 export function deleteUserGroup(
   userGroupId,
-  UserGroup = loopback.getModelByType('userGroup')
+  UserGroup = loopback.getModelByType('userGroup'),
+  User = loopback.getModelByType('User')
 ) {
   return new Promise((resolve, reject) => {
     UserGroup.destroyById(userGroupId, (error, countUserGroupDeleted) => {
       if (error /* || isEmpty(count)*/) {
         return reject(error || 'Error in deleting Documents');
+      }
+      if (countUserGroupDeleted) {
+        UserGroup.find(
+          { where: { id: userGroupId } },
+          function (err, userGroupFound) {
+            if (err) return reject(err);
+            if (userGroupFound) {
+              User.updateAll(
+                { userGroup: userGroupFound.userGroupName },
+                { userGroup: '' },
+                function (err, instance) {
+                  if (err) return reject(err);
+                  return resolve(instance);
+                }
+              );
+            }
+          }
+        );
       }
       return resolve(countUserGroupDeleted);
     });
