@@ -134,12 +134,31 @@ export function countUsersGroupDocuments(
 
 export function deleteUserGroup(
   userGroupId,
-  UserGroup = loopback.getModelByType('userGroup')
+  UserGroup = loopback.getModelByType('userGroup'),
+  User = loopback.getModelByType('User')
 ) {
   return new Promise((resolve, reject) => {
     UserGroup.destroyById(userGroupId, (error, countUserGroupDeleted) => {
       if (error /* || isEmpty(count)*/) {
         return reject(error || 'Error in deleting Documents');
+      }
+      if (countUserGroupDeleted) {
+        UserGroup.find(
+          { where: { id: userGroupId } },
+          function (err, userGroupFound) {
+            if (err) return reject(err);
+            if (userGroupFound) {
+              User.updateAll(
+                { userGroup: userGroupFound.userGroupName },
+                { userGroup: '' },
+                function (err, instance) {
+                  if (err) return reject(err);
+                  return resolve(instance);
+                }
+              );
+            }
+          }
+        );
       }
       return resolve(countUserGroupDeleted);
     });
