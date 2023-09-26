@@ -77,6 +77,7 @@ type Member = {
   name: string;
   gender: string;
   currentsSuperBlock: CurrentSuperBlock[];
+  userGroup: string;
 };
 
 type UserList = {
@@ -107,8 +108,10 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   const [memberNameToSearch, setMemberNameToSearch] = useState<string>('');
   const [groupMembers, setGroupMembers] = useState<string>('all');
   const [groups, setGroups] = useState<Group[]>([]);
-  // const [updating, setupdating] =
-  //   useState<{ isError: boolean; message: string }>();
+  const [updating, setupdating] =
+    useState<{ isAddedStatus: boolean; message: string }>();
+  const [countMemberGroupUpdate, setCountMemberGroupUpdate] =
+    useState<number>(1);
 
   // const data={
   //   id:"64d39b958b1fd17adc0e8f28",
@@ -138,8 +141,13 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     const allGroups = await getDatabaseResource<GroupList>(
       `/all-users-group?page=${currentPage}`
     );
-    if (allGroups) {
-      setGroups([...allGroups.userGroupList]);
+    if (allGroups?.userGroupList != null) {
+      setGroups([
+        { id: '0', userGroupName: 'all' },
+        ...allGroups.userGroupList
+      ]);
+    } else {
+      setGroups([{ id: '0', userGroupName: 'all' }]);
     }
   };
 
@@ -197,7 +205,27 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
       userGroup: groupName
     };
 
-    if (userId.length !== 0) void addUserInGRoup(data);
+    if (userId.length !== 0) {
+      let res;
+      void (async () => {
+        res = await addUserInGRoup(data);
+
+        if (res && res.isAdded) {
+          setCountMemberGroupUpdate(countMemberGroupUpdate + 1);
+
+          setupdating({
+            isAddedStatus: res.isAdded,
+            message: res.message
+          });
+          setTimeout(() => {
+            setupdating({
+              isAddedStatus: false,
+              message: ''
+            });
+          }, 5000);
+        }
+      })();
+    }
   };
 
   const removeUser = (
@@ -209,7 +237,24 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
       ids: userIds
     };
 
-    if (userIds.length !== 0) void remoevUserInGRoup(data);
+    let res;
+    void (async () => {
+      res = await remoevUserInGRoup(data);
+      setCountMemberGroupUpdate(countMemberGroupUpdate + 1);
+
+      if (res && res.isRemoved) {
+        setupdating({
+          isAddedStatus: res.isRemoved,
+          message: res.message
+        });
+        setTimeout(() => {
+          setupdating({
+            isAddedStatus: false,
+            message: ''
+          });
+        }, 5000);
+      }
+    })();
   };
 
   useEffect(() => {
@@ -221,7 +266,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
       // setGroupMembers('all');
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, groupMembers, memberNameToSearch]);
+  }, [currentPage, groupMembers, memberNameToSearch, countMemberGroupUpdate]);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
@@ -269,6 +314,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
             addUsers={addUser}
             removeUsers={removeUser}
             currentGroupMembers={groupMembers}
+            updatingMembersGroup={updating}
           />
         ) : (
           <DetailMember member={selectedMember} returnToTable={returnToTable} />
@@ -281,7 +327,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
 
 interface TableMembersProps {
   members?: Member[];
-  groups?: Group[];
+  groups: Group[];
   countUsers?: number;
   currentPage: number;
   totalPages: number;
@@ -300,6 +346,7 @@ interface TableMembersProps {
     event: React.ChangeEvent<HTMLInputElement>,
     userIds: string[]
   ) => void;
+  updatingMembersGroup?: { isAddedStatus: boolean; message: string };
 }
 
 export function TableMembers(props: TableMembersProps): JSX.Element {
@@ -315,7 +362,8 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
     handleChangeGroup,
     searchMember,
     addUsers,
-    removeUsers
+    removeUsers,
+    updatingMembersGroup
   } = props;
 
   const [memberName, setMemberName] = useState<string>('');
@@ -324,7 +372,6 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
   );
 
   const [selectedGroupName, setSelectedGroupName] = useState<string>('');
-
 
   const handleSearchMember = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -341,7 +388,6 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
   ) => {
     const memberNameInputValue = event.target.value;
     setMemberName(memberNameInputValue);
-
   };
 
   const handleChangeGroupName = (
@@ -373,7 +419,6 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
     }
   };
 
-
   const isMemberCheked = (memberId: string): boolean => {
     const isMemberCheked = selectedGroupMembers.find(
       selectedGroupMemberId => selectedGroupMemberId == memberId
@@ -385,6 +430,9 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
     return;
   }, [selectedGroupMembers]);
 
+  useEffect(() => {
+    setSelectedGroupMembers([]);
+  }, [currentGroupMembers, updatingMembersGroup]);
   return (
     <>
       <Row>
@@ -418,24 +466,26 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                     className='standard-radius-5'
                   >
                     {' '}
-                    <option value='all'>Tout les membres</option>
-                    {groups &&
+                    {/* <option value='all'>Tout les membres</option> */}
+                    {groups.length !== 0 &&
                       groups.map(group => {
                         return (
                           <option
                             key={group.userGroupName}
                             value={group.userGroupName}
                           >
-                            {group.userGroupName}
+                            {group.userGroupName == 'all'
+                              ? 'Tout les membres'
+                              : group.userGroupName}
                           </option>
                         );
                       })}
-                    <option value='dev-web-c1'>Dev web c1</option>
+                    {/* <option value='dev-web-c1'>Dev web c1</option>
                     <option value='dev-web-c2'>Dev web c2</option>
                     <option value='smd-classe-a-matin'>
                       Smd classe a matin
                     </option>
-                    <option value='smd-classe-a-midi'>Smd classe a midi</option>
+                    <option value='smd-classe-a-midi'>Smd classe a midi</option> */}
                   </FormControl>
                   <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
 
@@ -456,15 +506,19 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                       >
                         <option value=''>Selecltionnez un groupe</option>
 
-                        {groups &&
+                        {groups.length !== 0 &&
                           groups.map(group => {
                             return (
-                              <option
-                                key={group.userGroupName}
-                                value={group.userGroupName}
-                              >
-                                {group.userGroupName}
-                              </option>
+                              <>
+                                {group.userGroupName !== 'all' && (
+                                  <option
+                                    key={group.userGroupName}
+                                    value={group.userGroupName}
+                                  >
+                                    {group.userGroupName}
+                                  </option>
+                                )}
+                              </>
                             );
                           })}
                       </FormControl>
@@ -472,14 +526,15 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
 
                     <div className='btn-group'>
                       {selectedGroupMembers.length == 0 ||
-                      selectedGroupName == '' ? (
+                      selectedGroupName == '' ||
+                      currentGroupMembers == selectedGroupName ? (
                         <Button
                           disabled
                           type='submit'
                           className='standard-radius-5 btn-black'
                         >
                           {' '}
-                          Ajouter au groupe
+                          Ajouter
                         </Button>
                       ) : (
                         <Button
@@ -495,18 +550,20 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                             )
                           }
                         >
-                          Ajouter au groupe
+                          Ajouter
                         </Button>
                       )}
                       &nbsp;&nbsp;&nbsp;
                       {selectedGroupMembers.length == 0 ||
-                      selectedGroupName !== '' ? (
+                      selectedGroupName !== '' ||
+                      groups.length <= 1 ||
+                      currentGroupMembers == 'all' ? (
                         <Button
                           disabled
                           type='submit'
                           className='standard-radius-5 btn-red'
                         >
-                          Retirer du groupe
+                          Retirer
                         </Button>
                       ) : (
                         <Button
@@ -516,12 +573,40 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                             event: React.ChangeEvent<HTMLInputElement>
                           ) => removeUsers(event, selectedGroupMembers)}
                         >
-                          Retirer du groupe
+                          Retirer
                         </Button>
                       )}
                     </div>
                   </div>
-
+                  {updatingMembersGroup?.isAddedStatus ? (
+                    <>
+                      {' '}
+                      {!updatingMembersGroup ||
+                      updatingMembersGroup.message.length == 0 ? (
+                        <HelpBlock className='none-help-block'>
+                          {`none`}
+                        </HelpBlock>
+                      ) : (
+                        <HelpBlock className='text-success'>
+                          {`${updatingMembersGroup.message}`}
+                        </HelpBlock>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {' '}
+                      {!updatingMembersGroup ||
+                      updatingMembersGroup.message.length == 0 ? (
+                        <HelpBlock className='none-help-block'>
+                          {`none`}
+                        </HelpBlock>
+                      ) : (
+                        <HelpBlock className='text-error'>
+                          {`${updatingMembersGroup.message}`}
+                        </HelpBlock>
+                      )}
+                    </>
+                  )}
                 </FormGroup>
               </form>
             </div>
@@ -578,6 +663,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                     <th className='text-light'>
                       Responsive Web Design Progrès
                     </th>
+                    <th className='text-light'>Groupe</th>
                     <th className='text-light'>Actions</th>
                   </tr>
                 </thead>
@@ -670,6 +756,14 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                             </div>
                           )}
                         </td>
+                        {member.userGroup ? (
+                          <td style={{ verticalAlign: 'middle' }}>
+                            {member.userGroup}
+                          </td>
+                        ) : (
+                          <td style={{ verticalAlign: 'middle' }}>{'Aucun'}</td>
+                        )}
+
                         <td style={{ verticalAlign: 'middle' }}>
                           <button
                             className='action-btn-detail'
@@ -700,7 +794,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                   <tr>
                     <td></td>
                     <td></td>
-                    <td></td>
+                    <td>{"Pas d'utilisateurs"}</td>
                     <td></td>
                   </tr>
                 </tbody>
