@@ -182,25 +182,29 @@ async function getUserList(req, res) {
   try {
     let userList = [];
     let usersCount = [];
-
-    const filter = { userGroup: classRoom };
+    let filter = {};
     if (classRoom && classRoom != 'all') {
+      filter = { userGroup: classRoom };
       console.log('class', classRoom, 'filtre', filter);
       // // filter.about = new RegExp(`${classRoom}`, 'i');
-      // // if (memberName) {
-      // //   filter.name = new RegExp(`${memberName}`, 'i');
-    
-   
+      if (memberName) {
+        filter.name = new RegExp(`${memberName}`, 'i');
+        filter.email = new RegExp(`${memberName}`, 'i');
+      }
+
       userList = await getAllUsers(page, limit, filter);
       usersCount = await countUserDocuments(filter);
     } else if (classRoom == 'all' && memberName) {
+      // filter = { name: new RegExp(`${memberName}`, 'i') };
       filter.name = new RegExp(`${memberName}`, 'i');
+      filter.email = new RegExp(`${memberName}`, 'i');
       userList = await getAllUsers(page, limit, filter);
       usersCount = await countUserDocuments(filter);
     } else {
       userList = await getAllUsers(page, limit);
       usersCount = await countUserDocuments();
     }
+    console.log('list', userList);
 
     return res.json({
       userList: userList,
@@ -209,6 +213,7 @@ async function getUserList(req, res) {
       countUsers: usersCount.length
     });
   } catch (error) {
+    console.log('err', error);
     return res.json({
       error: error
     });

@@ -126,6 +126,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     if (memberList != null && !('error' in memberList)) {
       setMembers(memberList.userList);
       setCountUsers(memberList.countUsers);
+      console.log('les membres', memberList.userList);
 
       if (totalPages == 1) {
         setTotalPages(Number(memberList.totalPages));
