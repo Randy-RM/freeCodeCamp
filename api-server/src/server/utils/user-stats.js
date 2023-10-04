@@ -128,20 +128,58 @@ export function getAllUsers(
 ) {
   return new Promise((resolve, reject) => {
     if (filter) {
-      console.log('fx', filter);
-      User.find(
-        {
-          where: filter,
-          skip: (page - 1) * limit,
-          limit: limit * 1
-        },
-        (err, instance) => {
-          if (err || isEmpty(instance)) {
-            return reject(err || 'No users found');
-          }
-          return resolve(instance);
+      if (filter.name && filter.email) {
+        if (filter.userGroup) {
+          User.find(
+            {
+              where: {
+                or: [{ name: filter.name }, { email: filter.email }],
+                and: [{ userGroup: filter.userGroup }]
+              },
+              skip: (page - 1) * limit,
+              limit: limit * 1
+            },
+            (err, instance) => {
+              if (err || isEmpty(instance)) {
+                return reject(err || 'No users found ');
+              }
+
+              return resolve(instance);
+            }
+          );
+        } else {
+          User.find(
+            {
+              where: {
+                or: [{ name: filter.name }, { email: filter.email }]
+              },
+              skip: (page - 1) * limit,
+              limit: limit * 1
+            },
+            (err, instance) => {
+              if (err || isEmpty(instance)) {
+                return reject(err || 'No users found ');
+              }
+
+              return resolve(instance);
+            }
+          );
         }
-      );
+      } else {
+        User.find(
+          {
+            where: filter,
+            skip: (page - 1) * limit,
+            limit: limit * 1
+          },
+          (err, instance) => {
+            if (err || isEmpty(instance)) {
+              return reject(err || 'No users found ');
+            }
+            return resolve(instance);
+          }
+        );
+      }
     } else {
       User.find(
         { skip: (page - 1) * limit, limit: limit * 1 },
@@ -162,12 +200,27 @@ export function countUserDocuments(
 ) {
   return new Promise((resolve, reject) => {
     if (filter) {
-      User.find({ where: filter }, (err, count) => {
-        if (err || isEmpty(count)) {
-          return reject(err || 'can not count user collection');
-        }
-        return resolve(count);
-      });
+      if (filter.name && filter.email) {
+        User.find(
+          {
+            where: { or: [{ name: filter.name }, { email: filter.email }] }
+          },
+          (err, instance) => {
+            if (err || isEmpty(instance)) {
+              return reject(err || 'No users found  g');
+            }
+
+            return resolve(instance);
+          }
+        );
+      } else {
+        User.find({ where: filter }, (err, count) => {
+          if (err || isEmpty(count)) {
+            return reject(err || 'can not count user collection');
+          }
+          return resolve(count);
+        });
+      }
     } else {
       User.find((err, count) => {
         if (err || isEmpty(count)) {
