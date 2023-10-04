@@ -119,6 +119,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   // }
 
   const getMembers = async () => {
+    setIsLoadingMember(true);
     const memberList = await getDatabaseResource<UserList>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       `/all-users?page=${currentPage}&limit=10&classRoom=${groupMembers}&memberName=${memberNameToSearch}`
@@ -230,9 +231,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
       })();
     }
   };
-  const handelLoadingMemberState = () => {
-    setIsLoadingMember(true);
-  };
+
   const removeUser = (
     event: React.ChangeEvent<HTMLInputElement>,
     userIds: string[]
@@ -320,7 +319,6 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
             removeUsers={removeUser}
             currentGroupMembers={groupMembers}
             updatingMembersGroup={updating}
-            handelLoadingMember={handelLoadingMemberState}
             isLoadingMemberState={isLoadingMember}
           />
         ) : (
@@ -354,7 +352,7 @@ interface TableMembersProps {
     userIds: string[]
   ) => void;
   updatingMembersGroup?: { isAddedStatus: boolean; message: string };
-  handelLoadingMember: () => void;
+
   isLoadingMemberState: boolean;
 }
 
@@ -373,7 +371,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
     addUsers,
     removeUsers,
     updatingMembersGroup,
-    handelLoadingMember,
+
     isLoadingMemberState
   } = props;
 
@@ -387,7 +385,6 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
   const handleSearchMember = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     searchMember(memberName);
-    handelLoadingMember();
   };
 
   const handleClearSearchMemberInput = () => {
@@ -806,7 +803,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                   <tr>
                     <td></td>
                     <td></td>
-                    <td>{'Chargement en cours ...d'}</td>
+                    <td>{`Chargement d'utilisateurs en cours ...`}</td>
                     <td></td>
                   </tr>
                 </tbody>

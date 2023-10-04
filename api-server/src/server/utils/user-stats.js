@@ -128,8 +128,6 @@ export function getAllUsers(
 ) {
   return new Promise((resolve, reject) => {
     if (filter) {
-      console.log('fx', filter);
-
       if (filter.name && filter.email) {
         if (filter.userGroup) {
           User.find(
@@ -143,9 +141,9 @@ export function getAllUsers(
             },
             (err, instance) => {
               if (err || isEmpty(instance)) {
-                return reject(err || 'No users found fx');
+                return reject(err || 'No users found ');
               }
-              // console.log('instance', instance);
+
               return resolve(instance);
             }
           );
@@ -160,9 +158,9 @@ export function getAllUsers(
             },
             (err, instance) => {
               if (err || isEmpty(instance)) {
-                return reject(err || 'No users found fx');
+                return reject(err || 'No users found ');
               }
-              // console.log('instance', instance);
+
               return resolve(instance);
             }
           );
@@ -176,7 +174,7 @@ export function getAllUsers(
           },
           (err, instance) => {
             if (err || isEmpty(instance)) {
-              return reject(err || 'No users found bh');
+              return reject(err || 'No users found ');
             }
             return resolve(instance);
           }
@@ -211,7 +209,7 @@ export function countUserDocuments(
             if (err || isEmpty(instance)) {
               return reject(err || 'No users found  g');
             }
-            // console.log('instance', instance);
+
             return resolve(instance);
           }
         );
