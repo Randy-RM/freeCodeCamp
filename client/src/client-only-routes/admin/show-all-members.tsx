@@ -121,11 +121,12 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
   const getMembers = async () => {
     const memberList = await getDatabaseResource<UserList>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      `/all-users?page=${currentPage}&limit=2&classRoom=${groupMembers}&memberName=${memberNameToSearch}`
+      `/all-users?page=${currentPage}&limit=10&classRoom=${groupMembers}&memberName=${memberNameToSearch}`
     );
     if (memberList != null && !('error' in memberList)) {
       setMembers(memberList.userList);
       setCountUsers(memberList.countUsers);
+      console.log('les membres', memberList.userList);
 
       if (totalPages == 1) {
         setTotalPages(Number(memberList.totalPages));
