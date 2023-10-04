@@ -131,20 +131,42 @@ export function getAllUsers(
       console.log('fx', filter);
 
       if (filter.name && filter.email) {
-        User.find(
-          {
-            where: { or: [{ name: filter.name }, { email: filter.email }] },
-            skip: (page - 1) * limit,
-            limit: limit * 1
-          },
-          (err, instance) => {
-            if (err || isEmpty(instance)) {
-              return reject(err || 'No users found fx');
+        if (filter.userGroup) {
+          User.find(
+            {
+              where: {
+                or: [{ name: filter.name }, { email: filter.email }],
+                and: [{ userGroup: filter.userGroup }]
+              },
+              skip: (page - 1) * limit,
+              limit: limit * 1
+            },
+            (err, instance) => {
+              if (err || isEmpty(instance)) {
+                return reject(err || 'No users found fx');
+              }
+              // console.log('instance', instance);
+              return resolve(instance);
             }
-            // console.log('instance', instance);
-            return resolve(instance);
-          }
-        );
+          );
+        } else {
+          User.find(
+            {
+              where: {
+                or: [{ name: filter.name }, { email: filter.email }]
+              },
+              skip: (page - 1) * limit,
+              limit: limit * 1
+            },
+            (err, instance) => {
+              if (err || isEmpty(instance)) {
+                return reject(err || 'No users found fx');
+              }
+              // console.log('instance', instance);
+              return resolve(instance);
+            }
+          );
+        }
       } else {
         User.find(
           {

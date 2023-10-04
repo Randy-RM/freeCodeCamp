@@ -198,6 +198,7 @@ async function getUserList(req, res) {
       // filter = { name: new RegExp(`${memberName}`, 'i') };
       filter.name = new RegExp(`${memberName}`, 'i');
       filter.email = new RegExp(`${memberName}`, 'i');
+
       userList = await getAllUsers(page, limit, filter);
       usersCount = await countUserDocuments(filter);
     } else {
