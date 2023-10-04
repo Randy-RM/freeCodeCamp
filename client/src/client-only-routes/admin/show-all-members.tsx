@@ -112,13 +112,14 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     useState<{ isAddedStatus: boolean; message: string }>();
   const [countMemberGroupUpdate, setCountMemberGroupUpdate] =
     useState<number>(1);
-
+  const [isLoadingMember, setIsLoadingMember] = useState<boolean>(false);
   // const data={
   //   id:"64d39b958b1fd17adc0e8f28",
   //   userGroup:"C3"
   // }
 
   const getMembers = async () => {
+    setIsLoadingMember(true);
     const memberList = await getDatabaseResource<UserList>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       `/all-users?page=${currentPage}&limit=10&classRoom=${groupMembers}&memberName=${memberNameToSearch}`
@@ -126,6 +127,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     if (memberList != null && !('error' in memberList)) {
       setMembers(memberList.userList);
       setCountUsers(memberList.countUsers);
+      setIsLoadingMember(false);
       console.log('les membres', memberList.userList);
 
       if (totalPages == 1) {
@@ -135,6 +137,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     } else {
       setMembers([]);
       setCountUsers(0);
+      setIsLoadingMember(false);
     }
   };
 
@@ -316,6 +319,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
             removeUsers={removeUser}
             currentGroupMembers={groupMembers}
             updatingMembersGroup={updating}
+            isLoadingMemberState={isLoadingMember}
           />
         ) : (
           <DetailMember member={selectedMember} returnToTable={returnToTable} />
@@ -348,6 +352,8 @@ interface TableMembersProps {
     userIds: string[]
   ) => void;
   updatingMembersGroup?: { isAddedStatus: boolean; message: string };
+
+  isLoadingMemberState: boolean;
 }
 
 export function TableMembers(props: TableMembersProps): JSX.Element {
@@ -364,7 +370,9 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
     searchMember,
     addUsers,
     removeUsers,
-    updatingMembersGroup
+    updatingMembersGroup,
+
+    isLoadingMemberState
   } = props;
 
   const [memberName, setMemberName] = useState<string>('');
@@ -778,6 +786,26 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                       </tr>
                     );
                   })}
+                </tbody>
+              </Table>
+            ) : isLoadingMemberState ? (
+              <Table striped responsive hover>
+                <thead className='bg-dark-gray'>
+                  <tr>
+                    <th className='text-light'></th>
+                    <th className='text-light'></th>
+                    <th className='text-light'></th>
+                    <th className='text-light'></th>
+                    {/* <th className='text-light'></th> */}
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td>{`Chargement d'utilisateurs en cours ...`}</td>
+                    <td></td>
+                  </tr>
                 </tbody>
               </Table>
             ) : (
