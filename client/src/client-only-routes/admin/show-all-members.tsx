@@ -551,13 +551,13 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                           className='standard-radius-5 btn-black'
                           onClick={(
                             event: React.ChangeEvent<HTMLInputElement>
-                          ) =>
+                          ) => {
                             addUsers(
                               event,
                               selectedGroupName,
                               selectedGroupMembers
-                            )
-                          }
+                            );
+                          }}
                         >
                           Ajouter
                         </Button>
@@ -955,6 +955,11 @@ export function DetailMember(props: MemberProps): JSX.Element {
               {member?.gender}
             </p>
           )}
+          <p>
+            <span className='fw-bold'>{'Groupe'}</span>
+            <br />
+            {member?.userGroup}
+          </p>
         </div>
         <Spacer size={1} />
       </Col>
@@ -964,7 +969,7 @@ export function DetailMember(props: MemberProps): JSX.Element {
         member?.currentsSuperBlock.length > 0) ? (
         <Col md={12} sm={12} xs={12}>
           <p>
-            <span className='fw-bold'>{'Cours suivie'}</span>
+            <span className='fw-bold'>{'Cours suivis'}</span>
           </p>
         </Col>
       ) : null}
