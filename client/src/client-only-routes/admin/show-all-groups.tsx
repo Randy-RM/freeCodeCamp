@@ -70,6 +70,7 @@ const mapDispatchToProps = {
 type MemberGroup = {
   id: string;
   userGroupName: string;
+  createAt: string;
 };
 
 type MemberGroupList = {
@@ -391,6 +392,11 @@ export function TableMembers(props: TableMembersGroupProps): JSX.Element {
     handleSelectMemberGroupToUpdate
   } = props;
 
+  const dateFormat = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleString();
+  };
+
   return (
     <>
       <Row>
@@ -401,6 +407,8 @@ export function TableMembers(props: TableMembersGroupProps): JSX.Element {
                 <thead className='bg-dark-gray'>
                   <tr>
                     <th className='text-light'>Group</th>
+                    <th className='text-light'>Effectif</th>
+                    <th className='text-light'>Créé le</th>
                     <th className='text-light'>Action</th>
                   </tr>
                 </thead>
@@ -410,6 +418,12 @@ export function TableMembers(props: TableMembersGroupProps): JSX.Element {
                       <tr key={index}>
                         <td style={{ verticalAlign: 'middle' }}>
                           {group.userGroupName}
+                        </td>
+                        <td style={{ verticalAlign: 'middle' }}>
+                          {'O Membre'}
+                        </td>
+                        <td style={{ verticalAlign: 'middle' }}>
+                          {dateFormat(`${group.createAt}`)}
                         </td>
                         <td style={{ verticalAlign: 'middle' }}>
                           <button

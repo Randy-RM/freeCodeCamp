@@ -11,6 +11,10 @@
           "unique": true
         }
       }
+    },
+    "createAt": {
+      "type": "date",
+      "defaultFn": "now"
     }
   },
   "validations": [],
@@ -23,7 +27,6 @@
     }
   },
 
- 
   "acls": [],
   "methods": {}
 }
