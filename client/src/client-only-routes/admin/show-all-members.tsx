@@ -445,6 +445,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
 
   useEffect(() => {
     setSelectedGroupMembers([]);
+    setSelectedGroupName('');
   }, [currentGroupMembers, updatingMembersGroup]);
   return (
     <>
@@ -575,6 +576,16 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                           disabled
                           type='submit'
                           className='standard-radius-5 btn-red'
+                        >
+                          Retirer
+                        </Button>
+                      ) : currentGroupMembers == selectedGroupName ? (
+                        <Button
+                          type='submit'
+                          className='standard-radius-5 btn-red'
+                          onClick={(
+                            event: React.ChangeEvent<HTMLInputElement>
+                          ) => removeUsers(event, selectedGroupMembers)}
                         >
                           Retirer
                         </Button>
