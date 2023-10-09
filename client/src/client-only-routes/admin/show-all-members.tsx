@@ -78,6 +78,7 @@ type Member = {
   gender: string;
   currentsSuperBlock: CurrentSuperBlock[];
   userGroup: string;
+  createAt: string;
 };
 
 type UserList = {
@@ -427,7 +428,10 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
       ]);
     }
   };
-
+  const dateFormat = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleString();
+  };
   const isMemberCheked = (memberId: string): boolean => {
     const isMemberCheked = selectedGroupMembers.find(
       selectedGroupMemberId => selectedGroupMemberId == memberId
@@ -672,6 +676,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                     <th className='text-light'>
                       Responsive Web Design Progrès
                     </th>
+                    <th className='text-light'>{`Date d'inscription`}</th>
                     <th className='text-light'>Groupe</th>
                     <th className='text-light'>Actions</th>
                   </tr>
@@ -764,6 +769,9 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                               </div>
                             </div>
                           )}
+                        </td>
+                        <td style={{ verticalAlign: 'middle' }}>
+                          {dateFormat(`${member.createAt}`)}
                         </td>
                         {member.userGroup ? (
                           <td style={{ verticalAlign: 'middle' }}>
@@ -879,7 +887,10 @@ export function DetailMember(props: MemberProps): JSX.Element {
   const { member, returnToTable } = props;
 
   const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[] | null>();
-
+  const dateFormat = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleString();
+  };
   const getMoodleProgressCourses = async () => {
     const moodleUser = await getExternalResource<MoodleUser[]>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -959,6 +970,11 @@ export function DetailMember(props: MemberProps): JSX.Element {
             <span className='fw-bold'>{'Groupe'}</span>
             <br />
             {member?.userGroup}
+          </p>
+          <p>
+            <span className='fw-bold'>{'Membre depuis '}</span>
+            <br />
+            {member?.createAt ? dateFormat(`${member?.createAt}`) : ''}
           </p>
         </div>
         <Spacer size={1} />
