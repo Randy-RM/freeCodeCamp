@@ -278,7 +278,7 @@ export function ShowAllGroups(props: ShowAllGroupsProps): JSX.Element {
                 className='big-subheading'
                 style={{ overflowWrap: 'break-word' }}
               >
-                {'Groups'}
+                {'Groupes'}
               </h1>
             </div>
           </Col>
@@ -293,12 +293,12 @@ export function ShowAllGroups(props: ShowAllGroupsProps): JSX.Element {
                   <form>
                     <FormGroup controlId='class-room-filter'>
                       <ControlLabel>
-                        <strong>{'Nom du group'}</strong>
+                        <strong>{'Nom du groupe'}</strong>
                       </ControlLabel>
                       <div className=''>
                         <FormControl
                           type='text'
-                          placeholder='Nom du group'
+                          placeholder='Nom du groupe'
                           className='standard-radius-5'
                           name='groupName'
                           value={groupName}
@@ -406,7 +406,7 @@ export function TableMembers(props: TableMembersGroupProps): JSX.Element {
               <Table responsive hover>
                 <thead className='bg-dark-gray'>
                   <tr>
-                    <th className='text-light'>Group</th>
+                    <th className='text-light'>Groupe</th>
                     <th className='text-light'>Effectif</th>
                     <th className='text-light'>Créé le</th>
                     <th className='text-light'>Action</th>

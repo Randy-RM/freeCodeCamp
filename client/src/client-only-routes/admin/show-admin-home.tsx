@@ -62,7 +62,7 @@ export function ShowAdminHome(props: ShowAdminHomeProps): JSX.Element {
 
   if (
     !user.email.endsWith('@kinshasadigital.com') ||
-    !user.email.endsWith('@kadea.co') 
+    !user.email.endsWith('@kadea.co')
   ) {
     navigate(`${homeLocation}`);
     return <Loader fullScreen={true} />;
@@ -80,7 +80,7 @@ export function ShowAdminHome(props: ShowAdminHomeProps): JSX.Element {
                 className='big-subheading'
                 style={{ overflowWrap: 'break-word' }}
               >
-                {'Dashboard'}
+                {'Dashboardhghhhh'}
               </h1>
             </div>
           </Col>

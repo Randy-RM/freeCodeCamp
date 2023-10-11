@@ -980,7 +980,7 @@ export function DetailMember(props: MemberProps): JSX.Element {
           <p>
             <span className='fw-bold'>{'Groupe'}</span>
             <br />
-            {member?.userGroup}
+            {member?.userGroup ? member?.userGroup : 'Aucun'}
           </p>
           <p>
             <span className='fw-bold'>{'Membre depuis '}</span>
