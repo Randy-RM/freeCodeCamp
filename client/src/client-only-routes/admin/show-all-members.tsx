@@ -569,7 +569,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                       )}
                       &nbsp;&nbsp;&nbsp;
                       {selectedGroupMembers.length == 0 ||
-                      selectedGroupName !== '' ||
+                      // selectedGroupName !== '' ||
                       groups.length <= 1 ||
                       currentGroupMembers == 'all' ? (
                         <Button
