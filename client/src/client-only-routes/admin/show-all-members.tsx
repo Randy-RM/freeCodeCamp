@@ -471,7 +471,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
               <form>
                 <FormGroup controlId='class-room-filter'>
                   <ControlLabel>
-                    <strong>{'Group'}</strong>
+                    <strong>{'Groupe'}</strong>
                   </ControlLabel>
                   <FormControl
                     componentClass='select'
