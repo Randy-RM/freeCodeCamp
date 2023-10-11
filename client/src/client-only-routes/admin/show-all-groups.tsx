@@ -71,6 +71,7 @@ type MemberGroup = {
   id: string;
   userGroupName: string;
   createAt: string;
+  memberCount: number;
 };
 
 type MemberGroupList = {
@@ -420,7 +421,8 @@ export function TableMembers(props: TableMembersGroupProps): JSX.Element {
                           {group.userGroupName}
                         </td>
                         <td style={{ verticalAlign: 'middle' }}>
-                          {'O Membre'}
+                          {group.memberCount ? group.memberCount : 'O '}{' '}
+                          {'Membre'}
                         </td>
                         <td style={{ verticalAlign: 'middle' }}>
                           {dateFormat(`${group.createAt}`)}
