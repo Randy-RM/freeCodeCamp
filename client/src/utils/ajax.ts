@@ -498,6 +498,7 @@ export async function addUserInGRoup(
 
 interface RemoveUserInGRoupData {
   ids: string[];
+  userGroup: string;
 }
 interface RemoveUserInGRoupReponse {
   isRemoved: boolean;

@@ -198,13 +198,41 @@ export function putUserInGroup(
   });
 }
 
-export function deleteUserInGroup(ids, User = loopback.getModelByType('User')) {
+export function deleteUserInGroup(
+  ids,
+  userGroup,
+  User = loopback.getModelByType('User'),
+  UserGroup = loopback.getModelByType('userGroup')
+) {
   return new Promise((resolve, reject) => {
+    console.log('req', ids, userGroup);
     ids.map(id => {
-      User.updateAll({ id: id }, { userGroup: '' }, function (err, instance) {
-        if (err) return reject(err);
-        return resolve(instance);
-      });
+      User.updateAll(
+        { id: id },
+        { userGroup: '' },
+        function (err, userUpdated) {
+          if (err) return reject(err);
+          return User.find(
+            { where: { userGroup: userGroup } },
+            function (err, countUser) {
+              if (err) return reject(err);
+
+              if (countUser) {
+                UserGroup.updateAll(
+                  { userGroupName: userGroup },
+                  { memberCount: countUser.length },
+                  function (err, instance) {
+                    if (err) return reject(err || 'count member group');
+                    if (instance) {
+                      resolve(userUpdated);
+                    }
+                  }
+                );
+              }
+            }
+          );
+        }
+      );
     });
   });
 }

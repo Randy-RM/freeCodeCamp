@@ -235,11 +235,13 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
 
   const removeUser = (
     event: React.ChangeEvent<HTMLInputElement>,
-    userIds: string[]
+    userIds: string[],
+    groupName: string
   ) => {
     event.preventDefault();
     const data = {
-      ids: userIds
+      ids: userIds,
+      userGroup: groupName
     };
 
     let res;
@@ -350,7 +352,8 @@ interface TableMembersProps {
   ) => void;
   removeUsers: (
     event: React.ChangeEvent<HTMLInputElement>,
-    userIds: string[]
+    userIds: string[],
+    groupName: string
   ) => void;
   updatingMembersGroup?: { isAddedStatus: boolean; message: string };
 
@@ -585,7 +588,13 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                           className='standard-radius-5 btn-red'
                           onClick={(
                             event: React.ChangeEvent<HTMLInputElement>
-                          ) => removeUsers(event, selectedGroupMembers)}
+                          ) =>
+                            removeUsers(
+                              event,
+                              selectedGroupMembers,
+                              currentGroupMembers
+                            )
+                          }
                         >
                           Retirer
                         </Button>
@@ -595,7 +604,13 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                           className='standard-radius-5 btn-red'
                           onClick={(
                             event: React.ChangeEvent<HTMLInputElement>
-                          ) => removeUsers(event, selectedGroupMembers)}
+                          ) =>
+                            removeUsers(
+                              event,
+                              selectedGroupMembers,
+                              currentGroupMembers
+                            )
+                          }
                         >
                           Retirer
                         </Button>
