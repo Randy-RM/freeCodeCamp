@@ -422,7 +422,7 @@ export function TableMembers(props: TableMembersGroupProps): JSX.Element {
                         </td>
                         <td style={{ verticalAlign: 'middle' }}>
                           {group.memberCount ? group.memberCount : 'O '}{' '}
-                          {'Membres'}
+                          {'Membre'}
                         </td>
                         <td style={{ verticalAlign: 'middle' }}>
                           {dateFormat(`${group.createAt}`)}
