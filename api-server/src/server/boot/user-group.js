@@ -166,11 +166,15 @@ async function addUserIngroup(req, res) {
 
 async function removeUserINGroup(req, res) {
   const ids = req.body.ids;
+  const group = req.body.userGroup;
   try {
+    if (!group) {
+      throw new Error('Please select group');
+    }
     if (!ids || ids.length == 0) {
       throw new Error('Please select user');
     }
-    const userGroupRemoved = await deleteUserInGroup(ids);
+    const userGroupRemoved = await deleteUserInGroup(ids, group);
     if (userGroupRemoved) {
       res.json({
         isRemoved: true,

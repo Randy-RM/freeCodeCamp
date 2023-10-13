@@ -89,6 +89,10 @@
       "type": "string",
       "default": ""
     },
+    "createAt": {
+      "type": "date",
+      "defaultFn": "now"
+    },
     "codeTime": {
       "type": "string",
       "default": ""
