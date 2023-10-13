@@ -11,6 +11,13 @@
           "unique": true
         }
       }
+    },
+    "createAt": {
+      "type": "date",
+      "defaultFn": "now"
+    },
+    "memberCount": {
+      "type": "number"
     }
   },
   "validations": [],
@@ -23,7 +30,6 @@
     }
   },
 
- 
   "acls": [],
   "methods": {}
 }

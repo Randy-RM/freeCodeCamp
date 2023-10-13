@@ -78,6 +78,7 @@ type Member = {
   gender: string;
   currentsSuperBlock: CurrentSuperBlock[];
   userGroup: string;
+  createAt: string;
 };
 
 type UserList = {
@@ -234,11 +235,13 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
 
   const removeUser = (
     event: React.ChangeEvent<HTMLInputElement>,
-    userIds: string[]
+    userIds: string[],
+    groupName: string
   ) => {
     event.preventDefault();
     const data = {
-      ids: userIds
+      ids: userIds,
+      userGroup: groupName
     };
 
     let res;
@@ -349,7 +352,8 @@ interface TableMembersProps {
   ) => void;
   removeUsers: (
     event: React.ChangeEvent<HTMLInputElement>,
-    userIds: string[]
+    userIds: string[],
+    groupName: string
   ) => void;
   updatingMembersGroup?: { isAddedStatus: boolean; message: string };
 
@@ -427,7 +431,10 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
       ]);
     }
   };
-
+  const dateFormat = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleString();
+  };
   const isMemberCheked = (memberId: string): boolean => {
     const isMemberCheked = selectedGroupMembers.find(
       selectedGroupMemberId => selectedGroupMemberId == memberId
@@ -441,6 +448,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
 
   useEffect(() => {
     setSelectedGroupMembers([]);
+    setSelectedGroupName('');
   }, [currentGroupMembers, updatingMembersGroup]);
   return (
     <>
@@ -466,7 +474,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
               <form>
                 <FormGroup controlId='class-room-filter'>
                   <ControlLabel>
-                    <strong>{'Group'}</strong>
+                    <strong>{'Groupe'}</strong>
                   </ControlLabel>
                   <FormControl
                     componentClass='select'
@@ -551,20 +559,20 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                           className='standard-radius-5 btn-black'
                           onClick={(
                             event: React.ChangeEvent<HTMLInputElement>
-                          ) =>
+                          ) => {
                             addUsers(
                               event,
                               selectedGroupName,
                               selectedGroupMembers
-                            )
-                          }
+                            );
+                          }}
                         >
                           Ajouter
                         </Button>
                       )}
                       &nbsp;&nbsp;&nbsp;
                       {selectedGroupMembers.length == 0 ||
-                      selectedGroupName !== '' ||
+                      // selectedGroupName !== '' ||
                       groups.length <= 1 ||
                       currentGroupMembers == 'all' ? (
                         <Button
@@ -574,13 +582,35 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                         >
                           Retirer
                         </Button>
+                      ) : currentGroupMembers == selectedGroupName ? (
+                        <Button
+                          type='submit'
+                          className='standard-radius-5 btn-red'
+                          onClick={(
+                            event: React.ChangeEvent<HTMLInputElement>
+                          ) =>
+                            removeUsers(
+                              event,
+                              selectedGroupMembers,
+                              currentGroupMembers
+                            )
+                          }
+                        >
+                          Retirer
+                        </Button>
                       ) : (
                         <Button
                           type='submit'
                           className='standard-radius-5 btn-red'
                           onClick={(
                             event: React.ChangeEvent<HTMLInputElement>
-                          ) => removeUsers(event, selectedGroupMembers)}
+                          ) =>
+                            removeUsers(
+                              event,
+                              selectedGroupMembers,
+                              currentGroupMembers
+                            )
+                          }
                         >
                           Retirer
                         </Button>
@@ -672,6 +702,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                     <th className='text-light'>
                       Responsive Web Design Progrès
                     </th>
+                    <th className='text-light'>{`Date d'inscription`}</th>
                     <th className='text-light'>Groupe</th>
                     <th className='text-light'>Actions</th>
                   </tr>
@@ -764,6 +795,9 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                               </div>
                             </div>
                           )}
+                        </td>
+                        <td style={{ verticalAlign: 'middle' }}>
+                          {dateFormat(`${member.createAt}`)}
                         </td>
                         {member.userGroup ? (
                           <td style={{ verticalAlign: 'middle' }}>
@@ -879,7 +913,10 @@ export function DetailMember(props: MemberProps): JSX.Element {
   const { member, returnToTable } = props;
 
   const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[] | null>();
-
+  const dateFormat = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleString();
+  };
   const getMoodleProgressCourses = async () => {
     const moodleUser = await getExternalResource<MoodleUser[]>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -955,6 +992,16 @@ export function DetailMember(props: MemberProps): JSX.Element {
               {member?.gender}
             </p>
           )}
+          <p>
+            <span className='fw-bold'>{'Groupe'}</span>
+            <br />
+            {member?.userGroup ? member?.userGroup : 'Aucun'}
+          </p>
+          <p>
+            <span className='fw-bold'>{'Membre depuis '}</span>
+            <br />
+            {member?.createAt ? dateFormat(`${member?.createAt}`) : ''}
+          </p>
         </div>
         <Spacer size={1} />
       </Col>
@@ -964,7 +1011,7 @@ export function DetailMember(props: MemberProps): JSX.Element {
         member?.currentsSuperBlock.length > 0) ? (
         <Col md={12} sm={12} xs={12}>
           <p>
-            <span className='fw-bold'>{'Cours suivie'}</span>
+            <span className='fw-bold'>{'Cours suivis'}</span>
           </p>
         </Col>
       ) : null}

@@ -63,7 +63,7 @@ export const SideBarNavLinks = (): JSX.Element => {
             to={'/admin/all-groups'}
             activeClassName='active'
           >
-            {'Groups'}
+            {'Groupes'}
           </Link>
         </li>
       </ul>
