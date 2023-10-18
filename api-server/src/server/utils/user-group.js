@@ -171,8 +171,10 @@ export function putUserInGroup(
   UserGroup = loopback.getModelByType('userGroup')
 ) {
   return new Promise((resolve, reject) => {
-    ids.map(id => {
-      User.updateAll({ id: id }, { userGroup }, function (err, userUpdated) {
+    User.updateAll(
+      { id: { inq: ids } },
+      { userGroup },
+      function (err, userUpdated) {
         if (err) return reject(err);
         return User.find(
           { where: { userGroup: userGroup } },
@@ -193,8 +195,8 @@ export function putUserInGroup(
             }
           }
         );
-      });
-    });
+      }
+    );
   });
 }
 
