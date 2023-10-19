@@ -173,9 +173,10 @@ export function putUserInGroup(
   return new Promise((resolve, reject) => {
     User.updateAll(
       { id: { inq: ids } },
-      { userGroup },
+      { $set: { userGroup: userGroup } },
       function (err, userUpdated) {
-        if (err) return reject(err);
+        console.log('user', userUpdated);
+        if (err) return reject(console.log('err', err));
         return User.find(
           { where: { userGroup: userGroup } },
           function (err, countUser) {
@@ -208,34 +209,33 @@ export function deleteUserInGroup(
 ) {
   return new Promise((resolve, reject) => {
     console.log('req', ids, userGroup);
-    ids.map(id => {
-      User.updateAll(
-        { id: id },
-        { userGroup: '' },
-        function (err, userUpdated) {
-          if (err) return reject(err);
-          return User.find(
-            { where: { userGroup: userGroup } },
-            function (err, countUser) {
-              if (err) return reject(err);
 
-              if (countUser) {
-                UserGroup.updateAll(
-                  { userGroupName: userGroup },
-                  { memberCount: countUser.length },
-                  function (err, instance) {
-                    if (err) return reject(err || 'count member group');
-                    if (instance) {
-                      resolve(userUpdated);
-                    }
+    User.updateAll(
+      { id: { inq: ids } },
+      { userGroup: '' },
+      function (err, userUpdated) {
+        if (err) return reject(err);
+        return User.find(
+          { where: { userGroup: userGroup } },
+          function (err, countUser) {
+            if (err) return reject(err);
+
+            if (countUser) {
+              UserGroup.updateAll(
+                { userGroupName: userGroup },
+                { memberCount: countUser.length },
+                function (err, instance) {
+                  if (err) return reject(err || 'count member group');
+                  if (instance) {
+                    resolve(userUpdated);
                   }
-                );
-              }
+                }
+              );
             }
-          );
-        }
-      );
-    });
+          }
+        );
+      }
+    );
   });
 }
 
