@@ -22,14 +22,6 @@
   },
   "validations": [],
 
-  "relations": {
-    "user": {
-      "type": "hasMany",
-      "model": "user",
-      "foreignKey": "userGroup"
-    }
-  },
-
   "acls": [],
   "methods": {}
 }

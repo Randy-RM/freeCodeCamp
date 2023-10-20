@@ -56,9 +56,9 @@ export function updateUserGroup(
                     User.updateAll(
                       { userGroup: userGroupFound.userGroupName },
                       { userGroup: userGroup.userGroupName },
-                      function (err, instance) {
+                      function (err, users) {
                         if (err) return reject(err);
-                        return resolve(instance);
+                        return resolve(users);
                       }
                     );
                   }
@@ -88,21 +88,21 @@ export function getAllUsersGroup(
           limit: limit * 1,
           order: 'id DESC'
         },
-        (err, instance) => {
-          if (err || isEmpty(instance)) {
-            return reject(err || 'No users group found');
+        (err, users) => {
+          if (err || isEmpty(users)) {
+            return reject(err || 'Noinstance group found');
           }
-          resolve(console.log(instance));
+          resolve(console.log(users));
         }
       );
     } else {
       UsersGroup.find(
         { skip: (page - 1) * limit, limit: limit * 1, order: 'id DESC' },
-        (err, instance) => {
-          if (err || isEmpty(instance)) {
-            return reject(err || 'No users group found');
+        (err, users) => {
+          if (err || isEmpty(users)) {
+            return reject(err || 'Noinstance group found');
           }
-          return resolve(instance);
+          return resolve(users);
         }
       );
     }
@@ -151,9 +151,9 @@ export function deleteUserGroup(
               User.updateAll(
                 { userGroup: userGroupFound.userGroupName },
                 { userGroup: '' },
-                function (err, instance) {
+                function (err, users) {
                   if (err) return reject(err);
-                  return resolve(instance);
+                  return resolve(users);
                 }
               );
             }
@@ -171,33 +171,112 @@ export function putUserInGroup(
   UserGroup = loopback.getModelByType('userGroup')
 ) {
   return new Promise((resolve, reject) => {
-    User.updateAll(
-      { id: { inq: ids } },
-      { $set: { userGroup: userGroup } },
-      function (err, userUpdated) {
-        console.log('user', userUpdated);
-        if (err) return reject(console.log('err', err));
-        return User.find(
-          { where: { userGroup: userGroup } },
-          function (err, countUser) {
-            if (err) return reject(err);
+    console.log('les ids', ids);
+    User.find({ where: { id: { inq: ids } } }, function (err, users) {
+      console.log('err', err);
+      console.log('update', users);
+      console.log(typeof users.email);
+      if (users.length !== 0) {
+        users.map(user => {
+          console.log(user.userGroup);
 
-            if (countUser) {
-              UserGroup.updateAll(
-                { userGroupName: userGroup },
-                { memberCount: countUser.length },
-                function (err, instance) {
-                  if (err) return reject(err || 'count member group');
-                  if (instance) {
-                    resolve(userUpdated);
+          if (typeof user.userGroup === 'string') {
+            User.updateAll(
+              { id: user.id },
+              { $set: { userGroup: [userGroup] } },
+              function (err, userUpdated) {
+                console.log('user string', userUpdated);
+                if (err) return reject(console.log('err', err));
+                return User.find(
+                  { where: { userGroup: userGroup } },
+                  function (err, countUser) {
+                    if (err) return reject(err);
+
+                    if (countUser) {
+                      UserGroup.updateAll(
+                        { userGroupName: userGroup },
+                        { memberCount: countUser.length },
+                        function (err, users) {
+                          if (err) return reject(err || 'count member group');
+                          if (users) {
+                            resolve(userUpdated);
+                          }
+                        }
+                      );
+                    }
                   }
-                }
-              );
-            }
+                );
+              }
+            );
           }
-        );
+        });
       }
-    );
+    });
+
+    // User.find({ where: { id: { inq: ids } } }, function (err, users) {
+    //   if (err) return reject(console.log('err', err));
+    //   console.log('eeror', err);
+    //   console.log('insinstance', users.userGroup);
+    //   if (users) {
+    //     if (typeof users.userGroup === 'string') {
+    //       User.updateAll(
+    //         { id: { inq: ids } },
+    //         { $set: { userGroup: [userGroup] } },
+    //         function (err, userUpdated) {
+    //           console.log('user string', userUpdated);
+    //           if (err) return reject(console.log('err', err));
+    //           return User.find(
+    //             { where: { userGroup: userGroup } },
+    //             function (err, countUser) {
+    //               if (err) return reject(err);
+
+    //               if (countUser) {
+    //                 UserGroup.updateAll(
+    //                   { userGroupName: userGroup },
+    //                   { memberCount: countUser.length },
+    //                   function (err, users) {
+    //                     if (err) return reject(err || 'count member group');
+    //                     if (users) {
+    //                       resolve(userUpdated);
+    //                     }
+    //                   }
+    //                 );
+    //               }
+    //             }
+    //           );
+    //         }
+    //       );
+    //     } else if (Array.isArray(users.userGroup)) {
+    //       User.updateAll(
+    //         { id: { inq: ids } },
+    //         { $push: { userGroup: userGroup } },
+    //         function (err, userUpdated) {
+    //           console.log('user tab ', userUpdated);
+    //           if (err) return reject(console.log('err', err));
+    //           return User.find(
+    //             { where: { userGroup: userGroup } },
+    //             function (err, countUser) {
+    //               if (err) return reject(err);
+
+    //               if (countUser) {
+    //                 UserGroup.updateAll(
+    //                   { userGroupName: userGroup },
+    //                   { memberCount: countUser.length },
+    //                   function (err, users) {
+    //                     if (err) return reject(err || 'count member group');
+    //                     if (users) {
+    //                       resolve(userUpdated);
+    //                     }
+    //                   }
+    //                 );
+    //               }
+    //             }
+    //           );
+    //         }
+    //       );
+    //     }
+    //   }
+    // });
   });
 }
 
@@ -224,9 +303,9 @@ export function deleteUserInGroup(
               UserGroup.updateAll(
                 { userGroupName: userGroup },
                 { memberCount: countUser.length },
-                function (err, instance) {
+                function (err, users) {
                   if (err) return reject(err || 'count member group');
-                  if (instance) {
+                  if (users) {
                     resolve(userUpdated);
                   }
                 }
@@ -241,11 +320,11 @@ export function deleteUserInGroup(
 
 export function getUserByGroup(filter, User = loopback.getModelByType('User')) {
   return new Promise((resolve, reject) =>
-    User.find({ where: { userGroup: filter } }, (err, instance) => {
-      if (err || isEmpty(instance)) {
+    User.find({ where: { userGroup: filter } }, (err, users) => {
+      if (err || isEmpty(users)) {
         return reject(err || 'can not find user in this group');
       }
-      return resolve(instance);
+      return resolve(users);
     })
   );
 }
