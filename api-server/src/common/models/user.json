@@ -138,7 +138,8 @@
       "type": "string",
       "default": ""
     },
-    "userGroup": {
+
+    "groups": {
       "type": "array",
       "default": []
     },

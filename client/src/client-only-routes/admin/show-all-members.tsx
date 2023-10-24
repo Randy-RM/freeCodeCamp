@@ -77,7 +77,7 @@ type Member = {
   name: string;
   gender: string;
   currentsSuperBlock: CurrentSuperBlock[];
-  userGroup: string;
+  groups: string[];
   createAt: string;
 };
 
@@ -703,7 +703,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                       Responsive Web Design Progrès
                     </th>
                     <th className='text-light'>{`Date d'inscription`}</th>
-                    <th className='text-light'>Groupe</th>
+                    <th className='text-light'>Groupe(s)</th>
                     <th className='text-light'>Actions</th>
                   </tr>
                 </thead>
@@ -799,9 +799,9 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                         <td style={{ verticalAlign: 'middle' }}>
                           {dateFormat(`${member.createAt}`)}
                         </td>
-                        {member.userGroup ? (
+                        {member.groups ? (
                           <td style={{ verticalAlign: 'middle' }}>
-                            {member.userGroup}
+                            {member.groups.map(group => group).join(', ')}
                           </td>
                         ) : (
                           <td style={{ verticalAlign: 'middle' }}>{'Aucun'}</td>
@@ -995,7 +995,7 @@ export function DetailMember(props: MemberProps): JSX.Element {
           <p>
             <span className='fw-bold'>{'Groupe'}</span>
             <br />
-            {member?.userGroup ? member?.userGroup : 'Aucun'}
+            {member?.groups ? member?.groups : 'Aucun'}
           </p>
           <p>
             <span className='fw-bold'>{'Membre depuis '}</span>

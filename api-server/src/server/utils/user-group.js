@@ -171,24 +171,18 @@ export function putUserInGroup(
   UserGroup = loopback.getModelByType('userGroup')
 ) {
   return new Promise((resolve, reject) => {
-    console.log('les ids', ids);
     User.find({ where: { id: { inq: ids } } }, function (err, users) {
-      console.log('err', err);
-      console.log('update', users);
-      console.log(typeof users.email);
       if (users.length !== 0) {
         users.map(user => {
-          console.log(user.userGroup);
-
-          if (typeof user.userGroup === 'string') {
+          console.log('user', user.groups.includes(userGroup));
+          if (!user.groups.includes(userGroup)) {
             User.updateAll(
               { id: user.id },
-              { $set: { userGroup: [userGroup] } },
+              { $push: { groups: userGroup } },
               function (err, userUpdated) {
-                console.log('user string', userUpdated);
-                if (err) return reject(console.log('err', err));
+                if (err) return reject(err || 'can not add user in goupe ');
                 return User.find(
-                  { where: { userGroup: userGroup } },
+                  { where: { groups: userGroup } },
                   function (err, countUser) {
                     if (err) return reject(err);
 
@@ -208,75 +202,13 @@ export function putUserInGroup(
                 );
               }
             );
+          } else {
+            console.log('user2', user.groups.includes(userGroup));
+            return reject('already exists in ');
           }
         });
       }
     });
-
-    // User.find({ where: { id: { inq: ids } } }, function (err, users) {
-    //   if (err) return reject(console.log('err', err));
-    //   console.log('eeror', err);
-    //   console.log('insinstance', users.userGroup);
-    //   if (users) {
-    //     if (typeof users.userGroup === 'string') {
-    //       User.updateAll(
-    //         { id: { inq: ids } },
-    //         { $set: { userGroup: [userGroup] } },
-    //         function (err, userUpdated) {
-    //           console.log('user string', userUpdated);
-    //           if (err) return reject(console.log('err', err));
-    //           return User.find(
-    //             { where: { userGroup: userGroup } },
-    //             function (err, countUser) {
-    //               if (err) return reject(err);
-
-    //               if (countUser) {
-    //                 UserGroup.updateAll(
-    //                   { userGroupName: userGroup },
-    //                   { memberCount: countUser.length },
-    //                   function (err, users) {
-    //                     if (err) return reject(err || 'count member group');
-    //                     if (users) {
-    //                       resolve(userUpdated);
-    //                     }
-    //                   }
-    //                 );
-    //               }
-    //             }
-    //           );
-    //         }
-    //       );
-    //     } else if (Array.isArray(users.userGroup)) {
-    //       User.updateAll(
-    //         { id: { inq: ids } },
-    //         { $push: { userGroup: userGroup } },
-    //         function (err, userUpdated) {
-    //           console.log('user tab ', userUpdated);
-    //           if (err) return reject(console.log('err', err));
-    //           return User.find(
-    //             { where: { userGroup: userGroup } },
-    //             function (err, countUser) {
-    //               if (err) return reject(err);
-
-    //               if (countUser) {
-    //                 UserGroup.updateAll(
-    //                   { userGroupName: userGroup },
-    //                   { memberCount: countUser.length },
-    //                   function (err, users) {
-    //                     if (err) return reject(err || 'count member group');
-    //                     if (users) {
-    //                       resolve(userUpdated);
-    //                     }
-    //                   }
-    //                 );
-    //               }
-    //             }
-    //           );
-    //         }
-    //       );
-    //     }
-    //   }
-    // });
   });
 }
 
