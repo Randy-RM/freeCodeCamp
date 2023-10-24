@@ -995,7 +995,9 @@ export function DetailMember(props: MemberProps): JSX.Element {
           <p>
             <span className='fw-bold'>{'Groupe'}</span>
             <br />
-            {member?.groups ? member?.groups : 'Aucun'}
+            {member?.groups
+              ? member?.groups.map(group => group).join(', ')
+              : 'Aucun'}
           </p>
           <p>
             <span className='fw-bold'>{'Membre depuis '}</span>
