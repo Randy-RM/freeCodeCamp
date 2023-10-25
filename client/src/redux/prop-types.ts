@@ -304,6 +304,8 @@ export type User = {
   linkedin: string;
   location: string;
   name: string;
+  phone: string;
+  whatsapp: string;
   picture: string;
   points: number;
   portfolio: Portfolio[];
