@@ -79,6 +79,8 @@ type Member = {
   currentsSuperBlock: CurrentSuperBlock[];
   userGroup: string;
   createAt: string;
+  phone: string;
+  whatsapp: string;
 };
 
 type UserList = {
@@ -992,6 +994,16 @@ export function DetailMember(props: MemberProps): JSX.Element {
               {member?.gender}
             </p>
           )}
+          <p>
+            <span className='fw-bold'>{'Numéro de telephone'}</span>
+            <br />
+            {member?.phone}
+          </p>
+          <p>
+            <span className='fw-bold'>{'Numéro whatsapp'}</span>
+            <br />
+            {member?.whatsapp}
+          </p>
           <p>
             <span className='fw-bold'>{'Groupe'}</span>
             <br />
