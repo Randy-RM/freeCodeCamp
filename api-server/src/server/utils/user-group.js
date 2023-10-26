@@ -183,6 +183,7 @@ async function putUserInGroupFunction(ids, userGroup, UserGroup, User) {
   );
 
   const countUser = await User.find({ where: { groups: userGroup } });
+  console.log('user', countUser);
 
   await UserGroup.updateAll(
     { userGroupName: userGroup },
