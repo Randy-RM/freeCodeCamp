@@ -164,52 +164,53 @@ export function deleteUserGroup(
     });
   });
 }
-export function putUserInGroup(
+
+async function putUserInGroupFunction(ids, userGroup, UserGroup, User) {
+  const users = await User.find({ where: { id: { inq: ids } } });
+
+  if (users.length === 0) {
+    return Promise.reject('No users found');
+  }
+
+  const usersNotInGroup = users.filter(
+    user => !user.groups.includes(userGroup)
+  );
+
+  await Promise.all(
+    usersNotInGroup.map(async user => {
+      await User.updateAll({ id: user.id }, { $push: { groups: userGroup } });
+    })
+  );
+
+  const countUser = await User.find({ where: { groups: userGroup } });
+
+  await UserGroup.updateAll(
+    { userGroupName: userGroup },
+    { memberCount: countUser.length }
+  );
+
+  return users;
+}
+
+export async function putUserInGroup(
   ids,
   userGroup,
   User = loopback.getModelByType('User'),
   UserGroup = loopback.getModelByType('userGroup')
 ) {
-  return new Promise((resolve, reject) => {
-    User.find({ where: { id: { inq: ids } } }, function (err, users) {
-      if (users.length !== 0) {
-        users.map(user => {
-          console.log('user', user.groups.includes(userGroup));
-          if (!user.groups.includes(userGroup)) {
-            User.updateAll(
-              { id: user.id },
-              { $push: { groups: userGroup } },
-              function (err, userUpdated) {
-                if (err) return reject(err || 'can not add user in goupe ');
-                return User.find(
-                  { where: { groups: { $in: userGroup } } },
-                  function (err, countUser) {
-                    if (err) return reject(err);
-
-                    if (countUser) {
-                      UserGroup.updateAll(
-                        { userGroupName: userGroup },
-                        { memberCount: countUser.length },
-                        function (err, users) {
-                          if (err) return reject(err || 'count member group');
-                          if (users) {
-                            resolve(userUpdated);
-                          }
-                        }
-                      );
-                    }
-                  }
-                );
-              }
-            );
-          } else {
-            console.log('user2', user.groups.includes(userGroup));
-            return reject('already exists in ');
-          }
-        });
-      }
-    });
-  });
+  try {
+    const usersAddedToGroup = await putUserInGroupFunction(
+      ids,
+      userGroup,
+      UserGroup,
+      User
+    );
+    if (usersAddedToGroup) {
+      return usersAddedToGroup;
+    }
+  } catch (err) {
+    console.log('erro', err);
+  }
 }
 
 export function deleteUserInGroup(
