@@ -182,7 +182,7 @@ export function putUserInGroup(
               function (err, userUpdated) {
                 if (err) return reject(err || 'can not add user in goupe ');
                 return User.find(
-                  { where: { groups: userGroup } },
+                  { where: { groups: { $in: userGroup } } },
                   function (err, countUser) {
                     if (err) return reject(err);
 
@@ -223,7 +223,7 @@ export function deleteUserInGroup(
 
     User.updateAll(
       { id: { inq: ids } },
-      { userGroup: '' },
+      { groups: '' },
       function (err, userUpdated) {
         if (err) return reject(err);
         return User.find(
@@ -252,7 +252,7 @@ export function deleteUserInGroup(
 
 export function getUserByGroup(filter, User = loopback.getModelByType('User')) {
   return new Promise((resolve, reject) =>
-    User.find({ where: { userGroup: filter } }, (err, users) => {
+    User.find({ where: { groups: { $in: filter } } }, (err, users) => {
       if (err || isEmpty(users)) {
         return reject(err || 'can not find user in this group');
       }

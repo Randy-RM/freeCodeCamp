@@ -127,14 +127,16 @@ export function getAllUsers(
   User = loopback.getModelByType('User')
 ) {
   return new Promise((resolve, reject) => {
+    console.log('filtre ex', filter);
     if (filter) {
+      console.log('filtre', filter);
       if (filter.name && filter.email) {
         if (filter.userGroup) {
           User.find(
             {
               where: {
                 or: [{ name: filter.name }, { email: filter.email }],
-                and: [{ userGroup: filter.userGroup }]
+                and: [{ groups: { $in: filter.userGroup } }]
               },
               skip: (page - 1) * limit,
               limit: limit * 1
