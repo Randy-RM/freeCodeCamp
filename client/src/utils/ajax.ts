@@ -315,6 +315,8 @@ interface MyAbout {
   name: string;
   location: string;
   gender: string;
+  phone: string;
+  whatsapp: string;
   codeTime: string;
   about: string;
   picture: string;

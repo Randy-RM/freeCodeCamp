@@ -44,6 +44,8 @@ export const publicUserProps = [
   'website',
   'yearsTopContributor',
   'gender',
+  'phone',
+  'whatsapp',
   'codeTime',
   'fieldOfStudy',
   'levelOfStudy',

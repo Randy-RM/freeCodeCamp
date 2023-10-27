@@ -51,6 +51,8 @@ type AboutState = {
   isFocusAbout: boolean;
   isBlurAbout: boolean;
   isValidPhone: boolean;
+  isFocusPhone: boolean;
+  isBlurPhone: boolean;
   isValidWhatsapp: boolean;
 };
 
@@ -96,6 +98,8 @@ class AboutSettings extends Component<AboutProps, AboutState> {
       isFocusAbout: false,
       isBlurAbout: false,
       isValidPhone: true,
+      isFocusPhone: false,
+      isBlurPhone: false,
       isValidWhatsapp: true
     };
 
@@ -271,6 +275,31 @@ class AboutSettings extends Component<AboutProps, AboutState> {
     }
   };
 
+  focusHandelerPhone = () => {
+    this.setState({
+      isFocusPhone: true,
+      isBlurPhone: false
+    });
+  };
+
+  blurHandlerPhone = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement).value.slice(0).trim();
+
+    if (!validator.isEmpty(value)) {
+      this.setState({
+        isValidName: true,
+        isFocusName: false,
+        isBlurName: true
+      });
+    } else {
+      this.setState({
+        isValidName: false,
+        isFocusName: false,
+        isBlurName: true
+      });
+    }
+  };
+
   // ------------Location Handler------------
 
   focusHandlerLocation = () => {
@@ -332,6 +361,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
       formValues: { name, location, gender, codeTime, phone, whatsapp, about },
       isValidName,
       isValidPhone,
+      isValidWhatsapp,
       isFocusName,
       isBlurName
     } = this.state;
@@ -414,6 +444,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
               </FormControl>
               <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
             </FormGroup>
+
             <FormGroup controlId='about-phone'>
               <ControlLabel>
                 <strong>{'Numéro de téléphone'}</strong>
@@ -432,8 +463,6 @@ class AboutSettings extends Component<AboutProps, AboutState> {
                   {`Le numéro que vous avez entré n'est pas valide.`}
                 </HelpBlock>
               )}
-
-              <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
             </FormGroup>
 
             <FormGroup controlId='about-whatsapp'>
@@ -446,7 +475,13 @@ class AboutSettings extends Component<AboutProps, AboutState> {
                 type='text'
                 value={whatsapp}
               ></FormControl>
-              <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              {isValidWhatsapp ? (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              ) : (
+                <HelpBlock className='text-danger'>
+                  {`Le numéro que vous avez entré n'est pas valide.`}
+                </HelpBlock>
+              )}
             </FormGroup>
 
             <FormGroup controlId='about-code'>
