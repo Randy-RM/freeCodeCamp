@@ -227,7 +227,8 @@ async function removeUserFromGroupFunc(userGroup, ids, User, UserGroup) {
     })
   );
 
-  const countUser = await User.find({ where: { groups: { $in: userGroup } } });
+  const countUser = await User.find({ where: { groups: userGroup } });
+  console.log('user', countUser);
 
   await UserGroup.updateAll(
     { userGroupName: userGroup },
