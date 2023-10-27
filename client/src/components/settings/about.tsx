@@ -15,6 +15,8 @@ type FormValues = {
   name: string;
   location: string;
   gender: string;
+  phone: string;
+  whatsapp: string;
   codeTime: string;
   about: string;
 };
@@ -24,6 +26,8 @@ type AboutProps = {
   location: string;
   name: string;
   gender: string;
+  phone: string;
+  whatsapp: string;
   codeTime: string;
   points: number;
   submitNewAbout: (formValues: FormValues) => void;
@@ -46,6 +50,10 @@ type AboutState = {
   isValidAbout: boolean;
   isFocusAbout: boolean;
   isBlurAbout: boolean;
+  isValidPhone: boolean;
+  isFocusPhone: boolean;
+  isBlurPhone: boolean;
+  isValidWhatsapp: boolean;
 };
 
 class AboutSettings extends Component<AboutProps, AboutState> {
@@ -58,6 +66,8 @@ class AboutSettings extends Component<AboutProps, AboutState> {
       name = '',
       location = '',
       gender = '',
+      phone = '',
+      whatsapp = '',
       codeTime = '',
       about = ''
     } = props;
@@ -66,6 +76,8 @@ class AboutSettings extends Component<AboutProps, AboutState> {
       name,
       location,
       gender,
+      phone,
+      whatsapp,
       codeTime,
       about
     };
@@ -84,7 +96,11 @@ class AboutSettings extends Component<AboutProps, AboutState> {
       isValidCodeTime: true,
       isValidAbout: true,
       isFocusAbout: false,
-      isBlurAbout: false
+      isBlurAbout: false,
+      isValidPhone: true,
+      isFocusPhone: false,
+      isBlurPhone: false,
+      isValidWhatsapp: true
     };
 
     // this.focusHandlerName = this.focusHandlerName.bind(this);
@@ -92,13 +108,16 @@ class AboutSettings extends Component<AboutProps, AboutState> {
   }
 
   componentDidUpdate() {
-    const { name, location, gender, codeTime, about } = this.props;
+    const { name, location, gender, codeTime, about, phone, whatsapp } =
+      this.props;
     const { formValues, formClicked } = this.state;
     if (
       formClicked &&
       name === formValues.name &&
       location === formValues.location &&
       gender === formValues.gender &&
+      phone === formValues.phone &&
+      whatsapp === formValues.whatsapp &&
       codeTime === formValues.codeTime &&
       about === formValues.about
     ) {
@@ -108,6 +127,8 @@ class AboutSettings extends Component<AboutProps, AboutState> {
           name,
           location,
           gender,
+          phone,
+          whatsapp,
           codeTime,
           about
         },
@@ -118,8 +139,19 @@ class AboutSettings extends Component<AboutProps, AboutState> {
   }
 
   isFormPristine = () => {
-    const { formValues, originalValues, isValidName } = this.state;
-    if (isValidName === true && formValues.name.length >= 5) {
+    const {
+      formValues,
+      originalValues,
+      isValidName,
+      isValidPhone,
+      isValidWhatsapp
+    } = this.state;
+    if (
+      isValidName === true &&
+      formValues.name.length >= 5 &&
+      isValidPhone &&
+      isValidWhatsapp
+    ) {
       return (Object.keys(originalValues) as Array<keyof FormValues>)
         .map(key => originalValues[key] === formValues[key])
         .every(bool => bool);
@@ -139,6 +171,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
   createHandleChange =
     (key: keyof FormValues) => (e: React.FormEvent<HTMLInputElement>) => {
       const value = (e.target as HTMLInputElement).value.slice(0);
+      const phoneReg = /^(243|\+243|0|00243)([0-9]{9})$/;
       if (key === 'name') {
         return this.setState(state => ({
           formValues: {
@@ -157,6 +190,24 @@ class AboutSettings extends Component<AboutProps, AboutState> {
             [key]: value
           },
           isValidLocation: !validator.isEmpty(value)
+        }));
+      }
+      if (key === 'phone') {
+        return this.setState(state => ({
+          formValues: {
+            ...state.formValues,
+            [key]: value
+          },
+          isValidPhone: phoneReg.test(value)
+        }));
+      }
+      if (key === 'whatsapp') {
+        return this.setState(state => ({
+          formValues: {
+            ...state.formValues,
+            [key]: value
+          },
+          isValidWhatsapp: phoneReg.test(value)
         }));
       }
       if (key === 'gender') {
@@ -210,6 +261,31 @@ class AboutSettings extends Component<AboutProps, AboutState> {
       validator.isAlpha(value, 'fr-FR', { ignore: ' -' }) &&
       validator.isLength(value, { min: 5, max: 255 })
     ) {
+      this.setState({
+        isValidName: true,
+        isFocusName: false,
+        isBlurName: true
+      });
+    } else {
+      this.setState({
+        isValidName: false,
+        isFocusName: false,
+        isBlurName: true
+      });
+    }
+  };
+
+  focusHandelerPhone = () => {
+    this.setState({
+      isFocusPhone: true,
+      isBlurPhone: false
+    });
+  };
+
+  blurHandlerPhone = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement).value.slice(0).trim();
+
+    if (!validator.isEmpty(value)) {
       this.setState({
         isValidName: true,
         isFocusName: false,
@@ -282,8 +358,10 @@ class AboutSettings extends Component<AboutProps, AboutState> {
 
   render() {
     const {
-      formValues: { name, location, gender, codeTime, about },
+      formValues: { name, location, gender, codeTime, phone, whatsapp, about },
       isValidName,
+      isValidPhone,
+      isValidWhatsapp,
       isFocusName,
       isBlurName
     } = this.state;
@@ -365,6 +443,45 @@ class AboutSettings extends Component<AboutProps, AboutState> {
                 <option value='Homme'>Homme</option>
               </FormControl>
               <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+            </FormGroup>
+
+            <FormGroup controlId='about-phone'>
+              <ControlLabel>
+                <strong>{'Numéro de téléphone'}</strong>
+              </ControlLabel>
+              <FormControl
+                onChange={this.createHandleChange('phone')}
+                placeholder='+243899991122'
+                type='text'
+                value={phone}
+                className='standard-radius-5'
+              ></FormControl>
+              {isValidPhone ? (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              ) : (
+                <HelpBlock className='text-danger'>
+                  {`Le numéro que vous avez entré n'est pas valide.`}
+                </HelpBlock>
+              )}
+            </FormGroup>
+
+            <FormGroup controlId='about-whatsapp'>
+              <ControlLabel>
+                <strong>{'Numéro Whatsapp'}</strong>
+              </ControlLabel>
+              <FormControl
+                onChange={this.createHandleChange('whatsapp')}
+                placeholder='+243899991122'
+                type='text'
+                value={whatsapp}
+              ></FormControl>
+              {isValidWhatsapp ? (
+                <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+              ) : (
+                <HelpBlock className='text-danger'>
+                  {`Le numéro que vous avez entré n'est pas valide.`}
+                </HelpBlock>
+              )}
             </FormGroup>
 
             <FormGroup controlId='about-code'>

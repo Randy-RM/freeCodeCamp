@@ -89,6 +89,15 @@
       "type": "string",
       "default": ""
     },
+    "phone": {
+      "type": "string",
+      "default": ""
+    },
+    "whatsapp": {
+      "type": "string",
+      "default": ""
+    },
+
     "createAt": {
       "type": "date",
       "defaultFn": "now"

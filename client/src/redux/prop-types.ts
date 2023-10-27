@@ -58,6 +58,8 @@ export const UserPropType = PropTypes.shape({
   username: PropTypes.string,
   website: PropTypes.string,
   gender: PropTypes.string,
+  phone: PropTypes.string,
+  whatsapp: PropTypes.string,
   codeTime: PropTypes.string,
   fieldOfStudy: PropTypes.string,
   levelOfStudy: PropTypes.string,
@@ -318,6 +320,8 @@ export type User = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   yearsTopContributor: any[];
   gender: string;
+  phone: string;
+  whatsapp: string;
   codeTime: string;
   fieldOfStudy: string;
   levelOfStudy: string;

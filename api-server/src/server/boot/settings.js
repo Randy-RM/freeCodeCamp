@@ -151,14 +151,14 @@ function updateMyProfileUI(req, res, next) {
 function updateMyAbout(req, res, next) {
   const {
     user,
-    body: { name, location, gender, codeTime, about, picture }
+    body: { name, location, gender, phone, whatsapp, codeTime, about, picture }
   } = req;
-  log(name, location, gender, codeTime, about, picture);
+  log(name, location, gender, codeTime, about, phone, whatsapp, picture);
   // prevent dataurls from being stored
   // const update = isURL(picture, { require_protocol: true })
   //   ? { name, location, gender, codeTime, about, picture }
   //   : { name, location, gender, codeTime, about };
-  const update = { name, location, gender, codeTime, about };
+  const update = { name, location, gender, phone, whatsapp, codeTime, about };
   return user.updateAttributes(update, createStandardHandler(req, res, next));
 }
 

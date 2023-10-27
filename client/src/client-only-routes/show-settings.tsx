@@ -98,6 +98,8 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
       points,
       location,
       name,
+      phone,
+      whatsapp,
       gender,
       codeTime,
       fieldOfStudy,
@@ -154,6 +156,8 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
                     gender={gender}
                     codeTime={codeTime}
                     points={points}
+                    phone={phone}
+                    whatsapp={whatsapp}
                     submitNewAbout={submitNewAbout}
                     username={username}
                   />
