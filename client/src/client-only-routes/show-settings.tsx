@@ -86,7 +86,6 @@ const mapDispatchToProps = {
 export function ShowSettings(props: ShowSettingsProps): JSX.Element {
   const [courseLink, setCourseLink] = useState<string>('');
   // const { t } = useTranslation();
-  console.log('lik', courseLink);
 
   const queryString = window.location.search;
 
@@ -95,8 +94,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
     const decodelink = decodeURIComponent(`${urlparams}`);
     const trimmedUrl = decodelink.split('=');
     const link = trimmedUrl[0];
-    console.log(trimmedUrl);
-    console.log('link', `${link}`);
+
     setCourseLink(`${link}`);
   }, [queryString]);
   const {
@@ -133,7 +131,6 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
     updateInternetSettings
   } = props;
 
-  console.log('likn', courseLink);
   if (showLoading) {
     return <Loader fullScreen={true} />;
   }
@@ -143,10 +140,10 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
     return <Loader fullScreen={true} />;
   }
 
-  //  if (courseLink) {
-  //   navigate(`${courseLink}/`);
-  //   return <Loader fullScreen={true} />;
-  // }
+  if (name && phone) {
+    navigate(`${courseLink}`);
+    return <Loader fullScreen={true} />;
+  }
 
   return (
     <>
