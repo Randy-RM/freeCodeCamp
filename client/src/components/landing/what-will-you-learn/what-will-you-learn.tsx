@@ -33,6 +33,7 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
           isSignedIn={isSignedIn}
           title={`Responsive Web Design`}
           buttonText={`Suivre le cours  `}
+          link={'/learn/responsive-web-design/'}
           description={`
                 Dans ce cours, tu apprendras les langages que les développeurs
                 utilisent pour créer des pages Web : HTML (Hypertext Markup Language)
