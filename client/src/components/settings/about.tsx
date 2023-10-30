@@ -149,6 +149,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
     if (
       isValidName === true &&
       formValues.name.length >= 5 &&
+      formValues.phone.length >= 10 &&
       isValidPhone &&
       isValidWhatsapp
     ) {
@@ -448,6 +449,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
             <FormGroup controlId='about-phone'>
               <ControlLabel>
                 <strong>{'Numéro de téléphone'}</strong>
+                <span className='text-love-light'>*</span>
               </ControlLabel>
               <FormControl
                 onChange={this.createHandleChange('phone')}
