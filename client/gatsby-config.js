@@ -25,6 +25,13 @@ module.exports = {
   pathPrefix: pathPrefix,
   plugins: [
     {
+      resolve: `gatsby-plugin-google-tagmanager`,
+      options: {
+        // ID de votre conteneur Google Tag Manager
+        id: 'G-P9S5KF522M'
+      }
+    },
+    {
       resolve: 'gatsby-plugin-webpack-bundle-analyser-v2',
       options: {
         analyzerMode: 'disabled',
