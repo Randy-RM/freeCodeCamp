@@ -16,6 +16,8 @@ enum CardStyle {
 
 interface LandingDetailsProps {
   isSignedIn?: boolean;
+  phone?: string;
+  name?: string;
   isAvailable: boolean;
   sameTab?: boolean;
   external?: boolean;
@@ -32,6 +34,8 @@ interface LandingDetailsProps {
 const CourseCard = ({
   isSignedIn,
   isAvailable,
+  phone,
+  name,
   sameTab,
   external,
   description,
@@ -90,34 +94,16 @@ const CourseCard = ({
           <div className='card-course-detail-footer'>
             <div className='push'>
               {isAvailable ? (
-                isSignedIn ? (
-                  <>
-                    {link ? (
-                      <Link
-                        to={link}
-                        sameTab={sameTab ? true : false}
-                        external={external ? true : false}
-                        state={{ description: description }}
-                        className='link-course text-love-light fw-semi-bold text-responsive'
-                      >
-                        <div className='row-link'>
-                          <div className='row-link-text'>{buttonText}</div>
-                          <div>
-                            <img
-                              src={PlayIcon}
-                              alt='Laptop icon'
-                              className='play'
-                            />
-                          </div>
-                        </div>
-                      </Link>
-                    ) : (
-                      <>
-                        <Map
-                          forLanding={true}
-                          single={true}
+                name && phone ? (
+                  isSignedIn ? (
+                    <>
+                      {link ? (
+                        <Link
+                          to={link}
+                          sameTab={sameTab ? true : false}
+                          external={external ? true : false}
+                          state={{ description: description }}
                           className='link-course text-love-light fw-semi-bold text-responsive'
-                          keyPrefix='landing-details'
                         >
                           <div className='row-link'>
                             <div className='row-link-text'>{buttonText}</div>
@@ -129,20 +115,56 @@ const CourseCard = ({
                               />
                             </div>
                           </div>
-                        </Map>
-                        {/* <br />
+                        </Link>
+                      ) : (
+                        <>
+                          <Map
+                            forLanding={true}
+                            single={true}
+                            className='link-course text-love-light fw-semi-bold text-responsive'
+                            keyPrefix='landing-details'
+                          >
+                            <div className='row-link'>
+                              <div className='row-link-text'>{buttonText}</div>
+                              <div>
+                                <img
+                                  src={PlayIcon}
+                                  alt='Laptop icon'
+                                  className='play'
+                                />
+                              </div>
+                            </div>
+                          </Map>
+                          {/* <br />
                         <Link
                           to={`http://localhost:8001/`}
                           className='link-course text-love-light fw-semi-bold text-responsive'
                         >
                           Mooc
                         </Link> */}
-                      </>
-                    )}
-                  </>
+                        </>
+                      )}
+                    </>
+                  ) : (
+                    <a
+                      href={`${apiLocation}/signin`}
+                      className='link-course text-love-light fw-semi-bold text-responsive'
+                    >
+                      <div className='row-link'>
+                        <div className='row-link-text'>{buttonText}</div>
+                        <div>
+                          <img
+                            src={PlayIcon}
+                            alt='Laptop icon'
+                            className='play'
+                          />
+                        </div>
+                      </div>
+                    </a>
+                  )
                 ) : (
                   <a
-                    href={`${apiLocation}/signin`}
+                    href={`/settings?${link as string}`}
                     className='link-course text-love-light fw-semi-bold text-responsive'
                   >
                     <div className='row-link'>
