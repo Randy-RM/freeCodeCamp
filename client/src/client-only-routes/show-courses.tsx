@@ -81,7 +81,11 @@ const mapDispatchToProps = {
 
 export function Courses(props: CoursesProps): JSX.Element {
   // const { t } = useTranslation();
-  const { isSignedIn, /*navigate,*/ showLoading } = props;
+  const {
+    isSignedIn,
+    showLoading,
+    user: { name, phone }
+  } = props;
   const [moodleCourses, setMoodleCourses] =
     useState<MoodleCoursesCatalogue | null>();
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
@@ -151,11 +155,6 @@ export function Courses(props: CoursesProps): JSX.Element {
     return <Loader fullScreen={true} />;
   }
 
-  // if (!isSignedIn) {
-  //   navigate(`${apiLocation}/signin`);
-  //   return <Loader fullScreen={true} />;
-  // }
-
   return (
     <>
       {/* <Helmet title={`${t('buttons.settings')} | Code Learning Plateform`} /> */}
@@ -182,10 +181,13 @@ export function Courses(props: CoursesProps): JSX.Element {
                       icon={LaptopIcon}
                       sponsorIcon={LaediesActIcon}
                       alt=''
+                      name={name}
+                      phone={phone}
                       isAvailable={true}
                       isSignedIn={isSignedIn}
                       title={`Responsive Web Design`}
                       buttonText={`Suivre le cours  `}
+                      link={'/learn/responsive-web-design/'}
                       description={`
                 Dans ce cours, tu apprendras les langages que les développeurs 
                 utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
@@ -198,6 +200,8 @@ export function Courses(props: CoursesProps): JSX.Element {
                       alt=''
                       isAvailable={true}
                       isSignedIn={isSignedIn}
+                      phone={phone}
+                      name={name}
                       title={`JavaScript Algorithms and Data Structures`}
                       buttonText={`Suivre le cours  `}
                       link={`/learn/javascript-algorithms-and-data-structures`}
@@ -215,6 +219,8 @@ export function Courses(props: CoursesProps): JSX.Element {
                       <CourseCard
                         key={index + course.id}
                         icon={PhBookBookmark}
+                        phone={phone}
+                        name={name}
                         isAvailable={course.visible == 1}
                         isSignedIn={isSignedIn}
                         sameTab={true}

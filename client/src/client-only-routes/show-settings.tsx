@@ -1,5 +1,6 @@
-import { Grid, Row, Col } from '@freecodecamp/react-bootstrap';
-import React from 'react';
+import { Grid, Row, Col, HelpBlock } from '@freecodecamp/react-bootstrap';
+import React, { useEffect, useState } from 'react';
+
 import Helmet from 'react-helmet';
 // import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
@@ -83,7 +84,24 @@ const mapDispatchToProps = {
 };
 
 export function ShowSettings(props: ShowSettingsProps): JSX.Element {
+  const [courseLink, setCourseLink] = useState<string>('');
   // const { t } = useTranslation();
+
+  const queryString = window.location.search;
+  function removeEqualSignAtEnd(string: string) {
+    if (string.endsWith('=')) {
+      string = string.slice(0, string.length - 1);
+    }
+    return string;
+  }
+
+  useEffect(() => {
+    const urlparams: string = new URLSearchParams(queryString).toString();
+    const decodelink = decodeURIComponent(`${urlparams}`);
+    const link = removeEqualSignAtEnd(decodelink);
+
+    setCourseLink(`${link}`);
+  }, [queryString]);
   const {
     isSignedIn,
     submitNewAbout,
@@ -126,6 +144,14 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
     navigate(`${apiLocation}/signin`);
     return <Loader fullScreen={true} />;
   }
+  if (courseLink) {
+    if (name && phone) {
+      setTimeout(() => {
+        navigate(courseLink);
+      }, 3000);
+      return <Loader fullScreen={true} />;
+    }
+  }
 
   return (
     <>
@@ -144,6 +170,13 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
                   >
                     {'Informations personnelles'}
                   </h1>
+                  {!courseLink ? (
+                    <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
+                  ) : (
+                    <HelpBlock className='text-danger'>
+                      {`Vueillez compléter vos informations personnelles avant de commencer le cours `}
+                    </HelpBlock>
+                  )}
                 </div>
               </Col>
               <Col className='' md={12} sm={12} xs={12}>
