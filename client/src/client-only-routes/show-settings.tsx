@@ -139,10 +139,13 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
     navigate(`${apiLocation}/signin`);
     return <Loader fullScreen={true} />;
   }
-
-  if (name && phone) {
-    navigate(`${courseLink}`);
-    return <Loader fullScreen={true} />;
+  if (courseLink) {
+    if (name && phone) {
+      setTimeout(() => {
+        navigate(courseLink);
+      }, 3000);
+      return <Loader fullScreen={true} />;
+    }
   }
 
   return (
