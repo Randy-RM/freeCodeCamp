@@ -88,12 +88,17 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
   // const { t } = useTranslation();
 
   const queryString = window.location.search;
+  function removeEqualSignAtEnd(string: string) {
+    if (string.endsWith('=')) {
+      string = string.slice(0, string.length - 1);
+    }
+    return string;
+  }
 
   useEffect(() => {
     const urlparams: string = new URLSearchParams(queryString).toString();
     const decodelink = decodeURIComponent(`${urlparams}`);
-    const trimmedUrl = decodelink.split('=');
-    const link = trimmedUrl[0];
+    const link = removeEqualSignAtEnd(decodelink);
 
     setCourseLink(`${link}`);
   }, [queryString]);
