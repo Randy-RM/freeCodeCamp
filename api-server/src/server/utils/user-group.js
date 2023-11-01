@@ -56,9 +56,9 @@ export function updateUserGroup(
                     User.updateAll(
                       { userGroup: userGroupFound.userGroupName },
                       { userGroup: userGroup.userGroupName },
-                      function (err, instance) {
+                      function (err, users) {
                         if (err) return reject(err);
-                        return resolve(instance);
+                        return resolve(users);
                       }
                     );
                   }
@@ -88,21 +88,21 @@ export function getAllUsersGroup(
           limit: limit * 1,
           order: 'id DESC'
         },
-        (err, instance) => {
-          if (err || isEmpty(instance)) {
-            return reject(err || 'No users group found');
+        (err, users) => {
+          if (err || isEmpty(users)) {
+            return reject(err || 'Noinstance group found');
           }
-          resolve(console.log(instance));
+          resolve(console.log(users));
         }
       );
     } else {
       UsersGroup.find(
         { skip: (page - 1) * limit, limit: limit * 1, order: 'id DESC' },
-        (err, instance) => {
-          if (err || isEmpty(instance)) {
-            return reject(err || 'No users group found');
+        (err, users) => {
+          if (err || isEmpty(users)) {
+            return reject(err || 'Noinstance group found');
           }
-          return resolve(instance);
+          return resolve(users);
         }
       );
     }
@@ -151,9 +151,9 @@ export function deleteUserGroup(
               User.updateAll(
                 { userGroup: userGroupFound.userGroupName },
                 { userGroup: '' },
-                function (err, instance) {
+                function (err, users) {
                   if (err) return reject(err);
-                  return resolve(instance);
+                  return resolve(users);
                 }
               );
             }
@@ -164,86 +164,106 @@ export function deleteUserGroup(
     });
   });
 }
-export function putUserInGroup(
-  ids,
-  userGroup,
-  User = loopback.getModelByType('User'),
-  UserGroup = loopback.getModelByType('userGroup')
-) {
-  return new Promise((resolve, reject) => {
-    ids.map(id => {
-      User.updateAll({ id: id }, { userGroup }, function (err, userUpdated) {
-        if (err) return reject(err);
-        return User.find(
-          { where: { userGroup: userGroup } },
-          function (err, countUser) {
-            if (err) return reject(err);
 
-            if (countUser) {
-              UserGroup.updateAll(
-                { userGroupName: userGroup },
-                { memberCount: countUser.length },
-                function (err, instance) {
-                  if (err) return reject(err || 'count member group');
-                  if (instance) {
-                    resolve(userUpdated);
-                  }
-                }
-              );
-            }
-          }
-        );
-      });
-    });
-  });
+async function putUserInGroupFunction(ids, userGroup, UserGroup, User) {
+  const users = await User.find({ where: { id: { inq: ids } } });
+
+  if (users.length === 0) {
+    return Promise.reject('No users found');
+  }
+
+  const usersNotInGroup = users.filter(
+    user => !user.groups.includes(userGroup)
+  );
+
+  await Promise.all(
+    usersNotInGroup.map(async user => {
+      await User.updateAll({ id: user.id }, { $push: { groups: userGroup } });
+    })
+  );
+
+  const countUser = await User.find({ where: { groups: userGroup } });
+  console.log('user', countUser);
+
+  await UserGroup.updateAll(
+    { userGroupName: userGroup },
+    { memberCount: countUser.length }
+  );
+
+  return users;
 }
 
-export function deleteUserInGroup(
+export async function putUserInGroup(
   ids,
   userGroup,
   User = loopback.getModelByType('User'),
   UserGroup = loopback.getModelByType('userGroup')
 ) {
-  return new Promise((resolve, reject) => {
-    console.log('req', ids, userGroup);
-    ids.map(id => {
-      User.updateAll(
-        { id: id },
-        { userGroup: '' },
-        function (err, userUpdated) {
-          if (err) return reject(err);
-          return User.find(
-            { where: { userGroup: userGroup } },
-            function (err, countUser) {
-              if (err) return reject(err);
+  try {
+    const usersAddedToGroup = await putUserInGroupFunction(
+      ids,
+      userGroup,
+      UserGroup,
+      User
+    );
+    if (usersAddedToGroup) return usersAddedToGroup;
+  } catch (err) {
+    console.log('erro', err);
+  }
+}
 
-              if (countUser) {
-                UserGroup.updateAll(
-                  { userGroupName: userGroup },
-                  { memberCount: countUser.length },
-                  function (err, instance) {
-                    if (err) return reject(err || 'count member group');
-                    if (instance) {
-                      resolve(userUpdated);
-                    }
-                  }
-                );
-              }
-            }
-          );
-        }
-      );
-    });
-  });
+async function removeUserFromGroupFunc(userGroup, ids, User, UserGroup) {
+  const users = await User.find({ where: { id: { inq: ids } } });
+
+  if (users.length === 0) {
+    return Promise.reject('No users found');
+  }
+
+  const usersInGroup = users.filter(user => user.groups.includes(userGroup));
+
+  await Promise.all(
+    usersInGroup.map(async user => {
+      await User.updateAll({ id: user.id }, { $pull: { groups: userGroup } });
+    })
+  );
+
+  const countUser = await User.find({ where: { groups: userGroup } });
+  console.log('user', countUser);
+
+  await UserGroup.updateAll(
+    { userGroupName: userGroup },
+    { memberCount: countUser.length }
+  );
+
+  return users;
+}
+
+export async function deleteUserInGroup(
+  ids,
+  userGroup,
+  User = loopback.getModelByType('User'),
+  UserGroup = loopback.getModelByType('userGroup')
+) {
+  try {
+    const removeUserINGroup = await removeUserFromGroupFunc(
+      userGroup,
+      ids,
+      User,
+      UserGroup
+    );
+    if (removeUserINGroup) return removeUserINGroup;
+  } catch (err) {
+    return err;
+  }
 }
 
 export function getUserByGroup(filter, User = loopback.getModelByType('User')) {
   return new Promise((resolve, reject) =>
-    User.find({ where: { userGroup: filter } }, (err, instance) => {
-      if (err || isEmpty(instance)) {
+    User.find({ where: { groups: { $in: filter } } }, (err, users) => {
+      if (err || isEmpty(users)) {
         return reject(err || 'can not find user in this group');
       }
-      return resolve(instance);
+      return resolve(users);
     })
   );
 }

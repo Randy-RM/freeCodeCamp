@@ -147,9 +147,10 @@
       "type": "string",
       "default": ""
     },
-    "userGroup": {
-      "type": "string",
-      "default": ""
+
+    "groups": {
+      "type": "array",
+      "default": []
     },
     "acceptedPrivacyTerms": {
       "type": "boolean",

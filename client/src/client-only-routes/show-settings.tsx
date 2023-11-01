@@ -10,6 +10,7 @@ import envData from '../../../config/env.json';
 import { createFlashMessage } from '../components/Flash/redux';
 import { Loader, Spacer } from '../components/helpers';
 import About from '../components/settings/about';
+import Modal from '../components/settings/modal';
 import Education from '../components/settings/education';
 import WorkExperience from '../components/settings/work-experience';
 import DangerZone from '../components/settings/danger-zone';
@@ -86,6 +87,14 @@ const mapDispatchToProps = {
 export function ShowSettings(props: ShowSettingsProps): JSX.Element {
   const [courseLink, setCourseLink] = useState<string>('');
   // const { t } = useTranslation();
+  const [isOpen, setIsOpen] = useState(false);
+  const handleOpenModal = () => {
+    setIsOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
 
   const queryString = window.location.search;
   function removeEqualSignAtEnd(string: string) {
@@ -101,6 +110,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
     const link = removeEqualSignAtEnd(decodelink);
 
     setCourseLink(`${link}`);
+    handleOpenModal();
   }, [queryString]);
   const {
     isSignedIn,
@@ -173,9 +183,17 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
                   {!courseLink ? (
                     <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
                   ) : (
-                    <HelpBlock className='text-danger'>
-                      {`Vueillez compléter vos informations personnelles avant de commencer le cours `}
-                    </HelpBlock>
+                    <>
+                      <Modal
+                        isOpen={isOpen}
+                        onClose={handleCloseModal}
+                        title='Vueillez compléter vos informations personnelles avant de commencer le cours'
+                      ></Modal>
+
+                      <HelpBlock className='text-danger'>
+                        {`Vueillez compléter vos informations personnelles avant de commencer le cours `}
+                      </HelpBlock>
+                    </>
                   )}
                 </div>
               </Col>

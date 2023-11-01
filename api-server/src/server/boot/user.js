@@ -184,7 +184,7 @@ async function getUserList(req, res) {
     let usersCount = [];
     let filter = {};
     if (classRoom && classRoom != 'all') {
-      filter = { userGroup: classRoom };
+      filter = { groups: classRoom };
 
       if (memberName) {
         filter.name = new RegExp(`${memberName}`, 'i');
