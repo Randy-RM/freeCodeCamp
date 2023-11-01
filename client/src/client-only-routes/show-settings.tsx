@@ -95,8 +95,11 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
   const handleCloseModal = () => {
     setIsOpen(false);
   };
+  let queryString = '';
+  if (typeof window !== 'undefined') {
+    queryString = window.location.search;
+  }
 
-  const queryString = window.location.search;
   function removeEqualSignAtEnd(string: string) {
     if (string.endsWith('=')) {
       string = string.slice(0, string.length - 1);
