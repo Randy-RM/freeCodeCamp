@@ -11,6 +11,7 @@ import Map from '../../Map/index';
 import { Spacer } from '../../helpers';
 
 import '../intro.css';
+// import { User } from '../../../redux/prop-types';
 
 type FetchState = {
   pending: boolean;
@@ -20,6 +21,8 @@ type FetchState = {
 
 type User = {
   acceptedPrivacyTerms: boolean;
+  phone: string;
+  name: string;
 };
 
 const mapStateToProps = createSelector(
@@ -39,7 +42,10 @@ type IntroDescriptionProps = {
   user: User;
 };
 
-function IntroDescription({ isSignedIn }: IntroDescriptionProps): JSX.Element {
+function IntroDescription({
+  isSignedIn,
+  user: { phone, name }
+}: IntroDescriptionProps): JSX.Element {
   return (
     <div className='intro-description'>
       <h1>
@@ -66,14 +72,21 @@ function IntroDescription({ isSignedIn }: IntroDescriptionProps): JSX.Element {
         `}
       </p>
       <Spacer />
-      {isSignedIn && (
+      {isSignedIn && name && phone ? (
         <Map
           forLanding={true}
           single={true}
           className='btn-primary link-button'
-          text='Lancez-vous maintenant !'
+          text='Lancez-vous maintenant 2!'
           keyPrefix='landing-details'
         />
+      ) : (
+        <a
+          href={`/settings?/learn/responsive-web-design/`}
+          className='btn-primary link-button'
+        >
+          {'Lancez-vous maintenant '}
+        </a>
       )}
       <Spacer />
     </div>
