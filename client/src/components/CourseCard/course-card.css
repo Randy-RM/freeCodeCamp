@@ -90,6 +90,15 @@ img {
   justify-content: space-between;
 }
 
+.card-course-detail-container-landing {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  gap: 5%;
+}
+
 .card-course-detail-unit {
   margin: 0;
   padding: 0;
