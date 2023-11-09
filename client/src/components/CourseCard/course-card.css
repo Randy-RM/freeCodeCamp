@@ -18,11 +18,11 @@ img {
   width: 100%;
 }
 
-.card-course-detail-back {
+.card-course-back {
   /* padding:2%; */
-  width: 47%;
+  width: 30%;
   height: auto;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
 }
 
 .card-course-detail-item {
@@ -39,12 +39,12 @@ img {
 }
 
 .card-course-detail-logo {
-  width: 30%;
+  width: 10%;
   padding: 5%;
 }
 
 .card-course-detail-logo-sponsor {
-  width: 50%;
+  width: 40%;
   padding: 5%;
 }
 
@@ -54,6 +54,10 @@ img {
 
 .card-title-w60 {
   width: 60%;
+}
+
+.card-description-font-size {
+  font-size: 14px;
 }
 
 .link-course:hover {
