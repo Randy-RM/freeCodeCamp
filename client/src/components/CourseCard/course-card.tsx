@@ -48,7 +48,7 @@ const CourseCard = ({
   cardType
 }: LandingDetailsProps): JSX.Element => {
   return (
-    <div className='card-course-back standard-radius-5 card-outlin-border'>
+    <div className='card-course-detail-back standard-radius-5 card-outlin-border'>
       <div className='card-course-detail-unit position-relative'>
         <div className='card-outlin-border bg-light standard-radius-5'>
           {cardType && cardType == CardStyle.Path ? (
