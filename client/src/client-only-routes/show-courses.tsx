@@ -96,6 +96,26 @@ export function Courses(props: CoursesProps): JSX.Element {
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses&moodlewsrestformat=json`
     );
+
+    const splitCourse: {
+      result: MoodleCourse[][];
+      size: number;
+    } | null =
+      moodleCatalogue != null
+        ? splitArray<MoodleCourse>(
+            moodleCatalogue.filter(moodleCourse => {
+              return moodleCourse.visible == 1 && moodleCourse.format != 'site';
+            }),
+            4
+          )
+        : null;
+
+    console.log('Split : ', splitCourse);
+
+    // splitCourse?.result[currentPage - 1].sort(
+    //   (course1, course2) => course1.timecreated - course2.timecreated
+    // );
+
     if (moodleCatalogue != null) {
       setMoodleCourses(
         splitArray<MoodleCourse>(
