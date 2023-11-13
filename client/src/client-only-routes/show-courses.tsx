@@ -33,6 +33,9 @@ import {
 
 import { User } from '../redux/prop-types';
 import { getExternalResource } from '../utils/ajax';
+// import CourseFilter from '../components/CourseFilter/course-filter';
+
+import '../components/CourseFilter/course-filter.css';
 
 const { moodleApiBaseUrl, moodleApiToken, moodleBaseUrl } = envData;
 
@@ -56,6 +59,8 @@ type MoodleCourse = {
   summary: string;
   visible: number;
   format: string;
+  timecreated: number;
+  timemodified: number;
 };
 
 type MoodleCoursesCatalogue = {
@@ -97,7 +102,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses&moodlewsrestformat=json`
     );
 
-    const splitCourse: {
+    const splitCourses: {
       result: MoodleCourse[][];
       size: number;
     } | null =
@@ -110,21 +115,14 @@ export function Courses(props: CoursesProps): JSX.Element {
           )
         : null;
 
-    console.log('Split : ', splitCourse);
-
-    // splitCourse?.result[currentPage - 1].sort(
-    //   (course1, course2) => course1.timecreated - course2.timecreated
-    // );
+    //Order courses by their publication date
+    splitCourses?.result[currentPage - 1].sort(
+      (course1: MoodleCourse, course2: MoodleCourse) =>
+        course1.timecreated - course2.timecreated
+    );
 
     if (moodleCatalogue != null) {
-      setMoodleCourses(
-        splitArray<MoodleCourse>(
-          moodleCatalogue.filter(moodleCourse => {
-            return moodleCourse.visible == 1 && moodleCourse.format != 'site';
-          }),
-          4
-        )
-      );
+      setMoodleCourses(splitCourses);
     } else {
       setMoodleCourses(null);
     }
@@ -193,72 +191,77 @@ export function Courses(props: CoursesProps): JSX.Element {
               </p>
             </div>
             <Spacer />
-            {!isDataOnLoading ? (
-              <div className='card-course-detail-container'>
-                {currentPage == 1 && (
-                  <>
-                    <CourseCard
-                      icon={LaptopIcon}
-                      sponsorIcon={LaediesActIcon}
-                      alt=''
-                      name={name}
-                      phone={phone}
-                      isAvailable={true}
-                      isSignedIn={isSignedIn}
-                      title={`Responsive Web Design`}
-                      buttonText={`Suivre le cours  `}
-                      link={'/learn/responsive-web-design/'}
-                      description={`
+            <div className='card-filter-container'>
+              {/* <CourseFilter /> */}
+              {!isDataOnLoading ? (
+                <div className='card-course-detail-container'>
+                  {currentPage == 1 && (
+                    <>
+                      <CourseCard
+                        icon={LaptopIcon}
+                        sponsorIcon={LaediesActIcon}
+                        alt=''
+                        name={name}
+                        phone={phone}
+                        isAvailable={true}
+                        isSignedIn={isSignedIn}
+                        title={`Responsive Web Design`}
+                        buttonText={`Suivre le cours  `}
+                        link={'/learn/responsive-web-design/'}
+                        description={`
                 Dans ce cours, tu apprendras les langages que les développeurs 
                 utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
                 pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
                 Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
                 `}
-                    />
-                    <CourseCard
-                      icon={AlgoIcon}
-                      alt=''
-                      isAvailable={true}
-                      isSignedIn={isSignedIn}
-                      phone={phone}
-                      name={name}
-                      title={`JavaScript Algorithms and Data Structures`}
-                      buttonText={`Suivre le cours  `}
-                      link={`/learn/javascript-algorithms-and-data-structures`}
-                      description={`Alors que HTML et CSS contrôlent le contenu et le style  d'une page, 
+                      />
+                      <CourseCard
+                        icon={AlgoIcon}
+                        alt=''
+                        isAvailable={true}
+                        isSignedIn={isSignedIn}
+                        phone={phone}
+                        name={name}
+                        title={`JavaScript Algorithms and Data Structures`}
+                        buttonText={`Suivre le cours  `}
+                        link={`/learn/javascript-algorithms-and-data-structures`}
+                        description={`Alors que HTML et CSS contrôlent le contenu et le style  d'une page, 
                 JavaScript est utilisé pour la rendre interactive. Dans le cadre du 
                 cours JavaScript Algorithm and Data Structures, tu apprendras 
                 les principes fondamentaux de JavaScript, etc.`}
-                    />
-                  </>
-                )}
-                {moodleCourses &&
-                  moodleCourses.result.length > 0 &&
-                  moodleCourses.result[currentPage - 1].map((course, index) => {
-                    return (
-                      <CourseCard
-                        key={index + course.id}
-                        icon={PhBookBookmark}
-                        phone={phone}
-                        name={name}
-                        isAvailable={course.visible == 1}
-                        isSignedIn={isSignedIn}
-                        sameTab={true}
-                        external={true}
-                        title={`${course.displayname}`}
-                        buttonText={`Suivre le cours  `}
-                        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                        link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
-                        description={course.summary}
                       />
-                    );
-                  })}
-              </div>
-            ) : (
-              <div className='card-course-detail-container'>
-                {renderCourseCardSkeletons(6)}
-              </div>
-            )}
+                    </>
+                  )}
+                  {moodleCourses &&
+                    moodleCourses.result.length > 0 &&
+                    moodleCourses.result[currentPage - 1].map(
+                      (course, index) => {
+                        return (
+                          <CourseCard
+                            key={index + course.id}
+                            icon={PhBookBookmark}
+                            phone={phone}
+                            name={name}
+                            isAvailable={course.visible == 1}
+                            isSignedIn={isSignedIn}
+                            sameTab={true}
+                            external={true}
+                            title={`${course.displayname}`}
+                            buttonText={`Suivre le cours  `}
+                            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                            link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
+                            description={course.summary}
+                          />
+                        );
+                      }
+                    )}
+                </div>
+              ) : (
+                <div className='card-course-detail-container'>
+                  {renderCourseCardSkeletons(6)}
+                </div>
+              )}
+            </div>
           </div>
         </main>
         {moodleCourses && moodleCourses.size > 0 && (
