@@ -435,10 +435,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
       ]);
     }
   };
-  const dateFormat = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleString();
-  };
+
   const isMemberCheked = (memberId: string): boolean => {
     const isMemberCheked = selectedGroupMembers.find(
       selectedGroupMemberId => selectedGroupMemberId == memberId
@@ -457,6 +454,10 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
       setMembersForExpot([]);
     }
   };
+  const dateFormat = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleString();
+  };
 
   const exportUsers = (members: Member[]) => {
     const csvConfig = mkConfig({ useKeysAsHeaders: true });
@@ -464,10 +465,10 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
       return {
         Email: member.email,
         Nom: member.name,
-        Genre: member.gender,
-        Ville: member.location,
         Telephone: member.phone,
-        Whatsapp: member.whatsapp
+        Whatsapp: member.whatsapp,
+        Genre: member.gender,
+        Ville: member.location
       };
     });
 

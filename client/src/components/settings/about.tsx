@@ -144,14 +144,16 @@ class AboutSettings extends Component<AboutProps, AboutState> {
       originalValues,
       isValidName,
       isValidPhone,
-      isValidWhatsapp
+      isValidWhatsapp,
+      isValidLocation
     } = this.state;
     if (
       isValidName === true &&
       formValues.name.length >= 5 &&
       formValues.phone.length >= 10 &&
       isValidPhone &&
-      isValidWhatsapp
+      isValidWhatsapp &&
+      isValidLocation
     ) {
       return (Object.keys(originalValues) as Array<keyof FormValues>)
         .map(key => originalValues[key] === formValues[key])
@@ -190,7 +192,10 @@ class AboutSettings extends Component<AboutProps, AboutState> {
             ...state.formValues,
             [key]: value
           },
-          isValidLocation: !validator.isEmpty(value)
+          isValidLocation:
+            value === 'Kinshasa' || value === 'Goma' || value === 'Lubumbashi'
+              ? true
+              : false
         }));
       }
       if (key === 'phone') {
@@ -415,17 +420,30 @@ class AboutSettings extends Component<AboutProps, AboutState> {
 
             <FormGroup controlId='about-location'>
               <ControlLabel>
-                <strong>{'Adresse'}</strong>
+                <strong>{'Ville'}</strong>
+                <span className='text-love-light'>*</span>
               </ControlLabel>
               <FormControl
                 onFocus={this.focusHandlerLocation}
                 onBlur={this.blurHandlerLocation}
+                componentClass='select'
                 onChange={this.createHandleChange('location')}
-                type='text'
-                value={location}
-                placeholder='63, av. Colonel Mondjiba, Ngaliema - Kinshasa'
+                value={
+                  location === 'Kinshasa' ||
+                  location === 'Goma' ||
+                  location === 'Lubumbashi'
+                    ? location
+                    : ''
+                }
                 className='standard-radius-5'
-              />
+              >
+                {' '}
+                <option value=''></option>
+                <option value='Kinshasa'>Kinshasa</option>
+                <option value='Goma'>Goma</option>
+                <option value='Lubumbashi'>Lubumbashi</option>
+              </FormControl>
+
               <HelpBlock className='none-help-block'>{'none'}</HelpBlock>
             </FormGroup>
 
