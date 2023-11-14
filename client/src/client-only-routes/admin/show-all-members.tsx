@@ -22,6 +22,7 @@ import {
   faSearch,
   faXmark
 } from '@fortawesome/free-solid-svg-icons';
+import { mkConfig, generateCsv, download } from 'export-to-csv';
 import {
   addUserInGRoup,
   getDatabaseResource,
@@ -42,7 +43,6 @@ import {
 
 import { CurrentSuperBlock, User } from '../../redux/prop-types';
 import './admin-global.css';
-
 const { apiLocation, homeLocation, moodleApiBaseUrl, moodleApiToken } = envData;
 
 // TODO: update types for actions
@@ -81,6 +81,7 @@ type Member = {
   createAt: string;
   phone: string;
   whatsapp: string;
+  location: string;
 };
 
 type UserList = {
@@ -131,7 +132,6 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
       setMembers(memberList.userList);
       setCountUsers(memberList.countUsers);
       setIsLoadingMember(false);
-      console.log('les membres', memberList.userList);
 
       if (totalPages == 1) {
         setTotalPages(Number(memberList.totalPages));
@@ -393,6 +393,8 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
     searchMember(memberName);
   };
 
+  const [membersForExpot, setMembersForExpot] = useState<Member[]>();
+
   const handleClearSearchMemberInput = () => {
     setMemberName('');
     searchMember('');
@@ -433,16 +435,50 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
       ]);
     }
   };
-  const dateFormat = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleString();
-  };
+
   const isMemberCheked = (memberId: string): boolean => {
     const isMemberCheked = selectedGroupMembers.find(
       selectedGroupMemberId => selectedGroupMemberId == memberId
     );
     return isMemberCheked ? true : false;
   };
+
+  const getAllMembersForExport = async () => {
+    const memberList = await getDatabaseResource<UserList>(
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      `/all-users?limit=100000`
+    );
+    if (memberList != null && !('error' in memberList)) {
+      setMembersForExpot(memberList.userList);
+    } else {
+      setMembersForExpot([]);
+    }
+  };
+  const dateFormat = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleString();
+  };
+
+  const exportUsers = (members: Member[]) => {
+    const csvConfig = mkConfig({ useKeysAsHeaders: true });
+    const mockData = members.map(member => {
+      return {
+        Email: member.email,
+        Nom: member.name,
+        Telephone: member.phone,
+        Whatsapp: member.whatsapp,
+        Genre: member.gender,
+        Ville: member.location
+      };
+    });
+
+    const csv = generateCsv(csvConfig)(mockData);
+    download(csvConfig)(csv);
+  };
+
+  useEffect(() => {
+    void getAllMembersForExport();
+  }, []);
 
   useEffect(() => {
     return;
@@ -687,6 +723,28 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                   </div>
                 </FormGroup>
               </form>
+            </div>
+
+            <div className='Export-section'>
+              {membersForExpot?.length !== 0 ? (
+                <Button
+                  type='submit'
+                  className='standard-radius-5 btn-black'
+                  onClick={() => {
+                    exportUsers(membersForExpot as Member[]);
+                  }}
+                >
+                  Exporter les utilisateurs
+                </Button>
+              ) : (
+                <Button
+                  type='submit'
+                  className='standard-radius-5 btn-black'
+                  disabled
+                >
+                  Exporter les utilisateurs
+                </Button>
+              )}
             </div>
           </div>
         </Col>
