@@ -81,6 +81,7 @@ type Member = {
   createAt: string;
   phone: string;
   whatsapp: string;
+  location: string;
 };
 
 type UserList = {
@@ -393,6 +394,8 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
     searchMember(memberName);
   };
 
+  const [membersForExpot, setMembersForExpot] = useState<Member[]>();
+
   const handleClearSearchMemberInput = () => {
     setMemberName('');
     searchMember('');
@@ -443,12 +446,42 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
     );
     return isMemberCheked ? true : false;
   };
+
+  const getAllMembersForExport = async () => {
+    const memberList = await getDatabaseResource<UserList>(
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      `/all-users?limit=100000`
+    );
+    if (memberList != null && !('error' in memberList)) {
+      setMembersForExpot(memberList.userList);
+
+      console.log('les membres', memberList.userList);
+    } else {
+      setMembersForExpot([]);
+    }
+  };
+
   const exportUsers = (members: Member[]) => {
     const csvConfig = mkConfig({ useKeysAsHeaders: true });
-    const mockData = members;
+    const mockData = members.map(member => {
+      return {
+        Email: member.email,
+        Nom: member.name,
+        Genre: member.gender,
+        Ville: member.location,
+        Telephone: member.phone,
+        Whatsapp: member.whatsapp
+      };
+    });
+
     const csv = generateCsv(csvConfig)(mockData);
     download(csvConfig)(csv);
   };
+
+  useEffect(() => {
+    void getAllMembersForExport();
+  }, []);
+
   useEffect(() => {
     return;
   }, [selectedGroupMembers]);
@@ -657,19 +690,6 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
               </form>
             </div>
           </div>
-          {members?.length !== 0 ? (
-            <Button
-              type='submit'
-              className='standard-radius-5 btn-black'
-              onClick={() => {
-                exportUsers(members as Member[]);
-              }}
-            >
-              Exporter
-            </Button>
-          ) : (
-            ''
-          )}
         </Col>
         <Col md={6} sm={12} xs={12}>
           <div className=''>
@@ -705,6 +725,28 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                   </div>
                 </FormGroup>
               </form>
+            </div>
+
+            <div className='Export-section'>
+              {membersForExpot?.length !== 0 ? (
+                <Button
+                  type='submit'
+                  className='standard-radius-5 btn-black'
+                  onClick={() => {
+                    exportUsers(membersForExpot as Member[]);
+                  }}
+                >
+                  Exporter les utilisateurs
+                </Button>
+              ) : (
+                <Button
+                  type='submit'
+                  className='standard-radius-5 btn-black'
+                  disabled
+                >
+                  Exporter les utilisateurs
+                </Button>
+              )}
             </div>
           </div>
         </Col>
