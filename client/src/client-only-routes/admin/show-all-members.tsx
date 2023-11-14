@@ -132,7 +132,6 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
       setMembers(memberList.userList);
       setCountUsers(memberList.countUsers);
       setIsLoadingMember(false);
-      console.log('les membres', memberList.userList);
 
       if (totalPages == 1) {
         setTotalPages(Number(memberList.totalPages));
@@ -454,8 +453,6 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
     );
     if (memberList != null && !('error' in memberList)) {
       setMembersForExpot(memberList.userList);
-
-      console.log('les membres', memberList.userList);
     } else {
       setMembersForExpot([]);
     }
