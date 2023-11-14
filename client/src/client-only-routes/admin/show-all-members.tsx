@@ -22,6 +22,7 @@ import {
   faSearch,
   faXmark
 } from '@fortawesome/free-solid-svg-icons';
+import { mkConfig, generateCsv, download } from 'export-to-csv';
 import {
   addUserInGRoup,
   getDatabaseResource,
@@ -42,7 +43,6 @@ import {
 
 import { CurrentSuperBlock, User } from '../../redux/prop-types';
 import './admin-global.css';
-
 const { apiLocation, homeLocation, moodleApiBaseUrl, moodleApiToken } = envData;
 
 // TODO: update types for actions
@@ -443,7 +443,12 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
     );
     return isMemberCheked ? true : false;
   };
-
+  const exportUsers = (members: Member[]) => {
+    const csvConfig = mkConfig({ useKeysAsHeaders: true });
+    const mockData = members;
+    const csv = generateCsv(csvConfig)(mockData);
+    download(csvConfig)(csv);
+  };
   useEffect(() => {
     return;
   }, [selectedGroupMembers]);
@@ -652,6 +657,19 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
               </form>
             </div>
           </div>
+          {members?.length !== 0 ? (
+            <Button
+              type='submit'
+              className='standard-radius-5 btn-black'
+              onClick={() => {
+                exportUsers(members as Member[]);
+              }}
+            >
+              Exporter
+            </Button>
+          ) : (
+            ''
+          )}
         </Col>
         <Col md={6} sm={12} xs={12}>
           <div className=''>
