@@ -19,7 +19,7 @@ import {
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
 import {
-  createUserGroup,
+  createUserRole,
   updateMemberGroup,
   getDatabaseResource,
   deleteMemberGroup
@@ -70,6 +70,7 @@ const mapDispatchToProps = {
 type MemberGroup = {
   id: string;
   userGroupName: string;
+  userRoleName: string;
   createAt: string;
   memberCount: number;
 };
@@ -81,8 +82,8 @@ type MemberGroupList = {
   countUsersGroup: number;
 };
 
-interface UserGroupResponse {
-  userGroup: MemberGroup | null;
+interface UserRoleResponse {
+  userRole: MemberGroup | null;
   error: string | undefined;
 }
 
@@ -106,7 +107,7 @@ export function ShowAllRoles(props: ShowAllGroupsProps): JSX.Element {
   const getMembersGroup = async () => {
     const groupList = await getDatabaseResource<MemberGroupList>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      `/all-users-group?page=${currentPage}&limit=4&memberGroupName=${memberGroupNameToSearch}`
+      `/all-users-roles?page=${currentPage}&limit=4&memberGroupName=${memberGroupNameToSearch}`
     );
     if (groupList != null && !('error' in groupList)) {
       setMembersGroup(groupList.userGroupList);
@@ -145,15 +146,15 @@ export function ShowAllRoles(props: ShowAllGroupsProps): JSX.Element {
     setGroupName(currentGroupName);
   };
 
-  const handleCreateGroupe = async (event: React.FormEvent): Promise<void> => {
+  const handeleCreateRole = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
     if (groupName.length != 0) {
       const groupToCreate = groupName;
-      const response = (await createUserGroup({
-        userGroupName: groupToCreate.trim()
-      })) as UserGroupResponse;
-      if (response.userGroup) {
-        setGroupRecentlyTreated(response.userGroup.id);
+      const response = (await createUserRole({
+        userRoleName: groupToCreate.trim()
+      })) as UserRoleResponse;
+      if (response.userRole) {
+        setGroupRecentlyTreated(response.userRole.id);
         setCurrentPage(1);
         setGroupName('');
         setInputHelpBlock({
@@ -279,7 +280,7 @@ export function ShowAllRoles(props: ShowAllGroupsProps): JSX.Element {
                 className='big-subheading'
                 style={{ overflowWrap: 'break-word' }}
               >
-                {'Groupes'}
+                {'Rôles'}
               </h1>
             </div>
           </Col>
@@ -288,18 +289,18 @@ export function ShowAllRoles(props: ShowAllGroupsProps): JSX.Element {
         <Row>
           <Col md={6} sm={12} xs={12}>
             <div className='section-block-padding bg-secondary'>
-              <p className=''>Créer un groupe</p>
+              <p className=''>Créer un rôle</p>
               <div className=''>
                 <div>
                   <form>
                     <FormGroup controlId='class-room-filter'>
                       <ControlLabel>
-                        <strong>{'Nom du groupe'}</strong>
+                        <strong>{'Nom du rôle'}</strong>
                       </ControlLabel>
                       <div className=''>
                         <FormControl
                           type='text'
-                          placeholder='Nom du groupe'
+                          placeholder='Nom du rôle'
                           className='standard-radius-5'
                           name='groupName'
                           value={groupName}
@@ -336,9 +337,9 @@ export function ShowAllRoles(props: ShowAllGroupsProps): JSX.Element {
                           type='submit'
                           className='standard-radius-5 btn-black'
                           id='button-create'
-                          onClick={handleCreateGroupe}
+                          onClick={handeleCreateRole}
                         >
-                          Créer un nouveau group
+                          Créer un nouveau rôle
                         </Button>
                         &nbsp; &nbsp; &nbsp;
                         {isUpdateAction && (
@@ -348,7 +349,7 @@ export function ShowAllRoles(props: ShowAllGroupsProps): JSX.Element {
                             id='button-update'
                             onClick={handleUpdateGroupe}
                           >
-                            Mettre à jour le group
+                            Mettre à jour le rôle
                           </Button>
                         )}
                       </div>
@@ -407,8 +408,7 @@ export function TableMembers(props: TableMembersGroupProps): JSX.Element {
               <Table responsive hover>
                 <thead className='bg-dark-gray'>
                   <tr>
-                    <th className='text-light'>Groupe</th>
-                    <th className='text-light'>Effectif</th>
+                    <th className='text-light'>Rôle</th>
                     <th className='text-light'>Créé le</th>
                     <th className='text-light'>Action</th>
                   </tr>
@@ -418,12 +418,9 @@ export function TableMembers(props: TableMembersGroupProps): JSX.Element {
                     return (
                       <tr key={index}>
                         <td style={{ verticalAlign: 'middle' }}>
-                          {group.userGroupName}
+                          {group.userRoleName}
                         </td>
-                        <td style={{ verticalAlign: 'middle' }}>
-                          {group.memberCount ? group.memberCount : 'O '}{' '}
-                          {'Membre'}
-                        </td>
+
                         <td style={{ verticalAlign: 'middle' }}>
                           {dateFormat(`${group.createAt}`)}
                         </td>

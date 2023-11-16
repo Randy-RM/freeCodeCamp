@@ -2,7 +2,7 @@ import { Router } from '@reach/router';
 import { withPrefix } from 'gatsby';
 import React from 'react';
 
-import ShowAllRoles from '../../client-only-routes/admin/show-all-groups';
+import ShowAllRoles from '../../client-only-routes/admin/show-all-roles';
 import RedirectHome from '../../components/redirect-home';
 
 function AllRoles(): JSX.Element {

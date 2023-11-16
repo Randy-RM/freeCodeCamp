@@ -293,7 +293,7 @@ export async function createUserGroup(
   body: UserGroup
 ): Promise<UserGroupResponse | void | unknown> {
   try {
-    const response = await post<UserGroupResponse>('/user-role/create', body);
+    const response = await post<UserGroupResponse>('/user-group/create', body);
 
     if (!response.userGroup) {
       throw new Error(response.error);
@@ -309,20 +309,29 @@ export async function createUserGroup(
   }
 }
 
-export async function createUserRole(
-  body: UserGroup
-): Promise<UserGroupResponse | void | unknown> {
-  try {
-    const response = await post<UserGroupResponse>('/user-group/create', body);
+interface UserRole {
+  id?: string;
+  userRoleName: string;
+}
 
-    if (!response.userGroup) {
+interface UserRoleResponse {
+  userRole: UserRole | null;
+  error: string | undefined;
+}
+export async function createUserRole(
+  body: UserRole
+): Promise<UserRoleResponse | void | unknown> {
+  try {
+    const response = await post<UserRoleResponse>('/user-role/create', body);
+
+    if (!response.userRole) {
       throw new Error(response.error);
     }
     return response;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: unknown | any) {
     return {
-      userGroup: null,
+      userRole: null,
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
       error: error.message
     };

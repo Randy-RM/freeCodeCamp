@@ -29,23 +29,24 @@ function bootUserGroup(app) {
 }
 
 async function createOneUserRole(req, res) {
-  const { userGroupName } = req.body;
-  log(userGroupName);
+  const { userRoleName } = req.body;
+  log(userRoleName);
 
   try {
-    if (userGroupName.length == 0) {
+    if (userRoleName.length == 0) {
       throw new Error('This field should not be empty.');
     }
-    let newUserGroup = null;
-    newUserGroup = await insertUserRole({ userGroupName: userGroupName });
-    if (!newUserGroup.userGroup) {
-      throw new Error(newUserGroup.error);
+    let newUserRole = null;
+    newUserRole = await insertUserRole({ userRoleName: userRoleName });
+    if (!newUserRole.userRole) {
+      throw new Error(newUserRole.error);
     }
+    console.log('new', newUserRole);
 
-    return res.json(newUserGroup);
+    return res.json(newUserRole);
   } catch (error) {
     return res.json({
-      newUserGroup: null,
+      newUserRole: null,
       error: error.message
     });
   }

@@ -35,7 +35,7 @@ export function updateUserRole(
       (error, userGroupFound) => {
         if (userGroupFound.length != 0) {
           return reject(
-            new Error('Failed to update, a group already exists with this name')
+            new Error('Failed to update, a Role already exists with this name')
           );
         }
         return UserGroup.upsertWithWhere(
