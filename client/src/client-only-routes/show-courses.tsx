@@ -33,9 +33,9 @@ import {
 
 import { User } from '../redux/prop-types';
 import { getExternalResource } from '../utils/ajax';
-// import CourseFilter from '../components/CourseFilter/course-filter';
 
 import '../components/CourseFilter/course-filter.css';
+import CourseFilter from '../components/CourseFilter/course-filter';
 
 const { moodleApiBaseUrl, moodleApiToken, moodleBaseUrl } = envData;
 
@@ -49,7 +49,7 @@ interface CoursesProps {
   path?: string;
 }
 
-type MoodleCourse = {
+export type MoodleCourse = {
   id: number;
   shortname: string;
   categoryid: number;
@@ -63,7 +63,7 @@ type MoodleCourse = {
   timemodified: number;
 };
 
-type MoodleCoursesCatalogue = {
+export type MoodleCoursesCatalogue = {
   result: MoodleCourse[][];
   size: number;
 };
@@ -101,11 +101,8 @@ export function Courses(props: CoursesProps): JSX.Element {
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses&moodlewsrestformat=json`
     );
-
-    const splitCourses: {
-      result: MoodleCourse[][];
-      size: number;
-    } | null =
+    console.log('moodleCatalogue', moodleCatalogue);
+    const splitCourses: MoodleCoursesCatalogue | null | undefined =
       moodleCatalogue != null
         ? splitArray<MoodleCourse>(
             moodleCatalogue.filter(moodleCourse => {
@@ -192,7 +189,10 @@ export function Courses(props: CoursesProps): JSX.Element {
             </div>
             <Spacer />
             <div className='card-filter-container'>
-              {/* <CourseFilter /> */}
+              <CourseFilter
+                setMoodleCourses={setMoodleCourses}
+                setIsDataOnLoading={setIsDataOnLoading}
+              />
               {!isDataOnLoading ? (
                 <div className='card-course-detail-container'>
                   {currentPage == 1 && (
@@ -233,8 +233,9 @@ export function Courses(props: CoursesProps): JSX.Element {
                     </>
                   )}
                   {moodleCourses &&
+                    moodleCourses.result &&
                     moodleCourses.result.length > 0 &&
-                    moodleCourses.result[currentPage - 1].map(
+                    moodleCourses.result[currentPage - 1]?.map(
                       (course, index) => {
                         return (
                           <CourseCard
