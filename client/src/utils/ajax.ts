@@ -461,6 +461,39 @@ export async function updateMemberGroup(
   }
 }
 
+interface UpdateRoleResponse {
+  isUpdated: boolean;
+  error: string | unknown;
+}
+export async function updateMemberRole(
+  body: UserRole
+): Promise<UpdateRoleResponse | undefined> {
+  try {
+    const isMemberRoleUpdated = await put<UpdateRoleResponse>(
+      '/user-role/update',
+      body
+    );
+    if (!isMemberRoleUpdated.isUpdated) {
+      if (typeof isMemberRoleUpdated.error === 'string') {
+        throw new Error(isMemberRoleUpdated.error);
+      }
+      throw new Error('Update of the role failed.');
+    }
+    return isMemberRoleUpdated;
+  } catch (error) {
+    if (error instanceof Error) {
+      return {
+        isUpdated: false,
+        error: error.message
+      };
+    }
+    return {
+      isUpdated: false,
+      error: 'Update of the role failed.'
+    };
+  }
+}
+
 /** DELETE **/
 export function deleteWebhookToken(): Promise<void> {
   return deleteRequest('/user/webhook-token', {});
@@ -477,6 +510,31 @@ export async function deleteMemberGroup(
   try {
     const groupIsAdded = await deleteRequest<DeletionGroupResponse>(
       '/user-group/delete',
+      body
+    );
+    if (!groupIsAdded.isDeleted) {
+      throw new Error('Deletion of the group failed.');
+    }
+    return groupIsAdded;
+  } catch (error) {
+    if (error instanceof Error) {
+      return {
+        isDeleted: false,
+        message: error.message
+      };
+    }
+    return {
+      isDeleted: false,
+      message: 'Deletion of the group failed.'
+    };
+  }
+}
+export async function deleteMemberRole(
+  body: UserRole
+): Promise<DeletionGroupResponse | undefined> {
+  try {
+    const groupIsAdded = await deleteRequest<DeletionGroupResponse>(
+      '/user-role/delete',
       body
     );
     if (!groupIsAdded.isDeleted) {

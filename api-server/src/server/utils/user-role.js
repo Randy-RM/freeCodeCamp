@@ -24,38 +24,37 @@ export async function insertUserRole(
 }
 
 export function updateUserRole(
-  userGroup,
-  UserGroup = loopback.getModelByType('userGroup'),
+  userRole,
+  UserRole = loopback.getModelByType('userRole'),
   User = loopback.getModelByType('User')
 ) {
   return new Promise((resolve, reject) => {
-    console.log(userGroup, 'les goup avant');
-    return UserGroup.find(
-      { where: { userGroupName: userGroup.userGroupName } },
-      (error, userGroupFound) => {
-        if (userGroupFound.length != 0) {
+    return UserRole.find(
+      { where: { userRoleName: userRole.userRoleName } },
+      (error, userRoleFound) => {
+        if (userRoleFound.length != 0) {
           return reject(
             new Error('Failed to update, a Role already exists with this name')
           );
         }
-        return UserGroup.upsertWithWhere(
+        return UserRole.upsertWithWhere(
           {
-            id: userGroup.id
+            id: userRole.id
           },
-          userGroup,
-          (error, countUserGroupUpdated) => {
+          userRole,
+          (error, countUserRoleUpdated) => {
             if (error) {
               return reject(error || 'Error in Updated Document');
             }
-            if (countUserGroupUpdated) {
-              UserGroup.find(
-                { where: { id: userGroup.id } },
-                function (err, userGroupFound) {
+            if (countUserRoleUpdated) {
+              UserRole.find(
+                { where: { id: userRole.id } },
+                function (err, userRoleFound) {
                   if (err) return reject(err);
-                  if (userGroupFound) {
+                  if (userRoleFound) {
                     User.updateAll(
-                      { userGroup: userGroupFound.userGroupName },
-                      { userGroup: userGroup.userGroupName },
+                      { role: userRoleFound.userRoleName },
+                      { role: userRoleFound.userRoleName },
                       function (err, users) {
                         if (err) return reject(err);
                         return resolve(users);
@@ -65,7 +64,7 @@ export function updateUserRole(
                 }
               );
             }
-            return resolve(countUserGroupUpdated);
+            return resolve(countUserRoleUpdated);
           }
         );
       }
@@ -75,18 +74,18 @@ export function updateUserRole(
 
 export function countUsersRoleDocuments(
   filter,
-  UsersGroup = loopback.getModelByType('userGroup')
+  UsersRole = loopback.getModelByType('userRole')
 ) {
   return new Promise((resolve, reject) => {
     if (filter) {
-      UsersGroup.find({ where: filter }, (err, count) => {
+      UsersRole.find({ where: filter }, (err, count) => {
         if (err || isEmpty(count)) {
           return reject(err || 'can not count user group collection');
         }
         return resolve(count);
       });
     } else {
-      UsersGroup.find((err, count) => {
+      UsersRole.find((err, count) => {
         if (err || isEmpty(count)) {
           return reject(err || 'can not count user group collection');
         }
@@ -98,22 +97,22 @@ export function countUsersRoleDocuments(
 
 export function deleteUserRole(
   userGroupId,
-  UserGroup = loopback.getModelByType('userGroup'),
+  UserRole = loopback.getModelByType('userRole'),
   User = loopback.getModelByType('User')
 ) {
   return new Promise((resolve, reject) => {
-    UserGroup.destroyById(userGroupId, (error, countUserGroupDeleted) => {
+    UserRole.destroyById(userGroupId, (error, countUserGroupDeleted) => {
       if (error /* || isEmpty(count)*/) {
         return reject(error || 'Error in deleting Documents');
       }
       if (countUserGroupDeleted) {
-        UserGroup.find(
+        UserRole.find(
           { where: { id: userGroupId } },
           function (err, userGroupFound) {
             if (err) return reject(err);
             if (userGroupFound) {
               User.updateAll(
-                { userGroup: userGroupFound.userGroupName },
+                { role: userGroupFound.userGroupName },
                 { userGroup: '' },
                 function (err, users) {
                   if (err) return reject(err);

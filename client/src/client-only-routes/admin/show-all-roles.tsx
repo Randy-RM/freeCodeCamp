@@ -20,9 +20,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {
   createUserRole,
-  updateMemberGroup,
+  updateMemberRole,
   getDatabaseResource,
-  deleteMemberGroup
+  deleteMemberRole
 } from '../../utils/ajax';
 
 import envData from '../../../../config/env.json';
@@ -197,9 +197,9 @@ export function ShowAllRoles(props: ShowAllGroupsProps): JSX.Element {
     event.preventDefault();
     setIsUpdateAction(false);
     setGroupName('');
-    const response = await updateMemberGroup({
+    const response = await updateMemberRole({
       id: groupId,
-      userGroupName: groupName
+      userRoleName: groupName
     });
     if (response && response.isUpdated) {
       setGroupRecentlyTreated(groupRecentlyTreated != groupId ? groupId : '');
@@ -236,7 +236,7 @@ export function ShowAllRoles(props: ShowAllGroupsProps): JSX.Element {
   };
 
   const handleDeleteMemberGroup = async (memberGroup: MemberGroup) => {
-    const isMemberGroupDeleted = await deleteMemberGroup(memberGroup);
+    const isMemberGroupDeleted = await deleteMemberRole(memberGroup);
     if (isMemberGroupDeleted?.isDeleted) {
       setGroupRecentlyTreated(
         groupRecentlyTreated != memberGroup.id ? memberGroup.id : ''
