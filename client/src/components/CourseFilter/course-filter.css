@@ -23,10 +23,25 @@
   text-align: left;
 }
 
+.main-title-filter {
+  padding-bottom: 20px;
+}
+
 .filter-button:hover {
   border: none;
   background-color: inherit;
   color: red;
+}
+
+@keyframes details-show {
+  from {
+    opacity: 0;
+    transform: var(--details-translate, translateY(-0.5em));
+  }
+}
+
+details[open] > *:not(summary) {
+  animation: details-show 300ms ease-in-out;
 }
 
 .selected-category {
@@ -37,6 +52,13 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.filter-title-container {
+  display: flex;
+  gap: 5px;
+  cursor: pointer;
+  /* align-items: center; */
 }
 
 @media (max-width: 768px) {

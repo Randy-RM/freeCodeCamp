@@ -9,6 +9,7 @@ import {
   MoodleCoursesCatalogue
 } from '../../client-only-routes/show-courses';
 import { splitArray } from '../helpers';
+import sortCourses from '../helpers/sort-course';
 
 type MoodleCourseCategory = {
   id: number;
@@ -47,6 +48,8 @@ const CourseFilter = ({
     MoodleCourseCategory[] | null
   >();
 
+  const [showSubjectFilter, setShowSubjectFilter] = useState<boolean>(true);
+
   const [currentCategory, setCurrentCategory] = useState<number | null>(null);
 
   const getMoodleCourseCategory = async () => {
@@ -77,8 +80,10 @@ const CourseFilter = ({
             4
           )
         : null;
+    //Order courses by their publication date
+    const sortedCourses = sortCourses(splitCourses);
 
-    setMoodleCourses(splitCourses);
+    setMoodleCourses(sortedCourses);
   };
 
   const getMoodleCourses = async () => {
@@ -100,13 +105,10 @@ const CourseFilter = ({
     setIsDataOnLoading(false);
 
     //Order courses by their publication date
-    // splitCourses?.result[currentPage - 1].sort(
-    //   (course1: MoodleCourse, course2: MoodleCourse) =>
-    //     course1.timecreated - course2.timecreated
-    // );
+    const sortedCourses = sortCourses(splitCourses);
 
     if (moodleCatalogue != null) {
-      setMoodleCourses(splitCourses);
+      setMoodleCourses(sortedCourses);
     } else {
       setMoodleCourses(null);
     }
@@ -118,36 +120,72 @@ const CourseFilter = ({
 
   return (
     <div className='filter-container'>
-      <p className='filter-title'>Sujets</p>
-      <ul className=' filter-items-container '>
-        <button
-          className={`filter-button ${
-            currentCategory == null ? 'selected-category' : ''
-          }`}
-          onClick={() => {
-            void getMoodleCourses();
-            setCurrentCategory(null);
-          }}
+      <h3 className='main-title-filter'>Filtrer par :</h3>
+      <details className='filter-details-container'>
+        <summary
+          onClick={() => setShowSubjectFilter(e => !e)}
+          className='filter-title-container'
         >
-          Tous
-        </button>
-        {courseCategories?.map((element, index) => {
-          return (
-            <button
-              className={`filter-button ${
-                currentCategory == element.id ? 'selected-category' : ''
-              }`}
-              onClick={() => {
-                void filterByCategory(element.id);
-                setCurrentCategory(element.id);
-              }}
-              key={index}
+          <p className='filter-title'>Sujets</p>
+          {showSubjectFilter == true ? (
+            <svg
+              width='30px'
+              height='30px'
+              viewBox='0 0 24 24'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
             >
-              {element.name}
-            </button>
-          );
-        })}
-      </ul>
+              <rect width='24' height='24' fill='white' />
+              <path
+                d='M17 9.5L12 14.5L7 9.5'
+                stroke='#000000'
+                // stroke-linecap='round'
+                // stroke-linejoin='round'
+              />
+            </svg>
+          ) : (
+            <svg
+              width='30px'
+              height='30px'
+              viewBox='0 0 24 24'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <rect width='24' height='24' fill='white' />
+              <path d='M7 14.5L12 9.5L17 14.5' stroke='#000000' />
+            </svg>
+          )}
+        </summary>
+        <ul className=' filter-items-container '>
+          <button
+            className={`filter-button ${
+              currentCategory == null ? 'selected-category' : ''
+            }`}
+            onClick={() => {
+              void getMoodleCourses();
+              setCurrentCategory(null);
+            }}
+          >
+            Tous
+          </button>
+          {courseCategories?.map((element, index) => {
+            return (
+              <button
+                className={`filter-button ${
+                  currentCategory == element.id ? 'selected-category' : ''
+                }`}
+                onClick={() => {
+                  void filterByCategory(element.id);
+                  setCurrentCategory(element.id);
+                }}
+                key={index}
+              >
+                {element.name}
+              </button>
+            );
+          })}
+        </ul>
+      </details>
     </div>
   );
 };

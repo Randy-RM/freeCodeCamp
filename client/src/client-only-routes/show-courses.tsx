@@ -36,6 +36,7 @@ import { getExternalResource } from '../utils/ajax';
 
 import '../components/CourseFilter/course-filter.css';
 import CourseFilter from '../components/CourseFilter/course-filter';
+import sortCourses from '../components/helpers/sort-course';
 
 const { moodleApiBaseUrl, moodleApiToken, moodleBaseUrl } = envData;
 
@@ -113,13 +114,10 @@ export function Courses(props: CoursesProps): JSX.Element {
         : null;
 
     //Order courses by their publication date
-    splitCourses?.result[currentPage - 1].sort(
-      (course1: MoodleCourse, course2: MoodleCourse) =>
-        course1.timecreated - course2.timecreated
-    );
+    const sortedCourses = sortCourses(splitCourses);
 
     if (moodleCatalogue != null) {
-      setMoodleCourses(splitCourses);
+      setMoodleCourses(sortedCourses);
     } else {
       setMoodleCourses(null);
     }
