@@ -82,30 +82,30 @@ async function getUserRoleList(req, res) {
   const { page, limit, classRoom } = req.query;
 
   try {
-    let userGroupList = [];
-    let usersGroupCount = [];
+    let userRoleList = [];
+    let usersRoleCount = [];
     const filter = {};
     if (classRoom) {
       filter.userGroupName = new RegExp(`${classRoom}`, 'i');
-      userGroupList = await getAllUsersRole(page, limit, filter);
-      usersGroupCount = await countUsersRoleDocuments(filter);
+      userRoleList = await getAllUsersRole(page, limit, filter);
+      usersRoleCount = await countUsersRoleDocuments(filter);
     } else {
-      userGroupList = await getAllUsersRole(page, limit);
-      usersGroupCount = await countUsersRoleDocuments();
+      userRoleList = await getAllUsersRole(page, limit);
+      usersRoleCount = await countUsersRoleDocuments();
     }
 
     return res.json({
-      userGroupList: userGroupList,
-      totalPages: Math.ceil(usersGroupCount.length / limit),
+      userRoleList: userRoleList,
+      totalPages: Math.ceil(usersRoleCount.length / limit),
       currentPage: page,
-      countUsersGroup: usersGroupCount.length
+      countUsersRole: usersRoleCount.length
     });
   } catch (error) {
     return res.json({
-      userGroupList: null,
+      userRoleList: null,
       totalPages: null,
       currentPage: null,
-      countUsersGroup: null
+      countUsersRole: null
     });
   }
 }

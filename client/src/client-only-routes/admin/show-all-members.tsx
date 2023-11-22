@@ -916,6 +916,12 @@ type UserRole = {
   id: string;
   userRoleName: string;
 };
+type RoleList = {
+  userRoleList: UserRole[];
+  totalPages: number;
+  currentPage: number;
+  countUsers: number;
+};
 
 export function DetailMember(props: MemberProps): JSX.Element {
   const { member, returnToTable } = props;
@@ -928,16 +934,18 @@ export function DetailMember(props: MemberProps): JSX.Element {
   };
 
   const getAllRoles = async () => {
-    const allRoles = await getDatabaseResource<UserRole[]>(
+    const allRoles = await getDatabaseResource<RoleList>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      `/all-users-roles?page=1&limit=`
+      `/all-users-roles?page=1&limit=10`
     );
-    if (allRoles != null && !('error' in allRoles)) {
-      setUserRoles(allRoles);
+    if (allRoles?.userRoleList != null && !('error' in allRoles)) {
+      setUserRoles([...allRoles.userRoleList]);
     } else {
       setUserRoles([]);
     }
   };
+
+  console.log('Roles ', userRoles);
 
   const getMoodleProgressCourses = async () => {
     const moodleUser = await getExternalResource<MoodleUser[]>(
@@ -966,11 +974,15 @@ export function DetailMember(props: MemberProps): JSX.Element {
 
   useEffect(() => {
     void getMoodleProgressCourses();
-    void getAllRoles();
+
     return () => {
       setMoodleCourses([]); // cleanup useEffect to perform a React state update
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    void getAllRoles();
   }, []);
 
   return (
