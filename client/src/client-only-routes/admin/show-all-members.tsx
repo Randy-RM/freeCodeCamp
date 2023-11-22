@@ -81,6 +81,7 @@ type Member = {
   createAt: string;
   phone: string;
   whatsapp: string;
+  role: string[];
 };
 
 type UserList = {
@@ -911,14 +912,33 @@ type MoodleCourse = {
   progress: number;
 };
 
+type UserRole = {
+  id: string;
+  userRoleName: string;
+};
+
 export function DetailMember(props: MemberProps): JSX.Element {
   const { member, returnToTable } = props;
 
   const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[] | null>();
+  const [userRoles, setUserRoles] = useState<UserRole[]>([]);
   const dateFormat = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleString();
   };
+
+  const getAllRoles = async () => {
+    const allRoles = await getDatabaseResource<UserRole[]>(
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      `/all-users-roles?page=1&limit=`
+    );
+    if (allRoles != null && !('error' in allRoles)) {
+      setUserRoles(allRoles);
+    } else {
+      setUserRoles([]);
+    }
+  };
+
   const getMoodleProgressCourses = async () => {
     const moodleUser = await getExternalResource<MoodleUser[]>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -946,6 +966,7 @@ export function DetailMember(props: MemberProps): JSX.Element {
 
   useEffect(() => {
     void getMoodleProgressCourses();
+    void getAllRoles();
     return () => {
       setMoodleCourses([]); // cleanup useEffect to perform a React state update
     };
@@ -984,6 +1005,41 @@ export function DetailMember(props: MemberProps): JSX.Element {
               <span className='fw-bold'>{'Nom'}</span>
               <br />
               {member?.name}
+            </p>
+          )}
+          {member?.name && member?.name.length > 0 && (
+            <p>
+              <span className='fw-bold'>{'Rôle'}</span>
+              <br />
+              <FormGroup controlId='select-role' className='select-role'>
+                <FormControl
+                  componentClass='select'
+                  onChange={''}
+                  value={'User'}
+                  className='standard-radius-5 role-input'
+                >
+                  {' '}
+                  {/* <option value='all'>Tout les membres</option> */}
+                  <option key={''} value={'Admin'}>
+                    {member?.role ? member?.role : 'User'}
+                  </option>
+                  {userRoles.length !== 0 &&
+                    userRoles.map(userRole => {
+                      return (
+                        <option key={''} value={userRole.userRoleName}>
+                          {userRole.userRoleName}
+                        </option>
+                      );
+                    })}
+                </FormControl>
+                <Button
+                  type='submit'
+                  className='standard-radius-5 btn-black'
+                  id='button-addon2'
+                >
+                  {'Modifier'}
+                </Button>
+              </FormGroup>
             </p>
           )}
 

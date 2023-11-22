@@ -126,3 +126,13 @@
   gap: 1rem;
   justify-content: space-between;
 }
+
+.select-role {
+  display: flex;
+  flex-direction: row;
+
+  gap: 1rem;
+}
+.role-input {
+  width: 25%;
+}
