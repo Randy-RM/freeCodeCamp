@@ -24,6 +24,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {
   addUserInGRoup,
+  // addUserInRole,
   getDatabaseResource,
   getExternalResource,
   remoevUserInGRoup
@@ -81,7 +82,7 @@ type Member = {
   createAt: string;
   phone: string;
   whatsapp: string;
-  role: string[];
+  role: string;
 };
 
 type UserList = {
@@ -928,6 +929,10 @@ export function DetailMember(props: MemberProps): JSX.Element {
 
   const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[] | null>();
   const [userRoles, setUserRoles] = useState<UserRole[]>([]);
+
+  const [selectedRoleName, setSelectedRoleName] = useState<string | undefined>(
+    member?.role ? member?.role : 'User'
+  );
   const dateFormat = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleString();
@@ -944,8 +949,6 @@ export function DetailMember(props: MemberProps): JSX.Element {
       setUserRoles([]);
     }
   };
-
-  console.log('Roles ', userRoles);
 
   const getMoodleProgressCourses = async () => {
     const moodleUser = await getExternalResource<MoodleUser[]>(
@@ -970,6 +973,33 @@ export function DetailMember(props: MemberProps): JSX.Element {
     } else {
       setMoodleCourses(null);
     }
+  };
+
+  //   const addUserRole = (
+  //   event: React.ChangeEvent<HTMLInputElement>,
+  //   userRoleName: string,
+  //   userId: string[]
+  // ) => {
+  //   event.preventDefault();
+  //   const data = {
+  //     ids: userId,
+  //     userRole: userRoleName
+  //   };
+
+  //   if (userId.length !== 0) {
+  //     let res;
+  //     void (async () => {
+  //       res = await addUserInRole(data);
+
+  //     })();
+  //   }
+  // };
+  const handleChangeRoleName = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    event.preventDefault();
+    const roleMembersInput = event.target.value.slice();
+    setSelectedRoleName(roleMembersInput);
   };
 
   useEffect(() => {
@@ -1026,14 +1056,14 @@ export function DetailMember(props: MemberProps): JSX.Element {
               <FormGroup controlId='select-role' className='select-role'>
                 <FormControl
                   componentClass='select'
-                  onChange={''}
-                  value={'User'}
+                  onChange={handleChangeRoleName}
+                  value={selectedRoleName}
                   className='standard-radius-5 role-input'
                 >
                   {' '}
                   {/* <option value='all'>Tout les membres</option> */}
                   <option key={''} value={'Admin'}>
-                    {member?.role ? member?.role : 'User'}
+                    {selectedRoleName}
                   </option>
                   {userRoles.length !== 0 &&
                     userRoles.map(userRole => {

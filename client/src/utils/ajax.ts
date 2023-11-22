@@ -585,6 +585,31 @@ export async function addUserInGRoup(
   }
 }
 
+interface AddUserInRoleData {
+  ids: string[];
+  userRole: string;
+}
+export async function addUserInRole(
+  body: AddUserInRoleData
+): Promise<AddUserInGRoupReponse | undefined> {
+  try {
+    const roleIsAdded = await put<AddUserInGRoupReponse>(
+      '/user-role/add-user',
+      body
+    );
+
+    console.log('ffg', roleIsAdded);
+    return roleIsAdded;
+  } catch (error) {
+    console.log(error);
+
+    return {
+      isAdded: false,
+      message: 'user is not added in the group'
+    };
+  }
+}
+
 interface RemoveUserInGRoupData {
   ids: string[];
   userGroup: string;

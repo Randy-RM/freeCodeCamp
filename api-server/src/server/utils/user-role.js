@@ -128,28 +128,26 @@ export function deleteUserRole(
   });
 }
 
-async function putUserInRoleFunction(ids, userGroup, UserGroup, User) {
+async function putUserInRoleFunction(ids, userRole, UserRole, User) {
   const users = await User.find({ where: { id: { inq: ids } } });
 
   if (users.length === 0) {
     return Promise.reject('No users found');
   }
 
-  const usersNotInGroup = users.filter(
-    user => !user.groups.includes(userGroup)
-  );
+  const usersNotInGroup = users.filter(user => !user.role.includes(userRole));
 
   await Promise.all(
     usersNotInGroup.map(async user => {
-      await User.updateAll({ id: user.id }, { $push: { groups: userGroup } });
+      await User.updateAll({ id: user.id }, { $push: { role: userRole } });
     })
   );
 
-  const countUser = await User.find({ where: { groups: userGroup } });
+  const countUser = await User.find({ where: { role: userRole } });
   console.log('user', countUser);
 
-  await UserGroup.updateAll(
-    { userGroupName: userGroup },
+  await UserRole.updateAll(
+    { userRoleName: userRole },
     { memberCount: countUser.length }
   );
 
@@ -158,18 +156,18 @@ async function putUserInRoleFunction(ids, userGroup, UserGroup, User) {
 
 export async function putUserInRole(
   ids,
-  userGroup,
+  userRole,
   User = loopback.getModelByType('User'),
-  UserGroup = loopback.getModelByType('userGroup')
+  UserRole = loopback.getModelByType('userRole')
 ) {
   try {
-    const usersAddedToGroup = await putUserInRoleFunction(
+    const usersAddedToRole = await putUserInRoleFunction(
       ids,
-      userGroup,
-      UserGroup,
+      userRole,
+      UserRole,
       User
     );
-    if (usersAddedToGroup) return usersAddedToGroup;
+    if (usersAddedToRole) return usersAddedToRole;
   } catch (err) {
     console.log('erro', err);
   }

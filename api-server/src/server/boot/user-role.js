@@ -141,20 +141,20 @@ async function removeUserRole(req, res) {
 
 async function addUserInRole(req, res) {
   const id = req.body.ids;
-  const group = req.body.userGroup;
+  const role = req.body.userRole;
   try {
-    if (!group) {
+    if (!role) {
       throw new Error('Please select group');
     }
     if (id.length == 0) {
       throw new Error('Please select user');
     }
 
-    const userGroupAdded = await putUserInRole(id, group);
-    if (userGroupAdded) {
+    const userRoleAdded = await putUserInRole(id, role);
+    if (userRoleAdded) {
       return res.json({
         isAdded: true,
-        message: `User is added in group ${group}`
+        message: `User is added in group ${role}`
       });
     }
   } catch (error) {
