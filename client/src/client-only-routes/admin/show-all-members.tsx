@@ -24,7 +24,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {
   addUserInGRoup,
-  // addUserInRole,
+  addUserInRole,
   getDatabaseResource,
   getExternalResource,
   remoevUserInGRoup
@@ -933,6 +933,8 @@ export function DetailMember(props: MemberProps): JSX.Element {
   const [selectedRoleName, setSelectedRoleName] = useState<string | undefined>(
     member?.role ? member?.role : 'User'
   );
+  const [updating, setupdating] =
+    useState<{ isAddedStatus: boolean; message: string }>();
   const dateFormat = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleString();
@@ -975,25 +977,37 @@ export function DetailMember(props: MemberProps): JSX.Element {
     }
   };
 
-  //   const addUserRole = (
-  //   event: React.ChangeEvent<HTMLInputElement>,
-  //   userRoleName: string,
-  //   userId: string[]
-  // ) => {
-  //   event.preventDefault();
-  //   const data = {
-  //     ids: userId,
-  //     userRole: userRoleName
-  //   };
+  const addUserRole = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    userRoleName: string | undefined,
+    userId: string[]
+  ) => {
+    event.preventDefault();
+    const data = {
+      ids: userId,
+      userRole: userRoleName
+    };
 
-  //   if (userId.length !== 0) {
-  //     let res;
-  //     void (async () => {
-  //       res = await addUserInRole(data);
+    if (userId.length !== 0) {
+      let res;
+      void (async () => {
+        res = await addUserInRole(data);
 
-  //     })();
-  //   }
-  // };
+        if (res && res.isAdded) {
+          setupdating({
+            isAddedStatus: res.isAdded,
+            message: res.message
+          });
+          setTimeout(() => {
+            setupdating({
+              isAddedStatus: false,
+              message: ''
+            });
+          }, 5000);
+        }
+      })();
+    }
+  };
   const handleChangeRoleName = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
@@ -1078,9 +1092,39 @@ export function DetailMember(props: MemberProps): JSX.Element {
                   type='submit'
                   className='standard-radius-5 btn-black'
                   id='button-addon2'
+                  onClick={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    addUserRole(event, selectedRoleName, [member?.id]);
+                  }}
                 >
                   {'Modifier'}
                 </Button>
+                {updating?.isAddedStatus ? (
+                  <>
+                    {' '}
+                    {!updating || updating.message.length == 0 ? (
+                      <HelpBlock className='none-help-block'>
+                        {`none`}
+                      </HelpBlock>
+                    ) : (
+                      <HelpBlock className='text-success'>
+                        {`${updating.message}`}
+                      </HelpBlock>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {' '}
+                    {!updating || updating.message.length == 0 ? (
+                      <HelpBlock className='none-help-block'>
+                        {`none`}
+                      </HelpBlock>
+                    ) : (
+                      <HelpBlock className='text-error'>
+                        {`${updating.message}`}
+                      </HelpBlock>
+                    )}
+                  </>
+                )}
               </FormGroup>
             </p>
           )}

@@ -135,11 +135,11 @@ async function putUserInRoleFunction(ids, userRole, UserRole, User) {
     return Promise.reject('No users found');
   }
 
-  const usersNotInGroup = users.filter(user => !user.role.includes(userRole));
+  const usersNotInRole = users.filter(user => !user.role.includes(userRole));
 
   await Promise.all(
-    usersNotInGroup.map(async user => {
-      await User.updateAll({ id: user.id }, { $push: { role: userRole } });
+    usersNotInRole.map(async user => {
+      await User.updateAll({ id: user.id }, { role: userRole });
     })
   );
 

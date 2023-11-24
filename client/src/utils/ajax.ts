@@ -587,7 +587,7 @@ export async function addUserInGRoup(
 
 interface AddUserInRoleData {
   ids: string[];
-  userRole: string;
+  userRole: string | undefined;
 }
 export async function addUserInRole(
   body: AddUserInRoleData
