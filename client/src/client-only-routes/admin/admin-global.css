@@ -130,3 +130,12 @@
 .Export-section {
   padding-top: 1.4rem;
 }
+.select-role {
+  display: flex;
+  flex-direction: row;
+
+  gap: 1rem;
+}
+.role-input {
+  width: 25%;
+}

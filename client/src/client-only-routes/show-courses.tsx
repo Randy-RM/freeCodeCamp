@@ -125,6 +125,8 @@ export function Courses(props: CoursesProps): JSX.Element {
 
   useEffect(() => {
     void getMoodleCourses();
+    console.log('tdz', moodleCourses);
+
     const timer = setTimeout(() => {
       if (isDataOnLoading) {
         setIsDataOnLoading(false);
