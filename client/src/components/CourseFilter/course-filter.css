@@ -61,7 +61,31 @@ details[open] > *:not(summary) {
   /* align-items: center; */
 }
 
+.show-filter-button {
+  display: none;
+}
+
 @media (max-width: 768px) {
+  .show-filter-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3%;
+    border-radius: 30px;
+    border: 2px solid red;
+    width: 100%;
+    /* border-color: red; */
+    background: inherit;
+    transition: all 300ms;
+  }
+
+  svg {
+    transition: all 300ms;
+  }
+  .show-filter-button:hover > svg {
+    fill: white;
+  }
+
   .filter-container {
     display: none;
   }

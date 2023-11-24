@@ -121,7 +121,7 @@ const CourseFilter = ({
   return (
     <div className='filter-container'>
       <h3 className='main-title-filter'>Filtrer par :</h3>
-      <details className='filter-details-container'>
+      <details className='filter-details-container' open>
         <summary
           onClick={() => setShowSubjectFilter(e => !e)}
           className='filter-title-container'
