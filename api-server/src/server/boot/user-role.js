@@ -154,7 +154,7 @@ async function addUserInRole(req, res) {
     if (userRoleAdded) {
       return res.json({
         isAdded: true,
-        message: `User is added in group ${role}`
+        message: `User is now a ${role}`
       });
     }
   } catch (error) {
