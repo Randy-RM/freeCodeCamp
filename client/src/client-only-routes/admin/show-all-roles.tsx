@@ -42,7 +42,7 @@ import './admin-global.css';
 const { apiLocation, homeLocation } = envData;
 
 // TODO: update types for actions
-interface ShowAllGroupsProps {
+interface ShowAllRolesProps {
   createFlashMessage: typeof createFlashMessage;
   isSignedIn: boolean;
   navigate: (location: string) => void;
@@ -67,61 +67,60 @@ const mapDispatchToProps = {
   navigate
 };
 
-type MemberGroup = {
+type MemberRole = {
   id: string;
-  userGroupName: string;
   userRoleName: string;
   createAt: string;
   memberCount: number;
 };
 
-type MemberGroupList = {
-  userGroupList: MemberGroup[];
+type MemberRoleList = {
+  userRoleList: MemberRole[];
   totalPages: number;
   currentPage: number;
-  countUsersGroup: number;
+  countUsersRole: number;
 };
 
 interface UserRoleResponse {
-  userRole: MemberGroup | null;
+  userRole: MemberRole | null;
   error: string | undefined;
 }
 
-export function ShowAllRoles(props: ShowAllGroupsProps): JSX.Element {
+export function ShowAllRoles(props: ShowAllRolesProps): JSX.Element {
   const { isSignedIn, user, navigate, showLoading } = props;
-  const [groupName, setGroupName] = useState<string>('');
-  const [groupId, setGroupId] = useState<string>('');
-  const [membersGroup, setMembersGroup] = useState<MemberGroup[]>();
+  const [RoleName, setRoleName] = useState<string>('');
+  const [RoleId, setRoleId] = useState<string>('');
+  const [membersRole, setMembersRole] = useState<MemberRole[]>();
   const [totalPages, setTotalPages] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [countUsersGroup, setCountUsersGroup] = useState<number>();
+  const [countUsersRole, setCountUsersRole] = useState<number>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [memberGroupNameToSearch, setMemberGroupNameToSearch] =
+  const [memberRoleNameToSearch, setMemberRoleNameToSearch] =
     useState<string>('');
-  const [groupRecentlyTreated, setGroupRecentlyTreated] = useState<string>('');
+  const [RoleRecentlyTreated, setRoleRecentlyTreated] = useState<string>('');
   const [inputHelpBlock, setInputHelpBlock] =
     useState<{ isError: boolean; message: string }>();
   const [isUpdateAction, setIsUpdateAction] = useState<boolean>(false);
 
-  const getMembersGroup = async () => {
-    const groupList = await getDatabaseResource<MemberGroupList>(
+  const getMembersRole = async () => {
+    const RoleList = await getDatabaseResource<MemberRoleList>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      `/all-users-roles?page=${currentPage}&limit=4&memberGroupName=${memberGroupNameToSearch}`
+      `/all-users-roles?page=${currentPage}&limit=4&memberRoleName=${memberRoleNameToSearch}`
     );
-    if (groupList != null && !('error' in groupList)) {
-      setMembersGroup(groupList.userGroupList);
-      setCountUsersGroup(groupList.countUsersGroup);
+    if (RoleList != null && !('error' in RoleList)) {
+      setMembersRole(RoleList.userRoleList);
+      setCountUsersRole(RoleList.countUsersRole);
       if (totalPages == 1) {
-        setTotalPages(Number(groupList.totalPages));
-        setCurrentPage(Number(groupList.currentPage));
+        setTotalPages(Number(RoleList.totalPages));
+        setCurrentPage(Number(RoleList.currentPage));
       }
       if (totalPages > 1) {
-        setTotalPages(Number(groupList.totalPages));
+        setTotalPages(Number(RoleList.totalPages));
       }
     } else {
-      setMembersGroup([]);
-      setCountUsersGroup(0);
+      setMembersRole([]);
+      setCountUsersRole(0);
     }
   };
 
@@ -137,26 +136,26 @@ export function ShowAllRoles(props: ShowAllGroupsProps): JSX.Element {
     }
   };
 
-  const handleChangeGroupNameInput = (
+  const handleChangeRoleNameInput = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const currentGroupName = (
+    const currentRoleName = (
       event.target as HTMLInputElement
     ).value.trimStart();
-    setGroupName(currentGroupName);
+    setRoleName(currentRoleName);
   };
 
   const handeleCreateRole = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
-    if (groupName.length != 0) {
-      const groupToCreate = groupName;
+    if (RoleName.length != 0) {
+      const RoleToCreate = RoleName;
       const response = (await createUserRole({
-        userRoleName: groupToCreate.trim()
+        userRoleName: RoleToCreate.trim()
       })) as UserRoleResponse;
       if (response.userRole) {
-        setGroupRecentlyTreated(response.userRole.id);
+        setRoleRecentlyTreated(response.userRole.id);
         setCurrentPage(1);
-        setGroupName('');
+        setRoleName('');
         setInputHelpBlock({
           isError: false,
           message: 'Role successfully create'
@@ -193,16 +192,16 @@ export function ShowAllRoles(props: ShowAllGroupsProps): JSX.Element {
     }
   };
 
-  const handleUpdateGroupe = async (event: React.FormEvent): Promise<void> => {
+  const handleUpdateRolee = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
     setIsUpdateAction(false);
-    setGroupName('');
+    setRoleName('');
     const response = await updateMemberRole({
-      id: groupId,
-      userRoleName: groupName
+      id: RoleId,
+      userRoleName: RoleName
     });
     if (response && response.isUpdated) {
-      setGroupRecentlyTreated(groupRecentlyTreated != groupId ? groupId : '');
+      setRoleRecentlyTreated(RoleRecentlyTreated != RoleId ? RoleId : '');
       setInputHelpBlock({
         isError: false,
         message: 'Update sucessfuly'
@@ -214,7 +213,7 @@ export function ShowAllRoles(props: ShowAllGroupsProps): JSX.Element {
         });
       }, 3000);
     } else {
-      setGroupRecentlyTreated('');
+      setRoleRecentlyTreated('');
       setInputHelpBlock({
         isError: true,
         message:
@@ -229,30 +228,30 @@ export function ShowAllRoles(props: ShowAllGroupsProps): JSX.Element {
     }
   };
 
-  const handleSelectMemberGroupToUpdate = (memberGroup: MemberGroup) => {
-    setGroupId(memberGroup.id);
-    setGroupName(memberGroup.userGroupName);
+  const handleSelectMemberRoleToUpdate = (memberRole: MemberRole) => {
+    setRoleId(memberRole.id);
+    setRoleName(memberRole.userRoleName);
     setIsUpdateAction(true);
   };
 
-  const handleDeleteMemberGroup = async (memberGroup: MemberGroup) => {
-    const isMemberGroupDeleted = await deleteMemberRole(memberGroup);
-    if (isMemberGroupDeleted?.isDeleted) {
-      setGroupRecentlyTreated(
-        groupRecentlyTreated != memberGroup.id ? memberGroup.id : ''
+  const handleDeleteMemberRole = async (memberRole: MemberRole) => {
+    const isMemberRoleDeleted = await deleteMemberRole(memberRole);
+    if (isMemberRoleDeleted?.isDeleted) {
+      setRoleRecentlyTreated(
+        RoleRecentlyTreated != memberRole.id ? memberRole.id : ''
       );
     } else {
-      setGroupRecentlyTreated('');
+      setRoleRecentlyTreated('');
     }
   };
 
   useEffect(() => {
-    void getMembersGroup();
+    void getMembersRole();
     return () => {
-      setMembersGroup([]); // cleanup useEffect to perform a React state update
+      setMembersRole([]); // cleanup useEffect to perform a React state update
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, groupRecentlyTreated]);
+  }, [currentPage, RoleRecentlyTreated]);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
@@ -302,9 +301,9 @@ export function ShowAllRoles(props: ShowAllGroupsProps): JSX.Element {
                           type='text'
                           placeholder='Nom du rôle'
                           className='standard-radius-5'
-                          name='groupName'
-                          value={groupName}
-                          onChange={handleChangeGroupNameInput}
+                          name='RoleName'
+                          value={RoleName}
+                          onChange={handleChangeRoleNameInput}
                         />
                         {!inputHelpBlock?.isError ? (
                           <>
@@ -347,7 +346,7 @@ export function ShowAllRoles(props: ShowAllGroupsProps): JSX.Element {
                             type='submit'
                             className='standard-radius-5 btn-green'
                             id='button-update'
-                            onClick={handleUpdateGroupe}
+                            onClick={handleUpdateRolee}
                           >
                             Mettre à jour le rôle
                           </Button>
@@ -362,12 +361,12 @@ export function ShowAllRoles(props: ShowAllGroupsProps): JSX.Element {
           </Col>
         </Row>
         <TableMembers
-          membersGroup={membersGroup}
+          membersRole={membersRole}
           currentPage={currentPage}
           totalPages={totalPages}
           navigateToPage={navigateToPage}
-          deleteMemberGroup={handleDeleteMemberGroup}
-          handleSelectMemberGroupToUpdate={handleSelectMemberGroupToUpdate}
+          deleteMemberRole={handleDeleteMemberRole}
+          handleSelectMemberRoleToUpdate={handleSelectMemberRoleToUpdate}
         />
         <Spacer size={1} />
       </div>
@@ -375,23 +374,23 @@ export function ShowAllRoles(props: ShowAllGroupsProps): JSX.Element {
   );
 }
 
-interface TableMembersGroupProps {
-  membersGroup?: MemberGroup[];
+interface TableMembersRoleProps {
+  membersRole?: MemberRole[];
   currentPage: number;
   totalPages: number;
-  deleteMemberGroup: (memberGroup: MemberGroup) => void;
-  handleSelectMemberGroupToUpdate: (memberGroup: MemberGroup) => void;
+  deleteMemberRole: (memberRole: MemberRole) => void;
+  handleSelectMemberRoleToUpdate: (memberRole: MemberRole) => void;
   navigateToPage: (forwardOrBackward: boolean) => void;
 }
 
-export function TableMembers(props: TableMembersGroupProps): JSX.Element {
+export function TableMembers(props: TableMembersRoleProps): JSX.Element {
   const {
-    membersGroup,
+    membersRole,
     navigateToPage,
     currentPage,
     totalPages,
-    deleteMemberGroup,
-    handleSelectMemberGroupToUpdate
+    deleteMemberRole,
+    handleSelectMemberRoleToUpdate
   } = props;
 
   const dateFormat = (dateString: string) => {
@@ -404,7 +403,7 @@ export function TableMembers(props: TableMembersGroupProps): JSX.Element {
       <Row>
         <Col md={12} sm={12} xs={12}>
           <div className=''>
-            {membersGroup && membersGroup.length > 0 ? (
+            {membersRole && membersRole.length > 0 ? (
               <Table responsive hover>
                 <thead className='bg-dark-gray'>
                   <tr>
@@ -414,21 +413,21 @@ export function TableMembers(props: TableMembersGroupProps): JSX.Element {
                   </tr>
                 </thead>
                 <tbody>
-                  {membersGroup.map((group, index) => {
+                  {membersRole.map((role, index) => {
                     return (
                       <tr key={index}>
                         <td style={{ verticalAlign: 'middle' }}>
-                          {group.userRoleName}
+                          {role.userRoleName}
                         </td>
 
                         <td style={{ verticalAlign: 'middle' }}>
-                          {dateFormat(`${group.createAt}`)}
+                          {dateFormat(`${role.createAt}`)}
                         </td>
                         <td style={{ verticalAlign: 'middle' }}>
                           <button
                             className='action-btn-update'
                             onClick={() => {
-                              handleSelectMemberGroupToUpdate(group);
+                              handleSelectMemberRoleToUpdate(role);
                             }}
                           >
                             Mettre à jour
@@ -437,7 +436,7 @@ export function TableMembers(props: TableMembersGroupProps): JSX.Element {
                           <button
                             className='action-btn-delete'
                             onClick={() => {
-                              deleteMemberGroup(group);
+                              deleteMemberRole(role);
                             }}
                           >
                             Supprimer
