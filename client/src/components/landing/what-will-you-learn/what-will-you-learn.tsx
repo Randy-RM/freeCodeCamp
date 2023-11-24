@@ -55,6 +55,11 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
                 les principes fondamentaux de JavaScript, etc.`}
         />
       </div>
+      <div>
+        <a href={`/courses`} className='course-cta'>
+          {'Voir tout les cours'}
+        </a>
+      </div>
     </div>
   );
 };
