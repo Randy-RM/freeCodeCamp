@@ -37,12 +37,14 @@ const { moodleApiBaseUrl, moodleApiToken } = envData;
 
 const CourseFilter = ({
   setMoodleCourses,
-  setIsDataOnLoading
+  setIsDataOnLoading,
+  setShowFilter
 }: {
   setMoodleCourses: React.Dispatch<
     React.SetStateAction<MoodleCoursesCatalogue | null | undefined>
   >;
   setIsDataOnLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
 }): JSX.Element => {
   const [courseCategories, setCourseCategories] = useState<
     MoodleCourseCategory[] | null
@@ -120,7 +122,20 @@ const CourseFilter = ({
 
   return (
     <div className='filter-container'>
-      <h3 className='main-title-filter'>Filtrer par :</h3>
+      <div className='main-title-filter-container'>
+        <h2 className='main-title-filter'>Filtrer par :</h2>
+        <svg
+          onClick={() => {
+            setShowFilter(e => !e);
+          }}
+          width='30px'
+          height='30px'
+          xmlns='http://www.w3.org/2000/svg'
+          viewBox='0 0 24 24'
+        >
+          <path d='M12.0007 10.5865L16.9504 5.63672L18.3646 7.05093L13.4149 12.0007L18.3646 16.9504L16.9504 18.3646L12.0007 13.4149L7.05093 18.3646L5.63672 16.9504L10.5865 12.0007L5.63672 7.05093L7.05093 5.63672L12.0007 10.5865Z'></path>
+        </svg>
+      </div>
       <details className='filter-details-container' open>
         <summary
           onClick={() => setShowSubjectFilter(e => !e)}
@@ -157,17 +172,20 @@ const CourseFilter = ({
           )}
         </summary>
         <ul className=' filter-items-container '>
-          <button
-            className={`filter-button ${
-              currentCategory == null ? 'selected-category' : ''
-            }`}
-            onClick={() => {
-              void getMoodleCourses();
-              setCurrentCategory(null);
-            }}
-          >
-            Tous
-          </button>
+          {courseCategories && (
+            <button
+              className={`filter-button ${
+                currentCategory == null ? 'selected-category' : ''
+              }`}
+              onClick={() => {
+                void getMoodleCourses();
+                setCurrentCategory(null);
+                setShowFilter(e => !e);
+              }}
+            >
+              Tous
+            </button>
+          )}
           {courseCategories?.map((element, index) => {
             return (
               <button
@@ -177,6 +195,7 @@ const CourseFilter = ({
                 onClick={() => {
                   void filterByCategory(element.id);
                   setCurrentCategory(element.id);
+                  setShowFilter(e => !e);
                 }}
                 key={index}
               >

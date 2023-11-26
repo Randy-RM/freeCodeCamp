@@ -96,13 +96,14 @@ export function Courses(props: CoursesProps): JSX.Element {
     useState<MoodleCoursesCatalogue | null>();
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [showFilter, setShowFilter] = useState<boolean>(false);
 
   const getMoodleCourses = async () => {
     const moodleCatalogue = await getExternalResource<MoodleCourse[]>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses&moodlewsrestformat=json`
     );
-    console.log('moodleCatalogue', moodleCatalogue);
+
     const splitCourses: MoodleCoursesCatalogue | null | undefined =
       moodleCatalogue != null
         ? splitArray<MoodleCourse>(
@@ -185,7 +186,12 @@ export function Courses(props: CoursesProps): JSX.Element {
           `}
               </p>
             </div>
-            <button className=' show-filter-button '>
+            <button
+              onClick={() => {
+                setShowFilter(e => !e);
+              }}
+              className=' show-filter-button '
+            >
               <span>Filtrer</span>
               <svg
                 width='20px'
@@ -201,10 +207,13 @@ export function Courses(props: CoursesProps): JSX.Element {
             </button>
             <Spacer />
             <div className='card-filter-container'>
-              <CourseFilter
-                setMoodleCourses={setMoodleCourses}
-                setIsDataOnLoading={setIsDataOnLoading}
-              />
+              {showFilter ? (
+                <CourseFilter
+                  setMoodleCourses={setMoodleCourses}
+                  setShowFilter={setShowFilter}
+                  setIsDataOnLoading={setIsDataOnLoading}
+                />
+              ) : null}
               {!isDataOnLoading ? (
                 <div className='card-course-detail-container'>
                   {currentPage == 1 && (
