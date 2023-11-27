@@ -17,12 +17,6 @@ img {
   border: solid 1px #2b292b;
 }
 
-.card-course-detail-back {
-  /* padding:2%; */
-  width: 47%;
-  height: auto;
-}
-
 .card-course-detail-unit {
   margin: 0;
   padding: 0;
@@ -76,12 +70,13 @@ img {
   margin-right: 10px;
 }
 
-.card-course-detail-container {
+.card-course-detail-container-landing {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 5%;
 }
 
 .card-course-detail-unit {
@@ -94,19 +89,9 @@ img {
 }
 
 @media (max-width: 768px) {
-  .card-course-detail-back {
-    width: 80%;
-    margin-bottom: 10%;
-  }
-
-  .card-course-detail-unit {
-    width: 100%;
-  }
-
-  .card-course-detail-container {
+  .card-course-detail-container-landing {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -118,12 +103,7 @@ img {
     display: none;
   }
 
-  .card-course-detail-back {
-    width: 90%;
-    margin-bottom: 10%;
-  }
-
-  .card-course-detail-container {
+  .card-course-detail-container-landing {
     display: flex;
     flex-direction: column;
     align-items: center;

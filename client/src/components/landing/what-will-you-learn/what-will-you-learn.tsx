@@ -24,7 +24,7 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
         </p>
       </div>
       <Spacer size={2} />
-      <div className='card-course-detail-container'>
+      <div className='card-course-detail-container-landing'>
         <CourseCard
           icon={LaptopIcon}
           sponsorIcon={LaediesActIcon}
@@ -41,6 +41,7 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
                 Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
                 `}
         />
+
         <CourseCard
           icon={AlgoIcon}
           alt=''
