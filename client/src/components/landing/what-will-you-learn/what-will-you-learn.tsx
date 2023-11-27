@@ -5,7 +5,7 @@ import AlgoIcon from '../../../assets/images/algorithmIcon.svg';
 import LaediesActIcon from '../../../assets/images/partners/we-act-logo.png';
 
 import './what-will-you-learn.css';
-import CourseCard from '../../CourseCard/course-card';
+import CourseCardLanding from '../../CourseCard/course-card-landing';
 
 interface LandingDetailsProps {
   isSignedIn?: boolean;
@@ -25,7 +25,7 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
       </div>
       <Spacer size={2} />
       <div className='card-course-detail-container-landing'>
-        <CourseCard
+        <CourseCardLanding
           icon={LaptopIcon}
           sponsorIcon={LaediesActIcon}
           alt=''
@@ -42,7 +42,7 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
                 `}
         />
 
-        <CourseCard
+        <CourseCardLanding
           icon={AlgoIcon}
           alt=''
           isAvailable={true}

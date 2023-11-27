@@ -229,6 +229,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                   setProgrammingCategory={setProgrammingCategory}
                 />
               )}
+
               {!isDataOnLoading ? (
                 <div className='card-course-detail-container'>
                   {currentPage == 1 && programmingCategory && (
@@ -299,37 +300,39 @@ export function Courses(props: CoursesProps): JSX.Element {
                 </div>
               )}
             </div>
+            <Spacer size={2} />
+            <div className='pagination-container'>
+              {moodleCourses && moodleCourses.size > 0 && (
+                <Row>
+                  <Col md={12} sm={12} xs={12}>
+                    {currentPage > 1 && (
+                      <FontAwesomeIcon
+                        icon={faChevronLeft}
+                        className='pagination-chevron'
+                        onClick={() => {
+                          navigateToPage(false);
+                        }}
+                      />
+                    )}
+                    &nbsp;
+                    {`  ${currentPage} sur ${moodleCourses?.size}  `}
+                    &nbsp;
+                    {currentPage < moodleCourses?.size && (
+                      <FontAwesomeIcon
+                        icon={faChevronRight}
+                        className='pagination-chevron'
+                        onClick={() => {
+                          navigateToPage(true);
+                        }}
+                      />
+                    )}
+                    <Spacer size={2} />
+                  </Col>
+                </Row>
+              )}
+            </div>
           </div>
         </main>
-        <Spacer size={2} />
-        {moodleCourses && moodleCourses.size > 0 && (
-          <Row>
-            <Col md={12} sm={12} xs={12}>
-              {currentPage > 1 && (
-                <FontAwesomeIcon
-                  icon={faChevronLeft}
-                  className='pagination-chevron'
-                  onClick={() => {
-                    navigateToPage(false);
-                  }}
-                />
-              )}
-              &nbsp;
-              {`  ${currentPage} sur ${moodleCourses?.size}  `}
-              &nbsp;
-              {currentPage < moodleCourses?.size && (
-                <FontAwesomeIcon
-                  icon={faChevronRight}
-                  className='pagination-chevron'
-                  onClick={() => {
-                    navigateToPage(true);
-                  }}
-                />
-              )}
-              <Spacer size={2} />
-            </Col>
-          </Row>
-        )}
       </Grid>
     </>
   );
