@@ -989,7 +989,7 @@ export function DetailMember(props: MemberProps): JSX.Element {
   const [userRoles, setUserRoles] = useState<UserRole[]>([]);
 
   const [selectedRoleName, setSelectedRoleName] = useState<string | undefined>(
-    member?.role ? member?.role : 'User'
+    member?.role ? member?.role : ''
   );
   const [updating, setupdating] =
     useState<{ isAddedStatus: boolean; message: string }>();
@@ -1134,15 +1134,21 @@ export function DetailMember(props: MemberProps): JSX.Element {
                 >
                   {' '}
                   {/* <option value='all'>Tout les membres</option> */}
-                  <option key={''} value={'Admin'}>
+                  <option key={''} value={selectedRoleName}>
                     {selectedRoleName}
                   </option>
                   {userRoles.length !== 0 &&
                     userRoles.map(userRole => {
                       return (
-                        <option key={''} value={userRole.userRoleName}>
-                          {userRole.userRoleName}
-                        </option>
+                        <>
+                          {userRole.userRoleName == selectedRoleName ? (
+                            ''
+                          ) : (
+                            <option key={''} value={userRole.userRoleName}>
+                              {userRole.userRoleName}
+                            </option>
+                          )}
+                        </>
                       );
                     })}
                 </FormControl>

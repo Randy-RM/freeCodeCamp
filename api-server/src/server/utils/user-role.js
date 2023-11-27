@@ -54,7 +54,7 @@ export function updateUserRole(
                   if (userRoleFound) {
                     User.updateAll(
                       { role: userRoleFound.userRoleName },
-                      { role: userRoleFound.userRoleName },
+                      { role: userRole.userRoleName },
                       function (err, users) {
                         if (err) return reject(err);
                         return resolve(users);
@@ -96,24 +96,24 @@ export function countUsersRoleDocuments(
 }
 
 export function deleteUserRole(
-  userGroupId,
+  userRoleId,
   UserRole = loopback.getModelByType('userRole'),
   User = loopback.getModelByType('User')
 ) {
   return new Promise((resolve, reject) => {
-    UserRole.destroyById(userGroupId, (error, countUserGroupDeleted) => {
+    UserRole.destroyById(userRoleId, (error, countUserRoleDeleted) => {
       if (error /* || isEmpty(count)*/) {
         return reject(error || 'Error in deleting Documents');
       }
-      if (countUserGroupDeleted) {
+      if (countUserRoleDeleted) {
         UserRole.find(
-          { where: { id: userGroupId } },
-          function (err, userGroupFound) {
+          { where: { id: userRoleId } },
+          function (err, userRoleFound) {
             if (err) return reject(err);
-            if (userGroupFound) {
+            if (userRoleFound) {
               User.updateAll(
-                { role: userGroupFound.userGroupName },
-                { userGroup: '' },
+                { role: userRoleFound.userRoleName },
+                { role: '' },
                 function (err, users) {
                   if (err) return reject(err);
                   return resolve(users);
@@ -123,7 +123,7 @@ export function deleteUserRole(
           }
         );
       }
-      return resolve(countUserGroupDeleted);
+      return resolve(countUserRoleDeleted);
     });
   });
 }
