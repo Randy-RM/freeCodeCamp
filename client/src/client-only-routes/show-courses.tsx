@@ -97,6 +97,8 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [showFilter, setShowFilter] = useState<boolean>(false);
+  const [programmingCategory, setProgrammingCategory] = useState<boolean>(true);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   const getMoodleCourses = async () => {
     const moodleCatalogue = await getExternalResource<MoodleCourse[]>(
@@ -167,6 +169,15 @@ export function Courses(props: CoursesProps): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
+  window.addEventListener('resize', () => {
+    showFilter && setScreenWidth(window.innerWidth);
+  });
+
+  useEffect(() => {
+    if (screenWidth > 990) setShowFilter(true);
+    else setShowFilter(false);
+  }, [screenWidth]);
+
   if (showLoading) {
     return <Loader fullScreen={true} />;
   }
@@ -209,16 +220,18 @@ export function Courses(props: CoursesProps): JSX.Element {
             </button>
             <Spacer />
             <div className='card-filter-container'>
-              {showFilter ? (
+              {showFilter && (
                 <CourseFilter
+                  screenWidth={screenWidth}
                   setMoodleCourses={setMoodleCourses}
                   setShowFilter={setShowFilter}
                   setIsDataOnLoading={setIsDataOnLoading}
+                  setProgrammingCategory={setProgrammingCategory}
                 />
-              ) : null}
+              )}
               {!isDataOnLoading ? (
                 <div className='card-course-detail-container'>
-                  {currentPage == 1 && (
+                  {currentPage == 1 && programmingCategory && (
                     <>
                       <CourseCard
                         icon={LaptopIcon}
@@ -288,6 +301,7 @@ export function Courses(props: CoursesProps): JSX.Element {
             </div>
           </div>
         </main>
+        <Spacer size={2} />
         {moodleCourses && moodleCourses.size > 0 && (
           <Row>
             <Col md={12} sm={12} xs={12}>

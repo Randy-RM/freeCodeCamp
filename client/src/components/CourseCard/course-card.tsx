@@ -71,7 +71,7 @@ const CourseCard = ({
                 <img src={sponsorIcon} alt='' className='img-fluid' />
               </div>
             )}
-            <div className='card-course-detail-logo push hide-small'>
+            <div className='card-course-detail-logo push'>
               <img src={icon} alt={alt} className='img-fluid' />
             </div>
           </div>
