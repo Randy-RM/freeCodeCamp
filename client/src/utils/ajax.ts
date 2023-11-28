@@ -230,7 +230,7 @@ export async function postExternalResource<T>(
   data: DataLemlist
 ) {
   let response: unknown;
-  console.log('url', `${urlEndPoint}`);
+
   try {
     response = await requestModule<T>(`${urlEndPoint}`, {
       method: 'POST', //GET, POST, PUT, DELETE, etc.
@@ -241,7 +241,7 @@ export async function postExternalResource<T>(
   } catch (error) {
     response = error;
   }
-  return console.log('res', response);
+  return response;
 }
 export async function getDatabaseResource<T>(urlEndPoint: string) {
   let response: T | null;

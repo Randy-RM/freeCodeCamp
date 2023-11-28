@@ -43,7 +43,9 @@ if (FREECODECAMP_NODE_ENV !== 'development') {
     'radioLocation',
     'moodleBaseUrl',
     'moodleApiBaseUrl',
-    'moodleApiToken'
+    'moodleApiToken',
+    'lemlistToken',
+    'lemlistUrl'
   ];
   const deploymentKeys = [
     'clientLocale',

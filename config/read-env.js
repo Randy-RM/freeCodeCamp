@@ -25,6 +25,8 @@ const {
   CLIENT_LOCALE: clientLocale,
   CURRICULUM_LOCALE: curriculumLocale,
   SHOW_LOCALE_DROPDOWN_MENU: showLocaleDropdownMenu,
+  LEMLIST_URL: lemlistUrl,
+  LEMLIST_TOKEN: lemlistToken,
   // ALGOLIA_APP_ID: algoliaAppId,
   // ALGOLIA_API_KEY: algoliaAPIKey,
   // STRIPE_PUBLIC_KEY: stripePublicKey,
@@ -43,6 +45,7 @@ const locations = {
   apiLocation,
   forumLocation,
   newsLocation,
+
   radioLocation: !radioLocation
     ? 'https://coderadio.freecodecamp.org'
     : radioLocation,
@@ -54,6 +57,8 @@ const locations = {
 module.exports = Object.assign(locations, {
   clientLocale,
   curriculumLocale,
+  lemlistUrl,
+  lemlistToken,
   showLocaleDropdownMenu: showLocaleDropdownMenu === 'true',
   deploymentEnv,
   environment: process.env.FREECODECAMP_NODE_ENV || 'development',

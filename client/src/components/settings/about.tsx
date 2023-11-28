@@ -11,6 +11,8 @@ import { TFunction, withTranslation } from 'react-i18next';
 import { Spacer } from '../helpers';
 import BlockSaveButton from '../helpers/form/block-save-button';
 import { postExternalResource } from '../../utils/ajax';
+import envData from '../../../../config/env.json';
+const { lemlistUrl, lemlistToken } = envData;
 
 type FormValues = {
   name: string;
@@ -119,7 +121,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
   }
 
   lemlistSubmit = async (data: DataLemlist) => {
-    const url = `https://api.lemlist.com/api/campaigns/cam_hncfKbFjexTh4mt5W/leads/${data.email}?access_token=644361781db95beed35589825468642a`;
+    const url = `${lemlistUrl}/leads/${data.email}?access_token=${lemlistToken}`;
 
     return await postExternalResource(url, data);
   };
