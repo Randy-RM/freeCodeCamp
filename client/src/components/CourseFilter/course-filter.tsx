@@ -38,13 +38,17 @@ const { moodleApiBaseUrl, moodleApiToken } = envData;
 const CourseFilter = ({
   setMoodleCourses,
   setIsDataOnLoading,
-  setShowFilter
+  setShowFilter,
+  screenWidth,
+  setProgrammingCategory
 }: {
   setMoodleCourses: React.Dispatch<
     React.SetStateAction<MoodleCoursesCatalogue | null | undefined>
   >;
   setIsDataOnLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
+  setProgrammingCategory: React.Dispatch<React.SetStateAction<boolean>>;
+  screenWidth: number;
 }): JSX.Element => {
   const [courseCategories, setCourseCategories] = useState<
     MoodleCourseCategory[] | null
@@ -180,10 +184,26 @@ const CourseFilter = ({
               onClick={() => {
                 void getMoodleCourses();
                 setCurrentCategory(null);
-                setShowFilter(e => !e);
+                setProgrammingCategory(true);
+                if (screenWidth < 990) setShowFilter(e => !e);
               }}
             >
               Tous
+            </button>
+          )}
+          {courseCategories && (
+            <button
+              className={`filter-button ${
+                currentCategory == -1 ? 'selected-category' : ''
+              }`}
+              onClick={() => {
+                setCurrentCategory(-1);
+                setProgrammingCategory(true);
+                setMoodleCourses(null);
+                if (screenWidth < 990) setShowFilter(e => !e);
+              }}
+            >
+              Programmation
             </button>
           )}
           {courseCategories?.map((element, index) => {
@@ -195,7 +215,8 @@ const CourseFilter = ({
                 onClick={() => {
                   void filterByCategory(element.id);
                   setCurrentCategory(element.id);
-                  setShowFilter(e => !e);
+                  setProgrammingCategory(false);
+                  if (screenWidth < 990) setShowFilter(e => !e);
                 }}
                 key={index}
               >

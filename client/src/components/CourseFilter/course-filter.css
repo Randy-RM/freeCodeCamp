@@ -5,6 +5,10 @@
   top: 100px;
 }
 
+.pagination-container {
+  padding-left: 15%;
+}
+
 .main-title-filter-container {
   display: flex;
   justify-content: space-between;
@@ -108,5 +112,9 @@ details[open] > *:not(summary) {
   .main-title-filter-container > svg {
     display: block;
     cursor: pointer;
+  }
+
+  .pagination-container {
+    padding-left: 0%;
   }
 }
