@@ -470,7 +470,11 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
         Telephone: member.phone,
         Whatsapp: member.whatsapp,
         Genre: member.gender,
-        Ville: member.location
+        Ville: member.location,
+        DateInscription:
+          new Date(member.createAt) > new Date(new Date().getTime() - 120000)
+            ? ''
+            : dateFormat(member.createAt)
       };
     });
 
@@ -859,7 +863,10 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                           )}
                         </td>
                         <td style={{ verticalAlign: 'middle' }}>
-                          {dateFormat(`${member.createAt}`)}
+                          {new Date(member.createAt) <
+                          new Date(new Date().getTime() - 120000)
+                            ? dateFormat(`${member.createAt}`)
+                            : 'Pas de date'}
                         </td>
                         {member.groups ? (
                           <td style={{ verticalAlign: 'middle' }}>
