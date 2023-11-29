@@ -146,13 +146,14 @@ img {
 @media (max-width: 1024px) {
   .card-course-detail-back-landing {
     width: 47%;
-    /* margin-bottom: 10%; */
+    margin-bottom: 5%;
   }
 }
 
 @media (max-width: 768px) {
   .card-course-detail-back-landing {
-    width: 80%;
+    width: 90%;
+    margin-bottom: 10%;
   }
 
   .card-course-detail-unit {
@@ -178,7 +179,7 @@ img {
 
   .card-course-detail-back {
     width: 95%;
-    /* margin-bottom: 10%; */
+    margin-bottom: 10%;
   }
 
   .card-course-detail-container {
@@ -187,7 +188,6 @@ img {
     align-items: center !important;
     justify-content: center !important;
     height: fit-content;
-    gap: 50px;
   }
 
   .card-course-detail-item h4 {

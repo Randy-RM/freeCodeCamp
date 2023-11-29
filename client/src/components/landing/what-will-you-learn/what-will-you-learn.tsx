@@ -56,7 +56,7 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
                 les principes fondamentaux de JavaScript, etc.`}
         />
       </div>
-      <div>
+      <div className='course-cta-container'>
         <a href={`/courses`} className='course-cta'>
           {'Voir tout les cours'}
         </a>
