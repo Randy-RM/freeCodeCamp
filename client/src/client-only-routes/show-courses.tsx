@@ -169,9 +169,10 @@ export function Courses(props: CoursesProps): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
-  window.addEventListener('resize', () => {
-    showFilter && setScreenWidth(window.innerWidth);
-  });
+  typeof window !== undefined &&
+    window.addEventListener('resize', () => {
+      showFilter && setScreenWidth(window.innerWidth);
+    });
 
   useEffect(() => {
     if (screenWidth > 990) setShowFilter(true);
