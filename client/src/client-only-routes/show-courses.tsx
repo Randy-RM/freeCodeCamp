@@ -98,7 +98,9 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [showFilter, setShowFilter] = useState<boolean>(false);
   const [programmingCategory, setProgrammingCategory] = useState<boolean>(true);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 900
+  );
 
   const getMoodleCourses = async () => {
     const moodleCatalogue = await getExternalResource<MoodleCourse[]>(
@@ -141,7 +143,6 @@ export function Courses(props: CoursesProps): JSX.Element {
 
   useEffect(() => {
     void getMoodleCourses();
-    console.log('tdz', moodleCourses);
 
     const timer = setTimeout(() => {
       if (isDataOnLoading) {
@@ -168,10 +169,11 @@ export function Courses(props: CoursesProps): JSX.Element {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
-
-  window.addEventListener('resize', () => {
-    showFilter && setScreenWidth(window.innerWidth);
-  });
+  if (typeof window !== 'undefined') {
+    window.addEventListener('resize', () => {
+      showFilter && setScreenWidth(window.innerWidth);
+    });
+  }
 
   useEffect(() => {
     if (screenWidth > 990) setShowFilter(true);
