@@ -302,7 +302,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                 </div>
               )}
             </div>
-            <Spacer size={2} />
+            <Spacer size={3} />
             <div className='pagination-container'>
               {moodleCourses && moodleCourses.size > 0 && (
                 <Row>
