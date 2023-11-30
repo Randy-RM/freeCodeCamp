@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'gatsby';
 import { Spacer } from '../../../components/helpers';
+
 import LaptopIcon from '../../../assets/images/laptop.svg';
 import AlgoIcon from '../../../assets/images/algorithmIcon.svg';
 import LaediesActIcon from '../../../assets/images/partners/we-act-logo.png';
@@ -56,9 +58,9 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
         />
       </div>
       <div>
-        <a href={`/courses`} className='course-cta'>
+        <Link className='course-cta' to='/courses'>
           {'Voir tout les cours'}
-        </a>
+        </Link>
       </div>
     </div>
   );
