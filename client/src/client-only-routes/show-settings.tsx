@@ -121,7 +121,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
     submitNewEducation,
     submitNewWorkExperience,
     user: {
-      // email,
+      email,
       // isEmailVerified,
       // sendQuincyEmail,
       username,
@@ -214,6 +214,7 @@ export function ShowSettings(props: ShowSettingsProps): JSX.Element {
                     whatsapp={whatsapp}
                     submitNewAbout={submitNewAbout}
                     username={username}
+                    email={email}
                   />
                 </div>
                 <Spacer size={1} />

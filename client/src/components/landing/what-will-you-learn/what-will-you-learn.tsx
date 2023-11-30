@@ -1,11 +1,13 @@
 import React from 'react';
+import { Link } from 'gatsby';
 import { Spacer } from '../../../components/helpers';
+
 import LaptopIcon from '../../../assets/images/laptop.svg';
 import AlgoIcon from '../../../assets/images/algorithmIcon.svg';
 import LaediesActIcon from '../../../assets/images/partners/we-act-logo.png';
 
 import './what-will-you-learn.css';
-import CourseCard from '../../CourseCard/course-card';
+import CourseCardLanding from '../../CourseCard/course-card-landing';
 
 interface LandingDetailsProps {
   isSignedIn?: boolean;
@@ -24,8 +26,8 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
         </p>
       </div>
       <Spacer size={2} />
-      <div className='card-course-detail-container'>
-        <CourseCard
+      <div className='card-course-detail-container-landing'>
+        <CourseCardLanding
           icon={LaptopIcon}
           sponsorIcon={LaediesActIcon}
           alt=''
@@ -41,7 +43,8 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
                 Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
                 `}
         />
-        <CourseCard
+
+        <CourseCardLanding
           icon={AlgoIcon}
           alt=''
           isAvailable={true}
@@ -54,6 +57,11 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
                 cours JavaScript Algorithm and Data Structures, tu apprendras 
                 les principes fondamentaux de JavaScript, etc.`}
         />
+      </div>
+      <div>
+        <Link className='course-cta' to='/courses'>
+          {'Voir tout les cours'}
+        </Link>
       </div>
     </div>
   );

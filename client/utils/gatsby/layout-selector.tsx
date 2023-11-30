@@ -25,7 +25,9 @@ export default function layoutSelector({
     pathname === '/admin/all-members' ||
     pathname === '/admin/all-members/' ||
     pathname === '/admin/all-groups' ||
-    pathname === '/admin/all-groups/'
+    pathname === '/admin/all-groups/' ||
+    pathname === '/admin/all-roles' ||
+    pathname === '/admin/all-roles/'
   ) {
     return (
       <AdminDefaultLayout pathname={pathname} showFooter={false}>

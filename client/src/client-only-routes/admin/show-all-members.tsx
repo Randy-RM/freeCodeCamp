@@ -25,6 +25,7 @@ import {
 import { mkConfig, generateCsv, download } from 'export-to-csv';
 import {
   addUserInGRoup,
+  addUserInRole,
   getDatabaseResource,
   getExternalResource,
   remoevUserInGRoup
@@ -82,6 +83,7 @@ type Member = {
   phone: string;
   whatsapp: string;
   location: string;
+  role: string;
 };
 
 type UserList = {
@@ -468,7 +470,11 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
         Telephone: member.phone,
         Whatsapp: member.whatsapp,
         Genre: member.gender,
-        Ville: member.location
+        Ville: member.location,
+        DateInscription:
+          new Date(member.createAt) > new Date(new Date().getTime() - 120000)
+            ? ''
+            : dateFormat(member.createAt)
       };
     });
 
@@ -857,7 +863,10 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
                           )}
                         </td>
                         <td style={{ verticalAlign: 'middle' }}>
-                          {dateFormat(`${member.createAt}`)}
+                          {new Date(member.createAt) <
+                          new Date(new Date().getTime() - 120000)
+                            ? dateFormat(`${member.createAt}`)
+                            : 'Pas de date'}
                         </td>
                         {member.groups ? (
                           <td style={{ verticalAlign: 'middle' }}>
@@ -969,14 +978,45 @@ type MoodleCourse = {
   progress: number;
 };
 
+type UserRole = {
+  id: string;
+  userRoleName: string;
+};
+type RoleList = {
+  userRoleList: UserRole[];
+  totalPages: number;
+  currentPage: number;
+  countUsers: number;
+};
+
 export function DetailMember(props: MemberProps): JSX.Element {
   const { member, returnToTable } = props;
 
   const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[] | null>();
+  const [userRoles, setUserRoles] = useState<UserRole[]>([]);
+
+  const [selectedRoleName, setSelectedRoleName] = useState<string | undefined>(
+    member?.role ? member?.role : ''
+  );
+  const [updating, setupdating] =
+    useState<{ isAddedStatus: boolean; message: string }>();
   const dateFormat = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleString();
   };
+
+  const getAllRoles = async () => {
+    const allRoles = await getDatabaseResource<RoleList>(
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      `/all-users-roles?page=1&limit=10`
+    );
+    if (allRoles?.userRoleList != null && !('error' in allRoles)) {
+      setUserRoles([...allRoles.userRoleList]);
+    } else {
+      setUserRoles([]);
+    }
+  };
+
   const getMoodleProgressCourses = async () => {
     const moodleUser = await getExternalResource<MoodleUser[]>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -1002,12 +1042,56 @@ export function DetailMember(props: MemberProps): JSX.Element {
     }
   };
 
+  const addUserRole = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    userRoleName: string | undefined,
+    userId: string[]
+  ) => {
+    event.preventDefault();
+    const data = {
+      ids: userId,
+      userRole: userRoleName
+    };
+
+    if (userId.length !== 0) {
+      let res;
+      void (async () => {
+        res = await addUserInRole(data);
+
+        if (res && res.isAdded) {
+          setupdating({
+            isAddedStatus: res.isAdded,
+            message: res.message
+          });
+          setTimeout(() => {
+            setupdating({
+              isAddedStatus: false,
+              message: ''
+            });
+          }, 5000);
+        }
+      })();
+    }
+  };
+  const handleChangeRoleName = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    event.preventDefault();
+    const roleMembersInput = event.target.value.slice();
+    setSelectedRoleName(roleMembersInput);
+  };
+
   useEffect(() => {
     void getMoodleProgressCourses();
+
     return () => {
       setMoodleCourses([]); // cleanup useEffect to perform a React state update
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    void getAllRoles();
   }, []);
 
   return (
@@ -1042,6 +1126,77 @@ export function DetailMember(props: MemberProps): JSX.Element {
               <span className='fw-bold'>{'Nom'}</span>
               <br />
               {member?.name}
+            </p>
+          )}
+          {member?.name && member?.name.length > 0 && (
+            <p>
+              <span className='fw-bold'>{'Rôle'}</span>
+              <br />
+              <FormGroup controlId='select-role' className='select-role'>
+                <FormControl
+                  componentClass='select'
+                  onChange={handleChangeRoleName}
+                  value={selectedRoleName}
+                  className='standard-radius-5 role-input'
+                >
+                  {' '}
+                  {/* <option value='all'>Tout les membres</option> */}
+                  <option key={''} value={selectedRoleName}>
+                    {selectedRoleName}
+                  </option>
+                  {userRoles.length !== 0 &&
+                    userRoles.map(userRole => {
+                      return (
+                        <>
+                          {userRole.userRoleName == selectedRoleName ? (
+                            ''
+                          ) : (
+                            <option key={''} value={userRole.userRoleName}>
+                              {userRole.userRoleName}
+                            </option>
+                          )}
+                        </>
+                      );
+                    })}
+                </FormControl>
+                <Button
+                  type='submit'
+                  className='standard-radius-5 btn-black'
+                  id='button-addon2'
+                  onClick={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    addUserRole(event, selectedRoleName, [member?.id]);
+                  }}
+                >
+                  {'Modifier'}
+                </Button>
+                {updating?.isAddedStatus ? (
+                  <>
+                    {' '}
+                    {!updating || updating.message.length == 0 ? (
+                      <HelpBlock className='none-help-block'>
+                        {`none`}
+                      </HelpBlock>
+                    ) : (
+                      <HelpBlock className='text-success'>
+                        {`${updating.message}`}
+                      </HelpBlock>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {' '}
+                    {!updating || updating.message.length == 0 ? (
+                      <HelpBlock className='none-help-block'>
+                        {`none`}
+                      </HelpBlock>
+                    ) : (
+                      <HelpBlock className='text-error'>
+                        {`${updating.message}`}
+                      </HelpBlock>
+                    )}
+                  </>
+                )}
+              </FormGroup>
             </p>
           )}
 

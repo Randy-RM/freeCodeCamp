@@ -5,7 +5,7 @@ import PlayIcon from '../../assets/images/play.svg';
 import Map from '../Map/index';
 import { Link } from '../helpers';
 
-import './course-card.css';
+import './course-card-landing.css';
 
 const { apiLocation } = envData;
 
@@ -31,7 +31,7 @@ interface LandingDetailsProps {
   cardType?: string;
 }
 
-const CourseCard = ({
+const CourseCardLanding = ({
   isSignedIn,
   isAvailable,
   phone,
@@ -48,7 +48,7 @@ const CourseCard = ({
   cardType
 }: LandingDetailsProps): JSX.Element => {
   return (
-    <div className='card-course-detail-back standard-radius-5 card-outlin-border'>
+    <div className='card-course-detail-back-landing standard-radius-5 card-outlin-border'>
       <div className='card-course-detail-unit position-relative'>
         <div className='card-outlin-border bg-light standard-radius-5'>
           {cardType && cardType == CardStyle.Path ? (
@@ -86,7 +86,7 @@ const CourseCard = ({
               <p
                 className='text-responsive'
                 dangerouslySetInnerHTML={{
-                  __html: `${description.substring(0, 150)}...`
+                  __html: `${description.substring(0, 300)}...`
                 }}
               ></p>
             )}
@@ -192,5 +192,5 @@ const CourseCard = ({
   );
 };
 
-CourseCard.displayName = 'CourseCard';
-export default CourseCard;
+CourseCardLanding.displayName = 'CourseCardLanding';
+export default CourseCardLanding;

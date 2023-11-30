@@ -221,7 +221,28 @@ export async function getExternalResource<T>(urlEndPoint: string) {
   }
   return response;
 }
+interface DataLemlist {
+  firstName: string;
+}
 
+export async function postExternalResource<T>(
+  urlEndPoint: string,
+  data: DataLemlist
+) {
+  let response: unknown;
+
+  try {
+    response = await requestModule<T>(`${urlEndPoint}`, {
+      method: 'POST', //GET, POST, PUT, DELETE, etc.
+      mode: 'no-cors', //no-cors,cors, same-origin
+      cache: 'no-cache', //default, no-cache, reload, force-cache, only-if-cached
+      body: JSON.stringify({ firstName: data.firstName })
+    });
+  } catch (error) {
+    response = error;
+  }
+  return response;
+}
 export async function getDatabaseResource<T>(urlEndPoint: string) {
   let response: T | null;
   try {
@@ -303,6 +324,35 @@ export async function createUserGroup(
   } catch (error: unknown | any) {
     return {
       userGroup: null,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+      error: error.message
+    };
+  }
+}
+
+interface UserRole {
+  id?: string;
+  userRoleName: string;
+}
+
+interface UserRoleResponse {
+  userRole: UserRole | null;
+  error: string | undefined;
+}
+export async function createUserRole(
+  body: UserRole
+): Promise<UserRoleResponse | void | unknown> {
+  try {
+    const response = await post<UserRoleResponse>('/user-role/create', body);
+
+    if (!response.userRole) {
+      throw new Error(response.error);
+    }
+    return response;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: unknown | any) {
+    return {
+      userRole: null,
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
       error: error.message
     };
@@ -432,6 +482,39 @@ export async function updateMemberGroup(
   }
 }
 
+interface UpdateRoleResponse {
+  isUpdated: boolean;
+  error: string | unknown;
+}
+export async function updateMemberRole(
+  body: UserRole
+): Promise<UpdateRoleResponse | undefined> {
+  try {
+    const isMemberRoleUpdated = await put<UpdateRoleResponse>(
+      '/user-role/update',
+      body
+    );
+    if (!isMemberRoleUpdated.isUpdated) {
+      if (typeof isMemberRoleUpdated.error === 'string') {
+        throw new Error(isMemberRoleUpdated.error);
+      }
+      throw new Error('Update of the role failed.');
+    }
+    return isMemberRoleUpdated;
+  } catch (error) {
+    if (error instanceof Error) {
+      return {
+        isUpdated: false,
+        error: error.message
+      };
+    }
+    return {
+      isUpdated: false,
+      error: 'Update of the role failed.'
+    };
+  }
+}
+
 /** DELETE **/
 export function deleteWebhookToken(): Promise<void> {
   return deleteRequest('/user/webhook-token', {});
@@ -448,6 +531,31 @@ export async function deleteMemberGroup(
   try {
     const groupIsAdded = await deleteRequest<DeletionGroupResponse>(
       '/user-group/delete',
+      body
+    );
+    if (!groupIsAdded.isDeleted) {
+      throw new Error('Deletion of the group failed.');
+    }
+    return groupIsAdded;
+  } catch (error) {
+    if (error instanceof Error) {
+      return {
+        isDeleted: false,
+        message: error.message
+      };
+    }
+    return {
+      isDeleted: false,
+      message: 'Deletion of the group failed.'
+    };
+  }
+}
+export async function deleteMemberRole(
+  body: UserRole
+): Promise<DeletionGroupResponse | undefined> {
+  try {
+    const groupIsAdded = await deleteRequest<DeletionGroupResponse>(
+      '/user-role/delete',
       body
     );
     if (!groupIsAdded.isDeleted) {
@@ -488,6 +596,31 @@ export async function addUserInGRoup(
 
     console.log('ffg', groupIsAdded);
     return groupIsAdded;
+  } catch (error) {
+    console.log(error);
+
+    return {
+      isAdded: false,
+      message: 'user is not added in the group'
+    };
+  }
+}
+
+interface AddUserInRoleData {
+  ids: string[];
+  userRole: string | undefined;
+}
+export async function addUserInRole(
+  body: AddUserInRoleData
+): Promise<AddUserInGRoupReponse | undefined> {
+  try {
+    const roleIsAdded = await put<AddUserInGRoupReponse>(
+      '/user-role/add-user',
+      body
+    );
+
+    console.log('ffg', roleIsAdded);
+    return roleIsAdded;
   } catch (error) {
     console.log(error);
 

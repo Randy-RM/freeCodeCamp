@@ -66,5 +66,9 @@
   "userGroup": {
     "dataSource": "db",
     "public": true
+  },
+  "userRole": {
+    "dataSource": "db",
+    "public": true
   }
 }
