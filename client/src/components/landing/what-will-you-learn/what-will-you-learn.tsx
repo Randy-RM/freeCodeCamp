@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'gatsby';
 import { Spacer } from '../../../components/helpers';
+
 import LaptopIcon from '../../../assets/images/laptop.svg';
 import AlgoIcon from '../../../assets/images/algorithmIcon.svg';
 import LaediesActIcon from '../../../assets/images/partners/we-act-logo.png';
@@ -56,10 +58,10 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
                 les principes fondamentaux de JavaScript, etc.`}
         />
       </div>
-      <div className='course-cta-container'>
-        <a href={`/courses`} className='course-cta'>
+      <div>
+        <Link className='course-cta' to='/courses'>
           {'Voir tout les cours'}
-        </a>
+        </Link>
       </div>
     </div>
   );
