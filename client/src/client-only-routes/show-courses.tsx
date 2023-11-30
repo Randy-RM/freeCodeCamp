@@ -141,7 +141,6 @@ export function Courses(props: CoursesProps): JSX.Element {
 
   useEffect(() => {
     void getMoodleCourses();
-    console.log('tdz', moodleCourses);
 
     const timer = setTimeout(() => {
       if (isDataOnLoading) {
@@ -300,7 +299,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                 </div>
               )}
             </div>
-            <Spacer size={2} />
+            <Spacer size={3} />
             <div className='pagination-container'>
               {moodleCourses && moodleCourses.size > 0 && (
                 <Row>
