@@ -156,7 +156,6 @@ export function Courses(props: CoursesProps): JSX.Element {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       if (isDataOnLoading) {
