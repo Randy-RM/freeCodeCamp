@@ -65,7 +65,8 @@ const CourseFilter = ({
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_categories&moodlewsrestformat=json`
     );
-    setCourseCategories(moodleCourseCategories);
+    console.log('moodleCourseCategories:', moodleCourseCategories);
+    if (moodleCourseCategories) setCourseCategories(moodleCourseCategories);
   };
 
   const filterByCategory = async (categoryId: number) => {
