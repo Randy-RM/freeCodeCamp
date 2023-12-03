@@ -50,6 +50,23 @@ interface CoursesProps {
   path?: string;
 }
 
+export type MoodleCourseCategory = {
+  id: number;
+  name: string;
+  idnumber: string;
+  description: string;
+  descriptionformat: number;
+  parent: number;
+  sortorder: number;
+  coursecount: number;
+  visible: number;
+  visibleold: number;
+  timemodified: number;
+  depth: number;
+  path: string;
+  theme: string;
+};
+
 export type MoodleCourse = {
   id: number;
   shortname: string;
@@ -99,6 +116,27 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [showFilter, setShowFilter] = useState<boolean>(false);
   const [programmingCategory, setProgrammingCategory] = useState<boolean>(true);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  const [courseCategories, setCourseCategories] = useState<
+    MoodleCourseCategory[] | null
+  >();
+
+  const [currentCategory, setCurrentCategory] = useState<number | null>(null);
+
+  const getMoodleCourseCategory = async () => {
+    const moodleCourseCategories = await getExternalResource<
+      MoodleCourseCategory[]
+    >(
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_categories&moodlewsrestformat=json`
+    );
+
+    if (moodleCourseCategories) {
+      setCourseCategories(
+        moodleCourseCategories?.filter(category => category.coursecount > 0)
+      );
+    }
+  };
 
   const getMoodleCourses = async () => {
     const moodleCatalogue = await getExternalResource<MoodleCourse[]>(
@@ -179,6 +217,10 @@ export function Courses(props: CoursesProps): JSX.Element {
     else setShowFilter(false);
   }, [screenWidth]);
 
+  useEffect(() => {
+    void getMoodleCourseCategory();
+  }, [courseCategories]);
+
   if (showLoading) {
     return <Loader fullScreen={true} />;
   }
@@ -228,6 +270,9 @@ export function Courses(props: CoursesProps): JSX.Element {
                   setShowFilter={setShowFilter}
                   setIsDataOnLoading={setIsDataOnLoading}
                   setProgrammingCategory={setProgrammingCategory}
+                  courseCategories={courseCategories}
+                  currentCategory={currentCategory}
+                  setCurrentCategory={setCurrentCategory}
                 />
               )}
 

@@ -57,6 +57,7 @@ details[open] > *:not(summary) {
 
 .selected-category {
   color: red;
+  font-weight: bold;
 }
 
 .filter-items-container {
