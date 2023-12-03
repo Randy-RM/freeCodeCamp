@@ -27,7 +27,7 @@ img {
   /* padding:2%; */
   width: 30%;
   height: auto;
-  /* margin-bottom: 5%; */
+  margin-bottom: 5%;
 }
 
 .card-course-detail-item {
@@ -92,6 +92,7 @@ img {
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
+  height: inherit;
   justify-content: flex-start;
   gap: 5%;
 }
@@ -156,7 +157,7 @@ img {
 @media (max-width: 1024px) {
   .card-course-detail-back {
     width: 47%;
-    /* margin-bottom: 10%; */
+    /* margin-bottom: 5%; */
   }
 }
 
@@ -197,7 +198,7 @@ img {
     align-items: center !important;
     justify-content: center !important;
     height: fit-content;
-    gap: 50px;
+    /* gap: 30px; */
   }
 
   .card-course-detail-item h4 {

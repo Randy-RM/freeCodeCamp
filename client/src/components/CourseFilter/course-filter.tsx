@@ -65,8 +65,12 @@ const CourseFilter = ({
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_categories&moodlewsrestformat=json`
     );
-    console.log('moodleCourseCategories:', moodleCourseCategories);
-    if (moodleCourseCategories) setCourseCategories(moodleCourseCategories);
+
+    if (moodleCourseCategories) {
+      setCourseCategories(
+        moodleCourseCategories?.filter(category => category.coursecount > 0)
+      );
+    }
   };
 
   const filterByCategory = async (categoryId: number) => {
@@ -220,9 +224,8 @@ const CourseFilter = ({
                   if (screenWidth < 990) setShowFilter(e => !e);
                 }}
                 key={index}
-              >
-                {element.name}
-              </button>
+                dangerouslySetInnerHTML={{ __html: element.name }}
+              ></button>
             );
           })}
         </ul>

@@ -166,6 +166,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                 Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
                 `}
                 />
+
                 <CourseCard
                   icon={CloudShield}
                   alt=''
