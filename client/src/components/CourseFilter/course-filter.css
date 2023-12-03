@@ -60,6 +60,11 @@ details[open] > *:not(summary) {
   font-weight: bold;
 }
 
+.title-selected-filter {
+  border-bottom: 1px solid grey;
+  padding: 20px 0px;
+}
+
 .filter-items-container {
   display: flex;
   flex-direction: column;

@@ -261,7 +261,22 @@ export function Courses(props: CoursesProps): JSX.Element {
                 </g>
               </svg>{' '}
             </button>
+            {/* <Spacer /> */}
+            <h2
+              dangerouslySetInnerHTML={{
+                __html: `${
+                  currentCategory == null
+                    ? 'Tous les cours'
+                    : currentCategory == -1
+                    ? 'Programmation'
+                    : (courseCategories?.find(elt => elt.id == currentCategory)
+                        ?.name as string)
+                }`
+              }}
+              className='title-selected-filter'
+            ></h2>
             <Spacer />
+
             <div className='card-filter-container'>
               {showFilter && (
                 <CourseFilter

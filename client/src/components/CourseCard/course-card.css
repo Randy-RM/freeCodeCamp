@@ -27,7 +27,7 @@ img {
   /* padding:2%; */
   width: 30%;
   height: auto;
-  margin-bottom: 5%;
+  /* margin-bottom: 5%; */
 }
 
 .card-course-detail-item {
@@ -92,7 +92,6 @@ img {
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  height: inherit;
   justify-content: flex-start;
   gap: 5%;
 }
