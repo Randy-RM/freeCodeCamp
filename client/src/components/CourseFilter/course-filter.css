@@ -89,7 +89,7 @@ details[open] > *:not(summary) {
     align-items: center;
     gap: 3%;
     border-radius: 30px;
-    border: 2px solid red;
+    border: 2px solid #e60000;
     width: 100%;
     /* border-color: red; */
     background: inherit;
@@ -103,6 +103,10 @@ details[open] > *:not(summary) {
     fill: white;
   }
 
+  .show-filter-button:hover {
+    background-color: #e60000;
+    border: #e60000 2px solid;
+  }
   .filter-container {
     /* display: none; */
     position: fixed;

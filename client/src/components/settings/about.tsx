@@ -10,6 +10,9 @@ import validator from 'validator/';
 import { TFunction, withTranslation } from 'react-i18next';
 import { Spacer } from '../helpers';
 import BlockSaveButton from '../helpers/form/block-save-button';
+import { postExternalResource } from '../../utils/ajax';
+import envData from '../../../../config/env.json';
+const { lemlistUrl, lemlistToken } = envData;
 
 type FormValues = {
   name: string;
@@ -33,6 +36,7 @@ type AboutProps = {
   submitNewAbout: (formValues: FormValues) => void;
   t: TFunction;
   username: string;
+  email: string;
 };
 
 type AboutState = {
@@ -55,6 +59,11 @@ type AboutState = {
   isBlurPhone: boolean;
   isValidWhatsapp: boolean;
 };
+interface DataLemlist {
+  email: string;
+  firstName: string;
+  // Other data properties
+}
 
 class AboutSettings extends Component<AboutProps, AboutState> {
   validationImage: HTMLImageElement;
@@ -69,7 +78,9 @@ class AboutSettings extends Component<AboutProps, AboutState> {
       phone = '',
       whatsapp = '',
       codeTime = '',
-      about = ''
+      about = '',
+      username = '',
+      email = ''
     } = props;
 
     const values = {
@@ -79,7 +90,9 @@ class AboutSettings extends Component<AboutProps, AboutState> {
       phone,
       whatsapp,
       codeTime,
-      about
+      about,
+      username,
+      email
     };
 
     this.state = {
@@ -106,6 +119,12 @@ class AboutSettings extends Component<AboutProps, AboutState> {
     // this.focusHandlerName = this.focusHandlerName.bind(this);
     // this.blurHandlerName = this.blurHandlerName.bind(this);
   }
+
+  lemlistSubmit = async (data: DataLemlist) => {
+    const url = `${lemlistUrl}/leads/${data.email}?access_token=${lemlistToken}`;
+
+    return await postExternalResource(url, data);
+  };
 
   componentDidUpdate() {
     const { name, location, gender, codeTime, about, phone, whatsapp } =
@@ -166,6 +185,11 @@ class AboutSettings extends Component<AboutProps, AboutState> {
     e.preventDefault();
     const { formValues } = this.state;
     const { submitNewAbout } = this.props;
+    const data = {
+      email: this.props.email,
+      firstName: this.props.name
+    };
+    void this.lemlistSubmit(data);
     return this.setState({ formClicked: true }, () =>
       submitNewAbout(formValues)
     );

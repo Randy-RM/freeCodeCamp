@@ -221,7 +221,28 @@ export async function getExternalResource<T>(urlEndPoint: string) {
   }
   return response;
 }
+interface DataLemlist {
+  firstName: string;
+}
 
+export async function postExternalResource<T>(
+  urlEndPoint: string,
+  data: DataLemlist
+) {
+  let response: unknown;
+
+  try {
+    response = await requestModule<T>(`${urlEndPoint}`, {
+      method: 'POST', //GET, POST, PUT, DELETE, etc.
+      mode: 'no-cors', //no-cors,cors, same-origin
+      cache: 'no-cache', //default, no-cache, reload, force-cache, only-if-cached
+      body: JSON.stringify({ firstName: data.firstName })
+    });
+  } catch (error) {
+    response = error;
+  }
+  return response;
+}
 export async function getDatabaseResource<T>(urlEndPoint: string) {
   let response: T | null;
   try {
