@@ -64,3 +64,6 @@ LOCAL_MOCK_AUTH=true
 CODESEE=false
 # Webhook proxy url from smee.io for PayPal
 WEBHOOK_PROXY_URL=
+# LemList
+LEMLIST_URL=lemlsist_url
+LEMLIST_TOKEN=lemlsist_token
