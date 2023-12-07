@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './course-filter.css';
 
 import { getExternalResource } from '../../utils/ajax';
@@ -6,27 +6,11 @@ import envData from '../../../../config/env.json';
 
 import {
   MoodleCourse,
+  MoodleCourseCategory,
   MoodleCoursesCatalogue
 } from '../../client-only-routes/show-courses';
 import { splitArray } from '../helpers';
 import sortCourses from '../helpers/sort-course';
-
-type MoodleCourseCategory = {
-  id: number;
-  name: string;
-  idnumber: string;
-  description: string;
-  descriptionformat: number;
-  parent: number;
-  sortorder: number;
-  coursecount: number;
-  visible: number;
-  visibleold: number;
-  timemodified: number;
-  depth: number;
-  path: string;
-  theme: string;
-};
 
 type MoodleCoursesFiltered = {
   courses: MoodleCourse[] | null;
@@ -40,7 +24,10 @@ const CourseFilter = ({
   setIsDataOnLoading,
   setShowFilter,
   screenWidth,
-  setProgrammingCategory
+  courseCategories,
+  setProgrammingCategory,
+  currentCategory,
+  setCurrentCategory
 }: {
   setMoodleCourses: React.Dispatch<
     React.SetStateAction<MoodleCoursesCatalogue | null | undefined>
@@ -49,24 +36,11 @@ const CourseFilter = ({
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
   setProgrammingCategory: React.Dispatch<React.SetStateAction<boolean>>;
   screenWidth: number;
+  courseCategories: MoodleCourseCategory[] | null | undefined;
+  currentCategory: number | null;
+  setCurrentCategory: React.Dispatch<React.SetStateAction<number | null>>;
 }): JSX.Element => {
-  const [courseCategories, setCourseCategories] = useState<
-    MoodleCourseCategory[] | null
-  >();
-
   const [showSubjectFilter, setShowSubjectFilter] = useState<boolean>(true);
-
-  const [currentCategory, setCurrentCategory] = useState<number | null>(null);
-
-  const getMoodleCourseCategory = async () => {
-    const moodleCourseCategories = await getExternalResource<
-      MoodleCourseCategory[]
-    >(
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_categories&moodlewsrestformat=json`
-    );
-    setCourseCategories(moodleCourseCategories);
-  };
 
   const filterByCategory = async (categoryId: number) => {
     setIsDataOnLoading(true);
@@ -99,7 +73,7 @@ const CourseFilter = ({
       `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses&moodlewsrestformat=json`
     );
 
-    const splitCourses: MoodleCoursesCatalogue | null | undefined =
+    const splitCourses: MoodleCoursesCatalogue | null =
       moodleCatalogue != null
         ? splitArray<MoodleCourse>(
             moodleCatalogue.filter(moodleCourse => {
@@ -119,10 +93,6 @@ const CourseFilter = ({
       setMoodleCourses(null);
     }
   };
-
-  useEffect(() => {
-    void getMoodleCourseCategory();
-  }, []);
 
   return (
     <div className='filter-container'>
@@ -191,6 +161,7 @@ const CourseFilter = ({
               Tous
             </button>
           )}
+
           {courseCategories && (
             <button
               className={`filter-button ${
@@ -206,22 +177,22 @@ const CourseFilter = ({
               Programmation
             </button>
           )}
+
           {courseCategories?.map((element, index) => {
             return (
               <button
                 className={`filter-button ${
-                  currentCategory == element.id ? 'selected-category' : ''
+                  currentCategory == element?.id ? 'selected-category' : ''
                 }`}
                 onClick={() => {
-                  void filterByCategory(element.id);
-                  setCurrentCategory(element.id);
+                  void filterByCategory(element?.id);
+                  setCurrentCategory(element?.id);
                   setProgrammingCategory(false);
                   if (screenWidth < 990) setShowFilter(e => !e);
                 }}
                 key={index}
-              >
-                {element.name}
-              </button>
+                dangerouslySetInnerHTML={{ __html: element?.name }}
+              ></button>
             );
           })}
         </ul>

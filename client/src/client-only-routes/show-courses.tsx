@@ -50,6 +50,23 @@ interface CoursesProps {
   path?: string;
 }
 
+export type MoodleCourseCategory = {
+  id: number;
+  name: string;
+  idnumber: string;
+  description: string;
+  descriptionformat: number;
+  parent: number;
+  sortorder: number;
+  coursecount: number;
+  visible: number;
+  visibleold: number;
+  timemodified: number;
+  depth: number;
+  path: string;
+  theme: string;
+};
+
 export type MoodleCourse = {
   id: number;
   shortname: string;
@@ -101,6 +118,26 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [screenWidth, setScreenWidth] = useState(
     typeof window !== 'undefined' ? window.innerWidth : 900
   );
+  const [courseCategories, setCourseCategories] = useState<
+    MoodleCourseCategory[] | null
+  >();
+
+  const [currentCategory, setCurrentCategory] = useState<number | null>(null);
+
+  const getMoodleCourseCategory = async () => {
+    const moodleCourseCategories = await getExternalResource<
+      MoodleCourseCategory[]
+    >(
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_categories&moodlewsrestformat=json`
+    );
+
+    if (moodleCourseCategories) {
+      setCourseCategories(
+        moodleCourseCategories?.filter(category => category.coursecount > 0)
+      );
+    }
+  };
 
   const getMoodleCourses = async () => {
     const moodleCatalogue = await getExternalResource<MoodleCourse[]>(
@@ -156,7 +193,6 @@ export function Courses(props: CoursesProps): JSX.Element {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       if (isDataOnLoading) {
@@ -169,6 +205,7 @@ export function Courses(props: CoursesProps): JSX.Element {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
+
   if (typeof window !== 'undefined') {
     window.addEventListener('resize', () => {
       showFilter && setScreenWidth(window.innerWidth);
@@ -179,6 +216,10 @@ export function Courses(props: CoursesProps): JSX.Element {
     if (screenWidth > 990) setShowFilter(true);
     else setShowFilter(false);
   }, [screenWidth]);
+
+  useEffect(() => {
+    void getMoodleCourseCategory();
+  }, [courseCategories]);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
@@ -220,7 +261,22 @@ export function Courses(props: CoursesProps): JSX.Element {
                 </g>
               </svg>{' '}
             </button>
+            {/* <Spacer /> */}
+            <h2
+              dangerouslySetInnerHTML={{
+                __html: `${
+                  currentCategory == null
+                    ? 'Tous les cours'
+                    : currentCategory == -1
+                    ? 'Programmation'
+                    : (courseCategories?.find(elt => elt.id == currentCategory)
+                        ?.name as string)
+                }`
+              }}
+              className='title-selected-filter'
+            ></h2>
             <Spacer />
+
             <div className='card-filter-container'>
               {showFilter && (
                 <CourseFilter
@@ -229,6 +285,9 @@ export function Courses(props: CoursesProps): JSX.Element {
                   setShowFilter={setShowFilter}
                   setIsDataOnLoading={setIsDataOnLoading}
                   setProgrammingCategory={setProgrammingCategory}
+                  courseCategories={courseCategories}
+                  currentCategory={currentCategory}
+                  setCurrentCategory={setCurrentCategory}
                 />
               )}
 
