@@ -60,7 +60,7 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
       </div>
       <div>
         <Link className='course-cta' to='/courses'>
-          {'Voir tout les cours'}
+          {'Voir tous les cours'}
         </Link>
       </div>
     </div>
