@@ -474,7 +474,15 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
         DateInscription:
           new Date(member.createAt) > new Date(new Date().getTime() - 120000)
             ? ''
-            : dateFormat(member.createAt)
+            : dateFormat(member.createAt),
+        coursSuivis:
+          member.currentsSuperBlock.length > 0
+            ? member.currentsSuperBlock
+                .map(currentSuperBlock => {
+                  return currentSuperBlock.superBlockName;
+                })
+                .join(',')
+            : 'Aucun'
       };
     });
 
