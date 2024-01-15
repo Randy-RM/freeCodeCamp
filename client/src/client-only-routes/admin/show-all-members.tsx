@@ -1136,7 +1136,7 @@ export function DetailMember(props: MemberProps): JSX.Element {
               {member?.name}
             </p>
           )}
-          {member && (
+          {member?.email && (
             <p>
               <span className='fw-bold'>{'Rôle'}</span>
               <br />
