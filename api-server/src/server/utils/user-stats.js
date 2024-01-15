@@ -146,12 +146,12 @@ export function getAllUsers(
                 return reject(err || 'No users found ');
               }
               instance.forEach(user => {
-                if (user.role) {
+                if (!user.role) {
                   User.upsertWithWhere(
                     {
                       id: user.id
                     },
-                    { role: 'Joel tondozi' }
+                    { role: '' }
                   );
                 }
 
