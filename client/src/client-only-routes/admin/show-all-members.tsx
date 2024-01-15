@@ -1136,7 +1136,7 @@ export function DetailMember(props: MemberProps): JSX.Element {
               {member?.name}
             </p>
           )}
-          {member?.name && member?.name.length > 0 && (
+          {member && (
             <p>
               <span className='fw-bold'>{'Rôle'}</span>
               <br />

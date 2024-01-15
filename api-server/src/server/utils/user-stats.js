@@ -145,6 +145,22 @@ export function getAllUsers(
               if (err || isEmpty(instance)) {
                 return reject(err || 'No users found ');
               }
+              instance.forEach(user => {
+                if (user.role) {
+                  User.upsertWithWhere(
+                    {
+                      id: user.id
+                    },
+                    { role: 'Joel tondozi' }
+                  );
+                }
+
+                error => {
+                  if (error) {
+                    return reject(error || 'Error in Updated Document');
+                  }
+                };
+              });
 
               return resolve(instance);
             }
@@ -162,6 +178,22 @@ export function getAllUsers(
               if (err || isEmpty(instance)) {
                 return reject(err || 'No users found ');
               }
+              instance.forEach(user => {
+                if (!user.role) {
+                  User.upsertWithWhere(
+                    {
+                      id: user.id
+                    },
+                    { role: '' }
+                  );
+                }
+
+                error => {
+                  if (error) {
+                    return reject(error || 'Error in Updated Document');
+                  }
+                };
+              });
 
               return resolve(instance);
             }
@@ -178,6 +210,23 @@ export function getAllUsers(
             if (err || isEmpty(instance)) {
               return reject(err || 'No users found ');
             }
+            instance.forEach(user => {
+              if (!user.role) {
+                User.upsertWithWhere(
+                  {
+                    id: user.id
+                  },
+                  { role: '' }
+                );
+              }
+
+              error => {
+                if (error) {
+                  return reject(error || 'Error in Updated Document');
+                }
+              };
+            });
+
             return resolve(instance);
           }
         );
@@ -189,6 +238,23 @@ export function getAllUsers(
           if (err || isEmpty(instance)) {
             return reject(err || 'No users found');
           }
+          instance.forEach(user => {
+            if (!user.role) {
+              User.upsertWithWhere(
+                {
+                  id: user.id
+                },
+                { role: '' }
+              );
+            }
+
+            error => {
+              if (error) {
+                return reject(error || 'Error in Updated Document');
+              }
+            };
+          });
+
           return resolve(instance);
         }
       );
