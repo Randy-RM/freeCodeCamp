@@ -26,7 +26,7 @@ const CourseFilter = ({
   setShowFilter,
   screenWidth,
   courseCategories,
-  setProgrammingCategory,
+  // setProgrammingCategory,
   currentCategory,
   setCurrentCategory,
   setCurrentPage
@@ -36,7 +36,7 @@ const CourseFilter = ({
   >;
   setIsDataOnLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
-  setProgrammingCategory: React.Dispatch<React.SetStateAction<boolean>>;
+  // setProgrammingCategory: React.Dispatch<React.SetStateAction<boolean>>;
   screenWidth: number;
   courseCategories: MoodleCourseCategory[] | null | undefined;
   currentCategory: number | null;
@@ -158,7 +158,7 @@ const CourseFilter = ({
                 void getMoodleCourses();
                 setCurrentPage(1);
                 setCurrentCategory(null);
-                setProgrammingCategory(true);
+                // setProgrammingCategory(true);
                 scrollTo(130);
                 if (screenWidth < 990) setShowFilter(e => !e);
               }}
@@ -174,8 +174,8 @@ const CourseFilter = ({
               }`}
               onClick={() => {
                 setCurrentCategory(-1);
-                setCurrentPage(1);
-                setProgrammingCategory(true);
+                // setCurrentPage(1);
+                // setProgrammingCategory(true);
                 setMoodleCourses(null);
                 scrollTo(130);
                 if (screenWidth < 990) setShowFilter(e => !e);
@@ -196,7 +196,7 @@ const CourseFilter = ({
                   setCurrentCategory(element?.id);
                   setCurrentPage(1);
                   scrollTo(130);
-                  setProgrammingCategory(false);
+                  // setProgrammingCategory(false);
                   if (screenWidth < 990) setShowFilter(e => !e);
                 }}
                 key={index}
