@@ -23,6 +23,7 @@ import {
   faXmark
 } from '@fortawesome/free-solid-svg-icons';
 import { mkConfig, generateCsv, download } from 'export-to-csv';
+import validator from 'validator';
 import {
   addUserInGRoup,
   addUserInRole,
@@ -288,7 +289,10 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     return <Loader fullScreen={true} />;
   }
 
-  if (!user.email.endsWith('@kadea.co')) {
+  if (
+    validator.equals(user.role, 'Admin') ||
+    validator.equals(user.role, 'Super-admin')
+  ) {
     navigate(`${homeLocation}`);
     return <Loader fullScreen={true} />;
   }
