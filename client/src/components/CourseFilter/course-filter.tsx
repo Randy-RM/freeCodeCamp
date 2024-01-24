@@ -27,7 +27,8 @@ const CourseFilter = ({
   courseCategories,
   setProgrammingCategory,
   currentCategory,
-  setCurrentCategory
+  setCurrentCategory,
+  setCurrentPage
 }: {
   setMoodleCourses: React.Dispatch<
     React.SetStateAction<MoodleCoursesCatalogue | null | undefined>
@@ -39,6 +40,7 @@ const CourseFilter = ({
   courseCategories: MoodleCourseCategory[] | null | undefined;
   currentCategory: number | null;
   setCurrentCategory: React.Dispatch<React.SetStateAction<number | null>>;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }): JSX.Element => {
   const [showSubjectFilter, setShowSubjectFilter] = useState<boolean>(true);
 
@@ -153,6 +155,7 @@ const CourseFilter = ({
               }`}
               onClick={() => {
                 void getMoodleCourses();
+                setCurrentPage(1);
                 setCurrentCategory(null);
                 setProgrammingCategory(true);
                 if (screenWidth < 990) setShowFilter(e => !e);
@@ -169,6 +172,7 @@ const CourseFilter = ({
               }`}
               onClick={() => {
                 setCurrentCategory(-1);
+                setCurrentPage(1);
                 setProgrammingCategory(true);
                 setMoodleCourses(null);
                 if (screenWidth < 990) setShowFilter(e => !e);
@@ -187,6 +191,7 @@ const CourseFilter = ({
                 onClick={() => {
                   void filterByCategory(element?.id);
                   setCurrentCategory(element?.id);
+                  setCurrentPage(1);
                   setProgrammingCategory(false);
                   if (screenWidth < 990) setShowFilter(e => !e);
                 }}

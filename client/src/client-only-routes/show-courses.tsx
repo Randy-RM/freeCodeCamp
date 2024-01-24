@@ -288,6 +288,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                   courseCategories={courseCategories}
                   currentCategory={currentCategory}
                   setCurrentCategory={setCurrentCategory}
+                  setCurrentPage={setCurrentPage}
                 />
               )}
 
