@@ -7,7 +7,8 @@ import envData from '../../../../config/env.json';
 import {
   MoodleCourse,
   MoodleCourseCategory,
-  MoodleCoursesCatalogue
+  MoodleCoursesCatalogue,
+  scrollTo
 } from '../../client-only-routes/show-courses';
 import { splitArray } from '../helpers';
 import sortCourses from '../helpers/sort-course';
@@ -158,6 +159,7 @@ const CourseFilter = ({
                 setCurrentPage(1);
                 setCurrentCategory(null);
                 setProgrammingCategory(true);
+                scrollTo(130);
                 if (screenWidth < 990) setShowFilter(e => !e);
               }}
             >
@@ -175,6 +177,7 @@ const CourseFilter = ({
                 setCurrentPage(1);
                 setProgrammingCategory(true);
                 setMoodleCourses(null);
+                scrollTo(130);
                 if (screenWidth < 990) setShowFilter(e => !e);
               }}
             >
@@ -192,6 +195,7 @@ const CourseFilter = ({
                   void filterByCategory(element?.id);
                   setCurrentCategory(element?.id);
                   setCurrentPage(1);
+                  scrollTo(130);
                   setProgrammingCategory(false);
                   if (screenWidth < 990) setShowFilter(e => !e);
                 }}

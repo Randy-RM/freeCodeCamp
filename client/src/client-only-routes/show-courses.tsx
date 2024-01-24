@@ -102,6 +102,16 @@ const mapDispatchToProps = {
   navigate
 };
 
+export const scrollTo = (top: number) => {
+  if (typeof window !== 'undefined') {
+    window.scrollTo({
+      top,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+};
+
 export function Courses(props: CoursesProps): JSX.Element {
   // const { t } = useTranslation();
   const {
@@ -185,7 +195,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       if (isDataOnLoading) {
         setIsDataOnLoading(false);
       }
-    }, 3000);
+    }, 2000);
     return () => {
       setMoodleCourses(null); // cleanup useEffect to perform a React state update
       setIsDataOnLoading(true); // cleanup useEffect to perform a React state update
@@ -372,6 +382,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                         icon={faChevronLeft}
                         className='pagination-chevron'
                         onClick={() => {
+                          scrollTo(130);
                           navigateToPage(false);
                         }}
                       />
@@ -384,6 +395,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                         icon={faChevronRight}
                         className='pagination-chevron'
                         onClick={() => {
+                          scrollTo(130);
                           navigateToPage(true);
                         }}
                       />
