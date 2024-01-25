@@ -78,11 +78,13 @@ const CourseCard = ({
             </div>
           </div>
           <div className='card-course-detail-item'>
-            <h4
-              className='fw-bold text-love-light'
-              dangerouslySetInnerHTML={{ __html: title }}
-            ></h4>{' '}
-            <img src={badgeIcon} alt='' className='img-fluid' />
+            <div className='card-title'>
+              <h4
+                className='fw-bold text-love-light'
+                dangerouslySetInnerHTML={{ __html: title }}
+              ></h4>{' '}
+              <img src={badgeIcon} alt='' className='img-badge' />
+            </div>
           </div>
           <div className='card-course-detail-item  flexible'>
             {description && (
