@@ -18,6 +18,7 @@ import {
   faChevronLeft,
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
+import validator from 'validator';
 import {
   createUserRole,
   updateMemberRole,
@@ -262,7 +263,10 @@ export function ShowAllRoles(props: ShowAllRolesProps): JSX.Element {
     return <Loader fullScreen={true} />;
   }
 
-  if (!user.email.endsWith('@kadea.co')) {
+  if (
+    !validator.equals(user.role, 'Admin') ||
+    !validator.equals(user.role, 'Super-admin')
+  ) {
     navigate(`${homeLocation}`);
     return <Loader fullScreen={true} />;
   }
