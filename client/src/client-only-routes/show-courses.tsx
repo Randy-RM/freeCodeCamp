@@ -17,6 +17,7 @@ import AlgoIcon from '../assets/images/algorithmIcon.svg';
 import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
 
 import LaediesActIcon from '../assets/images/partners/we-act-logo.png';
+import NewBadge from '../assets/images/new.png';
 import { createFlashMessage } from '../components/Flash/redux';
 import {
   Loader,
@@ -300,6 +301,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                         sponsorIcon={LaediesActIcon}
                         alt=''
                         name={name}
+                        badgeIcon={NewBadge}
                         phone={phone}
                         isAvailable={true}
                         isSignedIn={isSignedIn}

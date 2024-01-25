@@ -25,6 +25,7 @@ interface LandingDetailsProps {
   title: string;
   icon?: string;
   sponsorIcon?: string;
+  badgeIcon?: string;
   alt?: string;
   buttonText?: string;
   link?: string;
@@ -45,7 +46,8 @@ const CourseCard = ({
   alt,
   buttonText,
   link,
-  cardType
+  cardType,
+  badgeIcon
 }: LandingDetailsProps): JSX.Element => {
   return (
     <div className='card-course-detail-back standard-radius-5 card-outlin-border'>
@@ -79,7 +81,8 @@ const CourseCard = ({
             <h4
               className='fw-bold text-love-light'
               dangerouslySetInnerHTML={{ __html: title }}
-            ></h4>
+            ></h4>{' '}
+            <img src={badgeIcon} alt='' className='img-fluid' />
           </div>
           <div className='card-course-detail-item  flexible'>
             {description && (
