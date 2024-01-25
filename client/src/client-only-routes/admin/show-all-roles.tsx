@@ -263,7 +263,7 @@ export function ShowAllRoles(props: ShowAllRolesProps): JSX.Element {
     return <Loader fullScreen={true} />;
   }
 
-  if (!validator.equals(user.role, 'Super-admin')) {
+  if (!validator.equals(user.role, 'Super-Admin')) {
     if (!validator.equals(user.role, 'Admin')) {
       navigate(`${homeLocation}`);
       return <Loader fullScreen={true} />;
@@ -335,7 +335,7 @@ export function ShowAllRoles(props: ShowAllRolesProps): JSX.Element {
                             )}
                           </>
                         )}
-                        {validator.equals(user.role, 'Super-admin') ? (
+                        {validator.equals(user.role, 'Super-Admin') ? (
                           <>
                             <Button
                               type='submit'
@@ -435,7 +435,7 @@ export function TableMembers(props: TableMembersRoleProps): JSX.Element {
                   <tr>
                     <th className='text-light'>Rôle</th>
                     <th className='text-light'>Créé le</th>
-                    {validator.equals(currentUserRole, 'Super-admin') && (
+                    {validator.equals(currentUserRole, 'Super-Admin') && (
                       <th className='text-light'>Action</th>
                     )}
                   </tr>
@@ -452,7 +452,7 @@ export function TableMembers(props: TableMembersRoleProps): JSX.Element {
                           {dateFormat(`${role.createAt}`)}
                         </td>
                         <td style={{ verticalAlign: 'middle' }}>
-                          {validator.equals(currentUserRole, 'Super-admin') && (
+                          {validator.equals(currentUserRole, 'Super-Admin') && (
                             <>
                               <button
                                 className='action-btn-update'
