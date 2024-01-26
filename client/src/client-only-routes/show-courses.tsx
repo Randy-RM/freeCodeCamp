@@ -112,6 +112,7 @@ export function Courses(props: CoursesProps): JSX.Element {
   } = props;
   const [moodleCourses, setMoodleCourses] =
     useState<MoodleCoursesCatalogue | null>();
+
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [showFilter, setShowFilter] = useState<boolean>(false);
@@ -212,6 +213,10 @@ export function Courses(props: CoursesProps): JSX.Element {
       showFilter && setScreenWidth(window.innerWidth);
     });
   }
+
+  const formatdate = (data: number) => {
+    return new Date(data * 1000).toLocaleDateString();
+  };
 
   useEffect(() => {
     if (screenWidth > 990) setShowFilter(true);
@@ -322,13 +327,14 @@ export function Courses(props: CoursesProps): JSX.Element {
                         isSignedIn={isSignedIn}
                         phone={phone}
                         name={name}
+                        badgeIcon={NewBadge}
                         title={`JavaScript Algorithms and Data Structures`}
                         buttonText={`Suivre le cours  `}
                         link={`/learn/javascript-algorithms-and-data-structures`}
                         description={`Alors que HTML et CSS contrôlent le contenu et le style  d'une page, 
                 JavaScript est utilisé pour la rendre interactive. Dans le cadre du 
                 cours JavaScript Algorithm and Data Structures, tu apprendras 
-                les principes fondamentaux de JavaScript, etc.`}
+                les principes fondamentaux de JavaScript, etc`}
                       />
                     </>
                   )}
@@ -343,12 +349,14 @@ export function Courses(props: CoursesProps): JSX.Element {
                             icon={PhBookBookmark}
                             phone={phone}
                             name={name}
+                            badgeIcon={NewBadge}
                             isAvailable={course.visible == 1}
                             isSignedIn={isSignedIn}
                             sameTab={true}
                             external={true}
                             title={`${course.displayname}`}
                             buttonText={`Suivre le cours  `}
+                            createAt={formatdate(course.timecreated)}
                             // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
                             link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
                             description={course.summary}

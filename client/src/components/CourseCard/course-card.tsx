@@ -30,6 +30,7 @@ interface LandingDetailsProps {
   buttonText?: string;
   link?: string;
   cardType?: string;
+  createAt?: Date | string | number;
 }
 
 const CourseCard = ({
