@@ -48,8 +48,17 @@ const CourseCard = ({
   buttonText,
   link,
   cardType,
-  badgeIcon
+  badgeIcon,
+  createAt
 }: LandingDetailsProps): JSX.Element => {
+  const isLessThan30DaysOld = (date: string): boolean => {
+    const dateObjet = new Date(date);
+    const dateDuJour = new Date();
+    const differenceEnMillisecondes =
+      dateDuJour.getTime() - dateObjet.getTime();
+    const differenceEnJours = differenceEnMillisecondes / (1000 * 60 * 60 * 24);
+    return differenceEnJours <= 30;
+  };
   return (
     <div className='card-course-detail-back standard-radius-5 card-outlin-border'>
       <div className='card-course-detail-unit position-relative'>
@@ -84,7 +93,9 @@ const CourseCard = ({
                 className='fw-bold text-love-light'
                 dangerouslySetInnerHTML={{ __html: title }}
               ></h4>{' '}
-              <img src={badgeIcon} alt='' className='img-badge' />
+              {isLessThan30DaysOld(createAt as string) && (
+                <img src={badgeIcon} alt='' className='img-badge' />
+              )}
             </div>
           </div>
           <div className='card-course-detail-item  flexible'>
