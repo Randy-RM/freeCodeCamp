@@ -17,6 +17,7 @@ import AlgoIcon from '../assets/images/algorithmIcon.svg';
 import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
 
 import LaediesActIcon from '../assets/images/partners/we-act-logo.png';
+import NewBadge from '../assets/images/new.png';
 import { createFlashMessage } from '../components/Flash/redux';
 import {
   Loader,
@@ -102,6 +103,16 @@ const mapDispatchToProps = {
   navigate
 };
 
+export const scrollTo = (top: number) => {
+  if (typeof window !== 'undefined') {
+    window.scrollTo({
+      top,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+};
+
 export function Courses(props: CoursesProps): JSX.Element {
   // const { t } = useTranslation();
   const {
@@ -111,10 +122,11 @@ export function Courses(props: CoursesProps): JSX.Element {
   } = props;
   const [moodleCourses, setMoodleCourses] =
     useState<MoodleCoursesCatalogue | null>();
+
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [showFilter, setShowFilter] = useState<boolean>(false);
-  const [programmingCategory, setProgrammingCategory] = useState<boolean>(true);
+  // const [programmingCategory, setProgrammingCategory] = useState<boolean>(true);
   const [screenWidth, setScreenWidth] = useState(
     typeof window !== 'undefined' ? window.innerWidth : 900
   );
@@ -185,7 +197,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       if (isDataOnLoading) {
         setIsDataOnLoading(false);
       }
-    }, 3000);
+    }, 2000);
     return () => {
       setMoodleCourses(null); // cleanup useEffect to perform a React state update
       setIsDataOnLoading(true); // cleanup useEffect to perform a React state update
@@ -211,6 +223,10 @@ export function Courses(props: CoursesProps): JSX.Element {
       showFilter && setScreenWidth(window.innerWidth);
     });
   }
+
+  const formatdate = (data: number) => {
+    return new Date(data * 1000).toLocaleDateString();
+  };
 
   useEffect(() => {
     if (screenWidth > 990) setShowFilter(true);
@@ -284,52 +300,55 @@ export function Courses(props: CoursesProps): JSX.Element {
                   setMoodleCourses={setMoodleCourses}
                   setShowFilter={setShowFilter}
                   setIsDataOnLoading={setIsDataOnLoading}
-                  setProgrammingCategory={setProgrammingCategory}
+                  // setProgrammingCategory={setProgrammingCategory}
                   courseCategories={courseCategories}
                   currentCategory={currentCategory}
                   setCurrentCategory={setCurrentCategory}
+                  setCurrentPage={setCurrentPage}
                 />
               )}
 
               {!isDataOnLoading ? (
                 <div className='card-course-detail-container'>
-                  {currentPage == 1 && programmingCategory && (
-                    <>
-                      <CourseCard
-                        icon={LaptopIcon}
-                        sponsorIcon={LaediesActIcon}
-                        alt=''
-                        name={name}
-                        phone={phone}
-                        isAvailable={true}
-                        isSignedIn={isSignedIn}
-                        title={`Responsive Web Design`}
-                        buttonText={`Suivre le cours  `}
-                        link={'/learn/responsive-web-design/'}
-                        description={`
+                  {currentPage == 1 &&
+                    (currentCategory == null || currentCategory == -1) && (
+                      <>
+                        <CourseCard
+                          icon={LaptopIcon}
+                          sponsorIcon={LaediesActIcon}
+                          alt=''
+                          name={name}
+                          phone={phone}
+                          isAvailable={true}
+                          isSignedIn={isSignedIn}
+                          title={`Responsive Web Design`}
+                          buttonText={`Suivre le cours  `}
+                          link={'/learn/responsive-web-design/'}
+                          description={`
                 Dans ce cours, tu apprendras les langages que les développeurs 
                 utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
                 pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
                 Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
                 `}
-                      />
-                      <CourseCard
-                        icon={AlgoIcon}
-                        alt=''
-                        isAvailable={true}
-                        isSignedIn={isSignedIn}
-                        phone={phone}
-                        name={name}
-                        title={`JavaScript Algorithms and Data Structures`}
-                        buttonText={`Suivre le cours  `}
-                        link={`/learn/javascript-algorithms-and-data-structures`}
-                        description={`Alors que HTML et CSS contrôlent le contenu et le style  d'une page, 
+                        />
+                        <CourseCard
+                          icon={AlgoIcon}
+                          alt=''
+                          isAvailable={true}
+                          isSignedIn={isSignedIn}
+                          phone={phone}
+                          name={name}
+                          title={`JavaScript Algorithms and Data Structures`}
+                          buttonText={`Suivre le cours  `}
+                          link={`/learn/javascript-algorithms-and-data-structures`}
+                          description={`Alors que HTML et CSS contrôlent le contenu et le style  d'une page, 
                 JavaScript est utilisé pour la rendre interactive. Dans le cadre du 
                 cours JavaScript Algorithm and Data Structures, tu apprendras 
                 les principes fondamentaux de JavaScript, etc.`}
-                      />
-                    </>
-                  )}
+                        />
+                      </>
+                    )}
+
                   {moodleCourses &&
                     moodleCourses.result &&
                     moodleCourses.result.length > 0 &&
@@ -341,12 +360,14 @@ export function Courses(props: CoursesProps): JSX.Element {
                             icon={PhBookBookmark}
                             phone={phone}
                             name={name}
+                            badgeIcon={NewBadge}
                             isAvailable={course.visible == 1}
                             isSignedIn={isSignedIn}
                             sameTab={true}
                             external={true}
                             title={`${course.displayname}`}
                             buttonText={`Suivre le cours  `}
+                            createAt={formatdate(course.timecreated)}
                             // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
                             link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
                             description={course.summary}
@@ -371,6 +392,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                         icon={faChevronLeft}
                         className='pagination-chevron'
                         onClick={() => {
+                          scrollTo(130);
                           navigateToPage(false);
                         }}
                       />
@@ -383,6 +405,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                         icon={faChevronRight}
                         className='pagination-chevron'
                         onClick={() => {
+                          scrollTo(130);
                           navigateToPage(true);
                         }}
                       />
