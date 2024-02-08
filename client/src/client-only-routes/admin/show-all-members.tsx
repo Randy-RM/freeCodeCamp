@@ -289,7 +289,7 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
     return <Loader fullScreen={true} />;
   }
 
-  if (!validator.equals(user.role, 'Super-Admin')) {
+  if (!validator.equals(user.role, 'Super-admin')) {
     if (!validator.equals(user.role, 'Admin')) {
       navigate(`${homeLocation}`);
       return <Loader fullScreen={true} />;
