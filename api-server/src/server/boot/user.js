@@ -78,6 +78,7 @@ async function generateRavenToken(res) {
 
     const tokenData = await response;
     console.log('les datas', tokenData.data);
+    return tokenData;
   } catch (error) {
     console.error('Erreur lors de la récupération du token:', error);
     res.status(500).json({ error: 'Erreur lors de la récupération du token' });

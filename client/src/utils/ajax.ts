@@ -300,13 +300,10 @@ export async function generateRavenTokenAcces(): Promise<unknown> {
     const response = await get('/generate-raven-token');
 
     console.log('acces token ', response);
+    return response;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: unknown | any) {
-    return {
-      userRole: null,
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      error: error.message
-    };
+  } catch (error) {
+    return null;
   }
 }
 export async function getDatabaseResource<T>(urlEndPoint: string) {
