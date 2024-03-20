@@ -25,54 +25,6 @@ function getCSRFToken() {
   return token ?? '';
 }
 
-interface RavenTokenData {
-  token: string;
-  expiresIn: number;
-  validFrom: string;
-  validTo: string;
-}
-
-export function addRavenTokenToLocalStorage(
-  ravenTokenData: RavenTokenData
-): void {
-  try {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      localStorage.setItem('ravenToken', JSON.stringify(ravenTokenData));
-      console.log('Le token Raven a été ajouté au stockage local.');
-    } else {
-      console.error("Le stockage local n'est pas pris en charge.");
-    }
-  } catch (error) {
-    console.error(
-      "Une erreur est survenue lors de l'ajout du token Raven au stockage local :",
-      error
-    );
-  }
-}
-
-export function getTokenDataFromLocalStorage(): RavenTokenData | null {
-  try {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      const tokenDataString = localStorage.getItem('ravenToken');
-      if (tokenDataString) {
-        const tokenData = JSON.parse(tokenDataString) as RavenTokenData;
-        return tokenData;
-      } else {
-        console.log('Aucune donnée de token trouvée dans le stockage local.');
-        return null;
-      }
-    } else {
-      console.log("Le stockage local n'est pas pris en charge.");
-      return null;
-    }
-  } catch (error) {
-    console.log(
-      'Une erreur est survenue lors de la récupération des données de token depuis le stockage local :',
-      error
-    );
-    return null;
-  }
-}
 // TODO: Might want to handle flash messages as close to the request as possible
 // to make use of the Response object (message, status, etc)
 async function get<T>(path: string): Promise<T> {
@@ -295,6 +247,54 @@ export async function postExternalResource<T>(
   return response;
 }
 
+interface RavenTokenData {
+  token: string;
+  expiresIn: number;
+  validFrom: string;
+  validTo: string;
+}
+
+export function addRavenTokenToLocalStorage(
+  ravenTokenData: RavenTokenData
+): void {
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem('ravenToken', JSON.stringify(ravenTokenData));
+      console.log('Le token Raven a été ajouté au stockage local.');
+    } else {
+      console.error("Le stockage local n'est pas pris en charge.");
+    }
+  } catch (error) {
+    console.error(
+      "Une erreur est survenue lors de l'ajout du token Raven au stockage local :",
+      error
+    );
+  }
+}
+
+export function getRavenTokenDataFromLocalStorage(): RavenTokenData | null {
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const tokenDataString = localStorage.getItem('ravenToken');
+      if (tokenDataString) {
+        const tokenData = JSON.parse(tokenDataString) as RavenTokenData;
+        return tokenData;
+      } else {
+        console.log('Aucune donnée de token trouvée dans le stockage local.');
+        return null;
+      }
+    } else {
+      console.log("Le stockage local n'est pas pris en charge.");
+      return null;
+    }
+  } catch (error) {
+    console.log(
+      'Une erreur est survenue lors de la récupération des données de token depuis le stockage local :',
+      error
+    );
+    return null;
+  }
+}
 export async function generateRavenTokenAcces(): Promise<unknown> {
   try {
     const response = await get('/generate-raven-token');

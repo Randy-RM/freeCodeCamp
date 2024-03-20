@@ -3,7 +3,12 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { Grid } from '@freecodecamp/react-bootstrap';
-import { getExternalResource } from '../utils/ajax';
+import {
+  addRavenTokenToLocalStorage,
+  generateRavenTokenAcces,
+  getExternalResource,
+  getRavenTokenDataFromLocalStorage
+} from '../utils/ajax';
 import { createFlashMessage } from '../components/Flash/redux';
 import {
   Loader,
@@ -52,6 +57,12 @@ type MoodleCoursesCatalogue = {
   result: MoodleCourseCategorie[][];
   size: number;
 };
+interface RavenTokenData {
+  token: string;
+  expiresIn: number;
+  validFrom: string;
+  validTo: string;
+}
 
 const mapStateToProps = createSelector(
   signInLoadingSelector,
@@ -114,6 +125,18 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
   //   setIsDataOnLoading(true);
   // };
 
+  const getRavenToken = async () => {
+    const ravenLocalToken = getRavenTokenDataFromLocalStorage();
+    if (ravenLocalToken === null) {
+      const generateRavenToken = await generateRavenTokenAcces();
+
+      if (generateRavenToken)
+        addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
+    }
+  };
+  useEffect(() => {
+    void getRavenToken();
+  }, []);
   useEffect(() => {
     void getMoodleCoursesCategories();
     const timer = setTimeout(() => {
@@ -143,7 +166,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
               <h1 className='big-subheading'>{`Nos parcours.`}</h1>
               <p className='text-responsive'>
                 {`
-          Nos parcours te permettent d’apprendre par la pratique. Tu gagneras donc un véritable savoir-faire.
+          Nos parcours te permettent d’apprendre par la pratique. Tu gagneras donc un véritable savoir-faire t.
           `}
               </p>
             </div>
