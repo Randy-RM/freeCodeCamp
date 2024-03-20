@@ -53,7 +53,7 @@ export function addRavenTokenToLocalStorage(
 export function getTokenDataFromLocalStorage(): RavenTokenData | null {
   try {
     if (typeof window !== 'undefined' && window.localStorage) {
-      const tokenDataString = localStorage.getItem('tokenData');
+      const tokenDataString = localStorage.getItem('ravenToken');
       if (tokenDataString) {
         const tokenData = JSON.parse(tokenDataString) as RavenTokenData;
         return tokenData;
