@@ -87,6 +87,8 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [awsCoursesIsAviable, setAwsCoursesIsAviable] =
+    useState<boolean>(false);
 
   const getMoodleCoursesCategories = async () => {
     const moodleCategoriesCatalogue = await getExternalResource<
@@ -127,13 +129,18 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
 
   const getRavenToken = async () => {
     const ravenLocalToken = getRavenTokenDataFromLocalStorage();
+
     if (ravenLocalToken === null) {
       const generateRavenToken = await generateRavenTokenAcces();
 
       if (generateRavenToken)
         addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
+      setAwsCoursesIsAviable(true);
+    } else {
+      setAwsCoursesIsAviable(true);
     }
   };
+
   useEffect(() => {
     void getRavenToken();
   }, []);
@@ -194,7 +201,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                   <PathCard
                     icon={CloudShield}
                     alt=''
-                    isAvailable={false}
+                    isAvailable={awsCoursesIsAviable}
                     isSignedIn={isSignedIn}
                     title={`Parcours AWS`}
                     buttonText={`Suivre le parcours  `}
