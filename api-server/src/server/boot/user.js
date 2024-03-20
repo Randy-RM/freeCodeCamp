@@ -3,6 +3,7 @@ import dedent from 'dedent';
 import { body } from 'express-validator';
 import { pick } from 'lodash';
 import { Observable } from 'rx';
+import Axios from 'axios';
 
 import {
   fixCompletedChallengeItem,
@@ -47,10 +48,41 @@ function bootUser(app) {
   );
 
   api.delete('/user/webhook-token', deleteWebhookToken);
+  api.get('/generate-raven-token', generateRavenToken);
 
   app.use(api);
 }
 
+async function generateRavenToken(res) {
+  console.log('ca marche');
+  try {
+    const apiKey = 'gyKJycM8xl1IooROdVQGB59tjL0CpaEk3XwLustN';
+    const clientId = 'WfrpIRsj8yyZqUrm4UdTkqdat';
+    const clientSecret = 'u3vkIcmsN7I7xtPcqz23kCv4zFKpfNhmt0wVQyEH9yd210Idk3';
+
+    const requestBody = JSON.stringify({
+      client_id: clientId,
+      client_secret: clientSecret
+    });
+
+    const response = await Axios.post(
+      'https://api.sandbox.raven360.com/gettoken',
+      requestBody,
+      {
+        headers: {
+          'x-api-key': apiKey,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    const tokenData = await response;
+    console.log('les datas', tokenData.data);
+  } catch (error) {
+    console.error('Erreur lors de la récupération du token:', error);
+    res.status(500).json({ error: 'Erreur lors de la récupération du token' });
+  }
+}
 function createPostWebhookToken(app) {
   const { WebhookToken } = app.models;
 

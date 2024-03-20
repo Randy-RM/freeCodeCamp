@@ -33,7 +33,7 @@ import {
 } from '../redux';
 
 import { User } from '../redux/prop-types';
-import { getExternalResource } from '../utils/ajax';
+import { generateRavenTokenAcces, getExternalResource } from '../utils/ajax';
 
 import '../components/CourseFilter/course-filter.css';
 import CourseFilter from '../components/CourseFilter/course-filter';
@@ -190,6 +190,9 @@ export function Courses(props: CoursesProps): JSX.Element {
     setIsDataOnLoading(true);
   };
 
+  useEffect(() => {
+    void generateRavenTokenAcces();
+  }, []);
   useEffect(() => {
     void getMoodleCourses();
 

@@ -18,8 +18,10 @@ const defaultOptions: RequestInit = {
 // csrf_token is passed to the client as a cookie. The client must send
 // this back as a header.
 function getCSRFToken() {
+  console.log('window', typeof window);
   const token =
     typeof window !== 'undefined' ? cookies.get('csrf_token') : null;
+  console.log('les token', token);
   return token ?? '';
 }
 
@@ -44,13 +46,14 @@ function deleteRequest<T = void>(path: string, body: unknown): Promise<T> {
 async function request<T>(
   method: 'POST' | 'PUT' | 'DELETE',
   path: string,
-  body: unknown
+  body: unknown,
+  token = null
 ): Promise<T> {
   const options: RequestInit = {
     ...defaultOptions,
     method,
     headers: {
-      'CSRF-Token': getCSRFToken(),
+      'CSRF-Token': token ?? getCSRFToken(),
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(body)
@@ -242,6 +245,21 @@ export async function postExternalResource<T>(
     response = error;
   }
   return response;
+}
+
+export async function generateRavenTokenAcces(): Promise<unknown> {
+  try {
+    const response = await get('/generate-raven-token');
+
+    console.log('acces token ', response);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: unknown | any) {
+    return {
+      userRole: null,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+      error: error.message
+    };
+  }
 }
 export async function getDatabaseResource<T>(urlEndPoint: string) {
   let response: T | null;
