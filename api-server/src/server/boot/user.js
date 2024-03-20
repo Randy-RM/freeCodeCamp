@@ -53,8 +53,8 @@ function bootUser(app) {
   app.use(api);
 }
 
-async function generateRavenToken(res) {
-  console.log('ca marche');
+async function generateRavenToken(req, res) {
+  console.log('ca marche', req);
   try {
     const apiKey = 'gyKJycM8xl1IooROdVQGB59tjL0CpaEk3XwLustN';
     const clientId = 'WfrpIRsj8yyZqUrm4UdTkqdat';
@@ -78,7 +78,7 @@ async function generateRavenToken(res) {
 
     const tokenData = await response;
     console.log('les datas', tokenData.data);
-    return res.json(tokenData);
+    return res.json(tokenData.data.data);
   } catch (error) {
     console.error('Erreur lors de la récupération du token:', error);
     res.status(500).json({ error: 'Erreur lors de la récupération du token' });
