@@ -264,6 +264,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                       return (
                         <PathCard
                           key={course.name}
+                          icon={PhBookBookmark}
                           isAvailable={true}
                           isSignedIn={isSignedIn}
                           title={`${index + 1}. ${course.name}`}
