@@ -3,10 +3,17 @@ import { Grid, Row, Col } from '@freecodecamp/react-bootstrap';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { getExternalResource } from '../utils/ajax';
+import {
+  getAwsCourses,
+  getRavenTokenDataFromLocalStorage
+} from '../utils/ajax';
 
 import { createFlashMessage } from '../components/Flash/redux';
-import { Loader, Spacer } from '../components/helpers';
+import {
+  Loader,
+  Spacer,
+  renderCourseCardSkeletons
+} from '../components/helpers';
 // import '../components/CourseCard/courses-card.css';
 import CourseCard from '../components/CourseCard/course-card';
 
@@ -20,8 +27,7 @@ import {
 import { User } from '../redux/prop-types';
 import envData from '../../../config/env.json';
 
-const { apiLocation, moodleBaseUrl, moodleApiBaseUrl, moodleApiToken } =
-  envData;
+const { apiLocation } = envData;
 
 // TODO: update types for actions
 interface ShowAwsCoursesProps {
@@ -33,23 +39,24 @@ interface ShowAwsCoursesProps {
   path?: string;
 }
 
-type MoodleCourse = {
-  id: number;
-  shortname: string;
-  categoryid: number;
-  categorysortorder: number;
-  fullname: string;
-  displayname: string;
-  summary: string;
+type RavenCourse = {
+  learningobjectid: number;
+  name: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  launch_url: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  short_description: string;
+  createddate: string;
+  updateddate: string;
+  contenttype: string;
 };
 
-// type MoodleCourse = {
-//   userId: number;
-//   id: number;
-//   title: string;
-//   body: string;
-// };
-
+interface RavenFetchCoursesDto {
+  apiKey: string;
+  token: string;
+  fromDate: string;
+  toDate: string;
+}
 const mapStateToProps = createSelector(
   signInLoadingSelector,
   userSelector,
@@ -68,22 +75,28 @@ const mapDispatchToProps = {
 
 export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
   const { showLoading, isSignedIn } = props;
-  const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[]>();
 
-  const getMoodleCourses = async () => {
-    const moodleCatalogue = await getExternalResource<MoodleCourse[]>(
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses&moodlewsrestformat=json`
-    );
-    if (moodleCatalogue != null) {
-      setMoodleCourses(moodleCatalogue);
-    } else {
-      setMoodleCourses([]);
-    }
+  const [ravenCourses, setRavenCourses] = useState<RavenCourse[]>([]);
+  console.log('state courses ', ravenCourses);
+
+  const ravenLocalToken = getRavenTokenDataFromLocalStorage();
+  const getRavenResources = async (data: RavenFetchCoursesDto) => {
+    const getReveanCourses = await getAwsCourses(data);
+
+    setRavenCourses(getReveanCourses as RavenCourse[]);
+    console.log('les ', getReveanCourses);
+  };
+
+  const ravenData: RavenFetchCoursesDto = {
+    apiKey: 'gyKJycM8xl1IooROdVQGB59tjL0CpaEk3XwLustN',
+    token: ravenLocalToken?.token || '',
+    fromDate: '01-01-2023',
+    toDate: '06-24-2024'
   };
 
   useEffect(() => {
-    void getMoodleCourses();
+    void getRavenResources(ravenData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (showLoading) {
@@ -147,7 +160,7 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
           </Col>
           <Col className='' md={12} sm={12} xs={12}>
             <div className='card-course-detail-container'>
-              {moodleCourses &&
+              {/* {moodleCourses &&
                 moodleCourses.length >= 0 &&
                 moodleCourses.map((course, index) => {
                   return (
@@ -162,7 +175,7 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
                     //     '-'
                     //   )}`}
                     // />
-                    <>
+                    
                       <CourseCard
                         key={course.id}
                         isAvailable={true}
@@ -173,9 +186,43 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
                         link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
                         description={course.summary}
                       />
-                    </>
+                    
                   );
-                })}
+                })} */}
+
+              {ravenCourses ? (
+                ravenCourses.length >= 0 &&
+                ravenCourses.map((course, index) => {
+                  return (
+                    // <CourseCard
+                    //   key={course.id}
+                    //   isAvailable={true}
+                    //   isSignedIn={isSignedIn}
+                    //   title={`${index + 1}. ${course.displayname}`}
+                    //   buttonText={`Suivre le cours  `}
+                    //   link={`/aws-courses/learning-path/${course.fullname.replace(
+                    //     / /g,
+                    //     '-'
+                    //   )}`}
+                    // />
+
+                    <CourseCard
+                      key={course.name}
+                      isAvailable={true}
+                      isSignedIn={isSignedIn}
+                      title={`${index + 1}. ${course.name}`}
+                      buttonText={`Suivre le cours  `}
+                      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                      link={`${course.launch_url}`}
+                      description={course.short_description}
+                    />
+                  );
+                })
+              ) : (
+                <div className='card-course-detail-container'>
+                  {renderCourseCardSkeletons(3)}
+                </div>
+              )}
             </div>
           </Col>
         </Row>

@@ -63,6 +63,12 @@ interface RavenTokenData {
   validFrom: string;
   validTo: string;
 }
+// interface RavenFetchCoursesDto {
+//   apiKey:string
+//   token: string;
+//   fromDate: string;
+//   toDate: string;
+// }
 
 const mapStateToProps = createSelector(
   signInLoadingSelector,
