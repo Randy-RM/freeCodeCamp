@@ -50,6 +50,7 @@ function bootUser(app) {
   api.delete('/user/webhook-token', deleteWebhookToken);
   api.get('/generate-raven-token', generateRavenToken);
   api.get('/get-raven-courses', getRavenAwsCatalogue);
+  api.get('/get-raven-path', getRavenAwsPathCatalogue);
 
   app.use(api);
 }
@@ -133,9 +134,9 @@ async function getRavenAwsCatalogue(req, res) {
       }
     );
 
-    const tokenData = await response;
-    console.log('les datas', tokenData.data);
-    return res.json(tokenData.data.data);
+    const ravenAwsCours = await response;
+    console.log('les datas', ravenAwsCours.data);
+    return res.json(ravenAwsCours.data.data);
   } catch (error) {
     console.error(
       'Erreur lors de la récupération des du catalogue:',
@@ -144,6 +145,56 @@ async function getRavenAwsCatalogue(req, res) {
     res.status(500).json([]);
   }
 }
+
+async function getRavenAwsPathCatalogue(req, res) {
+  const apiKey = process.env.RAVEN_AWS_API_KEY;
+  const { awstoken, fromdate, toDate } = req.query;
+
+  const baseUrl = process.env.RAVEN_AWS_BASE_URL;
+  const requestBody = JSON.stringify({
+    from_date: '01-01-2023',
+    to_date: '06-24-2024',
+    page_index: 1,
+    page_size: 0
+  });
+
+  try {
+    console.log(
+      'les token',
+      awstoken,
+      'les from:',
+      fromdate,
+      'les date to:',
+      toDate,
+      'les params: ',
+      req.query
+    );
+
+    const response = await Axios.post(
+      `${baseUrl}/administration/catalog/learningpaths`,
+      requestBody,
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          Authorization: awstoken
+        }
+      }
+    );
+
+    const ravenAwsPath = await response;
+    console.log('les datas', ravenAwsPath.data);
+    return res.json(ravenAwsPath.data.data);
+  } catch (error) {
+    console.error(
+      'Erreur lors de la récupération des du catalogue:',
+      error.message
+    );
+    res.status(500).json([]);
+  }
+}
+
 function createPostWebhookToken(app) {
   const { WebhookToken } = app.models;
 
