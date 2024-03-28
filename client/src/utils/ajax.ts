@@ -322,41 +322,25 @@ interface RavenFetchCoursesDto {
   fromDate: string;
   toDate: string;
 }
-// type RavenCourse = {
-//   learningobjectid: number;
-//   displayname: string;
-//   launchurl: string;
-//   body: string;
-//   shortdescription:string;
-//   createddate:string;
-//   updateddate:string;
-//   contenttype:string;
-// }
 
 export async function getAwsCourses(data: RavenFetchCoursesDto) {
   let response: unknown;
 
-  // try {
-  //   response = await requestModule<T>(`${urlEndPoint}`, {
-  //     method: 'POST', //GET, POST, PUT, DELETE, etc.
-  //     mode: 'cors', //no-cors,cors, same-origin
-  //     cache: 'no-cache', //default, no-cache, reload, force-cache, only-if-cached
-  //      headers: {
-  //       'Content-Type': 'application/json',
-  //       'Access-Control-Allow-Origin': '*',
-  //       'x-api-key':data.apiKey,
-  //       'Authorization':data.token
-
-  //     },
-  //     body: JSON.stringify({ from_date:data.fromDate, to_date:data.toDate })
-  //   });
-  // } catch (error) {
-  //   response = error;
-  // }
   try {
     response = await get(
       `/get-raven-courses?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.toDate}`
     );
+  } catch (error) {
+    response = null;
+  }
+  console.log('courses raven', response);
+  return response;
+}
+export async function getAwsPath(data: RavenFetchCoursesDto) {
+  let response: unknown;
+
+  try {
+    response = await get(`/get-raven-path?awstoken=${data.token}`);
   } catch (error) {
     response = null;
   }
