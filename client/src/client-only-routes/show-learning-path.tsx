@@ -20,6 +20,7 @@ import {
 import LaptopIcon from '../assets/images/laptop.svg';
 import CloudShield from '../assets/images/cloudShield.svg';
 import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
+import awsLogo from '../assets/images/aws-logo.png';
 
 import {
   signInLoadingSelector,
@@ -264,7 +265,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                       return (
                         <PathCard
                           key={course.name}
-                          icon={PhBookBookmark}
+                          icon={awsLogo}
                           isAvailable={true}
                           isSignedIn={isSignedIn}
                           title={`${index + 1}. ${course.name}`}
