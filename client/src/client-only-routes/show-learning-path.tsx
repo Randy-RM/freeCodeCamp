@@ -7,7 +7,8 @@ import {
   addRavenTokenToLocalStorage,
   generateRavenTokenAcces,
   getExternalResource,
-  getRavenTokenDataFromLocalStorage
+  getRavenTokenDataFromLocalStorage,
+  getAwsCourses
 } from '../utils/ajax';
 import { createFlashMessage } from '../components/Flash/redux';
 import {
@@ -31,7 +32,7 @@ import { User } from '../redux/prop-types';
 import envData from '../../../config/env.json';
 import PathCard from '../components/PathCard/path-card';
 
-const { moodleApiBaseUrl, moodleApiToken } = envData;
+const { moodleApiBaseUrl, moodleApiToken, ravenAwsApiKey } = envData;
 
 // TODO: update types for actions
 interface ShowLearningPathProps {
@@ -63,12 +64,23 @@ interface RavenTokenData {
   validFrom: string;
   validTo: string;
 }
-// interface RavenFetchCoursesDto {
-//   apiKey:string
-//   token: string;
-//   fromDate: string;
-//   toDate: string;
-// }
+type RavenCourse = {
+  learningobjectid: number;
+  name: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  launch_url: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  short_description: string;
+  createddate: string;
+  updateddate: string;
+  contenttype: string;
+};
+interface RavenFetchCoursesDto {
+  apiKey: string;
+  token: string;
+  fromDate: string;
+  toDate: string;
+}
 
 const mapStateToProps = createSelector(
   signInLoadingSelector,
@@ -95,7 +107,14 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [awsCoursesIsAviable, setAwsCoursesIsAviable] =
     useState<boolean>(false);
+  const [ravenPath, setRavenPath] = useState<RavenCourse[]>([]);
+  console.log('state courses ', ravenPath);
 
+  const getRavenResourcesPath = async (data: RavenFetchCoursesDto) => {
+    const getReveanCourses = await getAwsCourses(data);
+    setRavenPath(getReveanCourses as RavenCourse[]);
+    console.log('les ', getReveanCourses);
+  };
   const getMoodleCoursesCategories = async () => {
     const moodleCategoriesCatalogue = await getExternalResource<
       MoodleCourseCategorie[]
@@ -117,22 +136,6 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
     }
   };
 
-  // const navigateToPage = (forwardOrBackward: boolean) => {
-  //   if (forwardOrBackward) {
-  //     if (
-  //       moodleCoursesCategories &&
-  //       currentPage < moodleCoursesCategories?.size
-  //     ) {
-  //       setCurrentPage(Number(currentPage + 1));
-  //     }
-  //   } else {
-  //     if (currentPage > 1) {
-  //       setCurrentPage(Number(currentPage - 1));
-  //     }
-  //   }
-  //   setIsDataOnLoading(true);
-  // };
-
   const getRavenToken = async () => {
     const ravenLocalToken = getRavenTokenDataFromLocalStorage();
 
@@ -146,7 +149,20 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
       setAwsCoursesIsAviable(true);
     }
   };
-
+  const ravenLocalToken = getRavenTokenDataFromLocalStorage();
+  const ravenData: RavenFetchCoursesDto = {
+    apiKey: ravenAwsApiKey,
+    token: ravenLocalToken?.token || '',
+    fromDate: '01-01-2023',
+    toDate: '06-24-2024'
+  };
+  useEffect(() => {
+    void getRavenResourcesPath(ravenData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    void getRavenToken();
+  }, []);
   useEffect(() => {
     void getRavenToken();
   }, []);
@@ -241,6 +257,23 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                         );
                       }
                     )}
+
+                  {ravenPath &&
+                    ravenPath.length >= 0 &&
+                    ravenPath.map((course, index) => {
+                      return (
+                        <PathCard
+                          key={course.name}
+                          isAvailable={true}
+                          isSignedIn={isSignedIn}
+                          title={`${index + 1}. ${course.name}`}
+                          buttonText={`Suivre le cours  `}
+                          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                          link={`${course.launch_url}`}
+                          description={course.short_description}
+                        />
+                      );
+                    })}
                 </div>
               ) : (
                 <div className='card-course-detail-container'>
