@@ -32,6 +32,7 @@ type RavenCourse = {
 const { moodleApiBaseUrl, moodleApiToken } = envData;
 
 const CourseFilter = ({
+  setRavenCourses,
   setMoodleCourses,
   setIsDataOnLoading,
   setShowFilter,
@@ -192,6 +193,7 @@ const CourseFilter = ({
                 // setCurrentPage(1);
                 // setProgrammingCategory(true);
                 setMoodleCourses(null);
+                setRavenCourses(null);
                 scrollTo(130);
                 if (screenWidth < 990) setShowFilter(e => !e);
               }}

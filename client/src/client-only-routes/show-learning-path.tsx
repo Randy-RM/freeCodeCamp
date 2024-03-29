@@ -71,7 +71,7 @@ type RavenCourse = {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   launch_url: string;
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  short_description: string;
+  long_description: string;
   createddate: string;
   updateddate: string;
   contenttype: string;
@@ -272,7 +272,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                           buttonText={`Suivre le cours  `}
                           // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
                           link={`${course.launch_url}`}
-                          description={course.short_description}
+                          description={course.long_description}
                         />
                       );
                     })}

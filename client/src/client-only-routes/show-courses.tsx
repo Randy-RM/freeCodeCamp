@@ -15,6 +15,7 @@ import CourseCard from '../components/CourseCard/course-card';
 import LaptopIcon from '../assets/images/laptop.svg';
 import AlgoIcon from '../assets/images/algorithmIcon.svg';
 import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
+import awsLogo from '../assets/images/aws-logo.png';
 
 import LaediesActIcon from '../assets/images/partners/we-act-logo.png';
 import NewBadge from '../assets/images/new.png';
@@ -243,9 +244,6 @@ export function Courses(props: CoursesProps): JSX.Element {
     setIsDataOnLoading(true);
   };
 
-  useEffect(() => {
-    void getRavenToken();
-  }, []);
   const ravenData: RavenFetchCoursesDto = {
     apiKey: ravenAwsApiKey,
     token: ravenLocalToken?.token || '',
@@ -253,9 +251,13 @@ export function Courses(props: CoursesProps): JSX.Element {
     toDate: '06-24-2024'
   };
   useEffect(() => {
-    void getRavenResources(ravenData);
+    void getRavenToken();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    void getRavenResources(ravenData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
   useEffect(() => {
     void getMoodleCourses();
 
@@ -416,6 +418,24 @@ export function Courses(props: CoursesProps): JSX.Element {
                       </>
                     )}
 
+                  {ravenCourses &&
+                    ravenCourses.length >= 0 &&
+                    ravenCourses.map((course, index) => {
+                      return (
+                        <CourseCard
+                          key={course.name}
+                          icon={awsLogo}
+                          isAvailable={true}
+                          isSignedIn={isSignedIn}
+                          title={`${index + 1}. ${course.name}`}
+                          buttonText={`Suivre le cours  `}
+                          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                          link={`${course.launch_url}`}
+                          description={course.short_description}
+                        />
+                      );
+                    })}
+
                   {moodleCourses &&
                     moodleCourses.result &&
                     moodleCourses.result.length > 0 &&
@@ -449,7 +469,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                 </div>
               )}
             </div>
-            <Spacer size={3} />
+            <Spacer size={10} />
             <div className='pagination-container'>
               {moodleCourses && moodleCourses.size > 0 && (
                 <Row>
