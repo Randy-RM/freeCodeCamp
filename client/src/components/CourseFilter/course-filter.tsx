@@ -17,6 +17,17 @@ type MoodleCoursesFiltered = {
   courses: MoodleCourse[] | null;
   warnings: [];
 };
+type RavenCourse = {
+  learningobjectid: number;
+  name: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  launch_url: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  short_description: string;
+  createddate: string;
+  updateddate: string;
+  contenttype: string;
+};
 
 const { moodleApiBaseUrl, moodleApiToken } = envData;
 
@@ -34,6 +45,10 @@ const CourseFilter = ({
   setMoodleCourses: React.Dispatch<
     React.SetStateAction<MoodleCoursesCatalogue | null | undefined>
   >;
+  setRavenCourses: React.Dispatch<
+    React.SetStateAction<RavenCourse[] | null | undefined>
+  >;
+
   setIsDataOnLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
   // setProgrammingCategory: React.Dispatch<React.SetStateAction<boolean>>;

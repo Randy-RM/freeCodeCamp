@@ -33,13 +33,20 @@ import {
 } from '../redux';
 
 import { User } from '../redux/prop-types';
-import { generateRavenTokenAcces, getExternalResource } from '../utils/ajax';
+import {
+  addRavenTokenToLocalStorage,
+  generateRavenTokenAcces,
+  getAwsCourses,
+  getExternalResource,
+  getRavenTokenDataFromLocalStorage
+} from '../utils/ajax';
 
 import '../components/CourseFilter/course-filter.css';
 import CourseFilter from '../components/CourseFilter/course-filter';
 import sortCourses from '../components/helpers/sort-course';
 
-const { moodleApiBaseUrl, moodleApiToken, moodleBaseUrl } = envData;
+const { moodleApiBaseUrl, moodleApiToken, moodleBaseUrl, ravenAwsApiKey } =
+  envData;
 
 // TODO: update types for actions
 interface CoursesProps {
@@ -86,6 +93,30 @@ export type MoodleCoursesCatalogue = {
   result: MoodleCourse[][];
   size: number;
 };
+type RavenCourse = {
+  learningobjectid: number;
+  name: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  launch_url: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  short_description: string;
+  createddate: string;
+  updateddate: string;
+  contenttype: string;
+};
+interface RavenTokenData {
+  token: string;
+  expiresIn: number;
+  validFrom: string;
+  validTo: string;
+}
+
+interface RavenFetchCoursesDto {
+  apiKey: string;
+  token: string;
+  fromDate: string;
+  toDate: string;
+}
 
 const mapStateToProps = createSelector(
   signInLoadingSelector,
@@ -123,6 +154,10 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [moodleCourses, setMoodleCourses] =
     useState<MoodleCoursesCatalogue | null>();
 
+  const [ravenCourses, setRavenCourses] = useState<
+    RavenCourse[] | null | undefined
+  >([]);
+  console.log('state courses ', ravenCourses);
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [showFilter, setShowFilter] = useState<boolean>(false);
@@ -135,6 +170,24 @@ export function Courses(props: CoursesProps): JSX.Element {
   >();
 
   const [currentCategory, setCurrentCategory] = useState<number | null>(null);
+
+  const ravenLocalToken = getRavenTokenDataFromLocalStorage();
+  const getRavenResources = async (data: RavenFetchCoursesDto) => {
+    const getReveanCourses = await getAwsCourses(data);
+    setRavenCourses(getReveanCourses as RavenCourse[]);
+    console.log('les ', getReveanCourses);
+  };
+
+  const getRavenToken = async () => {
+    const ravenLocalToken = getRavenTokenDataFromLocalStorage();
+
+    if (ravenLocalToken === null) {
+      const generateRavenToken = await generateRavenTokenAcces();
+
+      if (generateRavenToken)
+        addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
+    }
+  };
 
   const getMoodleCourseCategory = async () => {
     const moodleCourseCategories = await getExternalResource<
@@ -191,7 +244,17 @@ export function Courses(props: CoursesProps): JSX.Element {
   };
 
   useEffect(() => {
-    void generateRavenTokenAcces();
+    void getRavenToken();
+  }, []);
+  const ravenData: RavenFetchCoursesDto = {
+    apiKey: ravenAwsApiKey,
+    token: ravenLocalToken?.token || '',
+    fromDate: '01-01-2023',
+    toDate: '06-24-2024'
+  };
+  useEffect(() => {
+    void getRavenResources(ravenData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     void getMoodleCourses();
@@ -300,6 +363,7 @@ export function Courses(props: CoursesProps): JSX.Element {
               {showFilter && (
                 <CourseFilter
                   screenWidth={screenWidth}
+                  setRavenCourses={setRavenCourses}
                   setMoodleCourses={setMoodleCourses}
                   setShowFilter={setShowFilter}
                   setIsDataOnLoading={setIsDataOnLoading}

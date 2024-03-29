@@ -8,7 +8,7 @@ import {
   generateRavenTokenAcces,
   getExternalResource,
   getRavenTokenDataFromLocalStorage,
-  getAwsCourses
+  getAwsPath
 } from '../utils/ajax';
 import { createFlashMessage } from '../components/Flash/redux';
 import {
@@ -112,7 +112,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
   console.log('state courses ', ravenPath);
 
   const getRavenResourcesPath = async (data: RavenFetchCoursesDto) => {
-    const getReveanCourses = await getAwsCourses(data);
+    const getReveanCourses = await getAwsPath(data);
     setRavenPath(getReveanCourses as RavenCourse[]);
     console.log('les ', getReveanCourses);
   };

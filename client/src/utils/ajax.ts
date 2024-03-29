@@ -340,7 +340,9 @@ export async function getAwsPath(data: RavenFetchCoursesDto) {
   let response: unknown;
 
   try {
-    response = await get(`/get-raven-path?awstoken=${data.token}`);
+    response = await get(
+      `/get-raven-path?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.toDate}`
+    );
   } catch (error) {
     response = null;
   }
