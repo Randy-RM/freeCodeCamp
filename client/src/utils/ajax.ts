@@ -259,7 +259,9 @@ export function addRavenTokenToLocalStorage(
 ): void {
   try {
     if (typeof window !== 'undefined' && window.localStorage) {
-      localStorage.setItem('ravenToken', JSON.stringify(ravenTokenData));
+      const ravenTokenExist = localStorage.getItem('ravenToken');
+      if (!ravenTokenExist)
+        localStorage.setItem('ravenToken', JSON.stringify(ravenTokenData));
       console.log('Le token Raven a été ajouté au stockage local.');
     } else {
       console.error("Le stockage local n'est pas pris en charge.");
