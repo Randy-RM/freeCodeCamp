@@ -172,9 +172,17 @@ export function Courses(props: CoursesProps): JSX.Element {
 
   const [currentCategory, setCurrentCategory] = useState<number | null>(null);
 
-  const ravenLocalToken = getRavenTokenDataFromLocalStorage();
-  const getRavenResources = async (data: RavenFetchCoursesDto) => {
-    const getReveanCourses = await getAwsCourses(data);
+  const getRavenResources = async () => {
+    await getRavenToken();
+
+    const ravenLocalToken = getRavenTokenDataFromLocalStorage();
+    const ravenData: RavenFetchCoursesDto = {
+      apiKey: ravenAwsApiKey,
+      token: ravenLocalToken?.token || '',
+      fromDate: '01-01-2023',
+      toDate: '06-24-2024'
+    };
+    const getReveanCourses = await getAwsCourses(ravenData);
     setRavenCourses(getReveanCourses as RavenCourse[]);
     console.log('les ', getReveanCourses);
   };
@@ -185,8 +193,9 @@ export function Courses(props: CoursesProps): JSX.Element {
     if (ravenLocalToken === null) {
       const generateRavenToken = await generateRavenTokenAcces();
 
-      if (generateRavenToken)
+      if (generateRavenToken) {
         addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
+      }
     }
   };
 
@@ -244,20 +253,11 @@ export function Courses(props: CoursesProps): JSX.Element {
     setIsDataOnLoading(true);
   };
 
-  const ravenData: RavenFetchCoursesDto = {
-    apiKey: ravenAwsApiKey,
-    token: ravenLocalToken?.token || '',
-    fromDate: '01-01-2023',
-    toDate: '06-24-2024'
-  };
   useEffect(() => {
-    void getRavenToken();
+    void getRavenResources();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  useEffect(() => {
-    void getRavenResources(ravenData);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
+
   useEffect(() => {
     void getMoodleCourses();
 
