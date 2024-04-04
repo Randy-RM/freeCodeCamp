@@ -240,6 +240,13 @@ export function Courses(props: CoursesProps): JSX.Element {
     }
   };
 
+  const allCourses = [
+    ...(ravenCourses || []),
+    ...(moodleCourses?.result ? moodleCourses.result.flat() : [])
+  ];
+
+  console.log('all courses', allCourses);
+
   const navigateToPage = (forwardOrBackward: boolean) => {
     if (forwardOrBackward) {
       if (moodleCourses && currentPage < moodleCourses?.size) {
@@ -418,50 +425,43 @@ export function Courses(props: CoursesProps): JSX.Element {
                       </>
                     )}
 
-                  {ravenCourses &&
-                    ravenCourses.length >= 0 &&
-                    ravenCourses.map((course, index) => {
+                  {allCourses.map((course, index) => {
+                    if ('launch_url' in course) {
+                      // Vérifie si le cours est un cours Raven
                       return (
                         <CourseCard
-                          key={course.name}
+                          key={index}
                           icon={awsLogo}
                           isAvailable={true}
                           isSignedIn={isSignedIn}
                           title={`${index + 1}. ${course.name}`}
-                          buttonText={`Suivre le cours  `}
-                          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                          buttonText={`Suivre le cours`}
                           link={`${course.launch_url}`}
                           description={course.short_description}
                         />
                       );
-                    })}
-
-                  {moodleCourses &&
-                    moodleCourses.result &&
-                    moodleCourses.result.length > 0 &&
-                    moodleCourses.result[currentPage - 1]?.map(
-                      (course, index) => {
-                        return (
-                          <CourseCard
-                            key={index + course.id}
-                            icon={PhBookBookmark}
-                            phone={phone}
-                            name={name}
-                            badgeIcon={NewBadge}
-                            isAvailable={course.visible == 1}
-                            isSignedIn={isSignedIn}
-                            sameTab={true}
-                            external={true}
-                            title={`${course.displayname}`}
-                            buttonText={`Suivre le cours  `}
-                            createAt={formatdate(course.timecreated)}
-                            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                            link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
-                            description={course.summary}
-                          />
-                        );
-                      }
-                    )}
+                    } else {
+                      // Si ce n'est pas un cours Raven, c'est un cours Moodle
+                      return (
+                        <CourseCard
+                          key={index + course.id}
+                          icon={PhBookBookmark}
+                          phone={phone}
+                          name={name}
+                          badgeIcon={NewBadge}
+                          isAvailable={course.visible == 1}
+                          isSignedIn={isSignedIn}
+                          sameTab={true}
+                          external={true}
+                          title={`${course.displayname}`}
+                          buttonText={`Suivre le cours`}
+                          createAt={formatdate(course.timecreated)}
+                          link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
+                          description={course.summary}
+                        />
+                      );
+                    }
+                  })}
                 </div>
               ) : (
                 <div className='card-course-detail-container'>
