@@ -115,6 +115,7 @@ interface RavenTokenData {
 interface RavenFetchCoursesDto {
   apiKey: string;
   token: string;
+  currentPage: number;
   fromDate: string;
   toDate: string;
 }
@@ -179,6 +180,7 @@ export function Courses(props: CoursesProps): JSX.Element {
     const ravenData: RavenFetchCoursesDto = {
       apiKey: ravenAwsApiKey,
       token: ravenLocalToken?.token || '',
+      currentPage: currentPage,
       fromDate: '01-01-2023',
       toDate: '06-24-2024'
     };
@@ -263,7 +265,7 @@ export function Courses(props: CoursesProps): JSX.Element {
   useEffect(() => {
     void getRavenResources();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     void getMoodleCourses();
@@ -328,8 +330,8 @@ export function Courses(props: CoursesProps): JSX.Element {
               <h2 className='big-subheading'>{`Suis nos cours.`}</h2>
               <p className='text-responsive'>
                 {`
-          Concentre-toi sur ce qui est nécessaire pour acquérir une compétence spécifique et applicable. 
-          Tu seras mieux outillé pour construire une carrière.
+              Concentre-toi sur ce qui est nécessaire pour acquérir une compétence spécifique et applicable. 
+              Tu seras mieux outillé pour construire une carrière.
           `}
               </p>
             </div>
@@ -360,6 +362,8 @@ export function Courses(props: CoursesProps): JSX.Element {
                     ? 'Tous les cours'
                     : currentCategory == -1
                     ? 'Programmation'
+                    : currentCategory == -2
+                    ? 'Aws'
                     : (courseCategories?.find(elt => elt.id == currentCategory)
                         ?.name as string)
                 }`
@@ -469,7 +473,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                 </div>
               )}
             </div>
-            <Spacer size={10} />
+            <Spacer size={13} />
             <div className='pagination-container'>
               {moodleCourses && moodleCourses.size > 0 && (
                 <Row>

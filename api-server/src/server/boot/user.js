@@ -107,7 +107,7 @@ async function getRavenAwsCatalogue(req, res) {
     learningobject_type: 'content',
     status: '0',
     page_index: 1,
-    page_size: 50
+    page_size: 4
   });
 
   try {
@@ -136,7 +136,7 @@ async function getRavenAwsCatalogue(req, res) {
     );
 
     const ravenAwsCours = await response;
-    console.log('les datas', ravenAwsCours.data);
+    console.log('les datas', ravenAwsCours);
     return res.json(ravenAwsCours.data.data);
   } catch (error) {
     console.error(
