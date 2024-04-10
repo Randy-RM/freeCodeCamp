@@ -142,9 +142,13 @@ const CourseFilter = ({
       fromDate: '01-01-2023',
       toDate: '06-24-2024'
     };
-    const getReveanCourses = await getAwsCourses(ravenData);
-    setRavenCourses(getReveanCourses as RavenCourse[]);
-    console.log('les ', getReveanCourses);
+    setIsDataOnLoading(true);
+    const courses = (await getAwsCourses(ravenData)) as RavenCourse[];
+    if (courses && courses.length !== 0) {
+      setRavenCourses(courses);
+      console.log('les ', courses);
+      setIsDataOnLoading(false);
+    }
   };
 
   const getRavenToken = async () => {
@@ -275,6 +279,7 @@ const CourseFilter = ({
                 }`}
                 onClick={() => {
                   void filterByCategory(element?.id);
+                  setRavenCourses(null);
                   setCurrentCategory(element?.id);
                   setCurrentPage(1);
                   scrollTo(130);
