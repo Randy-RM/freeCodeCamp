@@ -281,7 +281,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentPage]);
   useEffect(() => {
     const timer = setTimeout(() => {
       if (isDataOnLoading) {
@@ -312,7 +312,8 @@ export function Courses(props: CoursesProps): JSX.Element {
 
   useEffect(() => {
     void getMoodleCourseCategory();
-  }, [courseCategories]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;

@@ -258,7 +258,7 @@ const CourseFilter = ({
                 // setCurrentPage(1);
                 // setProgrammingCategory(true);
                 setMoodleCourses(null);
-                setRavenCourses(null);
+                void getRavenCourses();
                 scrollTo(130);
                 if (screenWidth < 990) setShowFilter(e => !e);
               }}
