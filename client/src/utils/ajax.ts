@@ -319,7 +319,6 @@ export async function getDatabaseResource<T>(urlEndPoint: string) {
 }
 
 interface RavenFetchCoursesDto {
-  apiKey: string;
   token: string;
   fromDate: string;
   toDate: string;
@@ -351,6 +350,21 @@ export async function getAwsPath(data: RavenFetchCoursesDto) {
   console.log('courses raven', response);
   return response;
 }
+export async function getAwsUserCoursesProgress(data: RavenFetchCoursesDto) {
+  let response: unknown;
+
+  try {
+    response = await get(
+      `/get-raven-user-progress?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.toDate}`
+    );
+  } catch (error) {
+    response = null;
+  }
+  console.log('courses raven', response);
+  return response;
+}
+
+('/get-raven-user-progress');
 
 /** POST **/
 

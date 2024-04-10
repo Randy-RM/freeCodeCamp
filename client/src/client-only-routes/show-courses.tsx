@@ -364,7 +364,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                     : currentCategory == -1
                     ? 'Programmation'
                     : currentCategory == -2
-                    ? 'Aws'
+                    ? ' Amazon Web Services'
                     : (courseCategories?.find(elt => elt.id == currentCategory)
                         ?.name as string)
                 }`
