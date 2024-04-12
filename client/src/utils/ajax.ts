@@ -350,12 +350,22 @@ export async function getAwsPath(data: RavenFetchCoursesDto) {
   console.log('courses raven', response);
   return response;
 }
-export async function getAwsUserCoursesProgress(data: RavenFetchCoursesDto) {
+
+interface RavenFetchUserCoursesProgressDto {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  email_id: string;
+  token: string;
+  fromDate: string;
+  toDate: string;
+}
+export async function getAwsUserCoursesProgress(
+  data: RavenFetchUserCoursesProgressDto
+) {
   let response: unknown;
 
   try {
     response = await get(
-      `/get-raven-user-progress?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.toDate}`
+      `/get-raven-user-progress?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.toDate}&email=${data.email_id}`
     );
   } catch (error) {
     response = null;

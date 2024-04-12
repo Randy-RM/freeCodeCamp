@@ -105,7 +105,6 @@ async function getRavenAwsCatalogue(req, res) {
     from_date: '01-01-2023',
     to_date: '06-24-2024',
     learningobject_type: 'content',
-    status: '0',
     page_index: 1,
     page_size: 4
   });
@@ -122,7 +121,7 @@ async function getRavenAwsCatalogue(req, res) {
       req.query
     );
 
-    const response = await Axios.post(
+    const ravenAwsCours = await Axios.post(
       `${baseUrl}/administration/catalog/learningobjects`,
       requestBody,
       {
@@ -135,8 +134,7 @@ async function getRavenAwsCatalogue(req, res) {
       }
     );
 
-    const ravenAwsCours = await response;
-    console.log('les datas', ravenAwsCours);
+    console.log('les datas', ravenAwsCours.data.data);
     return res.json(ravenAwsCours.data.data);
   } catch (error) {
     console.error(
@@ -146,6 +144,25 @@ async function getRavenAwsCatalogue(req, res) {
     res.status(500).json([]);
   }
 }
+function getCoursesWithProgress(courses, progressions) {
+  const coursesWithProgress = [];
+  courses.forEach(course => {
+    const matchingProgression = progressions.find(
+      progression => progression.learningobject_id === course.learningobject_id
+    );
+    if (matchingProgression) {
+      const courseWithProgress = {
+        learningobject_id: course.learningobject_id,
+        name: course.name,
+        display_name: course.display_name,
+        progress: matchingProgression.completion_percentage,
+        launch_url: course.launch_url
+      };
+      coursesWithProgress.push(courseWithProgress);
+    }
+  });
+  return coursesWithProgress;
+}
 
 async function getRavenAwsUserProgress(req, res) {
   const apiKey = process.env.RAVEN_AWS_API_KEY;
@@ -154,8 +171,15 @@ async function getRavenAwsUserProgress(req, res) {
   const baseUrl = process.env.RAVEN_AWS_BASE_URL;
   const requestBody = JSON.stringify({
     from_date: '01-01-2023',
-    to_date: '06-24-2024',
+    to_date: '06-28-2024',
     email_id: email
+  });
+  const requestBodycourses = JSON.stringify({
+    from_date: '01-01-2023',
+    to_date: '06-24-2024',
+    learningobject_type: 'content',
+    page_index: 1,
+    page_size: 4
   });
 
   try {
@@ -170,7 +194,7 @@ async function getRavenAwsUserProgress(req, res) {
       req.query
     );
 
-    const response = await Axios.post(
+    const ravenCourseProgress = await Axios.post(
       `${baseUrl}/administration/progress/learningobjects`,
       requestBody,
       {
@@ -183,9 +207,31 @@ async function getRavenAwsUserProgress(req, res) {
       }
     );
 
-    const ravenAwsUserProgress = await response;
-    console.log('les progres', ravenAwsUserProgress.data);
-    return res.json(ravenAwsUserProgress.data);
+    const ravenAwsCours = await Axios.post(
+      `${baseUrl}/administration/catalog/learningobjects`,
+      requestBodycourses,
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          Authorization: awstoken
+        }
+      }
+    );
+    console.log(
+      'les datas progresion:',
+      ravenAwsCours.data.data,
+      'prossion:',
+      ravenCourseProgress.data.data
+    );
+    const ravenCourseWithProgress = getCoursesWithProgress(
+      ravenAwsCours.data.data,
+      ravenCourseProgress.data.data
+    );
+
+    console.log('les datas progresion', ravenCourseWithProgress);
+    return res.json(ravenCourseWithProgress);
   } catch (error) {
     console.error(
       'Erreur lors de la récupération des progression:',
