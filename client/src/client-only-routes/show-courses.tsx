@@ -109,7 +109,8 @@ interface RavenTokenData {
   token: string;
   expiresIn: number;
   validFrom: string;
-  validTo: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
 }
 
 interface RavenFetchCoursesDto {
@@ -117,7 +118,8 @@ interface RavenFetchCoursesDto {
   token: string;
   currentPage: number;
   fromDate: string;
-  toDate: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
 }
 
 const mapStateToProps = createSelector(
@@ -182,7 +184,8 @@ export function Courses(props: CoursesProps): JSX.Element {
       token: ravenLocalToken?.token || '',
       currentPage: currentPage,
       fromDate: '01-01-2023',
-      toDate: '06-24-2024'
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      valid_to: '06-24-2024'
     };
     const getReveanCourses = await getAwsCourses(ravenData);
     setRavenCourses(getReveanCourses as RavenCourse[]);

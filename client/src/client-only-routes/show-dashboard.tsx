@@ -27,6 +27,8 @@ import {
 
 import { User } from '../redux/prop-types';
 
+import renderCourseProgressSkeletons from '../components/helpers/render-course-progress-skeleton';
+
 const { apiLocation, moodleApiBaseUrl, moodleApiToken, moodleBaseUrl } =
   envData;
 
@@ -48,7 +50,8 @@ interface RavenTokenData {
   token: string;
   expiresIn: number;
   validFrom: string;
-  validTo: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
 }
 
 type MoodleCourse = {
@@ -70,7 +73,8 @@ const mapStateToProps = createSelector(
 interface RavenFetchUserCoursesProgressDto {
   token: string;
   fromDate: string;
-  toDate: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
   // eslint-disable-next-line @typescript-eslint/naming-convention
   email_id: string;
 }
@@ -98,6 +102,7 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
   const [ravenCoursesProgress, setRavenCoursesProgress] = useState<
     RavenFetchUserCoursesProgressDtogress[] | null
   >([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [dataLoadingMessage, setDataLoadingMessage] = useState<string>(
     'Chargement en cours ...'
   );
@@ -105,22 +110,27 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
   console.log('progression rsven ', ravenCoursesProgress);
 
   const getRavenProgress = async (email: string) => {
+    setIsLoading(true);
     await getRavenToken();
 
     const ravenLocalToken = getRavenTokenDataFromLocalStorage();
     const ravenData: RavenFetchUserCoursesProgressDto = {
       token: ravenLocalToken?.token || '',
       fromDate: '01-01-2023',
-      toDate: '06-24-2024',
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      valid_to: '06-24-2024',
       // eslint-disable-next-line @typescript-eslint/naming-convention
       email_id: email
     };
     const getReveanCourses = await getAwsUserCoursesProgress(ravenData);
 
     console.log('les ', getReveanCourses);
-    setRavenCoursesProgress(
-      getReveanCourses as RavenFetchUserCoursesProgressDtogress[]
-    );
+    if (getReveanCourses) {
+      setRavenCoursesProgress(
+        getReveanCourses as RavenFetchUserCoursesProgressDtogress[]
+      );
+      setIsLoading(false);
+    }
   };
 
   const getRavenToken = async () => {
@@ -138,7 +148,7 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
       }
     } else {
       // Vérifier si le token existant a expiré d'une heure ou plus
-      const tokenExpirationTime = new Date(ravenTokenData.validTo);
+      const tokenExpirationTime = new Date(ravenTokenData.valid_to);
       const currentTime = new Date();
       console.log('validitime', ravenTokenData);
 
@@ -238,6 +248,7 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
                   </h1>
                 </div>
               </Col>
+
               {currentsSuperBlock && currentsSuperBlock.length > 0 && (
                 <>
                   {currentsSuperBlock.map(
@@ -254,19 +265,43 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
                       return (
                         <Col key={index} className='' md={12} sm={12} xs={12}>
                           <Spacer size={1} />
-                          <div className='block-ui bg-secondary standard-radius-5'>
-                            <CoursCardProgress
-                              challengeCount={totalChallenges}
-                              completedChallengeCount={totalCompletedChallenges}
-                              coursName={
-                                superBlockTranslatedName &&
-                                superBlockTranslatedName?.length > 0
-                                  ? superBlockTranslatedName
-                                  : superBlockName
-                              }
-                              superBlockPath={superBlockPath}
-                            />
-                          </div>
+                          <>
+                            {!isLoading ? (
+                              <div className='block-ui bg-secondary standard-radius-5'>
+                                <CoursCardProgress
+                                  challengeCount={totalChallenges}
+                                  completedChallengeCount={
+                                    totalCompletedChallenges
+                                  }
+                                  coursName={
+                                    superBlockTranslatedName &&
+                                    superBlockTranslatedName?.length > 0
+                                      ? superBlockTranslatedName
+                                      : superBlockName
+                                  }
+                                  superBlockPath={superBlockPath}
+                                />
+                              </div>
+                            ) : (
+                              <>
+                                <div className='block-ui bg-secondary standard-radius-5'>
+                                  {' '}
+                                  {renderCourseProgressSkeletons(1)}
+                                </div>
+                                <Spacer size={1} />{' '}
+                                <div className='block-ui bg-secondary standard-radius-5'>
+                                  {' '}
+                                  {renderCourseProgressSkeletons(1)}
+                                </div>
+                                <Spacer size={1} />{' '}
+                                <div className='block-ui bg-secondary standard-radius-5'>
+                                  {' '}
+                                  {renderCourseProgressSkeletons(1)}
+                                </div>{' '}
+                              </>
+                            )}
+                          </>
+
                           <Spacer size={1} />
                         </Col>
                       );
@@ -282,15 +317,19 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
                       <Col key={index} className='' md={12} sm={12} xs={12}>
                         <Spacer size={1} />
                         <div className='block-ui bg-secondary standard-radius-5'>
-                          <CoursCardProgress
-                            challengeCount={100}
-                            completedChallengeCount={moodleCourse.progress}
-                            coursName={moodleCourse.displayname}
-                            sameTab={true}
-                            external={true}
-                            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                            superBlockPath={`${moodleBaseUrl}/course/view.php?id=${moodleCourse.id}`}
-                          />
+                          {!isLoading ? (
+                            <CoursCardProgress
+                              challengeCount={100}
+                              completedChallengeCount={moodleCourse.progress}
+                              coursName={moodleCourse.displayname}
+                              sameTab={true}
+                              external={true}
+                              // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                              superBlockPath={`${moodleBaseUrl}/course/view.php?id=${moodleCourse.id}`}
+                            />
+                          ) : (
+                            renderCourseProgressSkeletons(2)
+                          )}
                         </div>
                         <Spacer size={1} />
                       </Col>
@@ -305,15 +344,19 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
                       <Col key={index} className='' md={12} sm={12} xs={12}>
                         <Spacer size={1} />
                         <div className='block-ui bg-secondary standard-radius-5'>
-                          <CoursCardProgress
-                            challengeCount={100}
-                            completedChallengeCount={ravenCourse.progress}
-                            coursName={ravenCourse.display_name}
-                            sameTab={true}
-                            external={true}
-                            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                            superBlockPath={ravenCourse.launch_url}
-                          />
+                          {!isLoading ? (
+                            <CoursCardProgress
+                              challengeCount={100}
+                              completedChallengeCount={ravenCourse.progress}
+                              coursName={ravenCourse.display_name}
+                              sameTab={true}
+                              external={true}
+                              // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                              superBlockPath={ravenCourse.launch_url}
+                            />
+                          ) : (
+                            renderCourseProgressSkeletons(2)
+                          )}
                         </div>
                         <Spacer size={1} />
                       </Col>
