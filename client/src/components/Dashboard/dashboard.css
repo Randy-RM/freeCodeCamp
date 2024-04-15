@@ -144,7 +144,7 @@
   background-color: #ececec;
   border-radius: 4px; /* Adjust as needed */
   animation: skeleton-loading 1.5s infinite ease-in-out;
-  height: 5px; /* Adjust height as needed */
+  height: 25px; /* Adjust height as needed */
 }
 
 /* Remove disabled styling once content is loaded (using JavaScript) */
