@@ -254,6 +254,10 @@ interface RavenTokenData {
   validTo: string;
 }
 
+export function removeRavenTokenFromLocalStorage() {
+  localStorage.removeItem('ravenToken');
+}
+
 export function addRavenTokenToLocalStorage(
   ravenTokenData: RavenTokenData
 ): void {
