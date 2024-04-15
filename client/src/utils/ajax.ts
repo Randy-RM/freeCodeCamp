@@ -360,7 +360,8 @@ interface RavenFetchUserCoursesProgressDto {
   email_id: string;
   token: string;
   fromDate: string;
-  toDate: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
 }
 export async function getAwsUserCoursesProgress(
   data: RavenFetchUserCoursesProgressDto
@@ -369,7 +370,7 @@ export async function getAwsUserCoursesProgress(
 
   try {
     response = await get(
-      `/get-raven-user-progress?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.toDate}&email=${data.email_id}`
+      `/get-raven-user-progress?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.valid_to}&email=${data.email_id}`
     );
   } catch (error) {
     response = null;
