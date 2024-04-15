@@ -63,7 +63,8 @@ interface RavenTokenData {
   token: string;
   expiresIn: number;
   validFrom: string;
-  validTo: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
 }
 type RavenCourse = {
   learningobjectid: number;
@@ -80,7 +81,8 @@ interface RavenFetchCoursesDto {
   apiKey: string;
   token: string;
   fromDate: string;
-  toDate: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
 }
 
 const mapStateToProps = createSelector(
@@ -155,7 +157,8 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
     apiKey: ravenAwsApiKey,
     token: ravenLocalToken?.token || '',
     fromDate: '01-01-2023',
-    toDate: '06-24-2024'
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    valid_to: '06-24-2024'
   };
   useEffect(() => {
     void getRavenResourcesPath(ravenData);

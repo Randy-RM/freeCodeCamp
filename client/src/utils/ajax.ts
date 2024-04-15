@@ -251,7 +251,8 @@ interface RavenTokenData {
   token: string;
   expiresIn: number;
   validFrom: string;
-  validTo: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
 }
 
 export function removeRavenTokenFromLocalStorage() {
@@ -325,7 +326,8 @@ export async function getDatabaseResource<T>(urlEndPoint: string) {
 interface RavenFetchCoursesDto {
   token: string;
   fromDate: string;
-  toDate: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
 }
 
 export async function getAwsCourses(data: RavenFetchCoursesDto) {
@@ -333,7 +335,7 @@ export async function getAwsCourses(data: RavenFetchCoursesDto) {
 
   try {
     response = await get(
-      `/get-raven-courses?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.toDate}`
+      `/get-raven-courses?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.valid_to}`
     );
   } catch (error) {
     response = null;
@@ -346,7 +348,7 @@ export async function getAwsPath(data: RavenFetchCoursesDto) {
 
   try {
     response = await get(
-      `/get-raven-path?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.toDate}`
+      `/get-raven-path?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.valid_to}`
     );
   } catch (error) {
     response = null;

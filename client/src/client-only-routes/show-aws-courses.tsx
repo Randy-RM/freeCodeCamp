@@ -55,7 +55,8 @@ interface RavenFetchCoursesDto {
   apiKey: string;
   token: string;
   fromDate: string;
-  toDate: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
 }
 const mapStateToProps = createSelector(
   signInLoadingSelector,
@@ -91,7 +92,8 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
     apiKey: 'gyKJycM8xl1IooROdVQGB59tjL0CpaEk3XwLustN',
     token: ravenLocalToken?.token || '',
     fromDate: '01-01-2023',
-    toDate: '06-24-2024'
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    valid_to: '06-24-2024'
   };
 
   useEffect(() => {
