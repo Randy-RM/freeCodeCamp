@@ -109,14 +109,17 @@ interface RavenTokenData {
   token: string;
   expiresIn: number;
   validFrom: string;
-  validTo: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
 }
 
 interface RavenFetchCoursesDto {
   apiKey: string;
   token: string;
+  currentPage: number;
   fromDate: string;
-  toDate: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
 }
 
 const mapStateToProps = createSelector(
@@ -172,9 +175,19 @@ export function Courses(props: CoursesProps): JSX.Element {
 
   const [currentCategory, setCurrentCategory] = useState<number | null>(null);
 
-  const ravenLocalToken = getRavenTokenDataFromLocalStorage();
-  const getRavenResources = async (data: RavenFetchCoursesDto) => {
-    const getReveanCourses = await getAwsCourses(data);
+  const getRavenResources = async () => {
+    await getRavenToken();
+
+    const ravenLocalToken = getRavenTokenDataFromLocalStorage();
+    const ravenData: RavenFetchCoursesDto = {
+      apiKey: ravenAwsApiKey,
+      token: ravenLocalToken?.token || '',
+      currentPage: currentPage,
+      fromDate: '01-01-2023',
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      valid_to: '06-24-2024'
+    };
+    const getReveanCourses = await getAwsCourses(ravenData);
     setRavenCourses(getReveanCourses as RavenCourse[]);
     console.log('les ', getReveanCourses);
   };
@@ -185,8 +198,9 @@ export function Courses(props: CoursesProps): JSX.Element {
     if (ravenLocalToken === null) {
       const generateRavenToken = await generateRavenTokenAcces();
 
-      if (generateRavenToken)
+      if (generateRavenToken) {
         addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
+      }
     }
   };
 
@@ -231,6 +245,13 @@ export function Courses(props: CoursesProps): JSX.Element {
     }
   };
 
+  const allCourses = [
+    ...(ravenCourses || []),
+    ...(moodleCourses?.result ? moodleCourses.result.flat() : [])
+  ];
+
+  console.log('all courses', allCourses);
+
   const navigateToPage = (forwardOrBackward: boolean) => {
     if (forwardOrBackward) {
       if (moodleCourses && currentPage < moodleCourses?.size) {
@@ -244,20 +265,11 @@ export function Courses(props: CoursesProps): JSX.Element {
     setIsDataOnLoading(true);
   };
 
-  const ravenData: RavenFetchCoursesDto = {
-    apiKey: ravenAwsApiKey,
-    token: ravenLocalToken?.token || '',
-    fromDate: '01-01-2023',
-    toDate: '06-24-2024'
-  };
   useEffect(() => {
-    void getRavenToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  useEffect(() => {
-    void getRavenResources(ravenData);
+    void getRavenResources();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
+
   useEffect(() => {
     void getMoodleCourses();
 
@@ -272,7 +284,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentPage]);
   useEffect(() => {
     const timer = setTimeout(() => {
       if (isDataOnLoading) {
@@ -303,7 +315,8 @@ export function Courses(props: CoursesProps): JSX.Element {
 
   useEffect(() => {
     void getMoodleCourseCategory();
-  }, [courseCategories]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
@@ -321,8 +334,8 @@ export function Courses(props: CoursesProps): JSX.Element {
               <h2 className='big-subheading'>{`Suis nos cours.`}</h2>
               <p className='text-responsive'>
                 {`
-          Concentre-toi sur ce qui est nécessaire pour acquérir une compétence spécifique et applicable. 
-          Tu seras mieux outillé pour construire une carrière.
+              Concentre-toi sur ce qui est nécessaire pour acquérir une compétence spécifique et applicable. 
+              Tu seras mieux outillé pour construire une carrière.
           `}
               </p>
             </div>
@@ -353,6 +366,8 @@ export function Courses(props: CoursesProps): JSX.Element {
                     ? 'Tous les cours'
                     : currentCategory == -1
                     ? 'Programmation'
+                    : currentCategory == -2
+                    ? ' Amazon Web Services'
                     : (courseCategories?.find(elt => elt.id == currentCategory)
                         ?.name as string)
                 }`
@@ -418,50 +433,43 @@ export function Courses(props: CoursesProps): JSX.Element {
                       </>
                     )}
 
-                  {ravenCourses &&
-                    ravenCourses.length >= 0 &&
-                    ravenCourses.map((course, index) => {
+                  {allCourses.map((course, index) => {
+                    if ('launch_url' in course) {
+                      // Vérifie si le cours est un cours Raven
                       return (
                         <CourseCard
-                          key={course.name}
+                          key={index}
                           icon={awsLogo}
                           isAvailable={true}
                           isSignedIn={isSignedIn}
                           title={`${index + 1}. ${course.name}`}
-                          buttonText={`Suivre le cours  `}
-                          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                          buttonText={`Suivre le cours`}
                           link={`${course.launch_url}`}
                           description={course.short_description}
                         />
                       );
-                    })}
-
-                  {moodleCourses &&
-                    moodleCourses.result &&
-                    moodleCourses.result.length > 0 &&
-                    moodleCourses.result[currentPage - 1]?.map(
-                      (course, index) => {
-                        return (
-                          <CourseCard
-                            key={index + course.id}
-                            icon={PhBookBookmark}
-                            phone={phone}
-                            name={name}
-                            badgeIcon={NewBadge}
-                            isAvailable={course.visible == 1}
-                            isSignedIn={isSignedIn}
-                            sameTab={true}
-                            external={true}
-                            title={`${course.displayname}`}
-                            buttonText={`Suivre le cours  `}
-                            createAt={formatdate(course.timecreated)}
-                            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                            link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
-                            description={course.summary}
-                          />
-                        );
-                      }
-                    )}
+                    } else {
+                      // Si ce n'est pas un cours Raven, c'est un cours Moodle
+                      return (
+                        <CourseCard
+                          key={index + course.id}
+                          icon={PhBookBookmark}
+                          phone={phone}
+                          name={name}
+                          badgeIcon={NewBadge}
+                          isAvailable={course.visible == 1}
+                          isSignedIn={isSignedIn}
+                          sameTab={true}
+                          external={true}
+                          title={`${course.displayname}`}
+                          buttonText={`Suivre le cours`}
+                          createAt={formatdate(course.timecreated)}
+                          link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
+                          description={course.summary}
+                        />
+                      );
+                    }
+                  })}
                 </div>
               ) : (
                 <div className='card-course-detail-container'>
@@ -469,7 +477,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                 </div>
               )}
             </div>
-            <Spacer size={10} />
+            <Spacer size={13} />
             <div className='pagination-container'>
               {moodleCourses && moodleCourses.size > 0 && (
                 <Row>

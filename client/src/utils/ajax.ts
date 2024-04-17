@@ -251,7 +251,12 @@ interface RavenTokenData {
   token: string;
   expiresIn: number;
   validFrom: string;
-  validTo: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
+}
+
+export function removeRavenTokenFromLocalStorage() {
+  localStorage.removeItem('ravenToken');
 }
 
 export function addRavenTokenToLocalStorage(
@@ -259,7 +264,9 @@ export function addRavenTokenToLocalStorage(
 ): void {
   try {
     if (typeof window !== 'undefined' && window.localStorage) {
-      localStorage.setItem('ravenToken', JSON.stringify(ravenTokenData));
+      const ravenTokenExist = localStorage.getItem('ravenToken');
+      if (!ravenTokenExist)
+        localStorage.setItem('ravenToken', JSON.stringify(ravenTokenData));
       console.log('Le token Raven a été ajouté au stockage local.');
     } else {
       console.error("Le stockage local n'est pas pris en charge.");
@@ -317,10 +324,10 @@ export async function getDatabaseResource<T>(urlEndPoint: string) {
 }
 
 interface RavenFetchCoursesDto {
-  apiKey: string;
   token: string;
   fromDate: string;
-  toDate: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
 }
 
 export async function getAwsCourses(data: RavenFetchCoursesDto) {
@@ -328,7 +335,7 @@ export async function getAwsCourses(data: RavenFetchCoursesDto) {
 
   try {
     response = await get(
-      `/get-raven-courses?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.toDate}`
+      `/get-raven-courses?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.valid_to}`
     );
   } catch (error) {
     response = null;
@@ -341,7 +348,7 @@ export async function getAwsPath(data: RavenFetchCoursesDto) {
 
   try {
     response = await get(
-      `/get-raven-path?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.toDate}`
+      `/get-raven-path?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.valid_to}`
     );
   } catch (error) {
     response = null;
@@ -349,6 +356,32 @@ export async function getAwsPath(data: RavenFetchCoursesDto) {
   console.log('courses raven', response);
   return response;
 }
+
+interface RavenFetchUserCoursesProgressDto {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  email_id: string;
+  token: string;
+  fromDate: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
+}
+export async function getAwsUserCoursesProgress(
+  data: RavenFetchUserCoursesProgressDto
+) {
+  let response: unknown;
+
+  try {
+    response = await get(
+      `/get-raven-user-progress?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.valid_to}&email=${data.email_id}`
+    );
+  } catch (error) {
+    response = null;
+  }
+  console.log('courses raven', response);
+  return response;
+}
+
+('/get-raven-user-progress');
 
 /** POST **/
 
