@@ -150,16 +150,26 @@ export function ShowDashboard(props: ShowDashboardProps): JSX.Element {
       // Vérifier si le token existant a expiré d'une heure ou plus
       const tokenExpirationTime = new Date(ravenTokenData.valid_to);
       const currentTime = new Date();
-      console.log('validitime', ravenTokenData);
-
+      console.log('validitime', ravenTokenData.valid_to);
+      // 1 heure en millisecondes
+      const oneHourInMillis = 60 * 60 * 1000;
       // Calculer la différence de temps en millisecondes
       const timeDifference =
-        currentTime.getTime() - tokenExpirationTime.getTime();
+        tokenExpirationTime.getTime() - currentTime.getTime();
+      console.log(
+        'les temps actu',
+        timeDifference,
+        'time',
+        currentTime.getTime(),
+        'token:',
+        tokenExpirationTime.getTime(),
+        'compo:',
+        timeDifference <= oneHourInMillis,
+        'test:',
+        oneHourInMillis
+      );
 
-      // 1 heure en millisecondes
-      const oneHourInMillis = 1000;
-
-      if (timeDifference >= oneHourInMillis) {
+      if (timeDifference <= oneHourInMillis) {
         // Le token a expiré d'une heure ou plus, donc le supprimer et générer un nouveau
         removeRavenTokenFromLocalStorage();
         const generateRavenToken = await generateRavenTokenAcces();
