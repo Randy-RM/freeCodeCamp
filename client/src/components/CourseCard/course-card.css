@@ -21,11 +21,15 @@ img {
 .card-outlin-border {
   border: solid 1px #2b292b;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-outlin-border-skeleton {
   border: solid 1px #2b292b;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-course-detail-back {
@@ -36,19 +40,24 @@ img {
 }
 
 .card-course-detail-item {
-  padding: 0% 5%;
+  display: flex;
+  align-items: center;
+  padding: 5% 5%;
 }
 
 .card-course-detail-header {
+  height: auto;
   overflow: hidden;
 }
 .card-title {
   display: flex;
   align-items: center;
+
+  height: auto;
 }
 
 .card-course-detail-footer {
-  padding: 5% 5%;
+  padding: 0% 5%;
   overflow: hidden;
 }
 
@@ -71,6 +80,8 @@ img {
 }
 
 .card-description-font-size {
+  border: 1px red solid !important;
+  height: 5rem;
   font-size: 14px;
 }
 
@@ -102,6 +113,7 @@ img {
   flex-wrap: wrap;
   width: 100%;
   justify-content: flex-start;
+
   gap: 5%;
 }
 
@@ -183,6 +195,7 @@ img {
     flex-direction: row !important;
     width: 100%;
     justify-content: flex-start !important;
+
     /* gap: 50px; */
   }
 }
@@ -205,7 +218,7 @@ img {
     flex-direction: column;
     align-items: center !important;
     justify-content: center !important;
-    height: fit-content;
+
     /* gap: 30px; */
   }
 
@@ -216,4 +229,6 @@ img {
 
 .flexible {
   flex-grow: 1;
+
+  height: 20%;
 }
