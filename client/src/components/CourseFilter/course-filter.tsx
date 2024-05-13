@@ -34,19 +34,22 @@ type RavenCourse = {
   updateddate: string;
   contenttype: string;
 };
+interface RavenTokenData {
+  token: string;
+  expiresIn: number;
+  validFrom: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
+}
 interface RavenFetchCoursesDto {
   apiKey: string;
   token: string;
   currentPage: number;
   fromDate: string;
-  toDate: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
 }
-interface RavenTokenData {
-  token: string;
-  expiresIn: number;
-  validFrom: string;
-  validTo: string;
-}
+
 const { moodleApiBaseUrl, moodleApiToken, ravenAwsApiKey } = envData;
 
 const CourseFilter = ({
@@ -140,7 +143,8 @@ const CourseFilter = ({
       token: ravenLocalToken?.token || '',
       currentPage: 1,
       fromDate: '01-01-2023',
-      toDate: '06-24-2024'
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      valid_to: '06-24-2024'
     };
     setIsDataOnLoading(true);
     const courses = (await getAwsCourses(ravenData)) as RavenCourse[];
