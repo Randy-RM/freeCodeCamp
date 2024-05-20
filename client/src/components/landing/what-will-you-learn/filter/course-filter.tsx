@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import '../filter/course-filter.css';
+import { MoodleCourseCategory } from '../../../../client-only-routes/show-courses';
 
-const CourseFilterList = (): JSX.Element => {
+const CourseFilterList = ({
+  courseCategories
+}: {
+  courseCategories: MoodleCourseCategory[] | undefined | null;
+}): JSX.Element => {
   const [activeButton, setActiveButton] = useState<string>('Populaires'); // Initial active button
   console.log('active log', activeButton == 'Populaires');
 
@@ -51,14 +56,20 @@ const CourseFilterList = (): JSX.Element => {
         >
           {'IA'}
         </button>
-        <button
-          className={`category-name ${
-            activeButton === 'Bureautique' ? 'active-button' : ''
-          }`}
-          onClick={handleButtonClick}
-        >
-          {'Bureautique'}
-        </button>
+
+        {courseCategories?.map((element, index) => {
+          return (
+            <button
+              className={`category-name ${
+                activeButton == element?.name ? 'active-button' : ''
+              }`}
+              onClick={handleButtonClick}
+              key={index}
+            >
+              {element?.name}
+            </button>
+          );
+        })}
       </ul>
     </div>
   );

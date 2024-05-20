@@ -12,6 +12,7 @@
 .landing-filter-container ul button {
   all: unset;
   padding-bottom: 0.5rem;
+  cursor: pointer;
 }
 .landing-filter-container .active-button {
   color: red;

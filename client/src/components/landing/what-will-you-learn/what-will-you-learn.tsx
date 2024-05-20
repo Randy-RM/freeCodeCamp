@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'gatsby';
 import { Spacer } from '../../../components/helpers';
 
@@ -9,20 +9,49 @@ import LaediesActIcon from '../../../assets/images/partners/we-act-logo.png';
 import './what-will-you-learn.css';
 
 import CourseCard from '../../CourseCard/course-card';
-import CourseFilterList from './filter/course-filter';
 
 interface LandingDetailsProps {
   isSignedIn?: boolean;
 }
+import envData from '../../../../../config/env.json';
+import { MoodleCourseCategory } from '../../../client-only-routes/show-courses';
+import { getExternalResource } from '../../../utils/ajax';
+import CourseFilterList from './filter/course-filter';
+
+const { moodleApiBaseUrl, moodleApiToken } = envData;
 
 const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
+  const [courseCategories, setCourseCategories] = useState<
+    MoodleCourseCategory[] | null
+  >();
+
+  const getMoodleCourseCategory = async () => {
+    const moodleCourseCategories = await getExternalResource<
+      MoodleCourseCategory[]
+    >(
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_categories&moodlewsrestformat=json`
+    );
+
+    if (moodleCourseCategories) {
+      setCourseCategories(
+        moodleCourseCategories?.filter(category => category.coursecount > 0)
+      );
+    }
+  };
+
+  useEffect(() => {
+    void getMoodleCourseCategory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className='landing-top'>
       <div>
         <h2 className='big-heading text-love-light text-center'>{`Le cours populaires`}</h2>
         <br />
 
-        <CourseFilterList />
+        <CourseFilterList courseCategories={courseCategories} />
       </div>
       <Spacer size={2} />
 
