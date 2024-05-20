@@ -271,7 +271,7 @@ const CourseFilter = ({
                 if (screenWidth < 990) setShowFilter(e => !e);
               }}
             >
-              Aws
+              AWS
             </button>
           )}
 

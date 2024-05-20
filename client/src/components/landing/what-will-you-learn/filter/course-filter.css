@@ -1,0 +1,20 @@
+.landing-filter-container {
+  border-bottom: 1px solid;
+  width: 100%;
+}
+
+.landing-filter-container ul {
+  display: flex;
+  justify-content: space-between;
+  overflow-x: scroll;
+}
+
+.landing-filter-container ul button {
+  all: unset;
+  padding-bottom: 0.5rem;
+}
+.landing-filter-container .active-button {
+  color: red;
+  border-bottom: red 3px solid;
+  font-weight: bold;
+}
