@@ -39,7 +39,8 @@ import {
   generateRavenTokenAcces,
   getAwsCourses,
   getExternalResource,
-  getRavenTokenDataFromLocalStorage
+  getRavenTokenDataFromLocalStorage,
+  removeRavenTokenFromLocalStorage
 } from '../utils/ajax';
 
 import '../components/CourseFilter/course-filter.css';
@@ -193,13 +194,42 @@ export function Courses(props: CoursesProps): JSX.Element {
   };
 
   const getRavenToken = async () => {
-    const ravenLocalToken = getRavenTokenDataFromLocalStorage();
+    const ravenTokenData = getRavenTokenDataFromLocalStorage();
 
-    if (ravenLocalToken === null) {
+    if (ravenTokenData === null) {
+      // Si aucun token n'existe en local storage, générer un nouveau token
       const generateRavenToken = await generateRavenTokenAcces();
 
       if (generateRavenToken) {
         addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
+        return generateRavenToken; // Retourner le nouveau token
+      } else {
+        return null; // Retourner null si la génération a échoué
+      }
+    } else {
+      // Vérifier si le token existant a expiré d'une heure ou plus
+      const tokenExpirationTime = new Date(ravenTokenData.valid_to);
+      const currentTime = new Date();
+      // 1 heure en millisecondes
+      const oneHourInMillis = 60 * 60 * 1000;
+      // Calculer la différence de temps en millisecondes
+      const timeDifference =
+        tokenExpirationTime.getTime() - currentTime.getTime();
+
+      if (timeDifference <= oneHourInMillis) {
+        // Le token a expiré d'une heure ou plus, donc le supprimer et générer un nouveau
+        removeRavenTokenFromLocalStorage();
+        const generateRavenToken = await generateRavenTokenAcces();
+
+        if (generateRavenToken) {
+          addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
+          return generateRavenToken; // Retourner le nouveau token
+        } else {
+          return null; // Retourner null si la génération a échoué
+        }
+      } else {
+        // Le token est encore valide, retourner le token existant
+        return ravenTokenData;
       }
     }
   };

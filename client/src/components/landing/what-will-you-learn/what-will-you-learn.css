@@ -76,6 +76,8 @@ img {
   flex-wrap: wrap;
   width: 100%;
 
+  border: #e60000 solid 1;
+
   gap: 5%;
 }
 
