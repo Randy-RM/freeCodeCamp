@@ -137,17 +137,20 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
 
     //Order courses by their publication date
     const sortedCourses = sortCourses(splitCourses);
-
+    console.log('moodle', sortedCourses);
     if (moodleCatalogue != null) {
       setMoodleCourses(sortedCourses);
     } else {
       setMoodleCourses(null);
     }
   };
+
   const allCourses = [
     ...(ravenCourses || []),
     ...(moodleCourses?.result ? moodleCourses.result.flat() : [])
   ];
+
+  console.log('allcourse', allCourses);
 
   const formatdate = (data: number) => {
     return new Date(data * 1000).toLocaleDateString();
@@ -157,6 +160,7 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
     void getMoodleCourseCategory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   useEffect(() => {
     void getMoodleCourses();
 
@@ -175,14 +179,18 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
 
   useEffect(() => {
     void getRavenResources();
+    const timer = setTimeout(() => {
+      if (isDataOnLoading) {
+        setIsDataOnLoading(false);
+      }
+    }, 2000);
+    return () => {
+      setMoodleCourses(null); // cleanup useEffect to perform a React state update
+      setIsDataOnLoading(true); // cleanup useEffect to perform a React state update
+      clearTimeout(timer);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  useEffect(() => {
-    // allCourses = [
-    //   ...(ravenCourses || []),
-    //   ...(moodleCourses?.result ? moodleCourses.result.flat() : [])
-    // ];
-  }, [ravenCourses, moodleCourses]);
 
   return (
     <div className='landing-top'>
@@ -277,6 +285,7 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
           </div>
         )}
       </div>
+      <Spacer size={2} />
       <div>
         <Link className='course-cta' to='/courses'>
           {'Voir tous les cours'}

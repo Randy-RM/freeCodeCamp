@@ -45,14 +45,14 @@ export const NavLinks = (props: NavLinksProps): JSX.Element => {
   const {
     innerRef,
     fetchState,
-    user: { username },
+    user: { username, role },
     navigate
   }: NavLinksProps = props;
 
   const { pending } = fetchState;
 
   // ------------IsDropdown Handler------------
-
+  console.log('userRole', role);
   const handleIsDropdown = () => {
     if (width < 1000) {
       setIsDropdown(isDropdown ? false : true);
@@ -186,6 +186,21 @@ export const NavLinks = (props: NavLinksProps): JSX.Element => {
             </li>
           </Fragment>
         )}
+
+        {role == 'Admin' ||
+          (role == 'Super-admin' && (
+            <li className='nav-item'>
+              <a
+                onClick={stockerUrlCourante}
+                className=''
+                href={`/admin/all-members`}
+                key='dashbord'
+                ref={innerRef}
+              >
+                {'Back office'}
+              </a>
+            </li>
+          ))}
 
         {!username && (
           <li className='nav-item'>

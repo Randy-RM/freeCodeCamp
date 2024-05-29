@@ -280,8 +280,6 @@ export function Courses(props: CoursesProps): JSX.Element {
     ...(moodleCourses?.result ? moodleCourses.result.flat() : [])
   ];
 
-  console.log('all courses', allCourses);
-
   const navigateToPage = (forwardOrBackward: boolean) => {
     if (forwardOrBackward) {
       if (moodleCourses && currentPage < moodleCourses?.size) {

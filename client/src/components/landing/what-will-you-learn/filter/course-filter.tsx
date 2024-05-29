@@ -69,6 +69,31 @@ const CourseFilterList = ({
   currentCategory: string;
 }): JSX.Element => {
   console.log('active log', currentCategory == 'Populaires', currentCategory);
+  const getMoodleCourses = async () => {
+    const moodleCatalogue = await getExternalResource<MoodleCourse[]>(
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses&moodlewsrestformat=json`
+    );
+
+    const splitCourses: MoodleCoursesCatalogue | null | undefined =
+      moodleCatalogue != null
+        ? splitArray<MoodleCourse>(
+            moodleCatalogue.filter(moodleCourse => {
+              return moodleCourse.visible == 1 && moodleCourse.format != 'site';
+            }),
+            4
+          )
+        : null;
+
+    //Order courses by their publication date
+    const sortedCourses = sortCourses(splitCourses);
+    console.log('moodle', sortedCourses);
+    if (moodleCatalogue != null) {
+      setMoodleCourses(sortedCourses);
+    } else {
+      setMoodleCourses(null);
+    }
+  };
   const filterByCategory = async (categoryId: number) => {
     setIsDataOnLoading(true);
     const moodleCourseFiltered: MoodleCoursesFiltered | null =
@@ -166,7 +191,9 @@ const CourseFilterList = ({
               onClick={e => {
                 handleButtonClick(e);
                 setMoodleCourses(null);
-                setMoodleCourses(null);
+                setRavenCourses(null);
+                void getRavenResources();
+                void getMoodleCourses();
               }}
             >
               {'Populaires'}
