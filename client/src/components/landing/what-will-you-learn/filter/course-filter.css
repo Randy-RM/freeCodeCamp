@@ -19,3 +19,20 @@
   border-bottom: red 3px solid;
   font-weight: bold;
 }
+
+@media (max-width: 768px) {
+  .landing-filter-container ul {
+    display: flex;
+    overflow-x: auto;
+    padding: 0.5rem;
+    /* Empêcher différents éléments de passer à la ligne suivante */
+    white-space: nowrap;
+  }
+
+  .landing-filter-container ul button {
+    /* Affiche deux éléments visibles */
+    flex: 0 0 50%;
+    padding: 10px;
+    text-align: center;
+  }
+}

@@ -225,7 +225,9 @@ const CourseFilterList = ({
                   }}
                   key={index}
                 >
-                  {element?.name}
+                  {element.name.includes('&amp')
+                    ? 'Marketing & Communication'
+                    : element?.name}
                 </button>
               );
             })}
