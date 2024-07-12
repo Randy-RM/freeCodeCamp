@@ -78,14 +78,12 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
   const { showLoading, isSignedIn } = props;
 
   const [ravenCourses, setRavenCourses] = useState<RavenCourse[]>([]);
-  console.log('state courses ', ravenCourses);
 
   const ravenLocalToken = getRavenTokenDataFromLocalStorage();
   const getRavenResources = async (data: RavenFetchCoursesDto) => {
     const getReveanCourses = await getAwsCourses(data);
 
     setRavenCourses(getReveanCourses as RavenCourse[]);
-    console.log('les ', getReveanCourses);
   };
 
   const ravenData: RavenFetchCoursesDto = {

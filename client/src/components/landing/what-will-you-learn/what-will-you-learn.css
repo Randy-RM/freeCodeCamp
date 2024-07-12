@@ -82,21 +82,22 @@ img {
 }
 @media (max-width: 768px) {
   .card-course-detail-container-landing {
-    /* flex-wrap: nowrap;
     height: 100%;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    padding-left: 20%; */
+    padding-left: 20%;
 
     display: flex;
     flex-direction: column;
   }
 
   .card-course-detail-container-landing > * {
-    flex: 0 0 90%;
+    flex: 0 0 90% !important;
     width: 100%;
+
     /* scroll-snap-align: start; */
+
     border: solid 1px red;
     margin: 5%;
   }
