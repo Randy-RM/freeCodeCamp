@@ -96,7 +96,7 @@ export type MoodleCoursesCatalogue = {
   result: MoodleCourse[][];
   size: number;
 };
-type RavenCourse = {
+export type RavenCourse = {
   learningobjectid: number;
   name: string;
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -163,7 +163,6 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [ravenCourses, setRavenCourses] = useState<
     RavenCourse[] | null | undefined
   >([]);
-  console.log('state courses ', ravenCourses);
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [showFilter, setShowFilter] = useState<boolean>(false);
@@ -191,7 +190,6 @@ export function Courses(props: CoursesProps): JSX.Element {
     };
     const getReveanCourses = await getAwsCourses(ravenData);
     setRavenCourses(getReveanCourses as RavenCourse[]);
-    console.log('les ', getReveanCourses);
   };
 
   const getRavenToken = async () => {
@@ -280,6 +278,8 @@ export function Courses(props: CoursesProps): JSX.Element {
     ...(ravenCourses || []),
     ...(moodleCourses?.result ? moodleCourses.result.flat() : [])
   ];
+
+  console.log(allCourses);
 
   const navigateToPage = (forwardOrBackward: boolean) => {
     if (forwardOrBackward) {
@@ -407,7 +407,17 @@ export function Courses(props: CoursesProps): JSX.Element {
           `}
                   </p>
                 </div>
-                <CoursesCategoryCard />
+                <CoursesCategoryCard
+                  allCourses={allCourses}
+                  courseCategories={courseCategories}
+                  setCurrentCategory={setCurrentCategory}
+                  currentCategory={currentCategory}
+                  screenWidth={setScreenWidth}
+                  setCurrentPage={setCurrentPage}
+                  setIsDataOnLoading={setIsDataOnLoading}
+                  setMoodleCourses={setMoodleCourses}
+                  setRavenCourses={setRavenCourses}
+                />
                 {!isDataOnLoading ? (
                   <div className='card-course-detail-container'>
                     {currentPage == 1 &&
