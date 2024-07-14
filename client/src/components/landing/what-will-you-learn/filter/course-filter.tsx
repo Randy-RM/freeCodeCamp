@@ -182,7 +182,6 @@ const CourseFilterList = ({
   return (
     <div className='landing-filter-container'>
       <ul className='filter-categories-list'>
-        <>ffdf</>
         {courseCategories && (
           <>
             <button
