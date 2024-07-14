@@ -32,29 +32,35 @@
 }
 .categories-container {
   display: flex;
-  justify-content: flex-start;
   gap: 2%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  white-space: nowrap;
+}
 
+.categories-container-banner {
+  display: flex;
+  flex-wrap: nowrap; /* Pour empêcher le retour à la ligne */
+  gap: 2%;
   height: auto;
   width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
-  scrollbar-width: none; /* For Firefox */
-  -ms-overflow-style: none;
+  scrollbar-width: none; /* Pour Firefox */
+  -ms-overflow-style: none; /* Pour IE et Edge */
+  -webkit-overflow-scrolling: touch; /* Pour un scrolling plus fluide sur iOS */
 }
 
 .category-card {
-  display: inline-block;
-  flex-direction: column;
-
+  flex: 0 0 auto; /* Permet aux cartes de garder leur taille initiale */
+  min-width: 300px; /* Largeur minimale pour chaque carte */
+  padding: 20px;
   background-color: #000000;
   color: white;
-  padding: 2%;
   border-radius: 12px;
-  white-space: normal;
-  min-height: fit-content;
-  min-width: 300px; /* Fixed width for each card */
-  box-sizing: border-box; /* Ensure padding and border are included in the width */
+  box-sizing: border-box; /* Assure que le padding et la bordure sont inclus dans la largeur */
 }
 
 .category-card:hover {
@@ -82,12 +88,13 @@
   color: white;
 }
 .parcours-section {
-  border: #000000 1px solid;
-  display: flex;
-  flex-direction: column;
-  padding: 2rem;
-  border-radius: 12px;
-  color: #000000;
+  flex: 0 0 auto; /* Permet aux éléments de garder leur taille initiale */
+  width: 100%; /* Largeur de chaque carte, ajustable selon ton design */
+  min-width: 350px; /* Largeur minimale pour une carte */
+  padding: 20px;
+  background-color: #f0f0f0; /* Exemple de couleur de fond */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Exemple d'ombre */
 }
 
 .parcours-section:hover {
