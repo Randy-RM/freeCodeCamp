@@ -68,7 +68,6 @@ const CourseFilterList = ({
   setCurrentCategory: React.Dispatch<React.SetStateAction<string>>;
   currentCategory: string;
 }): JSX.Element => {
-  console.log('active log', currentCategory == 'Populaires', currentCategory);
   const getMoodleCourses = async () => {
     const moodleCatalogue = await getExternalResource<MoodleCourse[]>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -87,7 +86,6 @@ const CourseFilterList = ({
 
     //Order courses by their publication date
     const sortedCourses = sortCourses(splitCourses);
-    console.log('moodle', sortedCourses);
     if (moodleCatalogue != null) {
       setMoodleCourses(sortedCourses);
     } else {
