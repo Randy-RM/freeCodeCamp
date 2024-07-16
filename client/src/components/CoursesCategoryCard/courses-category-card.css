@@ -42,7 +42,7 @@
 
 .categories-container-banner {
   display: flex;
-  flex-wrap: nowrap; /* Pour empêcher le retour à la ligne */
+  flex-wrap: nowrap;
   gap: 2%;
   height: auto;
   width: 100%;
@@ -55,7 +55,7 @@
 
 .category-card {
   flex: 0 0 auto; /* Permet aux cartes de garder leur taille initiale */
-  min-width: 300px; /* Largeur minimale pour chaque carte */
+  min-width: 400px;
   padding: 20px;
   background-color: #000000;
   color: white;
@@ -86,15 +86,44 @@
 
 .category-name {
   color: white;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+  display: inline;
+  font-weight: bold;
+}
+
+.link-reset {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link-reset:hover {
+  background-color: #e5203d;
+  text-decoration: none;
+}
+
+.category-name:focus {
+  outline: none;
+  background-color: #e5203d;
+  box-shadow: 0 0 0 2px #e5203d;
+}
+
+.category-name:hover {
+  background-color: #e5203d;
+  border: none;
 }
 .parcours-section {
   flex: 0 0 auto; /* Permet aux éléments de garder leur taille initiale */
-  width: 100%; /* Largeur de chaque carte, ajustable selon ton design */
-  min-width: 350px; /* Largeur minimale pour une carte */
+  width: 100%;
+  min-width: 350px;
   padding: 20px;
-  background-color: #f0f0f0; /* Exemple de couleur de fond */
+  background-color: #f0f0f0;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Exemple d'ombre */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .parcours-section:hover {
@@ -104,4 +133,8 @@
 }
 .parcours-section:hover > * {
   color: white;
+}
+
+.ti:hover {
+  background-color: #e5203d;
 }
