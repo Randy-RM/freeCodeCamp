@@ -247,7 +247,7 @@ export async function postExternalResource<T>(
   return response;
 }
 
-interface RavenTokenData {
+export interface RavenTokenData {
   token: string;
   expiresIn: number;
   validFrom: string;
