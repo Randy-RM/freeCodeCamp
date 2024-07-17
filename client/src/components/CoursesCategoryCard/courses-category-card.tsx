@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Link } from '@reach/router';
 
 /**
@@ -18,8 +18,7 @@ import {
   generateRavenTokenAcces,
   getAwsCourses,
   getExternalResource,
-  getRavenTokenDataFromLocalStorage,
-  RavenTokenData
+  getRavenTokenDataFromLocalStorage
 } from '../../utils/ajax';
 import envData from '../../../../config/env.json';
 import {
@@ -82,34 +81,9 @@ const CoursesCategoryCard = ({
   allCourses
 }: CourseFilterProps): JSX.Element => {
   const containerRef1 = useRef<HTMLDivElement>(null);
-  const containerRef2 = useRef<HTMLDivElement>(null);
 
   const scrollAmount = 320; // Adjust based on card width and gap
   const allcourses: Course[] | null = allCourses;
-
-  const autoScroll = (containerRef: React.RefObject<HTMLDivElement>) => {
-    const container = containerRef.current;
-    if (container) {
-      if (
-        container.scrollLeft + container.clientWidth >=
-        container.scrollWidth
-      ) {
-        container.scrollTo({ left: 0, behavior: 'smooth' });
-      } else {
-        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-      }
-    }
-  };
-
-  useEffect(() => {
-    const intervalId1 = setInterval(() => autoScroll(containerRef1), 3000);
-    const intervalId2 = setInterval(() => autoScroll(containerRef2), 6000);
-
-    return () => {
-      clearInterval(intervalId1);
-      clearInterval(intervalId2);
-    };
-  }, [scrollAmount]);
 
   const scrollLeft = (containerRef: React.RefObject<HTMLDivElement>) => {
     if (containerRef.current) {
@@ -208,7 +182,7 @@ const CoursesCategoryCard = ({
 
   const handleCategoryClick = (categoryId: number) => {
     setCurrentCategory(categoryId);
-    setCurrentPage(1); // Reset to first page on category change
+    setCurrentPage(1); // Retour à la première page à chaque fois que la catégory change
     setIsDataOnLoading(true);
 
     if (categoryId === -1) {
@@ -311,7 +285,7 @@ const CoursesCategoryCard = ({
           ))}
         </div>
       </div>
-      <div className='categories-container-banner' ref={containerRef2}>
+      <div className='categories-container-banner'>
         {allcourses?.map(course => {
           if (
             course.launch_url &&
