@@ -41,16 +41,13 @@
 }
 
 .categories-container-banner {
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Bordure semi-transparente */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
   display: flex;
-  flex-wrap: nowrap;
   gap: 2%;
   height: auto;
   width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: none; /* Pour Firefox */
-  -ms-overflow-style: none; /* Pour IE et Edge */
-  -webkit-overflow-scrolling: touch; /* Pour un scrolling plus fluide sur iOS */
 }
 
 .category-card {
@@ -106,35 +103,49 @@
   text-decoration: none;
 }
 
-.category-name:focus {
-  outline: none;
-  background-color: #e5203d;
-  box-shadow: 0 0 0 2px #e5203d;
-}
-
 .category-name:hover {
   background-color: #e5203d;
   border: none;
 }
+
 .parcours-section {
-  flex: 0 0 auto; /* Permet aux éléments de garder leur taille initiale */
-  width: 100%;
-  min-width: 350px;
+  width: calc(250% - 4px); /* Ajuste la largeur pour le chevauchement */
+  border: 1px solid rgba(0, 0, 0, 0.3); /* Bordure semi-transparente */
   padding: 20px;
   background-color: #f0f0f0;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 4px 4px rgba(95, 90, 90, 0.4);
+  margin-left: -5px;
+  margin-right: 0;
 }
 
 .parcours-section:hover {
   background-color: #e5203d;
   cursor: pointer;
-  color: white;
 }
-.parcours-section:hover > * {
+/* .parcours-section:hover > * {
   color: white;
-}
+} */
 
-.ti:hover {
-  background-color: #e5203d;
+@media only screen and (min-width: 768px) {
+  .categories-container-banner {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .main {
+    overflow-x: hidden;
+  }
+
+  .category-card {
+    min-width: 100px;
+    padding: 10px;
+    background-color: black;
+    border-radius: 12px;
+    box-sizing: border-box; /* Assure que le padding et la bordure sont inclus dans la largeur */
+  }
+
+  .category-name {
+    font-size: 20px;
+  }
 }

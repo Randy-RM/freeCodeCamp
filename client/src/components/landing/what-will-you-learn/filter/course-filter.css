@@ -21,14 +21,40 @@
   margin: 0.1rem;
 }
 
+.landing-filter-container :active {
+  border: none;
+  background-color: white;
+  background: none;
+}
+
+.landing-filter-container :hover {
+  background: none;
+}
+
 @media (max-width: 768px) {
   .landing-filter-container ul {
     display: flex;
     overflow-x: auto;
     padding: 0.5rem;
     margin: 0.5rem;
-    /* Empêcher différents éléments de passer à la ligne suivante */
-    white-space: nowrap;
+    white-space: nowrap; /* Empêcher différents éléments de passer à la ligne suivante */
+  }
+
+  /* Personnaliser la barre de défilement horizontale */
+  .landing-filter-container ul::-webkit-scrollbar {
+    height: 8px; /* Hauteur de la barre de défilement horizontale */
+  }
+
+  .landing-filter-container ul::-webkit-scrollbar-track {
+    background: white; /* Couleur de fond de la piste de la barre de défilement */
+  }
+
+  .landing-filter-container ul::-webkit-scrollbar-thumb {
+    background: white; /* Couleur de la poignée de la barre de défilement */
+  }
+
+  .landing-filter-container ul::-webkit-scrollbar-thumb:hover {
+    background: white; /* Couleur de la poignée de la barre de défilement lors du survol */
   }
 
   .landing-filter-container ul button {
