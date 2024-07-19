@@ -6,10 +6,10 @@ import { Link } from '@reach/router';
  * @param {string} html - La chaîne HTML à nettoyer.
  * @return {string} - Le texte nettoyé sans balises HTML.
  */
-const stripHtmlTags = (html: string): string => {
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-  return doc.body.textContent || '';
-};
+// const stripHtmlTags = (html: string): string => {
+//   const doc = new DOMParser().parseFromString(html, 'text/html');
+//   return doc.body.textContent || '';
+// };
 
 import './courses-category-card.css';
 import devIcon from '../../assets/icons/dev-icon.svg';
@@ -47,18 +47,18 @@ interface CourseFilterProps {
   allCourses: React.Dispatch<React.SetStateAction<[]>>;
 }
 
-interface Course {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  learningobject_id: number;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  launch_url: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  updated_date: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  display_name: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  short_description: string;
-}
+// interface Course {
+//   // eslint-disable-next-line @typescript-eslint/naming-convention
+//   learningobject_id: number;
+//   // eslint-disable-next-line @typescript-eslint/naming-convention
+//   launch_url: string;
+//   // eslint-disable-next-line @typescript-eslint/naming-convention
+//   updated_date: string;
+//   // eslint-disable-next-line @typescript-eslint/naming-convention
+//   display_name: string;
+//   // eslint-disable-next-line @typescript-eslint/naming-convention
+//   short_description: string;
+// }
 
 interface RavenTokenData {
   apiKey: string;
@@ -77,13 +77,11 @@ const CoursesCategoryCard = ({
   setIsDataOnLoading,
   courseCategories,
   setCurrentCategory,
-  setCurrentPage,
-  allCourses
+  setCurrentPage
 }: CourseFilterProps): JSX.Element => {
   const containerRef1 = useRef<HTMLDivElement>(null);
 
   const scrollAmount = 320; // Adjust based on card width and gap
-  const allcourses: Course[] | null = allCourses;
 
   const scrollLeft = (containerRef: React.RefObject<HTMLDivElement>) => {
     if (containerRef.current) {
@@ -211,13 +209,13 @@ const CoursesCategoryCard = ({
     }
   };
 
-  const isDateWithin30Days = (dateString: string | number) => {
-    const currentDate = new Date();
-    const date = new Date(dateString);
-    const differenceInTime = currentDate.getTime() - date.getTime();
-    const differenceInDays = differenceInTime / (1000 * 3600 * 24); // Convertir en jours
-    return differenceInDays < 180;
-  };
+  // const isDateWithin30Days = (dateString: string | number) => {
+  //   const currentDate = new Date();
+  //   const date = new Date(dateString);
+  //   const differenceInTime = currentDate.getTime() - date.getTime();
+  //   const differenceInDays = differenceInTime / (1000 * 3600 * 24); // Convertir en jours
+  //   return differenceInDays < 180;
+  // };
 
   return (
     <div className='main'>
@@ -286,50 +284,17 @@ const CoursesCategoryCard = ({
         </div>
       </div>
       <div className='categories-container-banner'>
-        {allcourses?.map(course => {
-          if (
-            course.launch_url &&
-            course.updated_date &&
-            isDateWithin30Days(course.updated_date)
-          ) {
-            return (
-              <div key={course.learningobject_id} className='parcours-section'>
-                <span className='ti'>Nouveau Parcours</span>
-                <Link to='/learning-path' className='link-reset'>
-                  <h2 className='path-title'>
-                    Découvre le parcours {course.display_name}
-                  </h2>
-                  <p className='path-description'>
-                    {stripHtmlTags(course.short_description)}
-                  </p>
-                </Link>
-              </div>
-            );
-          } else {
-            // Si la condition launch_url n'est pas respectée, on utilise courseCategories
-            return courseCategories?.map(category => {
-              if (
-                category.timemodified &&
-                isDateWithin30Days(category.timemodified)
-              ) {
-                return (
-                  <div key={category.id} className='parcours-section'>
-                    <span className='ti'>Nouveau Parcours</span>
-                    <Link to='/learning-path' className='link-reset'>
-                      <h2 className='path-title'>
-                        Découvre le parcours {category.name}
-                      </h2>
-                      <p className='path-description'>
-                        {stripHtmlTags(category.description)}
-                      </p>
-                    </Link>
-                  </div>
-                );
-              }
-              return null;
-            });
-          }
-        })}
+        <span className='ti'>Nouveau Parcours</span>
+        <Link to='/learning-path' className='link-reset'>
+          <h2 className='path-title'>Découvre le parcours Programmation</h2>
+          <p className='path-description'>
+            Dans ce cours, tu apprendras les langages que les développeurs
+            utilisent pour créer des pages Web : HTML (Hypertext Markup
+            Language) pour le contenu, et CSS (Cascading Style Sheets) pour la
+            conception. Enfin, tu apprendras à créer des pages Web adaptées à
+            différentes tailles d&apos;écran.
+          </p>
+        </Link>
       </div>
     </div>
   );

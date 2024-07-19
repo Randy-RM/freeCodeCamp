@@ -18,7 +18,6 @@ const defaultOptions: RequestInit = {
 // csrf_token is passed to the client as a cookie. The client must send
 // this back as a header.
 function getCSRFToken() {
-  console.log('window', typeof window);
   const token =
     typeof window !== 'undefined' ? cookies.get('csrf_token') : null;
   console.log('les token', token);

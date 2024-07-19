@@ -90,7 +90,6 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
     };
     const getReveanCourses = await getAwsCourses(ravenData);
     setRavenCourses(getReveanCourses as RavenCourse[]);
-    console.log('les ', getReveanCourses);
   };
 
   const getRavenToken = async () => {
@@ -137,7 +136,6 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
 
     //Order courses by their publication date
     const sortedCourses = sortCourses(splitCourses);
-    console.log('moodle', sortedCourses);
     if (moodleCatalogue != null) {
       setMoodleCourses(sortedCourses);
     } else {
@@ -149,8 +147,6 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
     ...(ravenCourses || []),
     ...(moodleCourses?.result ? moodleCourses.result.flat() : [])
   ];
-
-  console.log('allcourse', allCourses);
 
   const formatdate = (data: number) => {
     return new Date(data * 1000).toLocaleDateString();

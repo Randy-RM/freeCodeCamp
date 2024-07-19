@@ -406,7 +406,6 @@ export function Courses(props: CoursesProps): JSX.Element {
                   </p>
                 </div>
                 <CoursesCategoryCard
-                  allCourses={allCourses}
                   courseCategories={courseCategories}
                   setCurrentCategory={setCurrentCategory}
                   currentCategory={currentCategory}
