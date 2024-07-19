@@ -397,13 +397,8 @@ export function Courses(props: CoursesProps): JSX.Element {
 
               <div className='card-courses-detail-container'>
                 <div>
-                  <h2 className='big-subheading'>{`Explorez notre catalogue.`}</h2>
+                  <h2 className='big-subheading'>{`Explorer notre catalogue`}</h2>
                   <Spacer />
-                  <p className='big-subheading'>
-                    {`
-              Les sujet tendances 
-          `}
-                  </p>
                 </div>
                 <CoursesCategoryCard
                   courseCategories={courseCategories}
