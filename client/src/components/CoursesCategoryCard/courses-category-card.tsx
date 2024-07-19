@@ -284,7 +284,9 @@ const CoursesCategoryCard = ({
         </div>
       </div>
       <div className='categories-container-banner'>
-        <span className='ti'>Nouveau Parcours</span>
+        <div>
+          <h2 className='ti'>Nouveau Parcours</h2>
+        </div>
         <Link to='/learning-path' className='link-reset'>
           <h2 className='path-title'>Découvre le parcours Programmation</h2>
           <p className='path-description'>

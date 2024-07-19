@@ -56,7 +56,6 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 3%;
-
   padding-left: 2rem;
   width: 90%;
 }
@@ -141,6 +140,10 @@ details[open] > *:not(summary) {
 
 @media (max-width: 768px) {
   .card-courses-detail-container {
-    padding: 1%;
+    padding: 2px;
+    gap: 1%;
+  }
+  .card-courses-detail-container {
+    width: 100%;
   }
 }
