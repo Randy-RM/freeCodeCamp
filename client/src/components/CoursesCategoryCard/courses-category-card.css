@@ -3,8 +3,11 @@
   flex-direction: column;
   gap: 2rem;
 }
+
 .categories-wrapper {
-  display: flex;
+  display: none;
+}
+.categories-wrapper {
   flex-direction: column;
 }
 .chevron {
@@ -13,6 +16,11 @@
   margin-bottom: 0.5rem;
   gap: 2%;
 }
+
+.chevron .left {
+  margin-right: 1rem;
+}
+
 .scroll-button {
   display: flex;
   background-color: white;
@@ -21,6 +29,8 @@
   font-size: 20px;
   width: 10px;
   height: auto;
+  padding: 0.25rem 1rem;
+  font-weight: 800;
 
   border-radius: 8px;
 
@@ -48,10 +58,6 @@
   height: auto;
   width: 100%;
   border: 1px solid black;
-}
-
-.categories-container-banner :hover {
-  color: #f0f0f0;
 }
 
 .category-card {
