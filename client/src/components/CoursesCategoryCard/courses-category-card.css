@@ -41,19 +41,23 @@
 }
 
 .categories-container-banner {
-  border: 1px solid rgba(0, 0, 0, 0.1); /* Bordure semi-transparente */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   display: flex;
+  flex-direction: column;
   gap: 2%;
   height: auto;
   width: 100%;
 }
 
+.categories-container-banner :hover {
+  color: #f0f0f0;
+}
+
 .category-card {
-  flex: 0 0 auto; /* Permet aux cartes de garder leur taille initiale */
-  min-width: 400px;
-  padding: 20px;
+  width: 20rem;
+  justify-content: space-between; /* Permet aux cartes de garder leur taille initiale */
+  padding: 10px;
   background-color: #000000;
   color: white;
   border-radius: 12px;
@@ -63,6 +67,7 @@
 .category-card:hover {
   background-color: #e5203d;
   cursor: pointer;
+  border: none;
 }
 
 .red-card > * {
@@ -91,6 +96,8 @@
   text-align: left;
   display: inline;
   font-weight: bold;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .link-reset {
@@ -99,7 +106,8 @@
 }
 
 .link-reset:hover {
-  background-color: #e5203d;
+  background: none;
+  color: #000000;
   text-decoration: none;
 }
 
@@ -108,24 +116,26 @@
   border: none;
 }
 
-.parcours-section {
-  width: calc(250% - 4px); /* Ajuste la largeur pour le chevauchement */
+.categories-container-banner {
+  width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.3); /* Bordure semi-transparente */
   padding: 20px;
   background-color: #f0f0f0;
   border-radius: 10px;
   box-shadow: 4px 4px 4px 4px rgba(95, 90, 90, 0.4);
   margin-left: -5px;
+  background-color: #e5203d;
   margin-right: 0;
+  flex-grow: 1; /* Assure que l'enfant prenne toute la place disponible */
+  box-sizing: border-box; /* Inclut la bordure et le padding dans la taille totale */
 }
 
-.parcours-section:hover {
-  background-color: #e5203d;
+.categories-container-banner .ti,
+.path-title,
+.path-description {
   cursor: pointer;
+  color: #f0f0f0;
 }
-/* .parcours-section:hover > * {
-  color: white;
-} */
 
 @media only screen and (min-width: 768px) {
   .categories-container-banner {
@@ -133,19 +143,49 @@
     padding-right: 3rem;
   }
 
-  .main {
-    overflow-x: hidden;
-  }
-
   .category-card {
-    min-width: 100px;
     padding: 10px;
-    background-color: black;
-    border-radius: 12px;
-    box-sizing: border-box; /* Assure que le padding et la bordure sont inclus dans la largeur */
   }
 
   .category-name {
     font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .categories-container {
+    max-width: 200px;
+    gap: 5px;
+  }
+  .category-card {
+    padding: 15px;
+    margin: 5px;
+  }
+
+  .category-name {
+    font-size: 10px;
+    font-weight: bold;
+  }
+
+  .img-icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Styles pour les petits écrans (mobiles) */
+@media (max-width: 480px) {
+  .category-card {
+    padding: 10px;
+    margin: 5px 0;
+  }
+
+  .category-name {
+    font-size: 12px;
+  }
+
+  .img-icon {
+    width: 25px;
+    height: 25px;
   }
 }
