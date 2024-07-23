@@ -241,7 +241,7 @@ const CoursesCategoryCard = ({
             <span className='card-title'>Explorer tout</span>
             <div className='card-content'>
               <button
-                className='category-name'
+                className='category-name category-title'
                 onClick={() => handleCategoryClick(-1)}
                 onKeyPress={event => handleKeyPress(event, -1)}
                 tabIndex={0} // Makes the element focusable

@@ -18,16 +18,14 @@
   color: red;
   border-bottom: red 3px solid;
   font-weight: bold;
+  font-size: 1.3rem;
   margin: 0.1rem;
+  background-color: bisque;
 }
 
 .landing-filter-container :active {
   border: none;
   background-color: white;
-  background: none;
-}
-
-.landing-filter-container :hover {
   background: none;
 }
 

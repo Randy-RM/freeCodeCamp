@@ -214,7 +214,11 @@ const CourseFilterList = ({
               return (
                 <button
                   className={`category-name ${
-                    currentCategory == element?.name ? 'active-button' : ''
+                    currentCategory == element?.name ||
+                    (element?.name.includes('&amp') &&
+                      currentCategory == 'Marketing & Communication')
+                      ? 'active-button'
+                      : ''
                   }`}
                   onClick={e => {
                     handleButtonClick(e);
@@ -223,7 +227,7 @@ const CourseFilterList = ({
                   }}
                   key={index}
                 >
-                  {element.name.includes('&amp')
+                  {element?.name.includes('&amp')
                     ? 'Marketing & Communication'
                     : element?.name}
                 </button>
