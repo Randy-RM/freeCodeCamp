@@ -11,7 +11,7 @@
 
 .landing-filter-container ul button {
   all: unset;
-  padding-bottom: 0.5rem;
+  padding: 0.5vh 0.8vw;
   cursor: pointer;
 }
 .landing-filter-container .active-button {
@@ -20,7 +20,10 @@
   font-weight: bold;
   font-size: 1.3rem;
   margin: 0.1rem;
-  background-color: bisque;
+}
+
+.landing-filter-container button {
+  padding: 0.8vw;
 }
 
 .landing-filter-container :active {

@@ -103,6 +103,7 @@
   font-weight: bold;
   width: 100%;
   box-sizing: border-box;
+  padding: 0.8vw;
 }
 
 .path-description {
@@ -133,8 +134,7 @@
 }
 
 .category-name:hover {
-  color: white;
-  background-color: #e5203d;
+  background-color: #f3e6e8;
 }
 
 .categories-container-banner {
