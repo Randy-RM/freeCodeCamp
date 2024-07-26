@@ -220,7 +220,7 @@ const CoursesCategoryCard = ({
   return (
     <div className='main'>
       <div className='categories-wrapper'>
-        <p className='big-subheading'>Les sujet tendances</p>
+        <p className='tendance'>Les sujet tendances</p>
 
         <div className='chevron'>
           <button

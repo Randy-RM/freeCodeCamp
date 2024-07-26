@@ -183,7 +183,7 @@ const CourseFilterList = ({
         {courseCategories && (
           <>
             <button
-              className={`category-name ${
+              className={`category-title ${
                 currentCategory === 'Populaires' ? 'active-button' : ''
               }`}
               onClick={e => {
@@ -198,7 +198,7 @@ const CourseFilterList = ({
             </button>
 
             <button
-              className={`category-name ${
+              className={`category-title ${
                 currentCategory === 'AWS' ? 'active-button' : ''
               }`}
               onClick={e => {
@@ -213,7 +213,7 @@ const CourseFilterList = ({
             {courseCategories?.map((element, index) => {
               return (
                 <button
-                  className={`category-name ${
+                  className={`category-title ${
                     currentCategory == element?.name ||
                     (element?.name.includes('&amp') &&
                       currentCategory == 'Marketing & Communication')
