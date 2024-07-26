@@ -20,6 +20,7 @@ const defaultOptions: RequestInit = {
 function getCSRFToken() {
   const token =
     typeof window !== 'undefined' ? cookies.get('csrf_token') : null;
+  console.log('les token', token);
   return token ?? '';
 }
 
@@ -44,13 +45,14 @@ function deleteRequest<T = void>(path: string, body: unknown): Promise<T> {
 async function request<T>(
   method: 'POST' | 'PUT' | 'DELETE',
   path: string,
-  body: unknown
+  body: unknown,
+  token = null
 ): Promise<T> {
   const options: RequestInit = {
     ...defaultOptions,
     method,
     headers: {
-      'CSRF-Token': getCSRFToken(),
+      'CSRF-Token': token ?? getCSRFToken(),
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(body)
@@ -243,6 +245,73 @@ export async function postExternalResource<T>(
   }
   return response;
 }
+
+export interface RavenTokenData {
+  token: string;
+  expiresIn: number;
+  validFrom: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
+}
+
+export function removeRavenTokenFromLocalStorage() {
+  localStorage.removeItem('ravenToken');
+}
+
+export function addRavenTokenToLocalStorage(
+  ravenTokenData: RavenTokenData
+): void {
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const ravenTokenExist = localStorage.getItem('ravenToken');
+      if (!ravenTokenExist)
+        localStorage.setItem('ravenToken', JSON.stringify(ravenTokenData));
+      console.log('Le token Raven a été ajouté au stockage local.');
+    } else {
+      console.error("Le stockage local n'est pas pris en charge.");
+    }
+  } catch (error) {
+    console.error(
+      "Une erreur est survenue lors de l'ajout du token Raven au stockage local :",
+      error
+    );
+  }
+}
+
+export function getRavenTokenDataFromLocalStorage(): RavenTokenData | null {
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const tokenDataString = localStorage.getItem('ravenToken');
+      if (tokenDataString) {
+        const tokenData = JSON.parse(tokenDataString) as RavenTokenData;
+        return tokenData;
+      } else {
+        console.log('Aucune donnée de token trouvée dans le stockage local.');
+        return null;
+      }
+    } else {
+      console.log("Le stockage local n'est pas pris en charge.");
+      return null;
+    }
+  } catch (error) {
+    console.log(
+      'Une erreur est survenue lors de la récupération des données de token depuis le stockage local :',
+      error
+    );
+    return null;
+  }
+}
+export async function generateRavenTokenAcces(): Promise<unknown> {
+  try {
+    const response = await get('/generate-raven-token');
+
+    console.log('acces token ', response);
+    return response;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error) {
+    return null;
+  }
+}
 export async function getDatabaseResource<T>(urlEndPoint: string) {
   let response: T | null;
   try {
@@ -252,6 +321,66 @@ export async function getDatabaseResource<T>(urlEndPoint: string) {
   }
   return response;
 }
+
+interface RavenFetchCoursesDto {
+  token: string;
+  fromDate: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
+}
+
+export async function getAwsCourses(data: RavenFetchCoursesDto) {
+  let response: unknown;
+
+  try {
+    response = await get(
+      `/get-raven-courses?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.valid_to}`
+    );
+  } catch (error) {
+    response = null;
+  }
+  console.log('courses raven', response);
+  return response;
+}
+export async function getAwsPath(data: RavenFetchCoursesDto) {
+  let response: unknown;
+
+  try {
+    response = await get(
+      `/get-raven-path?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.valid_to}`
+    );
+  } catch (error) {
+    response = null;
+  }
+  console.log('courses raven', response);
+  return response;
+}
+
+interface RavenFetchUserCoursesProgressDto {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  email_id: string;
+  token: string;
+  fromDate: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
+}
+export async function getAwsUserCoursesProgress(
+  data: RavenFetchUserCoursesProgressDto
+) {
+  let response: unknown;
+
+  try {
+    response = await get(
+      `/get-raven-user-progress?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.valid_to}&email=${data.email_id}`
+    );
+  } catch (error) {
+    response = null;
+  }
+  console.log('courses raven', response);
+  return response;
+}
+
+('/get-raven-user-progress');
 
 /** POST **/
 

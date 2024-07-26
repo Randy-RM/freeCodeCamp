@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import './course-filter.css';
 
-import { getExternalResource } from '../../utils/ajax';
+import {
+  addRavenTokenToLocalStorage,
+  generateRavenTokenAcces,
+  getAwsCourses,
+  getExternalResource,
+  getRavenTokenDataFromLocalStorage
+} from '../../utils/ajax';
 import envData from '../../../../config/env.json';
 
 import {
@@ -17,10 +23,37 @@ type MoodleCoursesFiltered = {
   courses: MoodleCourse[] | null;
   warnings: [];
 };
+type RavenCourse = {
+  learningobjectid: number;
+  name: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  launch_url: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  short_description: string;
+  createddate: string;
+  updateddate: string;
+  contenttype: string;
+};
+interface RavenTokenData {
+  token: string;
+  expiresIn: number;
+  validFrom: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
+}
+interface RavenFetchCoursesDto {
+  apiKey: string;
+  token: string;
+  currentPage: number;
+  fromDate: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  valid_to: string;
+}
 
-const { moodleApiBaseUrl, moodleApiToken } = envData;
+const { moodleApiBaseUrl, moodleApiToken, ravenAwsApiKey } = envData;
 
 const CourseFilter = ({
+  setRavenCourses,
   setMoodleCourses,
   setIsDataOnLoading,
   setShowFilter,
@@ -34,11 +67,16 @@ const CourseFilter = ({
   setMoodleCourses: React.Dispatch<
     React.SetStateAction<MoodleCoursesCatalogue | null | undefined>
   >;
+  setRavenCourses: React.Dispatch<
+    React.SetStateAction<RavenCourse[] | null | undefined>
+  >;
+
   setIsDataOnLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
   // setProgrammingCategory: React.Dispatch<React.SetStateAction<boolean>>;
   screenWidth: number;
   courseCategories: MoodleCourseCategory[] | null | undefined;
+
   currentCategory: number | null;
   setCurrentCategory: React.Dispatch<React.SetStateAction<number | null>>;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
@@ -94,6 +132,38 @@ const CourseFilter = ({
       setMoodleCourses(sortedCourses);
     } else {
       setMoodleCourses(null);
+    }
+  };
+
+  const getRavenCourses = async () => {
+    await getRavenToken();
+
+    const ravenLocalToken = getRavenTokenDataFromLocalStorage();
+    const ravenData: RavenFetchCoursesDto = {
+      apiKey: ravenAwsApiKey,
+      token: ravenLocalToken?.token || '',
+      currentPage: 1,
+      fromDate: '01-01-2023',
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      valid_to: '06-24-2024'
+    };
+    setIsDataOnLoading(true);
+    const courses = (await getAwsCourses(ravenData)) as RavenCourse[];
+    if (courses && courses.length !== 0) {
+      setRavenCourses(courses);
+      setIsDataOnLoading(false);
+    }
+  };
+
+  const getRavenToken = async () => {
+    const ravenLocalToken = getRavenTokenDataFromLocalStorage();
+
+    if (ravenLocalToken === null) {
+      const generateRavenToken = await generateRavenTokenAcces();
+
+      if (generateRavenToken) {
+        addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
+      }
     }
   };
 
@@ -156,6 +226,7 @@ const CourseFilter = ({
               }`}
               onClick={() => {
                 void getMoodleCourses();
+                void getRavenCourses();
                 setCurrentPage(1);
                 setCurrentCategory(null);
                 // setProgrammingCategory(true);
@@ -177,11 +248,30 @@ const CourseFilter = ({
                 // setCurrentPage(1);
                 // setProgrammingCategory(true);
                 setMoodleCourses(null);
+                setRavenCourses(null);
                 scrollTo(130);
                 if (screenWidth < 990) setShowFilter(e => !e);
               }}
             >
               Programmation
+            </button>
+          )}
+          {courseCategories && (
+            <button
+              className={`filter-button ${
+                currentCategory == -2 ? 'selected-category' : ''
+              }`}
+              onClick={() => {
+                setCurrentCategory(-2);
+                // setCurrentPage(1);
+                // setProgrammingCategory(true);
+                setMoodleCourses(null);
+                void getRavenCourses();
+                scrollTo(130);
+                if (screenWidth < 990) setShowFilter(e => !e);
+              }}
+            >
+              AWS
             </button>
           )}
 
@@ -193,6 +283,7 @@ const CourseFilter = ({
                 }`}
                 onClick={() => {
                   void filterByCategory(element?.id);
+                  setRavenCourses(null);
                   setCurrentCategory(element?.id);
                   setCurrentPage(1);
                   scrollTo(130);
