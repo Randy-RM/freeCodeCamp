@@ -282,7 +282,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                 </div>
               ) : (
                 <div className='card-course-detail-container'>
-                  {renderCourseCardSkeletons(3)}
+                  {renderCourseCardSkeletons(6)}
                 </div>
               )}
             </div>

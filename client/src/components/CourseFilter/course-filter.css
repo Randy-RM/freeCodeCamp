@@ -21,6 +21,7 @@
 
 .card-filter-container {
   display: flex;
+
   gap: 4%;
 }
 
@@ -50,7 +51,14 @@
     transform: var(--details-translate, translateY(-0.5em));
   }
 }
-
+.card-courses-detail-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1%;
+  padding-left: 1rem;
+  width: 90%;
+}
 details[open] > *:not(summary) {
   animation: details-show 300ms ease-in-out;
 }
@@ -127,5 +135,15 @@ details[open] > *:not(summary) {
 
   .pagination-container {
     padding-left: 0%;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-courses-detail-container {
+    padding: 2px;
+    gap: 1%;
+  }
+  .card-courses-detail-container {
+    width: 100%;
   }
 }

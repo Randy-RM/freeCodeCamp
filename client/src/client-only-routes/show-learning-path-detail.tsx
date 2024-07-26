@@ -198,7 +198,7 @@ export function ShowLearningPathDetail(
               </div>
             ) : (
               <div className='card-course-detail-container'>
-                {renderCourseCardSkeletons(2)}
+                {renderCourseCardSkeletons(6)}
               </div>
             )}
           </Col>

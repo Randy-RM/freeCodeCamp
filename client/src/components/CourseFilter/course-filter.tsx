@@ -76,6 +76,7 @@ const CourseFilter = ({
   // setProgrammingCategory: React.Dispatch<React.SetStateAction<boolean>>;
   screenWidth: number;
   courseCategories: MoodleCourseCategory[] | null | undefined;
+
   currentCategory: number | null;
   setCurrentCategory: React.Dispatch<React.SetStateAction<number | null>>;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
@@ -150,7 +151,6 @@ const CourseFilter = ({
     const courses = (await getAwsCourses(ravenData)) as RavenCourse[];
     if (courses && courses.length !== 0) {
       setRavenCourses(courses);
-      console.log('les ', courses);
       setIsDataOnLoading(false);
     }
   };
@@ -271,7 +271,7 @@ const CourseFilter = ({
                 if (screenWidth < 990) setShowFilter(e => !e);
               }}
             >
-              Aws
+              AWS
             </button>
           )}
 

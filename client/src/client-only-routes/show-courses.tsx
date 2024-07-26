@@ -39,12 +39,14 @@ import {
   generateRavenTokenAcces,
   getAwsCourses,
   getExternalResource,
-  getRavenTokenDataFromLocalStorage
+  getRavenTokenDataFromLocalStorage,
+  removeRavenTokenFromLocalStorage
 } from '../utils/ajax';
 
 import '../components/CourseFilter/course-filter.css';
 import CourseFilter from '../components/CourseFilter/course-filter';
 import sortCourses from '../components/helpers/sort-course';
+import CoursesCategoryCard from '../components/CoursesCategoryCard/courses-category-card';
 
 const { moodleApiBaseUrl, moodleApiToken, moodleBaseUrl, ravenAwsApiKey } =
   envData;
@@ -94,7 +96,7 @@ export type MoodleCoursesCatalogue = {
   result: MoodleCourse[][];
   size: number;
 };
-type RavenCourse = {
+export type RavenCourse = {
   learningobjectid: number;
   name: string;
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -161,7 +163,6 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [ravenCourses, setRavenCourses] = useState<
     RavenCourse[] | null | undefined
   >([]);
-  console.log('state courses ', ravenCourses);
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [showFilter, setShowFilter] = useState<boolean>(false);
@@ -189,17 +190,45 @@ export function Courses(props: CoursesProps): JSX.Element {
     };
     const getReveanCourses = await getAwsCourses(ravenData);
     setRavenCourses(getReveanCourses as RavenCourse[]);
-    console.log('les ', getReveanCourses);
   };
 
   const getRavenToken = async () => {
-    const ravenLocalToken = getRavenTokenDataFromLocalStorage();
+    const ravenTokenData = getRavenTokenDataFromLocalStorage();
 
-    if (ravenLocalToken === null) {
+    if (ravenTokenData === null) {
+      // Si aucun token n'existe en local storage, générer un nouveau token
       const generateRavenToken = await generateRavenTokenAcces();
 
       if (generateRavenToken) {
         addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
+        return generateRavenToken; // Retourner le nouveau token
+      } else {
+        return null; // Retourner null si la génération a échoué
+      }
+    } else {
+      // Vérifier si le token existant a expiré d'une heure ou plus
+      const tokenExpirationTime = new Date(ravenTokenData.valid_to);
+      const currentTime = new Date();
+      // 1 heure en millisecondes
+      const oneHourInMillis = 60 * 60 * 1000;
+      // Calculer la différence de temps en millisecondes
+      const timeDifference =
+        tokenExpirationTime.getTime() - currentTime.getTime();
+
+      if (timeDifference <= oneHourInMillis) {
+        // Le token a expiré d'une heure ou plus, donc le supprimer et générer un nouveau
+        removeRavenTokenFromLocalStorage();
+        const generateRavenToken = await generateRavenTokenAcces();
+
+        if (generateRavenToken) {
+          addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
+          return generateRavenToken; // Retourner le nouveau token
+        } else {
+          return null; // Retourner null si la génération a échoué
+        }
+      } else {
+        // Le token est encore valide, retourner le token existant
+        return ravenTokenData;
       }
     }
   };
@@ -249,8 +278,6 @@ export function Courses(props: CoursesProps): JSX.Element {
     ...(ravenCourses || []),
     ...(moodleCourses?.result ? moodleCourses.result.flat() : [])
   ];
-
-  console.log('all courses', allCourses);
 
   const navigateToPage = (forwardOrBackward: boolean) => {
     if (forwardOrBackward) {
@@ -330,15 +357,7 @@ export function Courses(props: CoursesProps): JSX.Element {
         <main>
           <div className=''>
             <Spacer size={1} />
-            <div>
-              <h2 className='big-subheading'>{`Suis nos cours.`}</h2>
-              <p className='text-responsive'>
-                {`
-              Concentre-toi sur ce qui est nécessaire pour acquérir une compétence spécifique et applicable. 
-              Tu seras mieux outillé pour construire une carrière.
-          `}
-              </p>
-            </div>
+
             <button
               onClick={() => {
                 setShowFilter(e => !e);
@@ -359,22 +378,6 @@ export function Courses(props: CoursesProps): JSX.Element {
               </svg>{' '}
             </button>
             {/* <Spacer /> */}
-            <h2
-              dangerouslySetInnerHTML={{
-                __html: `${
-                  currentCategory == null
-                    ? 'Tous les cours'
-                    : currentCategory == -1
-                    ? 'Programmation'
-                    : currentCategory == -2
-                    ? ' Amazon Web Services'
-                    : (courseCategories?.find(elt => elt.id == currentCategory)
-                        ?.name as string)
-                }`
-              }}
-              className='title-selected-filter'
-            ></h2>
-            <Spacer />
 
             <div className='card-filter-container'>
               {showFilter && (
@@ -392,90 +395,106 @@ export function Courses(props: CoursesProps): JSX.Element {
                 />
               )}
 
-              {!isDataOnLoading ? (
-                <div className='card-course-detail-container'>
-                  {currentPage == 1 &&
-                    (currentCategory == null || currentCategory == -1) && (
-                      <>
-                        <CourseCard
-                          icon={LaptopIcon}
-                          sponsorIcon={LaediesActIcon}
-                          alt=''
-                          name={name}
-                          phone={phone}
-                          isAvailable={true}
-                          isSignedIn={isSignedIn}
-                          title={`Responsive Web Design`}
-                          buttonText={`Suivre le cours  `}
-                          link={'/learn/responsive-web-design/'}
-                          description={`
-                Dans ce cours, tu apprendras les langages que les développeurs 
-                utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
-                pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
-                Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
-                `}
-                        />
-                        <CourseCard
-                          icon={AlgoIcon}
-                          alt=''
-                          isAvailable={true}
-                          isSignedIn={isSignedIn}
-                          phone={phone}
-                          name={name}
-                          title={`JavaScript Algorithms and Data Structures`}
-                          buttonText={`Suivre le cours  `}
-                          link={`/learn/javascript-algorithms-and-data-structures`}
-                          description={`Alors que HTML et CSS contrôlent le contenu et le style  d'une page, 
-                JavaScript est utilisé pour la rendre interactive. Dans le cadre du 
-                cours JavaScript Algorithm and Data Structures, tu apprendras 
-                les principes fondamentaux de JavaScript, etc.`}
-                        />
-                      </>
-                    )}
+              <div className='card-courses-detail-container'>
+                <div>
+                  <h2 className='big-subheading'>{`Explorer notre catalogue`}</h2>
+                  <Spacer />
+                </div>
+                <CoursesCategoryCard
+                  courseCategories={courseCategories}
+                  setCurrentCategory={setCurrentCategory}
+                  currentCategory={currentCategory}
+                  screenWidth={setScreenWidth}
+                  setCurrentPage={setCurrentPage}
+                  setIsDataOnLoading={setIsDataOnLoading}
+                  setMoodleCourses={setMoodleCourses}
+                  setRavenCourses={setRavenCourses}
+                />
+                {!isDataOnLoading ? (
+                  <div className='card-course-detail-container'>
+                    {currentPage == 1 &&
+                      (currentCategory == null || currentCategory == -1) && (
+                        <>
+                          <CourseCard
+                            icon={LaptopIcon}
+                            sponsorIcon={LaediesActIcon}
+                            alt=''
+                            name={name}
+                            phone={phone}
+                            isAvailable={true}
+                            isSignedIn={isSignedIn}
+                            title={`Responsive Web Design`}
+                            buttonText={`Suivre le cours  `}
+                            link={'/learn/responsive-web-design/'}
+                            description={`
+                  Dans ce cours, tu apprendras les langages que les développeurs 
+                  utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
+                  pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
+                  Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
+                  `}
+                          />
+                          <CourseCard
+                            icon={AlgoIcon}
+                            alt=''
+                            isAvailable={true}
+                            isSignedIn={isSignedIn}
+                            phone={phone}
+                            name={name}
+                            title={`JavaScript Algorithms and Data Structures`}
+                            buttonText={`Suivre le cours  `}
+                            link={`/learn/javascript-algorithms-and-data-structures`}
+                            description={`Alors que HTML et CSS contrôlent le contenu et le style  d'une page, 
+                  JavaScript est utilisé pour la rendre interactive. Dans le cadre du 
+                  cours JavaScript Algorithm and Data Structures, tu apprendras 
+                  les principes fondamentaux de JavaScript, etc.`}
+                          />
+                        </>
+                      )}
 
-                  {allCourses.map((course, index) => {
-                    if ('launch_url' in course) {
-                      // Vérifie si le cours est un cours Raven
-                      return (
-                        <CourseCard
-                          key={index}
-                          icon={awsLogo}
-                          isAvailable={true}
-                          isSignedIn={isSignedIn}
-                          title={`${index + 1}. ${course.name}`}
-                          buttonText={`Suivre le cours`}
-                          link={`${course.launch_url}`}
-                          description={course.short_description}
-                        />
-                      );
-                    } else {
-                      // Si ce n'est pas un cours Raven, c'est un cours Moodle
-                      return (
-                        <CourseCard
-                          key={index + course.id}
-                          icon={PhBookBookmark}
-                          phone={phone}
-                          name={name}
-                          badgeIcon={NewBadge}
-                          isAvailable={course.visible == 1}
-                          isSignedIn={isSignedIn}
-                          sameTab={true}
-                          external={true}
-                          title={`${course.displayname}`}
-                          buttonText={`Suivre le cours`}
-                          createAt={formatdate(course.timecreated)}
-                          link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
-                          description={course.summary}
-                        />
-                      );
-                    }
-                  })}
-                </div>
-              ) : (
-                <div className='card-course-detail-container'>
-                  {renderCourseCardSkeletons(6)}
-                </div>
-              )}
+                    {allCourses.map((course, index) => {
+                      if ('launch_url' in course) {
+                        // Vérifie si le cours est un cours Raven
+                        return (
+                          <CourseCard
+                            key={index}
+                            icon={awsLogo}
+                            isAvailable={true}
+                            isSignedIn={isSignedIn}
+                            title={`${index + 1}. ${course.name}`}
+                            buttonText={`Suivre le cours`}
+                            link={`${course.launch_url}`}
+                            description={course.short_description}
+                          />
+                        );
+                      } else {
+                        // Si ce n'est pas un cours Raven, c'est un cours Moodle
+                        return (
+                          <CourseCard
+                            key={index + course.id}
+                            icon={PhBookBookmark}
+                            phone={phone}
+                            name={name}
+                            badgeIcon={NewBadge}
+                            isAvailable={course.visible == 1}
+                            isSignedIn={isSignedIn}
+                            sameTab={true}
+                            external={true}
+                            title={`${course.displayname}`}
+                            buttonText={`Suivre le cours`}
+                            createAt={formatdate(course.timecreated)}
+                            link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
+                            description={course.summary}
+                          />
+                        );
+                      }
+                    })}
+                  </div>
+                ) : (
+                  <div className='card-course-detail-container'>
+                    {renderCourseCardSkeletons(6)}
+                  </div>
+                )}
+              </div>
             </div>
             <Spacer size={13} />
             <div className='pagination-container'>

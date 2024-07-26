@@ -10,6 +10,7 @@
 .big-subheading {
   font-size: 2rem;
   overflow-wrap: break-word;
+  font-weight: 600;
 }
 
 .block-header {
