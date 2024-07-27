@@ -256,7 +256,7 @@ const CourseFilter = ({
               Programmation
             </button>
           )}
-          {courseCategories && (
+          {/* {courseCategories && (
             <button
               className={`filter-button ${
                 currentCategory == -2 ? 'selected-category' : ''
@@ -273,7 +273,7 @@ const CourseFilter = ({
             >
               AWS
             </button>
-          )}
+          )} */}
 
           {courseCategories?.map((element, index) => {
             return (

@@ -200,14 +200,14 @@ const CoursesCategoryCard = ({
   };
 
   //selectionne une catégorie par rapport à la catégorie passée en simulant le clic sur le clavier
-  const handleKeyPress = (
-    event: React.KeyboardEvent<HTMLHeadingElement>,
-    categoryId: number
-  ) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      handleCategoryClick(categoryId);
-    }
-  };
+  // const handleKeyPress = (
+  //   event: React.KeyboardEvent<HTMLHeadingElement>,
+  //   categoryId: number
+  // ) => {
+  //   if (event.key === 'Enter' || event.key === ' ') {
+  //     handleCategoryClick(categoryId);
+  //   }
+  // };
 
   // const isDateWithin30Days = (dateString: string | number) => {
   //   const currentDate = new Date();
@@ -243,7 +243,7 @@ const CoursesCategoryCard = ({
               <button
                 className='category-name'
                 onClick={() => handleCategoryClick(-1)}
-                onKeyPress={event => handleKeyPress(event, -1)}
+                // onKeyPress={event => handleKeyPress(event, -1)}
                 tabIndex={0} // Makes the element focusable
               >
                 Programmation
@@ -251,20 +251,20 @@ const CoursesCategoryCard = ({
               <img src={devIcon} className='img-icon' alt='icon' />
             </div>
           </div>
-          <div className='category-card'>
+          {/* <div className='category-card'>
             <span className='card-title'>Explorer tout</span>
             <div className='card-content'>
               <button
                 className='category-name'
                 onClick={() => handleCategoryClick(-2)}
-                onKeyPress={event => handleKeyPress(event, -2)}
+                // onKeyPress={event => handleKeyPress(event, -2)}
                 tabIndex={0} // Makes the element focusable
               >
                 Amazone web service
               </button>
               <img src={devIcon} className='img-icon' alt='icon' />
             </div>
-          </div>
+          </div> */}
           {courseCategories?.map(categorie => (
             <div key={categorie.id} className='category-card'>
               <span className='card-title'>Explorer tout</span>
@@ -272,7 +272,7 @@ const CoursesCategoryCard = ({
                 <button
                   className='category-name'
                   onClick={() => handleCategoryClick(categorie.id)}
-                  onKeyPress={event => handleKeyPress(event, categorie.id)}
+                  // onKeyPress={event => handleKeyPress(event, categorie.id)}
                   tabIndex={0} // rendre l'element focusable via le clavier et l'inclure dans la tabulation
                 >
                   {categorie.name.includes('amp')
