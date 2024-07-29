@@ -111,8 +111,8 @@ img {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: 3vw;
   width: 100%;
-  justify-content: space-between;
 }
 
 .card-course-detail-unit {
@@ -190,9 +190,8 @@ img {
 
   .card-course-detail-container {
     display: flex;
-    flex-direction: row !important;
+    flex-direction: row;
     width: 100%;
-    justify-content: space-between;
     padding-left: 16px;
 
     /* gap: 50px; */

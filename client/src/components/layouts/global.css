@@ -714,6 +714,7 @@ blockquote .small {
 
 .text-love-light {
   color: var(--love-light);
+  font-size: 1rem;
 }
 
 .btn-light {
