@@ -189,7 +189,7 @@ const CourseFilterList = ({
               onClick={e => {
                 handleButtonClick(e);
                 setMoodleCourses(null);
-                setRavenCourses(null);
+                // setRavenCourses(null);
                 void getRavenResources();
                 void getMoodleCourses();
               }}

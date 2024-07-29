@@ -15,7 +15,7 @@ import CourseCard from '../components/CourseCard/course-card';
 import LaptopIcon from '../assets/images/laptop.svg';
 import AlgoIcon from '../assets/images/algorithmIcon.svg';
 import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
-import awsLogo from '../assets/images/aws-logo.png';
+// import awsLogo from '../assets/images/aws-logo.png';
 
 import LaediesActIcon from '../assets/images/partners/we-act-logo.png';
 import NewBadge from '../assets/images/new.png';
@@ -455,16 +455,17 @@ export function Courses(props: CoursesProps): JSX.Element {
                       if ('launch_url' in course) {
                         // Vérifie si le cours est un cours Raven
                         return (
-                          <CourseCard
-                            key={index}
-                            icon={awsLogo}
-                            isAvailable={true}
-                            isSignedIn={isSignedIn}
-                            title={`${index + 1}. ${course.name}`}
-                            buttonText={`Suivre le cours`}
-                            link={`${course.launch_url}`}
-                            description={course.short_description}
-                          />
+                          // <CourseCard
+                          //   key={index}
+                          //   icon={awsLogo}
+                          //   isAvailable={true}
+                          //   isSignedIn={isSignedIn}
+                          //   title={`${index + 1}. ${course.name}`}
+                          //   buttonText={`Suivre le cours`}
+                          //   link={`${course.launch_url}`}
+                          //   description={course.short_description}
+                          // />
+                          ''
                         );
                       } else {
                         // Si ce n'est pas un cours Raven, c'est un cours Moodle
