@@ -84,6 +84,7 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
     const getReveanCourses = await getAwsCourses(data);
 
     setRavenCourses(getReveanCourses as RavenCourse[]);
+    // setRavenCourses(getReveanCourses as RavenCourse[]);
   };
 
   const ravenData: RavenFetchCoursesDto = {
@@ -164,17 +165,17 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
                 moodleCourses.length >= 0 &&
                 moodleCourses.map((course, index) => {
                   return (
-                    <CourseCard
-                      key={course.id}
-                      isAvailable={true}
-                      isSignedIn={isSignedIn}
-                      title={`${index + 1}. ${course.displayname}`}
-                      buttonText={`Suivre le cours  `}
-                      link={`/aws-courses/learning-path/${course.fullname.replace(
-                        / /g,
-                        '-'
-                      )}`}
-                    />
+                    // <CourseCard
+                    //   key={course.id}
+                    //   isAvailable={true}
+                    //   isSignedIn={isSignedIn}
+                    //   title={`${index + 1}. ${course.displayname}`}
+                    //   buttonText={`Suivre le cours  `}
+                    //   link={`/aws-courses/learning-path/${course.fullname.replace(
+                    //     / /g,
+                    //     '-'
+                    //   )}`}
+                    // />
                     
                       <CourseCard
                         key={course.id}
