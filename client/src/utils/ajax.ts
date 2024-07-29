@@ -306,7 +306,7 @@ export async function generateRavenTokenAcces(): Promise<unknown> {
     const response = await get('/generate-raven-token');
 
     console.log('acces token ', response);
-    return response;
+    return '';
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error) {
     return null;
