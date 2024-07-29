@@ -18,7 +18,7 @@ import {
   splitArray
 } from '../components/helpers';
 import LaptopIcon from '../assets/images/laptop.svg';
-import CloudShield from '../assets/images/cloudShield.svg';
+// import CloudShield from '../assets/images/cloudShield.svg';
 import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
 import awsLogo from '../assets/images/aws-logo.png';
 
@@ -108,8 +108,8 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [awsCoursesIsAviable, setAwsCoursesIsAviable] =
-    useState<boolean>(false);
+  // const [awsCoursesIsAviable, setAwsCoursesIsAviable] =
+  //   useState<boolean>(false);
   const [ravenPath, setRavenPath] = useState<RavenCourse[]>([]);
   console.log('state courses ', ravenPath);
 
@@ -147,9 +147,9 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
 
       if (generateRavenToken)
         addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
-      setAwsCoursesIsAviable(true);
+      // setAwsCoursesIsAviable(true);
     } else {
-      setAwsCoursesIsAviable(true);
+      // setAwsCoursesIsAviable(true);
     }
   };
   const ravenLocalToken = getRavenTokenDataFromLocalStorage();
@@ -224,7 +224,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                 `}
                   />
 
-                  <PathCard
+                  {/* <PathCard
                     icon={CloudShield}
                     alt=''
                     isAvailable={awsCoursesIsAviable}
@@ -237,7 +237,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                   optimiser l'utilisation du cloud AWS grâce à la compréhension 
                   de ces nombreux services et de leur intégration dans la création 
                   de solutions basées sur le cloud.`}
-                  />
+                  /> */}
 
                   {moodleCoursesCategories &&
                     moodleCoursesCategories.result.length >= 0 &&
