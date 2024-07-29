@@ -251,7 +251,7 @@ const CoursesCategoryCard = ({
               <img src={devIcon} className='img-icon' alt='icon' />
             </div>
           </div>
-          <div className='category-card'>
+          {/* <div className='category-card'>
             <span className='card-title'>Explorer tout</span>
             <div className='card-content'>
               <button
@@ -264,7 +264,7 @@ const CoursesCategoryCard = ({
               </button>
               <img src={devIcon} className='img-icon' alt='icon' />
             </div>
-          </div>
+          </div> */}
           {courseCategories?.map(categorie => (
             <div key={categorie.id} className='category-card'>
               <span className='card-title'>Explorer tout</span>

@@ -189,7 +189,7 @@ const CourseFilterList = ({
               onClick={e => {
                 handleButtonClick(e);
                 setMoodleCourses(null);
-                setRavenCourses(null);
+                // setRavenCourses(null);
                 void getRavenResources();
                 void getMoodleCourses();
               }}
@@ -197,7 +197,7 @@ const CourseFilterList = ({
               {'Populaires'}
             </button>
 
-            <button
+            {/* <button
               className={`category-title ${
                 currentCategory === 'AWS' ? 'active-button' : ''
               }`}
@@ -208,7 +208,7 @@ const CourseFilterList = ({
               }}
             >
               {'AWS'}
-            </button>
+            </button> */}
 
             {courseCategories?.map((element, index) => {
               return (
