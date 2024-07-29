@@ -339,7 +339,7 @@ export async function getAwsCourses(data: RavenFetchCoursesDto) {
   } catch (error) {
     response = null;
   }
-  console.log('courses raven', response);
+  // console.log('courses raven', response);
   return response;
 }
 export async function getAwsPath(data: RavenFetchCoursesDto) {

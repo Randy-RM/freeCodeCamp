@@ -52,7 +52,7 @@ export const NavLinks = (props: NavLinksProps): JSX.Element => {
   const { pending } = fetchState;
 
   // ------------IsDropdown Handler------------
-  console.log('userRole', role);
+  // console.log('userRole', role);
   const handleIsDropdown = () => {
     if (width < 1000) {
       setIsDropdown(isDropdown ? false : true);
