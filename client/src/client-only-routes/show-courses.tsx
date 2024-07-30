@@ -15,6 +15,7 @@ import CourseCard from '../components/CourseCard/course-card';
 import LaptopIcon from '../assets/images/laptop.svg';
 import AlgoIcon from '../assets/images/algorithmIcon.svg';
 import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
+
 // import awsLogo from '../assets/images/aws-logo.png';
 
 import LaediesActIcon from '../assets/images/partners/we-act-logo.png';
