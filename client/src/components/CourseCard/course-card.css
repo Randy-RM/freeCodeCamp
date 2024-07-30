@@ -109,9 +109,9 @@ img {
 
 .card-course-detail-container {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  gap: 3vw;
+  gap: 2rem;
+  margin-left: 1vw;
   width: 100%;
 }
 
