@@ -118,6 +118,10 @@ img {
   width: 100%;
 }
 
+.parcours-description {
+  font-size: 1.5rem;
+}
+
 .card-course-detail-container a {
   display: contents;
 }

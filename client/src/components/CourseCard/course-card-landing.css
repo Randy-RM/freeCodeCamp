@@ -87,6 +87,10 @@ img {
   gap: 3vw;
   width: 100%;
 }
+
+.parcours-description {
+  font-size: 1.5rem;
+}
 .card-course-detail-unit {
   margin: 0;
   padding: 0;
