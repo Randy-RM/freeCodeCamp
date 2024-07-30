@@ -13,6 +13,11 @@ import { Link } from '@reach/router';
 
 import './courses-category-card.css';
 import devIcon from '../../assets/icons/dev-icon.svg';
+import programmationIcon from '../../assets/icons/programation.png';
+import marketingIcone from '../../assets/icons/marketing.png';
+import itelligenceIcone from '../../assets/icons/bureaut.svg';
+import bureautiqueIcone from '../../assets/icons/computer.svg';
+
 import {
   addRavenTokenToLocalStorage,
   generateRavenTokenAcces,
@@ -217,6 +222,19 @@ const CoursesCategoryCard = ({
   //   return differenceInDays < 180;
   // };
 
+  // icons.ts
+  const getCourseIcon = (courseName: string): string => {
+    if (courseName.includes('Marketing')) {
+      return marketingIcone;
+    } else if (courseName.includes('Bureautique')) {
+      return bureautiqueIcone;
+    } else if (courseName.includes('artificielle')) {
+      return itelligenceIcone;
+    } else {
+      return devIcon;
+    }
+  };
+
   return (
     <div className='main'>
       <div className='categories-wrapper'>
@@ -248,7 +266,7 @@ const CoursesCategoryCard = ({
               >
                 Programmation
               </button>
-              <img src={devIcon} className='img-icon' alt='icon' />
+              <img src={programmationIcon} className='img-icon' alt='icon' />
             </div>
           </div>
           {/* <div className='category-card'>
@@ -273,13 +291,19 @@ const CoursesCategoryCard = ({
                   className='category-name'
                   onClick={() => handleCategoryClick(categorie.id)}
                   onKeyPress={event => handleKeyPress(event, categorie.id)}
-                  tabIndex={0} // rendre l'element focusable via le clavier et l'inclure dans la tabulation
+                  tabIndex={0} // rendre l'élément focusable via le clavier et l'inclure dans la tabulation
                 >
                   {categorie.name.includes('amp')
-                    ? 'Marketing & Communcation'
+                    ? 'Marketing & Communication'
+                    : categorie.name.includes('artificielle')
+                    ? 'Intelligence Artificielle'
                     : categorie.name}
                 </button>
-                <img src={devIcon} className='img-icon' alt='icon' />
+                <img
+                  src={getCourseIcon(categorie.name)}
+                  className='img-icon'
+                  alt={`${categorie.name} icon`}
+                />
               </div>
             </div>
           ))}
