@@ -29,8 +29,9 @@ img {
 }
 
 .card-course-detail-footer {
-  padding: 5% 5%;
+  padding: 5%;
   overflow: hidden;
+  margin-top: 2rem;
 }
 
 .card-course-detail-logo {
@@ -169,9 +170,15 @@ img {
     display: none;
   }
 
+  .card-course-detail-footer {
+    padding: auto;
+    margin: 0.5rem;
+    text-decoration: none;
+  }
+
   .card-course-detail-back {
     width: 95%;
-    margin-bottom: 10%;
+    margin-bottom: 5%;
   }
 
   .card-course-detail-container {
