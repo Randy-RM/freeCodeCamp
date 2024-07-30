@@ -62,84 +62,66 @@ const CourseCard = ({
   return (
     <div className='card-course-detail-back standard-radius-5 card-outlin-border'>
       <div className='card-course-detail-unit position-relative'>
-        <div className='card-outlin-border bg-light standard-radius-5'>
-          {cardType && cardType == CardStyle.Path ? (
-            <div className='bg-pretty-dark'>
-              <div className='card-course-detail-item text-light fw-bold'>
-                Parcours
+        <Link to={link ? link : ''} className='link'>
+          <div className='card-outlin-border bg-light standard-radius-5'>
+            {cardType && cardType == CardStyle.Path ? (
+              <div className='bg-pretty-dark'>
+                <div className='card-course-detail-item text-light fw-bold'>
+                  Parcours
+                </div>
               </div>
-            </div>
-          ) : (
-            <div className='bg-love-light'>
-              <div className='card-course-detail-item text-light fw-bold'>
-                Cours
-              </div>
-            </div>
-          )}
-
-          <div className='card-course-detail-header'>
-            {sponsorIcon && (
-              <div className='card-course-detail-logo-sponsor pull'>
-                <img src={sponsorIcon} alt='' className='img-fluid' />
+            ) : (
+              <div className='bg-love-light'>
+                <div className='card-course-detail-item text-light fw-bold'>
+                  Cours
+                </div>
               </div>
             )}
-            <div className='card-course-detail-logo push'>
-              <img src={icon} alt={alt} className='img-fluid' />
+
+            <div className='card-course-detail-header'>
+              {sponsorIcon && (
+                <div className='card-course-detail-logo-sponsor pull'>
+                  <img src={sponsorIcon} alt='' className='img-fluid' />
+                </div>
+              )}
+              <div className='card-course-detail-logo push'>
+                <img src={icon} alt={alt} className='img-fluid' />
+              </div>
             </div>
-          </div>
-          <div className='card-course-detail-item'>
-            <div className='card-title'>
-              <h4
-                className='fw-bold text-love-light'
-                dangerouslySetInnerHTML={{ __html: title }}
-              ></h4>{' '}
-              {isLessThan30DaysOld(createAt as string) && (
-                <img src={badgeIcon} alt='' className='img-badge' />
+            <div className='card-course-detail-item'>
+              <div className='card-title'>
+                <h4
+                  className='fw-bold text-love-light'
+                  dangerouslySetInnerHTML={{ __html: title }}
+                ></h4>{' '}
+                {isLessThan30DaysOld(createAt as string) && (
+                  <img src={badgeIcon} alt='' className='img-badge' />
+                )}
+              </div>
+            </div>
+            <div className='card-course-detail-item  flexible'>
+              {description && (
+                <p
+                  className='text-responsive'
+                  dangerouslySetInnerHTML={{
+                    __html: `${description.substring(0, 150)}...`
+                  }}
+                ></p>
               )}
             </div>
-          </div>
-          <div className='card-course-detail-item  flexible'>
-            {description && (
-              <p
-                className='text-responsive'
-                dangerouslySetInnerHTML={{
-                  __html: `${description.substring(0, 150)}...`
-                }}
-              ></p>
-            )}
-          </div>
-          <div className='card-course-detail-footer'>
-            <div className='push'>
-              {isAvailable ? (
-                name && phone ? (
-                  isSignedIn ? (
-                    <>
-                      {link ? (
-                        <Link
-                          to={link}
-                          sameTab={sameTab ? true : false}
-                          external={external ? true : false}
-                          state={{ description: description }}
-                          className='link-course text-love-light fw-semi-bold text-responsive'
-                        >
-                          <div className='row-link'>
-                            <div className='row-link-text'>{buttonText}</div>
-                            <div>
-                              <img
-                                src={PlayIcon}
-                                alt='Laptop icon'
-                                className='play'
-                              />
-                            </div>
-                          </div>
-                        </Link>
-                      ) : (
-                        <>
-                          <Map
-                            forLanding={true}
-                            single={true}
+            <div className='card-course-detail-footer'>
+              <div className='push'>
+                {isAvailable ? (
+                  name && phone ? (
+                    isSignedIn ? (
+                      <>
+                        {link ? (
+                          <Link
+                            to={link}
+                            sameTab={sameTab ? true : false}
+                            external={external ? true : false}
+                            state={{ description: description }}
                             className='link-course text-love-light fw-semi-bold text-responsive'
-                            keyPrefix='landing-details'
                           >
                             <div className='row-link'>
                               <div className='row-link-text'>{buttonText}</div>
@@ -151,20 +133,58 @@ const CourseCard = ({
                                 />
                               </div>
                             </div>
-                          </Map>
-                          {/* <br />
+                          </Link>
+                        ) : (
+                          <>
+                            <Map
+                              forLanding={true}
+                              single={true}
+                              className='link-course text-love-light fw-semi-bold text-responsive'
+                              keyPrefix='landing-details'
+                            >
+                              <div className='row-link'>
+                                <div className='row-link-text'>
+                                  {buttonText}
+                                </div>
+                                <div>
+                                  <img
+                                    src={PlayIcon}
+                                    alt='Laptop icon'
+                                    className='play'
+                                  />
+                                </div>
+                              </div>
+                            </Map>
+                            {/* <br />
                         <Link
                           to={`http://localhost:8001/`}
                           className='link-course text-love-light fw-semi-bold text-responsive'
                         >
                           Mooc
                         </Link> */}
-                        </>
-                      )}
-                    </>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <a
+                        href={`${apiLocation}/signin`}
+                        className='link-course text-love-light fw-semi-bold text-responsive'
+                      >
+                        <div className='row-link'>
+                          <div className='row-link-text'>{buttonText}</div>
+                          <div>
+                            <img
+                              src={PlayIcon}
+                              alt='Laptop icon'
+                              className='play'
+                            />
+                          </div>
+                        </div>
+                      </a>
+                    )
                   ) : (
                     <a
-                      href={`${apiLocation}/signin`}
+                      href={`/settings?${link as string}`}
                       className='link-course text-love-light fw-semi-bold text-responsive'
                     >
                       <div className='row-link'>
@@ -180,30 +200,14 @@ const CourseCard = ({
                     </a>
                   )
                 ) : (
-                  <a
-                    href={`/settings?${link as string}`}
-                    className='link-course text-love-light fw-semi-bold text-responsive'
-                  >
-                    <div className='row-link'>
-                      <div className='row-link-text'>{buttonText}</div>
-                      <div>
-                        <img
-                          src={PlayIcon}
-                          alt='Laptop icon'
-                          className='play'
-                        />
-                      </div>
-                    </div>
-                  </a>
-                )
-              ) : (
-                <span className='push text-love-light fw-semi-bold text-responsive'>
-                  Bientôt disponible
-                </span>
-              )}
+                  <span className='push text-love-light fw-semi-bold text-responsive'>
+                    Bientôt disponible
+                  </span>
+                )}
+              </div>
             </div>
           </div>
-        </div>
+        </Link>
       </div>
     </div>
   );
