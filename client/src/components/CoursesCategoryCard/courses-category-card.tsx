@@ -289,14 +289,17 @@ const CoursesCategoryCard = ({
         <div>
           <h2 className='ti'>Nouveau Parcours</h2>
         </div>
-        <Link to='/learning-path' className='link-reset'>
+        <Link to='/learning-path/developpement-web' className='link-reset'>
           <h2 className='path-title'>Découvre le parcours Programmation</h2>
           <p className='path-description'>
-            Dans ce cours, tu apprendras les langages que les développeurs
+            Dans ce parcours, tu apprendras les langages que les développeurs
             utilisent pour créer des pages Web : HTML (Hypertext Markup
             Language) pour le contenu, et CSS (Cascading Style Sheets) pour la
-            conception. Enfin, tu apprendras à créer des pages Web adaptées à
-            différentes tailles d&apos;écran.
+            conception. Ensuite, tu apprendras à créer des pages Web adaptées à
+            différentes tailles d&apos;écran et enfin, Tu vas utiliser le
+            JavaScript pour rendre tes sites interactifs. Tu apprendras les
+            Algorithm, Data Structures, et les principes fondamentaux du langage
+            de programmation JavaScript.
           </p>
         </Link>
       </div>
