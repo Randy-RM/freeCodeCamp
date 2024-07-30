@@ -73,6 +73,7 @@ const mapDispatchToProps = {
 export function ShowLearningPathDetail(
   props: ShowLearningPathDetailProps
 ): JSX.Element {
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   const { showLoading, isSignedIn, location } = props;
   const params: Record<string, undefined> = useParams();
   const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[]>();
@@ -122,6 +123,58 @@ export function ShowLearningPathDetail(
     return <Loader fullScreen={true} />;
   }
 
+  // Définir un type pour les clés valides de courseDescriptions
+  type CourseCategory =
+    | 'Développement Web'
+    | 'Design'
+    | 'Bureautique'
+    | 'Marketing'
+    | 'Communication'
+    | 'artificielle';
+
+  const courseDescriptions: Record<CourseCategory, string> = {
+    'Développement Web': `
+    Dans ce parcours, tu apprendras les langages que les développeurs 
+    utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
+    pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
+    Ensuite, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran et
+    enfin, Tu vas utiliser le JavaScript pour rendre tes sites interactifs. 
+    Tu apprendras les Algorithm, Data Structures, et les principes fondamentaux du langage de programmation JavaScript.
+  `,
+    Design: `
+    Dans ce parcours, tu apprendras les principes fondamentaux du design, y compris la typographie, la théorie des couleurs, et la mise en page.
+    Tu utiliseras des outils tels que Figma et Adobe XD pour créer des maquettes et des prototypes de haute qualité. 
+    En outre, tu apprendras à collaborer avec des développeurs pour transformer tes conceptions en produits réels.
+  `,
+    Bureautique: `
+    Notre parcours complet de bureautique vous accompagne pas à pas, du niveau débutant à expert, pour maîtriser Word, Excel, PowerPoint, Outlook et OneNote. Grâce à nos cours en ligne interactifs et à nos exercices pratiques, vous acquerrez les compétences nécessaires pour créer des documents impeccables, analyser des données complexes et gérer efficacement votre boîte mail. À la fin de ce parcours, vous serez certifié et prêt à relever tous les défis de votre vie professionnelle.
+  `,
+    Marketing: `
+    Notre parcours complet vous offre une formation pratique et intensive aux outils et techniques les plus efficaces du marketing digital. Vous apprendrez à créer une stratégie de contenu engageante, à optimiser votre site web pour les moteurs de recherche, à gérer votre communauté sur les réseaux sociaux et à mesurer la performance de vos campagnes. À l'issue de cette formation, vous serez capable de développer votre propre business en ligne ou de piloter les actions marketing d'une entreprise.
+  `,
+    Communication: `
+    Dans ce parcours, vous apprendrez les techniques de communication efficaces pour transmettre des messages clairs et percutants. Vous découvrirez comment créer des présentations impactantes, gérer les relations publiques et utiliser les médias sociaux pour améliorer votre visibilité. Vous développerez des compétences pour communiquer avec divers publics et dans différents contextes professionnels.
+  `,
+    artificielle: `
+    Ce parcours vous plongera dans l'univers fascinant de l'intelligence artificielle. Vous apprendrez les bases des algorithmes d'apprentissage automatique, le traitement du langage naturel, et la reconnaissance d'images. Vous explorerez des outils comme TensorFlow et PyTorch pour créer et entraîner des modèles d'IA. À la fin de ce parcours, vous serez capable de mettre en œuvre des solutions d'IA innovantes dans divers contextes.
+  `
+  };
+
+  function getDescriptionByCategory(categoryName: string | null): string {
+    const lowerCategoryName = categoryName?.toLowerCase() || '';
+
+    if (lowerCategoryName.includes('marketing')) {
+      return courseDescriptions['Marketing'];
+    } else if (lowerCategoryName.includes('communication')) {
+      return courseDescriptions['Communication'];
+    } else if (lowerCategoryName.includes('artificielle')) {
+      return courseDescriptions['artificielle'];
+    } else {
+      const validCategoryName = categoryName as CourseCategory;
+      return courseDescriptions[validCategoryName] || '.';
+    }
+  }
+
   return (
     <>
       <Helmet
@@ -142,14 +195,17 @@ export function ShowLearningPathDetail(
             </Col>
             <Col className='' md={12} sm={12} xs={12}>
               <div className='alert bg-secondary standard-radius-5'>
-                {location && location.state && location.state.description && (
+                {/* {location && location.state && location.state.description && (
                   <div
                     className='text-responsive'
                     dangerouslySetInnerHTML={{
                       __html: location.state.description
                     }}
-                  ></div>
-                )}
+                  >ma</div>
+                )} */}
+                <p className='parcours-description'>
+                  {getDescriptionByCategory(categoryName || '')}
+                </p>
               </div>
             </Col>
             <Spacer />
