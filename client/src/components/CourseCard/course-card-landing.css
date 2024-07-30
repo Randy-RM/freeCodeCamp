@@ -78,6 +78,15 @@ img {
   margin-right: 10px;
 }
 
+.card-link {
+  display: contents; /* evite le style par defaut des composantes link*/
+}
+.card-course-detail-container {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 3vw;
+  width: 100%;
+}
 .card-course-detail-unit {
   margin: 0;
   padding: 0;
@@ -150,15 +159,6 @@ img {
 
   .card-course-detail-unit {
     width: 100%;
-  }
-
-  .card-course-detail-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 3vw;
-    width: 100%;
-    /* gap: 50px; */
   }
 }
 
