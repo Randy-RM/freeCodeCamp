@@ -310,10 +310,10 @@ const CoursesCategoryCard = ({
         </div>
       </div>
       <div className='categories-container-banner'>
-        <div>
-          <h2 className='ti'>Nouveau Parcours</h2>
-        </div>
         <Link to='/learning-path/developpement-web' className='link-reset'>
+          <div>
+            <h2 className='ti'>Nouveau Parcours</h2>
+          </div>
           <h2 className='path-title'>Découvre le parcours Programmation</h2>
           <p className='path-description'>
             Dans ce parcours, tu apprendras les langages que les développeurs
