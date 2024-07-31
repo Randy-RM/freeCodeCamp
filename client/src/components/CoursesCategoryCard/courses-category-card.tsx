@@ -24,6 +24,7 @@ import {
   getAwsCourses,
   getExternalResource,
   getRavenTokenDataFromLocalStorage
+  // getDescriptionByCategory
 } from '../../utils/ajax';
 import envData from '../../../../config/env.json';
 import {
@@ -87,6 +88,7 @@ const CoursesCategoryCard = ({
   const containerRef1 = useRef<HTMLDivElement>(null);
 
   const scrollAmount = 320; // Adjust based on card width and gap
+  // const categoryDescrTitle = 'développement';
 
   const scrollLeft = (containerRef: React.RefObject<HTMLDivElement>) => {
     if (containerRef.current) {
@@ -317,9 +319,10 @@ const CoursesCategoryCard = ({
           </div>
           <h2 className='path-title'>Découvre le parcours Programmation</h2>
           <p className='path-description'>
-            Dans ce parcours, apprends HTML pour le contenu, CSS pour la
-            conception, et JavaScript pour l&apo;interactivité. Maîtrise les
-            algorithmes, structures de données, et crée des sites adaptatifs...
+            {/* {getDescriptionByCategory(categoryDescrTitle || '')} */}
+            Apprends HTML, CSS et JavaScript pour créer des pages web
+            interactives. Maîtrise les algorithmes et structures de données pour
+            des sites adaptatifs...
           </p>
         </Link>
       </div>

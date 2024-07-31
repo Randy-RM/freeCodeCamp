@@ -4,11 +4,7 @@ import { Grid, Row, Col } from '@freecodecamp/react-bootstrap';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import {
-  getExternalResource,
-  courseDescriptions,
-  CourseCategoryTitle
-} from '../utils/ajax';
+import { getExternalResource, getDescriptionByCategory } from '../utils/ajax';
 
 import { createFlashMessage } from '../components/Flash/redux';
 import {
@@ -128,21 +124,6 @@ export function ShowLearningPathDetail(
   }
 
   //fonction permettant de renvoyer la description d'un parcours en recevant le titre du parcours en paramétre
-
-  function getDescriptionByCategory(categoryName: string | null): string {
-    const lowerCategoryName = categoryName?.toLowerCase() || '';
-
-    if (lowerCategoryName.includes('marketing')) {
-      return courseDescriptions['Marketing'];
-    } else if (lowerCategoryName.includes('communication')) {
-      return courseDescriptions['Communication'];
-    } else if (lowerCategoryName.includes('artificielle')) {
-      return courseDescriptions['artificielle'];
-    } else {
-      const validCategoryName = categoryName as CourseCategoryTitle;
-      return courseDescriptions[validCategoryName] || '.';
-    }
-  }
 
   return (
     <>
