@@ -205,14 +205,14 @@ const CoursesCategoryCard = ({
   };
 
   //selectionne une catégorie par rapport à la catégorie passée en simulant le clic sur le clavier
-  // const handleKeyPress = (
-  //   event: React.KeyboardEvent<HTMLHeadingElement>,
-  //   categoryId: number
-  // ) => {
-  //   if (event.key === 'Enter' || event.key === ' ') {
-  //     handleCategoryClick(categoryId);
-  //   }
-  // };
+  const handleKeyPress = (
+    event: React.KeyboardEvent<HTMLHeadingElement>,
+    categoryId: number
+  ) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      handleCategoryClick(categoryId);
+    }
+  };
 
   // const isDateWithin30Days = (dateString: string | number) => {
   //   const currentDate = new Date();
@@ -261,7 +261,7 @@ const CoursesCategoryCard = ({
               <button
                 className='category-name'
                 onClick={() => handleCategoryClick(-1)}
-                // onKeyPress={event => handleKeyPress(event, -1)}
+                onKeyPress={event => handleKeyPress(event, -1)}
                 tabIndex={0} // Makes the element focusable
               >
                 Programmation
@@ -290,6 +290,7 @@ const CoursesCategoryCard = ({
                 <button
                   className='category-name'
                   onClick={() => handleCategoryClick(categorie.id)}
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-return,
                   onKeyPress={event => handleKeyPress(event, categorie.id)}
                   tabIndex={0} // rendre l'élément focusable via le clavier et l'inclure dans la tabulation
                 >
@@ -316,14 +317,9 @@ const CoursesCategoryCard = ({
           </div>
           <h2 className='path-title'>Découvre le parcours Programmation</h2>
           <p className='path-description'>
-            Dans ce parcours, tu apprendras les langages que les développeurs
-            utilisent pour créer des pages Web : HTML (Hypertext Markup
-            Language) pour le contenu, et CSS (Cascading Style Sheets) pour la
-            conception. Ensuite, tu apprendras à créer des pages Web adaptées à
-            différentes tailles d&apos;écran et enfin, Tu vas utiliser le
-            JavaScript pour rendre tes sites interactifs. Tu apprendras les
-            Algorithm, Data Structures, et les principes fondamentaux du langage
-            de programmation JavaScript.
+            Dans ce parcours, apprends HTML pour le contenu, CSS pour la
+            conception, et JavaScript pour l&apo;interactivité. Maîtrise les
+            algorithmes, structures de données, et crée des sites adaptatifs...
           </p>
         </Link>
       </div>
