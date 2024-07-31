@@ -205,14 +205,14 @@ const CoursesCategoryCard = ({
   };
 
   //selectionne une catégorie par rapport à la catégorie passée en simulant le clic sur le clavier
-  const handleKeyPress = (
-    event: React.KeyboardEvent<HTMLHeadingElement>,
-    categoryId: number
-  ) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      handleCategoryClick(categoryId);
-    }
-  };
+  // const handleKeyPress = (
+  //   event: React.KeyboardEvent<HTMLHeadingElement>,
+  //   categoryId: number
+  // ) => {
+  //   if (event.key === 'Enter' || event.key === ' ') {
+  //     handleCategoryClick(categoryId);
+  //   }
+  // };
 
   // const isDateWithin30Days = (dateString: string | number) => {
   //   const currentDate = new Date();
@@ -261,7 +261,7 @@ const CoursesCategoryCard = ({
               <button
                 className='category-name'
                 onClick={() => handleCategoryClick(-1)}
-                onKeyPress={event => handleKeyPress(event, -1)}
+                // onKeyPress={event => handleKeyPress(event, -1)}
                 tabIndex={0} // Makes the element focusable
               >
                 Programmation
@@ -275,7 +275,7 @@ const CoursesCategoryCard = ({
               <button
                 className='category-name'
                 onClick={() => handleCategoryClick(-2)}
-                onKeyPress={event => handleKeyPress(event, -2)}
+                // onKeyPress={event => handleKeyPress(event, -2)}
                 tabIndex={0} // Makes the element focusable
               >
                 Amazone web service
