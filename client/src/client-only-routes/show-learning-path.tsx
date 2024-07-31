@@ -3,6 +3,8 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { Grid } from '@freecodecamp/react-bootstrap';
+import { Link } from 'gatsby';
+
 import {
   addRavenTokenToLocalStorage,
   generateRavenTokenAcces,
@@ -199,7 +201,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
               <h1 className='big-subheading'>{`Nos parcours.`}</h1>
               <p className='text-responsive'>
                 {`
-          Nos parcours te permettent d’apprendre par la pratique. Tu gagneras donc un véritable savoir-faire t.
+          Nos parcours te permettent d’apprendre par la pratique. Tu gagneras donc un véritable savoir-faire .
           `}
               </p>
             </div>
@@ -207,22 +209,26 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
             <div>
               {!isDataOnLoading ? (
                 <div className='card-course-detail-container'>
-                  <PathCard
-                    icon={LaptopIcon}
-                    alt=''
-                    isAvailable={true}
-                    isSignedIn={isSignedIn}
-                    title={`Développement Web`}
-                    buttonText={`Suivre le parcours  `}
-                    link={`/learning-path/developpement-web`}
-                    cardType='parcours'
-                    description={`
-                Dans ce parcours en ligne, tu apprendras les langages que les développeurs 
-                utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
-                pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
-                Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
-                `}
-                  />
+                  <Link to='/learning-path/developpement-web'>
+                    <div className='card-link'>
+                      <PathCard
+                        icon={LaptopIcon}
+                        alt=''
+                        isAvailable={true}
+                        isSignedIn={isSignedIn}
+                        title={`Développement Web`}
+                        buttonText={`Suivre le parcours  `}
+                        link={`/learning-path/developpement-web`}
+                        cardType='parcours'
+                        description={`
+                        Dans ce parcours en ligne, tu apprendras les langages que les développeurs 
+                        utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
+                        pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
+                        Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
+                     `}
+                      />
+                    </div>
+                  </Link>
 
                   {/* <PathCard
                     icon={CloudShield}
@@ -244,20 +250,29 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                     moodleCoursesCategories.result[currentPage - 1].map(
                       (category, index) => {
                         return (
-                          <PathCard
+                          <Link
                             key={index}
-                            icon={PhBookBookmark}
-                            isAvailable={category.visible == 1}
-                            isSignedIn={isSignedIn}
-                            title={category.name.replace(/&amp;/g, 'et')}
-                            buttonText={`Suivre le parcours  `}
-                            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                            link={`/learning-path/${category.name
+                            to={`/learning-path/${category.name
                               .replace(/ /g, '-')
                               .replace(/&amp;/g, 'et')}/${category.id}`}
-                            cardType='parcours'
-                            description={category.description}
-                          />
+                            className='link'
+                          >
+                            <div className='card-link'>
+                              <PathCard
+                                icon={PhBookBookmark}
+                                isAvailable={category.visible == 1}
+                                isSignedIn={isSignedIn}
+                                title={category.name.replace(/&amp;/g, 'et')}
+                                buttonText={`Suivre le parcours`}
+                                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                                link={`/learning-path/${category.name
+                                  .replace(/ /g, '-')
+                                  .replace(/&amp;/g, 'et')}/${category.id}`}
+                                cardType='parcours'
+                                description={category.description}
+                              />
+                            </div>
+                          </Link>
                         );
                       }
                     )}

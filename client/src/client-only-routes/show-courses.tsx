@@ -15,6 +15,7 @@ import CourseCard from '../components/CourseCard/course-card';
 import LaptopIcon from '../assets/images/laptop.svg';
 import AlgoIcon from '../assets/images/algorithmIcon.svg';
 import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
+
 // import awsLogo from '../assets/images/aws-logo.png';
 
 import LaediesActIcon from '../assets/images/partners/we-act-logo.png';
@@ -497,7 +498,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                 )}
               </div>
             </div>
-            <Spacer size={13} />
+            <Spacer size={3} />
             <div className='pagination-container'>
               {moodleCourses && moodleCourses.size > 0 && (
                 <Row>
@@ -525,7 +526,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                         }}
                       />
                     )}
-                    <Spacer size={2} />
+                    <Spacer size={1} />
                   </Col>
                 </Row>
               )}

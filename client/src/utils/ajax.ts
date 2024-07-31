@@ -60,6 +60,44 @@ async function request<T>(
   return fetch(`${base}${path}`, options).then<T>(res => res.json());
 }
 
+//liste des descriptions pour chaque parcours affichée sous le parcours
+
+export type CourseCategoryTitle =
+  | 'Développement Web' // les | designes un type union où permettant au type de prendre une au l'autre titre parmis autant
+  | 'Design'
+  | 'Bureautique'
+  | 'Marketing'
+  | 'Communication'
+  | 'artificielle';
+
+export const courseDescriptions: Record<CourseCategoryTitle, string> = {
+  'Développement Web': `
+    Dans ce parcours, tu apprendras les langages que les développeurs 
+    utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
+    pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
+    Ensuite, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran et
+    enfin, Tu vas utiliser le JavaScript pour rendre tes sites interactifs. 
+    Tu apprendras les Algorithm, Data Structures, et les principes fondamentaux du langage de programmation JavaScript.
+  `,
+  Design: `
+    Dans ce parcours, tu apprendras les principes fondamentaux du design, y compris la typographie, la théorie des couleurs, et la mise en page.
+    Tu utiliseras des outils tels que Figma et Adobe XD pour créer des maquettes et des prototypes de haute qualité. 
+    En outre, tu apprendras à collaborer avec des développeurs pour transformer tes conceptions en produits réels.
+  `,
+  Bureautique: `
+    Notre parcours complet de bureautique vous accompagne pas à pas, du niveau débutant à expert, pour maîtriser Word, Excel, PowerPoint, Outlook et OneNote. Grâce à nos cours en ligne interactifs et à nos exercices pratiques, vous acquerrez les compétences nécessaires pour créer des documents impeccables, analyser des données complexes et gérer efficacement votre boîte mail. À la fin de ce parcours, vous serez certifié et prêt à relever tous les défis de votre vie professionnelle.
+  `,
+  Marketing: `
+    Notre parcours complet vous offre une formation pratique et intensive aux outils et techniques les plus efficaces du marketing digital. Vous apprendrez à créer une stratégie de contenu engageante, à optimiser votre site web pour les moteurs de recherche, à gérer votre communauté sur les réseaux sociaux et à mesurer la performance de vos campagnes. À l'issue de cette formation, vous serez capable de développer votre propre business en ligne ou de piloter les actions marketing d'une entreprise.
+  `,
+  Communication: `
+    Dans ce parcours, vous apprendrez les techniques de communication efficaces pour transmettre des messages clairs et percutants. Vous découvrirez comment créer des présentations impactantes, gérer les relations publiques et utiliser les médias sociaux pour améliorer votre visibilité. Vous développerez des compétences pour communiquer avec divers publics et dans différents contextes professionnels.
+  `,
+  artificielle: `
+    L'intelligence artificielle est un domaine technologique en rapide évolution, permettant aux ordinateurs d'imiter des fonctions humaines telles que l'apprentissage et la résolution de problèmes. Un domaine spécifique de l'IA qui a récemment gagné en popularité est l'IA générative, qui se concentre sur la création de nouveaux contenus, qu'il s'agisse de textes, d'images, de sons ou de vidéos. Inscrivez-vous à ce cours pour explorer les différentes formes d'IA générative à travers des applications interactives !
+  `
+};
+
 // Make the `request` function generic
 // to specify the return data type:
 async function requestModule<TResponse>(
