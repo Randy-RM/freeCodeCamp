@@ -13,6 +13,10 @@
   font-weight: 600;
 }
 
+.link {
+  text-decoration: none;
+}
+
 .block-header {
   display: flex;
   justify-content: start;

@@ -171,9 +171,7 @@ p.caption {
 }
 
 .landing-top p {
-  font-size: 1.2rem;
-  font-weight: 400;
-  margin: 0.6rem 0;
+  font-size: 1rem;
 }
 
 /* testimonials */
@@ -278,7 +276,7 @@ p.caption {
 
 @media (min-width: 500px) {
   .landing-top p {
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
 }
 

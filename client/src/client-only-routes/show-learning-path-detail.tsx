@@ -4,7 +4,11 @@ import { Grid, Row, Col } from '@freecodecamp/react-bootstrap';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { getExternalResource } from '../utils/ajax';
+import {
+  getExternalResource,
+  courseDescriptions,
+  CourseCategoryTitle
+} from '../utils/ajax';
 
 import { createFlashMessage } from '../components/Flash/redux';
 import {
@@ -73,6 +77,7 @@ const mapDispatchToProps = {
 export function ShowLearningPathDetail(
   props: ShowLearningPathDetailProps
 ): JSX.Element {
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   const { showLoading, isSignedIn, location } = props;
   const params: Record<string, undefined> = useParams();
   const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[]>();
@@ -122,6 +127,23 @@ export function ShowLearningPathDetail(
     return <Loader fullScreen={true} />;
   }
 
+  //fonction permettant de renvoyer la description d'un parcours en recevant le titre du parcours en paramétre
+
+  function getDescriptionByCategory(categoryName: string | null): string {
+    const lowerCategoryName = categoryName?.toLowerCase() || '';
+
+    if (lowerCategoryName.includes('marketing')) {
+      return courseDescriptions['Marketing'];
+    } else if (lowerCategoryName.includes('communication')) {
+      return courseDescriptions['Communication'];
+    } else if (lowerCategoryName.includes('artificielle')) {
+      return courseDescriptions['artificielle'];
+    } else {
+      const validCategoryName = categoryName as CourseCategoryTitle;
+      return courseDescriptions[validCategoryName] || '.';
+    }
+  }
+
   return (
     <>
       <Helmet
@@ -142,14 +164,17 @@ export function ShowLearningPathDetail(
             </Col>
             <Col className='' md={12} sm={12} xs={12}>
               <div className='alert bg-secondary standard-radius-5'>
-                {location && location.state && location.state.description && (
+                {/* {location && location.state && location.state.description && (
                   <div
                     className='text-responsive'
                     dangerouslySetInnerHTML={{
                       __html: location.state.description
                     }}
-                  ></div>
-                )}
+                  >ma</div>
+                )} */}
+                <p className='parcours-description'>
+                  {getDescriptionByCategory(categoryName || '')}
+                </p>
               </div>
             </Col>
             <Spacer />

@@ -13,6 +13,11 @@ import { Link } from '@reach/router';
 
 import './courses-category-card.css';
 import devIcon from '../../assets/icons/dev-icon.svg';
+import programmationIcon from '../../assets/icons/programation.png';
+import marketingIcone from '../../assets/icons/marketing.png';
+import itelligenceIcone from '../../assets/icons/bureaut.svg';
+import bureautiqueIcone from '../../assets/icons/computer.svg';
+
 import {
   addRavenTokenToLocalStorage,
   generateRavenTokenAcces,
@@ -217,10 +222,23 @@ const CoursesCategoryCard = ({
   //   return differenceInDays < 180;
   // };
 
+  // icons.ts
+  const getCourseIcon = (courseName: string): string => {
+    if (courseName.includes('Marketing')) {
+      return marketingIcone;
+    } else if (courseName.includes('Bureautique')) {
+      return bureautiqueIcone;
+    } else if (courseName.includes('artificielle')) {
+      return itelligenceIcone;
+    } else {
+      return devIcon;
+    }
+  };
+
   return (
     <div className='main'>
       <div className='categories-wrapper'>
-        <p className='tendance'>Les sujet tendances</p>
+        <p className='tendance'>Sujets tendance</p>
 
         <div className='chevron'>
           <button
@@ -248,7 +266,7 @@ const CoursesCategoryCard = ({
               >
                 Programmation
               </button>
-              <img src={devIcon} className='img-icon' alt='icon' />
+              <img src={programmationIcon} className='img-icon' alt='icon' />
             </div>
           </div>
           {/* <div className='category-card'>
@@ -272,14 +290,20 @@ const CoursesCategoryCard = ({
                 <button
                   className='category-name'
                   onClick={() => handleCategoryClick(categorie.id)}
-                  // onKeyPress={event => handleKeyPress(event, categorie.id)}
-                  tabIndex={0} // rendre l'element focusable via le clavier et l'inclure dans la tabulation
+                  onKeyPress={event => handleKeyPress(event, categorie.id)}
+                  tabIndex={0} // rendre l'élément focusable via le clavier et l'inclure dans la tabulation
                 >
                   {categorie.name.includes('amp')
-                    ? 'Marketing & Communcation'
+                    ? 'Marketing & Communication'
+                    : categorie.name.includes('artificielle')
+                    ? 'Intelligence Artificielle'
                     : categorie.name}
                 </button>
-                <img src={devIcon} className='img-icon' alt='icon' />
+                <img
+                  src={getCourseIcon(categorie.name)}
+                  className='img-icon'
+                  alt={`${categorie.name} icon`}
+                />
               </div>
             </div>
           ))}
@@ -289,14 +313,17 @@ const CoursesCategoryCard = ({
         <div>
           <h2 className='ti'>Nouveau Parcours</h2>
         </div>
-        <Link to='/learning-path' className='link-reset'>
+        <Link to='/learning-path/developpement-web' className='link-reset'>
           <h2 className='path-title'>Découvre le parcours Programmation</h2>
           <p className='path-description'>
-            Dans ce cours, tu apprendras les langages que les développeurs
+            Dans ce parcours, tu apprendras les langages que les développeurs
             utilisent pour créer des pages Web : HTML (Hypertext Markup
             Language) pour le contenu, et CSS (Cascading Style Sheets) pour la
-            conception. Enfin, tu apprendras à créer des pages Web adaptées à
-            différentes tailles d&apos;écran.
+            conception. Ensuite, tu apprendras à créer des pages Web adaptées à
+            différentes tailles d&apos;écran et enfin, Tu vas utiliser le
+            JavaScript pour rendre tes sites interactifs. Tu apprendras les
+            Algorithm, Data Structures, et les principes fondamentaux du langage
+            de programmation JavaScript.
           </p>
         </Link>
       </div>
