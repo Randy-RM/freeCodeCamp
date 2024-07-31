@@ -183,6 +183,7 @@
     background-color: #e5203d;
     border-radius: 16px;
     display: inline-block;
+    width: 11rem;
     padding: 0.33rem;
   }
 
@@ -254,6 +255,11 @@
   @media (max-width: 480px) {
     .category-name {
       font-size: 12px;
+    }
+
+    .ti {
+      font-size: 0.5rem;
+      text-align: center;
     }
 
     .img-icon {
@@ -331,6 +337,7 @@
   border-radius: 16px;
   display: inline-block;
   padding: 0.33rem;
+  width: 11rem;
 }
 
 .path-title {
@@ -354,7 +361,7 @@
 
 .categories-container-banner {
   width: 100%;
-  padding: 20px;
+  padding: 2rem;
   border-radius: 10px;
   margin-right: 0;
   flex-grow: 1; /* Assure que l'enfant prenne toute la place disponible */
@@ -373,8 +380,7 @@
 /* Styles pour les écrans de taille moyenne */
 @media (max-width: 768px) {
   .categories-container-banner {
-    padding-left: 3rem;
-    padding-right: 3rem;
+    padding: 0.33rem 1rem;
   }
 
   .category-card {
@@ -403,7 +409,9 @@
   .category-name {
     font-size: 12px;
   }
-
+  .categories-container-banner {
+    padding: 0.22rem;
+  }
   .img-icon {
     width: 25px;
     height: 25px;
