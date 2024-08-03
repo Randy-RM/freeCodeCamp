@@ -18,15 +18,6 @@ import marketingIcone from '../../assets/icons/marketing.png';
 import itelligenceIcone from '../../assets/icons/bureaut.svg';
 import bureautiqueIcone from '../../assets/icons/computer.svg';
 
-// import {
-//   addRavenTokenToLocalStorage,
-//   generateRavenTokenAcces,
-//   getAwsCourses,
-//   getExternalResource,
-//   getRavenTokenDataFromLocalStorage
-//   // getDescriptionByCategory
-// } from '../../utils/ajax';
-
 import {
   addRavenTokenToLocalStorage,
   generateRavenTokenAcces,

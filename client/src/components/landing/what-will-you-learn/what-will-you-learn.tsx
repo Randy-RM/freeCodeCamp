@@ -10,7 +10,6 @@ import LaptopIcon from '../../../assets/images/laptop.svg';
 import AlgoIcon from '../../../assets/images/algorithmIcon.svg';
 import LaediesActIcon from '../../../assets/images/partners/we-act-logo.png';
 import awsLogo from '../../../assets/images/aws-logo.png';
-1;
 import './what-will-you-learn.css';
 
 import CourseCard from '../../CourseCard/course-card';
