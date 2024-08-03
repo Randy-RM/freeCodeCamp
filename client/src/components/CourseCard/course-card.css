@@ -18,8 +18,6 @@ img {
 }
 
 .duration {
-  border-top: 1px dotted rgba(0, 0, 0, 0.5);
-  border-bottom: 1px dotted rgba(0, 0, 0, 0.5);
   display: flex;
   gap: 0.5rem;
   padding: 0.5rem;
@@ -39,6 +37,7 @@ img {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  height: 25rem;
   justify-content: space-between;
 }
 
