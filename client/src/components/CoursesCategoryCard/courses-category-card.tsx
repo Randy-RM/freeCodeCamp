@@ -18,13 +18,21 @@ import marketingIcone from '../../assets/icons/marketing.png';
 import itelligenceIcone from '../../assets/icons/bureaut.svg';
 import bureautiqueIcone from '../../assets/icons/computer.svg';
 
+// import {
+//   addRavenTokenToLocalStorage,
+//   generateRavenTokenAcces,
+//   getAwsCourses,
+//   getExternalResource,
+//   getRavenTokenDataFromLocalStorage
+//   // getDescriptionByCategory
+// } from '../../utils/ajax';
+
 import {
   addRavenTokenToLocalStorage,
   generateRavenTokenAcces,
   getAwsCourses,
   getExternalResource,
   getRavenTokenDataFromLocalStorage
-  // getDescriptionByCategory
 } from '../../utils/ajax';
 import envData from '../../../../config/env.json';
 import {
@@ -46,7 +54,7 @@ interface CourseFilterProps {
   >;
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
   setIsDataOnLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  courseCategories: MoodleCourseCategory[] | null;
+  courseCategories: MoodleCourseCategory[] | null | undefined;
   currentCategory: number | null;
   setCurrentCategory: React.Dispatch<React.SetStateAction<number | null>>;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
@@ -271,7 +279,7 @@ const CoursesCategoryCard = ({
               <img src={programmationIcon} className='img-icon' alt='icon' />
             </div>
           </div>
-          {/* <div className='category-card'>
+          <div className='category-card'>
             <span className='card-title'>Explorer tout</span>
             <div className='card-content'>
               <button
@@ -280,11 +288,11 @@ const CoursesCategoryCard = ({
                 // onKeyPress={event => handleKeyPress(event, -2)}
                 tabIndex={0} // Makes the element focusable
               >
-                Amazone web service
+                Amazon Web Service
               </button>
               <img src={devIcon} className='img-icon' alt='icon' />
             </div>
-          </div> */}
+          </div>
           {courseCategories?.map(categorie => (
             <div key={categorie.id} className='category-card'>
               <span className='card-title'>Explorer tout</span>
@@ -319,7 +327,7 @@ const CoursesCategoryCard = ({
           </div>
           <h2 className='path-title'>Découvre le parcours Programmation</h2>
           <p className='path-description'>
-            {/* {getDescriptionByCategory(categoryDescrTitle || '')} */}
+            {/* {getDescriptionByCategory(categoryDescrTitle || '')}  on utilisera cette ligne lorsque l'on voudra que les shrot description viennent tous de la structure des données*/}
             Apprends HTML, CSS et JavaScript pour créer des pages web
             interactives. Maîtrise les algorithmes et structures de données pour
             des sites adaptatifs...

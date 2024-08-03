@@ -52,7 +52,9 @@ async function request<T>(
     ...defaultOptions,
     method,
     headers: {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       'CSRF-Token': token ?? getCSRFToken(),
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(body)
@@ -384,7 +386,7 @@ export async function generateRavenTokenAcces(): Promise<unknown> {
     const response = await get('/generate-raven-token');
 
     console.log('acces token ', response);
-    return '';
+    return response;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error) {
     return null;
@@ -417,7 +419,7 @@ export async function getAwsCourses(data: RavenFetchCoursesDto) {
   } catch (error) {
     response = null;
   }
-  // console.log('courses raven', response);
+  console.log('courses raven', response);
   return response;
 }
 export async function getAwsPath(data: RavenFetchCoursesDto) {
@@ -430,10 +432,47 @@ export async function getAwsPath(data: RavenFetchCoursesDto) {
   } catch (error) {
     response = null;
   }
-  console.log('courses raven', response);
-  return response;
-}
+  // console.log('courses raven', response);
+  // return response;
+  //cette partie permet notamment de filtrer les parcours pour ne retenir que ceux en français où en anglais.
+  if (response) {
+    interface Tag {
+      title: string;
+    }
 
+    interface Category {
+      tags?: Tag[];
+    }
+
+    interface Course {
+      category?: Category[];
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const filterCourses = (response: unknown): Course[] => {
+      if (!Array.isArray(response)) {
+        throw new Error('Invalid response format');
+      }
+
+      const courses = response as Course[];
+
+      const coursesFilter = courses.filter(
+        course =>
+          course.category &&
+          course.category.some(
+            cat =>
+              cat.tags &&
+              cat.tags.some(
+                tag =>
+                  tag.title.includes('English') || tag.title.includes('French')
+              )
+          )
+      );
+
+      console.log(coursesFilter);
+      return coursesFilter;
+    };
+  }
+}
 interface RavenFetchUserCoursesProgressDto {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   email_id: string;

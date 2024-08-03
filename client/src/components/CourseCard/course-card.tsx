@@ -1,6 +1,7 @@
 import React from 'react';
 import envData from '../../../../config/env.json';
 import PlayIcon from '../../assets/images/play.svg';
+import clockIcon from '../../assets/icons/clock.svg';
 
 import Map from '../Map/index';
 import { Link } from '../helpers';
@@ -31,6 +32,7 @@ interface LandingDetailsProps {
   link?: string;
   cardType?: string;
   createAt?: Date | string | number;
+  duration?: string;
 }
 
 const CourseCard = ({
@@ -41,6 +43,7 @@ const CourseCard = ({
   sameTab,
   external,
   description,
+  duration,
   title,
   icon,
   sponsorIcon,
@@ -109,7 +112,30 @@ const CourseCard = ({
                 ></p>
               )}
             </div>
+
             <div className='card-course-detail-footer'>
+              <div className='duration pull'>
+                {/* {title.includes('Introduction') ||
+                title.includes('introduce') ||
+                title.includes('Getting Started') ? (
+                  <p>Beginners</p>
+                ) : (
+                  // Votre code ici
+                  <p>Intermediate</p>
+                )} */}
+                {duration ? (
+                  <>
+                    <img
+                      src={clockIcon}
+                      alt='icone clock duration'
+                      className='clock'
+                    />
+                    <p> Duration: {'' + `${duration} `}</p>
+                  </>
+                ) : (
+                  ''
+                )}
+              </div>
               <div className='push'>
                 {isAvailable ? (
                   name && phone ? (

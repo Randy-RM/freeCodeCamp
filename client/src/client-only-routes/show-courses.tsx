@@ -15,8 +15,7 @@ import CourseCard from '../components/CourseCard/course-card';
 import LaptopIcon from '../assets/images/laptop.svg';
 import AlgoIcon from '../assets/images/algorithmIcon.svg';
 import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
-
-// import awsLogo from '../assets/images/aws-logo.png';
+import awsLogo from '../assets/images/aws-logo.png';
 
 import LaediesActIcon from '../assets/images/partners/we-act-logo.png';
 import NewBadge from '../assets/images/new.png';
@@ -43,6 +42,7 @@ import {
   getRavenTokenDataFromLocalStorage,
   removeRavenTokenFromLocalStorage
 } from '../utils/ajax';
+import { convertTime } from '../utils/allFunctions';
 
 import '../components/CourseFilter/course-filter.css';
 import CourseFilter from '../components/CourseFilter/course-filter';
@@ -107,6 +107,7 @@ export type RavenCourse = {
   createddate: string;
   updateddate: string;
   contenttype: string;
+  duration: string;
 };
 interface RavenTokenData {
   token: string;
@@ -168,7 +169,7 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [showFilter, setShowFilter] = useState<boolean>(false);
   // const [programmingCategory, setProgrammingCategory] = useState<boolean>(true);
-  const [screenWidth, setScreenWidth] = useState(
+  const [screenWidth, setScreenWidth] = useState<number>(
     typeof window !== 'undefined' ? window.innerWidth : 900
   );
   const [courseCategories, setCourseCategories] = useState<
@@ -279,6 +280,10 @@ export function Courses(props: CoursesProps): JSX.Element {
     ...(ravenCourses || []),
     ...(moodleCourses?.result ? moodleCourses.result.flat() : [])
   ];
+
+  if (allCourses) {
+    console.log('raven', ravenCourses, 'moodle', moodleCourses?.result);
+  }
 
   const navigateToPage = (forwardOrBackward: boolean) => {
     if (forwardOrBackward) {
@@ -456,17 +461,17 @@ export function Courses(props: CoursesProps): JSX.Element {
                       if ('launch_url' in course) {
                         // Vérifie si le cours est un cours Raven
                         return (
-                          // <CourseCard
-                          //   key={index}
-                          //   icon={awsLogo}
-                          //   isAvailable={true}
-                          //   isSignedIn={isSignedIn}
-                          //   title={`${index + 1}. ${course.name}`}
-                          //   buttonText={`Suivre le cours`}
-                          //   link={`${course.launch_url}`}
-                          //   description={course.short_description}
-                          // />
-                          ''
+                          <CourseCard
+                            key={index}
+                            icon={awsLogo}
+                            isAvailable={true}
+                            isSignedIn={isSignedIn}
+                            title={`${index + 1}. ${course.name}`}
+                            buttonText={`Suivre le cours`}
+                            link={`${course.launch_url}`}
+                            description={course.short_description}
+                            duration={convertTime(course.duration)}
+                          />
                         );
                       } else {
                         // Si ce n'est pas un cours Raven, c'est un cours Moodle

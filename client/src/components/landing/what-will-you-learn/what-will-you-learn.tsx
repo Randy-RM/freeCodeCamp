@@ -31,6 +31,7 @@ import {
   getExternalResource,
   getRavenTokenDataFromLocalStorage
 } from '../../../utils/ajax';
+import { convertTime } from '../../../utils/allFunctions';
 import sortCourses from '../../helpers/sort-course';
 import CourseFilterList from './filter/course-filter';
 
@@ -46,6 +47,7 @@ type RavenCourse = {
   createddate: string;
   updateddate: string;
   contenttype: string;
+  duration: string;
 };
 interface RavenTokenData {
   token: string;
@@ -253,6 +255,7 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
                     title={`${index + 1}. ${course.name}`}
                     buttonText={`Suivre le cours`}
                     link={`${course.launch_url}`}
+                    duration={convertTime(course.duration)}
                     description={course.short_description}
                   />
                 );
