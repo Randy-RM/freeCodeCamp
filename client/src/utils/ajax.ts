@@ -82,7 +82,7 @@ export interface CourseDetails {
 export const courseDescriptions: Record<CourseCategoryTitle, CourseDetails> = {
   Développement: {
     titre: 'Développement Web',
-    summury: `Apprends HTML, CSS et JavaScript pour créer des pages web interactives. Maîtrise les algorithmes et structures de données pour des sites adaptatifs...`,
+    summury: `Dans ce parcours, tu apprendras à créer des pages Web avec HTML pour le contenu, CSS pour la conception, et JavaScript pour rendre les sites interactifs. Tu découvriras également les algorithmes, les structures de données, et les bases du langage JavaScript.`,
     description: `Dans ce parcours, tu apprendras les langages que les développeurs
     utilisent pour créer des pages Web : HTML (Hypertext Markup Language)
     pour le contenu, et CSS (Cascading Style Sheets) pour la conception.
