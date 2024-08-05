@@ -319,9 +319,10 @@ const CoursesCategoryCard = ({
           <h2 className='path-title'>Découvre le parcours Programmation</h2>
           <p className='path-description'>
             {/* {getDescriptionByCategory(categoryDescrTitle || '')}  on utilisera cette ligne lorsque l'on voudra que les shrot description viennent tous de la structure des données*/}
-            Apprends HTML, CSS et JavaScript pour créer des pages web
-            interactives. Maîtrise les algorithmes et structures de données pour
-            des sites adaptatifs...
+            Dans ce parcours, tu apprendras à créer des pages Web avec HTML pour
+            le contenu, CSS pour la conception, et JavaScript pour rendre les
+            sites interactifs. Tu découvriras également les algorithmes, les
+            structures de données, et les bases du langage JavaScript.
           </p>
         </Link>
       </div>
