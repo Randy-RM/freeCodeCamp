@@ -6,6 +6,7 @@ import type {
   CompletedChallenge,
   User
 } from '../redux/prop-types';
+import { RavenCourse } from '../client-only-routes/show-courses';
 
 const { apiLocation } = envData;
 
@@ -410,7 +411,7 @@ interface RavenFetchCoursesDto {
 }
 
 export async function getAwsCourses(data: RavenFetchCoursesDto) {
-  let response: unknown;
+  let response: unknown | RavenCourse[];
 
   try {
     response = await get(
@@ -442,36 +443,51 @@ export async function getAwsPath(data: RavenFetchCoursesDto) {
 
     interface Category {
       tags?: Tag[];
+      title: string;
     }
 
     interface Course {
       category?: Category[];
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      skill_level: string;
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const filterCourses = (response: unknown): Course[] => {
-      if (!Array.isArray(response)) {
-        throw new Error('Invalid response format');
-      }
-
       const courses = response as Course[];
 
-      const coursesFilter = courses.filter(
-        course =>
-          course.category &&
-          course.category.some(
-            cat =>
-              cat.tags &&
-              cat.tags.some(
-                tag =>
-                  tag.title.includes('English') || tag.title.includes('French')
-              )
-          )
-      );
+      const coursesFilter = courses
+        .filter(
+          course =>
+            course.category &&
+            course.category.some(
+              cat =>
+                cat.tags &&
+                cat.tags.some(
+                  tag =>
+                    tag.title.includes('English') ||
+                    tag.title.includes('French')
+                )
+            )
+        )
+        .map(course => {
+          // Extraire le skill level
+          const skillLevelCategory = course.category?.find(
+            cat => cat.title === 'Skill Level'
+          );
+          if (skillLevelCategory && skillLevelCategory.tags) {
+            course.skill_level = skillLevelCategory.tags[0]?.title;
+          }
+          return course;
+        });
 
-      console.log(coursesFilter);
       return coursesFilter;
     };
+
+    const filteredCourses = filterCourses(response);
+    return filteredCourses;
   }
+
+  return [];
 }
 interface RavenFetchUserCoursesProgressDto {
   // eslint-disable-next-line @typescript-eslint/naming-convention
