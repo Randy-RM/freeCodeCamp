@@ -31,3 +31,37 @@ export function convertTime(timeInput: string | number): string {
     return `${hours} hour${hours > 1 ? 's' : ''} ${remainingMinutes} minutes`;
   }
 }
+
+interface PaginationResult<T> {
+  paginatedData: T[];
+  totalPages: number;
+  currentPage: number;
+}
+
+export function paginate<T>(
+  data: T[],
+  currentPage: number,
+  itemsPerPage = 12
+): PaginationResult<T> {
+  const totalItems = data.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  if (currentPage > totalPages) {
+    currentPage = totalPages;
+  } else if (currentPage < 1) {
+    currentPage = 1;
+  }
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const paginatedData = data.slice(startIndex, endIndex);
+
+  return {
+    paginatedData,
+    totalPages,
+    currentPage
+  };
+}
+
+// const { paginatedData, totalPages, currentPage: page } = paginate(data, currentPage);
