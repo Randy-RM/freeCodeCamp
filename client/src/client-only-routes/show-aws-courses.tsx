@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import {
   getAwsCourses,
-  getRavenTokenDataFromLocalStorage
+  getRavenTokenDataFromLocalStorage,
+  getAwsPath
 } from '../utils/ajax';
 
 import { createFlashMessage } from '../components/Flash/redux';
@@ -14,8 +15,10 @@ import {
   Spacer,
   renderCourseCardSkeletons
 } from '../components/helpers';
-// import '../components/CourseCard/courses-card.css';
 import CourseCard from '../components/CourseCard/course-card';
+import awsLogo from '../assets/images/aws-logo.png';
+import PathCard from '../components/PathCard/path-card';
+import { convertTime } from '../utils/allFunctions';
 
 import {
   signInLoadingSelector,
@@ -29,7 +32,6 @@ import envData from '../../../config/env.json';
 
 const { apiLocation } = envData;
 
-// TODO: update types for actions
 interface ShowAwsCoursesProps {
   createFlashMessage: typeof createFlashMessage;
   isSignedIn: boolean;
@@ -46,9 +48,14 @@ type RavenCourse = {
   launch_url: string;
   // eslint-disable-next-line @typescript-eslint/naming-convention
   short_description: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  long_description: string;
   createddate: string;
   updateddate: string;
   contenttype: string;
+  duration: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  skill_level: string;
 };
 
 interface RavenFetchCoursesDto {
@@ -58,6 +65,7 @@ interface RavenFetchCoursesDto {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   valid_to: string;
 }
+
 const mapStateToProps = createSelector(
   signInLoadingSelector,
   userSelector,
@@ -76,15 +84,23 @@ const mapDispatchToProps = {
 
 export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
   const { showLoading, isSignedIn } = props;
+  const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
 
   const [ravenCourses, setRavenCourses] = useState<RavenCourse[]>([]);
+  const [ravenPath, setRavenPath] = useState<RavenCourse[]>([]);
+  const [courseNumber, setCourseNumber] = useState<number>(0);
 
   const ravenLocalToken = getRavenTokenDataFromLocalStorage();
+
   const getRavenResources = async (data: RavenFetchCoursesDto) => {
     const getReveanCourses = await getAwsCourses(data);
-
     setRavenCourses(getReveanCourses as RavenCourse[]);
-    // setRavenCourses(getReveanCourses as RavenCourse[]);
+  };
+
+  const getRavenResourcesPath = async (data: RavenFetchCoursesDto) => {
+    const getReveanCourses = await getAwsPath(data);
+    setRavenPath(getReveanCourses as unknown as RavenCourse[]);
+    // setCourseNumber(courseNumber + ravenPath.length);
   };
 
   const ravenData: RavenFetchCoursesDto = {
@@ -94,6 +110,24 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     valid_to: '06-24-2024'
   };
+  useEffect(() => {
+    setCourseNumber(ravenPath.length + ravenCourses.length);
+    console.log(courseNumber);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ravenPath, ravenCourses]);
+  useEffect(() => {
+    void getRavenResourcesPath(ravenData);
+
+    const timer = setTimeout(() => {
+      if (isDataOnLoading) {
+        setIsDataOnLoading(false);
+      }
+    }, 3000);
+    return () => {
+      clearTimeout(timer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isDataOnLoading]);
 
   useEffect(() => {
     void getRavenResources(ravenData);
@@ -156,72 +190,57 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
         <Spacer size={1} />
         <Row>
           <Col md={12} sm={12} xs={12}>
-            <h2 className='big-subheading'>{`Parcours d'apprentissage`}</h2>
+            <div className='course__number'>
+              <h2 className='big-subheading'>{`Parcours d'apprentissage`}</h2>
+              <span>{courseNumber} cours</span>
+            </div>
             <Spacer size={2} />
           </Col>
           <Col className='' md={12} sm={12} xs={12}>
             <div className='card-course-detail-container'>
-              {/* {moodleCourses &&
-                moodleCourses.length >= 0 &&
-                moodleCourses.map((course, index) => {
-                  return (
-                    // <CourseCard
-                    //   key={course.id}
-                    //   isAvailable={true}
-                    //   isSignedIn={isSignedIn}
-                    //   title={`${index + 1}. ${course.displayname}`}
-                    //   buttonText={`Suivre le cours  `}
-                    //   link={`/aws-courses/learning-path/${course.fullname.replace(
-                    //     / /g,
-                    //     '-'
-                    //   )}`}
-                    // />
-                    
-                      <CourseCard
-                        key={course.id}
+              {!isDataOnLoading ? (
+                <>
+                  {ravenPath && ravenPath.length > 0 ? (
+                    ravenPath.map((course, index) => (
+                      <PathCard
+                        key={course.name}
+                        icon={awsLogo}
                         isAvailable={true}
                         isSignedIn={isSignedIn}
-                        title={`${index + 1}. ${course.displayname}`}
+                        title={`${index + 1}. ${course.name}`}
                         buttonText={`Suivre le cours  `}
-                        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                        link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
-                        description={course.summary}
+                        link={`${course.launch_url}`}
+                        description={course.long_description}
+                        duration={convertTime(course.duration)}
+                        level={course.skill_level}
                       />
-                    
-                  );
-                })} */}
-
-              {ravenCourses ? (
-                ravenCourses.length >= 0 &&
-                ravenCourses.map((course, index) => {
-                  return (
-                    // <CourseCard
-                    //   key={course.id}
-                    //   isAvailable={true}
-                    //   isSignedIn={isSignedIn}
-                    //   title={`${index + 1}. ${course.displayname}`}
-                    //   buttonText={`Suivre le cours  `}
-                    //   link={`/aws-courses/learning-path/${course.fullname.replace(
-                    //     / /g,
-                    //     '-'
-                    //   )}`}
-                    // />
-
-                    <CourseCard
-                      key={course.name}
-                      isAvailable={true}
-                      isSignedIn={isSignedIn}
-                      title={`${index + 1}. ${course.name}`}
-                      buttonText={`Suivre le cours  `}
-                      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                      link={`${course.launch_url}`}
-                      description={course.short_description}
-                    />
-                  );
-                })
+                    ))
+                  ) : (
+                    <div className='card-course-detail-container'>
+                      {renderCourseCardSkeletons(6)}
+                    </div>
+                  )}
+                  {ravenCourses && ravenCourses.length > 0 ? (
+                    ravenCourses.map((course, index) => (
+                      <CourseCard
+                        key={course.name}
+                        isAvailable={true}
+                        isSignedIn={isSignedIn}
+                        title={`${index + 1}. ${course.name}`}
+                        buttonText={`Suivre le cours  `}
+                        link={`${course.launch_url}`}
+                        description={course.short_description}
+                      />
+                    ))
+                  ) : (
+                    <div className='card-course-detail-container'>
+                      {renderCourseCardSkeletons(6)}
+                    </div>
+                  )}
+                </>
               ) : (
                 <div className='card-course-detail-container'>
-                  {renderCourseCardSkeletons(3)}
+                  {renderCourseCardSkeletons(6)}
                 </div>
               )}
             </div>
