@@ -448,11 +448,11 @@ export function Courses(props: CoursesProps): JSX.Element {
               )}
 
               <div className='card-courses-detail-container'>
-                <div className='course__number'>
+                <div>
                   <h2 className='big-subheading'>{`Explorer notre catalogue`}</h2>
-                  <span>{allCourses.length + 2} cours</span>
                 </div>
                 <Spacer />
+
                 <CoursesCategoryCard
                   courseCategories={courseCategories}
                   setCurrentCategory={setCurrentCategory}
@@ -463,6 +463,10 @@ export function Courses(props: CoursesProps): JSX.Element {
                   setMoodleCourses={setMoodleCourses}
                   setRavenCourses={setRavenCourses}
                 />
+                <div className='course__number'>
+                  <p>Parcourir le catalogue complet</p>
+                  <span>{allCourses.length + 2} cours</span>
+                </div>
                 {!isDataOnLoading ? (
                   <div className='card-course-detail-container'>
                     {currentPage == 1 &&
@@ -565,7 +569,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                 )}
               </div>
             </div>
-            <Spacer size={3} />
+            <Spacer size={4} />
             <div className='pagination-container'>
               <FontAwesomeIcon
                 icon={faChevronLeft}
