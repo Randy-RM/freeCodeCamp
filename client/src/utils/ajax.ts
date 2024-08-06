@@ -424,7 +424,7 @@ export async function getAwsCourses(data: RavenFetchCoursesDto) {
   return response;
 }
 export async function getAwsPath(data: RavenFetchCoursesDto) {
-  let response: unknown;
+  let response: unknown | RavenCourse[];
 
   try {
     response = await get(
