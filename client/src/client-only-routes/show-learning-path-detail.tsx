@@ -102,6 +102,7 @@ export function ShowLearningPathDetail(
 
   useEffect(() => {
     void getMoodleCourses();
+
     const timer = setTimeout(() => {
       if (isDataOnLoading) {
         setIsDataOnLoading(false);
@@ -167,7 +168,10 @@ export function ShowLearningPathDetail(
         <Spacer size={1} />
         <Row>
           <Col md={12} sm={12} xs={12}>
-            <h2 className='big-subheading'>{`Cours`}</h2>
+            <div className='course__number'>
+              <h2 className='big-subheading'>{`Parcours d'apprentissage`}</h2>
+              <span>{moodleCourses?.length} cours</span>
+            </div>
             <Spacer size={2} />
           </Col>
           <Col className='' md={12} sm={12} xs={12}>
