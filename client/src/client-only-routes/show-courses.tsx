@@ -190,8 +190,6 @@ export function Courses(props: CoursesProps): JSX.Element {
 
   const ravenLocalToken = getRavenTokenDataFromLocalStorage();
 
-  console.log('state courses ', ravenPath);
-
   const getRavenResources = async () => {
     await getRavenToken();
 
@@ -219,7 +217,6 @@ export function Courses(props: CoursesProps): JSX.Element {
     };
     const getReveanCourses = await getAwsPath(ravenData);
     setRavenPath(getReveanCourses as unknown as RavenCourse[]);
-    console.log('les ', getReveanCourses);
   };
 
   const getRavenToken = async () => {

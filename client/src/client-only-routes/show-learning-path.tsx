@@ -122,7 +122,6 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
   const getRavenResourcesPath = async (data: RavenFetchCoursesDto) => {
     const getReveanCourses = await getAwsPath(data);
     setRavenPath(getReveanCourses as unknown as RavenCourse[]);
-    console.log('les ', getReveanCourses);
   };
   const getMoodleCoursesCategories = async () => {
     const moodleCategoriesCatalogue = await getExternalResource<

@@ -152,7 +152,6 @@ const CourseFilter = ({
     };
     const getReveanCourses = await getAwsPath(ravenData);
     setRavenPath(getReveanCourses as unknown as RavenCourse[]);
-    console.log('les ', getReveanCourses);
   };
 
   const getRavenCourses = async () => {
