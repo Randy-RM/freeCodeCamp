@@ -16,8 +16,9 @@ export function convertTime(timeInput: string | number): string {
       totalMinutes = value < 1 ? Math.round(value * 60) : value * 60;
     }
   }
-
-  if (totalMinutes < 60) {
+  if (totalMinutes < 1) {
+    return `< 1 minute`;
+  } else if (totalMinutes < 60) {
     return `${totalMinutes} minutes`;
   }
 
