@@ -88,10 +88,6 @@ img {
   width: 100%;
 }
 
-.course__number {
-  display: flex;
-}
-
 .parcours-description {
   font-size: 1.5rem;
 }

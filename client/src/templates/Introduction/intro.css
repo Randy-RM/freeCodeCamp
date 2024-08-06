@@ -26,12 +26,16 @@
 
 .course__number {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 1rem;
 }
 .course__number p,
 span {
   font-size: 1.5rem;
+}
+
+.course__number p {
+  font-weight: bold;
 }
 
 .block-header .block-link {
