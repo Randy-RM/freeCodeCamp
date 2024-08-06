@@ -115,7 +115,10 @@ export function ShowFccCourses(props: ShowFccCoursesProps): JSX.Element {
         <Spacer size={1} />
         <Row>
           <Col md={12} sm={12} xs={12}>
-            <h2 className='big-subheading'>{`Cours`}</h2>
+            <div className='course__number'>
+              <h2 className='big-subheading'>{`Parcours d'apprentissage`}</h2>
+              <span>2 cours</span>
+            </div>
             <Spacer size={2} />
           </Col>
           <Col className='' md={12} sm={12} xs={12}>
@@ -128,6 +131,7 @@ export function ShowFccCourses(props: ShowFccCoursesProps): JSX.Element {
                   isAvailable={true}
                   isSignedIn={isSignedIn}
                   title={`Responsive Web Design`}
+                  link={`/learn/responsive-web-design`}
                   buttonText={`Suivre le cours  `}
                   description={`
                 Dans ce cours, tu apprendras les langages que les développeurs 
