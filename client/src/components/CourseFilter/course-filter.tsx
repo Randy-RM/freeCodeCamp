@@ -6,7 +6,8 @@ import {
   generateRavenTokenAcces,
   getAwsCourses,
   getExternalResource,
-  getRavenTokenDataFromLocalStorage
+  getRavenTokenDataFromLocalStorage,
+  getAwsPath
 } from '../../utils/ajax';
 import envData from '../../../../config/env.json';
 
@@ -55,6 +56,7 @@ const { moodleApiBaseUrl, moodleApiToken, ravenAwsApiKey } = envData;
 
 const CourseFilter = ({
   setRavenCourses,
+  setRavenPath,
   setMoodleCourses,
   setIsDataOnLoading,
   setShowFilter,
@@ -74,6 +76,8 @@ const CourseFilter = ({
 
   setIsDataOnLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
+  setRavenPath: React.Dispatch<React.SetStateAction<RavenCourse[] | null>>;
+
   // setProgrammingCategory: React.Dispatch<React.SetStateAction<boolean>>;
   screenWidth: number;
   courseCategories: MoodleCourseCategory[] | null | undefined;
@@ -134,6 +138,21 @@ const CourseFilter = ({
     } else {
       setMoodleCourses(null);
     }
+  };
+  const getRavenResourcesPath = async () => {
+    await getRavenToken();
+    const ravenLocalToken = getRavenTokenDataFromLocalStorage();
+    const ravenData: RavenFetchCoursesDto = {
+      apiKey: ravenAwsApiKey,
+      token: ravenLocalToken?.token || '',
+      currentPage: 1,
+      fromDate: '01-01-2023',
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      valid_to: '06-24-2024'
+    };
+    const getReveanCourses = await getAwsPath(ravenData);
+    setRavenPath(getReveanCourses as unknown as RavenCourse[]);
+    console.log('les ', getReveanCourses);
   };
 
   const getRavenCourses = async () => {
@@ -228,6 +247,7 @@ const CourseFilter = ({
               onClick={() => {
                 void getMoodleCourses();
                 void getRavenCourses();
+                void getRavenResourcesPath();
                 setCurrentPage(1);
                 setCurrentCategory(null);
                 // setProgrammingCategory(true);
@@ -250,6 +270,7 @@ const CourseFilter = ({
                 // setProgrammingCategory(true);
                 setMoodleCourses(null);
                 setRavenCourses(null);
+                setRavenPath(null);
                 scrollTo(130);
                 if (screenWidth < 990) setShowFilter(e => !e);
               }}
@@ -268,6 +289,7 @@ const CourseFilter = ({
                 // setProgrammingCategory(true);
                 setMoodleCourses(null);
                 void getRavenCourses();
+                void getRavenResourcesPath();
                 scrollTo(130);
                 if (screenWidth < 990) setShowFilter(e => !e);
               }}
@@ -285,6 +307,7 @@ const CourseFilter = ({
                 onClick={() => {
                   void filterByCategory(element?.id);
                   setRavenCourses(null);
+                  setRavenPath(null);
                   setCurrentCategory(element?.id);
                   setCurrentPage(1);
                   scrollTo(130);

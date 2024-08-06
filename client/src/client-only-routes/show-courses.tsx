@@ -125,7 +125,7 @@ interface RavenTokenData {
   valid_to: string;
 }
 
-interface RavenFetchCoursesDto {
+export interface RavenFetchCoursesDto {
   apiKey: string;
   token: string;
   currentPage: number;
@@ -208,8 +208,16 @@ export function Courses(props: CoursesProps): JSX.Element {
     setRavenCourses(getReveanCourses as RavenCourse[]);
   };
 
-  const getRavenResourcesPath = async (data: RavenFetchCoursesDto) => {
-    const getReveanCourses = await getAwsPath(data);
+  const getRavenResourcesPath = async () => {
+    const ravenData: RavenFetchCoursesDto = {
+      apiKey: ravenAwsApiKey,
+      token: ravenLocalToken?.token || '',
+      currentPage: currentPage,
+      fromDate: '01-01-2023',
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      valid_to: '06-24-2024'
+    };
+    const getReveanCourses = await getAwsPath(ravenData);
     setRavenPath(getReveanCourses as unknown as RavenCourse[]);
     console.log('les ', getReveanCourses);
   };
@@ -299,12 +307,8 @@ export function Courses(props: CoursesProps): JSX.Element {
   const allCourses = [
     ...(ravenCourses || []),
     ...(moodleCourses?.result ? moodleCourses.result.flat() : []),
-    ...ravenPath
+    ...(ravenPath ? ravenPath : [])
   ];
-
-  if (allCourses) {
-    console.log('raven', ravenCourses, 'moodle', moodleCourses?.result);
-  }
 
   const {
     paginatedData,
@@ -332,15 +336,8 @@ export function Courses(props: CoursesProps): JSX.Element {
   };
 
   useEffect(() => {
-    const ravenData: RavenFetchCoursesDto = {
-      apiKey: ravenAwsApiKey,
-      token: ravenLocalToken?.token || '',
-      currentPage: currentPage,
-      fromDate: '01-01-2023',
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      valid_to: '06-24-2024'
-    };
-    void getRavenResourcesPath(ravenData);
+    void getRavenResourcesPath();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
@@ -434,6 +431,7 @@ export function Courses(props: CoursesProps): JSX.Element {
             <div className='card-filter-container'>
               {showFilter && (
                 <CourseFilter
+                  setRavenPath={setRavenPath}
                   screenWidth={screenWidth}
                   setRavenCourses={setRavenCourses}
                   setMoodleCourses={setMoodleCourses}
@@ -455,6 +453,8 @@ export function Courses(props: CoursesProps): JSX.Element {
 
                 <CoursesCategoryCard
                   courseCategories={courseCategories}
+                  // getRavenResourcesPath={getRavenResourcesPath}
+                  setRavenPath={setRavenPath}
                   setCurrentCategory={setCurrentCategory}
                   currentCategory={currentCategory}
                   screenWidth={setScreenWidth}
@@ -465,7 +465,13 @@ export function Courses(props: CoursesProps): JSX.Element {
                 />
                 <div className='course__number'>
                   <p>Parcourir le catalogue complet</p>
-                  <span>{allCourses.length + 2} cours</span>
+                  <span>
+                    {allCourses.length +
+                      (currentCategory == null || currentCategory == -1
+                        ? 2
+                        : 0)}{' '}
+                    cours
+                  </span>
                 </div>
                 {!isDataOnLoading ? (
                   <div className='card-course-detail-container'>
@@ -576,7 +582,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                 className='pagination-chevron'
                 onClick={() => onNavigueteBackward()}
               />
-              <span>
+              <span className='pagination__number'>
                 {currentPage}/{totalPages}
               </span>
               <FontAwesomeIcon
