@@ -4,6 +4,8 @@ import PlayIcon from '../../assets/images/play.svg';
 
 import Map from '../Map/index';
 import { Link } from '../helpers';
+import clockIcon from '../../assets/icons/clock.svg';
+import levelIcon from '../../assets/icons/level.svg';
 
 import './path-card.css';
 
@@ -24,6 +26,8 @@ interface LandingDetailsProps {
   buttonText?: string;
   link?: string;
   cardType?: string;
+  duration?: string;
+  level?: string;
 }
 
 const PathCard = ({
@@ -39,7 +43,9 @@ const PathCard = ({
   sponsorIcon,
   alt,
   buttonText,
-  link
+  link,
+  duration,
+  level
 }: LandingDetailsProps): JSX.Element => {
   return (
     <div className='card-course-detail-back-path standard-radius-5 card-outlin-border'>
@@ -64,7 +70,9 @@ const PathCard = ({
           <div className='card-course-detail-item'>
             <h4
               className='fw-bold text-love-light'
-              dangerouslySetInnerHTML={{ __html: title }}
+              dangerouslySetInnerHTML={{
+                __html: `${title.substring(0, 100)}`
+              }}
             ></h4>
           </div>
           <div className='card-course-detail-item  flexible'>
@@ -72,13 +80,42 @@ const PathCard = ({
               <p
                 className='text-responsive'
                 dangerouslySetInnerHTML={{
-                  __html: `${description.substring(0, 150)}...`
+                  __html: `${description.substring(0, 130)}...`
                 }}
               ></p>
             )}
           </div>
           <div className='card-course-detail-footer'>
-            <div className='push'>
+            <div className='course-level'>
+              <div className='level-card'>
+                {level ? (
+                  <>
+                    <img
+                      src={levelIcon}
+                      alt='icone clock duration'
+                      className='clock'
+                    />
+                    <p> {level}</p>
+                  </>
+                ) : (
+                  ''
+                )}
+              </div>
+              {duration ? (
+                <>
+                  <img
+                    src={clockIcon}
+                    alt='icone clock duration'
+                    className='clock'
+                  />
+                  <p> {duration} </p>
+                </>
+              ) : (
+                ''
+              )}
+            </div>
+            <div className='duration pull'>
+              <div className='push'></div>
               {isAvailable ? (
                 name && phone ? (
                   isSignedIn ? (
