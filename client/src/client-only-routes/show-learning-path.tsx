@@ -21,9 +21,9 @@ import {
   splitArray
 } from '../components/helpers';
 import LaptopIcon from '../assets/images/laptop.svg';
-import CloudShield from '../assets/images/cloudShield.svg';
 import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
 import awsLogo from '../assets/images/aws-logo.png';
+// import { convertTime } from '../utils/allFunctions';
 
 import {
   signInLoadingSelector,
@@ -79,6 +79,9 @@ type RavenCourse = {
   createddate: string;
   updateddate: string;
   contenttype: string;
+  duration: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  skill_level: string;
 };
 interface RavenFetchCoursesDto {
   apiKey: string;
@@ -230,22 +233,22 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                       />
                     </div>
                   </Link>
-
-                  <PathCard
-                    icon={CloudShield}
-                    alt=''
-                    isAvailable={awsCoursesIsAviable}
-                    isSignedIn={isSignedIn}
-                    title={`Parcours AWS`}
-                    buttonText={`Suivre le parcours  `}
-                    link={`/aws-courses`}
-                    cardType='parcours'
-                    description={`Ce parcours est conçu pour montrer aux participants comment 
+                  <Link to='/aws-courses'>
+                    <PathCard
+                      icon={awsLogo}
+                      alt=''
+                      isAvailable={awsCoursesIsAviable}
+                      isSignedIn={isSignedIn}
+                      title={`Parcours AWS`}
+                      buttonText={`Suivre le parcours  `}
+                      link={`/aws-courses`}
+                      cardType='parcours'
+                      description={`Ce parcours est conçu pour montrer aux participants comment 
                   optimiser l'utilisation du cloud AWS grâce à la compréhension 
                   de ces nombreux services et de leur intégration dans la création 
                   de solutions basées sur le cloud.`}
-                  />
-
+                    />
+                  </Link>
                   {moodleCoursesCategories &&
                     moodleCoursesCategories.result.length >= 0 &&
                     moodleCoursesCategories.result[currentPage - 1].map(
@@ -277,7 +280,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                         );
                       }
                     )}
-
+                  {/* 
                   {ravenPath &&
                     ravenPath.length >= 0 &&
                     ravenPath.map((course, index) => {
@@ -292,9 +295,11 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                           // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
                           link={`${course.launch_url}`}
                           description={course.long_description}
+                          duration={convertTime(course.duration)}
+                          level={course.skill_level}
                         />
                       );
-                    })}
+                    })} */}
                 </div>
               ) : (
                 <div className='card-course-detail-container'>
