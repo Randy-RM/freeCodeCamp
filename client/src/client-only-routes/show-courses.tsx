@@ -583,7 +583,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                 onClick={() => onNavigueteBackward()}
               />
               <span className='pagination__number'>
-                {currentPage}/{totalPages}
+                {currentPage}/{totalPages > 0 ? totalPages : 1}
               </span>
               <FontAwesomeIcon
                 icon={faChevronRight}
