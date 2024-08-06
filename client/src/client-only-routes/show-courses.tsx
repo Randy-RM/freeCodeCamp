@@ -1,14 +1,17 @@
-import { Grid, Row, Col } from '@freecodecamp/react-bootstrap';
+import { Grid } from '@freecodecamp/react-bootstrap';
 import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
+
 // import { useTranslation } from 'react-i18next';PhBookBookmark
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import {
   faChevronLeft,
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
+import PathCard from '../components/PathCard/path-card';
 
 import envData from '../../../config/env.json';
 import CourseCard from '../components/CourseCard/course-card';
@@ -40,9 +43,10 @@ import {
   getAwsCourses,
   getExternalResource,
   getRavenTokenDataFromLocalStorage,
-  removeRavenTokenFromLocalStorage
+  removeRavenTokenFromLocalStorage,
+  getAwsPath
 } from '../utils/ajax';
-import { convertTime } from '../utils/allFunctions';
+import { convertTime, paginate } from '../utils/allFunctions';
 
 import '../components/CourseFilter/course-filter.css';
 import CourseFilter from '../components/CourseFilter/course-filter';
@@ -108,6 +112,10 @@ export type RavenCourse = {
   updateddate: string;
   contenttype: string;
   duration: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  long_description: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  skill_level: string;
 };
 interface RavenTokenData {
   token: string;
@@ -178,6 +186,12 @@ export function Courses(props: CoursesProps): JSX.Element {
 
   const [currentCategory, setCurrentCategory] = useState<number | null>(null);
 
+  const [ravenPath, setRavenPath] = useState<RavenCourse[]>([]);
+
+  const ravenLocalToken = getRavenTokenDataFromLocalStorage();
+
+  console.log('state courses ', ravenPath);
+
   const getRavenResources = async () => {
     await getRavenToken();
 
@@ -192,6 +206,12 @@ export function Courses(props: CoursesProps): JSX.Element {
     };
     const getReveanCourses = await getAwsCourses(ravenData);
     setRavenCourses(getReveanCourses as RavenCourse[]);
+  };
+
+  const getRavenResourcesPath = async (data: RavenFetchCoursesDto) => {
+    const getReveanCourses = await getAwsPath(data);
+    setRavenPath(getReveanCourses as unknown as RavenCourse[]);
+    console.log('les ', getReveanCourses);
   };
 
   const getRavenToken = async () => {
@@ -278,25 +298,51 @@ export function Courses(props: CoursesProps): JSX.Element {
 
   const allCourses = [
     ...(ravenCourses || []),
-    ...(moodleCourses?.result ? moodleCourses.result.flat() : [])
+    ...(moodleCourses?.result ? moodleCourses.result.flat() : []),
+    ...ravenPath
   ];
 
   if (allCourses) {
     console.log('raven', ravenCourses, 'moodle', moodleCourses?.result);
   }
 
-  const navigateToPage = (forwardOrBackward: boolean) => {
-    if (forwardOrBackward) {
-      if (moodleCourses && currentPage < moodleCourses?.size) {
-        setCurrentPage(Number(currentPage + 1));
-      }
+  const {
+    paginatedData,
+    totalPages,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    currentPage: page
+  } = paginate(allCourses, currentPage);
+
+  const onNavigateForward = () => {
+    if (currentPage < totalPages && currentPage > 0) {
+      setCurrentPage(currentPage + 1);
+      setIsDataOnLoading(!isDataOnLoading);
     } else {
-      if (currentPage > 1) {
-        setCurrentPage(Number(currentPage - 1));
-      }
+      setCurrentPage(currentPage);
     }
-    setIsDataOnLoading(true);
   };
+
+  const onNavigueteBackward = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+      setIsDataOnLoading(!isDataOnLoading);
+    } else {
+      setCurrentPage(currentPage);
+    }
+  };
+
+  useEffect(() => {
+    const ravenData: RavenFetchCoursesDto = {
+      apiKey: ravenAwsApiKey,
+      token: ravenLocalToken?.token || '',
+      currentPage: currentPage,
+      fromDate: '01-01-2023',
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      valid_to: '06-24-2024'
+    };
+    void getRavenResourcesPath(ravenData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
 
   useEffect(() => {
     void getRavenResources();
@@ -402,10 +448,11 @@ export function Courses(props: CoursesProps): JSX.Element {
               )}
 
               <div className='card-courses-detail-container'>
-                <div>
+                <div className='course__number'>
                   <h2 className='big-subheading'>{`Explorer notre catalogue`}</h2>
-                  <Spacer />
+                  <span>{allCourses.length + 2} cours</span>
                 </div>
+                <Spacer />
                 <CoursesCategoryCard
                   courseCategories={courseCategories}
                   setCurrentCategory={setCurrentCategory}
@@ -456,25 +503,40 @@ export function Courses(props: CoursesProps): JSX.Element {
                           />
                         </>
                       )}
-
-                    {allCourses.map((course, index) => {
+                    {paginatedData.map((course, index) => {
                       if ('launch_url' in course) {
-                        // Vérifie si le cours est un cours Raven
-                        return (
-                          <CourseCard
-                            key={index}
-                            icon={awsLogo}
-                            isAvailable={true}
-                            isSignedIn={isSignedIn}
-                            title={`${index + 1}. ${course.name}`}
-                            buttonText={`Suivre le cours`}
-                            link={`${course.launch_url}`}
-                            description={course.short_description}
-                            duration={convertTime(course.duration)}
-                          />
-                        );
+                        if (course.long_description) {
+                          return (
+                            <PathCard
+                              key={course.name}
+                              icon={awsLogo}
+                              isAvailable={true}
+                              isSignedIn={isSignedIn}
+                              title={`${index + 1}. ${course.name}`}
+                              buttonText={`Suivre le cours`}
+                              link={course.launch_url}
+                              description={course.long_description}
+                              duration={convertTime(course.duration)}
+                              level={course.skill_level}
+                            />
+                          );
+                        } else {
+                          return (
+                            <CourseCard
+                              key={index}
+                              icon={awsLogo}
+                              isAvailable={true}
+                              isSignedIn={isSignedIn}
+                              title={`${index + 1}. ${course.name}`}
+                              buttonText={`Suivre le cours`}
+                              link={course.launch_url}
+                              description={course.short_description}
+                              duration={convertTime(course.duration)}
+                            />
+                          );
+                        }
                       } else {
-                        // Si ce n'est pas un cours Raven, c'est un cours Moodle
+                        // Vérifie si le cours est un cours Raven
                         return (
                           <CourseCard
                             key={index + course.id}
@@ -486,7 +548,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                             isSignedIn={isSignedIn}
                             sameTab={true}
                             external={true}
-                            title={`${course.displayname}`}
+                            title={course.displayname}
                             buttonText={`Suivre le cours`}
                             createAt={formatdate(course.timecreated)}
                             link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
@@ -505,36 +567,19 @@ export function Courses(props: CoursesProps): JSX.Element {
             </div>
             <Spacer size={3} />
             <div className='pagination-container'>
-              {moodleCourses && moodleCourses.size > 0 && (
-                <Row>
-                  <Col md={12} sm={12} xs={12}>
-                    {currentPage > 1 && (
-                      <FontAwesomeIcon
-                        icon={faChevronLeft}
-                        className='pagination-chevron'
-                        onClick={() => {
-                          scrollTo(130);
-                          navigateToPage(false);
-                        }}
-                      />
-                    )}
-                    &nbsp;
-                    {`  ${currentPage} sur ${moodleCourses?.size}  `}
-                    &nbsp;
-                    {currentPage < moodleCourses?.size && (
-                      <FontAwesomeIcon
-                        icon={faChevronRight}
-                        className='pagination-chevron'
-                        onClick={() => {
-                          scrollTo(130);
-                          navigateToPage(true);
-                        }}
-                      />
-                    )}
-                    <Spacer size={1} />
-                  </Col>
-                </Row>
-              )}
+              <FontAwesomeIcon
+                icon={faChevronLeft}
+                className='pagination-chevron'
+                onClick={() => onNavigueteBackward()}
+              />
+              <span>
+                {currentPage}/{totalPages}
+              </span>
+              <FontAwesomeIcon
+                icon={faChevronRight}
+                className='pagination-chevron'
+                onClick={() => onNavigateForward()}
+              />
             </div>
           </div>
         </main>
