@@ -210,6 +210,12 @@ img {
   text-decoration: none;
 }
 
+.duration__language {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.3rem;
+}
+
 .skeleton-logo-icon,
 .skeleton-title,
 .skeleton-content,
@@ -241,15 +247,6 @@ img {
 
   .card-course-detail-unit {
     width: 100%;
-  }
-
-  .card-course-detail-container {
-    /* display: flex;
-    flex-direction: row;
-    width: 100%;
-    padding-left: 16px; */
-
-    /* gap: 50px; */
   }
 }
 
