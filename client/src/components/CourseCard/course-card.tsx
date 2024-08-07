@@ -33,6 +33,7 @@ interface LandingDetailsProps {
   cardType?: string;
   createAt?: Date | string | number;
   duration?: string;
+  language?: string;
 }
 
 const CourseCard = ({
@@ -52,7 +53,8 @@ const CourseCard = ({
   link,
   cardType,
   badgeIcon,
-  createAt
+  createAt,
+  language
 }: LandingDetailsProps): JSX.Element => {
   const isLessThan30DaysOld = (date: string): boolean => {
     const dateObjet = new Date(date);
@@ -114,7 +116,7 @@ const CourseCard = ({
             </div>
 
             <div className='card-course-detail-footer'>
-              <div className='duration pull'>
+              <div className='duration__language'>
                 {/* {title.includes('Introduction') ||
                 title.includes('introduce') ||
                 title.includes('Getting Started') ? (
@@ -123,6 +125,7 @@ const CourseCard = ({
                   // Votre code ici
                   <p>Intermediate</p>
                 )} */}
+
                 {duration ? (
                   <>
                     <img
@@ -135,7 +138,17 @@ const CourseCard = ({
                 ) : (
                   ''
                 )}
+                {language ? (
+                  <>
+                    <p className='course__language'>
+                      {language === 'French' ? 'Français' : 'Anglais'}{' '}
+                    </p>
+                  </>
+                ) : (
+                  ''
+                )}
               </div>
+              <div className='duration pull'></div>
               <div className='push'>
                 {isAvailable ? (
                   name && phone ? (
