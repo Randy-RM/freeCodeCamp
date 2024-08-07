@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { Grid } from '@freecodecamp/react-bootstrap';
 import { Link } from 'gatsby';
+import routes from '../utils/routes';
 
 import {
   addRavenTokenToLocalStorage,
@@ -139,6 +140,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
           20
         )
       );
+      console.log(moodleCoursesCategories);
     } else {
       setMoodleCoursesCategories(null);
     }
@@ -212,7 +214,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
             <div>
               {!isDataOnLoading ? (
                 <div className='card-course-detail-container'>
-                  <Link to='/learning-path/developpement-web'>
+                  <Link to={routes.learningPath.fullstack}>
                     <div className='card-link'>
                       <PathCard
                         icon={LaptopIcon}
@@ -221,7 +223,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                         isSignedIn={isSignedIn}
                         title={`Développement Web`}
                         buttonText={`Suivre le parcours  `}
-                        link={`/learning-path/developpement-web`}
+                        link={routes.learningPath.fullstack}
                         cardType='parcours'
                         description={`
                         Dans ce parcours en ligne, tu apprendras les langages que les développeurs 
@@ -232,7 +234,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                       />
                     </div>
                   </Link>
-                  <Link to='/aws-courses'>
+                  <Link to={routes.learningPath.aws}>
                     <PathCard
                       icon={awsLogo}
                       alt=''
@@ -240,7 +242,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                       isSignedIn={isSignedIn}
                       title={`Parcours AWS`}
                       buttonText={`Suivre le parcours  `}
-                      link={`/aws-courses`}
+                      link={routes.learningPath.aws}
                       cardType='parcours'
                       description={`Ce parcours est conçu pour montrer aux participants comment 
                   optimiser l'utilisation du cloud AWS grâce à la compréhension 
@@ -255,7 +257,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                         return (
                           <Link
                             key={index}
-                            to={`/learning-path/${category.name
+                            to={`${routes.learningPath.index}/${category.name
                               .replace(/ /g, '-')
                               .replace(/&amp;/g, 'et')}/${category.id}`}
                             className='link'
@@ -268,7 +270,9 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                                 title={category.name.replace(/&amp;/g, 'et')}
                                 buttonText={`Suivre le parcours`}
                                 // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                                link={`/learning-path/${category.name
+                                link={`${
+                                  routes.learningPath.index
+                                }/${category.name
                                   .replace(/ /g, '-')
                                   .replace(/&amp;/g, 'et')}/${category.id}`}
                                 cardType='parcours'
@@ -279,26 +283,6 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                         );
                       }
                     )}
-                  {/* 
-                  {ravenPath &&
-                    ravenPath.length >= 0 &&
-                    ravenPath.map((course, index) => {
-                      return (
-                        <PathCard
-                          key={course.name}
-                          icon={awsLogo}
-                          isAvailable={true}
-                          isSignedIn={isSignedIn}
-                          title={`${index + 1}. ${course.name}`}
-                          buttonText={`Suivre le cours  `}
-                          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                          link={`${course.launch_url}`}
-                          description={course.long_description}
-                          duration={convertTime(course.duration)}
-                          level={course.skill_level}
-                        />
-                      );
-                    })} */}
                 </div>
               ) : (
                 <div className='card-course-detail-container'>
