@@ -154,8 +154,6 @@ const CoursesCategoryCard = ({
     } else {
       setMoodleCourses(null);
     }
-
-    console.log(moodleCatalogue);
   };
 
   const getRavenCourses = async () => {

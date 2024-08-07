@@ -21,7 +21,6 @@ const defaultOptions: RequestInit = {
 function getCSRFToken() {
   const token =
     typeof window !== 'undefined' ? cookies.get('csrf_token') : null;
-  console.log('les token', token);
   return token ?? '';
 }
 
@@ -432,7 +431,6 @@ export async function getAwsPath(data: RavenFetchCoursesDto) {
   } catch (error) {
     response = null;
   }
-  // console.log('courses raven', response);
   // return response;
   //cette partie permet notamment de filtrer les parcours pour ne retenir que ceux en français où en anglais.
   if (response) {

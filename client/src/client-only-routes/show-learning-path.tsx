@@ -117,8 +117,8 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [awsCoursesIsAviable, setAwsCoursesIsAviable] =
     useState<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [ravenPath, setRavenPath] = useState<RavenCourse[]>([]);
-  console.log('state courses ', ravenPath);
 
   const getRavenResourcesPath = async (data: RavenFetchCoursesDto) => {
     const getReveanCourses = await getAwsPath(data);
@@ -140,7 +140,6 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
           20
         )
       );
-      console.log(moodleCoursesCategories);
     } else {
       setMoodleCoursesCategories(null);
     }

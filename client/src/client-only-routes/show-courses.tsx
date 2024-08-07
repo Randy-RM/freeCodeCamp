@@ -17,7 +17,7 @@ import envData from '../../../config/env.json';
 import CourseCard from '../components/CourseCard/course-card';
 import LaptopIcon from '../assets/images/laptop.svg';
 import AlgoIcon from '../assets/images/algorithmIcon.svg';
-// import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
+import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
 import awsLogo from '../assets/images/aws-logo.png';
 
 import LaediesActIcon from '../assets/images/partners/we-act-logo.png';
@@ -46,7 +46,11 @@ import {
   removeRavenTokenFromLocalStorage,
   getAwsPath
 } from '../utils/ajax';
-import { convertTime, paginate } from '../utils/allFunctions';
+import {
+  convertTime,
+  convertTimestampToTime,
+  paginate
+} from '../utils/allFunctions';
 
 import '../components/CourseFilter/course-filter.css';
 import CourseFilter from '../components/CourseFilter/course-filter';
@@ -579,14 +583,16 @@ export function Courses(props: CoursesProps): JSX.Element {
                             <CourseCard
                               language='French'
                               key={`${index}-${course.id}`}
-                              icon='path/to/PhBookBookmark.png' // Remplacer par le chemin réel de l'image
+                              icon={PhBookBookmark} // Remplacer par le chemin réel de l'image
                               isAvailable={course.visible === 1}
                               isSignedIn={isSignedIn}
                               title={course.displayname}
                               buttonText='Suivre le cours'
                               link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
                               description={course.summary}
-                              duration={convertTime(course.timecreated)}
+                              duration={convertTimestampToTime(
+                                course.timecreated
+                              )}
                             />
                           );
                         }
@@ -599,7 +605,6 @@ export function Courses(props: CoursesProps): JSX.Element {
                   </div>
                 ) : null}
 
-                <Spacer size={4} />
                 <div className='pagination-container'>
                   <FontAwesomeIcon
                     icon={faChevronLeft}
@@ -615,6 +620,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                     onClick={() => onNavigateForward()}
                   />
                 </div>
+                <Spacer size={2} />
               </div>
             </div>
           </div>

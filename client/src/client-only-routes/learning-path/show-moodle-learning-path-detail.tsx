@@ -98,7 +98,6 @@ export function ShowLearningPathDetail(
           return moodleCourse.visible == 1;
         })
       );
-      console.log('moodle', moodleCourses);
     } else {
       setMoodleCourses([]);
     }

@@ -66,3 +66,28 @@ export function paginate<T>(
 }
 
 // const { paginatedData, totalPages, currentPage: page } = paginate(data, currentPage);
+
+export function convertTimestampToTime(timestamp: number) {
+  // Convertir le timestamp en millisecondes
+  const date = new Date(timestamp * 1000);
+  // Obtenir les heures et les minutes
+  const hours = date.getUTCHours();
+  const minutes = date.getUTCMinutes();
+  // Formater les heures et les minutes pour toujours afficher deux chiffres
+  const formattedHours = String(hours).padStart(2, '0');
+  const formattedMinutes = String(minutes).padStart(2, '0');
+  // Retourner le temps formaté
+  if (parseInt(formattedHours) < 1) {
+    if (parseInt(formattedMinutes) < 1) {
+      return `> 1 minutes`;
+    }
+    return `${formattedMinutes} minutes`;
+  } else if (parseInt(formattedHours) > 1) {
+    if (parseInt(formattedMinutes) < 1) {
+      return `${formattedHours}hours `;
+    }
+    return `${formattedHours}hours ${formattedMinutes} minutes`;
+  }
+
+  return `${formattedHours}hours ${formattedMinutes} minutes`;
+}

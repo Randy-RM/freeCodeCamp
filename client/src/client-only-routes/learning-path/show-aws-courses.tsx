@@ -105,7 +105,6 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
   const getRavenResources = async (data: RavenFetchCoursesDto) => {
     const getReveanCourses = await getAwsCourses(data);
     setRavenCourses(getReveanCourses as RavenCourse[]);
-    console.log('mon', ravenCourses);
   };
 
   const getRavenResourcesPath = async (data: RavenFetchCoursesDto) => {
