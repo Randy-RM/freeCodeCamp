@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { Grid } from '@freecodecamp/react-bootstrap';
 import { Link } from 'gatsby';
+import routes from '../utils/routes';
 
 import {
   addRavenTokenToLocalStorage,
@@ -12,6 +13,7 @@ import {
   getRavenTokenDataFromLocalStorage,
   getAwsPath
 } from '../utils/ajax';
+
 import { createFlashMessage } from '../components/Flash/redux';
 import {
   Loader,
@@ -20,9 +22,9 @@ import {
   splitArray
 } from '../components/helpers';
 import LaptopIcon from '../assets/images/laptop.svg';
-// import CloudShield from '../assets/images/cloudShield.svg';
 import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
 import awsLogo from '../assets/images/aws-logo.png';
+// import { convertTime } from '../utils/allFunctions';
 
 import {
   signInLoadingSelector,
@@ -78,6 +80,9 @@ type RavenCourse = {
   createddate: string;
   updateddate: string;
   contenttype: string;
+  duration: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  skill_level: string;
 };
 interface RavenFetchCoursesDto {
   apiKey: string;
@@ -110,15 +115,14 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currentPage, setCurrentPage] = useState<number>(1);
-  // const [awsCoursesIsAviable, setAwsCoursesIsAviable] =
-  //   useState<boolean>(false);
+  const [awsCoursesIsAviable, setAwsCoursesIsAviable] =
+    useState<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [ravenPath, setRavenPath] = useState<RavenCourse[]>([]);
-  console.log('state courses ', ravenPath);
 
   const getRavenResourcesPath = async (data: RavenFetchCoursesDto) => {
     const getReveanCourses = await getAwsPath(data);
-    setRavenPath(getReveanCourses as RavenCourse[]);
-    console.log('les ', getReveanCourses);
+    setRavenPath(getReveanCourses as unknown as RavenCourse[]);
   };
   const getMoodleCoursesCategories = async () => {
     const moodleCategoriesCatalogue = await getExternalResource<
@@ -149,9 +153,9 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
 
       if (generateRavenToken)
         addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
-      // setAwsCoursesIsAviable(true);
+      setAwsCoursesIsAviable(true);
     } else {
-      // setAwsCoursesIsAviable(true);
+      setAwsCoursesIsAviable(true);
     }
   };
   const ravenLocalToken = getRavenTokenDataFromLocalStorage();
@@ -209,7 +213,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
             <div>
               {!isDataOnLoading ? (
                 <div className='card-course-detail-container'>
-                  <Link to='/learning-path/developpement-web'>
+                  <Link to={routes.learningPath.fullstack}>
                     <div className='card-link'>
                       <PathCard
                         icon={LaptopIcon}
@@ -218,7 +222,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                         isSignedIn={isSignedIn}
                         title={`Développement Web`}
                         buttonText={`Suivre le parcours  `}
-                        link={`/learning-path/developpement-web`}
+                        link={routes.learningPath.fullstack}
                         cardType='parcours'
                         description={`
                         Dans ce parcours en ligne, tu apprendras les langages que les développeurs 
@@ -229,22 +233,22 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                       />
                     </div>
                   </Link>
-
-                  {/* <PathCard
-                    icon={CloudShield}
-                    alt=''
-                    isAvailable={awsCoursesIsAviable}
-                    isSignedIn={isSignedIn}
-                    title={`Parcours AWS`}
-                    buttonText={`Suivre le parcours  `}
-                    link={`/aws-courses`}
-                    cardType='parcours'
-                    description={`Ce parcours est conçu pour montrer aux participants comment 
+                  <Link to={routes.learningPath.aws}>
+                    <PathCard
+                      icon={awsLogo}
+                      alt=''
+                      isAvailable={awsCoursesIsAviable}
+                      isSignedIn={isSignedIn}
+                      title={`Parcours AWS`}
+                      buttonText={`Suivre le parcours  `}
+                      link={routes.learningPath.aws}
+                      cardType='parcours'
+                      description={`Ce parcours est conçu pour montrer aux participants comment 
                   optimiser l'utilisation du cloud AWS grâce à la compréhension 
                   de ces nombreux services et de leur intégration dans la création 
                   de solutions basées sur le cloud.`}
-                  /> */}
-
+                    />
+                  </Link>
                   {moodleCoursesCategories &&
                     moodleCoursesCategories.result.length >= 0 &&
                     moodleCoursesCategories.result[currentPage - 1].map(
@@ -252,7 +256,7 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                         return (
                           <Link
                             key={index}
-                            to={`/learning-path/${category.name
+                            to={`${routes.learningPath.index}/${category.name
                               .replace(/ /g, '-')
                               .replace(/&amp;/g, 'et')}/${category.id}`}
                             className='link'
@@ -265,7 +269,9 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                                 title={category.name.replace(/&amp;/g, 'et')}
                                 buttonText={`Suivre le parcours`}
                                 // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                                link={`/learning-path/${category.name
+                                link={`${
+                                  routes.learningPath.index
+                                }/${category.name
                                   .replace(/ /g, '-')
                                   .replace(/&amp;/g, 'et')}/${category.id}`}
                                 cardType='parcours'
@@ -276,24 +282,6 @@ export function ShowLearningPath(props: ShowLearningPathProps): JSX.Element {
                         );
                       }
                     )}
-
-                  {ravenPath &&
-                    ravenPath.length >= 0 &&
-                    ravenPath.map((course, index) => {
-                      return (
-                        <PathCard
-                          key={course.name}
-                          icon={awsLogo}
-                          isAvailable={true}
-                          isSignedIn={isSignedIn}
-                          title={`${index + 1}. ${course.name}`}
-                          buttonText={`Suivre le cours  `}
-                          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                          link={`${course.launch_url}`}
-                          description={course.long_description}
-                        />
-                      );
-                    })}
                 </div>
               ) : (
                 <div className='card-course-detail-container'>

@@ -8,7 +8,7 @@ import RedirectHome from '../components/redirect-home';
 function Courses(): JSX.Element {
   return (
     <Router>
-      <ShowCourses path={withPrefix('/courses')} />
+      <ShowCourses path={withPrefix('/catalogue')} />
       {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
       {/* @ts-ignore */}
       <RedirectHome default={true} />
