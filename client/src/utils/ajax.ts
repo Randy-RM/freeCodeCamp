@@ -420,7 +420,6 @@ export async function getAwsCourses(data: RavenFetchCoursesDto) {
   } catch (error) {
     response = null;
   }
-  console.log('courses raven', response);
   return response;
 }
 export async function getAwsPath(data: RavenFetchCoursesDto) {
@@ -450,6 +449,7 @@ export async function getAwsPath(data: RavenFetchCoursesDto) {
       category?: Category[];
       // eslint-disable-next-line @typescript-eslint/naming-convention
       skill_level: string;
+      language: string;
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const filterCourses = (response: unknown): Course[] => {
@@ -484,6 +484,7 @@ export async function getAwsPath(data: RavenFetchCoursesDto) {
     };
 
     const filteredCourses = filterCourses(response);
+
     return filteredCourses;
   }
 
