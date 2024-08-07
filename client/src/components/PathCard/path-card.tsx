@@ -28,6 +28,7 @@ interface LandingDetailsProps {
   cardType?: string;
   duration?: string;
   level?: string;
+  language?: string | null;
 }
 
 const PathCard = ({
@@ -45,7 +46,8 @@ const PathCard = ({
   buttonText,
   link,
   duration,
-  level
+  level,
+  language
 }: LandingDetailsProps): JSX.Element => {
   return (
     <div className='card-course-detail-back-path standard-radius-5 card-outlin-border'>
@@ -109,6 +111,16 @@ const PathCard = ({
                     className='clock'
                   />
                   <p> {duration} </p>
+                </>
+              ) : (
+                ''
+              )}
+              {language ? (
+                <>
+                  <p className='course__language'>
+                    {' '}
+                    {language === 'French' ? 'Français' : 'Anglais'}{' '}
+                  </p>
                 </>
               ) : (
                 ''
