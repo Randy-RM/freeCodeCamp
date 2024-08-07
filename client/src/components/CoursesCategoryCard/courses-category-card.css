@@ -137,10 +137,19 @@
     box-sizing: border-box; /* Assure que le padding et la bordure sont inclus dans la largeur */
   }
 
-  .category-card:hover {
+  .selecte__card {
+    background-color: #e5203d;
+  }
+
+  .category-name:hover {
     background-color: #e5203d;
     cursor: pointer;
     border: none;
+  }
+
+  .category-card:active {
+    background-color: red;
+    color: #e5203d;
   }
 
   .red-card > * {

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from '@reach/router';
 
 /**
@@ -22,6 +22,7 @@ import {
   addRavenTokenToLocalStorage,
   generateRavenTokenAcces,
   getAwsCourses,
+  getAwsPath,
   getExternalResource,
   getRavenTokenDataFromLocalStorage
 } from '../../utils/ajax';
@@ -30,7 +31,8 @@ import {
   MoodleCourse,
   MoodleCourseCategory,
   MoodleCoursesCatalogue,
-  RavenCourse
+  RavenCourse,
+  RavenFetchCoursesDto
 } from '../../client-only-routes/show-courses';
 import { splitArray } from '../helpers';
 import sortCourses from '../helpers/sort-course';
@@ -45,11 +47,12 @@ interface CourseFilterProps {
   >;
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
   setIsDataOnLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  courseCategories: MoodleCourseCategory[] | null;
+  courseCategories: MoodleCourseCategory[] | null | undefined;
   currentCategory: number | null;
   setCurrentCategory: React.Dispatch<React.SetStateAction<number | null>>;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
-  allCourses: React.Dispatch<React.SetStateAction<[]>>;
+  setRavenPath: React.Dispatch<React.SetStateAction<RavenCourse[] | null>>;
+  getRavenResourcesPath: RavenFetchCoursesDto;
 }
 
 // interface Course {
@@ -81,12 +84,15 @@ const CoursesCategoryCard = ({
   setMoodleCourses,
   setIsDataOnLoading,
   courseCategories,
+  setRavenPath,
   setCurrentCategory,
   setCurrentPage
 }: CourseFilterProps): JSX.Element => {
   const containerRef1 = useRef<HTMLDivElement>(null);
+  const [isSelected, setIsSelected] = useState<number | null>(null);
 
   const scrollAmount = 320; // Adjust based on card width and gap
+  // const categoryDescrTitle = 'développement';
 
   const scrollLeft = (containerRef: React.RefObject<HTMLDivElement>) => {
     if (containerRef.current) {
@@ -170,6 +176,26 @@ const CoursesCategoryCard = ({
     }
   };
 
+  const getRavenResourcesPath = async () => {
+    await getRavenToken();
+
+    const ravenLocalToken = getRavenTokenDataFromLocalStorage();
+    const ravenData = {
+      apiKey: ravenAwsApiKey,
+      token: ravenLocalToken?.token || '',
+      currentPage: 1,
+      fromDate: '01-01-2023',
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      valid_to: '06-24-2024'
+    };
+    setIsDataOnLoading(true);
+    const courses = (await getAwsPath(ravenData)) as RavenCourse[];
+    if (courses && courses.length !== 0) {
+      setRavenPath(courses);
+      setIsDataOnLoading(false);
+    }
+  };
+
   const getRavenToken = async () => {
     const ravenLocalToken = getRavenTokenDataFromLocalStorage();
 
@@ -184,6 +210,7 @@ const CoursesCategoryCard = ({
   };
 
   const handleCategoryClick = (categoryId: number) => {
+    setIsSelected(categoryId);
     setCurrentCategory(categoryId);
     setCurrentPage(1); // Retour à la première page à chaque fois que la catégory change
     setIsDataOnLoading(true);
@@ -191,16 +218,20 @@ const CoursesCategoryCard = ({
     if (categoryId === -1) {
       setMoodleCourses(null);
       setRavenCourses(null);
+      setRavenPath(null);
       void filterByCategory(categoryId);
     } else if (categoryId === -2) {
       setMoodleCourses(null);
       void getRavenCourses();
+      void getRavenResourcesPath();
     } else if (categoryId !== null) {
       void filterByCategory(categoryId);
       setRavenCourses(null);
+      setRavenPath(null);
     } else {
       void getMoodleCourses();
       setRavenCourses(null);
+      setRavenPath(null);
     }
   };
 
@@ -255,7 +286,7 @@ const CoursesCategoryCard = ({
           </button>
         </div>
         <div className='categories-container' ref={containerRef1}>
-          <div className='category-card'>
+          <div className={`category-card `}>
             <span className='card-title'>Explorer tout</span>
             <div className='card-content'>
               <button
@@ -269,8 +300,8 @@ const CoursesCategoryCard = ({
               <img src={programmationIcon} className='img-icon' alt='icon' />
             </div>
           </div>
-          {/* <div className='category-card'>
-            <span className='card-title'>Explorer tout</span>
+          <div className='category-card'>
+            <span className='card-title '>Explorer tout</span>
             <div className='card-content'>
               <button
                 className='category-name'
@@ -278,13 +309,18 @@ const CoursesCategoryCard = ({
                 // onKeyPress={event => handleKeyPress(event, -2)}
                 tabIndex={0} // Makes the element focusable
               >
-                Amazone web service
+                Amazon Web Service
               </button>
               <img src={devIcon} className='img-icon' alt='icon' />
             </div>
-          </div> */}
+          </div>
           {courseCategories?.map(categorie => (
-            <div key={categorie.id} className='category-card'>
+            <div
+              key={categorie.id}
+              className={`category-card ${
+                isSelected === categorie.id ? 'selecte__card category-card' : ''
+              }`}
+            >
               <span className='card-title'>Explorer tout</span>
               <div className='card-content'>
                 <button
@@ -317,9 +353,11 @@ const CoursesCategoryCard = ({
           </div>
           <h2 className='path-title'>Découvre le parcours Programmation</h2>
           <p className='path-description'>
-            Dans ce parcours, apprends HTML pour le contenu, CSS pour la
-            conception, et JavaScript pour l&apo;interactivité. Maîtrise les
-            algorithmes, structures de données, et crée des sites adaptatifs...
+            {/* {getDescriptionByCategory(categoryDescrTitle || '')}  on utilisera cette ligne lorsque l'on voudra que les shrot description viennent tous de la structure des données*/}
+            Dans ce parcours, tu apprendras à créer des pages Web avec HTML pour
+            le contenu, CSS pour la conception, et JavaScript pour rendre les
+            sites interactifs. Tu découvriras également les algorithmes, les
+            structures de données, et les bases du langage JavaScript.
           </p>
         </Link>
       </div>

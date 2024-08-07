@@ -1,6 +1,7 @@
 import React from 'react';
 import envData from '../../../../config/env.json';
 import PlayIcon from '../../assets/images/play.svg';
+import clockIcon from '../../assets/icons/clock.svg';
 
 import Map from '../Map/index';
 import { Link } from '../helpers';
@@ -31,6 +32,8 @@ interface LandingDetailsProps {
   link?: string;
   cardType?: string;
   createAt?: Date | string | number;
+  duration?: string;
+  language?: string;
 }
 
 const CourseCard = ({
@@ -41,6 +44,7 @@ const CourseCard = ({
   sameTab,
   external,
   description,
+  duration,
   title,
   icon,
   sponsorIcon,
@@ -49,7 +53,8 @@ const CourseCard = ({
   link,
   cardType,
   badgeIcon,
-  createAt
+  createAt,
+  language
 }: LandingDetailsProps): JSX.Element => {
   const isLessThan30DaysOld = (date: string): boolean => {
     const dateObjet = new Date(date);
@@ -109,7 +114,41 @@ const CourseCard = ({
                 ></p>
               )}
             </div>
+
             <div className='card-course-detail-footer'>
+              <div className='duration__language'>
+                {/* {title.includes('Introduction') ||
+                title.includes('introduce') ||
+                title.includes('Getting Started') ? (
+                  <p>Beginners</p>
+                ) : (
+                  // Votre code ici
+                  <p>Intermediate</p>
+                )} */}
+
+                {duration ? (
+                  <>
+                    <img
+                      src={clockIcon}
+                      alt='icone clock duration'
+                      className='clock'
+                    />
+                    <p>{duration} </p>
+                  </>
+                ) : (
+                  ''
+                )}
+                {language ? (
+                  <>
+                    <p className='course__language'>
+                      {language === 'French' ? 'Français' : 'Anglais'}{' '}
+                    </p>
+                  </>
+                ) : (
+                  ''
+                )}
+              </div>
+              <div className='duration pull'></div>
               <div className='push'>
                 {isAvailable ? (
                   name && phone ? (

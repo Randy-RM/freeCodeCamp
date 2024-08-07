@@ -6,6 +6,7 @@ import type {
   CompletedChallenge,
   User
 } from '../redux/prop-types';
+import { RavenCourse } from '../client-only-routes/show-courses';
 
 const { apiLocation } = envData;
 
@@ -20,7 +21,6 @@ const defaultOptions: RequestInit = {
 function getCSRFToken() {
   const token =
     typeof window !== 'undefined' ? cookies.get('csrf_token') : null;
-  console.log('les token', token);
   return token ?? '';
 }
 
@@ -52,7 +52,9 @@ async function request<T>(
     ...defaultOptions,
     method,
     headers: {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       'CSRF-Token': token ?? getCSRFToken(),
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(body)
@@ -63,40 +65,80 @@ async function request<T>(
 //liste des descriptions pour chaque parcours affichée sous le parcours
 
 export type CourseCategoryTitle =
-  | 'Développement Web' // les | designes un type union où permettant au type de prendre une au l'autre titre parmis autant
+  | 'Développement'
   | 'Design'
   | 'Bureautique'
   | 'Marketing'
   | 'Communication'
   | 'artificielle';
 
-export const courseDescriptions: Record<CourseCategoryTitle, string> = {
-  'Développement Web': `
-    Dans ce parcours, tu apprendras les langages que les développeurs 
-    utilisent pour créer des pages Web : HTML (Hypertext Markup Language) 
-    pour le contenu, et CSS (Cascading Style Sheets) pour la conception. 
+export interface CourseDetails {
+  titre: string;
+  summury: string;
+  description: string;
+}
+
+export const courseDescriptions: Record<CourseCategoryTitle, CourseDetails> = {
+  Développement: {
+    titre: 'Développement Web',
+    summury: `Dans ce parcours, tu apprendras à créer des pages Web avec HTML pour le contenu, CSS pour la conception, et JavaScript pour rendre les sites interactifs. Tu découvriras également les algorithmes, les structures de données, et les bases du langage JavaScript.`,
+    description: `Dans ce parcours, tu apprendras les langages que les développeurs
+    utilisent pour créer des pages Web : HTML (Hypertext Markup Language)
+    pour le contenu, et CSS (Cascading Style Sheets) pour la conception.
     Ensuite, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran et
-    enfin, Tu vas utiliser le JavaScript pour rendre tes sites interactifs. 
-    Tu apprendras les Algorithm, Data Structures, et les principes fondamentaux du langage de programmation JavaScript.
-  `,
-  Design: `
-    Dans ce parcours, tu apprendras les principes fondamentaux du design, y compris la typographie, la théorie des couleurs, et la mise en page.
+    enfin, Tu vas utiliser le JavaScript pour rendre tes sites interactifs.
+    Tu apprendras les Algorithm, Data Structures, et les principes fondamentaux du langage de programmation JavaScript.`
+  },
+  Design: {
+    titre: 'Design',
+    summury: `Apprends les bases du design : typographie, théorie des couleurs, mise en page. Utilise Figma et Adobe XD pour créer des prototypes de qualité.`,
+    description: `Dans ce parcours, tu apprendras les principes fondamentaux du design, y compris la typographie, la théorie des couleurs, et la mise en page.
     Tu utiliseras des outils tels que Figma et Adobe XD pour créer des maquettes et des prototypes de haute qualité. 
-    En outre, tu apprendras à collaborer avec des développeurs pour transformer tes conceptions en produits réels.
-  `,
-  Bureautique: `
-    Notre parcours complet de bureautique vous accompagne pas à pas, du niveau débutant à expert, pour maîtriser Word, Excel, PowerPoint, Outlook et OneNote. Grâce à nos cours en ligne interactifs et à nos exercices pratiques, vous acquerrez les compétences nécessaires pour créer des documents impeccables, analyser des données complexes et gérer efficacement votre boîte mail. À la fin de ce parcours, vous serez certifié et prêt à relever tous les défis de votre vie professionnelle.
-  `,
-  Marketing: `
-    Notre parcours complet vous offre une formation pratique et intensive aux outils et techniques les plus efficaces du marketing digital. Vous apprendrez à créer une stratégie de contenu engageante, à optimiser votre site web pour les moteurs de recherche, à gérer votre communauté sur les réseaux sociaux et à mesurer la performance de vos campagnes. À l'issue de cette formation, vous serez capable de développer votre propre business en ligne ou de piloter les actions marketing d'une entreprise.
-  `,
-  Communication: `
-    Dans ce parcours, vous apprendrez les techniques de communication efficaces pour transmettre des messages clairs et percutants. Vous découvrirez comment créer des présentations impactantes, gérer les relations publiques et utiliser les médias sociaux pour améliorer votre visibilité. Vous développerez des compétences pour communiquer avec divers publics et dans différents contextes professionnels.
-  `,
-  artificielle: `
-    L'intelligence artificielle est un domaine technologique en rapide évolution, permettant aux ordinateurs d'imiter des fonctions humaines telles que l'apprentissage et la résolution de problèmes. Un domaine spécifique de l'IA qui a récemment gagné en popularité est l'IA générative, qui se concentre sur la création de nouveaux contenus, qu'il s'agisse de textes, d'images, de sons ou de vidéos. Inscrivez-vous à ce cours pour explorer les différentes formes d'IA générative à travers des applications interactives !
-  `
+    En outre, tu apprendras à collaborer avec des développeurs pour transformer tes conceptions en produits réels.`
+  },
+  Bureautique: {
+    titre: 'Bureautique',
+    summury: `Maîtrise Word, Excel, PowerPoint, Outlook et OneNote. Crée des documents impeccables et analyse des données complexes avec nos cours interactifs.`,
+    description: `Notre parcours complet de bureautique vous accompagne pas à pas, du niveau débutant à expert, pour maîtriser Word, Excel, PowerPoint, Outlook et OneNote. Grâce à nos cours en ligne interactifs et à nos exercices pratiques, vous acquerrez les compétences nécessaires pour créer des documents impeccables, analyser des données complexes et gérer efficacement votre boîte mail. À la fin de ce parcours, vous serez certifié et prêt à relever tous les défis de votre vie professionnelle.`
+  },
+  Marketing: {
+    titre: 'Marketing',
+    summury: `Apprends les outils et techniques du marketing digital. Crée des stratégies de contenu, optimise ton site et gère les réseaux sociaux efficacement.`,
+    description: `Notre parcours complet vous offre une formation pratique et intensive aux outils et techniques les plus efficaces du marketing digital. Vous apprendrez à créer une stratégie de contenu engageante, à optimiser votre site web pour les moteurs de recherche, à gérer votre communauté sur les réseaux sociaux et à mesurer la performance de vos campagnes. À l'issue de cette formation, vous serez capable de développer votre propre business en ligne ou de piloter les actions marketing d'une entreprise.`
+  },
+  Communication: {
+    titre: 'Communication',
+    summury: `Maîtrise les techniques de communication pour des messages clairs et percutants. Crée des présentations, gérez les relations publiques et médias sociaux.`,
+    description: `Dans ce parcours, vous apprendrez les techniques de communication efficaces pour transmettre des messages clairs et percutants. Vous découvrirez comment créer des présentations impactantes, gérer les relations publiques et utiliser les médias sociaux pour améliorer votre visibilité. Vous développerez des compétences pour communiquer avec divers publics et dans différents contextes professionnels.`
+  },
+  artificielle: {
+    titre: 'Intelligence Artificielle',
+    summury: `Explore l'IA, imitant les fonctions humaines. Apprends l'IA générative pour créer des contenus (texte, images, sons, vidéos) à travers des applications interactives.`,
+    description: `L'intelligence artificielle est un domaine technologique en rapide évolution, permettant aux ordinateurs d'imiter des fonctions humaines telles que l'apprentissage et la résolution de problèmes. Un domaine spécifique de l'IA qui a récemment gagné en popularité est l'IA générative, qui se concentre sur la création de nouveaux contenus, qu'il s'agisse de textes, d'images, de sons ou de vidéos. Inscrivez-vous à ce cours pour explorer les différentes formes d'IA générative à travers des applications interactives !`
+  }
 };
+
+export function getDescriptionByCategory(categoryTitle: string | null): string {
+  if (!categoryTitle) return '.';
+
+  const lowerCategoryName = categoryTitle.toLowerCase();
+
+  if (lowerCategoryName.includes('marketing')) {
+    return courseDescriptions.Marketing.description;
+  } else if (lowerCategoryName.includes('communication')) {
+    return courseDescriptions.Communication.description;
+  } else if (lowerCategoryName.includes('artificielle')) {
+    return courseDescriptions.artificielle.description;
+  } else if (lowerCategoryName.includes('développement')) {
+    return courseDescriptions.Développement.description;
+  } else if (lowerCategoryName.includes('design')) {
+    return courseDescriptions.Design.description;
+  } else if (lowerCategoryName.includes('bureautique')) {
+    return courseDescriptions.Bureautique.description;
+  } else {
+    return '.';
+  }
+}
 
 // Make the `request` function generic
 // to specify the return data type:
@@ -344,7 +386,7 @@ export async function generateRavenTokenAcces(): Promise<unknown> {
     const response = await get('/generate-raven-token');
 
     console.log('acces token ', response);
-    return '';
+    return response;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error) {
     return null;
@@ -368,7 +410,7 @@ interface RavenFetchCoursesDto {
 }
 
 export async function getAwsCourses(data: RavenFetchCoursesDto) {
-  let response: unknown;
+  let response: unknown | RavenCourse[];
 
   try {
     response = await get(
@@ -377,11 +419,10 @@ export async function getAwsCourses(data: RavenFetchCoursesDto) {
   } catch (error) {
     response = null;
   }
-  // console.log('courses raven', response);
   return response;
 }
 export async function getAwsPath(data: RavenFetchCoursesDto) {
-  let response: unknown;
+  let response: unknown | RavenCourse[];
 
   try {
     response = await get(
@@ -390,10 +431,63 @@ export async function getAwsPath(data: RavenFetchCoursesDto) {
   } catch (error) {
     response = null;
   }
-  console.log('courses raven', response);
-  return response;
-}
+  // return response;
+  //cette partie permet notamment de filtrer les parcours pour ne retenir que ceux en français où en anglais.
+  if (response) {
+    interface Tag {
+      title: string;
+    }
 
+    interface Category {
+      tags?: Tag[];
+      title: string;
+    }
+
+    interface Course {
+      category?: Category[];
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      skill_level: string;
+      language: string;
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const filterCourses = (response: unknown): Course[] => {
+      const courses = response as Course[];
+
+      const coursesFilter = courses
+        .filter(
+          course =>
+            course.category &&
+            course.category.some(
+              cat =>
+                cat.tags &&
+                cat.tags.some(
+                  tag =>
+                    tag.title.includes('English') ||
+                    tag.title.includes('French')
+                )
+            )
+        )
+        .map(course => {
+          // Extraire le skill level
+          const skillLevelCategory = course.category?.find(
+            cat => cat.title === 'Skill Level'
+          );
+          if (skillLevelCategory && skillLevelCategory.tags) {
+            course.skill_level = skillLevelCategory.tags[0]?.title;
+          }
+          return course;
+        });
+
+      return coursesFilter;
+    };
+
+    const filteredCourses = filterCourses(response);
+
+    return filteredCourses;
+  }
+
+  return [];
+}
 interface RavenFetchUserCoursesProgressDto {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   email_id: string;

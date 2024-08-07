@@ -6,28 +6,27 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import {
   getExternalResource,
-  courseDescriptions,
-  CourseCategoryTitle
-} from '../utils/ajax';
+  getDescriptionByCategory
+} from '../../utils/ajax';
 
-import { createFlashMessage } from '../components/Flash/redux';
+import { createFlashMessage } from '../../components/Flash/redux';
 import {
   Loader,
   Spacer,
   renderCourseCardSkeletons
-} from '../components/helpers';
-import CourseCard from '../components/CourseCard/course-card';
-import PhBookBookmark from '../assets/images/ph-book-bookmark-thin.svg';
+} from '../../components/helpers';
+import CourseCard from '../../components/CourseCard/course-card';
+import PhBookBookmark from '../../assets/images/ph-book-bookmark-thin.svg';
 
 import {
   signInLoadingSelector,
   userSelector,
   isSignedInSelector,
   hardGoTo as navigate
-} from '../redux';
+} from '../../redux';
 
-import { User } from '../redux/prop-types';
-import envData from '../../../config/env.json';
+import { User } from '../../redux/prop-types';
+import envData from '../../../../config/env.json';
 
 const { apiLocation, moodleBaseUrl, moodleApiBaseUrl, moodleApiToken } =
   envData;
@@ -106,6 +105,7 @@ export function ShowLearningPathDetail(
 
   useEffect(() => {
     void getMoodleCourses();
+
     const timer = setTimeout(() => {
       if (isDataOnLoading) {
         setIsDataOnLoading(false);
@@ -128,21 +128,6 @@ export function ShowLearningPathDetail(
   }
 
   //fonction permettant de renvoyer la description d'un parcours en recevant le titre du parcours en paramétre
-
-  function getDescriptionByCategory(categoryName: string | null): string {
-    const lowerCategoryName = categoryName?.toLowerCase() || '';
-
-    if (lowerCategoryName.includes('marketing')) {
-      return courseDescriptions['Marketing'];
-    } else if (lowerCategoryName.includes('communication')) {
-      return courseDescriptions['Communication'];
-    } else if (lowerCategoryName.includes('artificielle')) {
-      return courseDescriptions['artificielle'];
-    } else {
-      const validCategoryName = categoryName as CourseCategoryTitle;
-      return courseDescriptions[validCategoryName] || '.';
-    }
-  }
 
   return (
     <>
@@ -186,7 +171,10 @@ export function ShowLearningPathDetail(
         <Spacer size={1} />
         <Row>
           <Col md={12} sm={12} xs={12}>
-            <h2 className='big-subheading'>{`Cours`}</h2>
+            <div className='course__number'>
+              <h2 className='big-subheading'>{`Parcours d'apprentissage`}</h2>
+              <span>{moodleCourses?.length} cours</span>
+            </div>
             <Spacer size={2} />
           </Col>
           <Col className='' md={12} sm={12} xs={12}>
@@ -197,6 +185,7 @@ export function ShowLearningPathDetail(
                     {moodleCourses.map((course, index) => {
                       return (
                         <CourseCard
+                          language='French'
                           key={index + course.id}
                           icon={PhBookBookmark}
                           isAvailable={course.visible == 1}

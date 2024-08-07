@@ -121,11 +121,11 @@ export const NavLinks = (props: NavLinksProps): JSX.Element => {
             onClick={handleIsDropdown}
             className=''
             key='courses'
-            to='/courses'
+            to='/catalogue'
             ref={innerRef}
             activeClassName='active'
           >
-            {'Cours'}
+            {'Catalogue'}
           </Link>
         </li>
 
