@@ -138,18 +138,22 @@ const CourseCard = ({
                 ) : (
                   ''
                 )}
-                {language ? (
-                  <>
-                    <p className='course__language'>
-                      {language === 'French' ? 'Français' : 'Anglais'}{' '}
-                    </p>
-                  </>
-                ) : (
-                  ''
-                )}
               </div>
+
               <div className='duration pull'></div>
+
               <div className='push'>
+                <div>
+                  {language ? (
+                    <>
+                      <p className='course__language'>
+                        {language === 'French' ? 'Français' : 'Anglais'}{' '}
+                      </p>
+                    </>
+                  ) : (
+                    ''
+                  )}
+                </div>
                 {isAvailable ? (
                   name && phone ? (
                     isSignedIn ? (

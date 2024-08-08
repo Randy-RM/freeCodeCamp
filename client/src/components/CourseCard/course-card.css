@@ -4,6 +4,9 @@
 
 .push {
   float: right;
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
 }
 
 img {
