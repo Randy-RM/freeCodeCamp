@@ -5,6 +5,9 @@
 .push {
   float: right;
 }
+.push__card {
+  float: right;
+}
 
 img {
   width: 100%;
@@ -64,10 +67,6 @@ img {
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-
-.row-link-text {
-  margin-right: 10px;
 }
 
 .card-course-detail-container-landing {

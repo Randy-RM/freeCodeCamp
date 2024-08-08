@@ -285,7 +285,7 @@ const WhatWillYouLearn = ({ isSignedIn }: LandingDetailsProps): JSX.Element => {
       </div>
       <Spacer size={2} />
       <div>
-        <Link className='course-cta' to='/courses'>
+        <Link className='course-cta' to='/catalogue'>
           {'Voir tous les cours'}
         </Link>
       </div>
