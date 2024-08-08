@@ -96,7 +96,7 @@ const CourseCard = ({
             <div className='card-course-detail-item'>
               <div className='card-title'>
                 <h4
-                  className='fw-bold text-love-light'
+                  className='fw-bold text-love-light text-love-light__mobile'
                   dangerouslySetInnerHTML={{ __html: title }}
                 ></h4>{' '}
                 {isLessThan30DaysOld(createAt as string) && (
@@ -133,23 +133,27 @@ const CourseCard = ({
                       alt='icone clock duration'
                       className='clock'
                     />
-                    <p>{duration} </p>
-                  </>
-                ) : (
-                  ''
-                )}
-                {language ? (
-                  <>
-                    <p className='course__language'>
-                      {language === 'French' ? 'Français' : 'Anglais'}{' '}
-                    </p>
+                    <p className='clock__time'>{duration} </p>
                   </>
                 ) : (
                   ''
                 )}
               </div>
+
               <div className='duration pull'></div>
+
               <div className='push'>
+                <div>
+                  {language ? (
+                    <>
+                      <p className='course__language'>
+                        {language === 'French' ? 'Français' : 'Anglais'}{' '}
+                      </p>
+                    </>
+                  ) : (
+                    ''
+                  )}
+                </div>
                 {isAvailable ? (
                   name && phone ? (
                     isSignedIn ? (
