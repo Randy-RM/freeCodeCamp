@@ -66,10 +66,6 @@ img {
   align-items: center;
 }
 
-.row-link-text {
-  margin-right: 10px;
-}
-
 .card-course-detail-container-landing {
   display: flex;
   flex-direction: row;

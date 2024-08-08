@@ -6,7 +6,8 @@
   float: right;
   display: flex;
   align-items: baseline;
-  gap: 0.3rem;
+  justify-content: space-between;
+  width: 15rem;
 }
 
 img {
@@ -31,7 +32,6 @@ img {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  gap: 0.3rem;
 }
 
 /* .course-level p {
@@ -46,6 +46,10 @@ img {
   color: red;
 }
 
+.clock__time {
+  text-align: center;
+}
+
 /*Card Styling*/
 .img-badge {
   height: auto;
@@ -58,7 +62,7 @@ img {
   width: 100%;
   display: flex;
   flex-direction: column;
-  height: 29rem;
+  height: 30rem;
   align-items: stretch;
   justify-content: space-between;
 }
@@ -106,6 +110,7 @@ img {
 
 .clock {
   width: 10%;
+  margin: 0.1rem;
 }
 
 .card-course-detail-logo-sponsor {
@@ -143,10 +148,7 @@ img {
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-
-.row-link-text {
-  margin-right: 10px;
+  gap: 0.5rem;
 }
 
 .card-course-detail-container {

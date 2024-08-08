@@ -18,6 +18,13 @@
   gap: 5%;
 }
 
+.row-link-text {
+  padding: 0.3;
+}
+
+.clock__time {
+  text-align: center;
+}
 @media (max-width: 1024px) {
   .card-course-detail-back-path {
     width: 47%;

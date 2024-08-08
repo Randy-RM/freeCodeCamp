@@ -133,7 +133,7 @@ const CourseCard = ({
                       alt='icone clock duration'
                       className='clock'
                     />
-                    <p>{duration} </p>
+                    <p className='clock__time'>{duration} </p>
                   </>
                 ) : (
                   ''

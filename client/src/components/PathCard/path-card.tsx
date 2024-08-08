@@ -110,54 +110,36 @@ const PathCard = ({
                     alt='icone clock duration'
                     className='clock'
                   />
-                  <p> {duration} </p>
-                </>
-              ) : (
-                ''
-              )}
-              {language ? (
-                <>
-                  <p className='course__language'>
-                    {' '}
-                    {language === 'French' ? 'Français' : 'Anglais'}{' '}
-                  </p>
+                  <p className='clock__time'> {duration} </p>
                 </>
               ) : (
                 ''
               )}
             </div>
             <div className='duration pull'>
-              <div className='push'></div>
-              {isAvailable ? (
-                name && phone ? (
-                  isSignedIn ? (
-                    <>
-                      {link ? (
-                        <Link
-                          to={link}
-                          sameTab={sameTab ? true : false}
-                          external={external ? true : false}
-                          state={{ description: description }}
-                          className='link-course text-love-light fw-semi-bold text-responsive'
-                        >
-                          <div className='row-link'>
-                            <div className='row-link-text'>{buttonText}</div>
-                            <div>
-                              <img
-                                src={PlayIcon}
-                                alt='Laptop icon'
-                                className='play'
-                              />
-                            </div>
-                          </div>
-                        </Link>
-                      ) : (
-                        <>
-                          <Map
-                            forLanding={true}
-                            single={true}
+              <div className={language ? 'push' : 'footer__block'}>
+                {language ? (
+                  <>
+                    <p className='course__language'>
+                      {' '}
+                      {language === 'French' ? 'Français' : 'Anglais'}{' '}
+                    </p>
+                  </>
+                ) : (
+                  ''
+                )}
+
+                {isAvailable ? (
+                  name && phone ? (
+                    isSignedIn ? (
+                      <>
+                        {link ? (
+                          <Link
+                            to={link}
+                            sameTab={sameTab ? true : false}
+                            external={external ? true : false}
+                            state={{ description: description }}
                             className='link-course text-love-light fw-semi-bold text-responsive'
-                            keyPrefix='landing-details'
                           >
                             <div className='row-link'>
                               <div className='row-link-text'>{buttonText}</div>
@@ -169,20 +151,58 @@ const PathCard = ({
                                 />
                               </div>
                             </div>
-                          </Map>
-                          {/* <br />
+                          </Link>
+                        ) : (
+                          <>
+                            <Map
+                              forLanding={true}
+                              single={true}
+                              className='link-course text-love-light fw-semi-bold text-responsive'
+                              keyPrefix='landing-details'
+                            >
+                              <div className='row-link'>
+                                <div className='row-link-text'>
+                                  {buttonText}
+                                </div>
+                                <div>
+                                  <img
+                                    src={PlayIcon}
+                                    alt='Laptop icon'
+                                    className='play'
+                                  />
+                                </div>
+                              </div>
+                            </Map>
+                            {/* <br />
                         <Link
                           to={`http://localhost:8001/`}
                           className='link-course text-love-light fw-semi-bold text-responsive'
                         >
                           Mooc
                         </Link> */}
-                        </>
-                      )}
-                    </>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <a
+                        href={`${apiLocation}/signin`}
+                        className='link-course text-love-light fw-semi-bold text-responsive'
+                      >
+                        <div className='row-link'>
+                          <div className='row-link-text'>{buttonText}</div>
+                          <div>
+                            <img
+                              src={PlayIcon}
+                              alt='Laptop icon'
+                              className='play'
+                            />
+                          </div>
+                        </div>
+                      </a>
+                    )
                   ) : (
                     <a
-                      href={`${apiLocation}/signin`}
+                      href={`/settings?${link as string}`}
                       className='link-course text-love-light fw-semi-bold text-responsive'
                     >
                       <div className='row-link'>
@@ -198,27 +218,11 @@ const PathCard = ({
                     </a>
                   )
                 ) : (
-                  <a
-                    href={`/settings?${link as string}`}
-                    className='link-course text-love-light fw-semi-bold text-responsive'
-                  >
-                    <div className='row-link'>
-                      <div className='row-link-text'>{buttonText}</div>
-                      <div>
-                        <img
-                          src={PlayIcon}
-                          alt='Laptop icon'
-                          className='play'
-                        />
-                      </div>
-                    </div>
-                  </a>
-                )
-              ) : (
-                <span className='push text-love-light fw-semi-bold text-responsive'>
-                  Bientôt disponible
-                </span>
-              )}
+                  <span className='push text-love-light fw-semi-bold text-responsive'>
+                    Bientôt disponible
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         </div>
