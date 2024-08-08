@@ -10,6 +10,10 @@ small {
   float: right;
 }
 
+.push__card {
+  float: right;
+}
+
 img {
   width: 100%;
   display: block;

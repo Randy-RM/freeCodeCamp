@@ -71,7 +71,7 @@ const PathCard = ({
           </div>
           <div className='card-course-detail-item'>
             <h4
-              className='fw-bold text-love-light'
+              className='fw-bold text-love-light .text-love-light__mobile'
               dangerouslySetInnerHTML={{
                 __html: `${title.substring(0, 100)}`
               }}
@@ -103,21 +103,23 @@ const PathCard = ({
                   ''
                 )}
               </div>
-              {duration ? (
-                <>
-                  <img
-                    src={clockIcon}
-                    alt='icone clock duration'
-                    className='clock'
-                  />
-                  <p className='clock__time'> {duration} </p>
-                </>
-              ) : (
-                ''
-              )}
+              <div className='level-card'>
+                {duration ? (
+                  <>
+                    <img
+                      src={clockIcon}
+                      alt='icone clock duration'
+                      className='clock'
+                    />
+                    <p className='clock__time'> {duration} </p>
+                  </>
+                ) : (
+                  ''
+                )}
+              </div>
             </div>
             <div className='duration pull'>
-              <div className={language ? 'push' : 'footer__block'}>
+              <div className={language ? 'push__card' : 'footer__block'}>
                 {language ? (
                   <>
                     <p className='course__language'>

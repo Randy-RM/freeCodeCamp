@@ -10,6 +10,14 @@
   width: 15rem;
 }
 
+.push__card {
+  float: right;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 15rem;
+}
+
 img {
   width: 100%;
   display: block;
@@ -29,6 +37,12 @@ img {
 }
 
 .course-level {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.card-level {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -244,6 +258,14 @@ img {
     width: 47%;
     /* margin-bottom: 5%; */
   }
+
+  .push {
+    width: 16rem;
+  }
+
+  .push__card {
+    width: 17rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -254,6 +276,14 @@ img {
   .card-course-detail-unit {
     width: 100%;
   }
+
+  .push {
+    width: 17rem;
+  }
+
+  .push__card {
+    width: 17rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -262,6 +292,28 @@ img {
   }
   .hide-small {
     display: none;
+  }
+
+  .row-link {
+    width: 8rem;
+  }
+
+  .level-card {
+    gap: 0.1rem;
+  }
+
+  .text-love-light {
+    font-size: 1rem;
+  }
+
+  .push {
+    width: 17rem;
+    gap: 6px;
+  }
+
+  .push__card {
+    width: 17rem;
+    gap: 6px;
   }
 
   .card-course-detail-back {
@@ -282,4 +334,32 @@ img {
   flex-grow: 1;
 
   height: 20%;
+}
+
+@media (max-width: 376px) {
+  .push {
+    width: 15rem;
+  }
+
+  .card-outlin-border {
+    height: 30rem;
+  }
+
+  .push__card {
+    width: 15rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .push {
+    width: 12rem;
+  }
+
+  .card-outlin-border {
+    height: 33rem;
+  }
+
+  .push__card {
+    width: 13rem;
+  }
 }

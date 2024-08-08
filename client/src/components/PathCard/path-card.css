@@ -19,7 +19,7 @@
 }
 
 .row-link-text {
-  padding: 0.3;
+  font-size: 1rem;
 }
 
 .clock__time {
@@ -29,6 +29,10 @@
   .card-course-detail-back-path {
     width: 47%;
     /* margin-bottom: 5%; */
+  }
+
+  .row-link-text {
+    font-size: 1rem;
   }
 }
 
@@ -43,6 +47,10 @@
     width: 100%;
     justify-content: flex-start !important;
     /* gap: 50px; */
+  }
+
+  .row-link-text {
+    font-size: 1rem;
   }
 }
 
@@ -59,5 +67,9 @@
     justify-content: center !important;
     height: fit-content;
     /* gap: 30px; */
+  }
+
+  .row-link-text {
+    font-size: 0.7rem;
   }
 }
