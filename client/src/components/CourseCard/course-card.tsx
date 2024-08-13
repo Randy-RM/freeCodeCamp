@@ -1,5 +1,4 @@
 import React from 'react';
-import envData from '../../../../config/env.json';
 import PlayIcon from '../../assets/images/play.svg';
 import clockIcon from '../../assets/icons/clock.svg';
 
@@ -8,7 +7,7 @@ import { Link } from '../helpers';
 
 import './course-card.css';
 
-const { apiLocation } = envData;
+// const { apiLocation } = envData;
 
 enum CardStyle {
   Path = 'parcours',
@@ -16,9 +15,6 @@ enum CardStyle {
 }
 
 interface LandingDetailsProps {
-  isSignedIn?: boolean;
-  phone?: string;
-  name?: string;
   isAvailable: boolean;
   sameTab?: boolean;
   external?: boolean;
@@ -37,10 +33,8 @@ interface LandingDetailsProps {
 }
 
 const CourseCard = ({
-  isSignedIn,
+  // isSignedIn,
   isAvailable,
-  phone,
-  name,
   sameTab,
   external,
   description,
@@ -155,62 +149,13 @@ const CourseCard = ({
                   )}
                 </div>
                 {isAvailable ? (
-                  name && phone ? (
-                    isSignedIn ? (
-                      <>
-                        {link ? (
-                          <Link
-                            to={link}
-                            sameTab={sameTab ? true : false}
-                            external={external ? true : false}
-                            state={{ description: description }}
-                            className='link-course text-love-light fw-semi-bold text-responsive'
-                          >
-                            <div className='row-link'>
-                              <div className='row-link-text'>{buttonText}</div>
-                              <div>
-                                <img
-                                  src={PlayIcon}
-                                  alt='Laptop icon'
-                                  className='play'
-                                />
-                              </div>
-                            </div>
-                          </Link>
-                        ) : (
-                          <>
-                            <Map
-                              forLanding={true}
-                              single={true}
-                              className='link-course text-love-light fw-semi-bold text-responsive'
-                              keyPrefix='landing-details'
-                            >
-                              <div className='row-link'>
-                                <div className='row-link-text'>
-                                  {buttonText}
-                                </div>
-                                <div>
-                                  <img
-                                    src={PlayIcon}
-                                    alt='Laptop icon'
-                                    className='play'
-                                  />
-                                </div>
-                              </div>
-                            </Map>
-                            {/* <br />
-                        <Link
-                          to={`http://localhost:8001/`}
-                          className='link-course text-love-light fw-semi-bold text-responsive'
-                        >
-                          Mooc
-                        </Link> */}
-                          </>
-                        )}
-                      </>
-                    ) : (
-                      <a
-                        href={`${apiLocation}/signin`}
+                  <>
+                    {link ? (
+                      <Link
+                        to={link}
+                        sameTab={sameTab ? true : false}
+                        external={external ? true : false}
+                        state={{ description: description }}
                         className='link-course text-love-light fw-semi-bold text-responsive'
                       >
                         <div className='row-link'>
@@ -223,25 +168,29 @@ const CourseCard = ({
                             />
                           </div>
                         </div>
-                      </a>
-                    )
-                  ) : (
-                    <a
-                      href={`/settings?${link as string}`}
-                      className='link-course text-love-light fw-semi-bold text-responsive'
-                    >
-                      <div className='row-link'>
-                        <div className='row-link-text'>{buttonText}</div>
-                        <div>
-                          <img
-                            src={PlayIcon}
-                            alt='Laptop icon'
-                            className='play'
-                          />
-                        </div>
-                      </div>
-                    </a>
-                  )
+                      </Link>
+                    ) : (
+                      <>
+                        <Map
+                          forLanding={true}
+                          single={true}
+                          className='link-course text-love-light fw-semi-bold text-responsive'
+                          keyPrefix='landing-details'
+                        >
+                          <div className='row-link'>
+                            <div className='row-link-text'>{buttonText}</div>
+                            <div>
+                              <img
+                                src={PlayIcon}
+                                alt='Laptop icon'
+                                className='play'
+                              />
+                            </div>
+                          </div>
+                        </Map>
+                      </>
+                    )}
+                  </>
                 ) : (
                   <span className='push text-love-light fw-semi-bold text-responsive'>
                     Bientôt disponible

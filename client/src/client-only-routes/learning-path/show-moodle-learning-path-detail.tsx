@@ -28,13 +28,11 @@ import {
 import { User } from '../../redux/prop-types';
 import envData from '../../../../config/env.json';
 
-const { apiLocation, moodleBaseUrl, moodleApiBaseUrl, moodleApiToken } =
-  envData;
+const { moodleBaseUrl, moodleApiBaseUrl, moodleApiToken } = envData;
 
 // TODO: update types for actions
 interface ShowLearningPathDetailProps {
   createFlashMessage: typeof createFlashMessage;
-  isSignedIn: boolean;
   navigate: (location: string) => void;
   showLoading: boolean;
   user: User;
@@ -61,10 +59,9 @@ const mapStateToProps = createSelector(
   signInLoadingSelector,
   userSelector,
   isSignedInSelector,
-  (showLoading: boolean, user: User, isSignedIn) => ({
+  (showLoading: boolean, user: User) => ({
     showLoading,
-    user,
-    isSignedIn
+    user
   })
 );
 
@@ -77,7 +74,7 @@ export function ShowLearningPathDetail(
   props: ShowLearningPathDetailProps
 ): JSX.Element {
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  const { showLoading, isSignedIn, location } = props;
+  const { showLoading, location } = props;
   const params: Record<string, undefined> = useParams();
   const [moodleCourses, setMoodleCourses] = useState<MoodleCourse[]>();
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
@@ -122,13 +119,6 @@ export function ShowLearningPathDetail(
     return <Loader fullScreen={true} />;
   }
 
-  if (!isSignedIn) {
-    navigate(`${apiLocation}/signin`);
-    return <Loader fullScreen={true} />;
-  }
-
-  //fonction permettant de renvoyer la description d'un parcours en recevant le titre du parcours en paramétre
-
   return (
     <>
       <Helmet
@@ -149,14 +139,6 @@ export function ShowLearningPathDetail(
             </Col>
             <Col className='' md={12} sm={12} xs={12}>
               <div className='alert bg-secondary standard-radius-5'>
-                {/* {location && location.state && location.state.description && (
-                  <div
-                    className='text-responsive'
-                    dangerouslySetInnerHTML={{
-                      __html: location.state.description
-                    }}
-                  >ma</div>
-                )} */}
                 <p className='parcours-description'>
                   {getDescriptionByCategory(categoryName || '')}
                 </p>
@@ -189,7 +171,6 @@ export function ShowLearningPathDetail(
                           key={index + course.id}
                           icon={PhBookBookmark}
                           isAvailable={course.visible == 1}
-                          isSignedIn={isSignedIn}
                           sameTab={true}
                           external={true}
                           title={`${course.displayname}`}
