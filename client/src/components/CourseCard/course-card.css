@@ -169,7 +169,7 @@ img {
 .card-course-detail-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5srem;
+  gap: 1.7rem;
   margin-left: 1vw;
   width: 100%;
 }
