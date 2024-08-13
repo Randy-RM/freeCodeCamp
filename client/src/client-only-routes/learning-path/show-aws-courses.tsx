@@ -28,9 +28,9 @@ import {
 } from '../../redux';
 
 import { User } from '../../redux/prop-types';
-import envData from '../../../../config/env.json';
+// import envData from '../../../../config/env.json';
 
-const { apiLocation } = envData;
+// const { apiLocation } = envData;
 type Tag = {
   title: string;
 };
@@ -41,7 +41,6 @@ type Category = {
 
 interface ShowAwsCoursesProps {
   createFlashMessage: typeof createFlashMessage;
-  isSignedIn: boolean;
   navigate: (location: string) => void;
   showLoading: boolean;
   user: User;
@@ -79,10 +78,9 @@ const mapStateToProps = createSelector(
   signInLoadingSelector,
   userSelector,
   isSignedInSelector,
-  (showLoading: boolean, user: User, isSignedIn) => ({
+  (showLoading: boolean, user: User) => ({
     showLoading,
-    user,
-    isSignedIn
+    user
   })
 );
 
@@ -92,7 +90,7 @@ const mapDispatchToProps = {
 };
 
 export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
-  const { showLoading, isSignedIn } = props;
+  const { showLoading } = props;
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
 
   const [ravenCourses, setRavenCourses] = useState<RavenCourse[]>([]);
@@ -143,11 +141,6 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
   }, []);
 
   if (showLoading) {
-    return <Loader fullScreen={true} />;
-  }
-
-  if (!isSignedIn) {
-    navigate(`${apiLocation}/signin`);
     return <Loader fullScreen={true} />;
   }
 
@@ -227,7 +220,6 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
                               key={course.name}
                               icon={awsLogo}
                               isAvailable={true}
-                              isSignedIn={isSignedIn}
                               title={`${index + 1}. ${course.name}`}
                               buttonText={`Suivre le cours`}
                               link={`${course.launch_url}`}
@@ -263,7 +255,6 @@ export function ShowAwsCourses(props: ShowAwsCoursesProps): JSX.Element {
                               language={language}
                               key={course.name}
                               isAvailable={true}
-                              isSignedIn={isSignedIn}
                               title={`${index + 1}. ${course.name}`}
                               buttonText={`Suivre le cours`}
                               link={`${course.launch_url}`}
