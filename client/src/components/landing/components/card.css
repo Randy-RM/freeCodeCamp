@@ -23,6 +23,7 @@ img {
 
 .card-outlin-border {
   border: solid 1px #3e3d3d;
+  width: 19rem;
 }
 
 .card-py-5 {

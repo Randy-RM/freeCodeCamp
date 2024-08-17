@@ -84,7 +84,6 @@ img {
 .card-course-detail-container {
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 3vw;
   width: 100%;
 }
 

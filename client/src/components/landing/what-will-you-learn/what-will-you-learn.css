@@ -74,10 +74,9 @@ img {
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-
   border: #e60000 solid 1;
-
-  gap: 5%;
+  gap: 2rem;
+  justify-content: flex-start;
 }
 @media (max-width: 768px) {
   .card-course-detail-container-landing {
