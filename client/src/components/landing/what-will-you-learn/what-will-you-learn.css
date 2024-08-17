@@ -76,7 +76,7 @@ img {
   width: 100%;
   border: #e60000 solid 1;
   gap: 2rem;
-  justify-content: center;
+  justify-content: flex-start;
 }
 @media (max-width: 768px) {
   .card-course-detail-container-landing {

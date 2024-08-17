@@ -36,6 +36,8 @@ import {
 } from '../../client-only-routes/show-courses';
 import { splitArray } from '../helpers';
 import sortCourses from '../helpers/sort-course';
+// import routes from '../../utils/routes';
+// import { navigate } from 'gatsby';
 
 interface CourseFilterProps {
   screenWidth: number;
@@ -189,7 +191,7 @@ const CoursesCategoryCard = ({
       valid_to: '06-24-2024'
     };
     setIsDataOnLoading(true);
-    const courses = (await getAwsPath(ravenData)) as RavenCourse[];
+    const courses = (await getAwsPath(ravenData)) as unknown as RavenCourse[];
     if (courses && courses.length !== 0) {
       setRavenPath(courses);
       setIsDataOnLoading(false);
@@ -269,7 +271,7 @@ const CoursesCategoryCard = ({
   return (
     <div className='main'>
       <div className='categories-wrapper'>
-        <p className='tendance'>Sujets tendance</p>
+        <p className='big-subheading'>Sujets tendance</p>
 
         <div className='chevron'>
           <button
@@ -291,12 +293,17 @@ const CoursesCategoryCard = ({
             <div className='card-content'>
               <button
                 className='category-name'
-                onClick={() => handleCategoryClick(-1)}
+                onClick={() => {
+                  handleCategoryClick(-1);
+                  setIsDataOnLoading(true);
+                  // navigate(routes.catalogue.catalogueTitle.replace(':value', e.target.innerText));
+                }}
                 onKeyPress={event => handleKeyPress(event, -1)}
-                tabIndex={0} // Makes the element focusable
+                tabIndex={0}
               >
                 Programmation
               </button>
+
               <img src={programmationIcon} className='img-icon' alt='icon' />
             </div>
           </div>
@@ -305,7 +312,10 @@ const CoursesCategoryCard = ({
             <div className='card-content'>
               <button
                 className='category-name'
-                onClick={() => handleCategoryClick(-2)}
+                onClick={() => {
+                  handleCategoryClick(-2);
+                  //  navigate(`${routes.catalogue.catalogueTitle}/${e.target.value}`)
+                }}
                 // onKeyPress={event => handleKeyPress(event, -2)}
                 tabIndex={0} // Makes the element focusable
               >
