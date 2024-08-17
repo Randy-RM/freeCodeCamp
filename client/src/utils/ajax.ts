@@ -6,7 +6,14 @@ import type {
   CompletedChallenge,
   User
 } from '../redux/prop-types';
-import { RavenCourse } from '../client-only-routes/show-courses';
+import {
+  MoodleCourse,
+  MoodleCourseCategory,
+  MoodleCoursesCatalogue,
+  RavenCourse
+} from '../client-only-routes/show-courses';
+import { splitArray } from '../components/helpers';
+import sortCourses from '../components/helpers/sort-course';
 
 const { apiLocation } = envData;
 
@@ -303,6 +310,57 @@ export async function getExternalResource<T>(urlEndPoint: string) {
   }
   return response;
 }
+
+//add for moddlecourse fetch test
+
+export const getMoodleCourseCategory = async () => {
+  const moodleCourseCategories = await getExternalResource<
+    MoodleCourseCategory[]
+  >(
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+    `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_categories&moodlewsrestformat=json`
+  );
+
+  if (moodleCourseCategories) {
+    const moodleCategorie = moodleCourseCategories?.filter(
+      category => category.coursecount > 0
+    );
+    console.log(moodleCategorie);
+    return moodleCategorie;
+  }
+};
+
+//get so courses by categories
+
+export const getMoodleCourses = async () => {
+  const moodleCatalogue = await getExternalResource<MoodleCourse[]>(
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+    `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses&moodlewsrestformat=json`
+  );
+
+  const splitCourses: MoodleCoursesCatalogue | null | undefined =
+    moodleCatalogue != null
+      ? splitArray<MoodleCourse>(
+          moodleCatalogue.filter(moodleCourse => {
+            return moodleCourse.visible == 1 && moodleCourse.format != 'site';
+          }),
+          4
+        )
+      : null;
+
+  //Order courses by their publication date
+  const sortedCourses = sortCourses(splitCourses);
+
+  if (moodleCatalogue != null) {
+    console.log(sortedCourses);
+
+    return sortedCourses;
+  } else {
+    return null;
+  }
+};
+//add for moddlecourse fetch test
+
 interface DataLemlist {
   firstName: string;
 }
@@ -407,7 +465,89 @@ interface RavenFetchCoursesDto {
   fromDate: string;
   // eslint-disable-next-line @typescript-eslint/naming-convention
   valid_to: string;
+  apiKey?: string;
+  currentPage?: number;
 }
+const getRavenToken = async () => {
+  const ravenTokenData = getRavenTokenDataFromLocalStorage();
+
+  if (ravenTokenData === null) {
+    // Si aucun token n'existe en local storage, générer un nouveau token
+    const generateRavenToken = await generateRavenTokenAcces();
+
+    if (generateRavenToken) {
+      addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
+      return generateRavenToken; // Retourner le nouveau token
+    } else {
+      return null; // Retourner null si la génération a échoué
+    }
+  } else {
+    // Vérifier si le token existant a expiré d'une heure ou plus
+    const tokenExpirationTime = new Date(ravenTokenData.valid_to);
+    const currentTime = new Date();
+    // 1 heure en millisecondes
+    const oneHourInMillis = 60 * 60 * 1000;
+    // Calculer la différence de temps en millisecondes
+    const timeDifference =
+      tokenExpirationTime.getTime() - currentTime.getTime();
+
+    if (timeDifference <= oneHourInMillis) {
+      // Le token a expiré d'une heure ou plus, donc le supprimer et générer un nouveau
+      removeRavenTokenFromLocalStorage();
+      const generateRavenToken = await generateRavenTokenAcces();
+
+      if (generateRavenToken) {
+        addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
+        return generateRavenToken; // Retourner le nouveau token
+      } else {
+        return null; // Retourner null si la génération a échoué
+      }
+    } else {
+      // Le token est encore valide, retourner le token existant
+      return ravenTokenData;
+    }
+  }
+};
+
+//add for test
+
+const { moodleApiBaseUrl, moodleApiToken, ravenAwsApiKey } = envData;
+const ravenLocalToken = getRavenTokenDataFromLocalStorage();
+
+export const getRavenResources = async (currentPage: number) => {
+  await getRavenToken();
+
+  const ravenData: RavenFetchCoursesDto = {
+    apiKey: ravenAwsApiKey,
+    token: ravenLocalToken?.token || '',
+    currentPage: currentPage,
+    fromDate: '01-01-2023',
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    valid_to: '06-24-2024'
+  };
+  const getReveanCourses = await getAwsCourses(ravenData);
+  console.log('le log de raven', getReveanCourses);
+
+  return getReveanCourses;
+};
+export const getRavenPathResources = async (currentPage: number) => {
+  await getRavenToken();
+
+  const ravenData: RavenFetchCoursesDto = {
+    apiKey: ravenAwsApiKey,
+    token: ravenLocalToken?.token || '',
+    currentPage: currentPage,
+    fromDate: '01-01-2023',
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    valid_to: '06-24-2024'
+  };
+  const getReveanPathCourses = await getAwsPath(ravenData);
+  console.log('le log de raven', getReveanPathCourses);
+
+  return getReveanPathCourses;
+};
+
+//end getRavenResources
 
 export async function getAwsCourses(data: RavenFetchCoursesDto) {
   let response: unknown | RavenCourse[];
@@ -419,6 +559,7 @@ export async function getAwsCourses(data: RavenFetchCoursesDto) {
   } catch (error) {
     response = null;
   }
+
   return response;
 }
 export async function getAwsPath(data: RavenFetchCoursesDto) {
