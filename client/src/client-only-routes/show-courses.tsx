@@ -61,7 +61,7 @@ const { moodleApiBaseUrl, moodleApiToken, moodleBaseUrl, ravenAwsApiKey } =
   envData;
 
 // TODO: update types for actions
-interface CoursesProps {
+export interface CoursesProps {
   createFlashMessage: typeof createFlashMessage;
   // isSignedIn: boolean;
   navigate: (location: string) => void;
@@ -417,6 +417,13 @@ export function Courses(props: CoursesProps): JSX.Element {
 
   useEffect(() => {
     void getMoodleCourseCategory();
+
+    ravenCourses?.length == 0
+      ? setIsDataOnLoading(false)
+      : setIsDataOnLoading(false);
+
+    console.log(isDataOnLoading);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -489,10 +496,11 @@ export function Courses(props: CoursesProps): JSX.Element {
                 <div className='course__number'>
                   <p>Parcourir le catalogue complet</p>
                   <span>
-                    {allCourses.length +
-                      (currentCategory == null || currentCategory == -1
-                        ? 2
-                        : 0)}{' '}
+                    {allCourses.length > 0 &&
+                      allCourses.length +
+                        (currentCategory == null || currentCategory == -1
+                          ? 2
+                          : 0)}{' '}
                     cours
                   </span>
                 </div>
@@ -539,71 +547,71 @@ export function Courses(props: CoursesProps): JSX.Element {
                           />
                         </>
                       )}
-                    {paginatedData.length > 0 ? (
-                      paginatedData.map((course, index) => {
-                        if ('launch_url' in course) {
-                          const firstCategory = course.category?.[0];
-                          const language =
-                            firstCategory?.tags?.[0]?.title || 'Unknown';
+                    {paginatedData.length > 0
+                      ? paginatedData.map((course, index) => {
+                          if ('launch_url' in course) {
+                            const firstCategory = course.category?.[0];
+                            const language =
+                              firstCategory?.tags?.[0]?.title || 'Unknown';
 
-                          if (course.long_description) {
-                            return (
-                              <PathCard
-                                language={language}
-                                key={course.name}
-                                icon={awsLogo}
-                                isAvailable={true}
-                                // isSignedIn={isSignedIn}
-                                title={`${index + 1}. ${course.name}`}
-                                buttonText='Suivre le cours'
-                                link={course.launch_url}
-                                description={course.long_description}
-                                duration={convertTime(course.duration)}
-                                level={course.skill_level}
-                              />
-                            );
+                            if (course.long_description) {
+                              return (
+                                <PathCard
+                                  language={language}
+                                  key={course.name}
+                                  icon={awsLogo}
+                                  isAvailable={true}
+                                  // isSignedIn={isSignedIn}
+                                  title={`${index + 1}. ${course.name}`}
+                                  buttonText='Suivre le cours'
+                                  link={course.launch_url}
+                                  description={course.long_description}
+                                  duration={convertTime(course.duration)}
+                                  level={course.skill_level}
+                                />
+                              );
+                            } else {
+                              return (
+                                <CourseCard
+                                  language={language}
+                                  key={index.toString()}
+                                  icon={awsLogo}
+                                  isAvailable={true}
+                                  // isSignedIn={isSignedIn}
+                                  title={`${index + 1}. ${course.name}`}
+                                  buttonText='Suivre le cours'
+                                  link={course.launch_url}
+                                  description={course.short_description}
+                                  duration={convertTime(course.duration)}
+                                />
+                              );
+                            }
                           } else {
                             return (
                               <CourseCard
-                                language={language}
-                                key={index.toString()}
-                                icon={awsLogo}
-                                isAvailable={true}
+                                language='French'
+                                key={`${index}-${course.id}`}
+                                icon={PhBookBookmark} // Remplacer par le chemin réel de l'image
+                                isAvailable={course.visible === 1}
                                 // isSignedIn={isSignedIn}
-                                title={`${index + 1}. ${course.name}`}
+                                title={course.displayname}
                                 buttonText='Suivre le cours'
-                                link={course.launch_url}
-                                description={course.short_description}
-                                duration={convertTime(course.duration)}
+                                link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
+                                description={course.summary}
+                                duration={convertTimestampToTime(
+                                  course.timecreated
+                                )}
                               />
                             );
                           }
-                        } else {
-                          return (
-                            <CourseCard
-                              language='French'
-                              key={`${index}-${course.id}`}
-                              icon={PhBookBookmark} // Remplacer par le chemin réel de l'image
-                              isAvailable={course.visible === 1}
-                              // isSignedIn={isSignedIn}
-                              title={course.displayname}
-                              buttonText='Suivre le cours'
-                              link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
-                              description={course.summary}
-                              duration={convertTimestampToTime(
-                                course.timecreated
-                              )}
-                            />
-                          );
-                        }
-                      })
-                    ) : (
-                      <div className='card-course-detail-container'>
-                        {renderCourseCardSkeletons(6)}
-                      </div>
-                    )}
+                        })
+                      : ''}
                   </div>
-                ) : null}
+                ) : (
+                  <div className='card-course-detail-container'>
+                    {renderCourseCardSkeletons(6)}
+                  </div>
+                )}
 
                 <div className='pagination-container'>
                   <FontAwesomeIcon

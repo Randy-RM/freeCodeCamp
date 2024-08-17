@@ -152,6 +152,10 @@ const CourseFilter = ({
     };
     const getReveanCourses = await getAwsPath(ravenData);
     setRavenPath(getReveanCourses as unknown as RavenCourse[]);
+
+    if (getRavenCourses === undefined || getRavenCourses.length < 0) {
+      setIsDataOnLoading(false);
+    }
   };
 
   const getRavenCourses = async () => {
@@ -168,8 +172,11 @@ const CourseFilter = ({
     };
     setIsDataOnLoading(true);
     const courses = (await getAwsCourses(ravenData)) as RavenCourse[];
+
     if (courses && courses.length !== 0) {
       setRavenCourses(courses);
+      setIsDataOnLoading(false);
+    } else if (courses === undefined || courses.length < 0) {
       setIsDataOnLoading(false);
     }
   };

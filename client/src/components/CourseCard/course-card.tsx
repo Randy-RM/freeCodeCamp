@@ -33,7 +33,6 @@ interface LandingDetailsProps {
 }
 
 const CourseCard = ({
-  // isSignedIn,
   isAvailable,
   sameTab,
   external,
@@ -111,15 +110,6 @@ const CourseCard = ({
 
             <div className='card-course-detail-footer'>
               <div className='duration__language'>
-                {/* {title.includes('Introduction') ||
-                title.includes('introduce') ||
-                title.includes('Getting Started') ? (
-                  <p>Beginners</p>
-                ) : (
-                  // Votre code ici
-                  <p>Intermediate</p>
-                )} */}
-
                 {duration ? (
                   <>
                     <img
