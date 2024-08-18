@@ -1,4 +1,5 @@
 import { FlashApp, FlashMessageArg } from '../components/Flash/redux';
+import { MoodleCourse, RavenCourse } from '../client-only-routes/show-courses';
 import { MainApp } from '.';
 
 export interface State {
@@ -40,6 +41,7 @@ export interface DefaultDonationFormState {
   success: boolean;
   error: null | string;
 }
+export type UnifiedCourse = MoodleCourse | RavenCourse;
 
 export const defaultFetchState = {
   pending: true,
