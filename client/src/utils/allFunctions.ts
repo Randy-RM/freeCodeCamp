@@ -1,3 +1,5 @@
+import { courseDescriptions } from './ajax';
+
 export function convertTime(timeInput: string | number): string {
   let totalMinutes: number;
 
@@ -90,4 +92,22 @@ export function convertTimestampToTime(timestamp: number) {
   }
 
   return `${formattedHours}hours ${formattedMinutes} minutes`;
+}
+
+export function getCategoryDescription(title: string): string | undefined {
+  const lowerCaseTitle = title.toLocaleLowerCase();
+
+  if (lowerCaseTitle.includes('programmation')) {
+    return courseDescriptions.Développement.description;
+  } else if (lowerCaseTitle.includes('bureautique')) {
+    return courseDescriptions.Bureautique.description;
+  } else if (lowerCaseTitle.includes('artificielle')) {
+    return courseDescriptions.artificielle.description;
+  } else if (lowerCaseTitle.includes('amazon web service')) {
+    return 'description amazone';
+  } else if (lowerCaseTitle.includes('marketing')) {
+    return courseDescriptions.Marketing.description;
+  }
+
+  return '';
 }
