@@ -77,7 +77,8 @@ export type CourseCategoryTitle =
   | 'Bureautique'
   | 'Marketing'
   | 'Communication'
-  | 'artificielle';
+  | 'artificielle'
+  | 'amazon';
 
 export interface CourseDetails {
   titre: string;
@@ -122,6 +123,12 @@ export const courseDescriptions: Record<CourseCategoryTitle, CourseDetails> = {
     titre: 'Intelligence Artificielle',
     summury: `Explore l'IA, imitant les fonctions humaines. Apprends l'IA générative pour créer des contenus (texte, images, sons, vidéos) à travers des applications interactives.`,
     description: `L'intelligence artificielle est un domaine technologique en rapide évolution, permettant aux ordinateurs d'imiter des fonctions humaines telles que l'apprentissage et la résolution de problèmes. Un domaine spécifique de l'IA qui a récemment gagné en popularité est l'IA générative, qui se concentre sur la création de nouveaux contenus, qu'il s'agisse de textes, d'images, de sons ou de vidéos. Inscrivez-vous à ce cours pour explorer les différentes formes d'IA générative à travers des applications interactives !`
+  },
+
+  amazon: {
+    titre: 'Amazon web service',
+    summury: `Ce cours est conçu pour montrer aux participants comment optimiser l'utilisation du cloud AWS grâce à la compréhension de ces nombreux services et de leur intégration dans la création de solutions basées sur le cloud.`,
+    description: `Etant donné que les solutions architecturales peuvent varier selon le secteur, le type d'application et la taille de l'entreprise, ce cours met l'accent sur les bonnes pratiques relatives au cloud AWS afin d'aider les participants à construire des solutions informatiques optimisées sur AWS. Cette formation présente également de nombreuses études de cas expliquant comment certains clients AWS ont conçu leurs infrastructures, mais aussi les stratégies et services qu'ils ont implémentés. A l'issue de cette formation, vous serez en capacité de créer une grande variété d'infrastructures en recourant aux différents services vu au travers de ce module.`
   }
 };
 

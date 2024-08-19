@@ -103,8 +103,8 @@ export function getCategoryDescription(title: string): string | undefined {
     return courseDescriptions.Bureautique.description;
   } else if (lowerCaseTitle.includes('artificielle')) {
     return courseDescriptions.artificielle.description;
-  } else if (lowerCaseTitle.includes('amazon web service')) {
-    return 'description amazone';
+  } else if (lowerCaseTitle.includes('amazon')) {
+    return courseDescriptions.amazon.description;
   } else if (lowerCaseTitle.includes('marketing')) {
     return courseDescriptions.Marketing.description;
   }

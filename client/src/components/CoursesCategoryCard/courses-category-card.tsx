@@ -291,9 +291,30 @@ const CoursesCategoryCard = ({
     categoryId: number,
     e: React.MouseEvent<HTMLButtonElement>
   ) => {
-    await handleCategoryClick(categoryId);
     handleClickButton(e);
-    await navigate(routes.catalogue.programmation);
+
+    const url =
+      categoryId === -1
+        ? routes.catalogue.programmation
+        : categoryId === -2
+        ? routes.catalogue.aws
+        : '';
+
+    await navigate(url);
+    await handleCategoryClick(categoryId);
+  };
+
+  const handleButtonClickMoodle = async (
+    categoryId: number,
+    categoryName: string,
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    handleClickButton(e);
+
+    const url = routes.catalogue.moodle.replace(':category', categoryName);
+
+    await navigate(url);
+    await handleCategoryClick(categoryId);
   };
 
   return (
@@ -363,7 +384,15 @@ const CoursesCategoryCard = ({
                 <button
                   className='category-name'
                   onClick={e => {
-                    void handleButtonClick(categorie.id, e);
+                    void handleButtonClickMoodle(
+                      categorie.id,
+                      categorie.name.includes('amp')
+                        ? 'marketing-communication'
+                        : categorie.name.includes('artificielle')
+                        ? 'intelligence-artificielle'
+                        : categorie.name,
+                      e
+                    );
                   }}
                   // eslint-disable-next-line @typescript-eslint/no-unsafe-return,
                   onKeyPress={event => handleKeyPress(event, categorie.id)}
