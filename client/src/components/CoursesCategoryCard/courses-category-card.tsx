@@ -12,6 +12,8 @@ import { Link } from '@reach/router';
 // };
 
 import './courses-category-card.css';
+import { navigate } from 'gatsby';
+import { useRecoilState } from 'recoil';
 import devIcon from '../../assets/icons/dev-icon.svg';
 import programmationIcon from '../../assets/icons/programation.png';
 import marketingIcone from '../../assets/icons/marketing.png';
@@ -36,6 +38,8 @@ import {
 } from '../../client-only-routes/show-courses';
 import { splitArray } from '../helpers';
 import sortCourses from '../helpers/sort-course';
+import routes from '../../utils/routes';
+import { titleOfCategorieValue } from '../../redux/atoms';
 // import routes from '../../utils/routes';
 // import { navigate } from 'gatsby';
 
@@ -92,6 +96,9 @@ const CoursesCategoryCard = ({
 }: CourseFilterProps): JSX.Element => {
   const containerRef1 = useRef<HTMLDivElement>(null);
   const [isSelected, setIsSelected] = useState<number | null>(null);
+  const [valueOfButton, setValueOfButton] = useRecoilState(
+    titleOfCategorieValue
+  );
 
   const scrollAmount = 320; // Adjust based on card width and gap
   // const categoryDescrTitle = 'développement';
@@ -211,39 +218,50 @@ const CoursesCategoryCard = ({
     }
   };
 
-  const handleCategoryClick = (categoryId: number) => {
+  const handleCategoryClick = async (categoryId: number) => {
     setIsSelected(categoryId);
     setCurrentCategory(categoryId);
     setCurrentPage(1); // Retour à la première page à chaque fois que la catégory change
     setIsDataOnLoading(true);
 
-    if (categoryId === -1) {
-      setMoodleCourses(null);
-      setRavenCourses(null);
-      setRavenPath(null);
-      void filterByCategory(categoryId);
-    } else if (categoryId === -2) {
-      setMoodleCourses(null);
-      void getRavenCourses();
-      void getRavenResourcesPath();
-    } else if (categoryId !== null) {
-      void filterByCategory(categoryId);
-      setRavenCourses(null);
-      setRavenPath(null);
-    } else {
-      void getMoodleCourses();
-      setRavenCourses(null);
-      setRavenPath(null);
+    try {
+      if (categoryId === -1) {
+        setMoodleCourses(null);
+        setRavenCourses(null);
+        setRavenPath(null);
+        await filterByCategory(categoryId);
+      } else if (categoryId === -2) {
+        setMoodleCourses(null);
+        await getRavenCourses();
+        await getRavenResourcesPath();
+      } else if (categoryId !== null) {
+        await filterByCategory(categoryId); // eslint-disable-line @typescript-eslint/no-floating-promises
+        setRavenCourses(null);
+        setRavenPath(null);
+      } else {
+        await getMoodleCourses();
+        setRavenCourses(null);
+        setRavenPath(null);
+      }
+    } catch (error) {
+      console.log('erreur lors de la recupération de la catégory', error);
+    }
+  };
+
+  const handleClickButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const target = e.target as HTMLButtonElement;
+    if (target !== null) {
+      setValueOfButton(target.textContent || '');
     }
   };
 
   //selectionne une catégorie par rapport à la catégorie passée en simulant le clic sur le clavier
   const handleKeyPress = (
-    event: React.KeyboardEvent<HTMLHeadingElement>,
+    event: React.KeyboardEvent<HTMLButtonElement>,
     categoryId: number
   ) => {
     if (event.key === 'Enter' || event.key === ' ') {
-      handleCategoryClick(categoryId);
+      void handleCategoryClick(categoryId);
     }
   };
 
@@ -265,7 +283,17 @@ const CoursesCategoryCard = ({
       return itelligenceIcone;
     } else {
       return devIcon;
+      console.log(valueOfButton);
     }
+  };
+
+  const handleButtonClick = async (
+    categoryId: number,
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    await handleCategoryClick(categoryId);
+    handleClickButton(e);
+    await navigate(routes.catalogue.programmation);
   };
 
   return (
@@ -293,12 +321,11 @@ const CoursesCategoryCard = ({
             <div className='card-content'>
               <button
                 className='category-name'
-                onClick={() => {
-                  handleCategoryClick(-1);
-                  setIsDataOnLoading(true);
+                onClick={e => {
+                  void handleButtonClick(-1, e);
                   // navigate(routes.catalogue.catalogueTitle.replace(':value', e.target.innerText));
                 }}
-                onKeyPress={event => handleKeyPress(event, -1)}
+                onKeyPress={e => handleKeyPress(e, -1)}
                 tabIndex={0}
               >
                 Programmation
@@ -312,8 +339,8 @@ const CoursesCategoryCard = ({
             <div className='card-content'>
               <button
                 className='category-name'
-                onClick={() => {
-                  handleCategoryClick(-2);
+                onClick={e => {
+                  void handleButtonClick(-2, e);
                   //  navigate(`${routes.catalogue.catalogueTitle}/${e.target.value}`)
                 }}
                 // onKeyPress={event => handleKeyPress(event, -2)}
@@ -335,7 +362,9 @@ const CoursesCategoryCard = ({
               <div className='card-content'>
                 <button
                   className='category-name'
-                  onClick={() => handleCategoryClick(categorie.id)}
+                  onClick={e => {
+                    void handleButtonClick(categorie.id, e);
+                  }}
                   // eslint-disable-next-line @typescript-eslint/no-unsafe-return,
                   onKeyPress={event => handleKeyPress(event, categorie.id)}
                   tabIndex={0} // rendre l'élément focusable via le clavier et l'inclure dans la tabulation
