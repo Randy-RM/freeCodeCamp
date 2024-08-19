@@ -13,7 +13,7 @@ function Courses(): JSX.Element {
     <Router>
       <ShowCourses path={withPrefix(routes.catalogue.index)} />
       {/* <MyCatalogue path={withPrefix(routes.catalogue.programmation)} /> */}
-      <MyCatalogue path={withPrefix(routes.catalogue.programmation)} />
+      <MyCatalogue path={withPrefix(routes.catalogue.catalogueTitle)} />
       {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
       {/* @ts-ignore */}
       <RedirectHome default={true} />
