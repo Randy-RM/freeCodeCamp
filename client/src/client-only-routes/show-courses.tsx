@@ -1,5 +1,5 @@
 import { Grid } from '@freecodecamp/react-bootstrap';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Helmet from 'react-helmet';
 
 // import { useTranslation } from 'react-i18next';PhBookBookmark
@@ -11,6 +11,7 @@ import {
   faChevronLeft,
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
+import { useRecoilState } from 'recoil';
 import PathCard from '../components/PathCard/path-card';
 
 import envData from '../../../config/env.json';
@@ -56,6 +57,8 @@ import '../components/CourseFilter/course-filter.css';
 import CourseFilter from '../components/CourseFilter/course-filter';
 import sortCourses from '../components/helpers/sort-course';
 import CoursesCategoryCard from '../components/CoursesCategoryCard/courses-category-card';
+import { allDataCourses } from '../redux/atoms';
+import { UnifiedCourse } from '../redux/types';
 
 const { moodleApiBaseUrl, moodleApiToken, moodleBaseUrl, ravenAwsApiKey } =
   envData;
@@ -163,6 +166,8 @@ export interface RavenFetchCoursesDto {
   valid_to: string;
 }
 
+type Courses = MoodleCourse | RavenCourse;
+
 const mapStateToProps = createSelector(
   signInLoadingSelector,
   userSelector,
@@ -216,6 +221,8 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [currentCategory, setCurrentCategory] = useState<number | null>(null);
 
   const [ravenPath, setRavenPath] = useState<RavenCourse[]>([]);
+  const [dataForAllCourses, setDataForallCourse] =
+    useRecoilState<UnifiedCourse[]>(allDataCourses);
 
   const ravenLocalToken = getRavenTokenDataFromLocalStorage();
 
@@ -330,11 +337,14 @@ export function Courses(props: CoursesProps): JSX.Element {
     }
   };
 
-  const allCourses = [
-    ...(ravenCourses || []),
-    ...(moodleCourses?.result ? moodleCourses.result.flat() : []),
-    ...(ravenPath ? ravenPath : [])
-  ];
+  const allCourses: (MoodleCourse | RavenCourse)[] = useMemo(
+    () => [
+      ...(ravenCourses || []),
+      ...(moodleCourses?.result ? moodleCourses.result.flat() : []),
+      ...(ravenPath ? ravenPath : [])
+    ],
+    [ravenCourses, moodleCourses, ravenPath]
+  );
 
   const {
     paginatedData,
@@ -366,6 +376,11 @@ export function Courses(props: CoursesProps): JSX.Element {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
+
+  useEffect(() => {
+    setDataForallCourse(allCourses);
+    console.log(dataForAllCourses);
+  }, [allCourses, dataForAllCourses, setDataForallCourse]);
 
   useEffect(() => {
     void getRavenResources();
