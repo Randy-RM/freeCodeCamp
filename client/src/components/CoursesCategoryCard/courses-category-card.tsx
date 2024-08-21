@@ -13,7 +13,7 @@ import { Link } from '@reach/router';
 
 import './courses-category-card.css';
 import { navigate } from 'gatsby';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import devIcon from '../../assets/icons/dev-icon.svg';
 import programmationIcon from '../../assets/icons/programation.png';
 import marketingIcone from '../../assets/icons/marketing.png';
@@ -39,7 +39,10 @@ import {
 import { splitArray } from '../helpers';
 import sortCourses from '../helpers/sort-course';
 import routes from '../../utils/routes';
-import { titleOfCategorieValue } from '../../redux/atoms';
+import {
+  titleOfCategorieValue,
+  valueOfCurrentCategory
+} from '../../redux/atoms';
 // import routes from '../../utils/routes';
 // import { navigate } from 'gatsby';
 
@@ -60,19 +63,6 @@ interface CourseFilterProps {
   setRavenPath: React.Dispatch<React.SetStateAction<RavenCourse[] | null>>;
   getRavenResourcesPath: RavenFetchCoursesDto;
 }
-
-// interface Course {
-//   // eslint-disable-next-line @typescript-eslint/naming-convention
-//   learningobject_id: number;
-//   // eslint-disable-next-line @typescript-eslint/naming-convention
-//   launch_url: string;
-//   // eslint-disable-next-line @typescript-eslint/naming-convention
-//   updated_date: string;
-//   // eslint-disable-next-line @typescript-eslint/naming-convention
-//   display_name: string;
-//   // eslint-disable-next-line @typescript-eslint/naming-convention
-//   short_description: string;
-// }
 
 interface RavenTokenData {
   apiKey: string;
@@ -96,9 +86,8 @@ const CoursesCategoryCard = ({
 }: CourseFilterProps): JSX.Element => {
   const containerRef1 = useRef<HTMLDivElement>(null);
   const [isSelected, setIsSelected] = useState<number | null>(null);
-  const [valueOfButton, setValueOfButton] = useRecoilState(
-    titleOfCategorieValue
-  );
+  const setValueOfButton = useSetRecoilState(titleOfCategorieValue);
+  const setCurrent = useSetRecoilState(valueOfCurrentCategory);
 
   const scrollAmount = 320; // Adjust based on card width and gap
   // const categoryDescrTitle = 'développement';
@@ -137,32 +126,6 @@ const CoursesCategoryCard = ({
     const sortedCourses = sortCourses(splitCourses);
 
     setMoodleCourses(sortedCourses);
-  };
-
-  const getMoodleCourses = async () => {
-    setIsDataOnLoading(true);
-    const moodleCatalogue = await getExternalResource<MoodleCourse[]>(
-      `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses&moodlewsrestformat=json`
-    );
-
-    const splitCourses: MoodleCoursesCatalogue | null =
-      moodleCatalogue != null
-        ? splitArray<MoodleCourse>(
-            moodleCatalogue.filter(moodleCourse => {
-              return moodleCourse.visible == 1 && moodleCourse.format != 'site';
-            }),
-            4
-          )
-        : null;
-    setIsDataOnLoading(false);
-
-    const sortedCourses = sortCourses(splitCourses);
-
-    if (moodleCatalogue != null) {
-      setMoodleCourses(sortedCourses);
-    } else {
-      setMoodleCourses(null);
-    }
   };
 
   const getRavenCourses = async () => {
@@ -221,6 +184,7 @@ const CoursesCategoryCard = ({
   const handleCategoryClick = async (categoryId: number) => {
     setIsSelected(categoryId);
     setCurrentCategory(categoryId);
+    setCurrent(categoryId);
     setCurrentPage(1); // Retour à la première page à chaque fois que la catégory change
     setIsDataOnLoading(true);
 
@@ -234,12 +198,12 @@ const CoursesCategoryCard = ({
         setMoodleCourses(null);
         await getRavenCourses();
         await getRavenResourcesPath();
-      } else if (categoryId !== null) {
+      } else if (categoryId == 11) {
         await filterByCategory(categoryId); // eslint-disable-line @typescript-eslint/no-floating-promises
         setRavenCourses(null);
         setRavenPath(null);
       } else {
-        await getMoodleCourses();
+        await filterByCategory(categoryId);
         setRavenCourses(null);
         setRavenPath(null);
       }
@@ -262,18 +226,9 @@ const CoursesCategoryCard = ({
   ) => {
     if (event.key === 'Enter' || event.key === ' ') {
       void handleCategoryClick(categoryId);
+      setCurrent(categoryId);
     }
   };
-
-  // const isDateWithin30Days = (dateString: string | number) => {
-  //   const currentDate = new Date();
-  //   const date = new Date(dateString);
-  //   const differenceInTime = currentDate.getTime() - date.getTime();
-  //   const differenceInDays = differenceInTime / (1000 * 3600 * 24); // Convertir en jours
-  //   return differenceInDays < 180;
-  // };
-
-  // icons.ts
   const getCourseIcon = (courseName: string): string => {
     if (courseName.includes('Marketing')) {
       return marketingIcone;
@@ -283,7 +238,6 @@ const CoursesCategoryCard = ({
       return itelligenceIcone;
     } else {
       return devIcon;
-      console.log(valueOfButton);
     }
   };
 
@@ -299,9 +253,8 @@ const CoursesCategoryCard = ({
         : categoryId === -2
         ? routes.catalogue.aws
         : '';
-
-    await navigate(url);
     await handleCategoryClick(categoryId);
+    await navigate(url);
   };
 
   const handleButtonClickMoodle = async (
@@ -312,9 +265,9 @@ const CoursesCategoryCard = ({
     handleClickButton(e);
 
     const url = routes.catalogue.moodle.replace(':category', categoryName);
-
-    await navigate(url);
     await handleCategoryClick(categoryId);
+    setCurrent(categoryId);
+    await navigate(url);
   };
 
   return (
