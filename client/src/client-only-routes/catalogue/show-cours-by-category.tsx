@@ -223,8 +223,11 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                 <div className='course__number'>
                   <p>Parcourir le catalogue complet</p>
                   <span>
-                    {paginatedData.length + (currentCurrent == -1 ? 2 : 0)}{' '}
-                    cours
+                    {paginatedData.length > 0 || currentCurrent === -1
+                      ? `${
+                          paginatedData.length + (currentCurrent === -1 ? 2 : 0)
+                        } cours`
+                      : ''}
                   </span>
                 </div>
 
