@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './course-filter.css';
 
+import { navigate } from 'gatsby';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   addRavenTokenToLocalStorage,
   generateRavenTokenAcces,
@@ -19,6 +21,11 @@ import {
 } from '../../client-only-routes/show-courses';
 import { splitArray } from '../helpers';
 import sortCourses from '../helpers/sort-course';
+import routes from '../../utils/routes';
+import {
+  titleOfCategorieValue,
+  valueOfCurrentCategory
+} from '../../redux/atoms';
 
 type MoodleCoursesFiltered = {
   courses: MoodleCourse[] | null;
@@ -63,7 +70,6 @@ const CourseFilter = ({
   screenWidth,
   courseCategories,
   // setProgrammingCategory,
-  currentCategory,
   setCurrentCategory,
   setCurrentPage
 }: {
@@ -87,6 +93,9 @@ const CourseFilter = ({
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }): JSX.Element => {
   const [showSubjectFilter, setShowSubjectFilter] = useState<boolean>(true);
+  const setValueOfButton = useSetRecoilState(titleOfCategorieValue);
+  const setCurrentCurrent = useSetRecoilState(valueOfCurrentCategory);
+  const currentCurrent = useRecoilValue(valueOfCurrentCategory);
 
   const filterByCategory = async (categoryId: number) => {
     setIsDataOnLoading(true);
@@ -248,17 +257,20 @@ const CourseFilter = ({
           {courseCategories && (
             <button
               className={`filter-button ${
-                currentCategory == null ? 'selected-category' : ''
+                currentCurrent == null ? 'selected-category' : ''
               }`}
               onClick={() => {
-                void getMoodleCourses();
-                void getRavenCourses();
-                void getRavenResourcesPath();
-                setCurrentPage(1);
-                setCurrentCategory(null);
-                // setProgrammingCategory(true);
-                scrollTo(130);
-                if (screenWidth < 990) setShowFilter(e => !e);
+                void (async () => {
+                  await getMoodleCourses();
+                  await getRavenCourses();
+                  await getRavenResourcesPath();
+                  setCurrentPage(1);
+                  setCurrentCategory(null);
+                  setCurrentCurrent(null);
+                  // setProgrammingCategory(true);
+                  scrollTo(130);
+                  if (screenWidth < 990) setShowFilter(e => !e);
+                })();
               }}
             >
               Tous
@@ -268,17 +280,19 @@ const CourseFilter = ({
           {courseCategories && (
             <button
               className={`filter-button ${
-                currentCategory == -1 ? 'selected-category' : ''
+                currentCurrent == -1 ? 'selected-category' : ''
               }`}
               onClick={() => {
-                setCurrentCategory(-1);
-                // setCurrentPage(1);
-                // setProgrammingCategory(true);
-                setMoodleCourses(null);
-                setRavenCourses(null);
-                setRavenPath(null);
-                scrollTo(130);
-                if (screenWidth < 990) setShowFilter(e => !e);
+                void (() => {
+                  setCurrentCurrent(-1);
+                  setMoodleCourses(null);
+                  setRavenCourses(null);
+                  setValueOfButton('Programmation');
+                  setRavenPath(null);
+                  scrollTo(130);
+                  if (screenWidth < 990) setShowFilter(e => !e);
+                  void navigate(routes.catalogue.programmation);
+                })();
               }}
             >
               Programmation
@@ -287,42 +301,66 @@ const CourseFilter = ({
           {courseCategories && (
             <button
               className={`filter-button ${
-                currentCategory == -2 ? 'selected-category' : ''
+                currentCurrent == -2 ? 'selected-category' : ''
               }`}
               onClick={() => {
-                setCurrentCategory(-2);
-                // setCurrentPage(1);
-                // setProgrammingCategory(true);
-                setMoodleCourses(null);
-                void getRavenCourses();
-                void getRavenResourcesPath();
-                scrollTo(130);
-                if (screenWidth < 990) setShowFilter(e => !e);
+                void (async () => {
+                  setIsDataOnLoading(true);
+                  setCurrentCurrent(-2);
+                  setValueOfButton('Amazon Web Service');
+                  // setCurrentPage(1);
+                  // setProgrammingCategory(true);
+                  setMoodleCourses(null);
+                  await getRavenCourses();
+                  await getRavenResourcesPath();
+                  scrollTo(130);
+                  void navigate(routes.catalogue.aws);
+                  if (screenWidth < 990) setShowFilter(e => !e);
+                })();
               }}
             >
-              AWS
+              Amazon Web Service
             </button>
           )}
 
-          {courseCategories?.map((element, index) => {
+          {courseCategories?.map((course, index) => {
             return (
               <button
+                key={index}
                 className={`filter-button ${
-                  currentCategory == element?.id ? 'selected-category' : ''
+                  currentCurrent == 11 ? 'selected-category' : ''
                 }`}
                 onClick={() => {
-                  void filterByCategory(element?.id);
-                  setRavenCourses(null);
-                  setRavenPath(null);
-                  setCurrentCategory(element?.id);
-                  setCurrentPage(1);
-                  scrollTo(130);
-                  // setProgrammingCategory(false);
-                  if (screenWidth < 990) setShowFilter(e => !e);
+                  void (async () => {
+                    await filterByCategory(course?.id ? course?.id : 0);
+                    setRavenCourses(null);
+                    setRavenPath(null);
+                    setCurrentCategory(course?.id);
+                    setCurrentCurrent(course?.id);
+                    setValueOfButton(
+                      course?.name.includes('Marketing')
+                        ? 'Marketing & Communication'
+                        : course?.name
+                    );
+                    setCurrentPage(1);
+                    void navigate(
+                      routes.catalogue.catalogueTitle.replace(
+                        ':value',
+                        course?.name.includes('Marketing')
+                          ? 'Marketing-Communication'
+                          : course?.name
+                      )
+                    );
+                    scrollTo(130);
+                    // setProgrammingCategory(false);
+                    if (screenWidth < 990) setShowFilter(e => !e);
+                  })();
                 }}
-                key={index}
-                dangerouslySetInnerHTML={{ __html: element?.name }}
-              ></button>
+              >
+                {course?.name.includes('Marketing')
+                  ? 'Marketing'
+                  : course?.name}
+              </button>
             );
           })}
         </ul>
