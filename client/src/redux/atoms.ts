@@ -1,5 +1,6 @@
 import { atom, AtomEffect, DefaultValue } from 'recoil';
 import {
+  MoodleCourseCategory,
   MoodleCoursesCatalogue,
   RavenCourse
 } from '../client-only-routes/show-courses';
@@ -67,4 +68,11 @@ export const pathRaven = atom<RavenCourse[]>({
   default: [],
   // eslint-disable-next-line @typescript-eslint/naming-convention
   effects_UNSTABLE: [localStorageEffect('pathRaven')]
+});
+
+export const categoryCours = atom<MoodleCourseCategory[] | null | undefined>({
+  key: 'categoryCours',
+  default: [],
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  effects_UNSTABLE: [localStorageEffect('categoryCours')]
 });
