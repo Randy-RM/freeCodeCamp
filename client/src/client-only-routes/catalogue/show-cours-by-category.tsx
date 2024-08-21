@@ -83,6 +83,8 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const [screenWidth, setScreenWidth] = useState<number>(
     typeof window !== 'undefined' ? window.innerWidth : 900
   );
+
+  //gestion des states avec recoil(voir doc recoil state manager)
   const valueOfTitleCategorie = useRecoilValue(titleOfCategorieValue);
   const allDataofCourses = useRecoilValue(allDataCourses);
   const setCurrentCurrent = useSetRecoilState(valueOfCurrentCategory);
@@ -100,24 +102,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     currentPage: page
   } = paginate(allDataofCourses, currentPage);
 
-  const onNavigateForward = () => {
-    if (currentPage < totalPages && currentPage > 0) {
-      setCurrentpage(currentPage + 1);
-      setIsDataOnLoading(!isDataOnLoading);
-    } else {
-      setCurrentpage(currentPage);
-    }
-  };
-
-  const onNavigueteBackward = () => {
-    if (currentPage > 1) {
-      setCurrentpage(currentPage - 1);
-      setIsDataOnLoading(!isDataOnLoading);
-    } else {
-      setCurrentpage(currentPage);
-    }
-  };
-
   useEffect(() => {
     const courses = void getMoodleCourseCategory();
     setCourseCategories(courses ? courses : []);
@@ -134,8 +118,8 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
       }
     }, 2000);
     return () => {
-      setDataMoodle(null); // cleanup useEffect to perform a React state update
-      setIsDataOnLoading(true); // cleanup useEffect to perform a React state update
+      setDataMoodle(null);
+      setIsDataOnLoading(true);
       clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -153,7 +137,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
       }
     }, 3000);
     return () => {
-      setIsDataOnLoading(true); // cleanup useEffect to perform a React state update
+      setIsDataOnLoading(true);
       clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -164,6 +148,25 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
       showFilter && setScreenWidth(window.innerWidth);
     });
   }
+
+  //gestion de la pagination pour l'affichage des cours
+  const onNavigateForward = () => {
+    if (currentPage < totalPages && currentPage > 0) {
+      setCurrentpage(currentPage + 1);
+      setIsDataOnLoading(!isDataOnLoading);
+    } else {
+      setCurrentpage(currentPage);
+    }
+  };
+
+  const onNavigueteBackward = () => {
+    if (currentPage > 1) {
+      setCurrentpage(currentPage - 1);
+      setIsDataOnLoading(!isDataOnLoading);
+    } else {
+      setCurrentpage(currentPage);
+    }
+  };
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
@@ -248,10 +251,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                           buttonText='Suivre le cours'
                           link='/learn/responsive-web-design/'
                           description={`
-                          Dans ce cours, tu apprendras les langages que les développeurs
-                          utilisent pour créer des pages Web : HTML (Hypertext Markup Language)
-                          pour le contenu, et CSS (Cascading Style Sheets) pour la conception.
-                          Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
+                          Ce cours t'apprend les langages HTML pour le contenu et CSS pour la conception, ainsi que la création de pages Web adaptatives pour différentes tailles d'écran.
                         `}
                         />
                         <CourseCard
@@ -265,10 +265,8 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                           title='JavaScript Algorithms and Data Structures'
                           buttonText='Suivre le cours'
                           link='/learn/javascript-algorithms-and-data-structures'
-                          description={`Alors que HTML et CSS contrôlent le contenu et le style d'une page,
-                          JavaScript est utilisé pour la rendre interactive. Dans le cadre du
-                          cours JavaScript Algorithm and Data Structures, tu apprendras
-                          les principes fondamentaux de JavaScript, etc.`}
+                          description={`
+                                      Ce cours t'enseigne les bases de JavaScript pour rendre les pages interactives, ainsi que les algorithmes et structures de données en JavaScript., etc.`}
                         />
                       </>
                     )}
@@ -337,7 +335,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                     {renderCourseCardSkeletons(6)}
                   </div>
                 )}
-
                 <div className='pagination-container'>
                   <FontAwesomeIcon
                     icon={faChevronLeft}
