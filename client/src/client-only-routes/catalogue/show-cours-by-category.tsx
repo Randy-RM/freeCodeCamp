@@ -18,7 +18,6 @@ import awsLogo from '../../assets/images/aws-logo.png';
 import {
   getRavenResources,
   getRavenPathResources,
-  getMoodleCourseCategory,
   getMoodleCourses
 } from '../../utils/ajax';
 import {
@@ -35,7 +34,7 @@ import {
   getCategoryDescription,
   paginate
 } from '../../utils/allFunctions';
-import { CoursesProps, MoodleCourseCategory } from '../show-courses';
+import { CoursesProps } from '../show-courses';
 import envData from '../../../../config/env.json';
 import {
   isSignedInSelector,
@@ -47,6 +46,7 @@ import { User } from '../../redux/prop-types';
 import { createFlashMessage } from '../../components/Flash/redux';
 import {
   allDataCourses,
+  categoryCours,
   coursesMoodle,
   coursesRaven,
   pathRaven,
@@ -77,9 +77,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
   const [showFilter, setShowFilter] = useState<boolean>(false);
   const [currentPage, setCurrentpage] = useState<number>(1);
-  const [courseCategories, setCourseCategories] = useState<
-    MoodleCourseCategory[] | null
-  >();
+
   const [screenWidth, setScreenWidth] = useState<number>(
     typeof window !== 'undefined' ? window.innerWidth : 900
   );
@@ -92,6 +90,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const setDataMoodle = useSetRecoilState(coursesMoodle);
   const setDataRaven = useSetRecoilState(coursesRaven);
   const setDataRavenPath = useSetRecoilState(pathRaven);
+  const showMoodleCategory = useRecoilValue(categoryCours);
 
   const { moodleBaseUrl } = envData;
 
@@ -101,11 +100,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     currentPage: page
   } = paginate(allDataofCourses, currentPage);
-
-  useEffect(() => {
-    const courses = void getMoodleCourseCategory();
-    setCourseCategories(courses ? courses : []);
-  }, []);
 
   useEffect(() => {
     void getMoodleCourses();
@@ -209,7 +203,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                   setMoodleCourses={setDataMoodle}
                   setShowFilter={setShowFilter}
                   setIsDataOnLoading={setIsDataOnLoading}
-                  courseCategories={courseCategories}
+                  courseCategories={showMoodleCategory}
                   currentCategory={currentCurrent}
                   setCurrentCategory={setCurrentCurrent}
                   setCurrentPage={setCurrentpage}

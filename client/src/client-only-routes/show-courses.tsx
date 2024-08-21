@@ -58,6 +58,7 @@ import sortCourses from '../components/helpers/sort-course';
 import CoursesCategoryCard from '../components/CoursesCategoryCard/courses-category-card';
 import {
   allDataCourses,
+  categoryCours,
   coursesMoodle,
   coursesRaven,
   pathRaven,
@@ -214,9 +215,9 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [screenWidth, setScreenWidth] = useState<number>(
     typeof window !== 'undefined' ? window.innerWidth : 900
   );
-  const [courseCategories, setCourseCategories] = useState<
-    MoodleCourseCategory[] | null
-  >();
+  const [courseCategories, setCourseCategories] = useRecoilState<
+    MoodleCourseCategory[] | null | undefined
+  >(categoryCours);
   const [currentCategory, setCurrentCategory] = useState<number | null>(null);
   const [current, SetCurrent] = useRecoilState(valueOfCurrentCategory);
   const currentCurrent = useRecoilValue(valueOfCurrentCategory);

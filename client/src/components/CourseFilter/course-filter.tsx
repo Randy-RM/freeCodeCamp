@@ -333,6 +333,7 @@ const CourseFilter = ({
                   void (async () => {
                     await filterByCategory(course?.id ? course?.id : 0);
                     setRavenCourses(null);
+
                     setRavenPath(null);
                     setCurrentCategory(course?.id);
                     setCurrentCurrent(course?.id);
