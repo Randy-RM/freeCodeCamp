@@ -278,23 +278,6 @@ export function getUsernameExists(username: string): Promise<boolean> {
   return get(`/api/users/exists?username=${username}`);
 }
 
-// interface MoodleCourse {
-//   id: number;
-//   shortname: string;
-//   categoryid: number;
-//   categorysortorder: number;
-//   fullname: string;
-//   displayname: string;
-//   summary: string;
-// }
-
-// interface MoodleCourse {
-//   userId: number;
-//   id: number;
-//   title: string;
-//   body: string;
-// }
-
 export async function getExternalResource<T>(urlEndPoint: string) {
   let response: T | null;
   try {
@@ -332,7 +315,6 @@ export const getMoodleCourseCategory = async () => {
     const moodleCategorie = moodleCourseCategories?.filter(
       category => category.coursecount > 0
     );
-    console.log(moodleCategorie);
     return moodleCategorie;
   }
 };
@@ -359,8 +341,6 @@ export const getMoodleCourses = async () => {
   const sortedCourses = sortCourses(splitCourses);
 
   if (moodleCatalogue != null) {
-    console.log(sortedCourses);
-
     return sortedCourses;
   } else {
     return null;
@@ -450,7 +430,6 @@ export async function generateRavenTokenAcces(): Promise<unknown> {
   try {
     const response = await get('/generate-raven-token');
 
-    console.log('acces token ', response);
     return response;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error) {
@@ -533,7 +512,6 @@ export const getRavenResources = async (currentPage: number) => {
     valid_to: '06-24-2024'
   };
   const getReveanCourses = await getAwsCourses(ravenData);
-  console.log('le log de raven', getReveanCourses);
 
   return getReveanCourses;
 };
@@ -549,8 +527,6 @@ export const getRavenPathResources = async (currentPage: number) => {
     valid_to: '06-24-2024'
   };
   const getReveanPathCourses = await getAwsPath(ravenData);
-  console.log('le log de raven', getReveanPathCourses);
-
   return getReveanPathCourses;
 };
 
@@ -656,7 +632,6 @@ export async function getAwsUserCoursesProgress(
   } catch (error) {
     response = null;
   }
-  console.log('courses raven', response);
   return response;
 }
 
@@ -1003,7 +978,6 @@ export async function addUserInGRoup(
       body
     );
 
-    console.log('ffg', groupIsAdded);
     return groupIsAdded;
   } catch (error) {
     console.log(error);
@@ -1028,7 +1002,6 @@ export async function addUserInRole(
       body
     );
 
-    console.log('ffg', roleIsAdded);
     return roleIsAdded;
   } catch (error) {
     console.log(error);
@@ -1057,7 +1030,6 @@ export async function remoevUserInGRoup(
       body
     );
 
-    console.log('ffg', groupIsAdded);
     return groupIsAdded;
   } catch (error) {
     console.log(error);
