@@ -8,6 +8,7 @@ import { Helmet } from 'react-helmet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import LaptopIcon from '../../assets/images/laptop.svg';
 import AlgoIcon from '../../assets/images/algorithmIcon.svg';
 import PhBookBookmark from '../../assets/images/ph-book-bookmark-thin.svg';
@@ -31,16 +32,10 @@ import PathCard from '../../components/PathCard/path-card';
 import {
   convertTime,
   convertTimestampToTime,
+  getCategoryDescription,
   paginate
 } from '../../utils/allFunctions';
-import {
-  CoursesProps,
-  MoodleCourse,
-  MoodleCourseCategory,
-  MoodleCoursesCatalogue,
-  RavenCourse
-} from '../show-courses';
-import CoursesCategoryCard from '../../components/CoursesCategoryCard/courses-category-card';
+import { CoursesProps, MoodleCourseCategory } from '../show-courses';
 import envData from '../../../../config/env.json';
 import {
   isSignedInSelector,
@@ -50,6 +45,16 @@ import {
 } from '../../redux';
 import { User } from '../../redux/prop-types';
 import { createFlashMessage } from '../../components/Flash/redux';
+import {
+  allDataCourses,
+  coursesMoodle,
+  coursesRaven,
+  pathRaven,
+  titleOfCategorieValue,
+  valueOfCurrentCategory
+} from '../../redux/atoms';
+
+import '../catalogue/show-courses-by-category.css';
 
 const mapStateToProps = createSelector(
   signInLoadingSelector,
@@ -71,33 +76,29 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const { showLoading } = props;
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
   const [showFilter, setShowFilter] = useState<boolean>(false);
-  const [moodleCourses, setMoodleCourses] =
-    useState<MoodleCoursesCatalogue | null>();
-  const [ravenCourses, setRavenCourses] = useState<RavenCourse[]>([]);
-  const [ravenPath, setRavenPath] = useState<RavenCourse[]>([]);
   const [currentPage, setCurrentpage] = useState<number>(1);
-  const [currentCategory, setCurrentCategory] = useState<number | null>(null);
   const [courseCategories, setCourseCategories] = useState<
     MoodleCourseCategory[] | null
   >();
   const [screenWidth, setScreenWidth] = useState<number>(
     typeof window !== 'undefined' ? window.innerWidth : 900
   );
+  const valueOfTitleCategorie = useRecoilValue(titleOfCategorieValue);
+  const allDataofCourses = useRecoilValue(allDataCourses);
+  const setCurrentCurrent = useSetRecoilState(valueOfCurrentCategory);
+  const currentCurrent = useRecoilValue(valueOfCurrentCategory);
+  const setDataMoodle = useSetRecoilState(coursesMoodle);
+  const setDataRaven = useSetRecoilState(coursesRaven);
+  const setDataRavenPath = useSetRecoilState(pathRaven);
 
   const { moodleBaseUrl } = envData;
-
-  const allCourses: (RavenCourse | MoodleCourse)[] = [
-    ...ravenCourses,
-    ...ravenPath,
-    ...(moodleCourses?.result ? moodleCourses.result.flat() : [])
-  ];
 
   const {
     paginatedData,
     totalPages,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     currentPage: page
-  } = paginate(allCourses, currentPage);
+  } = paginate(allDataofCourses, currentPage);
 
   const onNavigateForward = () => {
     if (currentPage < totalPages && currentPage > 0) {
@@ -117,19 +118,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     }
   };
 
-  // useEffect(() => {
-  //   const fetchCourses = async () => {
-  //     try {
-  //       const courses = await getRavenResources(currentPage);
-  //       setRavenCourses(courses ? (courses as RavenCourse[]) : []);
-  //     } catch (error) {
-  //       console.error("Failed to fetch courses:", error);
-  //     }
-  //   };
-
-  //   fetchCourses();
-  // }, [currentPage]);
-
   useEffect(() => {
     const courses = void getMoodleCourseCategory();
     setCourseCategories(courses ? courses : []);
@@ -146,25 +134,12 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
       }
     }, 2000);
     return () => {
-      setMoodleCourses(null); // cleanup useEffect to perform a React state update
+      setDataMoodle(null); // cleanup useEffect to perform a React state update
       setIsDataOnLoading(true); // cleanup useEffect to perform a React state update
       clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
-
-  // useEffect(() => {
-  //   const fetchCourses = async () => {
-  //     try {
-  //       const courses = await getRavenPathResources(currentPage);
-  //       setRavenPath(courses ? (courses as unknown as RavenCourse[]) : []);
-  //     } catch (error) {
-  //       console.error("Failed to fetch courses:", error);
-  //     }
-  //   };
-
-  //   fetchCourses();
-  // }, [currentPage]);
 
   useEffect(() => {
     if (screenWidth > 990) setShowFilter(true);
@@ -225,42 +200,34 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
             <div className='card-filter-container'>
               {showFilter && (
                 <CourseFilter
-                  setRavenPath={setRavenPath}
+                  setRavenPath={setDataRavenPath}
                   screenWidth={screenWidth}
-                  setRavenCourses={setRavenCourses}
-                  setMoodleCourses={setMoodleCourses}
+                  setRavenCourses={setDataRaven}
+                  setMoodleCourses={setDataMoodle}
                   setShowFilter={setShowFilter}
                   setIsDataOnLoading={setIsDataOnLoading}
                   courseCategories={courseCategories}
-                  currentCategory={currentCategory}
-                  setCurrentCategory={setCurrentCategory}
+                  currentCategory={currentCurrent}
+                  setCurrentCategory={setCurrentCurrent}
                   setCurrentPage={setCurrentpage}
                 />
               )}
 
               <div className='card-courses-detail-container'>
                 <div>
-                  <h2 className='big-subheading'>Explorer notre catalogue</h2>
+                  <h2 className='big-subheading'>{valueOfTitleCategorie}</h2>
                 </div>
                 <Spacer />
 
-                <CoursesCategoryCard
-                  courseCategories={courseCategories}
-                  setRavenPath={setRavenPath}
-                  setCurrentCategory={setCurrentCategory}
-                  currentCategory={currentCategory}
-                  screenWidth={setScreenWidth}
-                  setCurrentPage={setCurrentpage}
-                  setIsDataOnLoading={setIsDataOnLoading}
-                  setMoodleCourses={setMoodleCourses}
-                  setRavenCourses={setRavenCourses}
-                />
-
+                <div className='card__courses__description'>
+                  <h3>Decouvrez le parcours {valueOfTitleCategorie}</h3>
+                  <p>{getCategoryDescription(valueOfTitleCategorie)}</p>
+                </div>
                 <div className='course__number'>
                   <p>Parcourir le catalogue complet</p>
                   <span>
-                    {allCourses.length +
-                      (currentCategory == null || currentCategory == -1
+                    {allDataofCourses.length +
+                      (currentCurrent == null || currentCurrent == -1
                         ? 2
                         : 0)}{' '}
                     cours
@@ -270,7 +237,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                 {!isDataOnLoading ? (
                   <div className='card-course-detail-container'>
                     {currentPage == 1 &&
-                      (currentCategory == null || currentCategory == -1) && (
+                      (currentCurrent == null || currentCurrent == -1) && (
                         <>
                           <CourseCard
                             language='French'
@@ -309,71 +276,71 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                           />
                         </>
                       )}
-                    {paginatedData.length > 0 ? (
-                      paginatedData.map((course, index) => {
-                        if ('launch_url' in course) {
-                          const firstCategory = course.category?.[0];
-                          const language =
-                            firstCategory?.tags?.[0]?.title || 'Unknown';
+                    {paginatedData.length > 0
+                      ? paginatedData.map((course, index) => {
+                          if ('launch_url' in course) {
+                            const firstCategory = course.category?.[0];
+                            const language =
+                              firstCategory?.tags?.[0]?.title || 'Unknown';
 
-                          if (course.long_description) {
-                            return (
-                              <PathCard
-                                language={language}
-                                key={course.name}
-                                icon={awsLogo}
-                                isAvailable={true}
-                                // isSignedIn={isSignedIn}
-                                title={`${index + 1}. ${course.name}`}
-                                buttonText='Suivre le cours'
-                                link={course.launch_url}
-                                description={course.long_description}
-                                duration={convertTime(course.duration)}
-                                level={course.skill_level}
-                              />
-                            );
+                            if (course.long_description) {
+                              return (
+                                <PathCard
+                                  language={language}
+                                  key={course.name}
+                                  icon={awsLogo}
+                                  isAvailable={true}
+                                  // isSignedIn={isSignedIn}
+                                  title={`${index + 1}. ${course.name}`}
+                                  buttonText='Suivre le cours'
+                                  link={course.launch_url}
+                                  description={course.long_description}
+                                  duration={convertTime(course.duration)}
+                                  level={course.skill_level}
+                                />
+                              );
+                            } else {
+                              return (
+                                <CourseCard
+                                  language={language}
+                                  key={index.toString()}
+                                  icon={awsLogo}
+                                  isAvailable={true}
+                                  // isSignedIn={isSignedIn}
+                                  title={`${index + 1}. ${course.name}`}
+                                  buttonText='Suivre le cours'
+                                  link={course.launch_url}
+                                  description={course.short_description}
+                                  duration={convertTime(course.duration)}
+                                />
+                              );
+                            }
                           } else {
                             return (
                               <CourseCard
-                                language={language}
-                                key={index.toString()}
-                                icon={awsLogo}
-                                isAvailable={true}
+                                language='French'
+                                key={`${index}-${course.id}`}
+                                icon={PhBookBookmark} // Remplacer par le chemin réel de l'image
+                                isAvailable={course.visible === 1}
                                 // isSignedIn={isSignedIn}
-                                title={`${index + 1}. ${course.name}`}
+                                title={course.displayname}
                                 buttonText='Suivre le cours'
-                                link={course.launch_url}
-                                description={course.short_description}
-                                duration={convertTime(course.duration)}
+                                link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
+                                description={course.summary}
+                                duration={convertTimestampToTime(
+                                  course.timecreated
+                                )}
                               />
                             );
                           }
-                        } else {
-                          return (
-                            <CourseCard
-                              language='French'
-                              key={`${index}-${course.id}`}
-                              icon={PhBookBookmark} // Remplacer par le chemin réel de l'image
-                              isAvailable={course.visible === 1}
-                              // isSignedIn={isSignedIn}
-                              title={course.displayname}
-                              buttonText='Suivre le cours'
-                              link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
-                              description={course.summary}
-                              duration={convertTimestampToTime(
-                                course.timecreated
-                              )}
-                            />
-                          );
-                        }
-                      })
-                    ) : (
-                      <div className='card-course-detail-container'>
-                        {renderCourseCardSkeletons(6)}
-                      </div>
-                    )}
+                        })
+                      : ''}
                   </div>
-                ) : null}
+                ) : (
+                  <div className='card-course-detail-container'>
+                    {renderCourseCardSkeletons(6)}
+                  </div>
+                )}
 
                 <div className='pagination-container'>
                   <FontAwesomeIcon
