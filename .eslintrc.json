@@ -109,6 +109,15 @@
         "cy": true,
         "Cypress": true
       }
+    },
+    {
+      "files": ["gatsby-node.js"],
+      "parser": "eslint-plugin-babel", // Utiliser le parser Babel pour ce fichier
+      "rules": {
+        "@typescript-eslint/await-thenable": "off", // Désactiver cette règle spécifique
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/no-unsafe-return": "off"
+      }
     }
   ]
 }
