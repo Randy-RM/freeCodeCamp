@@ -90,12 +90,7 @@ export const courseDescriptions: Record<CourseCategoryTitle, CourseDetails> = {
   Développement: {
     titre: 'Développement Web',
     summury: `Dans ce parcours, tu apprendras à créer des pages Web avec HTML pour le contenu, CSS pour la conception, et JavaScript pour rendre les sites interactifs. Tu découvriras également les algorithmes, les structures de données, et les bases du langage JavaScript.`,
-    description: `Dans ce parcours, tu apprendras les langages que les développeurs
-    utilisent pour créer des pages Web : HTML (Hypertext Markup Language)
-    pour le contenu, et CSS (Cascading Style Sheets) pour la conception.
-    Ensuite, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran et
-    enfin, Tu vas utiliser le JavaScript pour rendre tes sites interactifs.
-    Tu apprendras les Algorithm, Data Structures, et les principes fondamentaux du langage de programmation JavaScript.`
+    description: `Ce parcours te forme aux bases du développement web : HTML pour le contenu, CSS pour la conception, et JavaScript pour l'interactivité. Tu apprendras aussi à adapter tes pages à différentes tailles d'écran, ainsi que les algorithmes, les structures de données, et les principes du JavaScript.`
   },
   Design: {
     titre: 'Design',
@@ -107,28 +102,29 @@ export const courseDescriptions: Record<CourseCategoryTitle, CourseDetails> = {
   Bureautique: {
     titre: 'Bureautique',
     summury: `Maîtrise Word, Excel, PowerPoint, Outlook et OneNote. Crée des documents impeccables et analyse des données complexes avec nos cours interactifs.`,
-    description: `Notre parcours complet de bureautique vous accompagne pas à pas, du niveau débutant à expert, pour maîtriser Word, Excel, PowerPoint, Outlook et OneNote. Grâce à nos cours en ligne interactifs et à nos exercices pratiques, vous acquerrez les compétences nécessaires pour créer des documents impeccables, analyser des données complexes et gérer efficacement votre boîte mail. À la fin de ce parcours, vous serez certifié et prêt à relever tous les défis de votre vie professionnelle.`
+    description: `Ce parcours complet vous guide du débutant à l'expert pour maîtriser Word, Excel, PowerPoint, Outlook, et OneNote. Grâce à des cours interactifs et des exercices pratiques, vous développerez les compétences pour créer des documents, analyser des données, et gérer votre boîte mail. A la fin de ce cours, vous serez prêt à relever les défis professionnels.`
   },
   Marketing: {
     titre: 'Marketing',
     summury: `Apprends les outils et techniques du marketing digital. Crée des stratégies de contenu, optimise ton site et gère les réseaux sociaux efficacement.`,
-    description: `Notre parcours complet vous offre une formation pratique et intensive aux outils et techniques les plus efficaces du marketing digital. Vous apprendrez à créer une stratégie de contenu engageante, à optimiser votre site web pour les moteurs de recherche, à gérer votre communauté sur les réseaux sociaux et à mesurer la performance de vos campagnes. À l'issue de cette formation, vous serez capable de développer votre propre business en ligne ou de piloter les actions marketing d'une entreprise.`
+    description: `Ce parcours intensif en marketing digital vous forme aux stratégies de contenu, SEO, gestion des réseaux sociaux, et mesure de performance. Maîtrisez les outils pour développer un business en ligne ou diriger le marketing d'une entreprise, en optimisant la communication et les relations publiques.`
   },
   Communication: {
     titre: 'Communication',
     summury: `Maîtrise les techniques de communication pour des messages clairs et percutants. Crée des présentations, gérez les relations publiques et médias sociaux.`,
-    description: `Dans ce parcours, vous apprendrez les techniques de communication efficaces pour transmettre des messages clairs et percutants. Vous découvrirez comment créer des présentations impactantes, gérer les relations publiques et utiliser les médias sociaux pour améliorer votre visibilité. Vous développerez des compétences pour communiquer avec divers publics et dans différents contextes professionnels.`
+    description: `Ce parcours intensif en marketing digital vous forme aux stratégies de contenu, SEO, gestion des réseaux sociaux, et mesure de performance. Maîtrisez les outils pour développer un business en ligne ou diriger le marketing d'une entreprise, en optimisant la communication et les relations publiques..`
   },
   artificielle: {
     titre: 'Intelligence Artificielle',
     summury: `Explore l'IA, imitant les fonctions humaines. Apprends l'IA générative pour créer des contenus (texte, images, sons, vidéos) à travers des applications interactives.`,
-    description: `L'intelligence artificielle est un domaine technologique en rapide évolution, permettant aux ordinateurs d'imiter des fonctions humaines telles que l'apprentissage et la résolution de problèmes. Un domaine spécifique de l'IA qui a récemment gagné en popularité est l'IA générative, qui se concentre sur la création de nouveaux contenus, qu'il s'agisse de textes, d'images, de sons ou de vidéos. Inscrivez-vous à ce cours pour explorer les différentes formes d'IA générative à travers des applications interactives !`
+    description: `
+Ce cours explore l'IA générative, un domaine en pleine expansion où les ordinateurs créent du contenu original, comme des textes, images, sons ou vidéos. Apprenez à maîtriser ces technologies via des applications interactives. !`
   },
 
   amazon: {
     titre: 'Amazon web service',
     summury: `Ce cours est conçu pour montrer aux participants comment optimiser l'utilisation du cloud AWS grâce à la compréhension de ces nombreux services et de leur intégration dans la création de solutions basées sur le cloud.`,
-    description: `Etant donné que les solutions architecturales peuvent varier selon le secteur, le type d'application et la taille de l'entreprise, ce cours met l'accent sur les bonnes pratiques relatives au cloud AWS afin d'aider les participants à construire des solutions informatiques optimisées sur AWS. Cette formation présente également de nombreuses études de cas expliquant comment certains clients AWS ont conçu leurs infrastructures, mais aussi les stratégies et services qu'ils ont implémentés. A l'issue de cette formation, vous serez en capacité de créer une grande variété d'infrastructures en recourant aux différents services vu au travers de ce module.`
+    description: `Ce cours AWS explore les bonnes pratiques cloud, avec des études de cas clients. Il vous apprend à concevoir des infrastructures optimisées et variées en utilisant les services AWS, vous rendant capable de construire des solutions informatiques robustes.`
   }
 };
 
