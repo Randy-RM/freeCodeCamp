@@ -69,7 +69,6 @@ const CourseFilter = ({
   setShowFilter,
   screenWidth,
   courseCategories,
-  // setProgrammingCategory,
   setCurrentCategory,
   setCurrentPage
 }: {

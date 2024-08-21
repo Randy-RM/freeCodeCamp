@@ -202,7 +202,6 @@ export const scrollTo = (top: number) => {
 };
 
 export function Courses(props: CoursesProps): JSX.Element {
-  // const { t } = useTranslation();
   const {
     // isSignedIn,
     showLoading
@@ -438,10 +437,6 @@ export function Courses(props: CoursesProps): JSX.Element {
       showFilter && setScreenWidth(window.innerWidth);
     });
   }
-
-  // const formatdate = (data: number) => {
-  //   return new Date(data * 1000).toLocaleDateString();
-  // };
 
   useEffect(() => {
     SetCurrent(null);
