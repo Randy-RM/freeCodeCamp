@@ -2,7 +2,6 @@ import { Grid } from '@freecodecamp/react-bootstrap';
 import React, { useState, useEffect, useMemo } from 'react';
 import Helmet from 'react-helmet';
 
-// import { useTranslation } from 'react-i18next';PhBookBookmark
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,7 +10,7 @@ import {
   faChevronLeft,
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import PathCard from '../components/PathCard/path-card';
 
 import envData from '../../../config/env.json';
@@ -57,8 +56,16 @@ import '../components/CourseFilter/course-filter.css';
 import CourseFilter from '../components/CourseFilter/course-filter';
 import sortCourses from '../components/helpers/sort-course';
 import CoursesCategoryCard from '../components/CoursesCategoryCard/courses-category-card';
-import { allDataCourses } from '../redux/atoms';
+import {
+  allDataCourses,
+  coursesMoodle,
+  coursesRaven,
+  pathRaven,
+  valueOfCurrentCategory
+} from '../redux/atoms';
 import { UnifiedCourse } from '../redux/types';
+// import { RootState, UnifiedCourse } from '../redux/types';
+// import { fetchRavenCoursesRequest } from '../redux/settings/actions_fetchData';
 
 const { moodleApiBaseUrl, moodleApiToken, moodleBaseUrl, ravenAwsApiKey } =
   envData;
@@ -187,7 +194,7 @@ const mapDispatchToProps = {
 export const scrollTo = (top: number) => {
   if (typeof window !== 'undefined') {
     window.scrollTo({
-      top,
+      top: top,
       left: 0,
       behavior: 'smooth'
     });
@@ -201,12 +208,6 @@ export function Courses(props: CoursesProps): JSX.Element {
     showLoading
     // user: { name, phone }
   } = props;
-  const [moodleCourses, setMoodleCourses] =
-    useState<MoodleCoursesCatalogue | null>();
-
-  const [ravenCourses, setRavenCourses] = useState<
-    RavenCourse[] | null | undefined
-  >([]);
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [showFilter, setShowFilter] = useState<boolean>(false);
@@ -217,12 +218,23 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [courseCategories, setCourseCategories] = useState<
     MoodleCourseCategory[] | null
   >();
-
   const [currentCategory, setCurrentCategory] = useState<number | null>(null);
-
-  const [ravenPath, setRavenPath] = useState<RavenCourse[]>([]);
+  const [current, SetCurrent] = useRecoilState(valueOfCurrentCategory);
+  const currentCurrent = useRecoilValue(valueOfCurrentCategory);
   const [dataForAllCourses, setDataForallCourse] =
     useRecoilState<UnifiedCourse[]>(allDataCourses);
+  const allDataofCourses = useRecoilValue(allDataCourses);
+  const [dataRaven, setDataRaven] = useRecoilState<
+    RavenCourse[] | null | undefined
+  >(coursesRaven);
+  const [dataRavenPath, setDataRavenPath] =
+    useRecoilState<RavenCourse[]>(pathRaven);
+  const [dataMoodle, setDataMoodle] = useRecoilState<
+    MoodleCoursesCatalogue | null | undefined
+  >(coursesMoodle);
+
+  // const dispatch = useDispatch();
+  // const mesCoursesRaven = useSelector((state:RootState) => state.mesCouresRaven.courses);
 
   const ravenLocalToken = getRavenTokenDataFromLocalStorage();
 
@@ -239,7 +251,8 @@ export function Courses(props: CoursesProps): JSX.Element {
       valid_to: '06-24-2024'
     };
     const getReveanCourses = await getAwsCourses(ravenData);
-    setRavenCourses(getReveanCourses as RavenCourse[]);
+    setDataRaven(getReveanCourses as RavenCourse[]);
+    console.log(dataRaven);
   };
 
   const getRavenResourcesPath = async () => {
@@ -252,7 +265,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       valid_to: '06-24-2024'
     };
     const getReveanCourses = await getAwsPath(ravenData);
-    setRavenPath(getReveanCourses as unknown as RavenCourse[]);
+    setDataRavenPath(getReveanCourses as unknown as RavenCourse[]);
   };
 
   const getRavenToken = async () => {
@@ -331,19 +344,19 @@ export function Courses(props: CoursesProps): JSX.Element {
     const sortedCourses = sortCourses(splitCourses);
 
     if (moodleCatalogue != null) {
-      setMoodleCourses(sortedCourses);
+      setDataMoodle(sortedCourses);
     } else {
-      setMoodleCourses(null);
+      setDataMoodle(null);
     }
   };
 
   const allCourses: (MoodleCourse | RavenCourse)[] = useMemo(
     () => [
-      ...(ravenCourses || []),
-      ...(moodleCourses?.result ? moodleCourses.result.flat() : []),
-      ...(ravenPath ? ravenPath : [])
+      ...(dataRaven || []),
+      ...(dataMoodle?.result ? dataMoodle.result.flat() : []),
+      ...(dataRavenPath ? dataRavenPath : [])
     ],
-    [ravenCourses, moodleCourses, ravenPath]
+    [dataRaven, dataMoodle, dataRavenPath]
   );
 
   const {
@@ -351,7 +364,7 @@ export function Courses(props: CoursesProps): JSX.Element {
     totalPages,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     currentPage: page
-  } = paginate(allCourses, currentPage);
+  } = paginate(allDataofCourses, currentPage);
 
   const onNavigateForward = () => {
     if (currentPage < totalPages && currentPage > 0) {
@@ -373,19 +386,24 @@ export function Courses(props: CoursesProps): JSX.Element {
 
   useEffect(() => {
     void getRavenResourcesPath();
+    console.log(current);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
   useEffect(() => {
     setDataForallCourse(allCourses);
-    console.log(dataForAllCourses);
   }, [allCourses, dataForAllCourses, setDataForallCourse]);
 
   useEffect(() => {
     void getRavenResources();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
+
+  //   useEffect(() => {
+  //   dispatch(fetchRavenCoursesRequest());
+
+  // }, [dispatch]);
 
   useEffect(() => {
     void getMoodleCourses();
@@ -396,7 +414,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       }
     }, 2000);
     return () => {
-      setMoodleCourses(null); // cleanup useEffect to perform a React state update
+      setDataMoodle(null); // cleanup useEffect to perform a React state update
       setIsDataOnLoading(true); // cleanup useEffect to perform a React state update
       clearTimeout(timer);
     };
@@ -426,6 +444,10 @@ export function Courses(props: CoursesProps): JSX.Element {
   // };
 
   useEffect(() => {
+    SetCurrent(null);
+  });
+
+  useEffect(() => {
     if (screenWidth > 990) setShowFilter(true);
     else setShowFilter(false);
   }, [screenWidth]);
@@ -433,11 +455,9 @@ export function Courses(props: CoursesProps): JSX.Element {
   useEffect(() => {
     void getMoodleCourseCategory();
 
-    ravenCourses?.length == 0
+    dataRaven?.length == 0
       ? setIsDataOnLoading(false)
       : setIsDataOnLoading(false);
-
-    console.log(isDataOnLoading);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -477,14 +497,14 @@ export function Courses(props: CoursesProps): JSX.Element {
             <div className='card-filter-container'>
               {showFilter && (
                 <CourseFilter
-                  setRavenPath={setRavenPath}
+                  setRavenPath={setDataRavenPath}
                   screenWidth={screenWidth}
-                  setRavenCourses={setRavenCourses}
-                  setMoodleCourses={setMoodleCourses}
+                  setRavenCourses={setDataRaven}
+                  setMoodleCourses={setDataMoodle}
                   setShowFilter={setShowFilter}
                   setIsDataOnLoading={setIsDataOnLoading}
                   courseCategories={courseCategories}
-                  currentCategory={currentCategory}
+                  currentCategory={currentCurrent}
                   setCurrentCategory={setCurrentCategory}
                   setCurrentPage={setCurrentPage}
                 />
@@ -498,22 +518,22 @@ export function Courses(props: CoursesProps): JSX.Element {
 
                 <CoursesCategoryCard
                   courseCategories={courseCategories}
-                  setRavenPath={setRavenPath}
+                  setRavenPath={setDataRavenPath}
                   setCurrentCategory={setCurrentCategory}
-                  currentCategory={currentCategory}
+                  currentCategory={currentCurrent}
                   screenWidth={setScreenWidth}
                   setCurrentPage={setCurrentPage}
                   setIsDataOnLoading={setIsDataOnLoading}
-                  setMoodleCourses={setMoodleCourses}
-                  setRavenCourses={setRavenCourses}
+                  setMoodleCourses={setDataMoodle}
+                  setRavenCourses={setDataRaven}
                 />
 
                 <div className='course__number'>
                   <p>Parcourir le catalogue complet</p>
                   <span>
-                    {allCourses.length > 0 &&
-                      allCourses.length +
-                        (currentCategory == null || currentCategory == -1
+                    {paginatedData.length > 0 &&
+                      paginatedData.length +
+                        (currentCurrent == null || currentCategory == -1
                           ? 2
                           : 0)}{' '}
                     cours
@@ -523,7 +543,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                 {!isDataOnLoading ? (
                   <div className='card-course-detail-container'>
                     {currentPage == 1 &&
-                      (currentCategory == null || currentCategory == -1) && (
+                      (currentCurrent == null || currentCurrent == -1) && (
                         <>
                           <CourseCard
                             language='French'
