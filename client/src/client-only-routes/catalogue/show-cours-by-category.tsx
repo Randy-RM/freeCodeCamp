@@ -226,56 +226,52 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                 <div className='course__number'>
                   <p>Parcourir le catalogue complet</p>
                   <span>
-                    {allDataofCourses.length +
-                      (currentCurrent == null || currentCurrent == -1
-                        ? 2
-                        : 0)}{' '}
+                    {paginatedData.length + (currentCurrent == -1 ? 2 : 0)}{' '}
                     cours
                   </span>
                 </div>
 
                 {!isDataOnLoading ? (
                   <div className='card-course-detail-container'>
-                    {currentPage == 1 &&
-                      (currentCurrent == null || currentCurrent == -1) && (
-                        <>
-                          <CourseCard
-                            language='French'
-                            icon={LaptopIcon}
-                            sponsorIcon={LaediesActIcon}
-                            alt=''
-                            // name={name}
-                            // phone={phone}
-                            isAvailable={true}
-                            // isSignedIn={isSignedIn}
-                            title='Responsive Web Design'
-                            buttonText='Suivre le cours'
-                            link='/learn/responsive-web-design/'
-                            description={`
+                    {currentPage == 1 && currentCurrent == -1 && (
+                      <>
+                        <CourseCard
+                          language='French'
+                          icon={LaptopIcon}
+                          sponsorIcon={LaediesActIcon}
+                          alt=''
+                          // name={name}
+                          // phone={phone}
+                          isAvailable={true}
+                          // isSignedIn={isSignedIn}
+                          title='Responsive Web Design'
+                          buttonText='Suivre le cours'
+                          link='/learn/responsive-web-design/'
+                          description={`
                           Dans ce cours, tu apprendras les langages que les développeurs
                           utilisent pour créer des pages Web : HTML (Hypertext Markup Language)
                           pour le contenu, et CSS (Cascading Style Sheets) pour la conception.
                           Enfin, tu apprendras à créer des pages Web adaptées à différentes tailles d'écran.
                         `}
-                          />
-                          <CourseCard
-                            language='French'
-                            icon={AlgoIcon}
-                            alt=''
-                            isAvailable={true}
-                            // isSignedIn={isSignedIn}
-                            // phone={phone}
-                            // name={name}
-                            title='JavaScript Algorithms and Data Structures'
-                            buttonText='Suivre le cours'
-                            link='/learn/javascript-algorithms-and-data-structures'
-                            description={`Alors que HTML et CSS contrôlent le contenu et le style d'une page,
+                        />
+                        <CourseCard
+                          language='French'
+                          icon={AlgoIcon}
+                          alt=''
+                          isAvailable={true}
+                          // isSignedIn={isSignedIn}
+                          // phone={phone}
+                          // name={name}
+                          title='JavaScript Algorithms and Data Structures'
+                          buttonText='Suivre le cours'
+                          link='/learn/javascript-algorithms-and-data-structures'
+                          description={`Alors que HTML et CSS contrôlent le contenu et le style d'une page,
                           JavaScript est utilisé pour la rendre interactive. Dans le cadre du
                           cours JavaScript Algorithm and Data Structures, tu apprendras
                           les principes fondamentaux de JavaScript, etc.`}
-                          />
-                        </>
-                      )}
+                        />
+                      </>
+                    )}
                     {paginatedData.length > 0
                       ? paginatedData.map((course, index) => {
                           if ('launch_url' in course) {
