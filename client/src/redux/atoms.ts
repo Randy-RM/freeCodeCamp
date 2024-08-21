@@ -1,4 +1,4 @@
-import { atom, AtomEffect, DefaultValue } from 'recoil';
+import { atom, AtomEffect, DefaultValue, selector } from 'recoil';
 import {
   MoodleCourseCategory,
   MoodleCoursesCatalogue,
@@ -75,4 +75,19 @@ export const categoryCours = atom<MoodleCourseCategory[] | null | undefined>({
   default: [],
   // eslint-disable-next-line @typescript-eslint/naming-convention
   effects_UNSTABLE: [localStorageEffect('categoryCours')]
+});
+
+export const currentCategorySelector = selector<number | null>({
+  key: 'currentCategorySelector',
+  get: ({ get }) => {
+    return get(valueOfCurrentCategory);
+  },
+  set: ({ set, get }, newValue) => {
+    const currentValue = get(valueOfCurrentCategory);
+
+    // Mettre à jour l'état seulement si la valeur a vraiment changé
+    if (currentValue !== newValue) {
+      set(valueOfCurrentCategory, newValue);
+    }
+  }
 });

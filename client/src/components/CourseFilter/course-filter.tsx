@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './course-filter.css';
 
 import { navigate } from 'gatsby';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
   addRavenTokenToLocalStorage,
   generateRavenTokenAcces,
@@ -23,8 +23,8 @@ import { splitArray } from '../helpers';
 import sortCourses from '../helpers/sort-course';
 import routes from '../../utils/routes';
 import {
-  titleOfCategorieValue,
-  valueOfCurrentCategory
+  currentCategorySelector,
+  titleOfCategorieValue
 } from '../../redux/atoms';
 
 type MoodleCoursesFiltered = {
@@ -93,8 +93,9 @@ const CourseFilter = ({
 }): JSX.Element => {
   const [showSubjectFilter, setShowSubjectFilter] = useState<boolean>(true);
   const setValueOfButton = useSetRecoilState(titleOfCategorieValue);
-  const setCurrentCurrent = useSetRecoilState(valueOfCurrentCategory);
-  const currentCurrent = useRecoilValue(valueOfCurrentCategory);
+  const [currentCurrent, setCurrentCurrent] = useRecoilState(
+    currentCategorySelector
+  );
 
   const filterByCategory = async (categoryId: number) => {
     setIsDataOnLoading(true);
@@ -284,6 +285,8 @@ const CourseFilter = ({
               onClick={() => {
                 void (() => {
                   setCurrentCurrent(-1);
+                  console.log(currentCurrent);
+
                   setMoodleCourses(null);
                   setRavenCourses(null);
                   setValueOfButton('Programmation');

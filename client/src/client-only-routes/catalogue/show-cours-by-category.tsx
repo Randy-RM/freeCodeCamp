@@ -8,7 +8,7 @@ import { Helmet } from 'react-helmet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import LaptopIcon from '../../assets/images/laptop.svg';
 import AlgoIcon from '../../assets/images/algorithmIcon.svg';
 import PhBookBookmark from '../../assets/images/ph-book-bookmark-thin.svg';
@@ -82,11 +82,13 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     typeof window !== 'undefined' ? window.innerWidth : 900
   );
 
+  const [valueOfCurrentCategorie, SetValueOfCurrentCategory] = useRecoilState(
+    valueOfCurrentCategory
+  );
+
   //gestion des states avec recoil(voir doc recoil state manager)
   const valueOfTitleCategorie = useRecoilValue(titleOfCategorieValue);
   const allDataofCourses = useRecoilValue(allDataCourses);
-  const setCurrentCurrent = useSetRecoilState(valueOfCurrentCategory);
-  const currentCurrent = useRecoilValue(valueOfCurrentCategory);
   const setDataMoodle = useSetRecoilState(coursesMoodle);
   const setDataRaven = useSetRecoilState(coursesRaven);
   const setDataRavenPath = useSetRecoilState(pathRaven);
@@ -204,8 +206,8 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                   setShowFilter={setShowFilter}
                   setIsDataOnLoading={setIsDataOnLoading}
                   courseCategories={showMoodleCategory}
-                  currentCategory={currentCurrent}
-                  setCurrentCategory={setCurrentCurrent}
+                  currentCategory={valueOfCurrentCategorie}
+                  setCurrentCategory={SetValueOfCurrentCategory}
                   setCurrentPage={setCurrentpage}
                 />
               )}
@@ -223,17 +225,17 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                 <div className='course__number'>
                   <p>Parcourir le catalogue complet</p>
                   <span>
-                    {paginatedData.length > 0 || currentCurrent === -1
+                    {paginatedData.length > 0 || valueOfCurrentCategorie === -1
                       ? `${
-                          paginatedData.length + (currentCurrent === -1 ? 2 : 0)
+                          paginatedData.length +
+                          (valueOfCurrentCategorie === -1 ? 2 : 0)
                         } cours`
                       : ''}
                   </span>
                 </div>
-
                 {!isDataOnLoading ? (
                   <div className='card-course-detail-container'>
-                    {currentPage == 1 && currentCurrent == -1 && (
+                    {currentPage == 1 && valueOfCurrentCategorie == -1 && (
                       <>
                         <CourseCard
                           language='French'
