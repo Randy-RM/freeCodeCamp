@@ -42,6 +42,14 @@ export const allDataCourses = atom<UnifiedCourse[]>({
   effects_UNSTABLE: [localStorageEffect('allDataCourses')]
 });
 
+// Atom pour les données des cours, avec typage explicite
+export const myAllDataCourses = atom<unknown[]>({
+  key: 'myAllDataCourses',
+  default: [], // Par défaut, un tableau vide de type RavenCourse[]
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  effects_UNSTABLE: [localStorageEffect('myAllDataCourses')]
+});
+
 export const valueOfCurrentCategory = atom<number | null>({
   key: 'valueOfCurrentCategory',
   default: null, // Par défaut, un tableau vide de type RavenCourse[]
