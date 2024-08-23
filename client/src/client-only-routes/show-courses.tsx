@@ -386,7 +386,6 @@ export function Courses(props: CoursesProps): JSX.Element {
 
   useEffect(() => {
     void getRavenResourcesPath();
-    console.log(currentCategory);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
@@ -440,8 +439,8 @@ export function Courses(props: CoursesProps): JSX.Element {
   }
 
   useEffect(() => {
-    setCurrentCategory(currentCategory);
-  });
+    setCurrentCategory(null);
+  }, [currentPage, setCurrentCategory]);
 
   useEffect(() => {
     if (screenWidth > 990) setShowFilter(true);
