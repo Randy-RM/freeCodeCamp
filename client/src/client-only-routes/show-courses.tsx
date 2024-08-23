@@ -233,6 +233,9 @@ export function Courses(props: CoursesProps): JSX.Element {
     MoodleCoursesCatalogue | null | undefined
   >(coursesMoodle);
 
+  // const [allDataRessourceCourse, setAllDataRessource] =
+  //   useRecoilState(myAllDataCourses);
+
   // const dispatch = useDispatch();
   // const mesCoursesRaven = useSelector((state:RootState) => state.mesCouresRaven.courses);
 
@@ -252,7 +255,6 @@ export function Courses(props: CoursesProps): JSX.Element {
     };
     const getReveanCourses = await getAwsCourses(ravenData);
     setDataRaven(getReveanCourses as RavenCourse[]);
-    console.log(dataRaven);
   };
 
   const getRavenResourcesPath = async () => {
@@ -383,6 +385,10 @@ export function Courses(props: CoursesProps): JSX.Element {
       setCurrentPage(currentPage);
     }
   };
+
+  // useEffect(() => {
+  //   setAllDataRessource(allDataRessoucesCourses);
+  // }, [currentCategory, allDataRessoucesCourses]);
 
   useEffect(() => {
     void getRavenResourcesPath();
