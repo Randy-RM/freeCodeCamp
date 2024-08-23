@@ -17,6 +17,12 @@ import sortCourses from '../components/helpers/sort-course';
 
 const { apiLocation } = envData;
 
+export type CombinedCourses =
+  | MoodleCoursesCatalogue
+  | RavenCourse[]
+  | unknown
+  | null;
+
 const base = apiLocation;
 
 const defaultOptions: RequestInit = {
@@ -422,6 +428,7 @@ export function getRavenTokenDataFromLocalStorage(): RavenTokenData | null {
     return null;
   }
 }
+
 export async function generateRavenTokenAcces(): Promise<unknown> {
   try {
     const response = await get('/generate-raven-token');
@@ -523,6 +530,7 @@ export const getRavenPathResources = async (currentPage: number) => {
     valid_to: '06-24-2024'
   };
   const getReveanPathCourses = await getAwsPath(ravenData);
+
   return getReveanPathCourses;
 };
 
@@ -608,6 +616,25 @@ export async function getAwsPath(data: RavenFetchCoursesDto) {
 
   return [];
 }
+
+//fonction permettant la combinaison de tous les cours notamment moodle et raven
+export const getAllRessources = async (
+  currentPage: number
+): Promise<CombinedCourses[]> => {
+  const moodleCourses = await getMoodleCourses();
+  const ravenCourses = await getRavenResources(currentPage);
+  const ravenPathCourses = await getRavenPathResources(currentPage);
+
+  // Combine the results into a single array
+  const allCourses: CombinedCourses[] = [
+    ...(moodleCourses?.result || []),
+    ...([ravenCourses] || []),
+    ...(ravenPathCourses || [])
+  ];
+
+  return allCourses;
+};
+
 interface RavenFetchUserCoursesProgressDto {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   email_id: string;
