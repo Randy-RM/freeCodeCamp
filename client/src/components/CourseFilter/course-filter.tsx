@@ -23,8 +23,8 @@ import { splitArray } from '../helpers';
 import sortCourses from '../helpers/sort-course';
 import routes from '../../utils/routes';
 import {
-  currentCategorySelector,
-  titleOfCategorieValue
+  titleOfCategorieValue,
+  valueOfCurrentCategory
 } from '../../redux/atoms';
 
 type MoodleCoursesFiltered = {
@@ -94,7 +94,7 @@ const CourseFilter = ({
   const [showSubjectFilter, setShowSubjectFilter] = useState<boolean>(true);
   const setValueOfButton = useSetRecoilState(titleOfCategorieValue);
   const [currentCurrent, setCurrentCurrent] = useRecoilState(
-    currentCategorySelector
+    valueOfCurrentCategory
   );
 
   const filterByCategory = async (categoryId: number) => {
@@ -285,8 +285,6 @@ const CourseFilter = ({
               onClick={() => {
                 void (() => {
                   setCurrentCurrent(-1);
-                  console.log(currentCurrent);
-
                   setMoodleCourses(null);
                   setRavenCourses(null);
                   setValueOfButton('Programmation');
@@ -330,7 +328,7 @@ const CourseFilter = ({
               <button
                 key={index}
                 className={`filter-button ${
-                  currentCurrent == 11 ? 'selected-category' : ''
+                  currentCurrent == course?.id ? 'selected-category' : ''
                 }`}
                 onClick={() => {
                   void (async () => {

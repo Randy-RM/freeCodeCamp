@@ -218,9 +218,9 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [courseCategories, setCourseCategories] = useRecoilState<
     MoodleCourseCategory[] | null | undefined
   >(categoryCours);
-  const [currentCategory, setCurrentCategory] = useState<number | null>(null);
-  const [current, SetCurrent] = useRecoilState(valueOfCurrentCategory);
-  const currentCurrent = useRecoilValue(valueOfCurrentCategory);
+  const [currentCategory, setCurrentCategory] = useRecoilState(
+    valueOfCurrentCategory
+  );
   const [dataForAllCourses, setDataForallCourse] =
     useRecoilState<UnifiedCourse[]>(allDataCourses);
   const allDataofCourses = useRecoilValue(allDataCourses);
@@ -386,7 +386,7 @@ export function Courses(props: CoursesProps): JSX.Element {
 
   useEffect(() => {
     void getRavenResourcesPath();
-    console.log(current);
+    console.log(currentCategory);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
@@ -440,7 +440,7 @@ export function Courses(props: CoursesProps): JSX.Element {
   }
 
   useEffect(() => {
-    SetCurrent(null);
+    setCurrentCategory(currentCategory);
   });
 
   useEffect(() => {
@@ -500,7 +500,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                   setShowFilter={setShowFilter}
                   setIsDataOnLoading={setIsDataOnLoading}
                   courseCategories={courseCategories}
-                  currentCategory={currentCurrent}
+                  currentCategory={currentCategory}
                   setCurrentCategory={setCurrentCategory}
                   setCurrentPage={setCurrentPage}
                 />
@@ -516,7 +516,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                   courseCategories={courseCategories}
                   setRavenPath={setDataRavenPath}
                   setCurrentCategory={setCurrentCategory}
-                  currentCategory={currentCurrent}
+                  currentCategory={currentCategory}
                   screenWidth={setScreenWidth}
                   setCurrentPage={setCurrentPage}
                   setIsDataOnLoading={setIsDataOnLoading}
@@ -529,7 +529,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                   <span>
                     {paginatedData.length > 0 &&
                       paginatedData.length +
-                        (currentCurrent == null || currentCategory == -1
+                        (currentCategory == null || currentCategory == -1
                           ? 2
                           : 0)}{' '}
                     cours
@@ -539,7 +539,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                 {!isDataOnLoading ? (
                   <div className='card-course-detail-container'>
                     {currentPage == 1 &&
-                      (currentCurrent == null || currentCurrent == -1) && (
+                      (currentCategory == null || currentCategory == -1) && (
                         <>
                           <CourseCard
                             language='French'

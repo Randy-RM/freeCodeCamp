@@ -9,3 +9,14 @@
   border-radius: 16px;
   padding: 1rem;
 }
+
+.catalog {
+  font-size: 1.5rem;
+  color: red;
+  font-weight: 500;
+}
+
+.catalog-title {
+  font-weight: 600;
+  font-size: 1.5rem;
+}

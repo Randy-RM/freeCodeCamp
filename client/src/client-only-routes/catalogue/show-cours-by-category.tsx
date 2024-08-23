@@ -139,6 +139,10 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
+  useEffect(() => {
+    SetValueOfCurrentCategory(valueOfCurrentCategorie);
+  }, [valueOfCurrentCategorie, SetValueOfCurrentCategory]);
+
   if (typeof window !== 'undefined') {
     window.addEventListener('resize', () => {
       showFilter && setScreenWidth(window.innerWidth);
@@ -214,7 +218,10 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
               <div className='card-courses-detail-container'>
                 <div>
-                  <h2 className='big-subheading'>{valueOfTitleCategorie}</h2>
+                  <h2 className=' catalog-title'>
+                    <span className='catalog'>Catalogue</span> /
+                    {valueOfTitleCategorie}
+                  </h2>
                 </div>
                 <Spacer />
 
