@@ -165,9 +165,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     currentPage: page
   } = paginate(ressourcesData, currentPage);
 
-  paginatedData
-    ? console.log(paginatedData)
-    : console.log('toujour pas chargé');
   useEffect(() => {
     if (screenWidth > 990) setShowFilter(true);
     else setShowFilter(false);
@@ -175,7 +172,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
   useEffect(() => {
     SetValueOfCurrentCategory(valueOfCurrentCategorie);
-    console.log(valueOfCurrentCategorie);
   }, [valueOfCurrentCategorie, SetValueOfCurrentCategory]);
 
   if (typeof window !== 'undefined') {

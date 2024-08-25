@@ -279,9 +279,9 @@ export function Courses(props: CoursesProps): JSX.Element {
 
       if (generateRavenToken) {
         addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
-        return generateRavenToken; // Retourner le nouveau token
+        return generateRavenToken;
       } else {
-        return null; // Retourner null si la génération a échoué
+        return null;
       }
     } else {
       // Vérifier si le token existant a expiré d'une heure ou plus
