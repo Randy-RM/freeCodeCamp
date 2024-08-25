@@ -106,24 +106,28 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     void getMoodleCourseCategory();
     void getAllRessources(currentPage);
 
-    const timer = setTimeout(() => {
-      if (isDataOnLoading) {
-        setIsDataOnLoading(false);
-      }
-    }, 2000);
-    return () => {
-      setDataMoodle(null);
-      setIsDataOnLoading(true);
-      clearTimeout(timer);
-    };
+    // const timer = setTimeout(() => {
+    //   if (isDataOnLoading) {
+    //     // setIsDataOnLoading(false);
+    //   }
+    // }, 2000);
+    // return () => {
+    //   setDataMoodle(null);
+    //   setIsDataOnLoading(true);
+    //   clearTimeout(timer);
+    // };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
+    setRessourceDatas([]);
+
     setIsDataOnLoading(true);
 
     const fetchCourses = async () => {
       try {
+        setRessourceDatas([]);
+
         const currentPage = 1; // ou la page courante
         const courses = await getAllRessources(currentPage);
 
@@ -153,7 +157,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     };
 
     void fetchCourses();
-  }, [valueOfCurrentCategorie, setRessourceDatas]);
+  }, [valueOfCurrentCategorie, setRessourceDatas, isDataOnLoading]);
 
   const {
     paginatedData,
@@ -162,6 +166,9 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     currentPage: page
   } = paginate(ressourcesData, currentPage);
 
+  paginatedData
+    ? console.log(paginatedData)
+    : console.log('toujour pas chargé');
   useEffect(() => {
     if (screenWidth > 990) setShowFilter(true);
     else setShowFilter(false);
@@ -170,11 +177,14 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (isDataOnLoading) {
-        setIsDataOnLoading(false);
+        console.log('befor upn pages charge Data', isDataOnLoading);
+
+        setIsDataOnLoading(!isDataOnLoading);
+        console.log('after upn pages charge Data', isDataOnLoading);
       }
     }, 3000);
     return () => {
-      setIsDataOnLoading(true);
+      // setIsDataOnLoading(true);
       clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -274,15 +284,33 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                 <div className='course__number'>
                   <p>Parcourir le catalogue complet</p>
                   <span>
-                    {paginatedData.length > 0 || valueOfCurrentCategorie === -1
-                      ? `${
-                          paginatedData.length +
-                          (valueOfCurrentCategorie === -1 ? 2 : 0)
-                        } cours`
-                      : ''}
+                    {(() => {
+                      if (isDataOnLoading) {
+                        return ''; // Affiche rien si les données sont en cours de chargement
+                      }
+
+                      if (valueOfCurrentCategorie === -1) {
+                        return '2 cours';
+                      } else if (valueOfCurrentCategorie === -2) {
+                        const lunchUrlCoursesCount = paginatedData.filter(
+                          course => course['launch_url']
+                        ).length;
+                        return lunchUrlCoursesCount > 0
+                          ? `${lunchUrlCoursesCount} cours`
+                          : '';
+                      } else {
+                        const categoryCoursesCount = paginatedData.filter(
+                          course =>
+                            course.categoryid === valueOfCurrentCategorie
+                        ).length;
+                        return categoryCoursesCount > 0
+                          ? `${categoryCoursesCount} cours`
+                          : '';
+                      }
+                    })()}
                   </span>
                 </div>
-                {!isDataOnLoading ? (
+                {paginatedData.length > 0 || valueOfCurrentCategorie == -1 ? (
                   <div className='card-course-detail-container'>
                     {currentPage == 1 && valueOfCurrentCategorie == -1 && (
                       <>
