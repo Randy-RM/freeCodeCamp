@@ -313,8 +313,10 @@ const CoursesCategoryCard = ({
             <div className='card-content'>
               <button
                 className='category-name'
-                onClick={e => {
-                  void handleButtonClick(-2, e);
+                onClick={() => {
+                  setCurrent(-2);
+                  setValueOfButton('Amazon Web Service');
+                  void navigate(routes.catalogue.aws);
                   //  navigate(`${routes.catalogue.catalogueTitle}/${e.target.value}`)
                 }}
                 // onKeyPress={event => handleKeyPress(event, -2)}
