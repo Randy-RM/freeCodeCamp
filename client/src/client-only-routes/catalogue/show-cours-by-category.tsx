@@ -97,11 +97,9 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const showMoodleCategory = useRecoilValue(categoryCours);
 
   const { moodleBaseUrl } = envData;
-
-  if (ressourcesData) {
-    console.log(ressourcesData);
-  }
   useEffect(() => {
+    setIsDataOnLoading(true);
+
     void getMoodleCourses();
     void getRavenResources(currentPage);
     void getRavenPathResources(currentPage);
@@ -122,6 +120,8 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   }, []);
 
   useEffect(() => {
+    setIsDataOnLoading(true);
+
     const fetchCourses = async () => {
       try {
         const currentPage = 1; // ou la page courante
@@ -144,6 +144,8 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
           valueOfCurrentCategorie === -2 ? ravenCourses : moodleCourses;
 
         setRessourceDatas(filteredCourses);
+        setIsDataOnLoading(false);
+
         return filteredCourses;
       } catch (error) {
         console.error('Error fetching courses:', error);

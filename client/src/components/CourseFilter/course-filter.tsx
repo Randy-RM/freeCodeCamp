@@ -285,13 +285,13 @@ const CourseFilter = ({
               onClick={() => {
                 void (() => {
                   setCurrentCurrent(-1);
+                  setValueOfButton('Programmation');
+                  void navigate(routes.catalogue.programmation);
                   setMoodleCourses(null);
                   setRavenCourses(null);
-                  setValueOfButton('Programmation');
                   setRavenPath(null);
                   scrollTo(130);
                   if (screenWidth < 990) setShowFilter(e => !e);
-                  void navigate(routes.catalogue.programmation);
                 })();
               }}
             >
@@ -305,16 +305,15 @@ const CourseFilter = ({
               }`}
               onClick={() => {
                 void (async () => {
-                  setIsDataOnLoading(true);
                   setCurrentCurrent(-2);
                   setValueOfButton('Amazon Web Service');
+                  void navigate(routes.catalogue.aws);
                   // setCurrentPage(1);
                   // setProgrammingCategory(true);
                   setMoodleCourses(null);
                   await getRavenCourses();
                   await getRavenResourcesPath();
                   scrollTo(130);
-                  void navigate(routes.catalogue.aws);
                   if (screenWidth < 990) setShowFilter(e => !e);
                 })();
               }}
