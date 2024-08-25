@@ -106,22 +106,20 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     void getMoodleCourseCategory();
     void getAllRessources(currentPage);
 
-    // const timer = setTimeout(() => {
-    //   if (isDataOnLoading) {
-    //     // setIsDataOnLoading(false);
-    //   }
-    // }, 2000);
-    // return () => {
-    //   setDataMoodle(null);
-    //   setIsDataOnLoading(true);
-    //   clearTimeout(timer);
-    // };
+    const timer = setTimeout(() => {
+      if (isDataOnLoading) {
+        // setIsDataOnLoading(false);
+      }
+    }, 2000);
+    return () => {
+      setDataMoodle(null);
+      setIsDataOnLoading(true);
+      clearTimeout(timer);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    setRessourceDatas([]);
-
     setIsDataOnLoading(true);
 
     const fetchCourses = async () => {
@@ -157,7 +155,8 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     };
 
     void fetchCourses();
-  }, [valueOfCurrentCategorie, setRessourceDatas, isDataOnLoading]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [valueOfCurrentCategorie]);
 
   const {
     paginatedData,
@@ -173,22 +172,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     if (screenWidth > 990) setShowFilter(true);
     else setShowFilter(false);
   }, [screenWidth]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (isDataOnLoading) {
-        console.log('befor upn pages charge Data', isDataOnLoading);
-
-        setIsDataOnLoading(!isDataOnLoading);
-        console.log('after upn pages charge Data', isDataOnLoading);
-      }
-    }, 3000);
-    return () => {
-      // setIsDataOnLoading(true);
-      clearTimeout(timer);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
 
   useEffect(() => {
     SetValueOfCurrentCategory(valueOfCurrentCategorie);
