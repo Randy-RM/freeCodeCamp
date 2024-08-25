@@ -265,7 +265,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                   <span>
                     {(() => {
                       if (isDataOnLoading) {
-                        return ''; // Affiche rien si les données sont en cours de chargement
+                        return '';
                       }
 
                       if (valueOfCurrentCategorie === -1) {

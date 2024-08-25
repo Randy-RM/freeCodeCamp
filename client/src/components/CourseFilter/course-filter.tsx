@@ -23,6 +23,7 @@ import { splitArray } from '../helpers';
 import sortCourses from '../helpers/sort-course';
 import routes from '../../utils/routes';
 import {
+  myAllDataCourses,
   titleOfCategorieValue,
   valueOfCurrentCategory
 } from '../../redux/atoms';
@@ -96,6 +97,8 @@ const CourseFilter = ({
   const [currentCurrent, setCurrentCurrent] = useRecoilState(
     valueOfCurrentCategory
   );
+
+  const setValueOfAllDataRessoures = useSetRecoilState(myAllDataCourses);
 
   const filterByCategory = async (categoryId: number) => {
     setIsDataOnLoading(true);
@@ -286,6 +289,7 @@ const CourseFilter = ({
                 void (() => {
                   setCurrentCurrent(-1);
                   setValueOfButton('Programmation');
+                  setValueOfAllDataRessoures([]);
                   void navigate(routes.catalogue.programmation);
                   setMoodleCourses(null);
                   setRavenCourses(null);
@@ -307,6 +311,7 @@ const CourseFilter = ({
                 void (async () => {
                   setCurrentCurrent(-2);
                   setValueOfButton('Amazon Web Service');
+                  setValueOfAllDataRessoures([]);
                   void navigate(routes.catalogue.aws);
                   // setCurrentPage(1);
                   // setProgrammingCategory(true);
@@ -331,6 +336,7 @@ const CourseFilter = ({
                 }`}
                 onClick={() => {
                   void (async () => {
+                    setValueOfAllDataRessoures([]);
                     await filterByCategory(course?.id ? course?.id : 0);
                     setRavenCourses(null);
 
