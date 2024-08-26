@@ -146,9 +146,9 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
           valueOfCurrentCategorie === -2 ? ravenCourses : moodleCourses;
 
         setRessourceDatas(filteredCourses);
-        setIsDataOnLoading(false);
         console.log(ressourcesData);
-        console.log(isDataOnLoading);
+
+        setIsDataOnLoading(false);
 
         return filteredCourses;
       } catch (error) {
