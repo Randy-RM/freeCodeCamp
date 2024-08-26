@@ -147,6 +147,8 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
         setRessourceDatas(filteredCourses);
         setIsDataOnLoading(false);
+        console.log(ressourcesData);
+        console.log(isDataOnLoading);
 
         return filteredCourses;
       } catch (error) {

@@ -272,7 +272,7 @@ const CourseFilter = ({
                   } else {
                     void navigate('/catalogue');
                   }
-
+                  setValueOfAllDataRessoures([]);
                   await getMoodleCourses();
                   await getRavenCourses();
                   await getRavenResourcesPath();

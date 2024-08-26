@@ -40,6 +40,7 @@ import { splitArray } from '../helpers';
 import sortCourses from '../helpers/sort-course';
 import routes from '../../utils/routes';
 import {
+  myAllDataCourses,
   titleOfCategorieValue,
   valueOfCurrentCategory
 } from '../../redux/atoms';
@@ -88,6 +89,7 @@ const CoursesCategoryCard = ({
   const [isSelected, setIsSelected] = useState<number | null>(null);
   const setValueOfButton = useSetRecoilState(titleOfCategorieValue);
   const setCurrent = useSetRecoilState(valueOfCurrentCategory);
+  const setValueOfAllRessourcesData = useSetRecoilState(myAllDataCourses);
 
   const scrollAmount = 320; // Adjust based on card width and gap
   // const categoryDescrTitle = 'développement';
@@ -259,13 +261,11 @@ const CoursesCategoryCard = ({
 
   const handleButtonClickMoodle = async (
     categoryId: number,
-    categoryName: string,
-    e: React.MouseEvent<HTMLButtonElement>
+    categoryName: string
   ) => {
-    handleClickButton(e);
-
     const url = routes.catalogue.moodle.replace(':category', categoryName);
     await handleCategoryClick(categoryId);
+    setValueOfAllRessourcesData([]);
     setCurrent(categoryId);
     await navigate(url);
   };
@@ -338,15 +338,14 @@ const CoursesCategoryCard = ({
               <div className='card-content'>
                 <button
                   className='category-name'
-                  onClick={e => {
+                  onClick={() => {
                     void handleButtonClickMoodle(
                       categorie.id,
                       categorie.name.includes('amp')
                         ? 'marketing-communication'
                         : categorie.name.includes('artificielle')
                         ? 'intelligence-artificielle'
-                        : categorie.name,
-                      e
+                        : categorie.name
                     );
                   }}
                   // eslint-disable-next-line @typescript-eslint/no-unsafe-return,
