@@ -112,11 +112,35 @@
     },
     {
       "files": ["gatsby-node.js"],
-      "parser": "eslint-plugin-babel", // Utiliser le parser Babel pour ce fichier
+      "parser": "eslint-plugin-babel",
       "rules": {
-        "@typescript-eslint/await-thenable": "off", // Désactiver cette règle spécifique
+        "@typescript-eslint/await-thenable": "off",
         "@typescript-eslint/no-unsafe-call": "off",
         "@typescript-eslint/no-unsafe-return": "off"
+      }
+    },
+    {
+      "files": ["gatsby-browser.js"],
+      "parserOptions": {
+        "project": null
+      },
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/await-thenable": "off",
+        "@typescript-eslint/no-floating-promises": "off",
+        "@typescript-eslint/no-implied-eval": "off",
+        "@typescript-eslint/no-misused-promises": "off",
+        "@typescript-eslint/no-unnecessary-type-assertion": "off",
+        "@typescript-eslint/no-unsafe-argument": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/naming-convention": "off",
+        "@typescript-eslint/no-unsafe-return": "off",
+        "@typescript-eslint/no-unsafe-member-access": "off",
+        "@typescript-eslint/require-await": "off",
+        "@typescript-eslint/restrict-plus-operands": "off",
+        "@typescript-eslint/restrict-template-expressions": "off",
+        "@typescript-eslint/unbound-method": "off"
       }
     }
   ]
