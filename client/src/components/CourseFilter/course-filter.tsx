@@ -20,7 +20,7 @@ import {
   MoodleCoursesCatalogue,
   scrollTo
 } from '../../client-only-routes/show-courses';
-import { splitArray } from '../helpers';
+import { Spacer, splitArray } from '../helpers';
 import sortCourses from '../helpers/sort-course';
 import routes from '../../utils/routes';
 import {
@@ -28,6 +28,7 @@ import {
   titleOfCategorieValue,
   valueOfCurrentCategory
 } from '../../redux/atoms';
+import OtherFilter from './other-filter';
 
 type MoodleCoursesFiltered = {
   courses: MoodleCourse[] | null;
@@ -380,6 +381,8 @@ const CourseFilter = ({
             );
           })}
         </ul>
+        <Spacer size={3} />
+        <OtherFilter />
       </details>
     </div>
   );
