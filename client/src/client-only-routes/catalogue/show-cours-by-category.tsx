@@ -53,7 +53,8 @@ import {
   myAllDataCourses,
   pathRaven,
   titleOfCategorieValue,
-  valueOfCurrentCategory
+  valueOfCurrentCategory,
+  valueOfLanguage
 } from '../../redux/atoms';
 
 import '../catalogue/show-courses-by-category.css';
@@ -95,6 +96,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const setDataRaven = useSetRecoilState(coursesRaven);
   const setDataRavenPath = useSetRecoilState(pathRaven);
   const showMoodleCategory = useRecoilValue(categoryCours);
+  const [valueLanguage, setValueLangue] = useRecoilState(valueOfLanguage);
 
   const { moodleBaseUrl } = envData;
   useEffect(() => {
@@ -181,6 +183,22 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     });
   }
 
+  useEffect(() => {
+    if (valueLanguage.length > 0) {
+      setRessourceDatas(
+        ressourcesData.filter(
+          course =>
+            'launch_url' in course &&
+            /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+            course.category?.[0]?.tags?.[0]?.title === valueLanguage
+        )
+      );
+    }
+
+    setValueLangue(valueLanguage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [valueLanguage]);
+
   //gestion de la pagination pour l'affichage des cours
   const onNavigateForward = () => {
     if (currentPage < totalPages && currentPage > 0) {
@@ -234,18 +252,20 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
             <div className='card-filter-container'>
               {showFilter && (
-                <CourseFilter
-                  setRavenPath={setDataRavenPath}
-                  screenWidth={screenWidth}
-                  setRavenCourses={setDataRaven}
-                  setMoodleCourses={setDataMoodle}
-                  setShowFilter={setShowFilter}
-                  setIsDataOnLoading={setIsDataOnLoading}
-                  courseCategories={showMoodleCategory}
-                  currentCategory={valueOfCurrentCategorie}
-                  setCurrentCategory={SetValueOfCurrentCategory}
-                  setCurrentPage={setCurrentpage}
-                />
+                <div>
+                  <CourseFilter
+                    setRavenPath={setDataRavenPath}
+                    screenWidth={screenWidth}
+                    setRavenCourses={setDataRaven}
+                    setMoodleCourses={setDataMoodle}
+                    setShowFilter={setShowFilter}
+                    setIsDataOnLoading={setIsDataOnLoading}
+                    courseCategories={showMoodleCategory}
+                    currentCategory={valueOfCurrentCategorie}
+                    setCurrentCategory={SetValueOfCurrentCategory}
+                    setCurrentPage={setCurrentpage}
+                  />
+                </div>
               )}
 
               <div className='card-courses-detail-container'>
