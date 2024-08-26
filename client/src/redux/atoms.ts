@@ -34,6 +34,22 @@ export const titleOfCategorieValue = atom<string>({
   effects_UNSTABLE: [localStorageEffect('titleOfCategorieValue')]
 });
 
+//atom pour la valeur de la category lorsqu'on clique sur le
+export const valueOfLanguage = atom<string>({
+  key: 'valueOfLanguage',
+  default: '',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  effects_UNSTABLE: [localStorageEffect('valueOfLanguage')]
+});
+
+//atom pour la valeur de la category lorsqu'on clique sur le
+export const checkedBox = atom<boolean>({
+  key: 'checkedBox',
+  default: true,
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  effects_UNSTABLE: [localStorageEffect('checkedBox')]
+});
+
 // Atom pour les données des cours, avec typage explicite
 export const allDataCourses = atom<UnifiedCourse[]>({
   key: 'allDataCourses',
