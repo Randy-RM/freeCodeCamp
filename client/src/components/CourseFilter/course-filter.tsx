@@ -3,6 +3,7 @@ import './course-filter.css';
 
 import { navigate } from 'gatsby';
 import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useLocation } from '@reach/router';
 import {
   addRavenTokenToLocalStorage,
   generateRavenTokenAcces,
@@ -97,6 +98,8 @@ const CourseFilter = ({
   const [currentCurrent, setCurrentCurrent] = useRecoilState(
     valueOfCurrentCategory
   );
+
+  const location = useLocation();
 
   const setValueOfAllDataRessoures = useSetRecoilState(myAllDataCourses);
 
@@ -264,12 +267,19 @@ const CourseFilter = ({
               }`}
               onClick={() => {
                 void (async () => {
+                  if (location.pathname === '/catalogue') {
+                    window.location.reload();
+                  } else {
+                    void navigate('/catalogue');
+                  }
+
                   await getMoodleCourses();
                   await getRavenCourses();
                   await getRavenResourcesPath();
                   setCurrentPage(1);
                   setCurrentCategory(null);
                   setCurrentCurrent(null);
+
                   // setProgrammingCategory(true);
                   scrollTo(130);
                   if (screenWidth < 990) setShowFilter(e => !e);
