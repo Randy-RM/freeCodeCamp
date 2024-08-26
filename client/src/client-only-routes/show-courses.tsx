@@ -62,7 +62,8 @@ import {
   coursesMoodle,
   coursesRaven,
   pathRaven,
-  valueOfCurrentCategory
+  valueOfCurrentCategory,
+  valueOfLanguage
 } from '../redux/atoms';
 import { UnifiedCourse } from '../redux/types';
 // import { RootState, UnifiedCourse } from '../redux/types';
@@ -232,6 +233,7 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [dataMoodle, setDataMoodle] = useRecoilState<
     MoodleCoursesCatalogue | null | undefined
   >(coursesMoodle);
+  const [valueLangue, setValueLangue] = useRecoilState(valueOfLanguage);
 
   // const [allDataRessourceCourse, setAllDataRessource] =
   //   useRecoilState(myAllDataCourses);
@@ -385,6 +387,20 @@ export function Courses(props: CoursesProps): JSX.Element {
       setCurrentPage(currentPage);
     }
   };
+
+  useEffect(() => {
+    if (valueLangue.length > 0) {
+      setDataForallCourse(
+        allDataofCourses.filter(
+          course =>
+            'launch_url' in course &&
+            course.category?.[0]?.tags?.[0]?.title === valueLangue
+        )
+      );
+    }
+    setValueLangue(valueLangue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [valueLangue]);
 
   // useEffect(() => {
   //   setAllDataRessource(allDataRessoucesCourses);
