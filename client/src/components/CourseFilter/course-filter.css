@@ -5,6 +5,24 @@
   top: 100px;
 }
 
+.filter__container {
+  width: 9rem;
+}
+
+.filter-items-container {
+  gap: 1rem;
+}
+
+.language__Label {
+  display: flex;
+  gap: 0.2rem;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
+  align-items: baseline;
+  font-weight: 500;
+}
+
 .pagination-container {
   display: flex;
   align-items: center;
