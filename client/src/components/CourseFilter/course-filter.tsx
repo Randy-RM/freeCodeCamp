@@ -31,6 +31,7 @@ import {
 import OtherFilter from './other-filter';
 import FilterByType from './filter-by-type';
 import FilterByLevel from './filter-by-level';
+import FilterByDuration from './filter-by-duration';
 
 type MoodleCoursesFiltered = {
   courses: MoodleCourse[] | null;
@@ -383,12 +384,22 @@ const CourseFilter = ({
             );
           })}
         </ul>
-        <Spacer size={1} />
-        <OtherFilter />
-        <Spacer size={1} />
-        <FilterByType />
-        <Spacer size={1} />
-        <FilterByLevel />
+        <div
+          className={
+            location.pathname == '/catalogue'
+              ? 'hidden-filter-on-Catalogue'
+              : ''
+          }
+        >
+          <Spacer size={1} />
+          <OtherFilter />
+          <Spacer size={1} />
+          <FilterByType />
+          <Spacer size={1} />
+          <FilterByLevel />
+          <Spacer size={1} />
+          <FilterByDuration />
+        </div>
       </details>
     </div>
   );

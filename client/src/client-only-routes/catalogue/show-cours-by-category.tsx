@@ -32,6 +32,7 @@ import CourseCard from '../../components/CourseCard/course-card';
 import PathCard from '../../components/PathCard/path-card';
 import {
   convertTime,
+  convertTimestampToHours,
   convertTimestampToTime,
   getCategoryDescription,
   paginate
@@ -56,6 +57,7 @@ import {
   valueOfCurrentCategory,
   valueOfLanguage,
   valueOfTypeCourse,
+  valueOfTypeDuration,
   valueOfTypeLevel
 } from '../../redux/atoms';
 
@@ -99,8 +101,10 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const setDataRavenPath = useSetRecoilState(pathRaven);
   const showMoodleCategory = useRecoilValue(categoryCours);
   const [valueLanguage, setValueLangue] = useRecoilState(valueOfLanguage);
-  const valueTypeOfCourse = useRecoilValue(valueOfTypeCourse);
-  const valueLevel = useRecoilValue(valueOfTypeLevel);
+  const [valueTypeOfCourse, setValueTypeOfcours] =
+    useRecoilState(valueOfTypeCourse);
+  const [valueLevel, setValueLevel] = useRecoilState(valueOfTypeLevel);
+  const [valueDuration, setValueDuration] = useRecoilState(valueOfTypeDuration);
 
   const { moodleBaseUrl } = envData;
   useEffect(() => {
@@ -140,81 +144,64 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
           .flatMap(course => (Array.isArray(course) ? course : []))
           .filter(course => 'launch_url' in course) as RavenCourse[];
 
-        // Si les cours Moodle sont dans des tableaux imbriqués, les aplatir
         const moodleCourses = courses
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
           .flatMap(course => (Array.isArray(course) ? course : []))
           .filter(course => !('launch_url' in course)) as MoodleCourse[];
 
-        // Ajouter la condition pour filtrer les cours Raven par langue et type
-        //comme les conditions qui suivent dependent des cours raven, nous verifions d'abord la valeur si elle est à -2
+        let filteredRavenCourses = ravenCourses;
+        let filteredMoodleCourses = moodleCourses;
+
         if (valueOfCurrentCategorie == -2) {
-          //ici on pose la condition de filtre sur la langue seléctionnée
+          // Filtre par langue
           if (valueLanguage !== 'none') {
-            const filteredRavenCourses = ravenCourses.filter(
-              course =>
-                /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-                course.category?.[0]?.tags?.[0]?.title === valueLanguage
+            filteredRavenCourses = filteredRavenCourses.filter(
+              course => course.category?.[0]?.tags?.[0]?.title === valueLanguage
             );
-            setRessourceDatas(filteredRavenCourses);
-
-            //si la langue est filtré je filtre par rapport au type des cours ou parcours
           }
 
+          // Filtre par type de cours
           if (valueTypeOfCourse !== 'none') {
-            if (valueTypeOfCourse === 'Parcours') {
-              const filteredRavenCourses = ravenCourses.filter(
-                course =>
-                  /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-                  course.long_description
-              );
-              setRessourceDatas(filteredRavenCourses);
-            } else {
-              const filteredRavenCourses = ravenCourses.filter(
-                course =>
-                  /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-                  !course.long_description
-              );
-              setRessourceDatas(filteredRavenCourses);
-            }
+            filteredRavenCourses = filteredRavenCourses.filter(course =>
+              valueTypeOfCourse === 'Parcours'
+                ? course.long_description
+                : !course.long_description
+            );
           }
-          //trie des cours par niveau
+
+          // Filtre par niveau
           if (valueLevel !== 'none') {
-            if (valueLevel == 'Débutant') {
-              const filteredRavenCourses = ravenCourses.filter(
-                course => course.skill_level == 'Fundamental'
-              );
-              setRessourceDatas(filteredRavenCourses);
-            } else if (valueLevel === 'Avancé') {
-              const filteredRavenCourses = ravenCourses.filter(
-                course => course.skill_level == 'Andvanced'
-              );
-              setRessourceDatas(filteredRavenCourses);
-            } else if (valueLevel === 'Intermédiaire') {
-              const filteredRavenCourses = ravenCourses.filter(
-                course => course.skill_level == 'Intermediate'
-              );
-              setRessourceDatas(filteredRavenCourses);
-            }
+            filteredRavenCourses = filteredRavenCourses.filter(course =>
+              valueLevel === 'Débutant'
+                ? course.skill_level === 'Fundamental'
+                : valueLevel === 'Avancé'
+                ? course.skill_level === 'Advanced'
+                : course.skill_level === 'Intermediate'
+            );
           }
 
-          // si il n'a aucune séléction, je retourne tous les cours sans filtre
-          setRessourceDatas(ravenCourses);
-
-          //si la catégory est null on renvoie tous les cours
+          setRessourceDatas(filteredRavenCourses);
         } else if (valueOfCurrentCategorie === null) {
-          const filteredCourses = [...ravenCourses, ...moodleCourses];
-          setRessourceDatas(filteredCourses);
-        }
-        //si la catégory n'est pas -2 je renvoie juste les cours raven
-        else {
-          const filteredCourses = moodleCourses;
+          setRessourceDatas([...ravenCourses, ...moodleCourses]);
+        } else {
+          // Filtre par durée
+          if (valueDuration !== 'none') {
+            filteredMoodleCourses = filteredMoodleCourses.filter(course => {
+              const courseHours = convertTimestampToHours(course.timecreated);
+              console.log(convertTimestampToHours(course.timecreated));
 
-          setRessourceDatas(filteredCourses);
+              return valueDuration === '>1h'
+                ? courseHours > 10
+                : valueDuration === '1>5h'
+                ? courseHours > 10 && courseHours <= 13
+                : courseHours > 13;
+            });
+          }
+
+          setRessourceDatas(filteredMoodleCourses);
         }
 
         setIsDataOnLoading(false);
-        return ressourcesData;
       } catch (error) {
         console.error('Error fetching courses:', error);
       }
@@ -227,16 +214,26 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     valueLanguage,
     currentPage,
     valueTypeOfCourse,
-    valueLevel
+    valueLevel,
+    valueDuration
   ]);
 
   useEffect(() => {
     setCurrentpage(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [valueOfCurrentCategorie, valueLanguage, valueTypeOfCourse, valueLevel]);
+  }, [
+    valueOfCurrentCategorie,
+    valueLanguage,
+    valueTypeOfCourse,
+    valueLevel,
+    valueDuration
+  ]);
 
   useEffect(() => {
     setValueLangue('none');
+    setValueTypeOfcours('none');
+    setValueLevel('none');
+    setValueDuration('none');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

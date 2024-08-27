@@ -62,10 +62,11 @@ import {
   coursesMoodle,
   coursesRaven,
   pathRaven,
-  valueOfCurrentCategory,
-  valueOfLanguage,
-  valueOfTypeCourse,
-  valueOfTypeLevel
+  valueOfCurrentCategory
+  // valueOfLanguage,
+  // valueOfTypeCourse,
+  // valueOfTypeDuration,
+  // valueOfTypeLevel
 } from '../redux/atoms';
 import { UnifiedCourse } from '../redux/types';
 // import { RootState, UnifiedCourse } from '../redux/types';
@@ -235,10 +236,11 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [dataMoodle, setDataMoodle] = useRecoilState<
     MoodleCoursesCatalogue | null | undefined
   >(coursesMoodle);
-  const [valueLangue, setValueLangue] = useRecoilState(valueOfLanguage);
-  const [valueOfCourseType, setValueOfCourseType] =
-    useRecoilState(valueOfTypeCourse);
-  const [valueLevel, setValueLevel] = useRecoilState(valueOfTypeLevel);
+  // const [valueLangue, setValueLangue] = useRecoilState(valueOfLanguage);
+  // const [valueOfCourseType, setValueOfCourseType] =
+  //   useRecoilState(valueOfTypeCourse);
+  // const [valueDuration, setValueDuration] = useRecoilState(valueOfTypeDuration);
+  // const [valueLevel, setValueLevel] = useRecoilState(valueOfTypeLevel);
 
   // const [allDataRessourceCourse, setAllDataRessource] =
   //   useRecoilState(myAllDataCourses);
@@ -393,55 +395,76 @@ export function Courses(props: CoursesProps): JSX.Element {
     }
   };
 
-  useEffect(() => {
-    if (currentCategory === -2) {
-      if (valueLangue !== 'none') {
-        setDataForallCourse(
-          allDataofCourses.filter(
-            course =>
-              'launch_url' in course &&
-              course.category?.[0]?.tags?.[0]?.title === valueLangue
-          )
-        );
-      } else {
-        setDataForallCourse(allDataofCourses);
-      }
-    }
-    setValueLangue(valueLangue);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [valueLangue, allDataofCourses]);
+  // useEffect(() => {
+  //   if (currentCategory === -2) {
+  //     if (valueLangue !== 'none') {
+  //       setDataForallCourse(
+  //         allDataofCourses.filter(
+  //           course =>
+  //             'launch_url' in course &&
+  //             course.category?.[0]?.tags?.[0]?.title === valueLangue
+  //         )
+  //       );
+  //     } else {
+  //       setDataForallCourse(allDataofCourses);
+  //     }
+  //   }
+  //   setValueLangue(valueLangue);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [valueLangue, allDataofCourses]);
 
-  useEffect(() => {
-    if (currentCategory === -2) {
-      if (valueLevel !== 'none') {
-        const filterByLevel = allDataofCourses.filter(
-          course => 'launch_url' in course && course.skill_level === valueLevel
-        );
-        setDataForallCourse(filterByLevel);
-      } else {
-        setDataForallCourse(allDataofCourses);
-      }
-    }
+  // useEffect(() => {
+  //   if (currentCategory === 11||
+  //     currentCategory === 13|| currentCategory === 14
+  //   ) {
+  //     if (valueDuration !== 'none') {
 
-    setValueLevel(valueLevel);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [valueLevel, allDataofCourses]);
+  //       setDataForallCourse(
+  //         allDataofCourses.filter(
+  //           course =>
+  //             'categorieid' in course &&
+  //             course.category?.[0]?.tags?.[0]?.title === valueLangue
+  //         )
+  //       );
+  //     } else {
+  //       setDataForallCourse(allDataofCourses);
+  //     }
+  //   }
+  //   setValueLangue(valueLangue);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [valueLangue, allDataofCourses]);
 
-  useEffect(() => {
-    if (currentCategory === -2) {
-      if (valueOfCourseType !== 'none') {
-        setDataForallCourse(
-          allDataofCourses.filter(
-            course => 'launch_url' in course && course.long_description
-          )
-        );
-      } else {
-        setDataForallCourse(allDataofCourses);
-      }
-    }
-    setValueOfCourseType(valueOfCourseType);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [valueOfCourseType, allDataofCourses]);
+  // useEffect(() => {
+  //   if (currentCategory === -2) {
+  //     if (valueLevel !== 'none') {
+  //       const filterByLevel = allDataofCourses.filter(
+  //         course => 'launch_url' in course && course.skill_level === valueLevel
+  //       );
+  //       setDataForallCourse(filterByLevel);
+  //     } else {
+  //       setDataForallCourse(allDataofCourses);
+  //     }
+  //   }
+
+  //   setValueLevel(valueLevel);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [valueLevel, allDataofCourses]);
+
+  // useEffect(() => {
+  //   if (currentCategory === -2) {
+  //     if (valueOfCourseType !== 'none') {
+  //       setDataForallCourse(
+  //         allDataofCourses.filter(
+  //           course => 'launch_url' in course && course.long_description
+  //         )
+  //       );
+  //     } else {
+  //       setDataForallCourse(allDataofCourses);
+  //     }
+  //   }
+  //   setValueOfCourseType(valueOfCourseType);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [valueOfCourseType, allDataofCourses]);
 
   // useEffect(() => {
   //   setAllDataRessource(allDataRessoucesCourses);
@@ -481,7 +504,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, valueLangue, valueOfCourseType]);
+  }, [currentPage]);
   useEffect(() => {
     const timer = setTimeout(() => {
       if (isDataOnLoading) {
@@ -493,7 +516,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, valueLangue, valueOfCourseType]);
+  }, [currentPage]);
 
   if (typeof window !== 'undefined') {
     window.addEventListener('resize', () => {
@@ -520,7 +543,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       : setIsDataOnLoading(false);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [valueLangue, valueOfCourseType]);
+  }, []);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;

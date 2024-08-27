@@ -50,12 +50,20 @@ export const valueOfTypeCourse = atom<string | null>({
   effects_UNSTABLE: [localStorageEffect('valueOfTypeCourse')]
 });
 
-//atom pour la valeur du type des contenu
+//atom pour la valeur du level des contenu
 export const valueOfTypeLevel = atom<string | null>({
   key: 'valueOfTypeLevel',
   default: '',
   // eslint-disable-next-line @typescript-eslint/naming-convention
   effects_UNSTABLE: [localStorageEffect('valueOfTypeLevel')]
+});
+
+//atom pour la valeur du la duration des contenu
+export const valueOfTypeDuration = atom<string | null>({
+  key: 'valueOfTypeDuration',
+  default: '',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  effects_UNSTABLE: [localStorageEffect('valueOfTypeDuration')]
 });
 
 //atom pour la valeur de la category lorsqu'on clique sur le
