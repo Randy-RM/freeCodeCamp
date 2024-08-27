@@ -1,22 +1,30 @@
 import React, { useState } from 'react';
 import './course-filter.css';
 
-import { useRecoilState } from 'recoil';
-import { checkedBox, valueOfLanguage } from '../../redux/atoms';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import {
+  checkedBox,
+  valueOfCurrentCategory,
+  valueOfLanguage
+} from '../../redux/atoms';
 
 const OtherFilter = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [showSubjectFilter, setShowSubjectFilter] = useState(true);
-  const [valueLanguage, setValueLanguage] = useRecoilState(valueOfLanguage);
-  const [valueChecked, setValueChecked] = useRecoilState(checkedBox);
+  const setValueLanguage = useSetRecoilState(valueOfLanguage);
+  const setValueChecked = useSetRecoilState(checkedBox);
+  const [currentCategorieValue, setValue0fCurrentCategory] = useRecoilState(
+    valueOfCurrentCategory
+  );
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
     const isChecked = e.target.checked;
+    const value = isChecked ? e.target.value : 'none'; // Assigner "none" lorsqu'il est décoché
 
-    setValueLanguage(isChecked ? value : '');
+    setValueLanguage(value);
     setValueChecked(isChecked);
-    console.log(valueChecked, showFilter);
+    setValue0fCurrentCategory(currentCategorieValue);
+    console.log(showFilter);
   };
 
   return (
@@ -70,23 +78,17 @@ const OtherFilter = () => {
               <input
                 type='checkbox'
                 value='English'
-                checked={
-                  valueLanguage ? valueLanguage.includes('English') : false
-                }
                 onChange={handleLanguageChange}
               />
-              English
+              Anglais
             </label>
             <label className='language__Label'>
               <input
                 type='checkbox'
                 value='French'
-                checked={
-                  valueLanguage ? valueLanguage.includes('French') : false
-                }
                 onChange={handleLanguageChange}
               />
-              French
+              Français
             </label>
           </div>
         </ul>
