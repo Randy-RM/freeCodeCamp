@@ -30,6 +30,7 @@ import {
 } from '../../redux/atoms';
 import OtherFilter from './other-filter';
 import FilterByType from './filter-by-type';
+import FilterByLevel from './filter-by-level';
 
 type MoodleCoursesFiltered = {
   courses: MoodleCourse[] | null;
@@ -386,6 +387,8 @@ const CourseFilter = ({
         <OtherFilter />
         <Spacer size={1} />
         <FilterByType />
+        <Spacer size={1} />
+        <FilterByLevel />
       </details>
     </div>
   );

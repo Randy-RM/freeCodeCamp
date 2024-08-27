@@ -55,7 +55,8 @@ import {
   titleOfCategorieValue,
   valueOfCurrentCategory,
   valueOfLanguage,
-  valueOfTypeCourse
+  valueOfTypeCourse,
+  valueOfTypeLevel
 } from '../../redux/atoms';
 
 import '../catalogue/show-courses-by-category.css';
@@ -99,6 +100,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const showMoodleCategory = useRecoilValue(categoryCours);
   const [valueLanguage, setValueLangue] = useRecoilState(valueOfLanguage);
   const valueTypeOfCourse = useRecoilValue(valueOfTypeCourse);
+  const valueLevel = useRecoilValue(valueOfTypeLevel);
 
   const { moodleBaseUrl } = envData;
   useEffect(() => {
@@ -176,6 +178,25 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
               setRessourceDatas(filteredRavenCourses);
             }
           }
+          //trie des cours par niveau
+          if (valueLevel !== 'none') {
+            if (valueLevel == 'Débutant') {
+              const filteredRavenCourses = ravenCourses.filter(
+                course => course.skill_level == 'Fundamental'
+              );
+              setRessourceDatas(filteredRavenCourses);
+            } else if (valueLevel === 'Avancé') {
+              const filteredRavenCourses = ravenCourses.filter(
+                course => course.skill_level == 'Andvanced'
+              );
+              setRessourceDatas(filteredRavenCourses);
+            } else if (valueLevel === 'Intermédiaire') {
+              const filteredRavenCourses = ravenCourses.filter(
+                course => course.skill_level == 'Intermediate'
+              );
+              setRessourceDatas(filteredRavenCourses);
+            }
+          }
 
           // si il n'a aucune séléction, je retourne tous les cours sans filtre
           setRessourceDatas(ravenCourses);
@@ -201,12 +222,18 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
     void fetchCourses();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [valueOfCurrentCategorie, valueLanguage, currentPage, valueTypeOfCourse]);
+  }, [
+    valueOfCurrentCategorie,
+    valueLanguage,
+    currentPage,
+    valueTypeOfCourse,
+    valueLevel
+  ]);
 
   useEffect(() => {
     setCurrentpage(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [valueOfCurrentCategorie, valueLanguage, valueTypeOfCourse]);
+  }, [valueOfCurrentCategorie, valueLanguage, valueTypeOfCourse, valueLevel]);
 
   useEffect(() => {
     setValueLangue('none');

@@ -64,7 +64,8 @@ import {
   pathRaven,
   valueOfCurrentCategory,
   valueOfLanguage,
-  valueOfTypeCourse
+  valueOfTypeCourse,
+  valueOfTypeLevel
 } from '../redux/atoms';
 import { UnifiedCourse } from '../redux/types';
 // import { RootState, UnifiedCourse } from '../redux/types';
@@ -237,6 +238,7 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [valueLangue, setValueLangue] = useRecoilState(valueOfLanguage);
   const [valueOfCourseType, setValueOfCourseType] =
     useRecoilState(valueOfTypeCourse);
+  const [valueLevel, setValueLevel] = useRecoilState(valueOfTypeLevel);
 
   // const [allDataRessourceCourse, setAllDataRessource] =
   //   useRecoilState(myAllDataCourses);
@@ -408,6 +410,22 @@ export function Courses(props: CoursesProps): JSX.Element {
     setValueLangue(valueLangue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [valueLangue, allDataofCourses]);
+
+  useEffect(() => {
+    if (currentCategory === -2) {
+      if (valueLevel !== 'none') {
+        const filterByLevel = allDataofCourses.filter(
+          course => 'launch_url' in course && course.skill_level === valueLevel
+        );
+        setDataForallCourse(filterByLevel);
+      } else {
+        setDataForallCourse(allDataofCourses);
+      }
+    }
+
+    setValueLevel(valueLevel);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [valueLevel, allDataofCourses]);
 
   useEffect(() => {
     if (currentCategory === -2) {

@@ -42,11 +42,20 @@ export const valueOfLanguage = atom<string | null>({
   effects_UNSTABLE: [localStorageEffect('valueOfLanguage')]
 });
 
+//atom pour la valeur du type des contenu
 export const valueOfTypeCourse = atom<string | null>({
   key: 'valueOfTypeCourse',
   default: '',
   // eslint-disable-next-line @typescript-eslint/naming-convention
   effects_UNSTABLE: [localStorageEffect('valueOfTypeCourse')]
+});
+
+//atom pour la valeur du type des contenu
+export const valueOfTypeLevel = atom<string | null>({
+  key: 'valueOfTypeLevel',
+  default: '',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  effects_UNSTABLE: [localStorageEffect('valueOfTypeLevel')]
 });
 
 //atom pour la valeur de la category lorsqu'on clique sur le
