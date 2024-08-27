@@ -35,7 +35,7 @@ export const titleOfCategorieValue = atom<string>({
 });
 
 //atom pour la valeur de la category lorsqu'on clique sur le
-export const valueOfLanguage = atom<string>({
+export const valueOfLanguage = atom<string | null>({
   key: 'valueOfLanguage',
   default: '',
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -44,6 +44,13 @@ export const valueOfLanguage = atom<string>({
 
 //atom pour la valeur de la category lorsqu'on clique sur le
 export const checkedBox = atom<boolean>({
+  key: 'checkedBox',
+  default: true,
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  effects_UNSTABLE: [localStorageEffect('checkedBox')]
+});
+
+export const isDataLoadingTrue = atom<boolean>({
   key: 'checkedBox',
   default: true,
   // eslint-disable-next-line @typescript-eslint/naming-convention
