@@ -389,18 +389,22 @@ export function Courses(props: CoursesProps): JSX.Element {
   };
 
   useEffect(() => {
-    if (valueLangue.length > 0) {
-      setDataForallCourse(
-        allDataofCourses.filter(
-          course =>
-            'launch_url' in course &&
-            course.category?.[0]?.tags?.[0]?.title === valueLangue
-        )
-      );
+    if (currentCategory === -2) {
+      if (valueLangue !== 'none') {
+        setDataForallCourse(
+          allDataofCourses.filter(
+            course =>
+              'launch_url' in course &&
+              course.category?.[0]?.tags?.[0]?.title === valueLangue
+          )
+        );
+      } else {
+        setDataForallCourse(allDataofCourses);
+      }
     }
     setValueLangue(valueLangue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [valueLangue]);
+  }, [valueLangue, allDataofCourses]);
 
   // useEffect(() => {
   //   setAllDataRessource(allDataRessoucesCourses);
@@ -440,7 +444,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
+  }, [currentPage, valueLangue]);
   useEffect(() => {
     const timer = setTimeout(() => {
       if (isDataOnLoading) {
@@ -452,14 +456,16 @@ export function Courses(props: CoursesProps): JSX.Element {
       clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
+  }, [currentPage, valueLangue]);
 
   if (typeof window !== 'undefined') {
     window.addEventListener('resize', () => {
       showFilter && setScreenWidth(window.innerWidth);
     });
   }
-
+  if (isDataOnLoading) {
+    console.log(isDataOnLoading);
+  }
   useEffect(() => {
     setCurrentCategory(null);
   }, [currentPage, setCurrentCategory]);
@@ -477,7 +483,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       : setIsDataOnLoading(false);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [valueLangue]);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;
