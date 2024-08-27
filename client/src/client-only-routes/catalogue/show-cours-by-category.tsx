@@ -54,7 +54,8 @@ import {
   pathRaven,
   titleOfCategorieValue,
   valueOfCurrentCategory,
-  valueOfLanguage
+  valueOfLanguage,
+  valueOfTypeCourse
 } from '../../redux/atoms';
 
 import '../catalogue/show-courses-by-category.css';
@@ -97,6 +98,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const setDataRavenPath = useSetRecoilState(pathRaven);
   const showMoodleCategory = useRecoilValue(categoryCours);
   const [valueLanguage, setValueLangue] = useRecoilState(valueOfLanguage);
+  const valueTypeOfCourse = useRecoilValue(valueOfTypeCourse);
 
   const { moodleBaseUrl } = envData;
   useEffect(() => {
@@ -142,8 +144,10 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
           .flatMap(course => (Array.isArray(course) ? course : []))
           .filter(course => !('launch_url' in course)) as MoodleCourse[];
 
-        // Ajouter la condition pour filtrer les cours Raven par langue
+        // Ajouter la condition pour filtrer les cours Raven par langue et type
+        //comme les conditions qui suivent dependent des cours raven, nous verifions d'abord la valeur si elle est à -2
         if (valueOfCurrentCategorie == -2) {
+          //ici on pose la condition de filtre sur la langue seléctionnée
           if (valueLanguage !== 'none') {
             const filteredRavenCourses = ravenCourses.filter(
               course =>
@@ -151,15 +155,43 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                 course.category?.[0]?.tags?.[0]?.title === valueLanguage
             );
             setRessourceDatas(filteredRavenCourses);
-          } else {
-            const filteredCourses = ravenCourses;
-            setRessourceDatas(filteredCourses);
+
+            //si la langue est filtré je filtre par rapport au type des cours ou parcours
           }
-        } else {
+
+          if (valueTypeOfCourse !== 'none') {
+            if (valueTypeOfCourse === 'Parcours') {
+              const filteredRavenCourses = ravenCourses.filter(
+                course =>
+                  /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+                  course.long_description
+              );
+              setRessourceDatas(filteredRavenCourses);
+            } else {
+              const filteredRavenCourses = ravenCourses.filter(
+                course =>
+                  /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+                  !course.long_description
+              );
+              setRessourceDatas(filteredRavenCourses);
+            }
+          }
+
+          // si il n'a aucune séléction, je retourne tous les cours sans filtre
+          setRessourceDatas(ravenCourses);
+
+          //si la catégory est null on renvoie tous les cours
+        } else if (valueOfCurrentCategorie === null) {
+          const filteredCourses = [...ravenCourses, ...moodleCourses];
+          setRessourceDatas(filteredCourses);
+        }
+        //si la catégory n'est pas -2 je renvoie juste les cours raven
+        else {
           const filteredCourses = moodleCourses;
 
           setRessourceDatas(filteredCourses);
         }
+
         setIsDataOnLoading(false);
         return ressourcesData;
       } catch (error) {
@@ -169,12 +201,12 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
     void fetchCourses();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [valueOfCurrentCategorie, valueLanguage, currentPage]);
+  }, [valueOfCurrentCategorie, valueLanguage, currentPage, valueTypeOfCourse]);
 
   useEffect(() => {
     setCurrentpage(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [valueOfCurrentCategorie, valueLanguage]);
+  }, [valueOfCurrentCategorie, valueLanguage, valueTypeOfCourse]);
 
   useEffect(() => {
     setValueLangue('none');

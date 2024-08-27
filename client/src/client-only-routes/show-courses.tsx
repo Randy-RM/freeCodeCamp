@@ -63,7 +63,8 @@ import {
   coursesRaven,
   pathRaven,
   valueOfCurrentCategory,
-  valueOfLanguage
+  valueOfLanguage,
+  valueOfTypeCourse
 } from '../redux/atoms';
 import { UnifiedCourse } from '../redux/types';
 // import { RootState, UnifiedCourse } from '../redux/types';
@@ -234,6 +235,8 @@ export function Courses(props: CoursesProps): JSX.Element {
     MoodleCoursesCatalogue | null | undefined
   >(coursesMoodle);
   const [valueLangue, setValueLangue] = useRecoilState(valueOfLanguage);
+  const [valueOfCourseType, setValueOfCourseType] =
+    useRecoilState(valueOfTypeCourse);
 
   // const [allDataRessourceCourse, setAllDataRessource] =
   //   useRecoilState(myAllDataCourses);
@@ -406,6 +409,22 @@ export function Courses(props: CoursesProps): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [valueLangue, allDataofCourses]);
 
+  useEffect(() => {
+    if (currentCategory === -2) {
+      if (valueOfCourseType !== 'none') {
+        setDataForallCourse(
+          allDataofCourses.filter(
+            course => 'launch_url' in course && course.long_description
+          )
+        );
+      } else {
+        setDataForallCourse(allDataofCourses);
+      }
+    }
+    setValueOfCourseType(valueOfCourseType);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [valueOfCourseType, allDataofCourses]);
+
   // useEffect(() => {
   //   setAllDataRessource(allDataRessoucesCourses);
   // }, [currentCategory, allDataRessoucesCourses]);
@@ -444,7 +463,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, valueLangue]);
+  }, [currentPage, valueLangue, valueOfCourseType]);
   useEffect(() => {
     const timer = setTimeout(() => {
       if (isDataOnLoading) {
@@ -456,7 +475,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, valueLangue]);
+  }, [currentPage, valueLangue, valueOfCourseType]);
 
   if (typeof window !== 'undefined') {
     window.addEventListener('resize', () => {
@@ -483,7 +502,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       : setIsDataOnLoading(false);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [valueLangue]);
+  }, [valueLangue, valueOfCourseType]);
 
   if (showLoading) {
     return <Loader fullScreen={true} />;

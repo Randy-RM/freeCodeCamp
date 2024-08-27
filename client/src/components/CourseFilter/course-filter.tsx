@@ -29,6 +29,7 @@ import {
   valueOfCurrentCategory
 } from '../../redux/atoms';
 import OtherFilter from './other-filter';
+import FilterByType from './filter-by-type';
 
 type MoodleCoursesFiltered = {
   courses: MoodleCourse[] | null;
@@ -381,8 +382,10 @@ const CourseFilter = ({
             );
           })}
         </ul>
-        <Spacer size={3} />
+        <Spacer size={1} />
         <OtherFilter />
+        <Spacer size={1} />
+        <FilterByType />
       </details>
     </div>
   );
