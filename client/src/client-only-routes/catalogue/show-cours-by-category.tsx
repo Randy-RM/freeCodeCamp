@@ -127,31 +127,41 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     const fetchCourses = async () => {
       try {
         setRessourceDatas([]);
-
         const currentPage = 1; // ou la page courante
         const courses = await getAllRessources(currentPage);
 
         // Séparer les cours Raven et Moodle
         const ravenCourses = courses
-          .flat()
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+          .flatMap(course => (Array.isArray(course) ? course : []))
           .filter(course => 'launch_url' in course) as RavenCourse[];
 
         // Si les cours Moodle sont dans des tableaux imbriqués, les aplatir
         const moodleCourses = courses
-          .flatMap(
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-            course => (Array.isArray(course) ? course : []) // Assurer que le contenu est un tableau
-          )
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+          .flatMap(course => (Array.isArray(course) ? course : []))
           .filter(course => !('launch_url' in course)) as MoodleCourse[];
 
-        const filteredCourses =
-          valueOfCurrentCategorie === -2 ? ravenCourses : moodleCourses;
+        // Ajouter la condition pour filtrer les cours Raven par langue
+        if (valueOfCurrentCategorie == -2) {
+          if (valueLanguage !== 'none') {
+            const filteredRavenCourses = ravenCourses.filter(
+              course =>
+                /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+                course.category?.[0]?.tags?.[0]?.title === valueLanguage
+            );
+            setRessourceDatas(filteredRavenCourses);
+          } else {
+            const filteredCourses = ravenCourses;
+            setRessourceDatas(filteredCourses);
+          }
+        } else {
+          const filteredCourses = moodleCourses;
 
-        setRessourceDatas(filteredCourses);
-        console.log(ressourcesData);
+          setRessourceDatas(filteredCourses);
+        }
         setIsDataOnLoading(false);
-
-        return filteredCourses;
+        return ressourcesData;
       } catch (error) {
         console.error('Error fetching courses:', error);
       }
@@ -159,7 +169,17 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
     void fetchCourses();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [valueOfCurrentCategorie]);
+  }, [valueOfCurrentCategorie, valueLanguage, currentPage]);
+
+  useEffect(() => {
+    setCurrentpage(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [valueOfCurrentCategorie, valueLanguage]);
+
+  useEffect(() => {
+    setValueLangue('none');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const {
     paginatedData,
@@ -182,22 +202,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
       showFilter && setScreenWidth(window.innerWidth);
     });
   }
-
-  useEffect(() => {
-    if (valueLanguage.length > 0) {
-      setRessourceDatas(
-        ressourcesData.filter(
-          course =>
-            'launch_url' in course &&
-            /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-            course.category?.[0]?.tags?.[0]?.title === valueLanguage
-        )
-      );
-    }
-
-    setValueLangue(valueLanguage);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [valueLanguage]);
 
   //gestion de la pagination pour l'affichage des cours
   const onNavigateForward = () => {
