@@ -42,6 +42,13 @@ export const valueOfLanguage = atom<string | null>({
   effects_UNSTABLE: [localStorageEffect('valueOfLanguage')]
 });
 
+export const valueOfTypeCourse = atom<string | null>({
+  key: 'valueOfTypeCourse',
+  default: '',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  effects_UNSTABLE: [localStorageEffect('valueOfTypeCourse')]
+});
+
 //atom pour la valeur de la category lorsqu'on clique sur le
 export const checkedBox = atom<boolean>({
   key: 'checkedBox',
