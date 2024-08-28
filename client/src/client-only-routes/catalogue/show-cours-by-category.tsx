@@ -188,8 +188,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
           if (valueDuration !== 'none') {
             filteredMoodleCourses = filteredMoodleCourses.filter(course => {
               const courseHours = convertTimestampToHours(course.timecreated);
-              console.log(convertTimestampToHours(course.timecreated));
-
               return valueDuration === '>1h'
                 ? courseHours > 10
                 : valueDuration === '1>5h'
@@ -236,7 +234,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     setValueDuration('none');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   const {
     paginatedData,
     totalPages,
