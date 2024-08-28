@@ -213,7 +213,13 @@ const CourseFilter = ({
   };
 
   return (
-    <div className='filter-container'>
+    <div
+      className={
+        location.pathname == '/catalogue'
+          ? 'filter-container_hidden-scrol'
+          : 'filter-container'
+      }
+    >
       <div className='main-title-filter-container'>
         <h2 className='main-title-filter'>Filtrer par :</h2>
         <svg
