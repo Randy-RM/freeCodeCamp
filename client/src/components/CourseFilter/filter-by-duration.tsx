@@ -47,7 +47,7 @@ const FilterByDuration = () => {
           onClick={() => setShowSubjectFilter(e => !e)}
           className='filter-title-container'
         >
-          <p className='filter-title'>Niveau</p>
+          <p className='filter-title'>Durée</p>
           {showSubjectFilter ? (
             <svg
               width='30px'
