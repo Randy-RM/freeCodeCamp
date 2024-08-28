@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useNavigate } from '@reach/router';
 import LaptopIcon from '../../assets/images/laptop.svg';
 import AlgoIcon from '../../assets/images/algorithmIcon.svg';
 import PhBookBookmark from '../../assets/images/ph-book-bookmark-thin.svg';
@@ -89,6 +90,8 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     typeof window !== 'undefined' ? window.innerWidth : 900
   );
 
+  const navigated = useNavigate();
+
   //gestion des states avec recoil(voir doc recoil state manager)
   const [valueOfCurrentCategorie, SetValueOfCurrentCategory] = useRecoilState(
     valueOfCurrentCategory
@@ -136,7 +139,18 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
       try {
         setRessourceDatas([]);
         const currentPage = 1; // ou la page courante
+
+        // Temps d'attente de l'upload de 5 secondes
+        const timeoutId = setTimeout(() => {
+          setIsDataOnLoading(false);
+          alert('Oops, problème de connexion. Veuillez réessayer.');
+          void navigated('/catalogue');
+        }, 5000);
+
         const courses = await getAllRessources(currentPage);
+
+        // Annuler le timeout si les données sont récupérées avec succès
+        clearTimeout(timeoutId);
 
         // Séparer les cours Raven et Moodle
         const ravenCourses = courses
@@ -202,6 +216,8 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         setIsDataOnLoading(false);
       } catch (error) {
         console.error('Error fetching courses:', error);
+        alert('Oops, problème de connexion. Veuillez réessayer.');
+        void navigated('/catalogue'); // Redirige vers /catalogue
       }
     };
 
