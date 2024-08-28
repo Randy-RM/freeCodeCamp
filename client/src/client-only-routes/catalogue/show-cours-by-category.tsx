@@ -248,6 +248,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     setValueTypeOfcours('none');
     setValueLevel('none');
     setValueDuration('none');
+    SetValueOfCurrentCategory(valueOfCurrentCategorie);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const {
