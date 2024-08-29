@@ -12,7 +12,7 @@ import {
 
 // import AsSeenIn from './components/as-seen-in';
 // import Banner from '../Header/components/banner';
-import RegistrationToAcademy from './components/registration-to-academy';
+// import RegistrationToAcademy from './components/registration-to-academy';
 // import LandingTop from './components/landing-top';
 // import LandingDetails from './components/landing-details';
 // import LandingLearn from './components/landing-learn';
@@ -27,6 +27,7 @@ import Vodacom from './vodacom-branding-section/vodacom-branding';
 import Partners from './partners/partners';
 
 import './landing.css';
+import Formations from './formations/formations';
 
 type FetchState = {
   pending: boolean;
@@ -81,9 +82,10 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
           </Grid>
         </div> */}
 
-        <div className='as-seen-in'>
+        <div className=''>
           <Grid>
-            <RegistrationToAcademy />
+            {/* <RegistrationToAcademy /> */}
+            <Formations />
           </Grid>
         </div>
 

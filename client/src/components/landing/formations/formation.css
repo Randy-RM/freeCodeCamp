@@ -1,0 +1,43 @@
+.formation {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.formation__title {
+  color: black;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.formation__button_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.formation__title-rouge {
+  border: none;
+  background-color: #e5203d;
+  color: #ffffff;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  padding: 0.1rem;
+  font-weight: 700;
+}
+
+.button-list {
+  border: none;
+  background-color: #f5f5f5;
+  border-radius: 16px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.button-list:hover {
+  background-color: #e5203d;
+  color: #ffffff;
+  font-weight: 600;
+}
