@@ -22,8 +22,8 @@ function Hero(): JSX.Element {
           <h1 className='hero__section__title'>
             Forme toi <strong className=''>Gratuitement</strong> En lingne
           </h1>
-          <p className=''>
-            Découvre les métiers du numérique avec nos formations gratuites
+          <p className='hero__main__section-p'>
+            Découvre les métiers du numérique avec nos formations gratuites.
           </p>
           <button
             className='hero__section__button'

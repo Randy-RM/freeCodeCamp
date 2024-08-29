@@ -14,8 +14,7 @@ body {
   padding: 1rem;
 }
 
-.hero__section__title,
-.hero__main__section p {
+.hero__section__title {
   color: #ffffff;
 }
 
@@ -42,4 +41,10 @@ body {
 .hero__section__button:hover {
   background-color: #ecd3d7;
   color: #e5203d;
+}
+
+.hero__main__section-p {
+  color: #ffffff;
+  font-size: 1rem;
+  max-width: 75%;
 }
