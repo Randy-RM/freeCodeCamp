@@ -50,7 +50,7 @@ const mapStateToProps = createSelector(
 );
 
 type LearnLayoutProps = {
-  isSignedIn?: boolean;
+  isSignedIn?: boolean | undefined;
   fetchState: FetchState;
   user: User;
   children?: React.ReactNode;
@@ -65,11 +65,11 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
         {/* <title>{t('metaTags:title')}</title> */}
         <title>{`Apprendre à coder - gratuitement | Kadea Online`}</title>
       </Helmet>
-      <main className='landing-page bg-light'>
+      <main className=''>
         {/* <Banner /> */}
-        <div className='hero-main-bg'>
+        <div className=''>
           <Grid>
-            <Hero pageName={'landing'} isSignedIn={isSignedIn} />
+            <Hero />
           </Grid>
         </div>
         {/* <Hero pageName={'landing'} isSignedIn={isSignedIn} /> */}
@@ -77,7 +77,7 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
 
         {/* <div className='bg-secondary'>
           <Grid>
-            <LandingTop pageName={'landing'} isSignedIn={isSignedIn} />
+            // <LandingTop pageName={'landing'} isSignedIn={isSignedIn} />
           </Grid>
         </div> */}
 
