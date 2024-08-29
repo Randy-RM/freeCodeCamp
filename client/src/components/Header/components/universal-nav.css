@@ -3,12 +3,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #202020;
+  background: #ffffff;
 }
 
 .link-logo,
 .link-logo:hover {
-  background: rgba(255, 255, 255, 0);
+  background: rgba(226, 217, 217, 0);
 }
 
 .menu-bar {
@@ -16,7 +16,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #202020;
+  background: #ffffff;
 }
 
 .container:before,
@@ -30,6 +30,7 @@
 }
 .logo img {
   width: 140px;
+  color: #202020;
   /* height: 40px; */
 }
 
@@ -49,6 +50,7 @@
   cursor: pointer;
   text-align: center;
   transition: all 0.3s ease;
+  color: #202020;
 }
 
 .nav-bar .nav-list {
@@ -80,7 +82,7 @@
 .nav-list .nav-item a:focus,
 .nav-list .nav-item .active {
   color: var(--love-light);
-  background: rgba(255, 255, 255, 0) !important;
+  background: rgba(245, 240, 240, 0) !important;
 }
 
 .nav-list .nav-item .nav-signin-btn {
