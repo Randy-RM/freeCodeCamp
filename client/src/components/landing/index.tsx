@@ -28,6 +28,7 @@ import Partners from './partners/partners';
 
 import './landing.css';
 import Formations from './formations/formations';
+import LandingInscription from './formations/landing-inscription';
 
 type FetchState = {
   pending: boolean;
@@ -87,6 +88,10 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
             {/* <RegistrationToAcademy /> */}
             <Formations />
           </Grid>
+        </div>
+
+        <div>
+          <LandingInscription />
         </div>
 
         {/* <Grid>
