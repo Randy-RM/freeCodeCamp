@@ -11,7 +11,7 @@ import {
 } from '../../redux';
 
 // import AsSeenIn from './components/as-seen-in';
-import Banner from '../Header/components/banner';
+// import Banner from '../Header/components/banner';
 import RegistrationToAcademy from './components/registration-to-academy';
 // import LandingTop from './components/landing-top';
 // import LandingDetails from './components/landing-details';
@@ -66,7 +66,7 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
         <title>{`Apprendre à coder - gratuitement | Kadea Online`}</title>
       </Helmet>
       <main className='landing-page bg-light'>
-        <Banner />
+        {/* <Banner /> */}
         <div className='hero-main-bg'>
           <Grid>
             <Hero pageName={'landing'} isSignedIn={isSignedIn} />
