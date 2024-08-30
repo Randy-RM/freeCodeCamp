@@ -13,7 +13,7 @@ import { Link } from '@reach/router';
 
 import './courses-category-card.css';
 import { navigate } from 'gatsby';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import devIcon from '../../assets/icons/dev-icon.svg';
 import programmationIcon from '../../assets/icons/programation.png';
 import marketingIcone from '../../assets/icons/marketing.png';
@@ -26,7 +26,8 @@ import {
   getAwsCourses,
   getAwsPath,
   getExternalResource,
-  getRavenTokenDataFromLocalStorage
+  getRavenTokenDataFromLocalStorage,
+  RavenTokenData
 } from '../../utils/ajax';
 import envData from '../../../../config/env.json';
 import {
@@ -42,6 +43,7 @@ import routes from '../../utils/routes';
 import {
   myAllDataCourses,
   titleOfCategorieValue,
+  tokenRaven,
   valueOfCurrentCategory
 } from '../../redux/atoms';
 // import routes from '../../utils/routes';
@@ -65,15 +67,6 @@ interface CourseFilterProps {
   getRavenResourcesPath: RavenFetchCoursesDto;
 }
 
-interface RavenTokenData {
-  apiKey: string;
-  token: string;
-  currentPage: 1;
-  fromDate: '01-01-2023';
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  valid_to: '06-24-2024';
-}
-
 const { moodleApiBaseUrl, moodleApiToken, ravenAwsApiKey } = envData;
 
 const CoursesCategoryCard = ({
@@ -90,6 +83,7 @@ const CoursesCategoryCard = ({
   const setValueOfButton = useSetRecoilState(titleOfCategorieValue);
   const setCurrent = useSetRecoilState(valueOfCurrentCategory);
   const setValueOfAllRessourcesData = useSetRecoilState(myAllDataCourses);
+  const [valueDeToken, setValueOfToken] = useRecoilState(tokenRaven);
 
   const scrollAmount = 320; // Adjust based on card width and gap
   // const categoryDescrTitle = 'développement';
@@ -179,6 +173,7 @@ const CoursesCategoryCard = ({
       if (typeof generateRavenToken && generateRavenToken !== null) {
         const token = generateRavenToken as RavenTokenData;
         addRavenTokenToLocalStorage({ token });
+        setValueOfToken(token);
       }
     }
   };
@@ -308,9 +303,13 @@ const CoursesCategoryCard = ({
               <img src={programmationIcon} className='img-icon' alt='icon' />
             </div>
           </div>
-          <div className='category-card'>
+          <div
+            className={
+              valueDeToken !== null ? 'category-card' : 'hide__category'
+            }
+          >
             <span className='card-title '>Explorer tout</span>
-            <div className='card-content'>
+            <div className='card-content '>
               <button
                 className='category-name'
                 onClick={() => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import '../filter/course-filter.css';
+import { useRecoilState } from 'recoil';
 import {
   MoodleCourse,
   MoodleCourseCategory,
@@ -11,11 +12,13 @@ import {
   getAwsCourses,
   getExternalResource,
   getRavenTokenDataFromLocalStorage,
-  removeRavenTokenFromLocalStorage
+  removeRavenTokenFromLocalStorage,
+  RavenTokenData
 } from '../../../../utils/ajax';
 import envData from '../../../../../../config/env.json';
 import { splitArray } from '../../../helpers';
 import sortCourses from '../../../helpers/sort-course';
+import { tokenRaven } from '../../../../redux/atoms';
 
 type MoodleCoursesFiltered = {
   courses: MoodleCourse[] | null;
@@ -32,13 +35,7 @@ type RavenCourse = {
   updateddate: string;
   contenttype: string;
 };
-interface RavenTokenData {
-  token: string;
-  expiresIn: number;
-  validFrom: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  valid_to: string;
-}
+
 interface RavenFetchCoursesDto {
   apiKey: string;
   token: string;
@@ -68,6 +65,8 @@ const CourseFilterList = ({
   setCurrentCategory: React.Dispatch<React.SetStateAction<string>>;
   currentCategory: string;
 }): JSX.Element => {
+  const [valueOfToken, SetValueOfToken] = useRecoilState(tokenRaven);
+
   const getMoodleCourses = async () => {
     const moodleCatalogue = await getExternalResource<MoodleCourse[]>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -142,8 +141,10 @@ const CourseFilterList = ({
 
       if (generateRavenToken) {
         addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
+        SetValueOfToken(generateRavenToken as RavenTokenData);
         return generateRavenToken; // Retourner le nouveau token
       } else {
+        SetValueOfToken(null);
         return null; // Retourner null si la génération a échoué
       }
     } else {
@@ -163,12 +164,15 @@ const CourseFilterList = ({
 
         if (generateRavenToken) {
           addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
+          SetValueOfToken(generateRavenToken as RavenTokenData);
           return generateRavenToken; // Retourner le nouveau token
         } else {
+          SetValueOfToken(null);
           return null; // Retourner null si la génération a échoué
         }
       } else {
         // Le token est encore valide, retourner le token existant
+        SetValueOfToken(ravenTokenData);
         return ravenTokenData;
       }
     }
@@ -201,6 +205,7 @@ const CourseFilterList = ({
               className={`category-title ${
                 currentCategory === 'AWS' ? 'active-button' : ''
               }`}
+              style={{ display: valueOfToken == null ? 'none' : 'block' }}
               onClick={e => {
                 handleButtonClick(e);
                 setMoodleCourses(null);

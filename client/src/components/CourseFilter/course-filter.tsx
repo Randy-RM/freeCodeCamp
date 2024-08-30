@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './course-filter.css';
 
 import { navigate } from 'gatsby';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { useLocation } from '@reach/router';
 import {
   addRavenTokenToLocalStorage,
@@ -10,7 +10,8 @@ import {
   getAwsCourses,
   getExternalResource,
   getRavenTokenDataFromLocalStorage,
-  getAwsPath
+  getAwsPath,
+  RavenTokenData
 } from '../../utils/ajax';
 import envData from '../../../../config/env.json';
 
@@ -26,6 +27,7 @@ import routes from '../../utils/routes';
 import {
   myAllDataCourses,
   titleOfCategorieValue,
+  tokenRaven,
   valueOfCurrentCategory
 } from '../../redux/atoms';
 import OtherFilter from './other-filter';
@@ -49,13 +51,6 @@ type RavenCourse = {
   contenttype: string;
   duration: string;
 };
-interface RavenTokenData {
-  token: string;
-  expiresIn: number;
-  validFrom: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  valid_to: string;
-}
 interface RavenFetchCoursesDto {
   apiKey: string;
   token: string;
@@ -102,6 +97,7 @@ const CourseFilter = ({
   const [currentCurrent, setCurrentCurrent] = useRecoilState(
     valueOfCurrentCategory
   );
+  const valueOfTokenRaven = useRecoilValue(tokenRaven);
 
   const location = useLocation();
 
@@ -327,6 +323,7 @@ const CourseFilter = ({
               className={`filter-button ${
                 currentCurrent == -2 ? 'selected-category' : ''
               }`}
+              style={{ display: valueOfTokenRaven == null ? 'none' : 'block' }}
               onClick={() => {
                 void (async () => {
                   setCurrentCurrent(-2);

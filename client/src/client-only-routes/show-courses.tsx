@@ -10,7 +10,7 @@ import {
   faChevronLeft,
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import PathCard from '../components/PathCard/path-card';
 
 import envData from '../../../config/env.json';
@@ -44,7 +44,8 @@ import {
   getExternalResource,
   getRavenTokenDataFromLocalStorage,
   removeRavenTokenFromLocalStorage,
-  getAwsPath
+  getAwsPath,
+  RavenTokenData
 } from '../utils/ajax';
 import {
   convertTime,
@@ -62,6 +63,7 @@ import {
   coursesMoodle,
   coursesRaven,
   pathRaven,
+  tokenRaven,
   valueOfCurrentCategory
   // valueOfLanguage,
   // valueOfTypeCourse,
@@ -138,13 +140,6 @@ export type RavenCourse = {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   skill_level: string;
 };
-interface RavenTokenData {
-  token: string;
-  expiresIn: number;
-  validFrom: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  valid_to: string;
-}
 
 type Tag = {
   title: string;
@@ -236,6 +231,7 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [dataMoodle, setDataMoodle] = useRecoilState<
     MoodleCoursesCatalogue | null | undefined
   >(coursesMoodle);
+  const setTakeTokenValue = useSetRecoilState(tokenRaven);
   // const [valueLangue, setValueLangue] = useRecoilState(valueOfLanguage);
   // const [valueOfCourseType, setValueOfCourseType] =
   //   useRecoilState(valueOfTypeCourse);
@@ -288,8 +284,12 @@ export function Courses(props: CoursesProps): JSX.Element {
 
       if (generateRavenToken) {
         addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
+        setTakeTokenValue(generateRavenToken as RavenTokenData);
+
         return generateRavenToken;
       } else {
+        setTakeTokenValue(null);
+
         return null;
       }
     } else {
@@ -316,6 +316,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       } else {
         // Le token est encore valide, retourner le token existant
         return ravenTokenData;
+        setTakeTokenValue(ravenTokenData);
       }
     }
   };
