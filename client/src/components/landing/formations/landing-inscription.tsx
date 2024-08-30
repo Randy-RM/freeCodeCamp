@@ -1,5 +1,4 @@
 import React from 'react';
-import './landing-inscription.css';
 
 function LandingInscription() {
   return (

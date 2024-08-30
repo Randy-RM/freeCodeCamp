@@ -15,7 +15,7 @@ import './what-will-you-learn.css';
 import CourseCard from '../../CourseCard/course-card';
 
 interface LandingDetailsProps {
-  isSignedIn?: true;
+  isSignedIn?: boolean;
 }
 import envData from '../../../../../config/env.json';
 import {

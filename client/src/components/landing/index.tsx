@@ -64,28 +64,21 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
   return (
     <>
       <Helmet>
-        {/* <title>{t('metaTags:title')}</title> */}
         <title>{`Apprendre à coder - gratuitement | Kadea Online`}</title>
       </Helmet>
       <main className=''>
-        {/* <Banner /> */}
         <div className=''>
           <Grid>
             <Hero />
           </Grid>
         </div>
-        {/* <Hero pageName={'landing'} isSignedIn={isSignedIn} /> */}
-        <Vodacom />
-
-        {/* <div className='bg-secondary'>
-          <Grid>
-            // <LandingTop pageName={'landing'} isSignedIn={isSignedIn} />
-          </Grid>
-        </div> */}
-
         <div className=''>
           <Grid>
-            {/* <RegistrationToAcademy /> */}
+            <Vodacom />
+          </Grid>
+        </div>
+        <div className=''>
+          <Grid>
             <Formations />
           </Grid>
         </div>

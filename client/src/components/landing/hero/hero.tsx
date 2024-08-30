@@ -5,7 +5,6 @@ import React from 'react';
 // import Map from '../../Map/index';
 // import LearnCode from '../../../assets/images/hero-img.png';
 import './hero-style.css';
-import { useNavigate } from '@reach/router';
 
 // const { apiLocation } = envData;
 
@@ -14,11 +13,10 @@ import { useNavigate } from '@reach/router';
 //   isSignedIn?: boolean;
 // }
 function Hero(): JSX.Element {
-  const navigate = useNavigate();
   return (
     <div className='hero__main'>
-      <div>
-        <section className='hero__main__section'>
+      <div className='h-full'>
+        <section className='flex h-full flex-col gap items-start justify-between'>
           <h1 className='hero__section__title'>
             Forme toi <strong className=''>Gratuitement</strong> En lingne
           </h1>
@@ -27,7 +25,7 @@ function Hero(): JSX.Element {
           </p>
           <button
             className='hero__section__button'
-            onClick={() => void navigate('/catalogue')}
+            // onClick={() => void navigate('/catalogue')}
           >
             Choisis ta formation
           </button>

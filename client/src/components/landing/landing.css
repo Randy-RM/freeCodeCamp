@@ -1,17 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap');
 
+:root {
+  --red-color: #e5203d;
+  --text-color: #27272a;
+  --blue-color: #49aaee;
+  --black-color: #000000;
+  --white-color: #fff;
+}
+
 body {
   font-family: 'Titilium web', sans-serif;
+  color: var(--text-color);
 }
 .hero__main {
-  background: url('../../assets/images/landing/hero_KonLine.jpg') no-repeat
-    center center; /* Center the image */
+  background: url('../../assets/images/landing/hero.png') no-repeat center
+    center; /* Center the image */
   background-size: cover;
   color: #ffffff;
   width: 100%;
   margin: 0 auto;
   border-radius: 21px;
   padding: 1rem;
+  height: 300px;
 }
 
 .hero__section__title {
@@ -29,22 +39,124 @@ body {
 }
 
 .hero__section__button {
-  border: none;
-  border-radius: 16px;
-  background-color: #e5203d;
-  padding: 1rem, 2rem;
-  color: #fff;
-  font-weight: 700;
-  font-size: 1rem;
+  padding: 0.5rem 1.875rem;
+  text-decoration: none;
+  color: var(--white-color);
+  font-weight: 600;
+  background: var(--red-color);
+  border: solid 1px var(--red-color);
+  border-radius: 20px;
+  transition: all 0.3s ease;
 }
 
 .hero__section__button:hover {
-  background-color: #ecd3d7;
-  color: #e5203d;
+  background: var(--red-color);
+  border-color: var(--red-color);
 }
 
 .hero__main__section-p {
   color: #ffffff;
   font-size: 1rem;
   max-width: 75%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-start {
+  align-items: start;
+}
+
+.items-end {
+  align-items: end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-start {
+  justify-content: start;
+}
+
+.justify-end {
+  justify-content: end;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.gap {
+  gap: 10px;
+}
+
+.text-xl {
+  font-size: 22px;
+}
+
+.text-xs {
+  font-size: 12px;
+}
+
+.text-sm {
+  font-size: 18px;
+}
+
+.text-normal {
+  font-size: 15px;
+  font-weight: normal;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.font-light {
+  font-weight: 300;
+}
+
+.p-normal {
+  padding: 18px;
+}
+
+.text-primary {
+  color: var(--red-color);
+}
+
+.bg-primary {
+  background-color: var(--red-color);
+}
+
+.text-blue {
+  background-color: var(--blue-color);
+}
+
+.bg-blue {
+  background-color: var(--blue-color);
+}
+
+.text-black {
+  color: var(--black-color);
+}
+
+.bg-black {
+  color: var(--black-color);
 }
