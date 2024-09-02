@@ -29,6 +29,7 @@ import Vodacom from './vodacom-branding-section/vodacom-branding';
 import './landing.css';
 import Formations from './formations/formations';
 import LandingSignupForm from './signup-form/landing-signup-form';
+import LandingCampusTrainings from './campus-trainings/campus-trainings';
 
 type FetchState = {
   pending: boolean;
@@ -87,6 +88,12 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
         <div>
           <Grid>
             <LandingSignupForm />
+          </Grid>
+        </div>
+
+        <div>
+          <Grid>
+            <LandingCampusTrainings />
           </Grid>
         </div>
 

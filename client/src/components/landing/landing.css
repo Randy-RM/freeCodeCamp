@@ -108,6 +108,10 @@ body {
   gap: 10px;
 }
 
+.gap-md {
+  gap: 20px;
+}
+
 .text-xl {
   font-size: 22px;
 }
@@ -135,6 +139,14 @@ body {
 
 .p-normal {
   padding: 18px;
+}
+
+p-0 {
+  padding: 0 !important;
+}
+
+m-0 {
+  margin: 0 !important;
 }
 
 .text-primary {
@@ -181,8 +193,20 @@ body {
   border-radius: 5px;
 }
 
+.rounded-md {
+  border-radius: 10px;
+}
+
 .grid-cols-1 {
   grid-template-columns: repeat(1, 1fr);
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.w-full {
+  width: 100%;
 }
 
 @media only screen and (min-width: 1200px) {
