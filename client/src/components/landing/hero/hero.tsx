@@ -5,6 +5,7 @@ import React from 'react';
 // import Map from '../../Map/index';
 // import LearnCode from '../../../assets/images/hero-img.png';
 import './hero-style.css';
+import { FaAngleRight } from 'react-icons/fa';
 
 // const { apiLocation } = envData;
 
@@ -24,10 +25,13 @@ function Hero(): JSX.Element {
             Découvre les métiers du numérique avec nos formations gratuites.
           </p>
           <button
-            className='hero__section__button'
+            className='flex hero-button items-center gap'
             // onClick={() => void navigate('/catalogue')}
           >
-            Choisis ta formation
+            <span>Choisis ta formation</span>
+            <span className='flex h-full items-center'>
+              <FaAngleRight />
+            </span>
           </button>
         </section>
       </div>

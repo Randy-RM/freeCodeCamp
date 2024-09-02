@@ -187,6 +187,7 @@
   flex-direction: column;
   padding: auto 0;
   cursor: pointer;
+  align-items: center;
 }
 
 .more-courses span {

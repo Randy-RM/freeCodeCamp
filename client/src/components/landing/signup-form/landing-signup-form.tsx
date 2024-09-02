@@ -1,5 +1,6 @@
 import React, { FormEvent } from 'react';
 import './styles.css';
+import { FaAngleRight } from 'react-icons/fa';
 
 function LandingSignupForm() {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -31,8 +32,11 @@ function LandingSignupForm() {
           className='form-control'
           placeholder='Créer un mot de passe'
         />
-        <button className='submit-btn'>
+        <button className='submit-btn flex items-center gap'>
           <span>S&apos;inscrire</span>
+          <span className='flex h-full items-center'>
+            <FaAngleRight />
+          </span>
         </button>
       </form>
     </section>

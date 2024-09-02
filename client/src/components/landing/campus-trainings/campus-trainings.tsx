@@ -1,4 +1,7 @@
 import React from 'react';
+import { FaAngleRight } from 'react-icons/fa';
+import { IoIosArrowRoundUp } from 'react-icons/io';
+import { BsCheck } from 'react-icons/bs';
 import { Image } from '../../../../../tools/ui-components/src/image/image';
 import campusImage from './../../../assets/images/landing/silikin.png';
 import devImage from './../../../assets/images/landing/trainings/dev.png';
@@ -75,9 +78,11 @@ export default function LandingCampusTrainings() {
             className='w-full justify-between training flex flex-col gap p-normal bg-primary rounded-md'
             key={i.valueOf()}
           >
-            <h4 className='training-name text-white p-0 m-0'>
-              {training.name}
-            </h4>
+            <div className='w-full flex items-start justify-between'>
+              <h4 className='training-name text-white p-0 m-0'>
+                {training.name}
+              </h4>
+            </div>
             <small className='training-description text-white'>
               {training.description}
             </small>
@@ -95,7 +100,9 @@ export default function LandingCampusTrainings() {
                   className='w-full flex items-center gap-xs'
                   key={i.valueOf()}
                 >
-                  <span></span>
+                  <span className='check-icon flex items-center justify-center'>
+                    <BsCheck />
+                  </span>
                   <small className='text-white'>{s}</small>
                 </div>
               ))}
@@ -104,9 +111,12 @@ export default function LandingCampusTrainings() {
               href='https://www.kadea.academy'
               target='_blank'
               rel='noreferrer'
-              className='subscribe-link'
+              className='subscribe-link flex items-center gap'
             >
               <span>Rejoins notre académie</span>
+              <span className='flex h-full items-center'>
+                <FaAngleRight />
+              </span>
             </a>
           </div>
           <div className='bootcamp-preview-hero-bg'></div>
@@ -123,7 +133,19 @@ export default function LandingCampusTrainings() {
                 className='bootcamp-training-image rounded-md'
               />
               <div className='w-full bootcamp-training-description flex flex-col gap'>
-                <h3>{training.name}</h3>
+                <div className='w-full flex items-center justify-between'>
+                  <h3>{training.name}</h3>
+                  <a
+                    target='_blank'
+                    rel='noreferrer'
+                    href={training.link}
+                    className=''
+                  >
+                    <span className='training-arrow-link'>
+                      <IoIosArrowRoundUp />
+                    </span>
+                  </a>
+                </div>
                 <p>{training.description}</p>
               </div>
             </div>
@@ -140,9 +162,12 @@ export default function LandingCampusTrainings() {
               href='https://www.kadea.academy'
               target='_blank'
               rel='noreferrer'
-              className='subscribe-link'
+              className='subscribe-link flex items-center gap'
             >
               <span>Rejoins notre académie</span>
+              <span className='text-white flex h-full items-center'>
+                <FaAngleRight />
+              </span>
             </a>
             <div className='w-full flex items-center gap'>
               {partners.map((p, i) => (

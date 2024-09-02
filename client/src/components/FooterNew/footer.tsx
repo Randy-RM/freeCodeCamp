@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid } from '@freecodecamp/react-bootstrap';
+import { VscTriangleRight } from 'react-icons/vsc';
 // import Whatsapp from '../../assets/images/whatsapp.png';
 import logo from '../../assets/icons/logo.png';
 import './style.css';
@@ -70,7 +71,9 @@ function Footer() {
                       className='w-full flex items-center links-section-link'
                       key={i.valueOf()}
                     >
-                      <span></span>
+                      <span className='text-primary triangle-icon'>
+                        <VscTriangleRight />
+                      </span>
                       <span className='text-white'>{link.label}</span>
                     </a>
                   ))}

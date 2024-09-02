@@ -1,5 +1,6 @@
 import React from 'react';
 import './formation.css';
+import { FaAngleDown } from 'react-icons/fa';
 import googleLogo from '../../../assets/images/landing/googleLogo.png';
 import pythonLogo from '../../../assets/icons/pyton.svg';
 import { Image } from '../../../../../tools/ui-components/src/image/image';
@@ -85,6 +86,9 @@ function Formations() {
       </div>
       <div className='more-courses'>
         <span>Plus de cours</span>
+        <span className='text-primary'>
+          <FaAngleDown />
+        </span>
       </div>
     </section>
   );

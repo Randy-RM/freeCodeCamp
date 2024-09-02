@@ -112,6 +112,10 @@ body {
   gap: 20px;
 }
 
+.gap-xs {
+  gap: 6px;
+}
+
 .text-xl {
   font-size: 22px;
 }
