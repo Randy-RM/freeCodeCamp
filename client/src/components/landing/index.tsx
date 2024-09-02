@@ -17,18 +17,18 @@ import {
 // import LandingDetails from './components/landing-details';
 // import LandingLearn from './components/landing-learn';
 // import LandingGoals from './components/landing-goals';
-import WhatCanYouDo from './whatCanYouDo/what-can-you-do';
+// import WhatCanYouDo from './whatCanYouDo/what-can-you-do';
 // import YourCareer from './yourCareer/your-career';
 import Hero from './hero/hero';
-import StartCOding from './start-coding/start-coding';
-import WhatWillYouLearn from './what-will-you-learn/what-will-you-learn';
-import HowWillYouLearn from './how-will-you-learn/how-will-you-learn';
+// import StartCOding from './start-coding/start-coding';
+// import WhatWillYouLearn from './what-will-you-learn/what-will-you-learn';
+// import HowWillYouLearn from './how-will-you-learn/how-will-you-learn';
 import Vodacom from './vodacom-branding-section/vodacom-branding';
-import Partners from './partners/partners';
+// import Partners from './partners/partners';
 
 import './landing.css';
 import Formations from './formations/formations';
-import LandingInscription from './formations/landing-inscription';
+import LandingSignupForm from './signup-form/landing-signup-form';
 
 type FetchState = {
   pending: boolean;
@@ -59,6 +59,7 @@ type LearnLayoutProps = {
 };
 
 function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
+  console.log(isSignedIn);
   // const { t } = useTranslation();
 
   return (
@@ -84,41 +85,43 @@ function Landing({ isSignedIn }: LearnLayoutProps): ReactElement {
         </div>
 
         <div>
-          <LandingInscription />
+          <Grid>
+            <LandingSignupForm />
+          </Grid>
         </div>
 
         {/* <Grid>
           <LandingDetails isSignedIn={isSignedIn} />
         </Grid> */}
-        <div className='dotted-bg'>
+        {/* <div className='dotted-bg'>
           <Grid>
             <WhatWillYouLearn isSignedIn={isSignedIn} />
           </Grid>
-        </div>
+        </div> */}
 
         {/* <Grid>
           <LandingLearn />
         </Grid> */}
-        <HowWillYouLearn />
+        {/* <HowWillYouLearn /> */}
 
         {/* <div className='bg-light-gray'>
           <Grid>
             <WhatCanYouDo />
           </Grid>
         </div> */}
-        <div className=''>
+        {/* <div className=''>
           <Grid>
             <WhatCanYouDo />
           </Grid>
-        </div>
+        </div> */}
 
-        <StartCOding isSignedIn={isSignedIn} />
+        {/* <StartCOding isSignedIn={isSignedIn} />
 
         <div className=''>
           <Grid>
             <Partners />
           </Grid>
-        </div>
+        </div> */}
 
         {/* <div className='as-seen-in'>
           <Grid>
