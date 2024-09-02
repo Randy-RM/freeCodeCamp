@@ -61,7 +61,9 @@ export default function LandingCampusTrainings() {
         className='w-full campus-image'
       />
       <div className='w-full flex flex-col items-center gap'>
-        <h2>Tu recherches une formation sur notre Campus ?</h2>
+        <h2 className='text-center'>
+          Tu recherches une formation sur notre Campus ?
+        </h2>
         <p>On a la formation qu&apos;il te faut</p>
       </div>
       <div className='trainings w-full grid grid-cols-3 gap'>

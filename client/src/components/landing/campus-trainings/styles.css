@@ -39,7 +39,7 @@
   width: 100%;
   height: 100%;
   top: 10px;
-  left: 0;
+  left: 15px;
   pointer-events: none;
   background-image: url('./../../../assets/images/landing/trainings/bootcamp.png');
   background-position: right;
@@ -93,12 +93,13 @@
 .join-section {
   background-color: #000;
   position: relative;
+  overflow: hidden;
 }
 
 .join-section-bg {
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 20px;
   width: 100%;
   height: 100%;
   background-image: url('./../../../assets/images/landing/man.png');
