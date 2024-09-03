@@ -33,6 +33,7 @@ import CourseCard from '../../components/CourseCard/course-card';
 import PathCard from '../../components/PathCard/path-card';
 import {
   convertTime,
+  convertTimeForFilter,
   convertTimestampToHours,
   convertTimestampToTime,
   getCategoryDescription,
@@ -193,6 +194,21 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
             );
           }
 
+          //filtre par durée
+          if (valueDuration !== 'none') {
+            filteredRavenCourses = filteredRavenCourses.filter(course => {
+              const courseHours = convertTimeForFilter(
+                parseInt(course.duration)
+              );
+
+              return valueDuration === '>1h'
+                ? courseHours < 60
+                : valueDuration === '1>5h'
+                ? courseHours >= 60 && courseHours <= 300
+                : courseHours > 300;
+            });
+          }
+
           setRessourceDatas(filteredRavenCourses);
         } else if (valueOfCurrentCategorie === null) {
           setRessourceDatas([...ravenCourses, ...moodleCourses]);
@@ -203,10 +219,10 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
               const courseHours = convertTimestampToHours(course.timecreated);
 
               return valueDuration === '>1h'
-                ? courseHours > 10
+                ? courseHours < 1
                 : valueDuration === '1>5h'
-                ? courseHours > 10 && courseHours <= 13
-                : courseHours > 13;
+                ? courseHours > 1 && courseHours <= 5
+                : courseHours > 5;
             });
           }
 
