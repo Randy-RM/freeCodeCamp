@@ -21,7 +21,7 @@ export function convertTime(timeInput: string | number): string {
   if (totalMinutes < 1) {
     return `< 1 minute`;
   } else if (totalMinutes < 60) {
-    return `${totalMinutes} minutes`;
+    return `${totalMinutes} min`;
   }
 
   // Calculer les heures et les minutes restantes
@@ -29,9 +29,9 @@ export function convertTime(timeInput: string | number): string {
   const remainingMinutes = totalMinutes % 60;
 
   if (remainingMinutes === 0) {
-    return `${hours} hour${hours > 1 ? 's' : ''}`;
+    return `${hours} h${hours > 1 ? 's' : ''}`;
   } else {
-    return `${hours} hour${hours > 1 ? 's' : ''} ${remainingMinutes} minutes`;
+    return `${hours} h${hours > 1 ? 's' : ''} ${remainingMinutes} min`;
   }
 }
 
