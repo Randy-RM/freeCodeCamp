@@ -37,7 +37,8 @@
   transition: all linear 200ms;
 }
 
-.button-list:hover {
+.button-list:hover,
+.button-list.active {
   background-color: #e5203d;
   color: #ffffff;
   /* font-weight: 600; */

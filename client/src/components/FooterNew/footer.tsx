@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from '@reach/router';
 import { Grid } from '@freecodecamp/react-bootstrap';
 import { VscTriangleRight } from 'react-icons/vsc';
 // import Whatsapp from '../../assets/images/whatsapp.png';
@@ -55,7 +56,9 @@ function Footer() {
     <footer className='footer-section'>
       <Grid>
         <section className='flex flex-col gap-md items-center'>
-          <Image src={logo} alt='Logo' className='logo' />
+          <Link to='/'>
+            <Image src={logo} alt='Logo' className='logo' />
+          </Link>
           <div className='w-full grid gap-md grid-cols-2 md-grid-cols-3'>
             {linksSections.map((section, id) => (
               <div className='w-full flex flex-col' key={id.valueOf()}>
