@@ -145,7 +145,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
           setIsDataOnLoading(false);
           alert('Oops, problème de connexion. Veuillez réessayer.');
           void navigated('/catalogue');
-        }, 5000);
+        }, 10000);
 
         const courses = await getAllRessources(currentPage);
 
@@ -202,6 +202,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
           if (valueDuration !== 'none') {
             filteredMoodleCourses = filteredMoodleCourses.filter(course => {
               const courseHours = convertTimestampToHours(course.timecreated);
+
               return valueDuration === '>1h'
                 ? courseHours > 10
                 : valueDuration === '1>5h'
@@ -346,7 +347,9 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                 <div>
                   <h2 className=' catalog-title'>
                     <span className='catalog'>Catalogue</span> /
-                    {valueOfTitleCategorie}
+                    <span className='catalog-title_space'>
+                      {valueOfTitleCategorie}
+                    </span>
                   </h2>
                 </div>
                 <Spacer />

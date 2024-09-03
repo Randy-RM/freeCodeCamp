@@ -21,6 +21,10 @@
   font-size: 1.5rem;
 }
 
+.catalog-title_space {
+  padding: 0.2rem;
+}
+
 .language-filter {
   display: flex;
   flex-direction: column;

@@ -317,6 +317,8 @@ export const getMoodleCourseCategory = async () => {
     const moodleCategorie = moodleCourseCategories?.filter(
       category => category.coursecount > 0
     );
+    // console.log(mesCoursMoodle);
+
     return moodleCategorie;
   }
 };
