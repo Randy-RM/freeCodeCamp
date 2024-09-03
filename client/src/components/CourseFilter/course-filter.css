@@ -1,8 +1,16 @@
 .filter-container {
+  position: sticky; /* Reste fixe par rapport au défilement horizontal */
+  top: 0;
+  z-index: 10; /* Assure que ce conteneur reste au-dessus des autres en cas de chevauchement */
+  background: #fff; /* Assure que le fond ne soit pas affecté par le scroll */
+}
+
+.filter-items-container {
   width: 100%;
   height: 100%;
   max-height: 80vh; /* Limite la hauteur du conteneur pour permettre le défilement */
   overflow-y: auto; /* Active le défilement vertical */
+  scroll-snap-type: y mandatory;
 }
 
 .filter-container_hidden-scrol {
@@ -87,6 +95,7 @@
   gap: 2rem;
   width: 90%;
 }
+
 details[open] > *:not(summary) {
   animation: details-show 300ms ease-in-out;
 }
