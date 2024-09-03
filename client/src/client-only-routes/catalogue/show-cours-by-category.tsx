@@ -145,7 +145,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
           setIsDataOnLoading(false);
           alert('Oops, problème de connexion. Veuillez réessayer.');
           void navigated('/catalogue');
-        }, 10000);
+        }, 20000);
 
         const courses = await getAllRessources(currentPage);
 
@@ -155,9 +155,8 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         // Séparer les cours Raven et Moodle
         const ravenCourses = courses
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-          .flatMap(course => (Array.isArray(course) ? course : []))
+          .flatMap(course => (Array.isArray(course) ? course : [course]))
           .filter(course => 'launch_url' in course) as RavenCourse[];
-
         const moodleCourses = courses
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
           .flatMap(course => (Array.isArray(course) ? course : []))
