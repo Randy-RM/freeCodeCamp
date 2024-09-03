@@ -7,6 +7,7 @@ import {
   valueOfCurrentCategory,
   valueOfTypeLevel
 } from '../../redux/atoms';
+import { AddFilterQueryString } from '../../utils/allFunctions';
 
 const FilterByLevel = () => {
   const [showFilter, setShowFilter] = useState(false);
@@ -22,6 +23,7 @@ const FilterByLevel = () => {
     const value = isChecked ? e.target.value : 'none'; // Assigner "none" lorsqu'il est décoché
 
     setValueLevel(value);
+    AddFilterQueryString(isChecked ? e.target.value : '');
     setValueChecked(isChecked);
     setValue0fCurrentCategory(currentCategorieValue);
     console.log(showFilter);

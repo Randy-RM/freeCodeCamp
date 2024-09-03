@@ -7,6 +7,7 @@ import {
   valueOfCurrentCategory,
   valueOfTypeDuration
 } from '../../redux/atoms';
+import { AddFilterQueryString } from '../../utils/allFunctions';
 
 const FilterByDuration = () => {
   const [showFilter, setShowFilter] = useState(false);
@@ -22,6 +23,7 @@ const FilterByDuration = () => {
     const value = isChecked ? e.target.value : 'none'; // Assigner "none" lorsqu'il est décoché
 
     setValueDuration(value);
+    AddFilterQueryString(isChecked ? e.target.value : '');
     setValueChecked(isChecked);
     setValue0fCurrentCategory(currentCategorieValue);
     setShowFilter(showFilter);

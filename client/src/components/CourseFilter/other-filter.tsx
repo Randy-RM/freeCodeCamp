@@ -7,6 +7,7 @@ import {
   valueOfCurrentCategory,
   valueOfLanguage
 } from '../../redux/atoms';
+import { AddFilterQueryString } from '../../utils/allFunctions';
 
 const OtherFilter = () => {
   const [showFilter, setShowFilter] = useState(false);
@@ -22,6 +23,7 @@ const OtherFilter = () => {
     const value = isChecked ? e.target.value : 'none'; // Assigner "none" lorsqu'il est décoché
 
     setValueLanguage(value);
+    AddFilterQueryString(isChecked ? e.target.value : '');
     setValueChecked(isChecked);
     setValue0fCurrentCategory(currentCategorieValue);
     console.log(showFilter);
