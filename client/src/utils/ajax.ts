@@ -633,7 +633,6 @@ export const getAllRessources = async (
     ...([ravenCourses] || []),
     ...(ravenPathCourses || [])
   ];
-
   return allCourses;
 };
 
