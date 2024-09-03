@@ -338,6 +338,13 @@ const CoursesCategoryCard = ({
                 <button
                   className='category-name'
                   onClick={() => {
+                    void setValueOfButton(
+                      categorie.name.includes('amp')
+                        ? 'marketing-communication'
+                        : categorie.name.includes('artificielle')
+                        ? 'intelligence-artificielle'
+                        : categorie.name
+                    );
                     void handleButtonClickMoodle(
                       categorie.id,
                       categorie.name.includes('amp')
