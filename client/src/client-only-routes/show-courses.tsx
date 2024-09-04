@@ -319,8 +319,8 @@ export function Courses(props: CoursesProps): JSX.Element {
         }
       } else {
         // Le token est encore valide, retourner le token existant
-        return ravenTokenData;
         setTakeTokenValue(ravenTokenData);
+        return ravenTokenData;
       }
     }
   };
@@ -399,81 +399,6 @@ export function Courses(props: CoursesProps): JSX.Element {
       setCurrentPage(currentPage);
     }
   };
-
-  // useEffect(() => {
-  //   if (currentCategory === -2) {
-  //     if (valueLangue !== 'none') {
-  //       setDataForallCourse(
-  //         allDataofCourses.filter(
-  //           course =>
-  //             'launch_url' in course &&
-  //             course.category?.[0]?.tags?.[0]?.title === valueLangue
-  //         )
-  //       );
-  //     } else {
-  //       setDataForallCourse(allDataofCourses);
-  //     }
-  //   }
-  //   setValueLangue(valueLangue);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [valueLangue, allDataofCourses]);
-
-  // useEffect(() => {
-  //   if (currentCategory === 11||
-  //     currentCategory === 13|| currentCategory === 14
-  //   ) {
-  //     if (valueDuration !== 'none') {
-
-  //       setDataForallCourse(
-  //         allDataofCourses.filter(
-  //           course =>
-  //             'categorieid' in course &&
-  //             course.category?.[0]?.tags?.[0]?.title === valueLangue
-  //         )
-  //       );
-  //     } else {
-  //       setDataForallCourse(allDataofCourses);
-  //     }
-  //   }
-  //   setValueLangue(valueLangue);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [valueLangue, allDataofCourses]);
-
-  // useEffect(() => {
-  //   if (currentCategory === -2) {
-  //     if (valueLevel !== 'none') {
-  //       const filterByLevel = allDataofCourses.filter(
-  //         course => 'launch_url' in course && course.skill_level === valueLevel
-  //       );
-  //       setDataForallCourse(filterByLevel);
-  //     } else {
-  //       setDataForallCourse(allDataofCourses);
-  //     }
-  //   }
-
-  //   setValueLevel(valueLevel);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [valueLevel, allDataofCourses]);
-
-  // useEffect(() => {
-  //   if (currentCategory === -2) {
-  //     if (valueOfCourseType !== 'none') {
-  //       setDataForallCourse(
-  //         allDataofCourses.filter(
-  //           course => 'launch_url' in course && course.long_description
-  //         )
-  //       );
-  //     } else {
-  //       setDataForallCourse(allDataofCourses);
-  //     }
-  //   }
-  //   setValueOfCourseType(valueOfCourseType);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [valueOfCourseType, allDataofCourses]);
-
-  // useEffect(() => {
-  //   setAllDataRessource(allDataRessoucesCourses);
-  // }, [currentCategory, allDataRessoucesCourses]);
 
   useEffect(() => {
     void getRavenResourcesPath();
