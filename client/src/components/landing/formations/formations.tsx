@@ -123,7 +123,7 @@ function Formations() {
   }, []);
 
   return (
-    <section className='formation'>
+    <section id='trainings' className='formation'>
       <h2 className='formation__title'>
         Découvre les formations gratuites de Kadea{' '}
         <span className='formation__title-rouge'>Online</span>

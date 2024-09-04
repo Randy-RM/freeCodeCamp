@@ -6,6 +6,7 @@ import React from 'react';
 // import LearnCode from '../../../assets/images/hero-img.png';
 import './hero-style.css';
 import { FaAngleRight } from 'react-icons/fa';
+import { navigate } from '@reach/router';
 
 // const { apiLocation } = envData;
 
@@ -26,6 +27,7 @@ function Hero(): JSX.Element {
           </p>
           <button
             className='flex hero-button items-center gap'
+            onClick={() => void navigate('#trainings')}
             // onClick={() => void navigate('/catalogue')}
           >
             <span>Choisis ta formation</span>
