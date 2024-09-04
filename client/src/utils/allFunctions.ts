@@ -1,3 +1,5 @@
+import { courseDescriptions } from './ajax';
+
 export function convertTime(timeInput: string | number): string {
   let totalMinutes: number;
 
@@ -90,4 +92,30 @@ export function convertTimestampToTime(timestamp: number) {
   }
 
   return `${formattedHours}hours ${formattedMinutes} minutes`;
+}
+
+export function convertTimestampToHours(timestamp: number): number {
+  // Convertir le timestamp en millisec
+  const date = new Date(timestamp * 1000);
+  // le temps que j'ai trouvé je le met en heure
+  const hours = date.getUTCHours();
+  return hours;
+}
+
+export function getCategoryDescription(title: string): string | undefined {
+  const lowerCaseTitle = title.toLocaleLowerCase();
+
+  if (lowerCaseTitle.includes('programmation')) {
+    return courseDescriptions.Développement.description;
+  } else if (lowerCaseTitle.includes('bureautique')) {
+    return courseDescriptions.Bureautique.description;
+  } else if (lowerCaseTitle.includes('artificielle')) {
+    return courseDescriptions.artificielle.description;
+  } else if (lowerCaseTitle.includes('amazon')) {
+    return courseDescriptions.amazon.description;
+  } else if (lowerCaseTitle.includes('marketing')) {
+    return courseDescriptions.Marketing.description;
+  }
+
+  return '';
 }
