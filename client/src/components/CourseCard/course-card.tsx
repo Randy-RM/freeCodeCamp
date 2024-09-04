@@ -1,6 +1,7 @@
 import React from 'react';
 import PlayIcon from '../../assets/images/play.svg';
 import clockIcon from '../../assets/icons/clock.svg';
+import levelIcon from '../../assets/icons/level.svg';
 
 import Map from '../Map/index';
 import { Link } from '../helpers';
@@ -30,6 +31,7 @@ interface LandingDetailsProps {
   createAt?: Date | string | number;
   duration?: string;
   language?: string;
+  level?: string;
 }
 
 const CourseCard = ({
@@ -47,7 +49,8 @@ const CourseCard = ({
   cardType,
   badgeIcon,
   createAt,
-  language
+  language,
+  level
 }: LandingDetailsProps): JSX.Element => {
   const isLessThan30DaysOld = (date: string): boolean => {
     const dateObjet = new Date(date);
@@ -109,6 +112,20 @@ const CourseCard = ({
             </div>
 
             <div className='card-course-detail-footer'>
+              <div className='level-card'>
+                {level ? (
+                  <>
+                    <img
+                      src={levelIcon}
+                      alt='icone clock duration'
+                      className='clock'
+                    />
+                    <p> {level === 'debutant' ? 'Débutant' : level}</p>
+                  </>
+                ) : (
+                  ''
+                )}
+              </div>
               <div className='duration__language'>
                 {duration ? (
                   <>

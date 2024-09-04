@@ -327,29 +327,71 @@ export const getMoodleCourseCategory = async () => {
 
 export const getMoodleCourses = async () => {
   const moodleCatalogue = await getExternalResource<MoodleCourse[]>(
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses&moodlewsrestformat=json`
   );
 
-  const splitCourses: MoodleCoursesCatalogue | null | undefined =
-    moodleCatalogue != null
-      ? splitArray<MoodleCourse>(
-          moodleCatalogue.filter(moodleCourse => {
-            return moodleCourse.visible == 1 && moodleCourse.format != 'site';
-          }),
-          4
-        )
-      : null;
+  // Filtrer les cours visibles et non formatés comme "site"
+  const filteredCourses =
+    moodleCatalogue?.filter(
+      moodleCourse =>
+        moodleCourse.visible === 1 && moodleCourse.format !== 'site'
+    ) || [];
 
-  //Order courses by their publication date
+  // Ajouter des propriétés spécifiques selon le categoryId
+  const coursesWithAdditionalProperties = filteredCourses.map(course => {
+    // Définir des valeurs par défaut
+    let additionalProperties = {
+      level: 'debutant',
+      duration: 0,
+      type: 'cours',
+      langue: 'French'
+    };
+
+    // Appliquer des valeurs spécifiques selon le categoryId
+    switch (course.categoryid) {
+      case 11:
+        additionalProperties = {
+          ...additionalProperties,
+          duration: 21000
+        };
+        break;
+      case 13:
+        additionalProperties = {
+          ...additionalProperties,
+
+          duration: 28800
+        };
+        break;
+      case 14:
+        additionalProperties = {
+          ...additionalProperties,
+          duration: 7200
+        };
+        break;
+      default:
+        break;
+    }
+
+    // Retourner le cours enrichi avec les propriétés supplémentaires
+    return {
+      ...course,
+      ...additionalProperties
+    };
+  });
+
+  // Diviser les cours en groupes de 4
+  const splitCourses: MoodleCoursesCatalogue | null = splitArray<MoodleCourse>(
+    coursesWithAdditionalProperties,
+    4
+  );
+
+  // Trier les cours par date de publication
   const sortedCourses = sortCourses(splitCourses);
 
-  if (moodleCatalogue != null) {
-    return sortedCourses;
-  } else {
-    return null;
-  }
+  // Retourner les cours triés ou null s'il n'y a pas de catalogue Moodle
+  return moodleCatalogue ? sortedCourses : null;
 };
+
 //add for moddlecourse fetch test
 
 interface DataLemlist {

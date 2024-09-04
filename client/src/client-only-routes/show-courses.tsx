@@ -116,6 +116,10 @@ export type MoodleCourse = {
   format: string;
   timecreated: number;
   timemodified: number;
+  langue: string;
+  duration: number;
+  level: string;
+  type: string;
 };
 
 export type MoodleCoursesCatalogue = {

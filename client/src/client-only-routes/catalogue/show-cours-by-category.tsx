@@ -34,7 +34,6 @@ import PathCard from '../../components/PathCard/path-card';
 import {
   convertTime,
   convertTimeForFilter,
-  convertTimestampToHours,
   convertTimestampToTime,
   getCategoryDescription,
   paginate
@@ -144,9 +143,11 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         // Temps d'attente de l'upload de 5 secondes
         const timeoutId = setTimeout(() => {
           setIsDataOnLoading(false);
-          alert('Oops, problème de connexion. Veuillez réessayer.');
+          alert(
+            'Oops, problème de connexion où cours indisponible. Veuillez réessayer.'
+          );
           void navigated('/catalogue');
-        }, 20000);
+        }, 13000);
 
         const courses = await getAllRessources(currentPage);
 
@@ -216,14 +217,32 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
           // Filtre par durée
           if (valueDuration !== 'none') {
             filteredMoodleCourses = filteredMoodleCourses.filter(course => {
-              const courseHours = convertTimestampToHours(course.timecreated);
+              const courseHours = convertTimeForFilter(course.duration);
 
               return valueDuration === '>1h'
-                ? courseHours < 1
+                ? courseHours < 60
                 : valueDuration === '1>5h'
-                ? courseHours > 1 && courseHours <= 5
-                : courseHours > 5;
+                ? courseHours >= 60 && courseHours <= 300
+                : courseHours > 300;
             });
+          }
+
+          if (valueLevel !== 'none') {
+            filteredMoodleCourses = filteredMoodleCourses.filter(course =>
+              valueLevel === 'Débutant'
+                ? course.level === 'debutant'
+                : valueLevel === 'Avancé'
+                ? course.level === 'Advanced'
+                : course.level === 'Intermediate'
+            );
+          }
+
+          if (valueTypeOfCourse !== 'none') {
+            filteredMoodleCourses = filteredMoodleCourses.filter(course =>
+              valueTypeOfCourse === 'Parcours'
+                ? course.type === 'parcours'
+                : course.type === 'cours'
+            );
           }
 
           setRessourceDatas(filteredMoodleCourses);
@@ -485,7 +504,8 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                             ) {
                               return (
                                 <CourseCard
-                                  language='French'
+                                  language={courseTyped.langue}
+                                  level={courseTyped.level}
                                   key={`${index}-${courseTyped.id}`}
                                   icon={PhBookBookmark} // Remplacer par le chemin réel de l'image
                                   isAvailable={courseTyped.visible === 1}
@@ -494,7 +514,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                                   link={`${moodleBaseUrl}/course/view.php?id=${courseTyped.id}`}
                                   description={courseTyped.summary}
                                   duration={convertTimestampToTime(
-                                    courseTyped.timecreated
+                                    courseTyped.duration
                                   )}
                                 />
                               );

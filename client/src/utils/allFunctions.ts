@@ -81,17 +81,17 @@ export function convertTimestampToTime(timestamp: number) {
   // Retourner le temps formaté
   if (parseInt(formattedHours) < 1) {
     if (parseInt(formattedMinutes) < 1) {
-      return `> 1 minutes`;
+      return `> 1 min`;
     }
-    return `${formattedMinutes} minutes`;
+    return `${formattedMinutes} min`;
   } else if (parseInt(formattedHours) > 1) {
     if (parseInt(formattedMinutes) < 1) {
-      return `${formattedHours}hours `;
+      return `${formattedHours}h `;
     }
-    return `${formattedHours}hours ${formattedMinutes} minutes`;
+    return `${formattedHours}h ${formattedMinutes} min`;
   }
 
-  return `${formattedHours}hours ${formattedMinutes} minutes`;
+  return `${formattedHours}h ${formattedMinutes} min`;
 }
 
 export function convertTimestampToHours(timestamp: number): number {
