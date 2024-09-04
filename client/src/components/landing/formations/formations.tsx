@@ -1,45 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import './formation.css';
 import { FaAngleDown } from 'react-icons/fa';
-import googleLogo from '../../../assets/images/landing/googleLogo.png';
-import pythonLogo from '../../../assets/icons/pyton.svg';
-import { Image } from '../../../../../tools/ui-components/src/image/image';
-import starIcon from '../../../assets/icons/iconeEtoiles.svg';
+import LaptopIcon from '../../../assets/images/laptop.svg';
+import AlgoIcon from '../../../assets/images/algorithmIcon.svg';
 import clockIcon from '../../../assets/icons/iconeHorloge.svg';
-
+import awsLogo from '../../../assets/images/aws-logo.png';
+import { Image } from '../../../../../tools/ui-components/src/image/image';
+import { convertTime } from '../../../utils/allFunctions';
 import {
   MoodleCourse,
   MoodleCourseCategory,
   MoodleCoursesCatalogue
 } from '../../../client-only-routes/show-courses';
 import { getExternalResource } from '../../../utils/ajax';
-import { splitArray } from '../../helpers';
+import { Link, splitArray } from '../../helpers';
 import sortCourses from '../../helpers/sort-course';
 import CoursesFilterSection from './filter-section';
 import envData from './../../../../../config/env.json';
 
-const courses = [
+const popularCourses = [
   {
-    title: "Fondamentaux de l'IA Google",
-    asset: googleLogo,
-    time: '3h 20 min',
-    stars: {
-      rate: '5.0',
-      count: '1k'
-    }
+    title: 'Responsive Web Design',
+    asset: LaptopIcon,
+    link: '/learn/responsive-web-design/'
   },
   {
-    title: 'Python pour tous',
-    asset: pythonLogo,
-    time: '3h 20 min',
-    stars: {
-      rate: '5.0',
-      count: '1k'
-    }
+    title: 'JavaScript Algorithms and Data Structures',
+    asset: AlgoIcon,
+    link: '/learn/javascript-algorithms-and-data-structures'
   }
 ];
 
-const { moodleApiBaseUrl, moodleApiToken } = envData;
+const { moodleApiBaseUrl, moodleApiToken, moodleBaseUrl } = envData;
 type RavenCourse = {
   learningobjectid: number;
   name: string;
@@ -52,22 +44,6 @@ type RavenCourse = {
   contenttype: string;
   duration: string;
 };
-// interface RavenTokenData {
-//   token: string;
-//   expiresIn: number;
-//   validFrom: string;
-//   // eslint-disable-next-line @typescript-eslint/naming-convention
-//   valid_to: string;
-// }
-
-// interface RavenFetchCoursesDto {
-//   apiKey: string;
-//   token: string;
-//   currentPage: number;
-//   fromDate: string;
-//   // eslint-disable-next-line @typescript-eslint/naming-convention
-//   valid_to: string;
-// }
 
 function Formations() {
   const [courseCategories, setCourseCategories] = useState<
@@ -80,36 +56,6 @@ function Formations() {
     RavenCourse[] | null | undefined
   >([]);
   const [currentCategory, setCurrentCategory] = useState<string>('popular');
-
-  console.log(moodleCourses, ravenCourses);
-
-  // const getRavenResources = async () => {
-  //   await getRavenToken();
-
-  //   const ravenLocalToken = getRavenTokenDataFromLocalStorage();
-  //   const ravenData: RavenFetchCoursesDto = {
-  //     apiKey: ravenAwsApiKey,
-  //     token: ravenLocalToken?.token || '',
-  //     currentPage: 1,
-  //     fromDate: '01-01-2023',
-  //     // eslint-disable-next-line @typescript-eslint/naming-convention
-  //     valid_to: '06-24-2024'
-  //   };
-  //   const getReveanCourses = await getAwsCourses(ravenData);
-  //   setRavenCourses(getReveanCourses as RavenCourse[]);
-  // };
-
-  // const getRavenToken = async () => {
-  //   const ravenLocalToken = getRavenTokenDataFromLocalStorage();
-
-  //   if (ravenLocalToken === null) {
-  //     const generateRavenToken = await generateRavenTokenAcces();
-
-  //     if (generateRavenToken) {
-  //       addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
-  //     }
-  //   }
-  // };
 
   const getMoodleCourseCategory = async () => {
     const moodleCourseCategories = await getExternalResource<
@@ -150,14 +96,10 @@ function Formations() {
     }
   };
 
-  // const allCourses = [
-  //   ...(ravenCourses || []),
-  //   ...(moodleCourses?.result ? moodleCourses.result.flat() : [])
-  // ];
-
-  // const formatdate = (data: number) => {
-  //   return new Date(data * 1000).toLocaleDateString();
-  // };
+  const allCourses = [
+    ...(ravenCourses || []),
+    ...(moodleCourses?.result ? moodleCourses.result.flat() : [])
+  ];
 
   useEffect(() => {
     void getMoodleCourseCategory();
@@ -194,43 +136,103 @@ function Formations() {
         setMoodleCourses={setMoodleCourses}
         setRavenCourses={setRavenCourses}
       />
-      {/* <div className='formation__button_list'>
-        {topics.map((topic, i) => (
-          <button className='button-list' key={i.valueOf()}>
-            {topic.title}
-          </button>
-        ))}
-      </div> */}
       <div className='trainings-list'>
-        {courses.map((course, i) => (
-          <div className='training-card' key={i.valueOf()}>
-            <div className='training-img'>
-              <Image src={course.asset} alt={`${course.title} cover image`} />
-            </div>
-            <div className='training-details'>
-              <h3 className='training-title'>{course.title}</h3>
-              <div className='training-stats'>
-                <div className='stat'>
-                  <Image src={starIcon} alt='Stars icon' />
-                  <span>
-                    {course.stars.rate} ({course.stars.count})
-                  </span>
-                </div>
-                <div className='stat'>
-                  <Image src={clockIcon} alt='Clock icon' />
-                  <span>{course.time}</span>
-                </div>
+        {isDataOnLoading
+          ? Array.from({ length: 6 }).map((_, i) => (
+              <div
+                className='training-card flex-col items-start'
+                key={i.valueOf()}
+              >
+                <div className='skeleton-title no-margin'></div>
+                <div className='skeleton-title load'></div>
               </div>
-            </div>
-          </div>
-        ))}
+            ))
+          : currentCategory == 'popular'
+          ? popularCourses.map((course, i) => (
+              <Link
+                to={course.link}
+                className='training-card'
+                key={i.valueOf()}
+              >
+                <div className='training-img'>
+                  <Image
+                    src={course.asset}
+                    alt={`${course.title} cover image`}
+                  />
+                </div>
+                <div className='training-details'>
+                  <h3 className='training-title'>{course.title}</h3>
+                  {/* <div className='training-stats'>
+                      <div className='stat'>
+                        <Image src={starIcon} alt='Stars icon' />
+                        <span>
+                          {course.stars.rate} ({course.stars.count})
+                        </span>
+                      </div>
+                      <div className='stat'>
+                        <Image src={clockIcon} alt='Clock icon' />
+                        <span>{course.time}</span>
+                      </div>
+                    </div> */}
+                </div>
+              </Link>
+            ))
+          : allCourses.map((course, i) => {
+              if ('launch_url' in course) {
+                // Vérifie si le cours est un cours Raven
+                return (
+                  <Link
+                    to={course.launch_url}
+                    className='training-card'
+                    key={i.valueOf()}
+                  >
+                    <div className='training-img'>
+                      <Image src={awsLogo} alt={`course cover image`} />
+                    </div>
+                    <div className='training-details'>
+                      <h3 className='training-title'>{`${i + 1}. ${
+                        course.name
+                      }`}</h3>
+                      <div className='training-stats'>
+                        {/* <div className='stat'>
+                          <Image src={starIcon} alt='Stars icon' />
+                          <span>
+                            {course.stars.rate} ({course.stars.count})
+                          </span>
+                        </div> */}
+                        <div className='stat'>
+                          <Image src={clockIcon} alt='Clock icon' />
+                          <span>{convertTime(course.duration)}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              } else {
+                // Si ce n'est pas un cours Raven, c'est un cours Moodle
+                return (
+                  <Link
+                    to={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
+                    className='training-card'
+                    key={i.valueOf()}
+                  >
+                    <div className='training-img'>
+                      <Image src={AlgoIcon} alt={`course cover image`} />
+                    </div>
+                    <div className='training-details'>
+                      <h3 className='training-title'>{`${course.displayname}`}</h3>
+                    </div>
+                  </Link>
+                );
+              }
+            })}
       </div>
-      <div className='more-courses'>
+      <Link to='/catalogue' className='more-courses'>
         <span>Plus de cours</span>
         <span className='text-primary'>
           <FaAngleDown />
         </span>
-      </div>
+      </Link>
     </section>
   );
 }
