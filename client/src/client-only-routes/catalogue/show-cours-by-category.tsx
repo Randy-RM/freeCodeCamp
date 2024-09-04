@@ -15,6 +15,7 @@ import AlgoIcon from '../../assets/images/algorithmIcon.svg';
 import PhBookBookmark from '../../assets/images/ph-book-bookmark-thin.svg';
 import LaediesActIcon from '../../assets/images/partners/we-act-logo.png';
 import awsLogo from '../../assets/images/aws-logo.png';
+import notFound from '../../assets/icons/nofound.svg';
 
 import {
   getRavenResources,
@@ -63,6 +64,7 @@ import {
 } from '../../redux/atoms';
 
 import '../catalogue/show-courses-by-category.css';
+import routes from '../../utils/routes';
 
 const mapStateToProps = createSelector(
   signInLoadingSelector,
@@ -89,6 +91,8 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const [screenWidth, setScreenWidth] = useState<number>(
     typeof window !== 'undefined' ? window.innerWidth : 900
   );
+
+  const [showMessage, setShowMessage] = useState(false);
 
   const navigated = useNavigate();
 
@@ -140,19 +144,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         setRessourceDatas([]);
         const currentPage = 1; // ou la page courante
 
-        // Temps d'attente de l'upload de 5 secondes
-        const timeoutId = setTimeout(() => {
-          setIsDataOnLoading(false);
-          alert(
-            'Oops, problème de connexion où cours indisponible. Veuillez réessayer.'
-          );
-          void navigated('/catalogue');
-        }, 13000);
-
         const courses = await getAllRessources(currentPage);
-
-        // Annuler le timeout si les données sont récupérées avec succès
-        clearTimeout(timeoutId);
 
         // Séparer les cours Raven et Moodle
         const ravenCourses = courses
@@ -236,12 +228,18 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                 : course.level === 'Intermediate'
             );
           }
-
+          //filtre par type de cours
           if (valueTypeOfCourse !== 'none') {
             filteredMoodleCourses = filteredMoodleCourses.filter(course =>
               valueTypeOfCourse === 'Parcours'
                 ? course.type === 'parcours'
                 : course.type === 'cours'
+            );
+          }
+          //filtre par langue
+          if (valueLanguage !== 'none') {
+            filteredMoodleCourses = filteredMoodleCourses.filter(
+              course => course.langue === valueLanguage
             );
           }
 
@@ -301,6 +299,44 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   useEffect(() => {
     SetValueOfCurrentCategory(valueOfCurrentCategorie);
   }, [valueOfCurrentCategorie, SetValueOfCurrentCategory]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (paginatedData.length === 0) {
+        setShowMessage(true);
+      }
+    }, 14000);
+
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    valueLanguage,
+    valueTypeOfCourse,
+    valueLevel,
+    valueDuration,
+    ressourcesData
+  ]);
+
+  //dans le cas où il n'y a aucun cours ou parcours pour un filtre alors on affichera cette page, juste pour une expérience utilisateur
+  if (showMessage) {
+    return (
+      <div className='no-courses'>
+        <img src={notFound} alt='Aucun cours disponible' />
+        <p>Aucun cours disponible pour le filtre sélectionné.</p>
+        <p>
+          Nous travaillons activement pour ajouter de nouveaux cours dans cette
+          catégorie. Restez à l&apos;écoute !
+        </p>
+        <button
+          onClick={() => {
+            void navigated(routes.catalogue.index);
+          }}
+        >
+          Visitez le catalogue
+        </button>
+      </div>
+    );
+  }
 
   if (typeof window !== 'undefined') {
     window.addEventListener('resize', () => {
@@ -426,6 +462,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                     {currentPage == 1 && valueOfCurrentCategorie == -1 && (
                       <>
                         <CourseCard
+                          level='Débutant'
                           language='French'
                           icon={LaptopIcon}
                           sponsorIcon={LaediesActIcon}
@@ -439,6 +476,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         `}
                         />
                         <CourseCard
+                          level='Débutant'
                           language='French'
                           icon={AlgoIcon}
                           alt=''
@@ -482,6 +520,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                               } else {
                                 return (
                                   <CourseCard
+                                    level={courseTyped.skill_level}
                                     language={language}
                                     key={index.toString()}
                                     icon={awsLogo}
