@@ -21,7 +21,7 @@ import {
   MoodleCoursesCatalogue,
   scrollTo
 } from '../../client-only-routes/show-courses';
-import { Spacer, splitArray } from '../helpers';
+import { splitArray } from '../helpers';
 import sortCourses from '../helpers/sort-course';
 import routes from '../../utils/routes';
 import {
@@ -394,14 +394,12 @@ const CourseFilter = ({
               : ''
           }
         >
-          <Spacer size={1} />
-          <OtherFilter />
-          <Spacer size={1} />
-          <FilterByType />
-          <Spacer size={1} />
-          <FilterByLevel />
-          <Spacer size={1} />
-          <FilterByDuration />
+          <div>
+            <OtherFilter />
+            <FilterByType />
+            <FilterByLevel />
+            <FilterByDuration />
+          </div>
         </div>
       </details>
     </div>

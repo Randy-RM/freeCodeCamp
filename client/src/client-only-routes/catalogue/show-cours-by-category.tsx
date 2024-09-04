@@ -395,9 +395,9 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
               </svg>
             </button>
 
-            <div className='card-filter-container'>
+            <div className={'card-filter-container '}>
               {showFilter && (
-                <div>
+                <div className=''>
                   <CourseFilter
                     setRavenPath={setDataRavenPath}
                     screenWidth={screenWidth}
@@ -413,7 +413,11 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                 </div>
               )}
 
-              <div className='card-courses-detail-container'>
+              <div
+                className={`card-courses-detail-container ${
+                  showFilter ? 'hidden_all_container' : ''
+                }`}
+              >
                 <div>
                   <h2 className=' catalog-title'>
                     <span className='catalog'>Catalogue</span> /

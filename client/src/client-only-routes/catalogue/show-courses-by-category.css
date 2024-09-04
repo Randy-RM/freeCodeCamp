@@ -21,6 +21,56 @@
   font-size: 1.5rem;
 }
 
+/* Sélection de l'élément avec la classe filter__liste */
+.filter__liste {
+  position: fixed;
+  z-index: 0;
+  top: 7rem;
+  overflow-y: scroll;
+  max-height: 80vh;
+}
+
+.fixed {
+  position: fixed;
+  top: 0; /* Ajustez selon vos besoins */
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Pour s'assurer que l'élément reste au-dessus des autres */
+}
+
+/* Style de la barre de défilement de .filter__liste */
+.all-filter-type::-webkit-scrollbar {
+  width: 5px; /* Largeur de la scrollbar */
+  color: #fff;
+  background-color: #f1f1f1;
+}
+
+.all-filter-type::-webkit-scrollbar:hover {
+  width: 10px; /* Largeur de la scrollbar */
+  color: #928686;
+}
+
+/* Style de la piste de la scrollbar de .all-filter-type */
+.all-filter-type::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Couleur de fond */
+  border-radius: 10px; /* Bords arrondis */
+}
+
+/* Style du bouton de défilement (thumb) de .all-filter-type */
+.all-filter-type::-webkit-scrollbar-thumb {
+  background-color: #fff; /* Couleur du bouton de défilement */
+  border-radius: 10px; /* Bords arrondis */
+}
+
+/* Effet hover sur le bouton de défilement de .all-filter-type */
+.all-filter-type::-webkit-scrollbar-thumb:hover {
+  background-color: #9a9090; /* Couleur du bouton au survol */
+}
+
+.hidden_all_container {
+  display: none;
+}
+
 .catalog-title_space {
   padding: 0.2rem;
 }
