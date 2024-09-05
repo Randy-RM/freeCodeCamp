@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './course-filter.css';
 
 import { useRecoilState, useSetRecoilState } from 'recoil';
@@ -18,12 +18,16 @@ const FilterByDuration = () => {
     valueOfCurrentCategory
   );
 
+  useEffect(() => {
+    AddFilterQueryString('', '');
+  }, []);
+
   const handleLanguageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked;
     const value = isChecked ? e.target.value : 'none'; // Assigner "none" lorsqu'il est décoché
 
     setValueDuration(value);
-    AddFilterQueryString(isChecked ? e.target.value : '');
+    AddFilterQueryString('durée', isChecked ? e.target.value : '');
     setValueChecked(isChecked);
     setValue0fCurrentCategory(currentCategorieValue);
     setShowFilter(showFilter);

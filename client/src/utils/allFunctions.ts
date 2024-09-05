@@ -121,7 +121,7 @@ export function getCategoryDescription(title: string): string | undefined {
 }
 
 //fonction permettant d'ajouter les query string sur un url
-export function AddFilterQueryString(name: string) {
+export function AddFilterQueryString(key: string, value: string) {
   // Base de l'URL actuelle
   const currentUrl = window.location.href;
 
@@ -131,11 +131,11 @@ export function AddFilterQueryString(name: string) {
   // Récupérer les paramètres existants
   const params = new URLSearchParams(url.search);
 
-  // Mettre à jour ou ajouter le paramètre 'name' avec la valeur filtrée
-  if (name) {
-    params.set('name', name); // Ajoute ou met à jour le paramètre
-  } else {
-    params.delete('name'); // Supprime le paramètre si le nom est vide (par ex., si le filtre est réinitialisé)
+  // Mettre à jour ou ajouter le paramètre avec la clé et la valeur spécifiées
+  if (key && value) {
+    params.set(key, value); // Ajoute ou met à jour le paramètre
+  } else if (key) {
+    params.delete(key); // Supprime le paramètre si la valeur est vide (par ex., si le filtre est réinitialisé)
   }
 
   // Construire la nouvelle URL avec les paramètres mis à jour
@@ -143,9 +143,6 @@ export function AddFilterQueryString(name: string) {
 
   // Mettre à jour l'URL dans le navigateur sans recharger la page
   window.history.replaceState(null, '', newUrl);
-
-  // Afficher les résultats filtrés selon la logique du filtre
-  console.log('Filtres appliqués :', params.toString());
 }
 
 //fonction permettant de retourner le temps par minutes afin de permettre le filtre
