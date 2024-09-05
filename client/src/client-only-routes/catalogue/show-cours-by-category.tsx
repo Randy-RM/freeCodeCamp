@@ -302,10 +302,10 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (paginatedData.length === 0) {
+      if (!isDataOnLoading) {
         setShowMessage(true);
       }
-    }, 14000);
+    }, 54000);
 
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -379,7 +379,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
               onClick={() => {
                 setShowFilter(e => !e);
               }}
-              className='show-filter-button'
+              className='show-filter-button '
             >
               <span>Filtrer</span>
               <svg
@@ -387,6 +387,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                 height='20px'
                 viewBox='0 0 24 24'
                 xmlns='http://www.w3.org/2000/svg'
+                className=''
               >
                 <g>
                   <path fill='none' d='M0 0h24v24H0z' />

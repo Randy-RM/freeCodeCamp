@@ -523,7 +523,13 @@ export function Courses(props: CoursesProps): JSX.Element {
                 />
               )}
 
-              <div className='card-courses-detail-container'>
+              <div
+                className={
+                  showFilter
+                    ? 'hide_on_mobile '
+                    : ' card-courses-detail-container '
+                }
+              >
                 <div>
                   <h2 className='big-subheading'>Explorer notre catalogue</h2>
                 </div>

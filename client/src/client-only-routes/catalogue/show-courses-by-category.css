@@ -68,7 +68,8 @@
 }
 
 .hidden_all_container {
-  display: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .catalog-title_space {
@@ -115,4 +116,14 @@
 
 .no-courses button:hover {
   background-color: #b71c1c;
+}
+
+@media (max-width: 468px) {
+  .hidden_all_container {
+    display: none;
+  }
+
+  .hide_on_mobile {
+    display: none;
+  }
 }

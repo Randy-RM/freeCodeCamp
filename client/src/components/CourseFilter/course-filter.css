@@ -211,4 +211,12 @@ details[open] > *:not(summary) {
   span {
     font-size: 1rem;
   }
+
+  .main-title-filter-container > svg {
+    display: none;
+  }
+
+  .filter-container {
+    top: 1px;
+  }
 }

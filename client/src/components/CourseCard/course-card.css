@@ -1,6 +1,6 @@
-.pull {
+/* .pull {
   float: right;
-}
+} */
 
 .push {
   gap: 1rem;
@@ -255,7 +255,7 @@ img {
 
 @media (max-width: 1024px) {
   .card-course-detail-back {
-    width: 47%;
+    width: 46%;
     /* margin-bottom: 5%; */
   }
 
@@ -270,7 +270,7 @@ img {
 
 @media (max-width: 768px) {
   .card-course-detail-back {
-    width: 47%;
+    width: 46%;
   }
 
   .card-course-detail-unit {
@@ -279,10 +279,13 @@ img {
 
   .push {
     width: 17rem;
+    display: block;
   }
 
   .push__card {
     width: 17rem;
+    display: block;
+    float: none;
   }
 }
 
