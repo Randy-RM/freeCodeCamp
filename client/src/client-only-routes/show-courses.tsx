@@ -526,8 +526,8 @@ export function Courses(props: CoursesProps): JSX.Element {
               <div
                 className={
                   showFilter
-                    ? 'hide_on_mobile '
-                    : ' card-courses-detail-container '
+                    ? 'card-courses-detail-container  hide_on_mobile'
+                    : 'card-courses-detail-container  '
                 }
               >
                 <div>

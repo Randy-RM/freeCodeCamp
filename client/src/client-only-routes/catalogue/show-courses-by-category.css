@@ -118,6 +118,11 @@
   background-color: #b71c1c;
 }
 
+.hide_on_mobile {
+  display: flex;
+  flex-direction: column;
+}
+
 @media (max-width: 468px) {
   .hidden_all_container {
     display: none;

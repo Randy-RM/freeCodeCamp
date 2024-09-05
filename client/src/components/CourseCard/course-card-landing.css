@@ -163,6 +163,10 @@ img {
   .card-course-detail-unit {
     width: 100%;
   }
+
+  .card-course-detail-container-on-card {
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {

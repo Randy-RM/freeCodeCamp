@@ -204,6 +204,9 @@ details[open] > *:not(summary) {
   span {
     font-size: 1rem;
   }
+  .main-title-filter-container > svg {
+    display: none;
+  }
 }
 
 @media (max-width: 468px) {
