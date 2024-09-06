@@ -1,8 +1,7 @@
 import { Grid } from '@freecodecamp/react-bootstrap';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Helmet from 'react-helmet';
 
-// import { useTranslation } from 'react-i18next';PhBookBookmark
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,6 +10,7 @@ import {
   faChevronLeft,
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import PathCard from '../components/PathCard/path-card';
 
 import envData from '../../../config/env.json';
@@ -56,6 +56,21 @@ import '../components/CourseFilter/course-filter.css';
 import CourseFilter from '../components/CourseFilter/course-filter';
 import sortCourses from '../components/helpers/sort-course';
 import CoursesCategoryCard from '../components/CoursesCategoryCard/courses-category-card';
+import {
+  allDataCourses,
+  categoryCours,
+  coursesMoodle,
+  coursesRaven,
+  pathRaven,
+  valueOfCurrentCategory
+  // valueOfLanguage,
+  // valueOfTypeCourse,
+  // valueOfTypeDuration,
+  // valueOfTypeLevel
+} from '../redux/atoms';
+import { UnifiedCourse } from '../redux/types';
+// import { RootState, UnifiedCourse } from '../redux/types';
+// import { fetchRavenCoursesRequest } from '../redux/settings/actions_fetchData';
 
 const { moodleApiBaseUrl, moodleApiToken, moodleBaseUrl, ravenAwsApiKey } =
   envData;
@@ -163,6 +178,8 @@ export interface RavenFetchCoursesDto {
   valid_to: string;
 }
 
+type Courses = MoodleCourse | RavenCourse;
+
 const mapStateToProps = createSelector(
   signInLoadingSelector,
   userSelector,
@@ -182,7 +199,7 @@ const mapDispatchToProps = {
 export const scrollTo = (top: number) => {
   if (typeof window !== 'undefined') {
     window.scrollTo({
-      top,
+      top: top,
       left: 0,
       behavior: 'smooth'
     });
@@ -190,18 +207,11 @@ export const scrollTo = (top: number) => {
 };
 
 export function Courses(props: CoursesProps): JSX.Element {
-  // const { t } = useTranslation();
   const {
     // isSignedIn,
     showLoading
     // user: { name, phone }
   } = props;
-  const [moodleCourses, setMoodleCourses] =
-    useState<MoodleCoursesCatalogue | null>();
-
-  const [ravenCourses, setRavenCourses] = useState<
-    RavenCourse[] | null | undefined
-  >([]);
   const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [showFilter, setShowFilter] = useState<boolean>(false);
@@ -209,13 +219,34 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [screenWidth, setScreenWidth] = useState<number>(
     typeof window !== 'undefined' ? window.innerWidth : 900
   );
-  const [courseCategories, setCourseCategories] = useState<
-    MoodleCourseCategory[] | null
-  >();
+  const [courseCategories, setCourseCategories] = useRecoilState<
+    MoodleCourseCategory[] | null | undefined
+  >(categoryCours);
+  const [currentCategory, setCurrentCategory] = useRecoilState(
+    valueOfCurrentCategory
+  );
+  const [dataForAllCourses, setDataForallCourse] =
+    useRecoilState<UnifiedCourse[]>(allDataCourses);
+  const allDataofCourses = useRecoilValue(allDataCourses);
+  const [dataRaven, setDataRaven] = useRecoilState<
+    RavenCourse[] | null | undefined
+  >(coursesRaven);
+  const [dataRavenPath, setDataRavenPath] =
+    useRecoilState<RavenCourse[]>(pathRaven);
+  const [dataMoodle, setDataMoodle] = useRecoilState<
+    MoodleCoursesCatalogue | null | undefined
+  >(coursesMoodle);
+  // const [valueLangue, setValueLangue] = useRecoilState(valueOfLanguage);
+  // const [valueOfCourseType, setValueOfCourseType] =
+  //   useRecoilState(valueOfTypeCourse);
+  // const [valueDuration, setValueDuration] = useRecoilState(valueOfTypeDuration);
+  // const [valueLevel, setValueLevel] = useRecoilState(valueOfTypeLevel);
 
-  const [currentCategory, setCurrentCategory] = useState<number | null>(null);
+  // const [allDataRessourceCourse, setAllDataRessource] =
+  //   useRecoilState(myAllDataCourses);
 
-  const [ravenPath, setRavenPath] = useState<RavenCourse[]>([]);
+  // const dispatch = useDispatch();
+  // const mesCoursesRaven = useSelector((state:RootState) => state.mesCouresRaven.courses);
 
   const ravenLocalToken = getRavenTokenDataFromLocalStorage();
 
@@ -232,7 +263,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       valid_to: '06-24-2024'
     };
     const getReveanCourses = await getAwsCourses(ravenData);
-    setRavenCourses(getReveanCourses as RavenCourse[]);
+    setDataRaven(getReveanCourses as RavenCourse[]);
   };
 
   const getRavenResourcesPath = async () => {
@@ -245,7 +276,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       valid_to: '06-24-2024'
     };
     const getReveanCourses = await getAwsPath(ravenData);
-    setRavenPath(getReveanCourses as unknown as RavenCourse[]);
+    setDataRavenPath(getReveanCourses as unknown as RavenCourse[]);
   };
 
   const getRavenToken = async () => {
@@ -257,9 +288,9 @@ export function Courses(props: CoursesProps): JSX.Element {
 
       if (generateRavenToken) {
         addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
-        return generateRavenToken; // Retourner le nouveau token
+        return generateRavenToken;
       } else {
-        return null; // Retourner null si la génération a échoué
+        return null;
       }
     } else {
       // Vérifier si le token existant a expiré d'une heure ou plus
@@ -324,24 +355,27 @@ export function Courses(props: CoursesProps): JSX.Element {
     const sortedCourses = sortCourses(splitCourses);
 
     if (moodleCatalogue != null) {
-      setMoodleCourses(sortedCourses);
+      setDataMoodle(sortedCourses);
     } else {
-      setMoodleCourses(null);
+      setDataMoodle(null);
     }
   };
 
-  const allCourses = [
-    ...(ravenCourses || []),
-    ...(moodleCourses?.result ? moodleCourses.result.flat() : []),
-    ...(ravenPath ? ravenPath : [])
-  ];
+  const allCourses: (MoodleCourse | RavenCourse)[] = useMemo(
+    () => [
+      ...(dataRaven || []),
+      ...(dataMoodle?.result ? dataMoodle.result.flat() : []),
+      ...(dataRavenPath ? dataRavenPath : [])
+    ],
+    [dataRaven, dataMoodle, dataRavenPath]
+  );
 
   const {
     paginatedData,
     totalPages,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     currentPage: page
-  } = paginate(allCourses, currentPage);
+  } = paginate(allDataofCourses, currentPage);
 
   const onNavigateForward = () => {
     if (currentPage < totalPages && currentPage > 0) {
@@ -361,6 +395,81 @@ export function Courses(props: CoursesProps): JSX.Element {
     }
   };
 
+  // useEffect(() => {
+  //   if (currentCategory === -2) {
+  //     if (valueLangue !== 'none') {
+  //       setDataForallCourse(
+  //         allDataofCourses.filter(
+  //           course =>
+  //             'launch_url' in course &&
+  //             course.category?.[0]?.tags?.[0]?.title === valueLangue
+  //         )
+  //       );
+  //     } else {
+  //       setDataForallCourse(allDataofCourses);
+  //     }
+  //   }
+  //   setValueLangue(valueLangue);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [valueLangue, allDataofCourses]);
+
+  // useEffect(() => {
+  //   if (currentCategory === 11||
+  //     currentCategory === 13|| currentCategory === 14
+  //   ) {
+  //     if (valueDuration !== 'none') {
+
+  //       setDataForallCourse(
+  //         allDataofCourses.filter(
+  //           course =>
+  //             'categorieid' in course &&
+  //             course.category?.[0]?.tags?.[0]?.title === valueLangue
+  //         )
+  //       );
+  //     } else {
+  //       setDataForallCourse(allDataofCourses);
+  //     }
+  //   }
+  //   setValueLangue(valueLangue);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [valueLangue, allDataofCourses]);
+
+  // useEffect(() => {
+  //   if (currentCategory === -2) {
+  //     if (valueLevel !== 'none') {
+  //       const filterByLevel = allDataofCourses.filter(
+  //         course => 'launch_url' in course && course.skill_level === valueLevel
+  //       );
+  //       setDataForallCourse(filterByLevel);
+  //     } else {
+  //       setDataForallCourse(allDataofCourses);
+  //     }
+  //   }
+
+  //   setValueLevel(valueLevel);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [valueLevel, allDataofCourses]);
+
+  // useEffect(() => {
+  //   if (currentCategory === -2) {
+  //     if (valueOfCourseType !== 'none') {
+  //       setDataForallCourse(
+  //         allDataofCourses.filter(
+  //           course => 'launch_url' in course && course.long_description
+  //         )
+  //       );
+  //     } else {
+  //       setDataForallCourse(allDataofCourses);
+  //     }
+  //   }
+  //   setValueOfCourseType(valueOfCourseType);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [valueOfCourseType, allDataofCourses]);
+
+  // useEffect(() => {
+  //   setAllDataRessource(allDataRessoucesCourses);
+  // }, [currentCategory, allDataRessoucesCourses]);
+
   useEffect(() => {
     void getRavenResourcesPath();
 
@@ -368,9 +477,18 @@ export function Courses(props: CoursesProps): JSX.Element {
   }, [currentPage]);
 
   useEffect(() => {
+    setDataForallCourse(allCourses);
+  }, [allCourses, dataForAllCourses, setDataForallCourse]);
+
+  useEffect(() => {
     void getRavenResources();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
+
+  //   useEffect(() => {
+  //   dispatch(fetchRavenCoursesRequest());
+
+  // }, [dispatch]);
 
   useEffect(() => {
     void getMoodleCourses();
@@ -381,7 +499,7 @@ export function Courses(props: CoursesProps): JSX.Element {
       }
     }, 2000);
     return () => {
-      setMoodleCourses(null); // cleanup useEffect to perform a React state update
+      setDataMoodle(null); // cleanup useEffect to perform a React state update
       setIsDataOnLoading(true); // cleanup useEffect to perform a React state update
       clearTimeout(timer);
     };
@@ -405,10 +523,12 @@ export function Courses(props: CoursesProps): JSX.Element {
       showFilter && setScreenWidth(window.innerWidth);
     });
   }
-
-  // const formatdate = (data: number) => {
-  //   return new Date(data * 1000).toLocaleDateString();
-  // };
+  if (isDataOnLoading) {
+    console.log(isDataOnLoading);
+  }
+  useEffect(() => {
+    setCurrentCategory(null);
+  }, [currentPage, setCurrentCategory]);
 
   useEffect(() => {
     if (screenWidth > 990) setShowFilter(true);
@@ -418,11 +538,9 @@ export function Courses(props: CoursesProps): JSX.Element {
   useEffect(() => {
     void getMoodleCourseCategory();
 
-    ravenCourses?.length == 0
+    dataRaven?.length == 0
       ? setIsDataOnLoading(false)
       : setIsDataOnLoading(false);
-
-    console.log(isDataOnLoading);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -462,10 +580,10 @@ export function Courses(props: CoursesProps): JSX.Element {
             <div className='card-filter-container'>
               {showFilter && (
                 <CourseFilter
-                  setRavenPath={setRavenPath}
+                  setRavenPath={setDataRavenPath}
                   screenWidth={screenWidth}
-                  setRavenCourses={setRavenCourses}
-                  setMoodleCourses={setMoodleCourses}
+                  setRavenCourses={setDataRaven}
+                  setMoodleCourses={setDataMoodle}
                   setShowFilter={setShowFilter}
                   setIsDataOnLoading={setIsDataOnLoading}
                   courseCategories={courseCategories}
@@ -483,21 +601,21 @@ export function Courses(props: CoursesProps): JSX.Element {
 
                 <CoursesCategoryCard
                   courseCategories={courseCategories}
-                  setRavenPath={setRavenPath}
+                  setRavenPath={setDataRavenPath}
                   setCurrentCategory={setCurrentCategory}
                   currentCategory={currentCategory}
                   screenWidth={setScreenWidth}
                   setCurrentPage={setCurrentPage}
                   setIsDataOnLoading={setIsDataOnLoading}
-                  setMoodleCourses={setMoodleCourses}
-                  setRavenCourses={setRavenCourses}
+                  setMoodleCourses={setDataMoodle}
+                  setRavenCourses={setDataRaven}
                 />
 
                 <div className='course__number'>
                   <p>Parcourir le catalogue complet</p>
                   <span>
-                    {allCourses.length > 0 &&
-                      allCourses.length +
+                    {paginatedData.length > 0 &&
+                      paginatedData.length +
                         (currentCategory == null || currentCategory == -1
                           ? 2
                           : 0)}{' '}

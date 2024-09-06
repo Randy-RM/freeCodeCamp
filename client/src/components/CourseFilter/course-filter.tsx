@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './course-filter.css';
 
+import { navigate } from 'gatsby';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useLocation } from '@reach/router';
 import {
   addRavenTokenToLocalStorage,
   generateRavenTokenAcces,
@@ -17,8 +20,18 @@ import {
   MoodleCoursesCatalogue,
   scrollTo
 } from '../../client-only-routes/show-courses';
-import { splitArray } from '../helpers';
+import { Spacer, splitArray } from '../helpers';
 import sortCourses from '../helpers/sort-course';
+import routes from '../../utils/routes';
+import {
+  myAllDataCourses,
+  titleOfCategorieValue,
+  valueOfCurrentCategory
+} from '../../redux/atoms';
+import OtherFilter from './other-filter';
+import FilterByType from './filter-by-type';
+import FilterByLevel from './filter-by-level';
+import FilterByDuration from './filter-by-duration';
 
 type MoodleCoursesFiltered = {
   courses: MoodleCourse[] | null;
@@ -62,8 +75,6 @@ const CourseFilter = ({
   setShowFilter,
   screenWidth,
   courseCategories,
-  // setProgrammingCategory,
-  currentCategory,
   setCurrentCategory,
   setCurrentPage
 }: {
@@ -87,6 +98,14 @@ const CourseFilter = ({
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }): JSX.Element => {
   const [showSubjectFilter, setShowSubjectFilter] = useState<boolean>(true);
+  const setValueOfButton = useSetRecoilState(titleOfCategorieValue);
+  const [currentCurrent, setCurrentCurrent] = useRecoilState(
+    valueOfCurrentCategory
+  );
+
+  const location = useLocation();
+
+  const setValueOfAllDataRessoures = useSetRecoilState(myAllDataCourses);
 
   const filterByCategory = async (categoryId: number) => {
     setIsDataOnLoading(true);
@@ -194,7 +213,13 @@ const CourseFilter = ({
   };
 
   return (
-    <div className='filter-container'>
+    <div
+      className={
+        location.pathname == '/catalogue'
+          ? 'filter-container_hidden-scrol'
+          : 'filter-container'
+      }
+    >
       <div className='main-title-filter-container'>
         <h2 className='main-title-filter'>Filtrer par :</h2>
         <svg
@@ -248,17 +273,27 @@ const CourseFilter = ({
           {courseCategories && (
             <button
               className={`filter-button ${
-                currentCategory == null ? 'selected-category' : ''
+                currentCurrent == null ? 'selected-category' : ''
               }`}
               onClick={() => {
-                void getMoodleCourses();
-                void getRavenCourses();
-                void getRavenResourcesPath();
-                setCurrentPage(1);
-                setCurrentCategory(null);
-                // setProgrammingCategory(true);
-                scrollTo(130);
-                if (screenWidth < 990) setShowFilter(e => !e);
+                void (async () => {
+                  if (location.pathname === '/catalogue') {
+                    window.location.reload();
+                  } else {
+                    void navigate('/catalogue');
+                  }
+                  setValueOfAllDataRessoures([]);
+                  await getMoodleCourses();
+                  await getRavenCourses();
+                  await getRavenResourcesPath();
+                  setCurrentPage(1);
+                  setCurrentCategory(null);
+                  setCurrentCurrent(null);
+
+                  // setProgrammingCategory(true);
+                  scrollTo(130);
+                  if (screenWidth < 990) setShowFilter(e => !e);
+                })();
               }}
             >
               Tous
@@ -268,17 +303,20 @@ const CourseFilter = ({
           {courseCategories && (
             <button
               className={`filter-button ${
-                currentCategory == -1 ? 'selected-category' : ''
+                currentCurrent == -1 ? 'selected-category' : ''
               }`}
               onClick={() => {
-                setCurrentCategory(-1);
-                // setCurrentPage(1);
-                // setProgrammingCategory(true);
-                setMoodleCourses(null);
-                setRavenCourses(null);
-                setRavenPath(null);
-                scrollTo(130);
-                if (screenWidth < 990) setShowFilter(e => !e);
+                void (() => {
+                  setCurrentCurrent(-1);
+                  setValueOfButton('Programmation');
+                  setValueOfAllDataRessoures([]);
+                  void navigate(routes.catalogue.programmation);
+                  setMoodleCourses(null);
+                  setRavenCourses(null);
+                  setRavenPath(null);
+                  scrollTo(130);
+                  if (screenWidth < 990) setShowFilter(e => !e);
+                })();
               }}
             >
               Programmation
@@ -287,45 +325,87 @@ const CourseFilter = ({
           {courseCategories && (
             <button
               className={`filter-button ${
-                currentCategory == -2 ? 'selected-category' : ''
+                currentCurrent == -2 ? 'selected-category' : ''
               }`}
               onClick={() => {
-                setCurrentCategory(-2);
-                // setCurrentPage(1);
-                // setProgrammingCategory(true);
-                setMoodleCourses(null);
-                void getRavenCourses();
-                void getRavenResourcesPath();
-                scrollTo(130);
-                if (screenWidth < 990) setShowFilter(e => !e);
+                void (async () => {
+                  setCurrentCurrent(-2);
+                  setValueOfButton('Amazon Web Service');
+                  setValueOfAllDataRessoures([]);
+                  void navigate(routes.catalogue.aws);
+                  // setCurrentPage(1);
+                  // setProgrammingCategory(true);
+                  setMoodleCourses(null);
+                  await getRavenCourses();
+                  await getRavenResourcesPath();
+                  scrollTo(130);
+                  if (screenWidth < 990) setShowFilter(e => !e);
+                })();
               }}
             >
-              AWS
+              Amazon Web Service
             </button>
           )}
 
-          {courseCategories?.map((element, index) => {
+          {courseCategories?.map((course, index) => {
             return (
               <button
+                key={index}
                 className={`filter-button ${
-                  currentCategory == element?.id ? 'selected-category' : ''
+                  currentCurrent == course?.id ? 'selected-category' : ''
                 }`}
                 onClick={() => {
-                  void filterByCategory(element?.id);
-                  setRavenCourses(null);
-                  setRavenPath(null);
-                  setCurrentCategory(element?.id);
-                  setCurrentPage(1);
-                  scrollTo(130);
-                  // setProgrammingCategory(false);
-                  if (screenWidth < 990) setShowFilter(e => !e);
+                  void (async () => {
+                    setValueOfAllDataRessoures([]);
+                    await filterByCategory(course?.id ? course?.id : 0);
+                    setRavenCourses(null);
+
+                    setRavenPath(null);
+                    setCurrentCategory(course?.id);
+                    setCurrentCurrent(course?.id);
+                    setValueOfButton(
+                      course?.name.includes('Marketing')
+                        ? 'Marketing & Communication'
+                        : course?.name
+                    );
+                    setCurrentPage(1);
+                    void navigate(
+                      routes.catalogue.catalogueTitle.replace(
+                        ':value',
+                        course?.name.includes('Marketing')
+                          ? 'Marketing-Communication'
+                          : course?.name
+                      )
+                    );
+                    scrollTo(130);
+                    // setProgrammingCategory(false);
+                    if (screenWidth < 990) setShowFilter(e => !e);
+                  })();
                 }}
-                key={index}
-                dangerouslySetInnerHTML={{ __html: element?.name }}
-              ></button>
+              >
+                {course?.name.includes('Marketing')
+                  ? 'Marketing'
+                  : course?.name}
+              </button>
             );
           })}
         </ul>
+        <div
+          className={
+            location.pathname == '/catalogue'
+              ? 'hidden-filter-on-Catalogue'
+              : ''
+          }
+        >
+          <Spacer size={1} />
+          <OtherFilter />
+          <Spacer size={1} />
+          <FilterByType />
+          <Spacer size={1} />
+          <FilterByLevel />
+          <Spacer size={1} />
+          <FilterByDuration />
+        </div>
       </details>
     </div>
   );
