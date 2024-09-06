@@ -21,7 +21,7 @@ export function convertTime(timeInput: string | number): string {
   if (totalMinutes < 1) {
     return `< 1 minute`;
   } else if (totalMinutes < 60) {
-    return `${totalMinutes} min`;
+    return `${totalMinutes} minutes`;
   }
 
   // Calculer les heures et les minutes restantes
@@ -31,7 +31,7 @@ export function convertTime(timeInput: string | number): string {
   if (remainingMinutes === 0) {
     return `${hours} h${hours > 1 ? 's' : ''}`;
   } else {
-    return `${hours} h${hours > 1 ? 's' : ''} ${remainingMinutes} min`;
+    return `${hours} h${hours > 1 ? 's' : ''} ${remainingMinutes} minutes`;
   }
 }
 
@@ -81,17 +81,17 @@ export function convertTimestampToTime(timestamp: number) {
   // Retourner le temps formaté
   if (parseInt(formattedHours) < 1) {
     if (parseInt(formattedMinutes) < 1) {
-      return `> 1 min`;
+      return `> 1 minutes`;
     }
-    return `${formattedMinutes} min`;
+    return `${formattedMinutes} minutes`;
   } else if (parseInt(formattedHours) > 1) {
     if (parseInt(formattedMinutes) < 1) {
       return `${formattedHours}h `;
     }
-    return `${formattedHours}h ${formattedMinutes} min`;
+    return `${formattedHours}h ${formattedMinutes} minutes`;
   }
 
-  return `${formattedHours}h ${formattedMinutes} min`;
+  return `${formattedHours}h ${formattedMinutes} minutes`;
 }
 
 export function convertTimestampToHours(timestamp: number): number {
@@ -166,4 +166,20 @@ export function convertTimeForFilter(timeInput: string | number): number {
   }
 
   return totalMinutes;
+}
+
+//formatage des descriptions RAven
+
+export function formatDescription(description: string) {
+  let cleanedDescription = description
+    .replace(/\n+/g, ' ') // Remplace tous les retours à la ligne par un espace simple
+    .replace(/\s{2,}/g, ' ') // Réduit les espaces multiples à un seul espace
+    .replace(/ {6,}/g, match => ' '.repeat(match.length % 5)) // Remplace les espaces de plus de 5 caractères par un seul espace
+    .trim();
+
+  if (cleanedDescription.length > 120) {
+    cleanedDescription = cleanedDescription.substring(0, 120).trim() + '...';
+  }
+
+  return cleanedDescription;
 }
