@@ -25,6 +25,19 @@
   margin: 0 auto;
 }
 
+.signin-link {
+  font-size: 18px;
+  padding: 8px 16px;
+}
+
+.signin-link:hover {
+  background-color: #e5203d !important;
+}
+
+.signin-link span {
+  font-size: inherit;
+}
+
 .landing-signup-form span {
   font-size: inherit;
   font-weight: inherit;

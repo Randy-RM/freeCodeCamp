@@ -30,7 +30,7 @@ function Hero(): JSX.Element {
             onClick={() => void navigate('#trainings')}
             // onClick={() => void navigate('/catalogue')}
           >
-            <span>Choisis ta formation</span>
+            <span className='font-bold'>Choisis ta formation</span>
             <span className='flex h-full items-center'>
               <FaAngleRight />
             </span>

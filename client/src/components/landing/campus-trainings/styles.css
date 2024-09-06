@@ -13,6 +13,10 @@
   background-color: #49aaee !important;
 }
 
+.training:hover > .training-arrow-white-link {
+  color: #49aaee;
+}
+
 .training-name {
   padding: 0;
   margin: 0;
@@ -42,10 +46,27 @@
   left: 15px;
   pointer-events: none;
   background-image: url('./../../../assets/images/landing/trainings/bootcamp.png');
-  background-position: right;
   background-repeat: no-repeat;
+  background-position: right;
   background-size: contain;
   z-index: 20;
+}
+
+@media only screen and (min-width: 1000px) {
+  .bootcamp-preview-hero-bg,
+  .join-section-bg {
+    width: 80% !important;
+  }
+
+  .bootcamp-preview-hero-content,
+  .join-section-content {
+    width: 80%;
+    margin-left: auto;
+  }
+
+  .join-section-content h2 {
+    max-width: 50%;
+  }
 }
 
 .bootcamp-preview-hero-content {
@@ -114,12 +135,6 @@
   z-index: 30;
 }
 
-@media only screen and (min-width: 600px) {
-  .join-section-content {
-    max-width: 60%;
-  }
-}
-
 .join-section-content h2 {
   color: white;
 }
@@ -166,6 +181,19 @@ a:hover {
   color: #fff;
   rotate: 45deg;
   font-size: 28px;
+  transition: all linear 100ms;
+}
+
+.training-arrow-white-link {
+  padding: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #fff;
+  color: #e5203d;
+  rotate: 45deg;
+  font-size: 20px;
   transition: all linear 100ms;
 }
 

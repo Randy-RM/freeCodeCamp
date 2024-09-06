@@ -11,24 +11,42 @@ import pullman from './../../../assets/images/landing/partners/pullman.png';
 import rawbank from './../../../assets/images/landing/partners/rawbank.png';
 import texaf from './../../../assets/images/landing/partners/texaf.png';
 import './styles.css';
+import envData from './../../../../../config/env.json';
+
+const { apiLocation } = envData;
 
 const partners = [rawbank, internews, texaf, pullman];
 
 const trainings = [
   {
     name: 'Bootcamp Carrière',
-    description: 'Formation longue sur notre campus',
+    description: (
+      <span className='training-description text-white'>
+        Formation <span className='font-bold text-inherit'>longue</span> sur
+        notre campus
+      </span>
+    ),
     link: 'https://www.kadea.academy/formations/dev-web'
   },
   {
     name: 'Boost',
-    description: 'Formation courte sur nos campus',
+    description: (
+      <span className='training-description text-white'>
+        Formation <span className='font-bold text-inherit'>courte</span> sur
+        notre campus
+      </span>
+    ),
     link: 'https://www.kadea.academy/boost'
   },
   {
     name: 'Initiation',
-    description: 'Formation gratuite en ligne',
-    link: 'https://www.kadea.academy'
+    description: (
+      <span className='training-description text-white'>
+        Formation <span className='font-bold text-inherit'>gratuite</span> en
+        ligne
+      </span>
+    ),
+    link: `${apiLocation}/signin`
   }
 ];
 
@@ -75,17 +93,18 @@ export default function LandingCampusTrainings() {
             rel='noreferrer'
             href={training.link}
             target='_blank'
-            className='w-full justify-between training flex flex-col gap p-normal bg-primary rounded-md'
+            className='w-full relative justify-between training flex flex-col gap p-normal bg-primary rounded-md'
             key={i.valueOf()}
           >
+            <span className='absolute training-arrow-white-link top-1 right-1'>
+              <IoIosArrowRoundUp />
+            </span>
             <div className='w-full flex items-start justify-between'>
               <h4 className='training-name text-white p-0 m-0'>
                 {training.name}
               </h4>
             </div>
-            <small className='training-description text-white'>
-              {training.description}
-            </small>
+            {training.description}
           </a>
         ))}
       </div>
