@@ -4,6 +4,7 @@ import {
   MoodleCoursesCatalogue,
   RavenCourse
 } from '../client-only-routes/show-courses';
+import { RavenTokenData } from '../utils/ajax';
 import { UnifiedCourse } from './types';
 // import { MoodleCourseCategory, MoodleCoursesCatalogue } from '../client-only-routes/show-courses';
 
@@ -61,6 +62,14 @@ export const valueOfTypeLevel = atom<string | null>({
   effects_UNSTABLE: [localStorageEffect('valueOfTypeLevel')]
 });
 
+//atom pour la valeur du token pour des contenu Raven
+export const tokenRaven = atom<RavenTokenData | null>({
+  key: 'tokenRaven',
+  default: null,
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  effects_UNSTABLE: [localStorageEffect('tokenRaven')]
+});
+
 //atom pour la valeur du la duration des contenu
 export const valueOfTypeDuration = atom<string | null>({
   key: 'valueOfTypeDuration',
@@ -78,10 +87,17 @@ export const checkedBox = atom<boolean>({
 });
 
 export const isDataLoadingTrue = atom<boolean>({
-  key: 'checkedBox',
+  key: 'isDataLoadingTrue',
   default: true,
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  effects_UNSTABLE: [localStorageEffect('checkedBox')]
+  effects_UNSTABLE: [localStorageEffect('isDataLoadingTrue')]
+});
+
+export const asCategoryHaveCourses = atom<boolean>({
+  key: 'asCategoryHaveCourses',
+  default: true,
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  effects_UNSTABLE: [localStorageEffect('asCategoryHaveCourses')]
 });
 
 // Atom pour les données des cours, avec typage explicite

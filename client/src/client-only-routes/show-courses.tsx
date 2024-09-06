@@ -10,7 +10,7 @@ import {
   faChevronLeft,
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import PathCard from '../components/PathCard/path-card';
 
 import envData from '../../../config/env.json';
@@ -44,7 +44,8 @@ import {
   getExternalResource,
   getRavenTokenDataFromLocalStorage,
   removeRavenTokenFromLocalStorage,
-  getAwsPath
+  getAwsPath,
+  RavenTokenData
 } from '../utils/ajax';
 import {
   convertTime,
@@ -62,6 +63,7 @@ import {
   coursesMoodle,
   coursesRaven,
   pathRaven,
+  tokenRaven,
   valueOfCurrentCategory
   // valueOfLanguage,
   // valueOfTypeCourse,
@@ -114,6 +116,10 @@ export type MoodleCourse = {
   format: string;
   timecreated: number;
   timemodified: number;
+  langue: string;
+  duration: number;
+  level: string;
+  type: string;
 };
 
 export type MoodleCoursesCatalogue = {
@@ -138,13 +144,6 @@ export type RavenCourse = {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   skill_level: string;
 };
-interface RavenTokenData {
-  token: string;
-  expiresIn: number;
-  validFrom: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  valid_to: string;
-}
 
 type Tag = {
   title: string;
@@ -236,6 +235,7 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [dataMoodle, setDataMoodle] = useRecoilState<
     MoodleCoursesCatalogue | null | undefined
   >(coursesMoodle);
+  const setTakeTokenValue = useSetRecoilState(tokenRaven);
   // const [valueLangue, setValueLangue] = useRecoilState(valueOfLanguage);
   // const [valueOfCourseType, setValueOfCourseType] =
   //   useRecoilState(valueOfTypeCourse);
@@ -288,8 +288,12 @@ export function Courses(props: CoursesProps): JSX.Element {
 
       if (generateRavenToken) {
         addRavenTokenToLocalStorage(generateRavenToken as RavenTokenData);
+        setTakeTokenValue(generateRavenToken as RavenTokenData);
+
         return generateRavenToken;
       } else {
+        setTakeTokenValue(null);
+
         return null;
       }
     } else {
@@ -315,6 +319,7 @@ export function Courses(props: CoursesProps): JSX.Element {
         }
       } else {
         // Le token est encore valide, retourner le token existant
+        setTakeTokenValue(ravenTokenData);
         return ravenTokenData;
       }
     }
@@ -394,81 +399,6 @@ export function Courses(props: CoursesProps): JSX.Element {
       setCurrentPage(currentPage);
     }
   };
-
-  // useEffect(() => {
-  //   if (currentCategory === -2) {
-  //     if (valueLangue !== 'none') {
-  //       setDataForallCourse(
-  //         allDataofCourses.filter(
-  //           course =>
-  //             'launch_url' in course &&
-  //             course.category?.[0]?.tags?.[0]?.title === valueLangue
-  //         )
-  //       );
-  //     } else {
-  //       setDataForallCourse(allDataofCourses);
-  //     }
-  //   }
-  //   setValueLangue(valueLangue);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [valueLangue, allDataofCourses]);
-
-  // useEffect(() => {
-  //   if (currentCategory === 11||
-  //     currentCategory === 13|| currentCategory === 14
-  //   ) {
-  //     if (valueDuration !== 'none') {
-
-  //       setDataForallCourse(
-  //         allDataofCourses.filter(
-  //           course =>
-  //             'categorieid' in course &&
-  //             course.category?.[0]?.tags?.[0]?.title === valueLangue
-  //         )
-  //       );
-  //     } else {
-  //       setDataForallCourse(allDataofCourses);
-  //     }
-  //   }
-  //   setValueLangue(valueLangue);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [valueLangue, allDataofCourses]);
-
-  // useEffect(() => {
-  //   if (currentCategory === -2) {
-  //     if (valueLevel !== 'none') {
-  //       const filterByLevel = allDataofCourses.filter(
-  //         course => 'launch_url' in course && course.skill_level === valueLevel
-  //       );
-  //       setDataForallCourse(filterByLevel);
-  //     } else {
-  //       setDataForallCourse(allDataofCourses);
-  //     }
-  //   }
-
-  //   setValueLevel(valueLevel);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [valueLevel, allDataofCourses]);
-
-  // useEffect(() => {
-  //   if (currentCategory === -2) {
-  //     if (valueOfCourseType !== 'none') {
-  //       setDataForallCourse(
-  //         allDataofCourses.filter(
-  //           course => 'launch_url' in course && course.long_description
-  //         )
-  //       );
-  //     } else {
-  //       setDataForallCourse(allDataofCourses);
-  //     }
-  //   }
-  //   setValueOfCourseType(valueOfCourseType);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [valueOfCourseType, allDataofCourses]);
-
-  // useEffect(() => {
-  //   setAllDataRessource(allDataRessoucesCourses);
-  // }, [currentCategory, allDataRessoucesCourses]);
 
   useEffect(() => {
     void getRavenResourcesPath();
@@ -593,7 +523,13 @@ export function Courses(props: CoursesProps): JSX.Element {
                 />
               )}
 
-              <div className='card-courses-detail-container'>
+              <div
+                className={
+                  showFilter
+                    ? 'card-courses-detail-container  hide_on_mobile'
+                    : 'card-courses-detail-container  '
+                }
+              >
                 <div>
                   <h2 className='big-subheading'>Explorer notre catalogue</h2>
                 </div>

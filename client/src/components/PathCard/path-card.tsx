@@ -84,7 +84,7 @@ const PathCard = ({
             </div>
             <div className='card-course-detail-footer'>
               <div className='course-level'>
-                <div className='level-card'>
+                <div className='level-card-parcours'>
                   {level ? (
                     <>
                       <img
@@ -100,21 +100,17 @@ const PathCard = ({
                 </div>
                 <div className='level-card'>
                   {duration ? (
-                    <>
+                    <div className='align'>
                       <img
                         src={clockIcon}
                         alt='icone clock duration'
                         className='clock'
                       />
                       <p className='clock__time'> {duration} </p>
-                    </>
+                    </div>
                   ) : (
                     ''
                   )}
-                </div>
-              </div>
-              <div className='duration pull'>
-                <div className={language ? 'push__card' : 'footer__block'}>
                   {language ? (
                     <>
                       <p className='course__language'>
@@ -125,7 +121,10 @@ const PathCard = ({
                   ) : (
                     ''
                   )}
-
+                </div>
+              </div>
+              <div className='duration pull'>
+                <div className={language ? 'push__card' : 'footer__block'}>
                   {isAvailable ? (
                     <>
                       {link ? (

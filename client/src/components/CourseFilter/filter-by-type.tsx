@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './course-filter.css';
 
 import { useRecoilState, useSetRecoilState } from 'recoil';
@@ -7,6 +7,7 @@ import {
   valueOfCurrentCategory,
   valueOfTypeCourse
 } from '../../redux/atoms';
+import { AddFilterQueryString } from '../../utils/allFunctions';
 
 const FilterByType = () => {
   const [showFilter, setShowFilter] = useState(false);
@@ -17,11 +18,16 @@ const FilterByType = () => {
     valueOfCurrentCategory
   );
 
+  useEffect(() => {
+    AddFilterQueryString('', '');
+  }, []);
+
   const handleLanguageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked;
     const value = isChecked ? e.target.value : 'none'; // Assigner "none" lorsqu'il est décoché
 
     setValuype(value);
+    AddFilterQueryString('type', isChecked ? e.target.value : '');
     setValueChecked(isChecked);
     setValue0fCurrentCategory(currentCategorieValue);
     console.log(showFilter);
