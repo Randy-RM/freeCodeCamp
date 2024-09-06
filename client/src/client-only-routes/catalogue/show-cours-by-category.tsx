@@ -36,6 +36,7 @@ import {
   convertTime,
   convertTimeForFilter,
   convertTimestampToTime,
+  formatDescription,
   getCategoryDescription,
   paginate
 } from '../../utils/allFunctions';
@@ -515,17 +516,27 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                                     icon={awsLogo}
                                     isAvailable={true}
                                     title={`${index + 1}. ${courseTyped.name}`}
-                                    buttonText='Suivre le cours'
+                                    buttonText='Suivre le parcours'
                                     link={courseTyped.launch_url}
-                                    description={courseTyped.long_description}
+                                    description={formatDescription(
+                                      courseTyped.long_description
+                                    )}
                                     duration={convertTime(courseTyped.duration)}
-                                    level={courseTyped.skill_level}
+                                    level={
+                                      courseTyped.skill_level == 'Fundamental'
+                                        ? 'Débutant'
+                                        : ''
+                                    }
                                   />
                                 );
                               } else {
                                 return (
                                   <CourseCard
-                                    level={courseTyped.skill_level}
+                                    level={
+                                      courseTyped.skill_level == 'Fundamental'
+                                        ? 'Débutant'
+                                        : ''
+                                    }
                                     language={language}
                                     key={index.toString()}
                                     icon={awsLogo}
@@ -533,7 +544,9 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                                     title={`${index + 1}. ${courseTyped.name}`}
                                     buttonText='Suivre le cours'
                                     link={courseTyped.launch_url}
-                                    description={courseTyped.short_description}
+                                    description={formatDescription(
+                                      courseTyped.short_description
+                                    )}
                                     duration={convertTime(courseTyped.duration)}
                                   />
                                 );

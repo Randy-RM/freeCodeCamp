@@ -112,49 +112,51 @@ const CourseCard = ({
             </div>
 
             <div className='card-course-detail-footer'>
-              <div className='level-card'>
-                {level ? (
-                  <>
-                    <img
-                      src={levelIcon}
-                      alt='icone clock duration'
-                      className='clock'
-                    />
-                    <p> {level === 'debutant' ? 'Débutant' : level}</p>
-                  </>
-                ) : (
-                  ''
-                )}
-              </div>
-              <div className='duration__language'>
-                {duration ? (
-                  <>
-                    <img
-                      src={clockIcon}
-                      alt='icone clock duration'
-                      className='clock'
-                    />
-                    <p className='clock__time'>{duration} </p>
-                  </>
-                ) : (
-                  ''
-                )}
-              </div>
-
-              <div className='duration pull'></div>
-
-              <div className='push'>
-                <div>
-                  {language ? (
+              <div className='level__duration'>
+                <div className='level-card'>
+                  {level ? (
                     <>
-                      <p className='course__language'>
-                        {language === 'French' ? 'Français' : 'Anglais'}{' '}
-                      </p>
+                      <img
+                        src={levelIcon}
+                        alt='icone clock duration'
+                        className='clock'
+                      />
+                      <p> {level === 'debutant' ? 'Débutant' : level}</p>
                     </>
                   ) : (
                     ''
                   )}
                 </div>
+                <div className='duration__language'>
+                  {duration ? (
+                    <div className='align'>
+                      <img
+                        src={clockIcon}
+                        alt='icone clock duration'
+                        className='clock'
+                      />
+                      <p className='clock__time'>{duration} </p>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  <div>
+                    {language ? (
+                      <>
+                        <p className='course__language'>
+                          {language === 'French' ? 'Français' : 'Anglais'}{' '}
+                        </p>
+                      </>
+                    ) : (
+                      ''
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div className='duration pull'></div>
+
+              <div className='push'>
                 {isAvailable ? (
                   <>
                     {link ? (
