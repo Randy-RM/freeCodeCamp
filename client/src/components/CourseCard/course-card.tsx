@@ -113,7 +113,7 @@ const CourseCard = ({
 
             <div className='card-course-detail-footer'>
               <div className='level__duration'>
-                <div className='level-card'>
+                <div className='level-card-course'>
                   {level ? (
                     <>
                       <img
