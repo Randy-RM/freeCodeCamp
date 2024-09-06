@@ -96,7 +96,7 @@ export const courseDescriptions: Record<CourseCategoryTitle, CourseDetails> = {
   Développement: {
     titre: 'Développement Web',
     summury: `Dans ce parcours, tu apprendras à créer des pages Web avec HTML pour le contenu, CSS pour la conception, et JavaScript pour rendre les sites interactifs. Tu découvriras également les algorithmes, les structures de données, et les bases du langage JavaScript.`,
-    description: `Ce parcours te forme aux bases du développement web : HTML pour le contenu, CSS pour la conception, et JavaScript pour l'interactivité. Tu apprendras aussi à adapter tes pages à différentes tailles d'écran, ainsi que les algorithmes, les structures de données, et les principes du JavaScript.`
+    description: `La programmation est une compétence essentielle qui permet de créer des logiciels, des applications web et mobiles. Nos cours couvrent divers langages comme Python, JavaScript et Java, adaptés à tous les niveaux. Que vous souhaitiez développer des sites web, des jeux ou des outils d’automatisation, ces parcours vous aideront à maîtriser les bases et à progresser vers des projets plus avancés.`
   },
   Design: {
     titre: 'Design',
@@ -108,12 +108,12 @@ export const courseDescriptions: Record<CourseCategoryTitle, CourseDetails> = {
   Bureautique: {
     titre: 'Bureautique',
     summury: `Maîtrise Word, Excel, PowerPoint, Outlook et OneNote. Crée des documents impeccables et analyse des données complexes avec nos cours interactifs.`,
-    description: `Ce parcours complet vous guide du débutant à l'expert pour maîtriser Word, Excel, PowerPoint, Outlook, et OneNote. Grâce à des cours interactifs et des exercices pratiques, vous développerez les compétences pour créer des documents, analyser des données, et gérer votre boîte mail. A la fin de ce cours, vous serez prêt à relever les défis professionnels.`
+    description: `Les compétences en bureautique sont indispensables pour une gestion efficace des tâches professionnelles et personnelles. Nos cours couvrent des outils comme Microsoft Office, Google Workspace et autres logiciels de productivité. Apprenez à créer des documents, des feuilles de calcul, et des présentations professionnelles. Que vous soyez débutant ou avancé, développez vos compétences pour travailler plus efficacement.`
   },
   Marketing: {
     titre: 'Marketing',
     summury: `Apprends les outils et techniques du marketing digital. Crée des stratégies de contenu, optimise ton site et gère les réseaux sociaux efficacement.`,
-    description: `Ce parcours intensif en marketing digital vous forme aux stratégies de contenu, SEO, gestion des réseaux sociaux, et mesure de performance. Maîtrisez les outils pour développer un business en ligne ou diriger le marketing d'une entreprise, en optimisant la communication et les relations publiques.`
+    description: `Le marketing et la communication sont essentiels pour créer et promouvoir une marque efficace. Nos cours vous apprennent à élaborer des stratégies, à maîtriser les réseaux sociaux, le SEO, et la création de contenu. Que vous soyez débutant ou professionnel, vous apprendrez à capter l’attention de votre audience et à optimiser votre impact avec des techniques modernes et des outils numériques.`
   },
   Communication: {
     titre: 'Communication',
@@ -124,13 +124,13 @@ export const courseDescriptions: Record<CourseCategoryTitle, CourseDetails> = {
     titre: 'Intelligence Artificielle',
     summury: `Explore l'IA, imitant les fonctions humaines. Apprends l'IA générative pour créer des contenus (texte, images, sons, vidéos) à travers des applications interactives.`,
     description: `
-Ce cours explore l'IA générative, un domaine en pleine expansion où les ordinateurs créent du contenu original, comme des textes, images, sons ou vidéos. Apprenez à maîtriser ces technologies via des applications interactives. !`
+L’intelligence artificielle transforme la façon dont nous travaillons, avec des outils comme GPT qui boostent la productivité. Nos cours vous guident dans la compréhension et l’application de l’IA, de l'automatisation des tâches à la génération de contenu. Que vous soyez débutant ou expert, apprenez à intégrer l'IA dans vos workflows pour gagner du temps et améliorer vos résultats.`
   },
 
   amazon: {
     titre: 'Amazon web service',
     summury: `Ce cours est conçu pour montrer aux participants comment optimiser l'utilisation du cloud AWS grâce à la compréhension de ces nombreux services et de leur intégration dans la création de solutions basées sur le cloud.`,
-    description: `Ce cours AWS explore les bonnes pratiques cloud, avec des études de cas clients. Il vous apprend à concevoir des infrastructures optimisées et variées en utilisant les services AWS, vous rendant capable de construire des solutions informatiques robustes.`
+    description: `Amazon Web Services (AWS) est une plateforme de cloud computing qui permet de stocker, gérer et déployer des applications en ligne. AWS offre des services tels que le calcul, le stockage et l’intelligence artificielle, utilisés par des entreprises de toutes tailles. Si vous voulez apprendre à maîtriser l’infrastructure cloud et à développer des solutions évolutives, AWS est fait pour vous !`
   }
 };
 
@@ -317,6 +317,8 @@ export const getMoodleCourseCategory = async () => {
     const moodleCategorie = moodleCourseCategories?.filter(
       category => category.coursecount > 0
     );
+    // console.log(mesCoursMoodle);
+
     return moodleCategorie;
   }
 };
@@ -325,29 +327,71 @@ export const getMoodleCourseCategory = async () => {
 
 export const getMoodleCourses = async () => {
   const moodleCatalogue = await getExternalResource<MoodleCourse[]>(
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses&moodlewsrestformat=json`
   );
 
-  const splitCourses: MoodleCoursesCatalogue | null | undefined =
-    moodleCatalogue != null
-      ? splitArray<MoodleCourse>(
-          moodleCatalogue.filter(moodleCourse => {
-            return moodleCourse.visible == 1 && moodleCourse.format != 'site';
-          }),
-          4
-        )
-      : null;
+  // Filtrer les cours visibles et non formatés comme "site"
+  const filteredCourses =
+    moodleCatalogue?.filter(
+      moodleCourse =>
+        moodleCourse.visible === 1 && moodleCourse.format !== 'site'
+    ) || [];
 
-  //Order courses by their publication date
+  // Ajouter des propriétés spécifiques selon le categoryId
+  const coursesWithAdditionalProperties = filteredCourses.map(course => {
+    // Définir des valeurs par défaut
+    let additionalProperties = {
+      level: 'debutant',
+      duration: 0,
+      type: 'cours',
+      langue: 'French'
+    };
+
+    // Appliquer des valeurs spécifiques selon le categoryId
+    switch (course.categoryid) {
+      case 11:
+        additionalProperties = {
+          ...additionalProperties,
+          duration: 21000
+        };
+        break;
+      case 13:
+        additionalProperties = {
+          ...additionalProperties,
+
+          duration: 28800
+        };
+        break;
+      case 14:
+        additionalProperties = {
+          ...additionalProperties,
+          duration: 7200
+        };
+        break;
+      default:
+        break;
+    }
+
+    // Retourner le cours enrichi avec les propriétés supplémentaires
+    return {
+      ...course,
+      ...additionalProperties
+    };
+  });
+
+  // Diviser les cours en groupes de 4
+  const splitCourses: MoodleCoursesCatalogue | null = splitArray<MoodleCourse>(
+    coursesWithAdditionalProperties,
+    4
+  );
+
+  // Trier les cours par date de publication
   const sortedCourses = sortCourses(splitCourses);
 
-  if (moodleCatalogue != null) {
-    return sortedCourses;
-  } else {
-    return null;
-  }
+  // Retourner les cours triés ou null s'il n'y a pas de catalogue Moodle
+  return moodleCatalogue ? sortedCourses : null;
 };
+
 //add for moddlecourse fetch test
 
 interface DataLemlist {
@@ -633,7 +677,6 @@ export const getAllRessources = async (
     ...([ravenCourses] || []),
     ...(ravenPathCourses || [])
   ];
-
   return allCourses;
 };
 
