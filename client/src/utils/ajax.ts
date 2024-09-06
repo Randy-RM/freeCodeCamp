@@ -96,7 +96,7 @@ export const courseDescriptions: Record<CourseCategoryTitle, CourseDetails> = {
   Développement: {
     titre: 'Développement Web',
     summury: `Dans ce parcours, tu apprendras à créer des pages Web avec HTML pour le contenu, CSS pour la conception, et JavaScript pour rendre les sites interactifs. Tu découvriras également les algorithmes, les structures de données, et les bases du langage JavaScript.`,
-    description: `Ce parcours te forme aux bases du développement web : HTML pour le contenu, CSS pour la conception, et JavaScript pour l'interactivité. Tu apprendras aussi à adapter tes pages à différentes tailles d'écran, ainsi que les algorithmes, les structures de données, et les principes du JavaScript.`
+    description: `La programmation est une compétence essentielle qui permet de créer des logiciels, des applications web et mobiles. Nos cours couvrent divers langages comme Python, JavaScript et Java, adaptés à tous les niveaux. Que vous souhaitiez développer des sites web, des jeux ou des outils d’automatisation, ces parcours vous aideront à maîtriser les bases et à progresser vers des projets plus avancés.`
   },
   Design: {
     titre: 'Design',
@@ -108,12 +108,12 @@ export const courseDescriptions: Record<CourseCategoryTitle, CourseDetails> = {
   Bureautique: {
     titre: 'Bureautique',
     summury: `Maîtrise Word, Excel, PowerPoint, Outlook et OneNote. Crée des documents impeccables et analyse des données complexes avec nos cours interactifs.`,
-    description: `Ce parcours complet vous guide du débutant à l'expert pour maîtriser Word, Excel, PowerPoint, Outlook, et OneNote. Grâce à des cours interactifs et des exercices pratiques, vous développerez les compétences pour créer des documents, analyser des données, et gérer votre boîte mail. A la fin de ce cours, vous serez prêt à relever les défis professionnels.`
+    description: `Les compétences en bureautique sont indispensables pour une gestion efficace des tâches professionnelles et personnelles. Nos cours couvrent des outils comme Microsoft Office, Google Workspace et autres logiciels de productivité. Apprenez à créer des documents, des feuilles de calcul, et des présentations professionnelles. Que vous soyez débutant ou avancé, développez vos compétences pour travailler plus efficacement.`
   },
   Marketing: {
     titre: 'Marketing',
     summury: `Apprends les outils et techniques du marketing digital. Crée des stratégies de contenu, optimise ton site et gère les réseaux sociaux efficacement.`,
-    description: `Ce parcours intensif en marketing digital vous forme aux stratégies de contenu, SEO, gestion des réseaux sociaux, et mesure de performance. Maîtrisez les outils pour développer un business en ligne ou diriger le marketing d'une entreprise, en optimisant la communication et les relations publiques.`
+    description: `Le marketing et la communication sont essentiels pour créer et promouvoir une marque efficace. Nos cours vous apprennent à élaborer des stratégies, à maîtriser les réseaux sociaux, le SEO, et la création de contenu. Que vous soyez débutant ou professionnel, vous apprendrez à capter l’attention de votre audience et à optimiser votre impact avec des techniques modernes et des outils numériques.`
   },
   Communication: {
     titre: 'Communication',
@@ -124,7 +124,7 @@ export const courseDescriptions: Record<CourseCategoryTitle, CourseDetails> = {
     titre: 'Intelligence Artificielle',
     summury: `Explore l'IA, imitant les fonctions humaines. Apprends l'IA générative pour créer des contenus (texte, images, sons, vidéos) à travers des applications interactives.`,
     description: `
-Ce cours explore l'IA générative, un domaine en pleine expansion où les ordinateurs créent du contenu original, comme des textes, images, sons ou vidéos. Apprenez à maîtriser ces technologies via des applications interactives. !`
+L’intelligence artificielle transforme la façon dont nous travaillons, avec des outils comme GPT qui boostent la productivité. Nos cours vous guident dans la compréhension et l’application de l’IA, de l'automatisation des tâches à la génération de contenu. Que vous soyez débutant ou expert, apprenez à intégrer l'IA dans vos workflows pour gagner du temps et améliorer vos résultats.`
   },
 
   amazon: {
