@@ -84,7 +84,7 @@ const PathCard = ({
             </div>
             <div className='card-course-detail-footer'>
               <div className='course-level'>
-                <div className='level-card'>
+                <div className='level-card-parcours'>
                   {level ? (
                     <>
                       <img

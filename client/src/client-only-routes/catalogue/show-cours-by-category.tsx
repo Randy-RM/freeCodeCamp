@@ -508,6 +508,14 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
                                 if (valueOfCurrentCategorie === -2) {
                                   if (courseTyped.long_description) {
+                                    console.log(
+                                      courseTyped.long_description.includes(
+                                        'This course would provide '
+                                      )
+                                        ? courseTyped.long_description
+                                        : 'rien'
+                                    );
+
                                     return (
                                       <PathCard
                                         language={language}

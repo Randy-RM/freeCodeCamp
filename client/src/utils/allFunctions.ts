@@ -170,16 +170,26 @@ export function convertTimeForFilter(timeInput: string | number): number {
 
 //formatage des descriptions RAven
 
-export function formatDescription(description: string) {
-  let cleanedDescription = description
-    .replace(/\n+/g, ' ') // Remplace tous les retours à la ligne par un espace simple
-    .replace(/\s{2,}/g, ' ') // Réduit les espaces multiples à un seul espace
-    .replace(/ {6,}/g, match => ' '.repeat(match.length % 5)) // Remplace les espaces de plus de 5 caractères par un seul espace
-    .trim();
+// export function formatDescription(description: string) {
+//   let cleanedDescription = description
+//     .replace(/\n+/g, ' ') // Remplace tous les retours à la ligne par un espace simple
+//     .replace(/\s{2,}/g, ' ') // Réduit les espaces multiples à un seul espace
+//     .replace(/ {6,}/g, match => ' '.repeat(match.length % 5)) // Remplace les espaces de plus de 5 caractères par un seul espace
+//     .trim();
 
-  if (cleanedDescription.length > 120) {
-    cleanedDescription = cleanedDescription.substring(0, 120).trim() + '...';
+//   if (cleanedDescription.length > 120) {
+//     cleanedDescription = cleanedDescription.substring(0, 120).trim() + '...';
+//   }
+
+//   return cleanedDescription;
+// }
+
+export function formatDescription(inputText: string) {
+  const cleanedText = inputText.replace('<p>&nbsp;</p>', '');
+  if (cleanedText.length > 130) {
+    return cleanedText.slice(0, 130) + '...';
   }
+  console.log(cleanedText);
 
-  return cleanedDescription;
+  return cleanedText;
 }
