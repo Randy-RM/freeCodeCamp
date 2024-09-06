@@ -130,7 +130,7 @@ Ce cours explore l'IA générative, un domaine en pleine expansion où les ordin
   amazon: {
     titre: 'Amazon web service',
     summury: `Ce cours est conçu pour montrer aux participants comment optimiser l'utilisation du cloud AWS grâce à la compréhension de ces nombreux services et de leur intégration dans la création de solutions basées sur le cloud.`,
-    description: `Ce cours AWS explore les bonnes pratiques cloud, avec des études de cas clients. Il vous apprend à concevoir des infrastructures optimisées et variées en utilisant les services AWS, vous rendant capable de construire des solutions informatiques robustes.`
+    description: `Amazon Web Services (AWS) est une plateforme de cloud computing qui permet de stocker, gérer et déployer des applications en ligne. AWS offre des services tels que le calcul, le stockage et l’intelligence artificielle, utilisés par des entreprises de toutes tailles. Si vous voulez apprendre à maîtriser l’infrastructure cloud et à développer des solutions évolutives, AWS est fait pour vous !`
   }
 };
 
