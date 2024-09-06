@@ -303,10 +303,10 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (!isDataOnLoading) {
+      if (ressourcesData.length == 0 && showMessage) {
         setShowMessage(true);
       }
-    }, 54000);
+    }, 10000);
 
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -317,27 +317,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     valueDuration,
     ressourcesData
   ]);
-
-  //dans le cas où il n'y a aucun cours ou parcours pour un filtre alors on affichera cette page, juste pour une expérience utilisateur
-  if (showMessage) {
-    return (
-      <div className='no-courses'>
-        <img src={notFound} alt='Aucun cours disponible' />
-        <p>Aucun cours disponible pour le filtre sélectionné.</p>
-        <p>
-          Nous travaillons activement pour ajouter de nouveaux cours dans cette
-          catégorie. Restez à l&apos;écoute !
-        </p>
-        <button
-          onClick={() => {
-            void navigated(routes.catalogue.index);
-          }}
-        >
-          Visitez le catalogue
-        </button>
-      </div>
-    );
-  }
 
   if (typeof window !== 'undefined') {
     window.addEventListener('resize', () => {
@@ -463,128 +442,159 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                     })()}
                   </span>
                 </div>
-                {paginatedData.length > 0 || valueOfCurrentCategorie == -1 ? (
-                  <div className='card-course-detail-container'>
-                    {currentPage == 1 && valueOfCurrentCategorie == -1 && (
-                      <>
-                        <CourseCard
-                          level='Débutant'
-                          language='French'
-                          icon={LaptopIcon}
-                          sponsorIcon={LaediesActIcon}
-                          alt=''
-                          isAvailable={true}
-                          title='Responsive Web Design'
-                          buttonText='Suivre le cours'
-                          link='/learn/responsive-web-design/'
-                          description={`
-          Ce cours t'apprend les langages HTML pour le contenu et CSS pour la conception, ainsi que la création de pages Web adaptatives pour différentes tailles d'écran.
-        `}
-                        />
-                        <CourseCard
-                          level='Débutant'
-                          language='French'
-                          icon={AlgoIcon}
-                          alt=''
-                          isAvailable={true}
-                          title='JavaScript Algorithms and Data Structures'
-                          buttonText='Suivre le cours'
-                          link='/learn/javascript-algorithms-and-data-structures'
-                          description={`
-                      Ce cours t'enseigne les bases de JavaScript pour rendre les pages interactives, ainsi que les algorithmes et structures de données en JavaScript., etc.`}
-                        />
-                      </>
-                    )}
-                    {(valueOfCurrentCategorie === -2 ||
-                      valueOfCurrentCategorie === 11 ||
-                      valueOfCurrentCategorie === 13 ||
-                      valueOfCurrentCategorie === 14) &&
-                    paginatedData.length > 0
-                      ? paginatedData.map((course, index) => {
-                          if ('launch_url' in course) {
-                            const courseTyped = course as RavenCourse; // Typage pour les cours Raven
-                            const firstCategory = courseTyped.category?.[0];
-                            const language =
-                              firstCategory?.tags?.[0]?.title || 'Unknown';
-
-                            if (valueOfCurrentCategorie === -2) {
-                              if (courseTyped.long_description) {
-                                return (
-                                  <PathCard
-                                    language={language}
-                                    key={courseTyped.name}
-                                    icon={awsLogo}
-                                    isAvailable={true}
-                                    title={`${index + 1}. ${courseTyped.name}`}
-                                    buttonText='Suivre le parcours'
-                                    link={courseTyped.launch_url}
-                                    description={formatDescription(
-                                      courseTyped.long_description
-                                    )}
-                                    duration={convertTime(courseTyped.duration)}
-                                    level={
-                                      courseTyped.skill_level == 'Fundamental'
-                                        ? 'Débutant'
-                                        : ''
-                                    }
-                                  />
-                                );
-                              } else {
-                                return (
-                                  <CourseCard
-                                    level={
-                                      courseTyped.skill_level == 'Fundamental'
-                                        ? 'Débutant'
-                                        : ''
-                                    }
-                                    language={language}
-                                    key={index.toString()}
-                                    icon={awsLogo}
-                                    isAvailable={true}
-                                    title={`${index + 1}. ${courseTyped.name}`}
-                                    buttonText='Suivre le cours'
-                                    link={courseTyped.launch_url}
-                                    description={formatDescription(
-                                      courseTyped.short_description
-                                    )}
-                                    duration={convertTime(courseTyped.duration)}
-                                  />
-                                );
-                              }
-                            } else {
-                              return null;
-                            }
-                          } else {
-                            const courseTyped = course as MoodleCourse; // Typage pour les cours Moodle
-                            if (
-                              courseTyped.categoryid === valueOfCurrentCategorie
-                            ) {
-                              return (
-                                <CourseCard
-                                  language={courseTyped.langue}
-                                  level={courseTyped.level}
-                                  key={`${index}-${courseTyped.id}`}
-                                  icon={PhBookBookmark} // Remplacer par le chemin réel de l'image
-                                  isAvailable={courseTyped.visible === 1}
-                                  title={courseTyped.displayname}
-                                  buttonText='Suivre le cours'
-                                  link={`${moodleBaseUrl}/course/view.php?id=${courseTyped.id}`}
-                                  description={courseTyped.summary}
-                                  duration={convertTimestampToTime(
-                                    courseTyped.duration
-                                  )}
-                                />
-                              );
-                            } else {
-                              return null;
-                            }
-                          }
-                        })
-                      : ''}
+                {showMessage && ressourcesData.length == 0 ? (
+                  <div className='no-courses'>
+                    <img src={notFound} alt='Aucun cours disponible' />
+                    <p>Aucun cours disponible pour le filtre sélectionné.</p>
+                    <p>
+                      Nous travaillons activement pour ajouter de nouveaux cours
+                      dans cette catégorie. Restez à l&apos;écoute !
+                    </p>
+                    <button
+                      onClick={() => {
+                        void navigated(routes.catalogue.index);
+                      }}
+                    >
+                      Visitez le catalogue
+                    </button>
                   </div>
                 ) : (
                   <div className='card-course-detail-container'>
-                    {renderCourseCardSkeletons(6)}
+                    {paginatedData.length > 0 ||
+                    valueOfCurrentCategorie === -1 ? (
+                      <>
+                        {currentPage === 1 && valueOfCurrentCategorie === -1 && (
+                          <>
+                            <CourseCard
+                              level='Débutant'
+                              language='French'
+                              icon={LaptopIcon}
+                              sponsorIcon={LaediesActIcon}
+                              alt=''
+                              isAvailable={true}
+                              title='Responsive Web Design'
+                              buttonText='Suivre le cours'
+                              link='/learn/responsive-web-design/'
+                              description={`
+                    Ce cours t'apprend les langages HTML pour le contenu et CSS pour la conception, ainsi que la création de pages Web adaptatives pour différentes tailles d'écran.
+                  `}
+                            />
+                            <CourseCard
+                              level='Débutant'
+                              language='French'
+                              icon={AlgoIcon}
+                              alt=''
+                              isAvailable={true}
+                              title='JavaScript Algorithms and Data Structures'
+                              buttonText='Suivre le cours'
+                              link='/learn/javascript-algorithms-and-data-structures'
+                              description={`
+                    Ce cours t'enseigne les bases de JavaScript pour rendre les pages interactives, ainsi que les algorithmes et structures de données en JavaScript., etc.
+                  `}
+                            />
+                          </>
+                        )}
+                        {(valueOfCurrentCategorie === -2 ||
+                          valueOfCurrentCategorie === 11 ||
+                          valueOfCurrentCategorie === 13 ||
+                          valueOfCurrentCategorie === 14) &&
+                        paginatedData.length > 0
+                          ? paginatedData.map((course, index) => {
+                              if ('launch_url' in course) {
+                                const courseTyped = course as RavenCourse; // Typage pour les cours Raven
+                                const firstCategory = courseTyped.category?.[0];
+                                const language =
+                                  firstCategory?.tags?.[0]?.title || 'Unknown';
+
+                                if (valueOfCurrentCategorie === -2) {
+                                  if (courseTyped.long_description) {
+                                    return (
+                                      <PathCard
+                                        language={language}
+                                        key={courseTyped.name}
+                                        icon={awsLogo}
+                                        isAvailable={true}
+                                        title={`${index + 1}. ${
+                                          courseTyped.name
+                                        }`}
+                                        buttonText='Suivre le parcours'
+                                        link={courseTyped.launch_url}
+                                        description={formatDescription(
+                                          courseTyped.long_description
+                                        )}
+                                        duration={convertTime(
+                                          courseTyped.duration
+                                        )}
+                                        level={
+                                          courseTyped.skill_level ===
+                                          'Fundamental'
+                                            ? 'Débutant'
+                                            : ''
+                                        }
+                                      />
+                                    );
+                                  } else {
+                                    return (
+                                      <CourseCard
+                                        level={
+                                          courseTyped.skill_level ===
+                                          'Fundamental'
+                                            ? 'Débutant'
+                                            : ''
+                                        }
+                                        language={language}
+                                        key={index.toString()}
+                                        icon={awsLogo}
+                                        isAvailable={true}
+                                        title={`${index + 1}. ${
+                                          courseTyped.name
+                                        }`}
+                                        buttonText='Suivre le cours'
+                                        link={courseTyped.launch_url}
+                                        description={formatDescription(
+                                          courseTyped.short_description
+                                        )}
+                                        duration={convertTime(
+                                          courseTyped.duration
+                                        )}
+                                      />
+                                    );
+                                  }
+                                } else {
+                                  return null;
+                                }
+                              } else {
+                                const courseTyped = course as MoodleCourse; // Typage pour les cours Moodle
+                                if (
+                                  courseTyped.categoryid ===
+                                  valueOfCurrentCategorie
+                                ) {
+                                  return (
+                                    <CourseCard
+                                      language={courseTyped.langue}
+                                      level={courseTyped.level}
+                                      key={`${index}-${courseTyped.id}`}
+                                      icon={PhBookBookmark} // Remplacer par le chemin réel de l'image
+                                      isAvailable={courseTyped.visible === 1}
+                                      title={courseTyped.displayname}
+                                      buttonText='Suivre le cours'
+                                      link={`${moodleBaseUrl}/course/view.php?id=${courseTyped.id}`}
+                                      description={courseTyped.summary}
+                                      duration={convertTimestampToTime(
+                                        courseTyped.duration
+                                      )}
+                                    />
+                                  );
+                                } else {
+                                  return null;
+                                }
+                              }
+                            })
+                          : ''}
+                      </>
+                    ) : (
+                      renderCourseCardSkeletons(6)
+                    )}
                   </div>
                 )}
 
