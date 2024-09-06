@@ -382,7 +382,9 @@ export interface RavenTokenData {
 }
 
 export function removeRavenTokenFromLocalStorage() {
-  localStorage.removeItem('ravenToken');
+  if (typeof window != 'undefined' && window.localStorage) {
+    localStorage.removeItem('ravenToken');
+  }
 }
 
 export function addRavenTokenToLocalStorage(
