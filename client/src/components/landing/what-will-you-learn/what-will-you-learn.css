@@ -4,8 +4,8 @@
 
 .push {
   display: flex;
-  justify-content: flex-start;
-  align-items: baseline;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 /*
 .push__card {
