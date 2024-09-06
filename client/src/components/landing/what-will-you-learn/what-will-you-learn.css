@@ -37,7 +37,7 @@ img {
 }
 
 .card-course-detail-footer {
-  padding: 5% 5%;
+  /* padding: 5% 5%; */
   overflow: hidden;
 }
 
@@ -152,10 +152,10 @@ img {
 
 @media (max-width: 480px) {
   .push {
-    justify-content: space-between;
+    justify-content: flex-end;
   }
   .push__card {
-    justify-content: space-between;
+    justify-content: flex-end;
   }
 }
 /*
