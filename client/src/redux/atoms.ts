@@ -12,7 +12,10 @@ import { UnifiedCourse } from './types';
 const localStorageEffect =
   <T>(key: string): AtomEffect<T> =>
   ({ setSelf, onSet }) => {
-    const savedValue = localStorage.getItem(key);
+    const savedValue =
+      typeof window != 'undefined' && window.localStorage
+        ? localStorage.getItem(key)
+        : null;
     if (savedValue != null) {
       setSelf(JSON.parse(savedValue) as T);
     }
