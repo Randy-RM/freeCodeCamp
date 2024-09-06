@@ -12,16 +12,16 @@ const linksSections = [
     title: 'Formations',
     links: [
       {
-        label: 'Bootcamp carrière',
-        link: '#'
+        label: 'Bootcamp Carrière',
+        link: 'https://www.kadea.academy/'
       },
       {
         label: 'Boost',
-        link: '#'
+        link: 'https://www.kadea.academy/boost/'
       },
       {
         label: 'Online',
-        link: '#'
+        link: 'https://online.kadea.co/'
       }
     ]
   },
@@ -30,11 +30,11 @@ const linksSections = [
     links: [
       {
         label: 'Kadea Academy',
-        link: '#'
+        link: 'https://kadea.academy/'
       },
       {
-        label: 'KADEA SOFTWARE',
-        link: '#'
+        label: 'Kadea Software',
+        link: 'https://kadea.co/'
       }
     ]
   },
@@ -43,7 +43,7 @@ const linksSections = [
     links: [
       {
         label: 'State of Dev',
-        link: '#'
+        link: 'https://stateofdev.kinshasadigital.academy/'
       }
     ]
   }

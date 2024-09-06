@@ -217,6 +217,26 @@ m-0 {
   width: 100%;
 }
 
+.text-inherit {
+  font-size: inherit;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.top-1 {
+  top: 5px;
+}
+
+.right-1 {
+  right: 5px;
+}
+
 @media only screen and (min-width: 1200px) {
 }
 

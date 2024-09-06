@@ -162,18 +162,6 @@ function Formations() {
                 </div>
                 <div className='training-details'>
                   <h3 className='training-title'>{course.title}</h3>
-                  {/* <div className='training-stats'>
-                      <div className='stat'>
-                        <Image src={starIcon} alt='Stars icon' />
-                        <span>
-                          {course.stars.rate} ({course.stars.count})
-                        </span>
-                      </div>
-                      <div className='stat'>
-                        <Image src={clockIcon} alt='Clock icon' />
-                        <span>{course.time}</span>
-                      </div>
-                    </div> */}
                 </div>
               </Link>
             ))
@@ -194,12 +182,6 @@ function Formations() {
                         course.name
                       }`}</h3>
                       <div className='training-stats'>
-                        {/* <div className='stat'>
-                          <Image src={starIcon} alt='Stars icon' />
-                          <span>
-                            {course.stars.rate} ({course.stars.count})
-                          </span>
-                        </div> */}
                         <div className='stat'>
                           <Image src={clockIcon} alt='Clock icon' />
                           <span>{convertTime(course.duration)}</span>
