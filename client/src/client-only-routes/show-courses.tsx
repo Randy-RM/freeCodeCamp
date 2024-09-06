@@ -565,6 +565,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                       (currentCategory == null || currentCategory == -1) && (
                         <>
                           <CourseCard
+                            level='debutant'
                             language='French'
                             icon={LaptopIcon}
                             sponsorIcon={LaediesActIcon}
@@ -584,6 +585,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                         `}
                           />
                           <CourseCard
+                            level='debutant'
                             language='French'
                             icon={AlgoIcon}
                             alt=''
@@ -627,6 +629,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                             } else {
                               return (
                                 <CourseCard
+                                  level={course.skill_level}
                                   language={language}
                                   key={index.toString()}
                                   icon={awsLogo}
@@ -643,6 +646,7 @@ export function Courses(props: CoursesProps): JSX.Element {
                           } else {
                             return (
                               <CourseCard
+                                level='debutant'
                                 language='French'
                                 key={`${index}-${course.id}`}
                                 icon={PhBookBookmark} // Remplacer par le chemin réel de l'image
