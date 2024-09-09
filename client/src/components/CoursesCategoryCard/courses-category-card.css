@@ -134,6 +134,7 @@
     background-color: #000000;
     color: white;
     border-radius: 12px;
+    max-width: 250px;
     box-sizing: border-box; /* Assure que le padding et la bordure sont inclus dans la largeur */
   }
 
