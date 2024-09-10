@@ -131,15 +131,37 @@ export function AddFilterQueryString(key: string, value: string) {
   // Récupérer les paramètres existants
   const params = new URLSearchParams(url.search);
 
-  // Mettre à jour ou ajouter le paramètre avec la clé et la valeur spécifiées
-  if (key && value) {
-    params.set(key, value); // Ajoute ou met à jour le paramètre
-  } else if (key) {
-    params.delete(key); // Supprime le paramètre si la valeur est vide (par ex., si le filtre est réinitialisé)
+  // Obtenir les valeurs actuelles pour la clé spécifiée
+  let existingValues = params.get(key)?.split(',') || [];
+
+  if (value) {
+    // Décoder les valeurs pour éviter les encodages indésirables (%2C)
+    existingValues = existingValues.map(decodeURIComponent);
+
+    // Si la valeur existe déjà, l'enlever (pour toggler)
+    if (existingValues.includes(value)) {
+      existingValues = existingValues.filter(v => v !== value);
+    } else {
+      // Sinon, l'ajouter
+      existingValues.push(value);
+    }
+  }
+
+  // Nettoyer les valeurs vides
+  existingValues = existingValues.filter(v => v);
+
+  // Mettre à jour ou supprimer le paramètre en fonction des valeurs présentes
+  if (existingValues.length > 0) {
+    // Joindre les valeurs avec une virgule sans encodage supplémentaire
+    params.set(key, existingValues.join(','));
+  } else {
+    params.delete(key); // Supprimer le paramètre s'il n'y a plus de valeurs
   }
 
   // Construire la nouvelle URL avec les paramètres mis à jour
-  const newUrl = `${url.pathname}?${params.toString()}`;
+  const newUrl = params.toString()
+    ? `${url.pathname}?${params.toString()}`
+    : url.pathname;
 
   // Mettre à jour l'URL dans le navigateur sans recharger la page
   window.history.replaceState(null, '', newUrl);
