@@ -57,11 +57,7 @@ import {
   myAllDataCourses,
   pathRaven,
   titleOfCategorieValue,
-  valueOfCurrentCategory,
-  valueOfLanguage,
-  valueOfTypeCourse,
-  valueOfTypeDuration,
-  valueOfTypeLevel
+  valueOfCurrentCategory
 } from '../../redux/atoms';
 
 import '../catalogue/show-courses-by-category.css';
@@ -108,11 +104,8 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const setDataRaven = useSetRecoilState(coursesRaven);
   const setDataRavenPath = useSetRecoilState(pathRaven);
   const showMoodleCategory = useRecoilValue(categoryCours);
-  const [valueLanguage, setValueLangue] = useRecoilState(valueOfLanguage);
-  const [valueTypeOfCourse, setValueTypeOfcours] =
-    useRecoilState(valueOfTypeCourse);
-  const [valueLevel, setValueLevel] = useRecoilState(valueOfTypeLevel);
-  const [valueDuration, setValueDuration] = useRecoilState(valueOfTypeDuration);
+
+  const currentUrl = window.location.href;
 
   const { moodleBaseUrl } = envData;
   useEffect(() => {
@@ -160,90 +153,124 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         let filteredRavenCourses = ravenCourses;
         let filteredMoodleCourses = moodleCourses;
 
-        if (valueOfCurrentCategorie == -2) {
+        if (valueOfCurrentCategorie === -2) {
           // Filtre par langue
-          if (valueLanguage !== 'none') {
-            filteredRavenCourses = filteredRavenCourses.filter(
-              course => course.category?.[0]?.tags?.[0]?.title === valueLanguage
-            );
+          const filterByEnglish = currentUrl.includes('English');
+          const filterByFrench = currentUrl.includes('French');
+
+          if (filterByEnglish || filterByFrench) {
+            filteredRavenCourses = filteredRavenCourses.filter(course => {
+              const courseLanguage = course.category?.[0]?.tags?.[0]?.title;
+              return (
+                (filterByEnglish && courseLanguage === 'English') ||
+                (filterByFrench && courseLanguage === 'French')
+              );
+            });
+
+            filteredMoodleCourses = filteredMoodleCourses.filter(course => {
+              const courseLanguage = course.langue; // Adapter pour Moodle
+              return (
+                (filterByEnglish && courseLanguage === 'English') ||
+                (filterByFrench && courseLanguage === 'French')
+              );
+            });
           }
 
           // Filtre par type de cours
-          if (valueTypeOfCourse !== 'none') {
-            filteredRavenCourses = filteredRavenCourses.filter(course =>
-              valueTypeOfCourse === 'Parcours'
-                ? course.long_description
-                : !course.long_description
-            );
+          const filterByParcours = currentUrl.includes('Parcours');
+          const filterByCours = currentUrl.includes('Cours');
+
+          if (filterByParcours || filterByCours) {
+            filteredRavenCourses = filteredRavenCourses.filter(course => {
+              return (
+                // eslint-disable-next-line @typescript-eslint/naming-convention
+                (filterByParcours && course.long_description) ||
+                // eslint-disable-next-line @typescript-eslint/naming-convention
+                (filterByCours && !course.long_description)
+              );
+            });
+
+            filteredMoodleCourses = filteredMoodleCourses.filter(course => {
+              return (
+                (filterByParcours && course.type === 'parcours') ||
+                (filterByCours && course.type === 'cours')
+              );
+            });
           }
 
           // Filtre par niveau
-          if (valueLevel !== 'none') {
-            filteredRavenCourses = filteredRavenCourses.filter(course =>
-              valueLevel === 'Débutant'
-                ? course.skill_level === 'Fundamental'
-                : valueLevel === 'Avancé'
-                ? course.skill_level === 'Advanced'
-                : course.skill_level === 'Intermediate'
-            );
+          const filterByDebutant = currentUrl.includes('Débutant');
+          const filterByIntermediaire =
+            currentUrl.includes('Interm%C3%A9diaire');
+          const filterByAvance = currentUrl.includes('Avanc%C3%A9');
+
+          if (filterByDebutant || filterByIntermediaire || filterByAvance) {
+            filteredRavenCourses = filteredRavenCourses.filter(course => {
+              return (
+                // eslint-disable-next-line @typescript-eslint/naming-convention
+                (filterByDebutant && course.skill_level === 'Fundamental') ||
+                (filterByIntermediaire &&
+                  // eslint-disable-next-line @typescript-eslint/naming-convention
+                  course.skill_level === 'Intermediate') ||
+                // eslint-disable-next-line @typescript-eslint/naming-convention
+                (filterByAvance && course.skill_level === 'Advanced')
+              );
+            });
+
+            filteredMoodleCourses = filteredMoodleCourses.filter(course => {
+              return (
+                (filterByDebutant && course.level === 'debutant') ||
+                (filterByIntermediaire && course.level === 'Intermediate') ||
+                (filterByAvance && course.level === 'Advanced')
+              );
+            });
           }
 
-          //filtre par durée
-          if (valueDuration !== 'none') {
+          // Filtrer par durée
+          if (currentUrl.includes('dur%C3%A9e')) {
+            const filterLessThan1Hour = currentUrl.includes('dur%C3%A9e=%3E1h');
+            const filterBetween1And5Hours =
+              currentUrl.includes('dur%C3%A9e=1%3E5h');
+            const filterUpTo5Hours = currentUrl.includes('%3E1h%2C1%3E5h');
+            const filterMoreThan5Hours =
+              currentUrl.includes('dur%C3%A9e=%3E5h');
+
             filteredRavenCourses = filteredRavenCourses.filter(course => {
               const courseHours = convertTimeForFilter(
                 parseInt(course.duration)
               );
+              return (
+                (filterLessThan1Hour && courseHours < 60) ||
+                (filterBetween1And5Hours &&
+                  courseHours >= 60 &&
+                  courseHours <= 300) ||
+                (filterUpTo5Hours && courseHours <= 300) ||
+                (filterMoreThan5Hours && courseHours > 300)
+              );
+            });
 
-              return valueDuration === '>1h'
-                ? courseHours < 60
-                : valueDuration === '1>5h'
-                ? courseHours >= 60 && courseHours <= 300
-                : courseHours > 300;
+            filteredMoodleCourses = filteredMoodleCourses.filter(course => {
+              const courseHours = convertTimeForFilter(course.duration);
+              return (
+                (filterLessThan1Hour && courseHours < 60) ||
+                (filterBetween1And5Hours &&
+                  courseHours >= 60 &&
+                  courseHours <= 300) ||
+                (filterUpTo5Hours && courseHours <= 300) ||
+                (filterMoreThan5Hours && courseHours > 300)
+              );
             });
           }
 
-          setRessourceDatas(filteredRavenCourses);
+          // Mise à jour des données affichées
+          setRessourceDatas([
+            ...filteredRavenCourses,
+            ...filteredMoodleCourses
+          ]);
         } else if (valueOfCurrentCategorie === null) {
           setRessourceDatas([...ravenCourses, ...moodleCourses]);
         } else {
-          // Filtre par durée
-          if (valueDuration !== 'none') {
-            filteredMoodleCourses = filteredMoodleCourses.filter(course => {
-              const courseHours = convertTimeForFilter(course.duration);
-
-              return valueDuration === '>1h'
-                ? courseHours < 60
-                : valueDuration === '1>5h'
-                ? courseHours >= 60 && courseHours <= 300
-                : courseHours > 300;
-            });
-          }
-
-          if (valueLevel !== 'none') {
-            filteredMoodleCourses = filteredMoodleCourses.filter(course =>
-              valueLevel === 'Débutant'
-                ? course.level === 'debutant'
-                : valueLevel === 'Avancé'
-                ? course.level === 'Advanced'
-                : course.level === 'Intermediate'
-            );
-          }
-          //filtre par type de cours
-          if (valueTypeOfCourse !== 'none') {
-            filteredMoodleCourses = filteredMoodleCourses.filter(course =>
-              valueTypeOfCourse === 'Parcours'
-                ? course.type === 'parcours'
-                : course.type === 'cours'
-            );
-          }
-          //filtre par langue
-          if (valueLanguage !== 'none') {
-            filteredMoodleCourses = filteredMoodleCourses.filter(
-              course => course.langue === valueLanguage
-            );
-          }
-
+          // Filtrage supplémentaire basé sur d'autres critères
           setRessourceDatas(filteredMoodleCourses);
         }
 
@@ -257,34 +284,13 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
     void fetchCourses();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    valueOfCurrentCategorie,
-    valueLanguage,
-    currentPage,
-    valueTypeOfCourse,
-    valueLevel,
-    valueDuration
-  ]);
+  }, [valueOfCurrentCategorie, currentUrl]);
 
   useEffect(() => {
     setCurrentpage(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    valueOfCurrentCategorie,
-    valueLanguage,
-    valueTypeOfCourse,
-    valueLevel,
-    valueDuration
-  ]);
+  }, [valueOfCurrentCategorie, currentUrl]);
 
-  useEffect(() => {
-    setValueLangue('none');
-    setValueTypeOfcours('none');
-    setValueLevel('none');
-    setValueDuration('none');
-    SetValueOfCurrentCategory(valueOfCurrentCategorie);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   const {
     paginatedData,
     totalPages,
@@ -310,13 +316,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    valueLanguage,
-    valueTypeOfCourse,
-    valueLevel,
-    valueDuration,
-    ressourcesData
-  ]);
+  }, [currentUrl, valueOfCurrentCategorie]);
 
   if (typeof window !== 'undefined') {
     window.addEventListener('resize', () => {
@@ -508,14 +508,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
                                 if (valueOfCurrentCategorie === -2) {
                                   if (courseTyped.long_description) {
-                                    console.log(
-                                      courseTyped.long_description.includes(
-                                        'This course would provide '
-                                      )
-                                        ? courseTyped.long_description
-                                        : 'rien'
-                                    );
-
                                     return (
                                       <PathCard
                                         language={language}
