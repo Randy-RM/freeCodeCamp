@@ -9,7 +9,7 @@ const routes = {
     index: '/catalogue',
     catalogueTitle: '/catalogue/:value',
     aws: '/catalogue/amazon-web-service',
-    programmation: '/catalogue/programation',
+    programmation: '/catalogue/programmation',
     moodle: '/catalogue/:category'
   }
 };
