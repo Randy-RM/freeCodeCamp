@@ -19,6 +19,10 @@
   max-height: 80vh; /* Limite la hauteur du conteneur pour permettre le défilement */
 }
 
+.filter__layoute {
+  width: 10rem;
+}
+
 .filter__container {
   width: 9rem;
 }
@@ -188,13 +192,16 @@ details[open] > *:not(summary) {
     border-radius: 10px;
   }
 
+  h2 .filter__counter {
+    display: inline;
+    font-weight: 400 !important;
+    padding: 1.2rem !important;
+  }
+
   .filter-container::-webkit-scrollbar-track {
     background: transparent;
   }
 
-  .filter-container:hover {
-    background: rgb(233, 211, 211);
-  }
   .pagination-container {
     margin-top: 2rem;
   }
@@ -212,7 +219,7 @@ details[open] > *:not(summary) {
 @media (max-width: 768px) {
   .card-courses-detail-container {
     padding: 2px;
-    gap: 0%;
+    gap: 0.3%;
   }
   .card-courses-detail-container {
     width: 100%;
