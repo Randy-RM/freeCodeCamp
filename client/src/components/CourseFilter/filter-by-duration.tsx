@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './course-filter.css';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
+  categoryCounter,
   changeState,
   valueOfCurrentCategory,
   valueOfTypeDuration
@@ -39,6 +40,8 @@ const FilterByDuration = () => {
 
   const [queryString, setQueryString] = useState<string>('');
   const setChangeState = useSetRecoilState(changeState);
+  const [counterForCategory, setCounterForcategory] =
+    useRecoilState(categoryCounter);
 
   useEffect(() => {
     AddFilterQueryString('durée', queryString ? queryString : '');
@@ -82,6 +85,13 @@ const FilterByDuration = () => {
       // Mettre à jour les états dans Recoil
       setValueDuration(value);
       AddFilterQueryString('durée', queryString ? queryString : '');
+      setCounterForcategory(
+        counterForCategory >= 0 && isChecked
+          ? counterForCategory + 1
+          : counterForCategory > 0 && !isChecked
+          ? counterForCategory - 1
+          : counterForCategory
+      );
       setChangeState(false);
       setValue0fCurrentCategory(currentCategorieValue);
       console.log(showFilter);

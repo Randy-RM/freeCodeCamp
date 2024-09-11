@@ -155,6 +155,13 @@ export const categoryCours = atom<MoodleCourseCategory[] | null | undefined>({
   effects_UNSTABLE: [localStorageEffect('categoryCours')]
 });
 
+export const categoryCounter = atom<number>({
+  key: 'categoryCounter',
+  default: 0,
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  effects_UNSTABLE: [localStorageEffect('categoryCounter')]
+});
+
 export const currentCategorySelector = selector<number | null>({
   key: 'currentCategorySelector',
   get: ({ get }) => {

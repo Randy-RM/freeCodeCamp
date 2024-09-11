@@ -3,6 +3,7 @@ import './course-filter.css';
 
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
+  categoryCounter,
   changeState,
   checkedBox,
   valueOfCurrentCategory,
@@ -20,6 +21,8 @@ const FilterByLevel = () => {
   );
 
   const setChangeState = useSetRecoilState(changeState);
+  const [counterForCategory, setCounterForcategory] =
+    useRecoilState(categoryCounter);
 
   const [checkedState, setCheckedState] = useState({
     Débutant: false,
@@ -58,6 +61,13 @@ const FilterByLevel = () => {
       setValueLevel(value);
       AddFilterQueryString('niveau', checked ? value : '');
       setValueChecked(checked);
+      setCounterForcategory(
+        counterForCategory >= 0 && checked
+          ? counterForCategory + 1
+          : counterForCategory > 0 && !checked
+          ? counterForCategory - 1
+          : counterForCategory
+      );
       setChangeState(false);
       setValue0fCurrentCategory(currentCategorieValue);
       console.log(showFilter);

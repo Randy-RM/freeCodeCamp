@@ -3,6 +3,7 @@ import './course-filter.css';
 
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
+  categoryCounter,
   changeState,
   checkedBox,
   valueOfCurrentCategory,
@@ -20,6 +21,8 @@ const OtherFilter = () => {
   );
 
   const setChangeState = useSetRecoilState(changeState);
+  const [counterForCategory, setCounterForcategory] =
+    useRecoilState(categoryCounter);
 
   useEffect(() => {
     AddFilterQueryString('', '');
@@ -31,6 +34,13 @@ const OtherFilter = () => {
 
     setValueLanguage(value);
     AddFilterQueryString('langue', isChecked ? e.target.value : '');
+    setCounterForcategory(
+      counterForCategory >= 0 && isChecked
+        ? counterForCategory + 1
+        : counterForCategory > 0 && !isChecked
+        ? counterForCategory - 1
+        : counterForCategory
+    );
     setChangeState(false);
     setValueChecked(isChecked);
     setValue0fCurrentCategory(currentCategorieValue);
