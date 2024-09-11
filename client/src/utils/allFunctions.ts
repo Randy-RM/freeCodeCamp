@@ -121,51 +121,56 @@ export function getCategoryDescription(title: string): string | undefined {
 }
 
 //fonction permettant d'ajouter les query string sur un url
-export function AddFilterQueryString(key: string, value: string) {
-  // Obtenir l'URL actuelle
-  const currentUrl = window.location.href;
 
-  // Créer un objet URL à partir de l'URL actuelle
+/**
+ * Ajoute, met à jour ou supprime un paramètre de requête dans l'URL.
+ * @param key La clé du paramètre de requête.
+ * @param value La valeur à ajouter ou supprimer du paramètre.
+ */
+export function AddFilterQueryString(key: string, value: string) {
+  // Vérifier si le code s'exécute dans un navigateur
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  // Obtenir l'URL actuelle et initialiser URLSearchParams
+  const currentUrl = window.location.href;
   const url = new URL(currentUrl);
 
-  // Récupérer les paramètres de la requête
-  const params = new URLSearchParams(url.search);
+  const searchParams = new URLSearchParams(url.search);
 
-  // Récupérer les valeurs existantes pour la clé donnée, s'il y en a
-  const existingValues = params.get(key);
+  // Récupérer les valeurs existantes pour la clé donnée, sous forme de tableau
+  const existingValues = searchParams.get(key)?.split(',') || [];
 
-  // Convertir les valeurs existantes en tableau si elles existent, sinon tableau vide
-  let valuesArray = existingValues ? existingValues.split(',') : [];
-
-  // Vérifier si la valeur est déjà présente dans les valeurs existantes
+  // Logique pour gérer l'ajout ou la suppression de la valeur
   if (value === '') {
-    // Si la valeur est vide, ne pas ajouter de clé avec une valeur vide
-    if (valuesArray.length > 0) {
-      // Si la clé a des valeurs existantes, supprimer la clé
-      params.delete(key);
+    // Si la valeur est vide, supprimer la clé seulement si des valeurs existent
+    if (existingValues.length > 0) {
+      searchParams.delete(key);
     }
-  } else if (valuesArray.includes(value)) {
-    // Si la valeur existe déjà, la retirer
-    valuesArray = valuesArray.filter(v => v !== value);
-    // Si aucune valeur ne reste pour cette clé, supprimer la clé
-    if (valuesArray.length === 0) {
-      params.delete(key);
+  } else if (existingValues.includes(value)) {
+    // Si la valeur existe, la supprimer
+    const filteredValues = existingValues.filter(v => v !== value);
+
+    // Mettre à jour la clé avec les valeurs restantes ou supprimer si vide
+    if (filteredValues.length === 0) {
+      searchParams.delete(key);
     } else {
-      // Sinon, mettre à jour les valeurs pour cette clé
-      params.set(key, valuesArray.join(','));
+      searchParams.set(key, filteredValues.join(','));
     }
   } else {
     // Si la valeur n'existe pas, l'ajouter aux valeurs existantes
-    valuesArray.push(value);
-    params.set(key, valuesArray.join(','));
+    existingValues.push(value);
+    searchParams.set(key, existingValues.join(','));
   }
 
-  // Construire la nouvelle URL avec les paramètres mis à jour
-  const newUrl = params.toString()
-    ? `${url.pathname}?${params.toString()}`
-    : url.pathname;
+  // Construire la nouvelle URL
+  // Construire la nouvelle URL si les searchParams existent, sinon juste le pathname
+  const newUrl = searchParams.toString()
+    ? `${window.location.pathname}?${searchParams.toString()}`
+    : window.location.pathname;
 
-  // Mettre à jour l'URL dans le navigateur sans recharger la page
+  // Mettre à jour l'URL sans recharger la page
   window.history.replaceState(null, '', newUrl);
 }
 
