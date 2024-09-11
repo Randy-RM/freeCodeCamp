@@ -83,6 +83,13 @@ export const checkedBox = atom<boolean>({
   effects_UNSTABLE: [localStorageEffect('checkedBox')]
 });
 
+export const changeState = atom<boolean>({
+  key: 'changeState',
+  default: false,
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  effects_UNSTABLE: [localStorageEffect('changeState')]
+});
+
 export const isDataLoadingTrue = atom<boolean>({
   key: 'isDataLoadingTrue',
   default: true,
