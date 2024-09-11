@@ -34,7 +34,7 @@ const FilterByType = () => {
     const value = isChecked ? e.target.value : 'none'; // Assigner "none" lorsqu'il est décoché
 
     setValuype(value);
-    AddFilterQueryString('type', isChecked ? e.target.value : '');
+    AddFilterQueryString('type', e.target.value);
     setCounterForcategory(
       counterForCategory >= 0 && isChecked
         ? counterForCategory + 1

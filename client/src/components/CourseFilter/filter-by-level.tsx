@@ -59,7 +59,7 @@ const FilterByLevel = () => {
       const updatedState = { ...prevState, [value]: checked };
 
       setValueLevel(value);
-      AddFilterQueryString('niveau', checked ? value : '');
+      AddFilterQueryString('niveau', value);
       setValueChecked(checked);
       setCounterForcategory(
         counterForCategory >= 0 && checked

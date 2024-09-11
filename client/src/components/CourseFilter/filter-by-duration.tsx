@@ -11,29 +11,9 @@ import { AddFilterQueryString } from '../../utils/allFunctions';
 
 const FilterByDuration = () => {
   const [showFilter, setShowFilter] = useState(false);
-  const [showSubjectFilter, setShowSubjectFilter] = useState(true);
   const setValueDuration = useSetRecoilState(valueOfTypeDuration);
-  const [checkedState, setCheckedState] = useState<{
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    '>1h': boolean /* eslint-disable @typescript-eslint/no-unsafe-assignment */;
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    '1>5h': boolean;
-    /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    '>5h': boolean;
-  }>({
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    '>1h': false,
-    /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    '1>5h': false,
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    '>5h': false /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-  });
+  const [showSubjectFilter, setShowSubjectFilter] = useState(true);
+
   const [currentCategorieValue, setValue0fCurrentCategory] = useRecoilState(
     valueOfCurrentCategory
   );
@@ -44,60 +24,43 @@ const FilterByDuration = () => {
     useRecoilState(categoryCounter);
 
   useEffect(() => {
-    AddFilterQueryString('durée', queryString ? queryString : '');
-    /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-    /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-  }, [queryString]);
+    AddFilterQueryString('', '');
+  }, []);
 
   // Charger l'état des checkboxes depuis le localStorage lors du montage du composant
   /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-  useEffect(() => {
-    const savedState = JSON.parse(
-      localStorage.getItem('filterDurationState') || '{}'
-    );
-    if (savedState) {
-      /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-      setCheckedState(
-        /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        savedState /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-      );
-    }
-  }, []);
+  // useEffect(() => {
+  //   const savedState = JSON.parse(
+  //     localStorage.getItem('filterDurationState') || '{}'
+  //   );
+  //   if (savedState) {
+  //     setQueryString(queryString);
+  //   }
+  // }, []);
 
   // Sauvegarder l'état des checkboxes dans le localStorage à chaque changement
-  useEffect(() => {
-    localStorage.setItem('filterDurationState', JSON.stringify(checkedState));
-  }, [checkedState]);
+  // useEffect(() => {
+  //   localStorage.setItem('filterDurationState', JSON.stringify(queryString));
+  // }, [queryString]);
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = e.target;
 
-    // Mise à jour de l'état des checkboxes
-    setCheckedState(prevState => {
-      const updatedState = {
-        ...prevState,
-        [value]: checked // Mise à jour dynamique basée sur 'value'
-      };
+    setQueryString(queryString);
 
-      setQueryString(value);
-
-      // Mettre à jour les états dans Recoil
-      setValueDuration(value);
-      AddFilterQueryString('durée', queryString ? queryString : '');
-      setCounterForcategory(
-        counterForCategory >= 0 && isChecked
-          ? counterForCategory + 1
-          : counterForCategory > 0 && !isChecked
-          ? counterForCategory - 1
-          : counterForCategory
-      );
-      setChangeState(false);
-      setValue0fCurrentCategory(currentCategorieValue);
-      console.log(showFilter);
-
-      return updatedState;
-    });
+    // Mettre à jour les états dans Recoil
+    setValueDuration(value);
+    AddFilterQueryString('durée', e.target.value);
+    setCounterForcategory(
+      counterForCategory >= 0 && checked
+        ? counterForCategory + 1
+        : counterForCategory > 0 && !checked
+        ? counterForCategory - 1
+        : counterForCategory
+    );
+    setChangeState(false);
+    setValue0fCurrentCategory(currentCategorieValue);
+    console.log(showFilter);
   };
 
   return (
@@ -151,7 +114,6 @@ const FilterByDuration = () => {
               <input
                 type='checkbox'
                 value='>1h'
-                checked={checkedState['>1h']}
                 onChange={handleLanguageChange}
               />
               Moins d&apos;1 heure
@@ -160,7 +122,6 @@ const FilterByDuration = () => {
               <input
                 type='checkbox'
                 value='1>5h'
-                checked={checkedState['1>5h']}
                 onChange={handleLanguageChange}
               />
               1 à 5 heures
@@ -169,7 +130,6 @@ const FilterByDuration = () => {
               <input
                 type='checkbox'
                 value='>5h'
-                checked={checkedState['>5h']}
                 onChange={handleLanguageChange}
               />
               5+ heures

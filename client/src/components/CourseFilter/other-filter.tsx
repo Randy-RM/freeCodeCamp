@@ -33,7 +33,7 @@ const OtherFilter = () => {
     const value = isChecked ? e.target.value : 'none'; // Assigner "none" lorsqu'il est décoché
 
     setValueLanguage(value);
-    AddFilterQueryString('langue', isChecked ? e.target.value : '');
+    AddFilterQueryString('langue', e.target.value);
     setCounterForcategory(
       counterForCategory >= 0 && isChecked
         ? counterForCategory + 1
