@@ -274,6 +274,8 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     }
   };
 
+  console.log(currentUrl);
+
   useEffect(() => {
     void fetchCourses();
     setChangeStateValue(true);

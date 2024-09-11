@@ -18,6 +18,7 @@ const FilterByType = () => {
   const [currentCategorieValue, setValue0fCurrentCategory] = useRecoilState(
     valueOfCurrentCategory
   );
+
   const setChangeState = useSetRecoilState(changeState);
 
   useEffect(() => {
@@ -30,9 +31,9 @@ const FilterByType = () => {
 
     setValuype(value);
     AddFilterQueryString('type', isChecked ? e.target.value : '');
+    setChangeState(false);
     setValueChecked(isChecked);
     setValue0fCurrentCategory(currentCategorieValue);
-    setChangeState(false);
     console.log(showFilter);
   };
 

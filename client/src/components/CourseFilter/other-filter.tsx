@@ -18,6 +18,7 @@ const OtherFilter = () => {
   const [currentCategorieValue, setValue0fCurrentCategory] = useRecoilState(
     valueOfCurrentCategory
   );
+
   const setChangeState = useSetRecoilState(changeState);
 
   useEffect(() => {
@@ -30,9 +31,9 @@ const OtherFilter = () => {
 
     setValueLanguage(value);
     AddFilterQueryString('langue', isChecked ? e.target.value : '');
+    setChangeState(false);
     setValueChecked(isChecked);
     setValue0fCurrentCategory(currentCategorieValue);
-    setChangeState(false);
     console.log(showFilter);
   };
 
