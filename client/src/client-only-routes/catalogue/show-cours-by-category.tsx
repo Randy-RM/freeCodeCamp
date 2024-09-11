@@ -240,7 +240,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         setRessourceDatas([...filteredRavenCourses]);
       }
 
-      // **Conditions pour MoodleCourses**
       if (
         valueOfCurrentCategorie === 11 ||
         valueOfCurrentCategorie === 13 ||
@@ -256,12 +255,17 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
           currentUrl.includes('Avanc%C3%A9');
         const isDurationFilterActive = currentUrl.includes('dur%C3%A9e');
 
+        // **Ajoutez ce filtre pour vérifier la catégorie**
+        filteredMoodleCourses = moodleCourses.filter(
+          course => course.categoryid === valueOfCurrentCategorie
+        );
+
         // Appliquer les filtres seulement s'ils sont activés
         if (isLanguageFilterActive) {
           const filterByEnglish = currentUrl.includes('English');
           const filterByFrench = currentUrl.includes('French');
 
-          filteredMoodleCourses = moodleCourses.filter(course => {
+          filteredMoodleCourses = filteredMoodleCourses.filter(course => {
             const courseLanguage = course.langue;
             return (
               (filterByEnglish && courseLanguage === 'English') ||
@@ -275,9 +279,10 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
           const filterByCours = currentUrl.includes('Cours');
 
           filteredMoodleCourses = filteredMoodleCourses.filter(course => {
+            const category = course.categoryid;
             return (
-              (filterByParcours && course.type === 'parcours') ||
-              (filterByCours && course.type === 'cours')
+              (filterByParcours && category && course.type === 'parcours') ||
+              (filterByCours && category && course.type === 'cours')
             );
           });
         }
@@ -317,18 +322,20 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
           });
         }
 
-        // Si aucun filtre n'est activé, retourner tous les cours Moodle
+        // Si aucun filtre n'est activé, retourner seulement les cours Moodle de la catégorie courante
         if (
           !isLanguageFilterActive &&
           !isTypeFilterActive &&
           !isLevelFilterActive &&
           !isDurationFilterActive
         ) {
-          filteredMoodleCourses = moodleCourses;
+          filteredMoodleCourses = moodleCourses.filter(
+            course => course.categoryid === valueOfCurrentCategorie
+          );
         }
 
         // Mise à jour des données pour MoodleCourses
-        setRessourceDatas(prev => [...prev, ...filteredMoodleCourses]);
+        setRessourceDatas([...filteredMoodleCourses]);
       }
 
       setIsDataOnLoading(false);
