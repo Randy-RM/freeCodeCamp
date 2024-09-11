@@ -9,13 +9,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { useNavigate } from '@reach/router';
 import LaptopIcon from '../../assets/images/laptop.svg';
 import AlgoIcon from '../../assets/images/algorithmIcon.svg';
 import PhBookBookmark from '../../assets/images/ph-book-bookmark-thin.svg';
 import LaediesActIcon from '../../assets/images/partners/we-act-logo.png';
 import awsLogo from '../../assets/images/aws-logo.png';
-import notFound from '../../assets/icons/nofound.svg';
 
 import {
   getRavenResources,
@@ -62,7 +60,6 @@ import {
 } from '../../redux/atoms';
 
 import '../catalogue/show-courses-by-category.css';
-import routes from '../../utils/routes';
 
 const mapStateToProps = createSelector(
   signInLoadingSelector,
@@ -91,8 +88,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   );
 
   const [showMessage, setShowMessage] = useState(false);
-
-  const navigated = useNavigate();
 
   //gestion des states avec recoil(voir doc recoil state manager)
   const [valueOfCurrentCategorie, SetValueOfCurrentCategory] = useRecoilState(
@@ -149,17 +144,31 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
       const moodleCourses = courses
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         .flatMap(course => (Array.isArray(course) ? course : []))
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         .filter(course => !('launch_url' in course)) as MoodleCourse[];
 
       let filteredRavenCourses = ravenCourses;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       let filteredMoodleCourses = moodleCourses;
 
+      // **Conditions pour RavenCourses**
       if (valueOfCurrentCategorie === -2) {
-        // Filtre par langue
-        const filterByEnglish = currentUrl.includes('English');
-        const filterByFrench = currentUrl.includes('French');
+        // Initialisation des flags de filtres
+        const isLanguageFilterActive =
+          currentUrl.includes('English') || currentUrl.includes('French');
+        const isTypeFilterActive =
+          currentUrl.includes('Parcours') || currentUrl.includes('Cours');
+        const isLevelFilterActive =
+          currentUrl.includes('Débutant') ||
+          currentUrl.includes('Interm%C3%A9diaire') ||
+          currentUrl.includes('Avanc%C3%A9');
+        const isDurationFilterActive = currentUrl.includes('dur%C3%A9e');
 
-        if (filterByEnglish || filterByFrench) {
+        // Appliquer les filtres seulement s'ils sont activés
+        if (isLanguageFilterActive) {
+          const filterByEnglish = currentUrl.includes('English');
+          const filterByFrench = currentUrl.includes('French');
+
           filteredRavenCourses = filteredRavenCourses.filter(course => {
             const courseLanguage = course.category?.[0]?.tags?.[0]?.title;
             return (
@@ -167,67 +176,37 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
               (filterByFrench && courseLanguage === 'French')
             );
           });
-
-          filteredMoodleCourses = filteredMoodleCourses.filter(course => {
-            const courseLanguage = course.langue; // Adapter pour Moodle
-            return (
-              (filterByEnglish && courseLanguage === 'English') ||
-              (filterByFrench && courseLanguage === 'French')
-            );
-          });
         }
 
-        // Filtre par type de cours
-        const filterByParcours = currentUrl.includes('Parcours');
-        const filterByCours = currentUrl.includes('Cours');
+        if (isTypeFilterActive) {
+          const filterByParcours = currentUrl.includes('Parcours');
+          const filterByCours = currentUrl.includes('Cours');
 
-        if (filterByParcours || filterByCours) {
           filteredRavenCourses = filteredRavenCourses.filter(course => {
             return (
-              // eslint-disable-next-line @typescript-eslint/naming-convention
               (filterByParcours && course.long_description) ||
-              // eslint-disable-next-line @typescript-eslint/naming-convention
               (filterByCours && !course.long_description)
             );
           });
-
-          filteredMoodleCourses = filteredMoodleCourses.filter(course => {
-            return (
-              (filterByParcours && course.type === 'parcours') ||
-              (filterByCours && course.type === 'cours')
-            );
-          });
         }
 
-        // Filtre par niveau
-        const filterByDebutant = currentUrl.includes('Débutant');
-        const filterByIntermediaire = currentUrl.includes('Interm%C3%A9diaire');
-        const filterByAvance = currentUrl.includes('Avanc%C3%A9');
+        if (isLevelFilterActive) {
+          const filterByDebutant = currentUrl.includes('Débutant');
+          const filterByIntermediaire =
+            currentUrl.includes('Interm%C3%A9diaire');
+          const filterByAvance = currentUrl.includes('Avanc%C3%A9');
 
-        if (filterByDebutant || filterByIntermediaire || filterByAvance) {
           filteredRavenCourses = filteredRavenCourses.filter(course => {
             return (
-              // eslint-disable-next-line @typescript-eslint/naming-convention
               (filterByDebutant && course.skill_level === 'Fundamental') ||
               (filterByIntermediaire &&
-                // eslint-disable-next-line @typescript-eslint/naming-convention
                 course.skill_level === 'Intermediate') ||
-              // eslint-disable-next-line @typescript-eslint/naming-convention
               (filterByAvance && course.skill_level === 'Advanced')
             );
           });
-
-          filteredMoodleCourses = filteredMoodleCourses.filter(course => {
-            return (
-              (filterByDebutant && course.level === 'debutant') ||
-              (filterByIntermediaire && course.level === 'Intermediate') ||
-              (filterByAvance && course.level === 'Advanced')
-            );
-          });
         }
 
-        // Filtrer par durée
-        if (currentUrl.includes('dur%C3%A9e')) {
+        if (isDurationFilterActive) {
           const filterLessThan1Hour = currentUrl.includes('dur%C3%A9e=%3E1h');
           const filterBetween1And5Hours =
             currentUrl.includes('dur%C3%A9e=1%3E5h');
@@ -245,6 +224,85 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
               (filterMoreThan5Hours && courseHours > 300)
             );
           });
+        }
+
+        // Si aucun filtre n'est activé, retourner tous les cours Raven
+        if (
+          !isLanguageFilterActive &&
+          !isTypeFilterActive &&
+          !isLevelFilterActive &&
+          !isDurationFilterActive
+        ) {
+          filteredRavenCourses = ravenCourses;
+        }
+
+        // Mise à jour des données pour RavenCourses
+        setRessourceDatas([...filteredRavenCourses]);
+      }
+
+      // **Conditions pour MoodleCourses**
+      if (
+        valueOfCurrentCategorie === 11 ||
+        valueOfCurrentCategorie === 13 ||
+        valueOfCurrentCategorie === 14
+      ) {
+        const isLanguageFilterActive =
+          currentUrl.includes('English') || currentUrl.includes('French');
+        const isTypeFilterActive =
+          currentUrl.includes('Parcours') || currentUrl.includes('Cours');
+        const isLevelFilterActive =
+          currentUrl.includes('Débutant') ||
+          currentUrl.includes('Interm%C3%A9diaire') ||
+          currentUrl.includes('Avanc%C3%A9');
+        const isDurationFilterActive = currentUrl.includes('dur%C3%A9e');
+
+        // Appliquer les filtres seulement s'ils sont activés
+        if (isLanguageFilterActive) {
+          const filterByEnglish = currentUrl.includes('English');
+          const filterByFrench = currentUrl.includes('French');
+
+          filteredMoodleCourses = moodleCourses.filter(course => {
+            const courseLanguage = course.langue;
+            return (
+              (filterByEnglish && courseLanguage === 'English') ||
+              (filterByFrench && courseLanguage === 'French')
+            );
+          });
+        }
+
+        if (isTypeFilterActive) {
+          const filterByParcours = currentUrl.includes('Parcours');
+          const filterByCours = currentUrl.includes('Cours');
+
+          filteredMoodleCourses = filteredMoodleCourses.filter(course => {
+            return (
+              (filterByParcours && course.type === 'parcours') ||
+              (filterByCours && course.type === 'cours')
+            );
+          });
+        }
+
+        if (isLevelFilterActive) {
+          const filterByDebutant = currentUrl.includes('Débutant');
+          const filterByIntermediaire =
+            currentUrl.includes('Interm%C3%A9diaire');
+          const filterByAvance = currentUrl.includes('Avanc%C3%A9');
+
+          filteredMoodleCourses = filteredMoodleCourses.filter(course => {
+            return (
+              (filterByDebutant && course.level === 'debutant') ||
+              (filterByIntermediaire && course.level === 'Intermediate') ||
+              (filterByAvance && course.level === 'Advanced')
+            );
+          });
+        }
+
+        if (isDurationFilterActive) {
+          const filterLessThan1Hour = currentUrl.includes('dur%C3%A9e=%3E1h');
+          const filterBetween1And5Hours =
+            currentUrl.includes('dur%C3%A9e=1%3E5h');
+          const filterUpTo5Hours = currentUrl.includes('%3E1h%2C1%3E5h');
+          const filterMoreThan5Hours = currentUrl.includes('dur%C3%A9e=%3E5h');
 
           filteredMoodleCourses = filteredMoodleCourses.filter(course => {
             const courseHours = convertTimeForFilter(course.duration);
@@ -259,13 +317,18 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
           });
         }
 
-        // Mise à jour des données affichées
-        setRessourceDatas([...filteredRavenCourses]);
-      } else if (valueOfCurrentCategorie === null) {
-        setRessourceDatas([...ravenCourses, ...moodleCourses]);
-      } else {
-        // Filtrage supplémentaire basé sur d'autres critères
-        setRessourceDatas(filteredMoodleCourses);
+        // Si aucun filtre n'est activé, retourner tous les cours Moodle
+        if (
+          !isLanguageFilterActive &&
+          !isTypeFilterActive &&
+          !isLevelFilterActive &&
+          !isDurationFilterActive
+        ) {
+          filteredMoodleCourses = moodleCourses;
+        }
+
+        // Mise à jour des données pour MoodleCourses
+        setRessourceDatas(prev => [...prev, ...filteredMoodleCourses]);
       }
 
       setIsDataOnLoading(false);
@@ -413,7 +476,11 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                   <p>Parcourir le catalogue complet</p>
                   <span>
                     {(() => {
-                      if (isDataOnLoading) {
+                      if (
+                        !isDataOnLoading &&
+                        ressourcesData.length == 0 &&
+                        valueOfCurrentCategorie != -1
+                      ) {
                         return '';
                       }
 
@@ -438,21 +505,17 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                     })()}
                   </span>
                 </div>
-                {showMessage && ressourcesData.length == 0 ? (
-                  <div className='no-courses'>
-                    <img src={notFound} alt='Aucun cours disponible' />
-                    <p>Aucun cours disponible pour le filtre sélectionné.</p>
-                    <p>
-                      Nous travaillons activement pour ajouter de nouveaux cours
-                      dans cette catégorie. Restez à l&apos;écoute !
+                {!isDataOnLoading &&
+                ressourcesData.length == 0 &&
+                valueOfCurrentCategorie != -1 ? (
+                  <div className=''>
+                    <p className='no-cours'>
+                      Aucune correspondance exacte .
+                      <div>
+                        Modifiez ou supprimez certains de vos filtres ou ajustez
+                        votre catégorie de recherche.
+                      </div>
                     </p>
-                    <button
-                      onClick={() => {
-                        void navigated(routes.catalogue.index);
-                      }}
-                    >
-                      Visitez le catalogue
-                    </button>
                   </div>
                 ) : (
                   <div className='card-course-detail-container'>
