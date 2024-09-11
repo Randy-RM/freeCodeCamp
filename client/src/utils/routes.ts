@@ -8,7 +8,7 @@ const routes = {
   catalogue: {
     index: '/catalogue',
     catalogueTitle: '/catalogue/:value',
-    aws: '/catalogue/Amazone-web-service',
+    aws: '/catalogue/amazon-web-service',
     programmation: '/catalogue/programation',
     moodle: '/catalogue/:category'
   }
