@@ -52,6 +52,7 @@ import { User } from '../../redux/prop-types';
 import { createFlashMessage } from '../../components/Flash/redux';
 import {
   categoryCours,
+  changeState,
   coursesMoodle,
   coursesRaven,
   myAllDataCourses,
@@ -104,6 +105,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const setDataRaven = useSetRecoilState(coursesRaven);
   const setDataRavenPath = useSetRecoilState(pathRaven);
   const showMoodleCategory = useRecoilValue(categoryCours);
+  const [changeStateValue, setChangeStateValue] = useRecoilState(changeState);
 
   const currentUrl = window.location.href;
 
@@ -130,161 +132,153 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
+  const fetchCourses = async () => {
     setIsDataOnLoading(true);
 
-    const fetchCourses = async () => {
-      try {
-        setRessourceDatas([]);
-        const currentPage = 1; // ou la page courante
+    try {
+      setRessourceDatas([]);
+      const currentPage = 1; // ou la page courante
 
-        const courses = await getAllRessources(currentPage);
+      const courses = await getAllRessources(currentPage);
 
-        // Séparer les cours Raven et Moodle
-        const ravenCourses = courses
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-          .flatMap(course => (Array.isArray(course) ? course : [course]))
-          .filter(course => 'launch_url' in course) as RavenCourse[];
-        const moodleCourses = courses
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-          .flatMap(course => (Array.isArray(course) ? course : []))
-          .filter(course => !('launch_url' in course)) as MoodleCourse[];
+      // Séparer les cours Raven et Moodle
+      const ravenCourses = courses
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+        .flatMap(course => (Array.isArray(course) ? course : [course]))
+        .filter(course => 'launch_url' in course) as RavenCourse[];
+      const moodleCourses = courses
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+        .flatMap(course => (Array.isArray(course) ? course : []))
+        .filter(course => !('launch_url' in course)) as MoodleCourse[];
 
-        let filteredRavenCourses = ravenCourses;
-        let filteredMoodleCourses = moodleCourses;
+      let filteredRavenCourses = ravenCourses;
+      let filteredMoodleCourses = moodleCourses;
 
-        if (valueOfCurrentCategorie === -2) {
-          // Filtre par langue
-          const filterByEnglish = currentUrl.includes('English');
-          const filterByFrench = currentUrl.includes('French');
+      if (valueOfCurrentCategorie === -2) {
+        // Filtre par langue
+        const filterByEnglish = currentUrl.includes('English');
+        const filterByFrench = currentUrl.includes('French');
 
-          if (filterByEnglish || filterByFrench) {
-            filteredRavenCourses = filteredRavenCourses.filter(course => {
-              const courseLanguage = course.category?.[0]?.tags?.[0]?.title;
-              return (
-                (filterByEnglish && courseLanguage === 'English') ||
-                (filterByFrench && courseLanguage === 'French')
-              );
-            });
+        if (filterByEnglish || filterByFrench) {
+          filteredRavenCourses = filteredRavenCourses.filter(course => {
+            const courseLanguage = course.category?.[0]?.tags?.[0]?.title;
+            return (
+              (filterByEnglish && courseLanguage === 'English') ||
+              (filterByFrench && courseLanguage === 'French')
+            );
+          });
 
-            filteredMoodleCourses = filteredMoodleCourses.filter(course => {
-              const courseLanguage = course.langue; // Adapter pour Moodle
-              return (
-                (filterByEnglish && courseLanguage === 'English') ||
-                (filterByFrench && courseLanguage === 'French')
-              );
-            });
-          }
-
-          // Filtre par type de cours
-          const filterByParcours = currentUrl.includes('Parcours');
-          const filterByCours = currentUrl.includes('Cours');
-
-          if (filterByParcours || filterByCours) {
-            filteredRavenCourses = filteredRavenCourses.filter(course => {
-              return (
-                // eslint-disable-next-line @typescript-eslint/naming-convention
-                (filterByParcours && course.long_description) ||
-                // eslint-disable-next-line @typescript-eslint/naming-convention
-                (filterByCours && !course.long_description)
-              );
-            });
-
-            filteredMoodleCourses = filteredMoodleCourses.filter(course => {
-              return (
-                (filterByParcours && course.type === 'parcours') ||
-                (filterByCours && course.type === 'cours')
-              );
-            });
-          }
-
-          // Filtre par niveau
-          const filterByDebutant = currentUrl.includes('Débutant');
-          const filterByIntermediaire =
-            currentUrl.includes('Interm%C3%A9diaire');
-          const filterByAvance = currentUrl.includes('Avanc%C3%A9');
-
-          if (filterByDebutant || filterByIntermediaire || filterByAvance) {
-            filteredRavenCourses = filteredRavenCourses.filter(course => {
-              return (
-                // eslint-disable-next-line @typescript-eslint/naming-convention
-                (filterByDebutant && course.skill_level === 'Fundamental') ||
-                (filterByIntermediaire &&
-                  // eslint-disable-next-line @typescript-eslint/naming-convention
-                  course.skill_level === 'Intermediate') ||
-                // eslint-disable-next-line @typescript-eslint/naming-convention
-                (filterByAvance && course.skill_level === 'Advanced')
-              );
-            });
-
-            filteredMoodleCourses = filteredMoodleCourses.filter(course => {
-              return (
-                (filterByDebutant && course.level === 'debutant') ||
-                (filterByIntermediaire && course.level === 'Intermediate') ||
-                (filterByAvance && course.level === 'Advanced')
-              );
-            });
-          }
-
-          // Filtrer par durée
-          if (currentUrl.includes('dur%C3%A9e')) {
-            const filterLessThan1Hour = currentUrl.includes('dur%C3%A9e=%3E1h');
-            const filterBetween1And5Hours =
-              currentUrl.includes('dur%C3%A9e=1%3E5h');
-            const filterUpTo5Hours = currentUrl.includes('%3E1h%2C1%3E5h');
-            const filterMoreThan5Hours =
-              currentUrl.includes('dur%C3%A9e=%3E5h');
-
-            filteredRavenCourses = filteredRavenCourses.filter(course => {
-              const courseHours = convertTimeForFilter(
-                parseInt(course.duration)
-              );
-              return (
-                (filterLessThan1Hour && courseHours < 60) ||
-                (filterBetween1And5Hours &&
-                  courseHours >= 60 &&
-                  courseHours <= 300) ||
-                (filterUpTo5Hours && courseHours <= 300) ||
-                (filterMoreThan5Hours && courseHours > 300)
-              );
-            });
-
-            filteredMoodleCourses = filteredMoodleCourses.filter(course => {
-              const courseHours = convertTimeForFilter(course.duration);
-              return (
-                (filterLessThan1Hour && courseHours < 60) ||
-                (filterBetween1And5Hours &&
-                  courseHours >= 60 &&
-                  courseHours <= 300) ||
-                (filterUpTo5Hours && courseHours <= 300) ||
-                (filterMoreThan5Hours && courseHours > 300)
-              );
-            });
-          }
-
-          // Mise à jour des données affichées
-          setRessourceDatas([
-            ...filteredRavenCourses,
-            ...filteredMoodleCourses
-          ]);
-        } else if (valueOfCurrentCategorie === null) {
-          setRessourceDatas([...ravenCourses, ...moodleCourses]);
-        } else {
-          // Filtrage supplémentaire basé sur d'autres critères
-          setRessourceDatas(filteredMoodleCourses);
+          filteredMoodleCourses = filteredMoodleCourses.filter(course => {
+            const courseLanguage = course.langue; // Adapter pour Moodle
+            return (
+              (filterByEnglish && courseLanguage === 'English') ||
+              (filterByFrench && courseLanguage === 'French')
+            );
+          });
         }
 
-        setIsDataOnLoading(false);
-      } catch (error) {
-        console.error('Error fetching courses:', error);
-        alert('Oops, problème de connexion. Veuillez réessayer.');
-        void navigated('/catalogue'); // Redirige vers /catalogue
-      }
-    };
+        // Filtre par type de cours
+        const filterByParcours = currentUrl.includes('Parcours');
+        const filterByCours = currentUrl.includes('Cours');
 
+        if (filterByParcours || filterByCours) {
+          filteredRavenCourses = filteredRavenCourses.filter(course => {
+            return (
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              (filterByParcours && course.long_description) ||
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              (filterByCours && !course.long_description)
+            );
+          });
+
+          filteredMoodleCourses = filteredMoodleCourses.filter(course => {
+            return (
+              (filterByParcours && course.type === 'parcours') ||
+              (filterByCours && course.type === 'cours')
+            );
+          });
+        }
+
+        // Filtre par niveau
+        const filterByDebutant = currentUrl.includes('Débutant');
+        const filterByIntermediaire = currentUrl.includes('Interm%C3%A9diaire');
+        const filterByAvance = currentUrl.includes('Avanc%C3%A9');
+
+        if (filterByDebutant || filterByIntermediaire || filterByAvance) {
+          filteredRavenCourses = filteredRavenCourses.filter(course => {
+            return (
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              (filterByDebutant && course.skill_level === 'Fundamental') ||
+              (filterByIntermediaire &&
+                // eslint-disable-next-line @typescript-eslint/naming-convention
+                course.skill_level === 'Intermediate') ||
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              (filterByAvance && course.skill_level === 'Advanced')
+            );
+          });
+
+          filteredMoodleCourses = filteredMoodleCourses.filter(course => {
+            return (
+              (filterByDebutant && course.level === 'debutant') ||
+              (filterByIntermediaire && course.level === 'Intermediate') ||
+              (filterByAvance && course.level === 'Advanced')
+            );
+          });
+        }
+
+        // Filtrer par durée
+        if (currentUrl.includes('dur%C3%A9e')) {
+          const filterLessThan1Hour = currentUrl.includes('dur%C3%A9e=%3E1h');
+          const filterBetween1And5Hours =
+            currentUrl.includes('dur%C3%A9e=1%3E5h');
+          const filterUpTo5Hours = currentUrl.includes('%3E1h%2C1%3E5h');
+          const filterMoreThan5Hours = currentUrl.includes('dur%C3%A9e=%3E5h');
+
+          filteredRavenCourses = filteredRavenCourses.filter(course => {
+            const courseHours = convertTimeForFilter(parseInt(course.duration));
+            return (
+              (filterLessThan1Hour && courseHours < 60) ||
+              (filterBetween1And5Hours &&
+                courseHours >= 60 &&
+                courseHours <= 300) ||
+              (filterUpTo5Hours && courseHours <= 300) ||
+              (filterMoreThan5Hours && courseHours > 300)
+            );
+          });
+
+          filteredMoodleCourses = filteredMoodleCourses.filter(course => {
+            const courseHours = convertTimeForFilter(course.duration);
+            return (
+              (filterLessThan1Hour && courseHours < 60) ||
+              (filterBetween1And5Hours &&
+                courseHours >= 60 &&
+                courseHours <= 300) ||
+              (filterUpTo5Hours && courseHours <= 300) ||
+              (filterMoreThan5Hours && courseHours > 300)
+            );
+          });
+        }
+
+        // Mise à jour des données affichées
+        setRessourceDatas([...filteredRavenCourses]);
+      } else if (valueOfCurrentCategorie === null) {
+        setRessourceDatas([...ravenCourses, ...moodleCourses]);
+      } else {
+        // Filtrage supplémentaire basé sur d'autres critères
+        setRessourceDatas(filteredMoodleCourses);
+      }
+
+      setIsDataOnLoading(false);
+    } catch (error) {
+      console.error('Error fetching courses:', error);
+    }
+  };
+
+  useEffect(() => {
     void fetchCourses();
+    setChangeStateValue(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [valueOfCurrentCategorie, currentUrl]);
+  }, [valueOfCurrentCategorie, changeStateValue]);
 
   useEffect(() => {
     setCurrentpage(1);

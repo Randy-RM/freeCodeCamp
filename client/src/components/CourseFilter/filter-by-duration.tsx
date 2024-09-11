@@ -3,6 +3,7 @@ import './course-filter.css';
 
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
+  changeState,
   checkedBox,
   valueOfCurrentCategory,
   valueOfTypeDuration
@@ -18,6 +19,8 @@ const FilterByDuration = () => {
     valueOfCurrentCategory
   );
 
+  const setChangeState = useSetRecoilState(changeState);
+
   useEffect(() => {
     AddFilterQueryString('', '');
   }, []);
@@ -31,6 +34,7 @@ const FilterByDuration = () => {
     setValueChecked(isChecked);
     setValue0fCurrentCategory(currentCategorieValue);
     setShowFilter(showFilter);
+    setChangeState(true);
   };
 
   return (
