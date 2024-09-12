@@ -3,6 +3,8 @@ import './course-filter.css';
 
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
+  categoryCounter,
+  changeState,
   checkedBox,
   valueOfCurrentCategory,
   valueOfTypeCourse
@@ -18,19 +20,62 @@ const FilterByType = () => {
     valueOfCurrentCategory
   );
 
+  const setChangeState = useSetRecoilState(changeState);
+  const [counterForCategory, setCounterForcategory] =
+    useRecoilState(categoryCounter);
+
+  // État local pour gérer les cases cochées
+  const [checkedState, setCheckedState] = useState({
+    Cours: false,
+    Parcours: false
+  });
+
+  // Charger l'état des cases cochées depuis le localStorage au montage du composant
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const savedState = JSON.parse(
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      localStorage.getItem('filterTypeState') || '{}'
+    );
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    if (savedState && Object.keys(savedState).length > 0) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      setCheckedState(savedState);
+    }
+  }, []);
+
+  // Sauvegarder l'état des cases cochées dans le localStorage à chaque modification
+  useEffect(() => {
+    localStorage.setItem('filterTypeState', JSON.stringify(checkedState));
+  }, [checkedState]);
+
   useEffect(() => {
     AddFilterQueryString('', '');
   }, []);
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const isChecked = e.target.checked;
-    const value = isChecked ? e.target.value : 'none'; // Assigner "none" lorsqu'il est décoché
+    const { value, checked } = e.target;
 
-    setValuype(value);
-    AddFilterQueryString('type', isChecked ? e.target.value : '');
-    setValueChecked(isChecked);
-    setValue0fCurrentCategory(currentCategorieValue);
-    console.log(showFilter);
+    setCheckedState(prevState => {
+      const updatedState = { ...prevState, [value]: checked };
+      setValuype(value);
+      AddFilterQueryString('type', value);
+      setCounterForcategory(
+        counterForCategory >= 0 && checked
+          ? counterForCategory + 1
+          : counterForCategory > 0 && !checked
+          ? counterForCategory - 1
+          : counterForCategory
+      );
+      setChangeState(false);
+      setValueChecked(checked);
+      setValue0fCurrentCategory(currentCategorieValue);
+      console.log(showFilter);
+
+      return updatedState;
+    });
   };
 
   return (
@@ -84,6 +129,7 @@ const FilterByType = () => {
               <input
                 type='checkbox'
                 value='Cours'
+                checked={checkedState.Cours}
                 onChange={handleLanguageChange}
               />
               Cours
@@ -92,6 +138,7 @@ const FilterByType = () => {
               <input
                 type='checkbox'
                 value='Parcours'
+                checked={checkedState.Parcours}
                 onChange={handleLanguageChange}
               />
               Parcours

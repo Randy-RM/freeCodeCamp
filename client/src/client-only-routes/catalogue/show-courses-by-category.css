@@ -10,6 +10,17 @@
   padding: 1rem;
 }
 
+.no-cours {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.no-cours div {
+  font-weight: 400;
+  font-size: 1.5rem;
+  padding: 1rem 0rem;
+}
+
 .catalog {
   font-size: 1.5rem;
   color: red;
@@ -121,6 +132,12 @@
 .hide_on_mobile {
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: 468px) {
+  .catalog-title {
+    padding-top: 0.4rem;
+  }
 }
 
 @media (max-width: 468px) {
