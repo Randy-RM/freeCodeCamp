@@ -83,11 +83,15 @@ function LearnPage({ isSignedIn }: LearnPageProps) {
       <main className='landing-page bg-light'>
         <div className='hero-main-bg'>
           <Grid>
-            <Hero pageName={'landing'} isSignedIn={isSignedIn} />
+            <Hero />
           </Grid>
         </div>
         {/* <Hero pageName={'landing'} isSignedIn={isSignedIn} /> */}
-        <Vodacom />
+        <div className=''>
+          <Grid>
+            <Vodacom />
+          </Grid>
+        </div>
 
         {/* <div className='bg-secondary'>
           <Grid>
