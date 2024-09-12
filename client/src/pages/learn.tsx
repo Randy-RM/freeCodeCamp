@@ -1,34 +1,15 @@
-import { Grid } from '@freecodecamp/react-bootstrap';
 import { graphql } from 'gatsby';
 import React from 'react';
-import Helmet from 'react-helmet';
-// import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import LearnLayout from '../components/layouts/learn';
-
 import {
   userFetchStateSelector,
   isSignedInSelector,
   userSelector
 } from '../redux';
 
-// import AsSeenIn from './components/as-seen-in';
-import RegistrationToAcademy from '../components/landing/components/registration-to-academy';
-// import LandingTop from './components/landing-top';
-// import LandingDetails from '../components/landing/components/landing-details';
-// import LandingLearn from './components/landing-learn';
-// import LandingGoals from './components/landing-goals';
-import WhatCanYouDo from '../components/landing/whatCanYouDo/what-can-you-do';
-// import YourCareer from './yourCareer/your-career';
-import Hero from '../components/landing/hero/hero';
-import StartCOding from '../components/landing/start-coding/start-coding';
-import WhatWillYouLearn from '../components/landing/what-will-you-learn/what-will-you-learn';
-import HowWillYouLearn from '../components/landing/how-will-you-learn/how-will-you-learn';
-import Vodacom from '../components/landing/vodacom-branding-section/vodacom-branding';
-import Partners from '../components/landing/partners/partners';
-
 import '../components/landing/landing.css';
+import Landing from '../components/landing';
 
 interface FetchState {
   pending: boolean;
