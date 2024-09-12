@@ -3,6 +3,8 @@ import './course-filter.css';
 
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
+  categoryCounter,
+  changeState,
   checkedBox,
   valueOfCurrentCategory,
   valueOfTypeLevel
@@ -18,19 +20,60 @@ const FilterByLevel = () => {
     valueOfCurrentCategory
   );
 
+  const setChangeState = useSetRecoilState(changeState);
+  const [counterForCategory, setCounterForcategory] =
+    useRecoilState(categoryCounter);
+
+  const [checkedState, setCheckedState] = useState({
+    Débutant: false,
+    Intermédiaire: false,
+    Avancé: false
+  });
+
+  // Charger l'état des cases à cocher depuis le localStorage
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const savedState = JSON.parse(
+      localStorage.getItem('filterLevelState') || '{}'
+    );
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    if (savedState && Object.keys(savedState).length > 0) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      setCheckedState(savedState);
+    }
+  }, []);
+
+  // Sauvegarder l'état des cases à cocher dans le localStorage lorsqu'il change
+  useEffect(() => {
+    localStorage.setItem('filterLevelState', JSON.stringify(checkedState));
+  }, [checkedState]);
+
   useEffect(() => {
     AddFilterQueryString('', '');
   }, []);
 
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const isChecked = e.target.checked;
-    const value = isChecked ? e.target.value : 'none'; // Assigner "none" lorsqu'il est décoché
+  const handleLevelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = e.target;
 
-    setValueLevel(value);
-    AddFilterQueryString('niveau', isChecked ? e.target.value : '');
-    setValueChecked(isChecked);
-    setValue0fCurrentCategory(currentCategorieValue);
-    console.log(showFilter);
+    setCheckedState(prevState => {
+      const updatedState = { ...prevState, [value]: checked };
+
+      setValueLevel(value);
+      AddFilterQueryString('niveau', value);
+      setValueChecked(checked);
+      setCounterForcategory(
+        counterForCategory >= 0 && checked
+          ? counterForCategory + 1
+          : counterForCategory > 0 && !checked
+          ? counterForCategory - 1
+          : counterForCategory
+      );
+      setChangeState(false);
+      setValue0fCurrentCategory(currentCategorieValue);
+      console.log(showFilter);
+
+      return updatedState;
+    });
   };
 
   return (
@@ -84,7 +127,8 @@ const FilterByLevel = () => {
               <input
                 type='checkbox'
                 value='Débutant'
-                onChange={handleLanguageChange}
+                checked={checkedState.Débutant}
+                onChange={handleLevelChange}
               />
               Débutant
             </label>
@@ -92,7 +136,8 @@ const FilterByLevel = () => {
               <input
                 type='checkbox'
                 value='Intermédiaire'
-                onChange={handleLanguageChange}
+                checked={checkedState.Intermédiaire}
+                onChange={handleLevelChange}
               />
               Intermédiaire
             </label>
@@ -100,7 +145,8 @@ const FilterByLevel = () => {
               <input
                 type='checkbox'
                 value='Avancé'
-                onChange={handleLanguageChange}
+                checked={checkedState.Avancé}
+                onChange={handleLevelChange}
               />
               Avancé
             </label>
