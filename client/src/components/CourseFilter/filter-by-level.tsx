@@ -30,20 +30,20 @@ const FilterByLevel = () => {
     Avancé: false
   });
 
+  // Charger l'état des cases à cocher depuis le localStorage
   useEffect(() => {
-    /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const savedState = JSON.parse(
       localStorage.getItem('filterLevelState') || '{}'
     );
-    /* eslint-disable @typescript-eslint/no-unsafe-assignment */
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     if (savedState && Object.keys(savedState).length > 0) {
-      /* eslint-disable @typescript-eslint/no-unsafe-assignment */
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       setCheckedState(savedState);
     }
   }, []);
 
+  // Sauvegarder l'état des cases à cocher dans le localStorage lorsqu'il change
   useEffect(() => {
     localStorage.setItem('filterLevelState', JSON.stringify(checkedState));
   }, [checkedState]);
@@ -127,6 +127,7 @@ const FilterByLevel = () => {
               <input
                 type='checkbox'
                 value='Débutant'
+                checked={checkedState.Débutant}
                 onChange={handleLevelChange}
               />
               Débutant
@@ -135,6 +136,7 @@ const FilterByLevel = () => {
               <input
                 type='checkbox'
                 value='Intermédiaire'
+                checked={checkedState.Intermédiaire}
                 onChange={handleLevelChange}
               />
               Intermédiaire
@@ -143,6 +145,7 @@ const FilterByLevel = () => {
               <input
                 type='checkbox'
                 value='Avancé'
+                checked={checkedState.Avancé}
                 onChange={handleLevelChange}
               />
               Avancé
