@@ -303,8 +303,9 @@ const CoursesCategoryCard = ({
           </button>
           <button
             className={
-              valueDeToken !== null ? 'category-card' : 'hide__category'
+              valueDeToken == null ? ' hide__category' : 'hide__category'
             }
+            style={{ display: 'none' }}
             onClick={() => {
               setCurrent(-2);
               setValueOfButton('Amazon Web Service');
