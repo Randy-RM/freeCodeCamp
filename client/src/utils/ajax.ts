@@ -108,7 +108,7 @@ export interface ProgramationCourses {
   link?: string;
   cardType?: string;
   createAt?: Date | string | number;
-  duration: number;
+  duration: string | number;
   language?: string;
   level?: string;
   type: string;
