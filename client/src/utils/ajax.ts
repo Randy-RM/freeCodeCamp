@@ -92,6 +92,69 @@ export interface CourseDetails {
   description: string;
 }
 
+//data structure for programation cours
+
+export interface ProgramationCourses {
+  isAvailable: boolean;
+  sameTab?: boolean;
+  external?: boolean;
+  description?: string;
+  title: string;
+  icon?: string;
+  sponsorIcon?: string;
+  badgeIcon?: string;
+  alt?: string;
+  buttonText?: string;
+  link?: string;
+  cardType?: string;
+  createAt?: Date | string | number;
+  duration: number;
+  language?: string;
+  level?: string;
+  type: string;
+}
+
+export const dataForprogramation: programationCourses[] = [
+  {
+    title: 'Responsive Web Design',
+    level: 'Débutant',
+    language: 'Français',
+    sponsorIcon: 'LaediesActIcon',
+    alt: 'Icone ladies Act des cours Responsive design',
+    isAvailable: true,
+    link: '/learn/responsive-web-design/',
+    description:
+      "Ce cours t'apprend les langages HTML pour le contenu et CSS pour la conception, ainsi que la création de pages Web adaptatives pour différentes tailles d'écran.",
+    duration: 120,
+    type: 'Cours'
+  },
+  {
+    title: 'JavaScript Algorithms and Data Structures',
+    level: 'Débutant',
+    language: 'Anglais',
+    sponsorIcon: 'AlgoIcon',
+    alt: 'Icone cours algorithm et structure de données',
+    isAvailable: true,
+    link: '/learn/javascript-algorithms-and-data-structures',
+    description:
+      "Ce cours t'enseigne les bases de JavaScript pour rendre les pages interactives, ainsi que les algorithmes et structures de données en JavaScript, etc.",
+    duration: 120,
+    type: 'Cours'
+  }
+];
+
+// <CourseCard
+//               level='Débutant'
+//               language='French'
+//               icon={AlgoIcon}
+//               alt=''
+//               isAvailable={true}
+//               title='JavaScript Algorithms and Data Structures'
+//               buttonText='Suivre le cours'
+//               link='/learn/javascript-algorithms-and-data-structures'
+//               description={`
+//     Ce cours t'enseigne les bases de JavaScript pour rendre les pages interactives, ainsi que les algorithmes et structures de données en JavaScript., etc.
+//   `}
 export const courseDescriptions: Record<CourseCategoryTitle, CourseDetails> = {
   Développement: {
     titre: 'Développement Web',
