@@ -57,7 +57,76 @@ function LearnPage({ isSignedIn }: LearnPageProps) {
 
   console.log(isSignedIn);
 
-  return <Landing />;
+  return (
+    <LearnLayout>
+      {/* <Helmet title={t('metaTags:title')} /> */}
+      <Helmet title={`Apprendre à coder - gratuitement | Kadea Online`} />
+      <main className='landing-page bg-light'>
+        <div className='hero-main-bg'>
+          <Grid>
+            <Hero />
+          </Grid>
+        </div>
+        {/* <Hero pageName={'landing'} isSignedIn={isSignedIn} /> */}
+        <div className=''>
+          <Grid>
+            <Vodacom />
+          </Grid>
+        </div>
+
+        {/* <div className='bg-secondary'>
+          <Grid>
+            <LandingTop pageName={'landing'} isSignedIn={isSignedIn} />
+          </Grid>
+        </div> */}
+
+        <div className='as-seen-in'>
+          <Grid>
+            <RegistrationToAcademy />
+          </Grid>
+        </div>
+
+        {/* <Grid>
+          <LandingDetails isSignedIn={isSignedIn} />
+        </Grid> */}
+        <div className='dotted-bg'>
+          <Grid>
+            <WhatWillYouLearn isSignedIn={isSignedIn} />
+          </Grid>
+        </div>
+
+        {/* <Grid>
+          <LandingLearn />
+        </Grid> */}
+        <HowWillYouLearn />
+
+        {/* <div className='bg-light-gray'>
+          <Grid>
+            <WhatCanYouDo />
+          </Grid>
+        </div> */}
+        <div className=''>
+          <Grid>
+            <WhatCanYouDo />
+          </Grid>
+        </div>
+
+        <StartCOding isSignedIn={isSignedIn} />
+
+        <div className=''>
+          <Grid>
+            <Partners />
+          </Grid>
+        </div>
+
+        {/* <div className='as-seen-in'>
+          <Grid>
+            <YourCareer isSignedIn={isSignedIn} />
+          </Grid>
+        </div> */}
+      </main>
+    </LearnLayout>
+  );
 }
 
 LearnPage.displayName = 'LearnPage';
