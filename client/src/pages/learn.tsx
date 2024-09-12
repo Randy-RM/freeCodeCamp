@@ -86,18 +86,11 @@ function LearnPage({ isSignedIn }: LearnPageProps) {
             <Hero />
           </Grid>
         </div>
-        {/* <Hero pageName={'landing'} isSignedIn={isSignedIn} /> */}
         <div className=''>
           <Grid>
             <Vodacom />
           </Grid>
         </div>
-
-        {/* <div className='bg-secondary'>
-          <Grid>
-            <LandingTop pageName={'landing'} isSignedIn={isSignedIn} />
-          </Grid>
-        </div> */}
 
         <div className='as-seen-in'>
           <Grid>
@@ -105,25 +98,14 @@ function LearnPage({ isSignedIn }: LearnPageProps) {
           </Grid>
         </div>
 
-        {/* <Grid>
-          <LandingDetails isSignedIn={isSignedIn} />
-        </Grid> */}
         <div className='dotted-bg'>
           <Grid>
             <WhatWillYouLearn isSignedIn={isSignedIn} />
           </Grid>
         </div>
 
-        {/* <Grid>
-          <LandingLearn />
-        </Grid> */}
         <HowWillYouLearn />
 
-        {/* <div className='bg-light-gray'>
-          <Grid>
-            <WhatCanYouDo />
-          </Grid>
-        </div> */}
         <div className=''>
           <Grid>
             <WhatCanYouDo />
@@ -137,12 +119,6 @@ function LearnPage({ isSignedIn }: LearnPageProps) {
             <Partners />
           </Grid>
         </div>
-
-        {/* <div className='as-seen-in'>
-          <Grid>
-            <YourCareer isSignedIn={isSignedIn} />
-          </Grid>
-        </div> */}
       </main>
     </LearnLayout>
   );
