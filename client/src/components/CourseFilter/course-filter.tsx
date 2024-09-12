@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './course-filter.css';
 
 import { navigate } from 'gatsby';
@@ -102,8 +102,11 @@ const CourseFilter = ({
 
   const location = useLocation();
 
+  const currentUrl = window.location.href;
+
   const setValueOfAllDataRessoures = useSetRecoilState(myAllDataCourses);
-  const valueOfcounterFilter = useRecoilValue(categoryCounter);
+  const [valueOfcounterFilter, setValueOfcounterFilter] =
+    useRecoilState(categoryCounter);
 
   const filterByCategory = async (categoryId: number) => {
     setIsDataOnLoading(true);
@@ -209,6 +212,15 @@ const CourseFilter = ({
       }
     }
   };
+
+  useEffect(() => {
+    if (currentUrl.includes('?')) {
+      setValueOfcounterFilter(valueOfcounterFilter);
+    } else {
+      setValueOfcounterFilter(0);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUrl]);
 
   return (
     <div className='filter__layoute'>
