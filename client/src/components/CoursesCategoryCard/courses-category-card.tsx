@@ -305,7 +305,6 @@ const CoursesCategoryCard = ({
             className={
               valueDeToken == null ? ' hide__category' : 'hide__category'
             }
-            style={{ display: 'none' }}
             onClick={() => {
               setCurrent(-2);
               setValueOfButton('Amazon Web Service');
