@@ -411,6 +411,7 @@ const CourseFilter = ({
           </ul>
           <div
             className={
+              location.pathname == '/catalogue/' ||
               location.pathname == '/catalogue'
                 ? 'hidden-filter-on-Catalogue'
                 : ''
