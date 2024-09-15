@@ -25,9 +25,7 @@ const FilterByDuration = () => {
 
   const [checkedState, setCheckedState] = useState({
     lessOneHour: false,
-
     overOneHour: false,
-
     overFiveHour: false
   });
 
@@ -56,6 +54,7 @@ const FilterByDuration = () => {
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = e.target;
 
+    //mise à jour de l'état local
     setCheckedState(prevState => {
       const updatedState = { ...prevState, [value]: checked };
       const queryParams = new URLSearchParams(window.location.search);
@@ -74,8 +73,8 @@ const FilterByDuration = () => {
       }
 
       window.history.replaceState(null, '', `?${queryParams.toString()}`);
-      setValueDuration(duration.join(''));
 
+      setValueDuration(duration.join(''));
       setCounterForcategory(
         counterForCategory >= 0 && checked
           ? counterForCategory + 1
@@ -143,7 +142,7 @@ const FilterByDuration = () => {
               <input
                 type='checkbox'
                 value={allQuery.value.duration.lessOneHour}
-                checked={checkedState.lessOneHour}
+                checked={checkedState['lessOneHour']}
                 onChange={handleCheckboxChange}
               />
               Moins d&apos;1 heure
@@ -152,7 +151,7 @@ const FilterByDuration = () => {
               <input
                 type='checkbox'
                 value={allQuery.value.duration.overOneHour}
-                checked={checkedState.overOneHour}
+                checked={checkedState['overOneHour']}
                 onChange={handleCheckboxChange}
               />
               1 à 5 heures
@@ -161,7 +160,7 @@ const FilterByDuration = () => {
               <input
                 type='checkbox'
                 value={allQuery.value.duration.overFiveHour}
-                checked={checkedState.overFiveHour}
+                checked={checkedState['overFiveHour']}
                 onChange={handleCheckboxChange}
               />
               5+ heures
