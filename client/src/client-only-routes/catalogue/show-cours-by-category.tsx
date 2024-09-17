@@ -303,7 +303,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
           filteredRavenCourses = filteredRavenCourses.filter(course => {
             const courseLanguage = course.category?.[0]?.tags?.[0]?.title;
-            console.log('langue', courseLanguage);
 
             return (
               (filterByEnglish &&
