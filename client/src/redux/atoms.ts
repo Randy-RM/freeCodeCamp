@@ -13,7 +13,10 @@ import { UnifiedCourse } from './types';
 const localStorageEffect =
   <T>(key: string): AtomEffect<T> =>
   ({ setSelf, onSet }) => {
-    const savedValue = localStorage.getItem(key);
+    const savedValue =
+      typeof window != 'undefined' && window.localStorage
+        ? localStorage.getItem(key)
+        : null;
     if (savedValue != null) {
       setSelf(JSON.parse(savedValue) as T);
     }
@@ -146,6 +149,13 @@ export const pathRaven = atom<RavenCourse[]>({
   default: [],
   // eslint-disable-next-line @typescript-eslint/naming-convention
   effects_UNSTABLE: [localStorageEffect('pathRaven')]
+});
+
+export const centraliseRavenData = atom<RavenCourse[]>({
+  key: 'centraliseRavenData',
+  default: [],
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  effects_UNSTABLE: [localStorageEffect('centraliseRavenData')]
 });
 
 export const categoryCours = atom<MoodleCourseCategory[] | null | undefined>({
