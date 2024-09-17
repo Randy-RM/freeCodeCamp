@@ -52,6 +52,7 @@ import { User } from '../../redux/prop-types';
 import { createFlashMessage } from '../../components/Flash/redux';
 import {
   categoryCours,
+  centraliseRavenData,
   changeState,
   coursesMoodle,
   coursesRaven,
@@ -103,6 +104,8 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const setDataRavenPath = useSetRecoilState(pathRaven);
   const showMoodleCategory = useRecoilValue(categoryCours);
   const [changeStateValue, setChangeStateValue] = useRecoilState(changeState);
+  const [centralRaveData, setCentraleRavenData] =
+    useRecoilState(centraliseRavenData);
 
   const currentUrl = window.location.href;
 
@@ -115,6 +118,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     void getRavenPathResources(currentPage);
     void getMoodleCourseCategory();
     void getAllRessources(currentPage);
+    setCentraleRavenData(centralRaveData);
 
     const timer = setTimeout(() => {
       if (isDataOnLoading) {
@@ -149,7 +153,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         .filter(course => !('launch_url' in course)) as MoodleCourse[];
 
-      let filteredRavenCourses = ravenCourses;
+      let filteredRavenCourses = centralRaveData;
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       let filteredMoodleCourses = moodleCourses;
       let filterProgramationCourses = dataForprogramation;
