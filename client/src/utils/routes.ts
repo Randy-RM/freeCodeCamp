@@ -18,21 +18,21 @@ const routes = Object.freeze({
 
 const allQuery = Object.freeze({
   key: {
-    level: 'level',
-    duration: 'durée',
+    level: 'niveau',
+    duration: 'duree',
     language: 'langue',
     type: 'type'
   },
   value: Object.freeze({
     level: Object.freeze({
       debutant: 'Débutant',
-      intermediaire: 'Intermediaire',
-      avance: 'Avancé'
+      intermediaire: 'Intermediate',
+      avance: 'avance'
     }),
     duration: Object.freeze({
-      lessOneHour: '>1h',
-      overOneHour: '1>5h',
-      overFiveHour: '>5h'
+      lessOneHour: '-1h',
+      overOneHour: '1-5h',
+      overFiveHour: 'Ov5h'
     }),
     language: Object.freeze({
       french: 'French',
