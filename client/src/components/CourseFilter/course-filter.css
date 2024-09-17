@@ -264,6 +264,7 @@ details[open] > *:not(summary) {
 
   .pagination-container {
     padding-top: 0rem;
+    margin-bottom: 3rem;
   }
 
   .main-title-filter-container {
