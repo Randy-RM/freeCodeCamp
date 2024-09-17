@@ -148,7 +148,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         .flatMap(course => (Array.isArray(course) ? course : [course]))
         .filter(course => 'launch_url' in course) as RavenCourse[];
-      setCentraleRavenData(ravenCourses);
+      setCentraleRavenData(centralRaveData);
 
       const moodleCourses = courses
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
