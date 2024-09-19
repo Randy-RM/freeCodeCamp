@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 // import LaptopIcon from '../../assets/images/laptop.svg';
+import { useLocation } from '@reach/router';
 import AlgoIcon from '../../assets/images/algorithmIcon.svg';
 import PhBookBookmark from '../../assets/images/ph-book-bookmark-thin.svg';
 import LaediesActIcon from '../../assets/images/partners/we-act-logo.png';
@@ -52,13 +53,11 @@ import { User } from '../../redux/prop-types';
 import { createFlashMessage } from '../../components/Flash/redux';
 import {
   categoryCours,
-  centraliseRavenData,
   changeState,
   coursesMoodle,
   coursesRaven,
   myAllDataCourses,
   pathRaven,
-  titleOfCategorieValue,
   valueOfCurrentCategory
 } from '../../redux/atoms';
 
@@ -83,7 +82,7 @@ const mapDispatchToProps = {
 
 function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const { showLoading } = props;
-  const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(true);
+  const [isDataOnLoading, setIsDataOnLoading] = useState<boolean>(false);
   const [showFilter, setShowFilter] = useState<boolean>(false);
   const [currentPage, setCurrentpage] = useState<number>(1);
 
@@ -98,17 +97,16 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     valueOfCurrentCategory
   );
   const [ressourcesData, setRessourceDatas] = useRecoilState(myAllDataCourses);
-  const valueOfTitleCategorie = useRecoilValue(titleOfCategorieValue);
   // const allDataofCourses = useRecoilValue(allDataCourses);
   const setDataMoodle = useSetRecoilState(coursesMoodle);
   const setDataRaven = useSetRecoilState(coursesRaven);
   const setDataRavenPath = useSetRecoilState(pathRaven);
   const showMoodleCategory = useRecoilValue(categoryCours);
-  const [changeStateValue, setChangeStateValue] = useRecoilState(changeState);
-  const [centralRaveData, setCentraleRavenData] =
-    useRecoilState(centraliseRavenData);
+  const changeStateValue = useRecoilValue(changeState);
 
   const currentUrl = window.location.href;
+  const location = useLocation();
+  const valueOfUrl = location.pathname.split('/')[2];
 
   const { moodleBaseUrl } = envData;
   useEffect(() => {
@@ -118,14 +116,14 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     void getRavenResources(currentPage);
     void getRavenPathResources(currentPage);
     void getMoodleCourseCategory();
-    void getAllRessources(currentPage);
-    setCentraleRavenData(centralRaveData);
+    // void getAllRessources(currentPage);
+    // setCentraleRavenData(centralRaveData);
 
     const timer = setTimeout(() => {
       if (isDataOnLoading) {
-        // setIsDataOnLoading(false);
+        setIsDataOnLoading(true);
       }
-    }, 2000);
+    }, 1000);
     return () => {
       setDataMoodle(null);
       setIsDataOnLoading(true);
@@ -148,7 +146,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         .flatMap(course => (Array.isArray(course) ? course : [course]))
         .filter(course => 'launch_url' in course) as RavenCourse[];
-      setCentraleRavenData(ravenCourses);
+      // setCentraleRavenData(ravenCourses);
 
       const moodleCourses = courses
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
@@ -393,6 +391,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         }
 
         // Mise à jour des données pour RavenCourses
+        setIsDataOnLoading(true);
         setRessourceDatas([...filteredRavenCourses]);
       }
 
@@ -517,16 +516,18 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         // Mise à jour des données pour MoodleCourses
         setRessourceDatas([...filteredMoodleCourses]);
       }
-
-      setIsDataOnLoading(false);
     } catch (error) {
       console.error('Error fetching courses:', error);
     }
   };
 
   useEffect(() => {
-    void fetchCourses();
-    setChangeStateValue(true);
+    const fectchCourse = async () => {
+      await fetchCourses();
+      setIsDataOnLoading(false);
+    };
+    void fectchCourse();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [valueOfCurrentCategorie, changeStateValue]);
 
@@ -550,6 +551,12 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   useEffect(() => {
     SetValueOfCurrentCategory(valueOfCurrentCategorie);
   }, [valueOfCurrentCategorie, SetValueOfCurrentCategory]);
+
+  useEffect(() => {
+    if (valueOfCurrentCategorie == -2) {
+      setIsDataOnLoading(true);
+    }
+  }, [valueOfCurrentCategorie, setIsDataOnLoading]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -647,52 +654,30 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                   <h2 className=' catalog-title'>
                     <span className='catalog'>Catalogue</span> /
                     <span className='catalog-title_space'>
-                      {valueOfTitleCategorie}
+                      {valueOfUrl.includes('Intelligence%20artificielle')
+                        ? 'Intelligence Artificielle'
+                        : valueOfUrl}
                     </span>
                   </h2>
                 </div>
                 <Spacer />
-
                 <div className='card__courses__description'>
-                  <h3>Decouvrez le parcours {valueOfTitleCategorie}</h3>
-                  <p>{getCategoryDescription(valueOfTitleCategorie)}</p>
+                  <h3>
+                    Decouvrez le parcours{' '}
+                    {valueOfUrl.includes('Intelligence%20artificielle')
+                      ? 'Intelligence Artificielle'
+                      : valueOfUrl}
+                  </h3>
+                  <p>{getCategoryDescription(valueOfUrl)}</p>
                 </div>
                 <div className='course__number'>
                   <p>Parcourir le catalogue complet</p>
                   <span>
-                    {(() => {
-                      if (
-                        !isDataOnLoading &&
-                        ressourcesData.length == 0 &&
-                        valueOfCurrentCategorie != -1
-                      ) {
-                        return '';
-                      }
-
-                      if (valueOfCurrentCategorie === -1) {
-                        return paginatedData.length > 0
-                          ? paginatedData.length
-                          : '';
-                      } else if (valueOfCurrentCategorie === -2) {
-                        const lunchUrlCoursesCount = paginatedData.filter(
-                          course => course['launch_url']
-                        ).length;
-                        return lunchUrlCoursesCount > 0
-                          ? `${lunchUrlCoursesCount} cours`
-                          : '';
-                      } else {
-                        const categoryCoursesCount = paginatedData.filter(
-                          course =>
-                            course.categoryid === valueOfCurrentCategorie
-                        ).length;
-                        return categoryCoursesCount > 0
-                          ? `${categoryCoursesCount} cours`
-                          : '';
-                      }
-                    })()}
+                    {paginatedData.length > 0 ? paginatedData.length : ''}
                   </span>
                 </div>
-                {!isDataOnLoading && ressourcesData.length == 0 ? (
+
+                {!isDataOnLoading && paginatedData.length == 0 ? (
                   <div className=''>
                     <p className='no-cours'>
                       Aucune correspondance exacte .
@@ -704,7 +689,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                   </div>
                 ) : (
                   <div className='card-course-detail-container'>
-                    {paginatedData.length > 0 ? (
+                    {!isDataOnLoading && paginatedData.length > 0 ? (
                       <>
                         {paginatedData.map((course, index) => {
                           // Vérifie les conditions pour valueOfCurrentCategorie
@@ -835,7 +820,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                     )}
                   </div>
                 )}
-
                 <div className='pagination-container'>
                   <FontAwesomeIcon
                     icon={faChevronLeft}
