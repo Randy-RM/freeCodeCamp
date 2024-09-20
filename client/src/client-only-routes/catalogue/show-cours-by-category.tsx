@@ -90,7 +90,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     typeof window !== 'undefined' ? window.innerWidth : 900
   );
 
-  const [showMessage, setShowMessage] = useState(false);
+  const [showMessage, setShowMessage] = useState(true);
 
   //gestion des states avec recoil(voir doc recoil state manager)
   const [valueOfCurrentCategorie, SetValueOfCurrentCategory] = useRecoilState(
@@ -120,10 +120,10 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     // setCentraleRavenData(centralRaveData);
 
     const timer = setTimeout(() => {
-      if (isDataOnLoading) {
-        setIsDataOnLoading(true);
+      if (valueOfCurrentCategorie == -2) {
+        setIsDataOnLoading(false);
       }
-    }, 1000);
+    }, 5000);
     return () => {
       setDataMoodle(null);
       setIsDataOnLoading(true);
@@ -391,7 +391,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         }
 
         // Mise à jour des données pour RavenCourses
-        setIsDataOnLoading(true);
+
         setRessourceDatas([...filteredRavenCourses]);
       }
 
@@ -549,31 +549,25 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   }, [screenWidth]);
 
   useEffect(() => {
-    SetValueOfCurrentCategory(valueOfCurrentCategorie);
-  }, [valueOfCurrentCategorie, SetValueOfCurrentCategory]);
-
-  useEffect(() => {
-    if (valueOfCurrentCategorie == -2) {
-      setIsDataOnLoading(true);
-    }
-  }, [valueOfCurrentCategorie, setIsDataOnLoading]);
-
-  useEffect(() => {
     const timer = setTimeout(() => {
-      if (ressourcesData.length == 0 && showMessage) {
-        setShowMessage(true);
-      }
-    }, 10000);
+      setShowMessage(false);
+    }, 5000);
 
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUrl, valueOfCurrentCategorie]);
+  }, [showMessage]);
 
   if (typeof window !== 'undefined') {
     window.addEventListener('resize', () => {
       showFilter && setScreenWidth(window.innerWidth);
     });
   }
+
+  useEffect(() => {
+    void getRavenResources(1);
+    void getRavenPathResources(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   //gestion de la pagination pour l'affichage des cours
   const onNavigateForward = () => {
@@ -677,7 +671,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                   </span>
                 </div>
 
-                {!isDataOnLoading && paginatedData.length == 0 ? (
+                {!showMessage && paginatedData.length < 0 ? (
                   <div className=''>
                     <p className='no-cours'>
                       Aucune correspondance exacte .
@@ -723,7 +717,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                             }
 
                             // Vérification si le cours est de type Raven
-                            if ('launch_url' in course) {
+                            if (valueOfCurrentCategorie === -2) {
                               const courseTyped = course as RavenCourse;
                               const firstCategory = courseTyped.category?.[0];
                               const language =
