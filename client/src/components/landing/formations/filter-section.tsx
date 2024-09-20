@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import {
   MoodleCourse,
@@ -10,6 +10,7 @@ import {
   generateRavenTokenAcces,
   getAwsCourses,
   getExternalResource,
+  getRavenPathResources,
   getRavenTokenDataFromLocalStorage,
   removeRavenTokenFromLocalStorage
 } from '../../../utils/ajax';
@@ -212,6 +213,12 @@ const CoursesFilterSection = ({
     ];
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setCurrentCategory, courseCategories]);
+
+  useEffect(() => {
+    void getRavenPathResources(1);
+    void getRavenResources();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className='formation__button_list'>
