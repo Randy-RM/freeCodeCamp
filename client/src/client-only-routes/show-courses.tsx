@@ -60,9 +60,9 @@ import CoursesCategoryCard from '../components/CoursesCategoryCard/courses-categ
 import {
   allDataCourses,
   categoryCours,
-  centraliseRavenData,
   coursesMoodle,
   coursesRaven,
+  myAllDataCourses,
   pathRaven,
   tokenRaven,
   valueOfCurrentCategory
@@ -237,7 +237,7 @@ export function Courses(props: CoursesProps): JSX.Element {
     MoodleCoursesCatalogue | null | undefined
   >(coursesMoodle);
   const setTakeTokenValue = useSetRecoilState(tokenRaven);
-  const setCentraleRavenData = useSetRecoilState(centraliseRavenData);
+  const setAllaDataCoursProject = useSetRecoilState(myAllDataCourses);
   // const [valueLangue, setValueLangue] = useRecoilState(valueOfLanguage);
   // const [valueOfCourseType, setValueOfCourseType] =
   //   useRecoilState(valueOfTypeCourse);
@@ -266,7 +266,7 @@ export function Courses(props: CoursesProps): JSX.Element {
     };
     const getReveanCourses = await getAwsCourses(ravenData);
     setDataRaven(getReveanCourses as RavenCourse[]);
-    setCentraleRavenData(getReveanCourses as RavenCourse[]);
+    setAllaDataCoursProject(getReveanCourses as RavenCourse[]);
   };
 
   const getRavenResourcesPath = async () => {
@@ -280,7 +280,7 @@ export function Courses(props: CoursesProps): JSX.Element {
     };
     const getReveanCourses = await getAwsPath(ravenData);
     setDataRavenPath(getReveanCourses as unknown as RavenCourse[]);
-    setCentraleRavenData(getReveanCourses as unknown as RavenCourse[]);
+    setAllaDataCoursProject(getReveanCourses as unknown as RavenCourse[]);
   };
 
   const getRavenToken = async () => {
