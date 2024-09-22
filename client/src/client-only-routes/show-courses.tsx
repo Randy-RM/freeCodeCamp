@@ -63,6 +63,8 @@ import {
   coursesMoodle,
   coursesRaven,
   myAllDataCourses,
+  myDataMoodle,
+  myDataRaven,
   pathRaven,
   tokenRaven,
   valueOfCurrentCategory
@@ -228,6 +230,8 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [dataForAllCourses, setDataForallCourse] =
     useRecoilState<UnifiedCourse[]>(allDataCourses);
   const allDataofCourses = useRecoilValue(allDataCourses);
+  const setMyAllRavenCourse = useSetRecoilState(myDataRaven);
+  const setMyAllMoodleCourse = useSetRecoilState(myDataMoodle);
   const [dataRaven, setDataRaven] = useRecoilState<
     RavenCourse[] | null | undefined
   >(coursesRaven);
@@ -280,6 +284,7 @@ export function Courses(props: CoursesProps): JSX.Element {
     };
     const getReveanCourses = await getAwsPath(ravenData);
     setDataRavenPath(getReveanCourses as unknown as RavenCourse[]);
+    setMyAllRavenCourse(getReveanCourses as unknown as RavenCourse[]);
     setAllaDataCoursProject(getReveanCourses as unknown as RavenCourse[]);
   };
 
@@ -349,6 +354,8 @@ export function Courses(props: CoursesProps): JSX.Element {
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       `${moodleApiBaseUrl}?wstoken=${moodleApiToken}&wsfunction=core_course_get_courses&moodlewsrestformat=json`
     );
+
+    setMyAllMoodleCourse(moodleCatalogue as MoodleCourse[]);
 
     const splitCourses: MoodleCoursesCatalogue | null | undefined =
       moodleCatalogue != null
