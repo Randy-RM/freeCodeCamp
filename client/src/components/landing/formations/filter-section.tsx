@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import {
   MoodleCourse,
@@ -10,6 +10,7 @@ import {
   generateRavenTokenAcces,
   getAwsCourses,
   getExternalResource,
+  getRavenPathResources,
   getRavenTokenDataFromLocalStorage,
   removeRavenTokenFromLocalStorage
 } from '../../../utils/ajax';
@@ -42,15 +43,8 @@ interface RavenTokenData {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   valid_to: string;
 }
-interface RavenFetchCoursesDto {
-  apiKey: string;
-  token: string;
-  currentPage: number;
-  fromDate: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  valid_to: string;
-}
-const { moodleApiBaseUrl, moodleApiToken, ravenAwsApiKey } = envData;
+
+const { moodleApiBaseUrl, moodleApiToken } = envData;
 
 const CoursesFilterSection = ({
   courseCategories,
@@ -124,16 +118,7 @@ const CoursesFilterSection = ({
     setIsDataOnLoading(true);
     await getRavenToken();
 
-    const ravenLocalToken = getRavenTokenDataFromLocalStorage();
-    const ravenData: RavenFetchCoursesDto = {
-      apiKey: ravenAwsApiKey,
-      token: ravenLocalToken?.token || '',
-      currentPage: Math.floor(Math.random() * 4) + 1,
-      fromDate: '01-01-2023',
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      valid_to: '06-24-2024'
-    };
-    const getReveanCourses = await getAwsCourses(ravenData);
+    const getReveanCourses = await getAwsCourses(1);
     setRavenCourses(getReveanCourses as RavenCourse[]);
     setIsDataOnLoading(false);
   };
@@ -212,6 +197,12 @@ const CoursesFilterSection = ({
     ];
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setCurrentCategory, courseCategories]);
+
+  useEffect(() => {
+    void getRavenPathResources(1);
+    void getRavenResources();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className='formation__button_list'>
