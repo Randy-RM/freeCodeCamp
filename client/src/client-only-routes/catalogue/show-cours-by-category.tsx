@@ -53,6 +53,8 @@ import {
   coursesMoodle,
   coursesRaven,
   myAllDataCourses,
+  myDataMoodle,
+  myDataRaven,
   pathRaven,
   valueOfCurrentCategory
 } from '../../redux/atoms';
@@ -95,12 +97,9 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const setDataRavenPath = useSetRecoilState(pathRaven);
   const showMoodleCategory = useRecoilValue(categoryCours);
   const valueOfCounter = useRecoilValue(categoryCounter);
-  const [dataCoursesMoodle, setDataCoursesMoodle] = useState<
-    MoodleCourse[] | undefined
-  >([]);
-  const [dataCoursesRaven, setDataCoursesRaven] = useState<
-    RavenCourse[] | undefined
-  >([]);
+  const [dataCoursesMoodle, setDataCoursesMoodle] =
+    useRecoilState(myDataMoodle);
+  const [dataCoursesRaven, setDataCoursesRaven] = useRecoilState(myDataRaven);
 
   const currentUrl = window.location.href;
   const location = useLocation();
@@ -504,7 +503,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
       }
     };
     void fetchData();
-    setIsDataOnLoading(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
