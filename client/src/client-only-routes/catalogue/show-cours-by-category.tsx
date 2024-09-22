@@ -98,7 +98,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const setDataRaven = useSetRecoilState(coursesRaven);
   const setDataRavenPath = useSetRecoilState(pathRaven);
   const showMoodleCategory = useRecoilValue(categoryCours);
-
   const valueOfCounter = useRecoilValue(categoryCounter);
   const [dataCoursesMoodle, setDataCoursesMoodle] =
     useRecoilState(myDataMoodle);
