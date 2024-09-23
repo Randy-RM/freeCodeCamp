@@ -3,7 +3,8 @@ import { useRecoilValue } from 'recoil';
 import {
   MoodleCourse,
   MoodleCourseCategory,
-  MoodleCoursesCatalogue
+  MoodleCoursesCatalogue,
+  RavenCourse
 } from '../../../client-only-routes/show-courses';
 import {
   addRavenTokenToLocalStorage,
@@ -24,18 +25,6 @@ type MoodleCoursesFiltered = {
   warnings: [];
 };
 
-type RavenCourse = {
-  learningobjectid: number;
-  name: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  launch_url: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  short_description: string;
-  createddate: string;
-  updateddate: string;
-  contenttype: string;
-  duration: string;
-};
 interface RavenTokenData {
   token: string;
   expiresIn: number;
