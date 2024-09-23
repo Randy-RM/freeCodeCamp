@@ -430,7 +430,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
         filteredMoodleCourses = filteredMoodleCourses?.filter(course => {
           const courseHours = convertTimeForFilter(course.duration);
-          console.log(courseHours);
 
           if (
             filterLessThan1Hour ||
