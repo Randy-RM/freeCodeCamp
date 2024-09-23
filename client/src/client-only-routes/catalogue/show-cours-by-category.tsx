@@ -432,7 +432,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
         filteredMoodleCourses = filteredMoodleCourses?.filter(course => {
           const courseHours = convertTimeForFilter(course.duration);
-          console.log(courseHours);
 
           if (
             filterLessThan1Hour ||
@@ -468,6 +467,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         ...(filteredMoodleCourses ? filteredMoodleCourses : [])
       ]);
     }
+    setIsDataOnLoading(false);
   };
 
   async function fetchAllCours() {
@@ -491,7 +491,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
   useEffect(() => {
     void fetchCourses();
-    setIsDataOnLoading(false);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
