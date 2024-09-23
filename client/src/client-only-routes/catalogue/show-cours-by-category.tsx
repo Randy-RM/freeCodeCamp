@@ -465,11 +465,11 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         ...(filteredMoodleCourses ? filteredMoodleCourses : [])
       ]);
     }
+    setIsDataOnLoading(false);
   };
 
   useEffect(() => {
     void fetchCourses();
-    setIsDataOnLoading(false);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
