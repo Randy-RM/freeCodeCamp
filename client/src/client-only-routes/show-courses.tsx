@@ -405,7 +405,6 @@ export function Courses(props: CoursesProps): JSX.Element {
           .flatMap(course => (Array.isArray(course) ? course : [course]))
           .filter(course => 'launch_url' in course) as RavenCourse[];
         setMyAllRavenCourse(ravenCourses);
-
         const moodleCourses = res
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
           .flatMap(course => (Array.isArray(course) ? course : []))
