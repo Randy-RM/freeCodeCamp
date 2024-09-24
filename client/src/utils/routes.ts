@@ -45,4 +45,43 @@ const allQuery = Object.freeze({
   })
 });
 
-export { routes, allQuery };
+const arrayOfCategory = [
+  {
+    categoryName: 'Tous',
+    categoryId: null,
+    categoryRoute: routes.catalogue.index
+  },
+  {
+    categoryName: 'Programmation',
+    categoryId: -1,
+    categoryRoute: routes.catalogue.programmation
+  },
+  {
+    categoryName: 'Amazon web service',
+    categoryId: -2,
+    categoryRoute: routes.catalogue.aws
+  },
+  {
+    categoryName: 'Bureautique',
+    categoryId: 11,
+    categoryRoute: routes.catalogue.moodle.replace(':category', 'Bureautique')
+  },
+  {
+    categoryName: 'Marketing-Communication',
+    categoryId: 13,
+    categoryRoute: routes.catalogue.moodle.replace(
+      ':category',
+      'Marketing-Communication'
+    )
+  },
+  {
+    categoryName: 'Intelligence-Artificielle',
+    categoryId: 14,
+    categoryRoute: routes.catalogue.moodle.replace(
+      ':category',
+      'Intelligence - artificielle'
+    )
+  }
+];
+
+export { routes, allQuery, arrayOfCategory };
