@@ -347,7 +347,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                   <h2 className=' catalog-title'>
                     <span className='catalog'>Catalogue</span> /
                     <span className='catalog-title_space'>
-                      {valueOfUrl.includes('Intelligence%20artificielle')
+                      {valueOfUrl.includes('Intelligence%20-%20artificielle')
                         ? 'Intelligence Artificielle'
                         : valueOfUrl}
                     </span>
@@ -357,7 +357,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                 <div className='card__courses__description'>
                   <h3>
                     Decouvrez le parcours{' '}
-                    {valueOfUrl.includes('Intelligence%20artificielle')
+                    {valueOfUrl.includes('Intelligence%20-%20artificielle')
                       ? 'Intelligence Artificielle'
                       : valueOfUrl}
                   </h3>
