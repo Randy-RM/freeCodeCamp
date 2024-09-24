@@ -107,103 +107,102 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const { moodleBaseUrl } = envData;
 
   const fetchCourses = () => {
-    setRessourceDatas([]);
-    setIsDataOnLoading(true);
+    try {
+      setRessourceDatas([]);
+      setIsDataOnLoading(true);
 
-    const filteredRavenCourses = dataCoursesRaven;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    const filteredMoodleCourses = dataCoursesMoodle;
-    const filterProgramationCourses = dataForprogramation;
+      const filteredRavenCourses = dataCoursesRaven;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      const filteredMoodleCourses = dataCoursesMoodle;
+      const filterProgramationCourses = dataForprogramation;
 
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    type CourseType = RavenCourse | MoodleCourse | ProgramationCourses;
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      type CourseType = RavenCourse | MoodleCourse | ProgramationCourses;
 
-    const manyCategoryFilter = () => {
-      let courses: CourseType[] | undefined;
-      let category: 'programation' | 'aws' | 'moodle';
+      const manyCategoryFilter = () => {
+        let courses: CourseType[] | undefined;
+        let category: 'programation' | 'aws' | 'moodle';
 
-      if (valueOfCurrentCategorie === -1) {
-        courses = filterProgramationCourses;
-        category = 'programation';
-      } else if (valueOfCurrentCategorie === -2) {
-        courses = filteredRavenCourses;
-        category = 'aws';
-      } else {
-        courses = filteredMoodleCourses?.filter(
-          course => course.categoryid === valueOfCurrentCategorie
-        );
-        category = 'moodle';
-      }
-
-      if (!courses) return [];
-
-      switch (category) {
-        case 'programation':
-          return courses.filter(
-            course =>
-              filterLogics.programation.language(
-                course as ProgramationCourses,
-                currentUrl
-              ) &&
-              filterLogics.programation.type(
-                course as ProgramationCourses,
-                currentUrl
-              ) &&
-              filterLogics.programation.level(
-                course as ProgramationCourses,
-                currentUrl
-              ) &&
-              filterLogics.programation.duration(
-                course as ProgramationCourses,
-                currentUrl
-              )
+        if (valueOfCurrentCategorie === -1) {
+          courses = filterProgramationCourses;
+          category = 'programation';
+        } else if (valueOfCurrentCategorie === -2) {
+          courses = filteredRavenCourses;
+          category = 'aws';
+        } else {
+          courses = filteredMoodleCourses?.filter(
+            course => course.categoryid === valueOfCurrentCategorie
           );
+          category = 'moodle';
+        }
 
-        case 'aws':
-          return courses.filter(
-            course =>
-              filterLogics.aws.language(course as RavenCourse, currentUrl) &&
-              filterLogics.aws.type(course as RavenCourse, currentUrl) &&
-              filterLogics.aws.level(course as RavenCourse, currentUrl) &&
-              filterLogics.aws.duration(course as RavenCourse, currentUrl)
-          );
+        if (!courses) return [];
 
-        case 'moodle':
-          return courses.filter(
-            course =>
-              filterLogics.moodle.language(
-                course as MoodleCourse,
-                currentUrl
-              ) &&
-              filterLogics.moodle.type(course as MoodleCourse, currentUrl) &&
-              filterLogics.moodle.level(course as MoodleCourse, currentUrl) &&
-              filterLogics.moodle.duration(course as MoodleCourse, currentUrl)
-          );
+        switch (category) {
+          case 'programation':
+            return courses.filter(
+              course =>
+                filterLogics.programation.language(
+                  course as ProgramationCourses,
+                  currentUrl
+                ) &&
+                filterLogics.programation.type(
+                  course as ProgramationCourses,
+                  currentUrl
+                ) &&
+                filterLogics.programation.level(
+                  course as ProgramationCourses,
+                  currentUrl
+                ) &&
+                filterLogics.programation.duration(
+                  course as ProgramationCourses,
+                  currentUrl
+                )
+            );
 
-        default:
-          return [];
-      }
-    };
-    const filteredCourses = manyCategoryFilter();
-    setRessourceDatas(filteredCourses);
+          case 'aws':
+            return courses.filter(
+              course =>
+                filterLogics.aws.language(course as RavenCourse, currentUrl) &&
+                filterLogics.aws.type(course as RavenCourse, currentUrl) &&
+                filterLogics.aws.level(course as RavenCourse, currentUrl) &&
+                filterLogics.aws.duration(course as RavenCourse, currentUrl)
+            );
+
+          case 'moodle':
+            return courses.filter(
+              course =>
+                filterLogics.moodle.language(
+                  course as MoodleCourse,
+                  currentUrl
+                ) &&
+                filterLogics.moodle.type(course as MoodleCourse, currentUrl) &&
+                filterLogics.moodle.level(course as MoodleCourse, currentUrl) &&
+                filterLogics.moodle.duration(course as MoodleCourse, currentUrl)
+            );
+
+          default:
+            return [];
+        }
+      };
+      const filteredCourses = manyCategoryFilter();
+      setRessourceDatas(filteredCourses);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des données:', error);
+    } finally {
+      setIsDataOnLoading(false);
+    }
   };
 
   useEffect(() => {
     void fetchCourses();
-    setIsDataOnLoading(false);
+    setCurrentpage(1);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    valueOfUrl,
-    valueOfCounter,
-    valueOfCurrentCategorie,
-    setDataCoursesMoodle,
-    setDataCoursesRaven
-  ]);
+  }, [valueOfUrl, valueOfCounter, valueOfCurrentCategorie]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const currentPage = 1;
         const res = await getAllRessources(currentPage);
 
         // Séparer les cours Raven et Moodle
