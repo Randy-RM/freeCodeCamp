@@ -125,10 +125,10 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         let courses: CourseType[] | undefined;
         let category: 'programation' | 'aws' | 'moodle';
 
-        if (valueOfCurrentCategorie === -1) {
+        if (valueOfUrl == 'programmation') {
           courses = filterProgramationCourses;
           category = 'programation';
-        } else if (valueOfCurrentCategorie === -2) {
+        } else if (valueOfUrl == 'amazon-web-service') {
           courses = filteredRavenCourses;
           category = 'aws';
         } else {
@@ -216,6 +216,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   }, []);
 
   useEffect(() => {
+    setRessourceDatas([]);
     void fetchCourses();
     setCurrentpage(1);
 
@@ -387,14 +388,14 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                         {paginatedData.map((course, index) => {
                           // Vérifie les conditions pour valueOfCurrentCategorie
                           if (
-                            valueOfUrl === 'programmation' || // Ajout de valueOfCurrentCategorie === -1
-                            valueOfUrl === 'amazon-web-service' ||
-                            valueOfUrl === 'Bureautique' ||
-                            valueOfUrl === 'Marketing-Communication' ||
-                            valueOfUrl === 'Intelligence%20artificielle'
+                            valueOfUrl == 'programmation' ||
+                            valueOfUrl == 'amazon-web-service' ||
+                            valueOfUrl == 'Intelligence%20-%20artificielle' ||
+                            valueOfUrl == 'Marketing-Communication' ||
+                            valueOfUrl == 'Bureautique'
                           ) {
                             // Affichage des cours pour valueOfCurrentCategorie === -1
-                            if (valueOfUrl === 'programmation') {
+                            if (valueOfUrl == 'programmation') {
                               const courseList = course as ProgramationCourses;
                               return (
                                 <CourseCard
@@ -416,13 +417,13 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                             }
 
                             // Vérification si le cours est de type Raven
-                            if (valueOfCurrentCategorie === -2) {
+                            if (valueOfUrl == 'amazon-web-service') {
                               const courseTyped = course as RavenCourse;
                               const firstCategory = courseTyped.category?.[0];
                               const language =
                                 firstCategory?.tags?.[0]?.title || 'Unknown';
 
-                              if (valueOfUrl === 'amazon-web-service') {
+                              if (valueOfUrl == 'amazon-web-service') {
                                 if (courseTyped.long_description) {
                                   return (
                                     <PathCard
@@ -480,10 +481,16 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                             } else {
                               // Vérification si le cours est de type Moodle
                               const courseTyped = course as MoodleCourse;
-                              if (
-                                courseTyped.categoryid ===
-                                valueOfCurrentCategorie
-                              ) {
+                              const nowCategorie =
+                                valueOfUrl == 'Bureautique'
+                                  ? 11
+                                  : valueOfUrl == 'Marketing-Communication'
+                                  ? 13
+                                  : valueOfUrl ==
+                                    'Intelligence%20-%20artificielle'
+                                  ? 14
+                                  : valueOfCurrentCategorie;
+                              if (courseTyped.categoryid == nowCategorie) {
                                 return (
                                   <CourseCard
                                     language={courseTyped.langue}
