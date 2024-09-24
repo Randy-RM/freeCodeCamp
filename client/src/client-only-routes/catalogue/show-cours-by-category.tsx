@@ -89,7 +89,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const [valueOfCurrentCategorie, SetValueOfCurrentCategory] = useRecoilState(
     valueOfCurrentCategory
   );
-  const [ressourcesData, setRessourceDatas] = useRecoilState(myAllDataCourses);
+  const setRessourceDatas = useSetRecoilState(myAllDataCourses);
   // const allDataofCourses = useRecoilValue(allDataCourses);
   const setDataMoodle = useSetRecoilState(coursesMoodle);
   const setDataRaven = useSetRecoilState(coursesRaven);
@@ -99,6 +99,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const [dataCoursesMoodle, setDataCoursesMoodle] =
     useRecoilState(myDataMoodle);
   const [dataCoursesRaven, setDataCoursesRaven] = useRecoilState(myDataRaven);
+  const [coursesData, setCoursesData] = useState<unknown[]>([]);
 
   const currentUrl = window.location.href;
   const location = useLocation();
@@ -108,7 +109,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
   const fetchCourses = () => {
     try {
-      setRessourceDatas([]);
       setIsDataOnLoading(true);
 
       const filteredRavenCourses = dataCoursesRaven;
@@ -140,6 +140,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
         switch (category) {
           case 'programation':
+            setRessourceDatas([]);
             return courses.filter(
               course =>
                 filterLogics.programation.language(
@@ -186,6 +187,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         }
       };
       const filteredCourses = manyCategoryFilter();
+      setCoursesData(filteredCourses);
       setRessourceDatas(filteredCourses);
     } catch (error) {
       console.error('Erreur lors de la récupération des données:', error);
@@ -195,7 +197,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   };
 
   useEffect(() => {
-    setRessourceDatas([]);
     void fetchCourses();
     setCurrentpage(1);
 
@@ -236,7 +237,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     totalPages,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     currentPage: page
-  } = paginate(ressourcesData, currentPage);
+  } = paginate(coursesData, currentPage);
 
   useEffect(() => {
     if (screenWidth > 990) setShowFilter(true);
@@ -376,23 +377,27 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                             // Affichage des cours pour valueOfCurrentCategorie === -1
                             if (valueOfUrl == 'programmation') {
                               const courseList = course as ProgramationCourses;
-                              return (
-                                <CourseCard
-                                  level={courseList.level}
-                                  language={courseList.language}
-                                  icon={
-                                    courseList.sponsorIcon === 'AlgoIcon'
-                                      ? AlgoIcon
-                                      : LaediesActIcon
-                                  }
-                                  alt={courseList.alt}
-                                  isAvailable={courseList.isAvailable}
-                                  title={courseList.title}
-                                  buttonText='Suivre le cours'
-                                  link={courseList.link}
-                                  description={courseList.description}
-                                />
-                              );
+                              if (courseList.title) {
+                                return (
+                                  <CourseCard
+                                    level={courseList.level}
+                                    language={courseList.language}
+                                    icon={
+                                      courseList.sponsorIcon === 'AlgoIcon'
+                                        ? AlgoIcon
+                                        : LaediesActIcon
+                                    }
+                                    alt={courseList.alt}
+                                    isAvailable={courseList.isAvailable}
+                                    title={courseList.title}
+                                    buttonText='Suivre le cours'
+                                    link={courseList.link}
+                                    description={courseList.description}
+                                  />
+                                );
+                              } else {
+                                return renderCourseCardSkeletons(6);
+                              }
                             }
 
                             // Vérification si le cours est de type Raven
