@@ -601,23 +601,22 @@ const { moodleApiBaseUrl, moodleApiToken, ravenAwsApiKey } = envData;
 const ravenLocalToken = getRavenTokenDataFromLocalStorage();
 
 export const getRavenResources = async (currentPage: number) => {
-  await getRavenToken();
-
-  const ravenData: RavenFetchCoursesDto = {
-    apiKey: ravenAwsApiKey,
-    token: ravenLocalToken?.token || '',
-    currentPage: currentPage,
-    fromDate: '01-01-2023',
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    valid_to: '06-24-2024'
-  };
-  const getReveanCourses = await getAwsCourses(ravenData);
+  const getReveanCourses = await getAwsCourses(currentPage);
 
   return getReveanCourses;
 };
 export const getRavenPathResources = async (currentPage: number) => {
   await getRavenToken();
 
+  const getReveanPathCourses = await getAwsPath(currentPage);
+  return getReveanPathCourses;
+};
+
+//end getRavenResources
+
+export async function getAwsCourses(currentPage: number) {
+  await getRavenToken();
+
   const ravenData: RavenFetchCoursesDto = {
     apiKey: ravenAwsApiKey,
     token: ravenLocalToken?.token || '',
@@ -626,18 +625,11 @@ export const getRavenPathResources = async (currentPage: number) => {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     valid_to: '06-24-2024'
   };
-  const getReveanPathCourses = await getAwsPath(ravenData);
-  return getReveanPathCourses;
-};
-
-//end getRavenResources
-
-export async function getAwsCourses(data: RavenFetchCoursesDto) {
   let response: unknown | RavenCourse[];
 
   try {
     response = await get(
-      `/get-raven-courses?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.valid_to}`
+      `/get-raven-courses?awstoken=${ravenData.token}&fromdate=${ravenData.fromDate}&todate=${ravenData.valid_to}`
     );
   } catch (error) {
     response = null;
@@ -645,12 +637,22 @@ export async function getAwsCourses(data: RavenFetchCoursesDto) {
 
   return response;
 }
-export async function getAwsPath(data: RavenFetchCoursesDto) {
+export async function getAwsPath(currentPage: number) {
+  await getRavenToken();
+
+  const ravenData: RavenFetchCoursesDto = {
+    apiKey: ravenAwsApiKey,
+    token: ravenLocalToken?.token || '',
+    currentPage: currentPage,
+    fromDate: '01-01-2023',
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    valid_to: '06-24-2024'
+  };
   let response: unknown | RavenCourse[];
 
   try {
     response = await get(
-      `/get-raven-path?awstoken=${data.token}&fromdate=${data.fromDate}&todate=${data.valid_to}`
+      `/get-raven-path?awstoken=${ravenData.token}&fromdate=${ravenData.fromDate}&todate=${ravenData.valid_to}`
     );
   } catch (error) {
     response = null;
@@ -706,7 +708,6 @@ export async function getAwsPath(data: RavenFetchCoursesDto) {
     };
 
     const filteredCourses = filterCourses(response);
-
     return filteredCourses;
   }
 
