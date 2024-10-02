@@ -19,7 +19,9 @@ import awsLogo from '../../assets/images/aws-logo.png';
 import {
   getAllRessources,
   dataForprogramation,
-  ProgramationCourses
+  ProgramationCourses,
+  getRavenResources,
+  getRavenPathResources
 } from '../../utils/ajax';
 import {
   Loader,
@@ -90,6 +92,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     valueOfCurrentCategory
   );
   const setRessourceDatas = useSetRecoilState(myAllDataCourses);
+
   // const allDataofCourses = useRecoilValue(allDataCourses);
   const setDataMoodle = useSetRecoilState(coursesMoodle);
   const setDataRaven = useSetRecoilState(coursesRaven);
@@ -109,22 +112,18 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
   const fetchedData = useMemo(async () => {
     try {
-      const res = await getAllRessources(currentPage);
-
-      const ravenCourses = res
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-        .flatMap(course => (Array.isArray(course) ? course : [course]))
-        .filter(course => 'launch_url' in course);
-
-      const moodleCourses = res
+      const res = await getAllRessources();
+      const getMoodle = res
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         .flatMap(course => (Array.isArray(course) ? course : []))
         .filter(course => !('launch_url' in course));
 
-      return { ravenCourses, moodleCourses };
+      const getRaven = await getRavenResources(currentPage);
+      const getRavenPath = await getRavenPathResources(currentPage);
+      return { getMoodle, getRaven, getRavenPath };
     } catch (error) {
       console.error('Error fetching data:', error);
-      return { ravenCourses: [], moodleCourses: [] };
+      return { getMoodle: [], getRaven: [], getRavenPath: [] };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -228,14 +227,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   ]);
 
   useEffect(() => {
-    void fetchedData.then(({ ravenCourses, moodleCourses }) => {
-      setDataCoursesRaven(ravenCourses);
-      setDataCoursesMoodle(moodleCourses);
-      setIsDataOnLoading(false);
-    });
-  }, [fetchedData, setDataCoursesRaven, setDataCoursesMoodle]);
-
-  useEffect(() => {
     void fetchCourses();
   }, [
     fetchCourses,
@@ -266,6 +257,19 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     if (screenWidth > 990) setShowFilter(true);
     else setShowFilter(false);
   }, [screenWidth]);
+
+  useEffect(() => {
+    void fetchedData.then(({ getMoodle, getRaven, getRavenPath }) => {
+      const raven = [
+        ...(getRaven as RavenCourse[]),
+        ...(getRavenPath as unknown as RavenCourse[])
+      ];
+      setDataCoursesRaven(raven);
+
+      setDataCoursesMoodle(getMoodle);
+      setIsDataOnLoading(false);
+    });
+  }, [fetchedData, setDataCoursesRaven, setDataCoursesMoodle]);
 
   if (typeof window !== 'undefined') {
     window.addEventListener('resize', () => {

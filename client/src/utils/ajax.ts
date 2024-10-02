@@ -143,18 +143,6 @@ export const dataForprogramation: ProgramationCourses[] = [
   }
 ];
 
-// <CourseCard
-//               level='Débutant'
-//               language='French'
-//               icon={AlgoIcon}
-//               alt=''
-//               isAvailable={true}
-//               title='JavaScript Algorithms and Data Structures'
-//               buttonText='Suivre le cours'
-//               link='/learn/javascript-algorithms-and-data-structures'
-//               description={`
-//     Ce cours t'enseigne les bases de JavaScript pour rendre les pages interactives, ainsi que les algorithmes et structures de données en JavaScript., etc.
-//   `}
 export const courseDescriptions: Record<CourseCategoryTitle, CourseDetails> = {
   Développement: {
     titre: 'Développement Web',
@@ -566,7 +554,7 @@ interface RavenFetchCoursesDto {
   apiKey?: string;
   currentPage?: number;
 }
-const getRavenToken = async () => {
+export const getRavenToken = async () => {
   const ravenTokenData = getRavenTokenDataFromLocalStorage();
 
   if (ravenTokenData === null) {
@@ -639,7 +627,6 @@ export const getRavenPathResources = async (currentPage: number) => {
     valid_to: '06-24-2024'
   };
   const getReveanPathCourses = await getAwsPath(ravenData);
-
   return getReveanPathCourses;
 };
 
@@ -727,19 +714,10 @@ export async function getAwsPath(data: RavenFetchCoursesDto) {
 }
 
 //fonction permettant la combinaison de tous les cours notamment moodle et raven
-export const getAllRessources = async (
-  currentPage: number
-): Promise<CombinedCourses[]> => {
+export const getAllRessources = async (): Promise<CombinedCourses[]> => {
   const moodleCourses = await getMoodleCourses();
-  const ravenCourses = await getRavenResources(currentPage);
-  const ravenPathCourses = await getRavenPathResources(currentPage);
-
   // Combine the results into a single array
-  const allCourses: CombinedCourses[] = [
-    ...(moodleCourses?.result || []),
-    ...([ravenCourses] || []),
-    ...(ravenPathCourses || [])
-  ];
+  const allCourses: CombinedCourses[] = [...(moodleCourses?.result || [])];
   return allCourses;
 };
 
