@@ -487,29 +487,23 @@ export function Courses(props: CoursesProps): JSX.Element {
                                 />
                               );
                             }
-                          } else {
-                            const courses = paginatedData.filter(
-                              course => 'timecreated' in course
+                          } else if ('timecreated' in course) {
+                            return (
+                              <CourseCard
+                                level='debutant'
+                                language='French'
+                                key={course.id}
+                                icon={PhBookBookmark}
+                                isAvailable={course.visible === 1}
+                                title={course.displayname}
+                                buttonText='Suivre le cours'
+                                link={`${moodleBaseUrl}/course/view.php?id=${course.id}`}
+                                description={course.summary}
+                                duration={convertTimestampToTime(
+                                  course.timecreated
+                                )}
+                              />
                             );
-                            return courses.map(course => {
-                              const courseMoodle = course as MoodleCourse;
-                              return (
-                                <CourseCard
-                                  level='debutant'
-                                  language='French'
-                                  key={courseMoodle.id}
-                                  icon={PhBookBookmark}
-                                  isAvailable={courseMoodle.visible === 1}
-                                  title={courseMoodle.displayname}
-                                  buttonText='Suivre le cours'
-                                  link={`${moodleBaseUrl}/course/view.php?id=${courseMoodle.id}`}
-                                  description={courseMoodle.summary}
-                                  duration={convertTimestampToTime(
-                                    courseMoodle.timecreated
-                                  )}
-                                />
-                              );
-                            });
                           }
                         })
                       : ''}
