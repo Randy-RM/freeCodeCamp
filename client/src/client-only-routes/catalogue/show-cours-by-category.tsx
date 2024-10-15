@@ -126,12 +126,14 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
           courses = filteredRavenCourses;
           category = 'aws';
         } else {
-          if (Array.isArray(filteredMoodleCourses)) {
-            courses = filteredMoodleCourses.filter(
+          courses = filteredMoodleCourses?.result
+            .flatMap(
               /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-              course => course.categoryid === valueOfCurrentCategorie
-            );
-          }
+              course => course
+            )
+            .filter(
+              course => course.categoryid == valueOfCurrentCategorie
+            ) as unknown as MoodleCourse[];
           category = 'moodle';
         }
 
