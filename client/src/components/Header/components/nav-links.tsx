@@ -10,217 +10,218 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 // @ts-nocheck
 import {
-  faCheckSquare,
-  faHeart,
-  faSquare,
-  faExternalLinkAlt
+  faBars,
+  faXmark,
+  faExternalLink
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState, useEffect, RefObject } from 'react';
 import { TFunction, withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import envData from '../../../../../config/env.json';
-import {
-  availableLangs,
-  langDisplayNames
-} from '../../../../../config/i18n/all-langs';
 import { hardGoTo as navigate } from '../../../redux';
-import { updateUserFlag } from '../../../redux/settings';
-import createLanguageRedirect from '../../create-language-redirect';
 import { Link } from '../../helpers';
-import { Themes } from '../../settings/theme';
+import useWindowSize from './use-window-size';
 
-const { clientLocale, radioLocation, apiLocation } = envData;
-
-const locales = availableLangs.client;
+const { apiLocation } = envData;
 
 export interface NavLinksProps {
-  displayMenu?: boolean;
   fetchState?: { pending: boolean };
   i18n: Object;
+  innerRef?: RefObject<HTMLButtonElement>;
   t: TFunction;
-  toggleDisplayMenu?: React.MouseEventHandler<HTMLButtonElement>;
-  toggleNightMode: (x: any) => any;
   user?: Record<string, unknown>;
   navigate?: (location: string) => void;
 }
 
 const mapDispatchToProps = {
-  navigate,
-  toggleNightMode: (theme: Themes) => updateUserFlag({ theme })
+  navigate
 };
 
-export class NavLinks extends Component<NavLinksProps, {}> {
-  static displayName: string;
+export const NavLinks = (props: NavLinksProps): JSX.Element => {
+  const [isDropdown, setIsDropdown] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [width, height] = useWindowSize();
+  const {
+    innerRef,
+    fetchState,
+    user: { username, role },
+    navigate
+  }: NavLinksProps = props;
 
-  constructor(props: NavLinksProps) {
-    super(props);
-    this.handleLanguageChange = this.handleLanguageChange.bind(this);
-  }
+  const { pending } = fetchState;
 
-  toggleTheme(currentTheme = Themes.Default, toggleNightMode: any) {
-    toggleNightMode(
-      currentTheme === Themes.Night ? Themes.Default : Themes.Night
-    );
-  }
+  // ------------IsDropdown Handler------------
+  // console.log('userRole', role);
+  const handleIsDropdown = () => {
+    if (width < 1000) {
+      setIsDropdown(isDropdown ? false : true);
+      if (isDropdown) {
+        document.body.style.overflowY = null;
+      } else {
+        document.body.style.overflowY = 'hidden';
+      }
+    }
+  };
+  const stockerUrlCourante = (): void => {
+    if (typeof window !== 'undefined') {
+      const currentUrl = window.location.href;
 
-  handleLanguageChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ): void => {
-    const { toggleDisplayMenu, navigate } = this.props;
-    toggleDisplayMenu();
+      // Stocker l'URL dans le localStorage
+      localStorage.setItem('currentUrlForRedirection', currentUrl);
 
-    const path = createLanguageRedirect({
-      clientLocale,
-      lang: event.target.value
-    });
-
-    return navigate(path);
+      handleIsDropdown;
+    }
   };
 
-  render() {
-    const {
-      displayMenu,
-      fetchState,
-      t,
-      toggleNightMode,
-      user: { isDonating = false, username, theme }
-    }: NavLinksProps = this.props;
+  useEffect(() => {
+    if (width > 1000) {
+      document.body.style.overflowY = null;
+      setIsDropdown(false);
+    }
+  }, [width]);
 
-    const { pending } = fetchState;
+  useEffect(() => {
+    const urlredirectionAfterLogin = localStorage.getItem(
+      'currentUrlForRedirection'
+    );
+    if (urlredirectionAfterLogin) {
+      localStorage.removeItem('currentUrlForRedirection');
+      navigate(`${urlredirectionAfterLogin}`);
+    }
+  }, [navigate]);
 
-    return pending ? (
-      <div className='nav-skeleton' />
-    ) : (
-      <div className={'nav-list' + (displayMenu ? ' display-menu' : '')}>
-        {isDonating ? (
-          <div className='nav-link nav-link-flex nav-link-header' key='donate'>
-            <span>{t('donate.thanks')}</span>
-            <FontAwesomeIcon icon={faHeart} />
-          </div>
-        ) : (
-          <Link className='nav-link' key='donate' sameTab={false} to='/donate'>
-            {t('buttons.donate')}
-          </Link>
-        )}
-        {!username && (
-          <a
-            className='nav-link nav-link-sign-in'
-            href={`${apiLocation}/signin`}
-            key='signin'
+  return pending ? (
+    <div className='nav-skeleton' />
+  ) : (
+    <div className=''>
+      <label htmlFor='show-menu' className='menu-icon'>
+        <FontAwesomeIcon
+          icon={isDropdown ? faXmark : faBars}
+          onClick={handleIsDropdown}
+        />
+      </label>
+      <input type='checkbox' id='show-menu' />
+      <ul className={isDropdown ? 'nav-list show-menu' : 'nav-list'}>
+        <li className='nav-item'>
+          <Link
+            onClick={handleIsDropdown}
+            className=''
+            key='learn'
+            to={'/'}
+            ref={innerRef}
+            activeClassName='active'
           >
-            {t('buttons.sign-in')}
-          </a>
-        )}
-        <Link className='nav-link' key='learn' to='/learn'>
-          {t('buttons.curriculum')}
-        </Link>
+            {'Accueil'}
+          </Link>
+        </li>
+
+        <li className='nav-item'>
+          <Link
+            onClick={handleIsDropdown}
+            className=''
+            key='courses'
+            to='/catalogue'
+            ref={innerRef}
+            activeClassName='active'
+          >
+            {'Catalogue'}
+          </Link>
+        </li>
+
+        <li className='nav-item'>
+          <Link
+            onClick={handleIsDropdown}
+            external={true}
+            className=''
+            key='Kadea-academy'
+            to='https://www.kinshasadigital.academy/'
+          >
+            {'Académie '}
+            <FontAwesomeIcon icon={faExternalLink} />
+          </Link>
+        </li>
+
         {username && (
           <Fragment key='profile-settings'>
-            <Link
-              className='nav-link'
-              key='profile'
-              sameTab={false}
-              to={`/${username}`}
-            >
-              {t('buttons.profile')}
-            </Link>
-            <Link
-              className='nav-link'
-              key='settings'
-              sameTab={false}
-              to={`/settings`}
-            >
-              {t('buttons.settings')}
-            </Link>
+            <li className='nav-item'>
+              <Link
+                onClick={handleIsDropdown}
+                className=''
+                key='dashboard'
+                sameTab={false}
+                to={`/dashboard`}
+                ref={innerRef}
+                activeClassName='active'
+              >
+                {'Tableau de bord'}
+              </Link>
+            </li>
+
+            <li className='nav-item'>
+              <Link
+                onClick={handleIsDropdown}
+                className=''
+                key='settings'
+                sameTab={false}
+                to={`/settings`}
+                ref={innerRef}
+                activeClassName='active'
+              >
+                {'Profil'}
+              </Link>
+            </li>
           </Fragment>
         )}
-        <hr className='nav-line' />
-        <Link
-          className='nav-link nav-link-flex'
-          external={true}
-          key='forum'
-          sameTab={false}
-          to={t('links:nav.forum')}
-        >
-          <span>{t('buttons.forum')}</span>
-          <FontAwesomeIcon icon={faExternalLinkAlt} />
-        </Link>
-        <Link
-          className='nav-link nav-link-flex'
-          external={true}
-          key='news'
-          sameTab={false}
-          to={t('links:nav.news')}
-        >
-          <span>{t('buttons.news')}</span>
-          <FontAwesomeIcon icon={faExternalLinkAlt} />
-        </Link>
-        <Link
-          className='nav-link nav-link-flex'
-          external={true}
-          key='radio'
-          sameTab={false}
-          to={radioLocation}
-        >
-          <span>{t('buttons.radio')}</span>
-          <FontAwesomeIcon icon={faExternalLinkAlt} />
-        </Link>
-        <hr className='nav-line' />
-        <button
-          className={
-            'nav-link nav-link-flex' + (!username ? ' nav-link-header' : '')
-          }
-          disabled={!username}
-          key='theme'
-          onClick={() => this.toggleTheme(String(theme), toggleNightMode)}
-        >
-          {username ? (
-            <>
-              <span>{t('settings.labels.night-mode')}</span>
-              {theme === Themes.Night ? (
-                <FontAwesomeIcon icon={faCheckSquare} />
-              ) : (
-                <FontAwesomeIcon icon={faSquare} />
-              )}
-            </>
-          ) : (
-            <span className='nav-link-dull'>{t('misc.change-theme')}</span>
-          )}
-        </button>
-        <div className='nav-link nav-link-header' key='lang-header'>
-          {t('footer.language')}
-        </div>
 
-        <div className='nav-link dropdown-nav-link' key='language-dropdown'>
-          <select
-            className='nav-link-lang-dropdown'
-            onChange={this.handleLanguageChange}
-            value={clientLocale}
-          >
-            {locales.map(lang => (
-              <option key={'lang-' + lang} value={lang}>
-                {langDisplayNames[lang]}
-              </option>
-            ))}
-          </select>
-        </div>
+        {role == 'Admin' ||
+          (role == 'Super-admin' && (
+            <li className='nav-item'>
+              <a
+                onClick={stockerUrlCourante}
+                className=''
+                href={`/admin/all-members`}
+                key='dashbord'
+                ref={innerRef}
+              >
+                {'Back office'}
+              </a>
+            </li>
+          ))}
+
+        {!username && (
+          <li className='nav-item'>
+            <a
+              onClick={stockerUrlCourante}
+              className='nav-signin-btn'
+              href={`${apiLocation}/signin`}
+              key='signin'
+              ref={innerRef}
+            >
+              {'Connexion'}
+            </a>
+          </li>
+        )}
+
         {username && (
           <Fragment key='signout-frag'>
-            <hr className='nav-line-2' />
-            <a
-              className='nav-link'
-              href={`${apiLocation}/signout`}
-              key='sign-out'
-            >
-              {t('buttons.sign-out')}
-            </a>
+            <li className='nav-item'>
+              <a
+                onClick={handleIsDropdown}
+                className='nav-signout-btn'
+                href={`${apiLocation}/signout`}
+                key='sign-out'
+                ref={innerRef}
+              >
+                {'Déconnexion'}
+              </a>
+            </li>
           </Fragment>
         )}
-      </div>
-    );
-  }
-}
+      </ul>
+    </div>
+  );
+};
 
 NavLinks.displayName = 'NavLinks';
 

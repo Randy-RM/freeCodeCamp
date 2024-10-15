@@ -27,6 +27,11 @@ const updateHooksRE = /^\/hooks\/update-paypal$/;
 // note: this would be replaced by webhooks later
 const donateRE = /^\/donate\/charge-stripe$/;
 const submitCoderoadChallengeRE = /^\/coderoad-challenge-completed$/;
+//Raven360 authorization
+const getRavenTokenRE = /^\/generate-raven-token/;
+const getRavenCourseRE = /^\/get-raven-courses/;
+const getRavenPathRE = /^\/get-raven-path/;
+const getRavenProgressRE = /^\/get-raven-user-progress/;
 
 const _pathsAllowedREs = [
   authRE,
@@ -42,7 +47,11 @@ const _pathsAllowedREs = [
   unsubscribeRE,
   updateHooksRE,
   donateRE,
-  submitCoderoadChallengeRE
+  submitCoderoadChallengeRE,
+  getRavenTokenRE,
+  getRavenCourseRE,
+  getRavenPathRE,
+  getRavenProgressRE
 ];
 
 export function isAllowedPath(path, pathsAllowedREs = _pathsAllowedREs) {
@@ -63,30 +72,33 @@ export default function getRequestAuthorisation({
       );
       if (!accessToken && error === errorTypes.noTokenFound) {
         throw wrapHandledError(
-          new Error('Access token is required for this request'),
+          new Error(`Un jeton d'accès est nécessaire pour cette requête`),
           {
             type: 'info',
             redirect: `${origin}/signin`,
-            message: 'Access token is required for this request',
+            message: `Un jeton d'accès est nécessaire pour cette requête`,
             status: 403
           }
         );
       }
       if (!accessToken && error === errorTypes.invalidToken) {
-        throw wrapHandledError(new Error('Access token is invalid'), {
+        throw wrapHandledError(new Error(`Le jeton d'accès est invalide`), {
           type: 'info',
           redirect: `${origin}/signin`,
-          message: 'Your access token is invalid',
+          message: `Votre jeton d'accès est invalide`,
           status: 403
         });
       }
       if (!accessToken && error === errorTypes.expiredToken) {
-        throw wrapHandledError(new Error('Access token is no longer valid'), {
-          type: 'info',
-          redirect: `${origin}/signin`,
-          message: 'Access token is no longer valid',
-          status: 403
-        });
+        throw wrapHandledError(
+          new Error(`Le jeton d'accès n'est plus valide`),
+          {
+            type: 'info',
+            redirect: `${origin}/signin`,
+            message: `Le jeton d'accès n'est plus valide`,
+            status: 403
+          }
+        );
       }
       res.set(authHeaderNS, jwt);
       if (isEmpty(req.user)) {

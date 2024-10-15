@@ -1,20 +1,25 @@
-import { Grid, Row, Col } from '@freecodecamp/react-bootstrap';
+import { Grid } from '@freecodecamp/react-bootstrap';
 import { graphql } from 'gatsby';
 import React from 'react';
-import Helmet from 'react-helmet';
-import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-
-import Intro from '../components/Intro';
-import Map from '../components/Map';
-import { Spacer } from '../components/helpers';
-import LearnLayout from '../components/layouts/learn';
 import {
   userFetchStateSelector,
   isSignedInSelector,
   userSelector
 } from '../redux';
+
+import '../components/landing/landing.css';
+import { LearnLayout } from '../components/layouts';
+import Hero from '../components/landing/hero/hero';
+import VodacomBranding from '../components/landing/vodacom-branding-section/vodacom-branding';
+import RegistrationToAcademy from '../components/landing/components/registration-to-academy';
+import WhatWillYouLearn from '../components/landing/what-will-you-learn/what-will-you-learn';
+import HowWillYouLearn from '../components/landing/how-will-you-learn/how-will-you-learn';
+import WhatCanYouDo from '../components/landing/whatCanYouDo/what-can-you-do';
+import StartCOding from '../components/landing/start-coding/start-coding';
+import Partners from '../components/landing/partners/partners';
 
 interface FetchState {
   pending: boolean;
@@ -32,7 +37,7 @@ const mapStateToProps = createSelector(
   userFetchStateSelector,
   isSignedInSelector,
   userSelector,
-  (fetchState: FetchState, isSignedIn: boolean, user: User) => ({
+  (fetchState: FetchState, isSignedIn = true, user: User) => ({
     fetchState,
     isSignedIn,
     user
@@ -44,7 +49,7 @@ interface Slug {
 }
 
 interface LearnPageProps {
-  isSignedIn: boolean;
+  isSignedIn: true;
   fetchState: FetchState;
   state: Record<string, unknown>;
   user: User;
@@ -57,39 +62,55 @@ interface LearnPageProps {
   };
 }
 
-function LearnPage({
-  isSignedIn,
-  fetchState: { pending, complete },
-  user: { name = '', completedChallengeCount = 0 },
-  data: {
-    challengeNode: {
-      challenge: {
-        fields: { slug }
-      }
-    }
-  }
-}: LearnPageProps) {
-  const { t } = useTranslation();
+function LearnPage({ isSignedIn }: LearnPageProps) {
+  // const { t } = useTranslation();
+
+  console.log(isSignedIn);
 
   return (
     <LearnLayout>
-      <Helmet title={t('metaTags:title')} />
-      <Grid>
-        <Row>
-          <Col md={8} mdOffset={2} sm={10} smOffset={1} xs={12}>
-            <Intro
-              complete={complete}
-              completedChallengeCount={completedChallengeCount}
-              isSignedIn={isSignedIn}
-              name={name}
-              pending={pending}
-              slug={slug}
-            />
-            <Map />
-            <Spacer size={2} />
-          </Col>
-        </Row>
-      </Grid>
+      {/* <Helmet title={t('metaTags:title')} /> */}
+      <Helmet title={`Apprendre à coder - gratuitement | Kadea Online`} />
+      <main className='landing-page bg-light'>
+        <div className='hero-main-bg'>
+          <Grid>
+            <Hero />
+          </Grid>
+        </div>
+        <div className=''>
+          <Grid>
+            <VodacomBranding />
+          </Grid>
+        </div>
+
+        <div className='as-seen-in'>
+          <Grid>
+            <RegistrationToAcademy />
+          </Grid>
+        </div>
+
+        <div className='dotted-bg'>
+          <Grid>
+            <WhatWillYouLearn isSignedIn={isSignedIn} />
+          </Grid>
+        </div>
+
+        <HowWillYouLearn />
+
+        <div className=''>
+          <Grid>
+            <WhatCanYouDo />
+          </Grid>
+        </div>
+
+        <StartCOding isSignedIn={isSignedIn} />
+
+        <div className=''>
+          <Grid>
+            <Partners />
+          </Grid>
+        </div>
+      </main>
     </LearnLayout>
   );
 }

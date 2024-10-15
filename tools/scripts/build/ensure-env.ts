@@ -40,7 +40,16 @@ if (FREECODECAMP_NODE_ENV !== 'development') {
     'apiLocation',
     'forumLocation',
     'newsLocation',
-    'radioLocation'
+    'radioLocation',
+    'moodleBaseUrl',
+    'moodleApiBaseUrl',
+    'moodleApiToken',
+    'lemlistToken',
+    'lemlistUrl',
+    'ravenAwsApiKey',
+    'ravenAwsBaseUrl',
+    'ravenAwsClientId',
+    'ravenAwsClientSecretId'
   ];
   const deploymentKeys = [
     'clientLocale',
@@ -51,13 +60,13 @@ if (FREECODECAMP_NODE_ENV !== 'development') {
     'showUpcomingChanges',
     'showNewCurriculum'
   ];
-  const searchKeys = ['algoliaAppId', 'algoliaAPIKey'];
-  const donationKeys = ['stripePublicKey', 'paypalClientId', 'patreonClientId'];
+  //const searchKeys = ['algoliaAppId', 'algoliaAPIKey'];
+  //const donationKeys = ['stripePublicKey', 'paypalClientId'];
 
   const expectedVariables = locationKeys.concat(
-    deploymentKeys,
-    searchKeys,
-    donationKeys
+    deploymentKeys
+    //searchKeys,
+    //donationKeys
   );
   const receivedvariables = Object.keys(env as Record<string, unknown>);
   expectedVariables.sort();
