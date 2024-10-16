@@ -16,7 +16,13 @@ import PhBookBookmark from '../../assets/images/ph-book-bookmark-thin.svg';
 import LaediesActIcon from '../../assets/images/partners/we-act-logo.png';
 import awsLogo from '../../assets/images/aws-logo.png';
 
-import { ProgramationCourses } from '../../utils/ajax';
+import {
+  dataForprogramation,
+  getAwsCourses,
+  getMoodleCourses,
+  getRavenPathResources,
+  ProgramationCourses
+} from '../../utils/ajax';
 import {
   Loader,
   renderCourseCardSkeletons,
@@ -32,7 +38,12 @@ import {
   getCategoryDescription,
   paginate
 } from '../../utils/allFunctions';
-import { CoursesProps, MoodleCourse, RavenCourse } from '../show-courses';
+import {
+  CoursesProps,
+  MoodleCourse,
+  MoodleCoursesCatalogue,
+  RavenCourse
+} from '../show-courses';
 import envData from '../../../../config/env.json';
 import {
   isSignedInSelector,
@@ -94,9 +105,11 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const showMoodleCategory = useRecoilValue(categoryCours);
   const valueOfCounter = useRecoilValue(categoryCounter);
   const [coursesData, setCoursesData] = useState<unknown[]>([]);
-  const ravenState = useRecoilValue(centraliseRavenData);
-  const moodleState = useRecoilValue(myDataMoodle);
-  const programmationState = useRecoilValue(centraliseProgramationCours);
+  const [ravenState, setGetAllRavenData] = useRecoilState(centraliseRavenData);
+  const [moodleState, setGetAllDataMoodle] = useRecoilState(myDataMoodle);
+  const [programmationState, setGetAllProgrammationCourses] = useRecoilState(
+    centraliseProgramationCours
+  );
 
   const currentUrl = window.location.href;
   const location = useLocation();
@@ -215,6 +228,66 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     valueOfCounter,
     valueOfCurrentCategorie
   ]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const currentPage = 1;
+
+        const storedProgrammationData =
+          localStorage.getItem('programmationData');
+        const storedMoodleData = localStorage.getItem('moodleData');
+        const storedRavenData = localStorage.getItem('ravenData');
+
+        if (storedProgrammationData) {
+          setGetAllProgrammationCourses(
+            JSON.parse(storedProgrammationData) as ProgramationCourses[]
+          );
+        } else {
+          const programmationData = dataForprogramation;
+          setGetAllProgrammationCourses(programmationData);
+          localStorage.setItem(
+            'programmationData',
+            JSON.stringify(programmationData)
+          );
+        }
+
+        if (storedMoodleData && storedRavenData) {
+          setGetAllDataMoodle(
+            JSON.parse(storedMoodleData) as MoodleCoursesCatalogue
+          );
+          setGetAllRavenData(JSON.parse(storedRavenData) as RavenCourse[]);
+        } else {
+          const [moodleData, ravenData, ravenPathData] = await Promise.all([
+            getMoodleCourses(),
+            getAwsCourses(currentPage),
+            getRavenPathResources(currentPage)
+          ]);
+
+          if (moodleData) {
+            setGetAllDataMoodle(moodleData);
+            localStorage.setItem('moodleData', JSON.stringify(moodleData));
+          }
+
+          if (ravenData || ravenPathData) {
+            const unifiedRavenData = [
+              ...((ravenData as RavenCourse[]) || []),
+              ...(ravenPathData || [])
+            ];
+            setGetAllRavenData(unifiedRavenData as RavenCourse[]);
+            localStorage.setItem('ravenData', JSON.stringify(unifiedRavenData));
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setIsDataOnLoading(false);
+      }
+    };
+
+    void fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     setCurrentpage(1);
