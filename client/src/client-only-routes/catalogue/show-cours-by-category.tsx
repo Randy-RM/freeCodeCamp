@@ -113,7 +113,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
   const currentUrl = window.location.href;
   const location = useLocation();
-  const valueOfUrl = location.pathname.split('/')[2];
+  const valueOfUrl = location.pathname.split('/')[2].replace(/-/g, ' ');
 
   const { moodleBaseUrl } = envData;
 
@@ -135,7 +135,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         if (valueOfUrl == 'programmation') {
           courses = filterProgramationCourses;
           category = 'programation';
-        } else if (valueOfUrl == 'amazon-web-service') {
+        } else if (valueOfUrl == 'amazon web service') {
           courses = filteredRavenCourses;
           category = 'aws';
         } else {
@@ -394,8 +394,10 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                   <h2 className=' catalog-title'>
                     <span className='catalog'>Catalogue</span> /
                     <span className='catalog-title_space'>
-                      {valueOfUrl.includes('Intelligence%20-%20artificielle')
+                      {valueOfUrl.includes('Intelligence%20 %20artificielle')
                         ? 'Intelligence Artificielle'
+                        : valueOfUrl.includes('Marketing Communication')
+                        ? 'Marketing et Communication'
                         : valueOfUrl}
                     </span>
                   </h2>
@@ -404,8 +406,10 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                 <div className='card__courses__description'>
                   <h3>
                     Decouvrez le parcours{' '}
-                    {valueOfUrl.includes('Intelligence%20-%20artificielle')
+                    {valueOfUrl.includes('Intelligence%20 %20artificielle')
                       ? 'Intelligence Artificielle'
+                      : valueOfUrl.includes('Marketing Communication')
+                      ? 'Marketing et Communication'
                       : valueOfUrl}
                   </h3>
                   <p>{getCategoryDescription(valueOfUrl)}</p>
@@ -424,9 +428,9 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                     paginatedData.map((course, index) => {
                       if (
                         valueOfUrl === 'programmation' ||
-                        valueOfUrl === 'amazon-web-service' ||
-                        valueOfUrl === 'Intelligence%20-%20artificielle' ||
-                        valueOfUrl === 'Marketing-Communication' ||
+                        valueOfUrl === 'amazon web service' ||
+                        valueOfUrl === 'Intelligence%20 %20artificielle' ||
+                        valueOfUrl === 'Marketing Communication' ||
                         valueOfUrl === 'Bureautique'
                       ) {
                         if (valueOfUrl === 'programmation') {
@@ -453,7 +457,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                           }
                         }
 
-                        if (valueOfUrl === 'amazon-web-service') {
+                        if (valueOfUrl === 'amazon web service') {
                           const courseTyped = course as RavenCourse;
                           const firstCategory = courseTyped.category?.[0];
                           const language =
@@ -507,9 +511,9 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                           const nowCategorie =
                             valueOfUrl === 'Bureautique'
                               ? 11
-                              : valueOfUrl === 'Marketing-Communication'
+                              : valueOfUrl === 'Marketing Communication'
                               ? 13
-                              : valueOfUrl === 'Intelligence%20-%20artificielle'
+                              : valueOfUrl === 'Intelligence%20 %20artificielle'
                               ? 14
                               : valueOfCurrentCategorie;
                           if (courseTyped.categoryid == nowCategorie) {
