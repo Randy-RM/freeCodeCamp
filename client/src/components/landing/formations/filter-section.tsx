@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import React, { useEffect, useMemo } from 'react';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
   MoodleCourse,
   MoodleCourseCategory,
@@ -60,7 +60,7 @@ const CoursesFilterSection = ({
   currentCategory: string;
 }): JSX.Element => {
   const setValueOfToken = useSetRecoilState(tokenRaven);
-  const [tokeFromRaven, setTokenFromRaven] = useState<RavenTokenData>();
+  const [tokeFromRaven, setTokenFromRaven] = useRecoilState(tokenRaven);
   const setGetAllRavenData = useSetRecoilState(centraliseRavenData);
   const setGetAllDataMoodle = useSetRecoilState(myDataMoodle);
   const setGetAllProgrammationCourses = useSetRecoilState(
@@ -118,7 +118,7 @@ const CoursesFilterSection = ({
     setIsDataOnLoading(true);
     await getRavenToken();
 
-    const getReveanCourses = await getAwsCourses(1);
+    const getReveanCourses = await getAwsCourses();
     setRavenCourses(getReveanCourses as RavenCourse[]);
     setIsDataOnLoading(false);
   };
@@ -126,8 +126,6 @@ const CoursesFilterSection = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const currentPage = 1;
-
         const storedProgrammationData =
           localStorage.getItem('programmationData');
         const storedMoodleData = localStorage.getItem('moodleData');
@@ -154,8 +152,8 @@ const CoursesFilterSection = ({
         } else {
           const [moodleData, ravenData, ravenPathData] = await Promise.all([
             getMoodleCourses(),
-            getAwsCourses(currentPage),
-            getRavenPathResources(currentPage)
+            getAwsCourses(),
+            getRavenPathResources()
           ]);
 
           if (moodleData) {
