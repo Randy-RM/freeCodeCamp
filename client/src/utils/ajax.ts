@@ -739,6 +739,41 @@ export async function getAwsUserCoursesProgress(
   return response;
 }
 
+//test fetch
+
+export async function saveDataOnDb() {
+  try {
+    const token = (await getRavenToken()) as RavenTokenData;
+    const ravenData: RavenFetchCoursesDto = {
+      apiKey: ravenAwsApiKey,
+      token: token.token,
+
+      fromDate: '01-01-2023',
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      valid_to: '06-24-2024'
+    };
+
+    const response = await get(
+      `/save-rave-courses?awstoken=${ravenData.token}&fromdate=${ravenData.fromDate}&todate=${ravenData.valid_to}}`
+    );
+
+    if (response) {
+      console.log('Data saved successfully:', response);
+    }
+  } catch (error) {
+    console.error("erreur lors de l'enregistrément des données", error);
+  }
+}
+
+export async function getDataFromDb() {
+  try {
+    const response = await get('/raven-get-course');
+    console.log('Données récupérées avec succès:', response);
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données :', error);
+  }
+}
+
 ('/get-raven-user-progress');
 
 /** POST **/
