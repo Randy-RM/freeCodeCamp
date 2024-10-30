@@ -9,11 +9,13 @@ import {
 import {
   dataForprogramation,
   getAwsCourses,
+  getDataFromDb,
   getExternalResource,
   getMoodleCourses,
   getRavenPathResources,
   getRavenToken,
-  ProgramationCourses
+  ProgramationCourses,
+  saveDataOnDb
 } from '../../../utils/ajax';
 import { splitArray } from '../../helpers';
 import sortCourses from '../../helpers/sort-course';
@@ -176,6 +178,8 @@ const CoursesFilterSection = ({
         setIsDataOnLoading(false);
       }
     };
+    void saveDataOnDb();
+    void getDataFromDb();
 
     void fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -219,6 +223,8 @@ const CoursesFilterSection = ({
     const getRaveToken = async () => {
       try {
         const ravenToken = await getRavenToken();
+        console.log(ravenToken);
+
         setTokenFromRaven(ravenToken as RavenTokenData);
         setValueOfToken(ravenToken as RavenTokenData);
       } catch (error) {
