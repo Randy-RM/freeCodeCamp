@@ -32,6 +32,7 @@ function bootUser(app) {
   const postDeleteAccount = createPostDeleteAccount(app);
   const postWebhookToken = createPostWebhookToken(app);
   const deleteWebhookToken = createDeleteWebhookToken(app);
+  const saveDataOnBdd = saveRavenCoursesToDB(app);
 
   const csrfProtection = csurf({
     cookie: {
@@ -72,7 +73,7 @@ function bootUser(app) {
   api.get('/get-raven-courses', getRavenAwsCatalogue);
   api.get('/get-raven-path', getRavenAwsPathCatalogue);
   api.get('/get-raven-user-progress', getRavenAwsUserProgress);
-  api.post('/save-rave-courses', saveRavenCoursesToDB);
+  api.post('/save-rave-courses', saveDataOnBdd);
 
   api.get('/raven-get-course', getRavenCoursesFromDB);
 
@@ -437,8 +438,7 @@ async function getUserList(req, res) {
 
 export async function saveRavenCoursesToDB(app) {
   console.log('save data on bdd');
-
-  const { RavenCourse } = app.models;
+  const RavenCourse = app.models.RavenCourse;
 
   return async function postSaveRavenCourses(req, res) {
     const apiKey = process.env.RAVEN_AWS_API_KEY;
