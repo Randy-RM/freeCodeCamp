@@ -75,8 +75,6 @@ function bootUser(app) {
   api.get('/get-raven-user-progress', getRavenAwsUserProgress);
   api.post('/save-rave-courses', saveDataOnBdd);
 
-  api.get('/raven-get-course', getRavenCoursesFromDB);
-
   app.use(api);
 }
 
@@ -454,6 +452,7 @@ export async function saveRavenCoursesToDB(app) {
     });
 
     try {
+      // Requête vers l'API Raven
       const ravenResponse = await Axios.post(
         `${baseUrl}/administration/catalog/learningobjects`,
         requestBody,
@@ -467,11 +466,20 @@ export async function saveRavenCoursesToDB(app) {
         }
       );
 
-      const courses = ravenResponse.data.data;
+      // Vérification de la présence de données dans la réponse
+      const courses = ravenResponse.data?.data || [];
+      if (courses.length === 0) {
+        console.log('Aucun cours trouvé');
+        return res.json({
+          success: false,
+          message: 'No courses found in the API response'
+        });
+      }
 
-      // suppression des données existantes
+      // Suppression des données existantes avant d'ajouter les nouvelles
       await RavenCourse.destroyAll();
-      // et ajout des nouvelles données
+
+      // Insertion des nouveaux cours
       const savedCourses = await Promise.all(
         courses.map(async course => {
           const courseData = {
@@ -494,41 +502,22 @@ export async function saveRavenCoursesToDB(app) {
           return RavenCourse.create(courseData);
         })
       );
-      console.log(savedCourses.length);
 
+      console.log(`${savedCourses.length} cours sauvegardés avec succès`);
+
+      // Conversion des données sauvegardées en JSON
+      const data = savedCourses.map(course => course.toJSON());
       return res.json({
         success: true,
         message: 'Courses saved successfully',
         coursesCount: savedCourses.length,
-        courses: savedCourses
+        courses: data
       });
     } catch (error) {
       console.error('Error saving Raven courses to DB:', error.message);
       return res.status(500).json({
         success: false,
         message: 'Error saving courses to database',
-        error: error.message
-      });
-    }
-  };
-}
-
-async function getRavenCoursesFromDB(app) {
-  const { RavenCourse } = app.models;
-
-  return async function getLocalRavenCourses(req, res) {
-    try {
-      const courses = await RavenCourse.find();
-      return res.json({
-        success: true,
-        coursesCount: courses.length,
-        courses
-      });
-    } catch (error) {
-      console.error('Error fetching courses from DB:', error.message);
-      return res.status(500).json({
-        success: false,
-        message: 'Error fetching courses from database',
         error: error.message
       });
     }

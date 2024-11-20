@@ -766,6 +766,12 @@ interface CsrfResponse {
   csrfToken: string;
 }
 
+interface ResponseRaven {
+  success: boolean;
+  message: string;
+  coursesCount: number;
+  coourses?: RavenCourse[];
+}
 export async function saveDataOnDb() {
   try {
     // Première étape : récupérer le token CSRF
@@ -812,12 +818,12 @@ export async function saveDataOnDb() {
     );
 
     if (response.ok) {
-      console.log('Data saved successfully:', response.json());
+      const data = (await response.json()) as ResponseRaven;
+      if (data && data.success) {
+        console.log('Data saved successfully:', data);
+      }
     } else {
-      console.error(
-        "Erreur lors de l'enregistrement des données :",
-        response.statusText
-      );
+      console.error("Erreur lors de l'enregistrement des données ");
     }
   } catch (error) {
     console.error("Erreur lors de l'enregistrement des données", error);
