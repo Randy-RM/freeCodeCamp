@@ -32,7 +32,7 @@ function bootUser(app) {
   const postDeleteAccount = createPostDeleteAccount(app);
   const postWebhookToken = createPostWebhookToken(app);
   const deleteWebhookToken = createDeleteWebhookToken(app);
-  const saveDataOnBdd = saveRavenCoursesToDB(app);
+  // const saveDataOnBdd = saveRavenCoursesToDB(app);
 
   const csrfProtection = csurf({
     cookie: {
@@ -73,7 +73,7 @@ function bootUser(app) {
   api.get('/get-raven-courses', getRavenAwsCatalogue);
   api.get('/get-raven-path', getRavenAwsPathCatalogue);
   api.get('/get-raven-user-progress', getRavenAwsUserProgress);
-  api.post('/save-rave-courses', saveDataOnBdd);
+  // api.post('/save-rave-courses', saveDataOnBdd);
 
   app.use(api);
 }
@@ -434,95 +434,101 @@ async function getUserList(req, res) {
   }
 }
 
-export async function saveRavenCoursesToDB(app) {
-  console.log('save data on bdd');
-  const RavenCourse = app.models.RavenCourse;
+// export async function saveRavenCoursesToDB(app) {
+//   console.log('save data on bdd');
+//   const RavenCourse = app.models.RavenCourse;
 
-  return async function postSaveRavenCourses(req, res) {
-    const apiKey = process.env.RAVEN_AWS_API_KEY;
-    const { awstoken } = req.query;
-    const baseUrl = process.env.RAVEN_AWS_BASE_URL;
+//   return async function postSaveRavenCourses(req, res) {
+//     const apiKey = process.env.RAVEN_AWS_API_KEY;
+//     const { awstoken } = req.query;
+//     const baseUrl = process.env.RAVEN_AWS_BASE_URL;
 
-    const requestBody = JSON.stringify({
-      from_date: '01-01-2023',
-      to_date: '06-24-2024',
-      learningobject_type: 'content',
-      page_index: 1,
-      page_size: 4
-    });
+//     const requestBody = JSON.stringify({
+//       from_date: '01-01-2023',
+//       to_date: '06-24-2024',
+//       learningobject_type: 'content',
+//       page_index: 1,
+//       page_size: 4
+//     });
 
-    try {
-      // Requête vers l'API Raven
-      const ravenResponse = await Axios.post(
-        `${baseUrl}/administration/catalog/learningobjects`,
-        requestBody,
-        {
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            'x-api-key': apiKey,
-            Authorization: `Bearer ${awstoken}`
-          }
-        }
-      );
+//     try {
+//       // Requête vers l'API Raven
+//       if (!awstoken) {
+//         return res.json({
+//           success: false,
+//           message: 'No token found'
+//         });
+//       }
+//       const ravenResponse = await Axios.post(
+//         `${baseUrl}/administration/catalog/learningobjects`,
+//         requestBody,
+//         {
+//           headers: {
+//             Accept: 'application/json',
+//             'Content-Type': 'application/json',
+//             'x-api-key': apiKey,
+//             Authorization: `Bearer ${awstoken}`
+//           }
+//         }
+//       );
 
-      // Vérification de la présence de données dans la réponse
-      const courses = ravenResponse.data?.data || [];
-      if (courses.length === 0) {
-        console.log('Aucun cours trouvé');
-        return res.json({
-          success: false,
-          message: 'No courses found in the API response'
-        });
-      }
+//       // Vérification de la présence de données dans la réponse
+//       const courses = ravenResponse.data?.data || [];
+//       if (courses.length === 0) {
+//         console.log('Aucun cours trouvé');
+//         return res.json({
+//           success: false,
+//           message: 'No courses found in the API response'
+//         });
+//       }
 
-      // Suppression des données existantes avant d'ajouter les nouvelles
-      await RavenCourse.destroyAll();
+//       // Suppression des données existantes avant d'ajouter les nouvelles
+//       await RavenCourse.destroyAll();
 
-      // Insertion des nouveaux cours
-      const savedCourses = await Promise.all(
-        courses.map(async course => {
-          const courseData = {
-            learningobjectid: course.learningobject_id,
-            name: course.name,
-            display_name: course.display_name,
-            description: course.description,
-            launch_url: course.launch_url,
-            short_description: course.short_description,
-            duration: course.duration,
-            createddate: course.created_date,
-            last_modified_date: course.last_modified_date,
-            updateddate: course.updated_date,
-            content_type: course.content_type,
-            long_description: course.long_description,
-            skill_level: course.skill_level,
-            category: course.category
-          };
+//       // Insertion des nouveaux cours
+//       const savedCourses = await Promise.all(
+//         courses.map(async course => {
+//           const courseData = {
+//             learningobjectid: course.learningobject_id,
+//             name: course.name,
+//             display_name: course.display_name,
+//             description: course.description,
+//             launch_url: course.launch_url,
+//             short_description: course.short_description,
+//             duration: course.duration,
+//             createddate: course.created_date,
+//             last_modified_date: course.last_modified_date,
+//             updateddate: course.updated_date,
+//             content_type: course.content_type,
+//             long_description: course.long_description,
+//             skill_level: course.skill_level,
+//             category: course.category
+//           };
 
-          return RavenCourse.create(courseData);
-        })
-      );
+//           return RavenCourse.create(courseData);
+//         })
+//       );
 
-      console.log(`${savedCourses.length} cours sauvegardés avec succès`);
+//       console.log(`${savedCourses.length} cours sauvegardés avec succès`);
 
-      // Conversion des données sauvegardées en JSON
-      const data = savedCourses.map(course => course.toJSON());
-      return res.json({
-        success: true,
-        message: 'Courses saved successfully',
-        coursesCount: savedCourses.length,
-        courses: data
-      });
-    } catch (error) {
-      console.error('Error saving Raven courses to DB:', error.message);
-      return res.status(500).json({
-        success: false,
-        message: 'Error saving courses to database',
-        error: error.message
-      });
-    }
-  };
-}
+//       // Conversion des données sauvegardées en JSON
+//       const data = savedCourses.map(course => course.toJSON());
+//       return res.json({
+//         success: true,
+//         message: 'Courses saved successfully',
+//         coursesCount: savedCourses.length,
+//         courses: data
+//       });
+//     } catch (error) {
+//       console.error('Error saving Raven courses to DB:', error.message);
+//       return res.status(500).json({
+//         success: false,
+//         message: 'Error saving courses to database',
+//         error: error.message
+//       });
+//     }
+//   };
+// }
 
 function getUnlinkSocial(req, res, next) {
   const { user } = req;
