@@ -620,7 +620,6 @@ export async function getAwsPath() {
 
   try {
     response = await get(`/get-raven-path`);
-    console.log(response);
   } catch (error) {
     response = null;
   }
