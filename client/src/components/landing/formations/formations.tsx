@@ -97,8 +97,12 @@ function Formations() {
 
   const AllPopularCourses = [
     ...popularCourses,
-    ...(ravenCourses?.splice(0, 2) || []), // Prend les deux premiers RavenCourse
-    ...(moodleCourses?.result ? moodleCourses.result.flat().splice(2, 2) : [])
+    ...(ravenCourses?.splice(Math.floor(Math.random() * 100), 2) || []), // Prend les deux premiers RavenCourse
+    ...(moodleCourses?.result
+      ? moodleCourses.result
+          .flat()
+          .splice(Math.floor(Math.random() * (0 - 6) + 5), 2)
+      : [])
   ];
 
   useEffect(() => {
