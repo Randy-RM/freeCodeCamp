@@ -37,7 +37,7 @@ import {
 import { User } from '../redux/prop-types';
 import {
   dataForprogramation,
-  getAwsPath,
+  getDataFromDb,
   getExternalResource,
   getMoodleCourses,
   getRavenPathResources,
@@ -255,10 +255,13 @@ export function Courses(props: CoursesProps): JSX.Element {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const pathRavenCourses =
+          (await getDataFromDb()) as unknown as RavenCourse[];
+        setGetAllRavenData(pathRavenCourses);
         // Si pas de données stockées, on fait les appels API pour récupérer les données
         const [moodleData, ravenData, ravenPathData] = await Promise.all([
           getMoodleCourses(),
-          getAwsPath(),
+          getDataFromDb(),
           getRavenPathResources()
         ]);
 
@@ -273,7 +276,7 @@ export function Courses(props: CoursesProps): JSX.Element {
             ...((ravenData as unknown as RavenCourse[]) || []),
             ...(ravenPathData || [])
           ];
-          setGetAllRavenData(unifiedRavenData as RavenCourse[]);
+          setGetAllRavenData(unifiedRavenData);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
