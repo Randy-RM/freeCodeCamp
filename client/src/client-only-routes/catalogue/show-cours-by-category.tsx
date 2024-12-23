@@ -197,7 +197,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
       const filteredCourses = manyCategoryFilter();
       setCoursesData(filteredCourses);
       setRessourceDatas(filteredCourses);
-      setIsDataOnLoading(false);
     } catch (error) {
       console.error('Erreur lors de la récupération des données:', error);
     }
