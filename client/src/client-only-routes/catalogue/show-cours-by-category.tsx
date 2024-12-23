@@ -18,7 +18,7 @@ import awsLogo from '../../assets/images/aws-logo.png';
 
 import {
   dataForprogramation,
-  getAwsPath,
+  getDataFromDb,
   getMoodleCourses,
   ProgramationCourses
 } from '../../utils/ajax';
@@ -226,9 +226,12 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const pathRavenCourses =
+          (await getDataFromDb()) as unknown as RavenCourse[];
+        setGetAllRavenData(pathRavenCourses);
         const [moodleData, ravenData] = await Promise.all([
           getMoodleCourses(),
-          getAwsPath()
+          getDataFromDb()
         ]);
 
         if (moodleData) {
