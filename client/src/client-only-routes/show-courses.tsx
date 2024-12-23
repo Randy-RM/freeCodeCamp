@@ -57,7 +57,6 @@ import {
   categoryCours,
   centraliseRavenData,
   coursesMoodle,
-  coursesRaven,
   myDataMoodle,
   pathRaven,
   valueOfCurrentCategory
@@ -208,9 +207,7 @@ export function Courses(props: CoursesProps): JSX.Element {
   const [dataForAllCourses, setDataForallCourse] =
     useRecoilState<UnifiedCourse[]>(allDataCourses);
   const allDataofCourses = useRecoilValue(allDataCourses);
-  const [dataRaven, setDataRaven] = useRecoilState<
-    RavenCourse[] | null | undefined
-  >(coursesRaven);
+  const setDataRaven = useSetRecoilState<RavenCourse[]>(centraliseRavenData);
   const setDataRavenPath = useSetRecoilState<RavenCourse[]>(pathRaven);
   const setDataMoodle = useSetRecoilState<
     MoodleCoursesCatalogue | null | undefined
@@ -308,15 +305,6 @@ export function Courses(props: CoursesProps): JSX.Element {
   };
 
   useEffect(() => {
-    void getMoodleCourseCategory().then(() => {
-      if (dataRaven?.length === 0) {
-        setIsDataOnLoading(false);
-      }
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     setDataForallCourse(allCourses);
   }, [allCourses, dataForAllCourses, setDataForallCourse]);
 
@@ -337,11 +325,6 @@ export function Courses(props: CoursesProps): JSX.Element {
 
   useEffect(() => {
     void getMoodleCourseCategory();
-
-    dataRaven?.length == 0
-      ? setIsDataOnLoading(false)
-      : setIsDataOnLoading(false);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -420,7 +403,10 @@ export function Courses(props: CoursesProps): JSX.Element {
                 <div className='course__number'>
                   <p>Parcourir le catalogue complet</p>
                   <span>
-                    {paginatedData.length > 0 ? paginatedData.length : ''} cours
+                    {paginatedData.length > 0 || !isDataOnLoading
+                      ? paginatedData.length
+                      : '...'}{' '}
+                    cours
                   </span>
                 </div>
 
