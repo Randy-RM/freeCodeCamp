@@ -599,7 +599,7 @@ export const getRavenResources = async () => {
   return getReveanCourses;
 };
 export const getRavenPathResources = async () => {
-  const getReveanPathCourses = await getAwsPath();
+  const getReveanPathCourses = await getDataFromDb();
   return getReveanPathCourses;
 };
 
@@ -615,70 +615,70 @@ export async function getAwsCourses() {
 
   return [];
 }
-export async function getAwsPath() {
-  let response: unknown | RavenCourse[];
+// export async function getAwsPath() {
+//   let response: unknown | RavenCourse[];
 
-  try {
-    response = await get(`/get-raven-path`);
-  } catch (error) {
-    response = null;
-  }
-  // return response;
-  //cette partie permet notamment de filtrer les parcours pour ne retenir que ceux en français où en anglais.
-  if (response) {
-    interface Tag {
-      title: string;
-    }
+//   try {
+//     response = await get(`/get-raven-path`);
+//   } catch (error) {
+//     response = null;
+//   }
+//   // return response;
+//   //cette partie permet notamment de filtrer les parcours pour ne retenir que ceux en français où en anglais.
+//   if (response) {
+//     interface Tag {
+//       title: string;
+//     }
 
-    interface Category {
-      tags?: Tag[];
-      title: string;
-    }
+//     interface Category {
+//       tags?: Tag[];
+//       title: string;
+//     }
 
-    interface Course {
-      category?: Category[];
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      skill_level: string;
-      language: string;
-    }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const filterCourses = (response: unknown): Course[] => {
-      const courses = response as Course[];
+//     interface Course {
+//       category?: Category[];
+//       // eslint-disable-next-line @typescript-eslint/naming-convention
+//       skill_level: string;
+//       language: string;
+//     }
+//     // eslint-disable-next-line @typescript-eslint/no-unused-vars
+//     const filterCourses = (response: unknown): Course[] => {
+//       const courses = response as Course[];
 
-      const coursesFilter = courses
-        .filter(
-          course =>
-            course.category &&
-            course.category.some(
-              cat =>
-                cat.tags &&
-                cat.tags.some(
-                  tag =>
-                    tag.title.includes('English') ||
-                    tag.title.includes('French')
-                )
-            )
-        )
-        .map(course => {
-          // Extraire le skill level
-          const skillLevelCategory = course.category?.find(
-            cat => cat.title === 'Skill Level'
-          );
-          if (skillLevelCategory && skillLevelCategory.tags) {
-            course.skill_level = skillLevelCategory.tags[0]?.title;
-          }
-          return course;
-        });
+//       const coursesFilter = courses
+//         .filter(
+//           course =>
+//             course.category &&
+//             course.category.some(
+//               cat =>
+//                 cat.tags &&
+//                 cat.tags.some(
+//                   tag =>
+//                     tag.title.includes('English') ||
+//                     tag.title.includes('French')
+//                 )
+//             )
+//         )
+//         .map(course => {
+//           // Extraire le skill level
+//           const skillLevelCategory = course.category?.find(
+//             cat => cat.title === 'Skill Level'
+//           );
+//           if (skillLevelCategory && skillLevelCategory.tags) {
+//             course.skill_level = skillLevelCategory.tags[0]?.title;
+//           }
+//           return course;
+//         });
 
-      return coursesFilter;
-    };
+//       return coursesFilter;
+//     };
 
-    const filteredCourses = filterCourses(response);
-    return filteredCourses;
-  }
+//     const filteredCourses = filterCourses(response);
+//     return filteredCourses;
+//   }
 
-  return [];
-}
+//   return [];
+// }
 
 //fonction permettant la combinaison de tous les cours notamment moodle et raven
 export const getAllRessources = async (): Promise<CombinedCourses[]> => {
