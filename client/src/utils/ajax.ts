@@ -816,49 +816,36 @@ export async function getAwsUserCoursesProgress(
 //     console.error("Erreur lors de l'enregistrement des données", error);
 //   }
 // }
+interface ResponseRaven {
+  success: boolean;
+  data: [];
+  error: string;
+}
 
-// export async function getDataFromDb() {
-//   try {
-//     const jwtToken = getCookie('jwt_access_token');
-//     if (!jwtToken) {
-//       console.error("Le JWT n'est pas disponible dans les cookies");
-//       return;
-//     }
+export async function getDataFromDb() {
+  try {
+    const response = await get<ResponseRaven>(
+      '/get-kinshasa-digital-raven-courses'
+    );
 
-//     const csrfResponse = await fetch('http://localhost:3000/csrf-token', {
-//       credentials: 'include' // Important pour les cookies
-//     });
-//     const csrfData = (await csrfResponse.json()) as CsrfResponse;
-//     const { csrfToken } = csrfData;
+    if (!response.success) {
+      console.log('Error fetching courses:', response.error);
+    }
+    const courses = response.data as RavenCourse[];
 
-//     // Vérifier si le token CSRF est valide
-//     if (!csrfToken) {
-//       console.error('Token CSRF introuvable');
-//       return;
-//     }
-
-//     const response = await fetch('/get-kinshasa-digital-raven-courses', {
-//       method: 'GET',
-//       credentials: 'include', // Important pour les cookies
-//       headers: {
-//         // eslint-disable-next-line @typescript-eslint/naming-convention
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${jwtToken}`,
-//         // eslint-disable-next-line @typescript-eslint/naming-convention
-//         'CSRF-Token': csrfToken // Ajouter le token CSRF
-//       }
-//     });
-//     if (!response.ok) {
-//       console.error('Erreur lors de la récupération des données');
-//       return;
-//     }
-//     const courses = await response.json();
-//     console.log('response', courses);
-//     return courses;
-//   } catch (error) {
-//     console.error('Erreur lors de la récupération des données', error);
-//   }
-// }
+    const coursesFilterByLanguage = courses.filter(course => {
+      return course.category?.some(cat =>
+        cat.tags?.some(
+          tag => tag.title.match(/English/) || tag.title.match(/French/)
+        )
+      );
+    });
+    return coursesFilterByLanguage;
+  } catch (error) {
+    console.error('Error fetching courses:', error);
+    throw error;
+  }
+}
 
 //Elle finit ici
 
