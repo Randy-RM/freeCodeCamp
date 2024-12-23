@@ -7,7 +7,7 @@ import {
   RavenCourse
 } from '../../../client-only-routes/show-courses';
 import {
-  getAwsPath,
+  getDataFromDb,
   getExternalResource,
   getMoodleCourses,
   getRavenPathResources,
@@ -111,7 +111,7 @@ const CoursesFilterSection = ({
   };
   const getRavenResources = async () => {
     setIsDataOnLoading(true);
-    const getReveanCourses = await getAwsPath();
+    const getReveanCourses = await getDataFromDb();
     setRavenCourses(getReveanCourses as unknown as RavenCourse[]);
     setIsDataOnLoading(false);
   };
@@ -121,7 +121,7 @@ const CoursesFilterSection = ({
       try {
         const [moodleData, ravenData] = await Promise.all([
           getMoodleCourses(),
-          getAwsPath(),
+          getDataFromDb(),
           getRavenPathResources()
         ]);
 
@@ -142,6 +142,7 @@ const CoursesFilterSection = ({
         setIsDataOnLoading(false);
       }
     };
+    void getDataFromDb();
 
     void fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
