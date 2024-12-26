@@ -615,70 +615,70 @@ export async function getAwsCourses() {
 
   return [];
 }
-// export async function getAwsPath() {
-//   let response: unknown | RavenCourse[];
+export async function getAwsPath() {
+  let response: unknown | RavenCourse[];
 
-//   try {
-//     response = await get(`/get-raven-path`);
-//   } catch (error) {
-//     response = null;
-//   }
-//   // return response;
-//   //cette partie permet notamment de filtrer les parcours pour ne retenir que ceux en français où en anglais.
-//   if (response) {
-//     interface Tag {
-//       title: string;
-//     }
+  try {
+    response = await get(`/get-raven-path`);
+  } catch (error) {
+    response = null;
+  }
+  // return response;
+  //cette partie permet notamment de filtrer les parcours pour ne retenir que ceux en français où en anglais.
+  if (response) {
+    interface Tag {
+      title: string;
+    }
 
-//     interface Category {
-//       tags?: Tag[];
-//       title: string;
-//     }
+    interface Category {
+      tags?: Tag[];
+      title: string;
+    }
 
-//     interface Course {
-//       category?: Category[];
-//       // eslint-disable-next-line @typescript-eslint/naming-convention
-//       skill_level: string;
-//       language: string;
-//     }
-//     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-//     const filterCourses = (response: unknown): Course[] => {
-//       const courses = response as Course[];
+    interface Course {
+      category?: Category[];
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      skill_level: string;
+      language: string;
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const filterCourses = (response: unknown): Course[] => {
+      const courses = response as Course[];
 
-//       const coursesFilter = courses
-//         .filter(
-//           course =>
-//             course.category &&
-//             course.category.some(
-//               cat =>
-//                 cat.tags &&
-//                 cat.tags.some(
-//                   tag =>
-//                     tag.title.includes('English') ||
-//                     tag.title.includes('French')
-//                 )
-//             )
-//         )
-//         .map(course => {
-//           // Extraire le skill level
-//           const skillLevelCategory = course.category?.find(
-//             cat => cat.title === 'Skill Level'
-//           );
-//           if (skillLevelCategory && skillLevelCategory.tags) {
-//             course.skill_level = skillLevelCategory.tags[0]?.title;
-//           }
-//           return course;
-//         });
+      const coursesFilter = courses
+        .filter(
+          course =>
+            course.category &&
+            course.category.some(
+              cat =>
+                cat.tags &&
+                cat.tags.some(
+                  tag =>
+                    tag.title.includes('English') ||
+                    tag.title.includes('French')
+                )
+            )
+        )
+        .map(course => {
+          // Extraire le skill level
+          const skillLevelCategory = course.category?.find(
+            cat => cat.title === 'Skill Level'
+          );
+          if (skillLevelCategory && skillLevelCategory.tags) {
+            course.skill_level = skillLevelCategory.tags[0]?.title;
+          }
+          return course;
+        });
 
-//       return coursesFilter;
-//     };
+      return coursesFilter;
+    };
 
-//     const filteredCourses = filterCourses(response);
-//     return filteredCourses;
-//   }
+    const filteredCourses = filterCourses(response);
+    return filteredCourses;
+  }
 
-//   return [];
-// }
+  return [];
+}
 
 //fonction permettant la combinaison de tous les cours notamment moodle et raven
 export const getAllRessources = async (): Promise<CombinedCourses[]> => {
@@ -715,107 +715,107 @@ export async function getAwsUserCoursesProgress(
 //il y'a encore les érreurs qui reviennes, du coup il m'est judicieux de
 // mettre en commentaire pour eviter des erreur en production
 
-// function getCookie(name: string): string | undefined {
-//   const value = `; ${document.cookie}`;
-//   const parts = value.split(`; ${name}=`);
+function getCookie(name: string): string | undefined {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
 
-//   if (parts.length === 2) {
-//     let token = parts.pop()?.split(';').shift() ?? undefined;
-//     if (token) {
-//       // Nettoyer le token en retirant 's%3A' si présent
-//       token = token.replace('s%3A', '');
-//       // Prendre seulement les trois premières parties du JWT
-//       const tokenParts = token.split('.');
-//       token = tokenParts.slice(0, 3).join('.');
-//     }
-//     return token;
-//   }
+  if (parts.length === 2) {
+    let token = parts.pop()?.split(';').shift() ?? undefined;
+    if (token) {
+      // Nettoyer le token en retirant 's%3A' si présent
+      token = token.replace('s%3A', '');
+      // Prendre seulement les trois premières parties du JWT
+      const tokenParts = token.split('.');
+      token = tokenParts.slice(0, 3).join('.');
+    }
+    return token;
+  }
 
-//   return undefined;
-// }
+  return undefined;
+}
 
-// interface CsrfResponse {
-//   csrfToken: string;
-// }
+interface CsrfResponse {
+  csrfToken: string;
+}
 
-// interface ResponseRaven {
-//   success: boolean;
-//   message: string;
-//   coursesCount: number;
-//   coourses?: RavenCourse[];
-// }
+interface ResponseRaven {
+  success: boolean;
+  message: string;
+  coursesCount: number;
+  coourses?: RavenCourse[];
+}
 
-// export async function saveDataOnDb() {
-//   const jwtToken = getCookie('jwt_access_token');
-//   if (!jwtToken) {
-//     console.error("Le JWT n'est pas disponible dans les cookies");
-//     return;
-//   }
-//   try {
-//     const token = (await getRavenToken()) as RavenTokenData;
-//     const fromDate = '01-01-2023';
-//     const toDate = '11-11-2024';
+export async function saveDataOnDb() {
+  const jwtToken = getCookie('jwt_access_token');
+  if (!jwtToken) {
+    console.error("Le JWT n'est pas disponible dans les cookies");
+    return;
+  }
+  try {
+    const token = (await getRavenToken()) as RavenTokenData;
+    const fromDate = '01-01-2023';
+    const toDate = '11-11-2024';
 
-//     if (token.token && jwtToken) {
-//       // Première étape : récupérer le token CSRF
-//       const csrfResponse = await fetch('http://localhost:3000/csrf-token', {
-//         credentials: 'include' // Important pour les cookies
-//       });
-//       const csrfData = (await csrfResponse.json()) as CsrfResponse;
-//       const { csrfToken } = csrfData;
+    if (token.token && jwtToken) {
+      // Première étape : récupérer le token CSRF
+      const csrfResponse = await fetch('http://localhost:3000/csrf-token', {
+        credentials: 'include' // Important pour les cookies
+      });
+      const csrfData = (await csrfResponse.json()) as CsrfResponse;
+      const { csrfToken } = csrfData;
 
-//       // Vérifier si le token CSRF est valide
-//       if (!csrfToken) {
-//         console.error('Token CSRF introuvable');
-//         return;
-//       }
+      // Vérifier si le token CSRF est valide
+      if (!csrfToken) {
+        console.error('Token CSRF introuvable');
+        return;
+      }
 
-//       const jwtToken = getCookie('jwt_access_token');
-//       if (!jwtToken) {
-//         console.error("Le JWT n'est pas disponible dans les cookies");
-//         return;
-//       }
+      const jwtToken = getCookie('jwt_access_token');
+      if (!jwtToken) {
+        console.error("Le JWT n'est pas disponible dans les cookies");
+        return;
+      }
 
-//       const response = await fetch(
-//         `http://localhost:3000/save-rave-courses?awstoken=${token.token}&fromdate=${fromDate}&todate=${toDate}`,
-//         {
-//           method: 'POST',
-//           credentials: 'include', // Important pour les cookies
-//           headers: {
-//             // eslint-disable-next-line @typescript-eslint/naming-convention
-//             'Content-Type': 'application/json',
-//             Authorization: `Bearer ${jwtToken}`,
-//             // eslint-disable-next-line @typescript-eslint/naming-convention
-//             'CSRF-Token': csrfToken // Ajouter le token CSRF
-//           },
-//           body: JSON.stringify({
-//             // eslint-disable-next-line @typescript-eslint/naming-convention
-//             from_date: fromDate,
-//             // eslint-disable-next-line @typescript-eslint/naming-convention
-//             to_date: toDate,
-//             _csrf: csrfToken // Inclure aussi dans le body
-//           })
-//         }
-//       );
+      const response = await fetch(
+        `http://localhost:3000/save-rave-courses?awstoken=${token.token}&fromdate=${fromDate}&todate=${toDate}`,
+        {
+          method: 'POST',
+          credentials: 'include', // Important pour les cookies
+          headers: {
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${jwtToken}`,
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            'CSRF-Token': csrfToken // Ajouter le token CSRF
+          },
+          body: JSON.stringify({
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            from_date: fromDate,
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            to_date: toDate,
+            _csrf: csrfToken // Inclure aussi dans le body
+          })
+        }
+      );
 
-//       if (response.ok) {
-//         const data = (await response.json()) as ResponseRaven;
-//         if (data.success) {
-//           console.log('Data saved successfully:', data);
-//         } else {
-//           console.error(
-//             "Erreur lors de l'enregistrement des données",
-//             data.message
-//           );
-//         }
-//       } else {
-//         console.error("Erreur lors de l'enregistrement des données");
-//       }
-//     }
-//   } catch (error) {
-//     console.error("Erreur lors de l'enregistrement des données", error);
-//   }
-// }
+      if (response.ok) {
+        const data = (await response.json()) as ResponseRaven;
+        if (data.success) {
+          console.log('Data saved successfully:', data);
+        } else {
+          console.error(
+            "Erreur lors de l'enregistrement des données",
+            data.message
+          );
+        }
+      } else {
+        console.error("Erreur lors de l'enregistrement des données");
+      }
+    }
+  } catch (error) {
+    console.error("Erreur lors de l'enregistrement des données", error);
+  }
+}
 interface ResponseRaven {
   success: boolean;
   data: [];
@@ -833,13 +833,27 @@ export async function getDataFromDb() {
     }
     const courses = response.data as RavenCourse[];
 
-    const coursesFilterByLanguage = courses.filter(course => {
-      return course.category?.some(cat =>
-        cat.tags?.some(
-          tag => tag.title.match(/English/) || tag.title.match(/French/)
-        )
-      );
-    });
+    const coursesFilterByLanguage = courses
+      .filter(course => {
+        return course.category?.some(cat =>
+          cat.tags?.some(
+            tag => tag.title.match(/English/) || tag.title.match(/French/)
+          )
+        );
+      })
+      .map(course => {
+        // Extraire le skill level
+        const skillLevelCategory = course.category?.find(cat =>
+          cat.tags?.find(tag => tag.title === 'Skill Level')
+        );
+
+        if (skillLevelCategory && skillLevelCategory.tags?.[0].title) {
+          course.skill_level = skillLevelCategory.tags[0].title;
+        }
+
+        return course;
+      });
+
     return coursesFilterByLanguage;
   } catch (error) {
     console.error('Error fetching courses:', error);
