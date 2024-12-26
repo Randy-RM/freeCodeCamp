@@ -18,6 +18,7 @@ import awsLogo from '../../assets/images/aws-logo.png';
 
 import {
   dataForprogramation,
+  getAwsPath,
   getDataFromDb,
   getMoodleCourses,
   ProgramationCourses
@@ -114,7 +115,9 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const fetchCourses = useCallback(() => {
     try {
       setIsDataOnLoading(true);
-      const filteredRavenCourses = ravenState;
+      const ravenDataWhenEmptyDb = getAwsPath() as unknown as RavenCourse[];
+      const filteredRavenCourses =
+        ravenState.length > 0 ? ravenState : ravenDataWhenEmptyDb;
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       const filteredMoodleCourses = moodleState;
       setProgrammationState(dataForprogramation);
@@ -227,7 +230,14 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
       try {
         const pathRavenCourses =
           (await getDataFromDb()) as unknown as RavenCourse[];
-        setGetAllRavenData(pathRavenCourses);
+
+        const ravenDataWhenEmptyDb =
+          (await getAwsPath()) as unknown as RavenCourse[];
+        if (pathRavenCourses.length > 0) {
+          setGetAllRavenData(pathRavenCourses);
+        } else {
+          setGetAllRavenData(ravenDataWhenEmptyDb);
+        }
         const [moodleData, ravenData] = await Promise.all([
           getMoodleCourses(),
           getDataFromDb()
