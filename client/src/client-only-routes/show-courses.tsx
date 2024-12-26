@@ -37,10 +37,10 @@ import {
 import { User } from '../redux/prop-types';
 import {
   dataForprogramation,
+  getAwsPath,
   getDataFromDb,
   getExternalResource,
   getMoodleCourses,
-  getRavenPathResources,
   ProgramationCourses
 } from '../utils/ajax';
 import {
@@ -254,12 +254,18 @@ export function Courses(props: CoursesProps): JSX.Element {
       try {
         const pathRavenCourses =
           (await getDataFromDb()) as unknown as RavenCourse[];
-        setGetAllRavenData(pathRavenCourses);
+        const ravenDataWhenEmptyDb =
+          (await getAwsPath()) as unknown as RavenCourse[];
+        if (pathRavenCourses.length > 0) {
+          setGetAllRavenData(pathRavenCourses);
+        } else {
+          setGetAllRavenData(ravenDataWhenEmptyDb);
+        }
         // Si pas de données stockées, on fait les appels API pour récupérer les données
         const [moodleData, ravenData, ravenPathData] = await Promise.all([
           getMoodleCourses(),
           getDataFromDb(),
-          getRavenPathResources()
+          getAwsPath()
         ]);
 
         setProgramamationState(dataForprogramation);
@@ -271,7 +277,7 @@ export function Courses(props: CoursesProps): JSX.Element {
         if (ravenData || ravenPathData) {
           const unifiedRavenData = [
             ...((ravenData as unknown as RavenCourse[]) || []),
-            ...(ravenPathData || [])
+            ...((ravenPathData as unknown as RavenCourse[]) || [])
           ];
           setGetAllRavenData(unifiedRavenData);
         }
