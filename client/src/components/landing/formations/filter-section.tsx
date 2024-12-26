@@ -7,6 +7,7 @@ import {
   RavenCourse
 } from '../../../client-only-routes/show-courses';
 import {
+  getAwsPath,
   getDataFromDb,
   getExternalResource,
   getMoodleCourses,
@@ -112,7 +113,12 @@ const CoursesFilterSection = ({
   const getRavenResources = async () => {
     setIsDataOnLoading(true);
     const getReveanCourses = await getDataFromDb();
-    setRavenCourses(getReveanCourses as unknown as RavenCourse[]);
+    const ravenDataWhenEmptyDb = await getAwsPath();
+    setRavenCourses(
+      getReveanCourses.length > 0
+        ? (getReveanCourses as unknown as RavenCourse[])
+        : (ravenDataWhenEmptyDb as unknown as RavenCourse[])
+    );
     setIsDataOnLoading(false);
   };
 
@@ -121,7 +127,13 @@ const CoursesFilterSection = ({
       try {
         const pathRavenCourses =
           (await getDataFromDb()) as unknown as RavenCourse[];
-        setGetAllRavenData(pathRavenCourses);
+        const ravenDataWhenEmptyDb =
+          (await getAwsPath()) as unknown as RavenCourse[];
+        if (pathRavenCourses.length > 0) {
+          setGetAllRavenData(pathRavenCourses);
+        } else {
+          setGetAllRavenData(ravenDataWhenEmptyDb);
+        }
         const [moodleData, ravenData] = await Promise.all([
           getMoodleCourses(),
           getDataFromDb(),
