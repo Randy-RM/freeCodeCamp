@@ -131,6 +131,7 @@ export type RavenCourse = {
   category?: Category[];
   // eslint-disable-next-line @typescript-eslint/naming-convention
   skill_level: string;
+  roles: string;
 };
 
 type Tag = {

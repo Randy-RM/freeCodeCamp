@@ -851,8 +851,13 @@ export async function getDataFromDb() {
         enhancedCourse.skill_level =
           skillLevelCategory?.tags?.[0]?.title || 'Fundamental';
 
+        const domain = course.category?.[1]?.tags?.[0]?.title || '';
+        enhancedCourse.roles = domain;
+
         return enhancedCourse;
       });
+    console.log(coursesFilterByLanguage);
+
     return coursesFilterByLanguage;
   } catch (error) {
     console.error('Error fetching courses:', error);

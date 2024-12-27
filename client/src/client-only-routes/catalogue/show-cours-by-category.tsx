@@ -1,20 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Grid } from '@freecodecamp/react-bootstrap';
-import {
-  faChevronLeft,
-  faChevronRight
-} from '@fortawesome/free-solid-svg-icons';
 import { Helmet } from 'react-helmet';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 // import LaptopIcon from '../../assets/images/laptop.svg';
 import { useLocation } from '@reach/router';
-import AlgoIcon from '../../assets/images/algorithmIcon.svg';
-import PhBookBookmark from '../../assets/images/ph-book-bookmark-thin.svg';
-import LaediesActIcon from '../../assets/images/partners/we-act-logo.png';
-import awsLogo from '../../assets/images/aws-logo.png';
 
 import {
   dataForprogramation,
@@ -29,17 +20,8 @@ import {
   Spacer
 } from '../../components/helpers';
 import CourseFilter from '../../components/CourseFilter/course-filter';
-import CourseCard from '../../components/CourseCard/course-card';
-import PathCard from '../../components/PathCard/path-card';
-import {
-  convertTime,
-  convertTimestampToTime,
-  formatDescription,
-  getCategoryDescription,
-  paginate
-} from '../../utils/allFunctions';
+import { getCategoryDescription, paginate } from '../../utils/allFunctions';
 import { CoursesProps, MoodleCourse, RavenCourse } from '../show-courses';
-import envData from '../../../../config/env.json';
 import {
   isSignedInSelector,
   signInLoadingSelector,
@@ -61,7 +43,9 @@ import {
 } from '../../redux/atoms';
 
 import '../catalogue/show-courses-by-category.css';
-import { allQuery, filterLogics } from '../../utils/routes';
+import { filterLogics } from '../../utils/routes';
+import AllCourseByType from './all-course-by-type';
+import PaginationControls from './pagination';
 
 const mapStateToProps = createSelector(
   signInLoadingSelector,
@@ -78,6 +62,8 @@ const mapDispatchToProps = {
   createFlashMessage,
   navigate
 };
+
+type Course = RavenCourse | MoodleCourse | ProgramationCourses;
 
 function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const { showLoading } = props;
@@ -109,8 +95,6 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const location = useLocation();
   const valueOfUrl = location.pathname.split('/')[2].replace(/-/g, ' ');
 
-  const { moodleBaseUrl } = envData;
-
   //utilisation de useCallback afin de mémoriser la fonction et éviter de la recréer à chaque rendu mais seulement au changement des dépendances
   const fetchCourses = useCallback(() => {
     try {
@@ -135,6 +119,24 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         } else if (valueOfUrl == 'amazon web service') {
           courses = filteredRavenCourses;
           category = 'aws';
+        } else if (
+          valueOfUrl === 'intelligence artificielle' ||
+          valueOfUrl.includes('Intelligence%20 %20artificielle')
+        ) {
+          const moodleIACourses = filteredMoodleCourses?.result
+            .flatMap(course => course)
+            .filter(
+              course =>
+                // Filtrer les cours Moodle qui sont de type IA
+                course.categoryid == 14
+            ) as unknown as MoodleCourse[];
+
+          // const ravenIACourses = filteredRavenCourses.filter(course =>
+          //   // Utiliser la logique de domaine existante pour Raven
+          //   filterLogics.aws.domain(course, currentUrl)
+          // );
+          courses = [...moodleIACourses];
+          category = 'moodle';
         } else {
           courses = filteredMoodleCourses?.result
             .flatMap(
@@ -178,7 +180,8 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                 filterLogics.aws.language(course as RavenCourse, currentUrl) &&
                 filterLogics.aws.type(course as RavenCourse, currentUrl) &&
                 filterLogics.aws.level(course as RavenCourse, currentUrl) &&
-                filterLogics.aws.duration(course as RavenCourse, currentUrl)
+                filterLogics.aws.duration(course as RavenCourse, currentUrl) &&
+                filterLogics.aws.domain(course as RavenCourse, currentUrl)
             );
 
           case 'moodle':
@@ -198,6 +201,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
         }
       };
       const filteredCourses = manyCategoryFilter();
+
       setCoursesData(filteredCourses);
       setRessourceDatas(filteredCourses);
     } catch (error) {
@@ -406,131 +410,14 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                   {isDataOnLoading && paginatedData.length === 0 ? (
                     renderCourseCardSkeletons(6)
                   ) : paginatedData.length > 0 ? (
-                    paginatedData.map((course, index) => {
-                      if (
-                        valueOfUrl === 'programmation' ||
-                        valueOfUrl === 'amazon web service' ||
-                        valueOfUrl === 'intelligence artificielle' ||
-                        valueOfUrl.includes(
-                          'Intelligence%20 %20artificielle'
-                        ) ||
-                        valueOfUrl.toLocaleLowerCase() ===
-                          'marketing communication' ||
-                        valueOfUrl === 'Bureautique'
-                      ) {
-                        if (valueOfUrl === 'programmation') {
-                          const courseList = course as ProgramationCourses;
-                          if (courseList.title) {
-                            return (
-                              <CourseCard
-                                key={index}
-                                level={courseList.level}
-                                language={courseList.language}
-                                icon={
-                                  courseList.sponsorIcon === 'AlgoIcon'
-                                    ? AlgoIcon
-                                    : LaediesActIcon
-                                }
-                                alt={courseList.alt}
-                                isAvailable={courseList.isAvailable}
-                                title={courseList.title}
-                                buttonText='Suivre le cours'
-                                link={courseList.link}
-                                description={courseList.description}
-                              />
-                            );
-                          }
-                        }
-
-                        if (valueOfUrl === 'amazon web service') {
-                          const courseTyped = course as RavenCourse;
-                          const firstCategory = courseTyped.category?.[0];
-                          const language =
-                            firstCategory?.tags?.[0]?.title || 'Unknown';
-
-                          if (courseTyped.long_description) {
-                            return (
-                              <PathCard
-                                key={courseTyped.name}
-                                language={language}
-                                icon={awsLogo}
-                                isAvailable={true}
-                                title={`${index + 1}. ${courseTyped.name}`}
-                                buttonText='Suivre le parcours'
-                                link={courseTyped.launch_url}
-                                description={formatDescription(
-                                  courseTyped.long_description
-                                )}
-                                duration={convertTime(courseTyped.duration)}
-                                level={
-                                  courseTyped.skill_level === 'Fundamental'
-                                    ? allQuery.value.level.debutant
-                                    : ''
-                                }
-                              />
-                            );
-                          } else {
-                            return (
-                              <CourseCard
-                                key={index.toString()}
-                                level={
-                                  courseTyped.skill_level === 'Fundamental'
-                                    ? allQuery.value.level.debutant
-                                    : ''
-                                }
-                                language={language}
-                                icon={awsLogo}
-                                isAvailable={true}
-                                title={`${index + 1}. ${courseTyped.name}`}
-                                buttonText='Suivre le cours'
-                                link={courseTyped.launch_url}
-                                description={formatDescription(
-                                  courseTyped.short_description
-                                )}
-                                duration={convertTime(courseTyped.duration)}
-                              />
-                            );
-                          }
-                        } else {
-                          const courseTyped = course as MoodleCourse;
-                          const nowCategorie =
-                            valueOfUrl === 'Bureautique'
-                              ? 11
-                              : valueOfUrl.toLocaleLowerCase() ===
-                                'marketing communication'
-                              ? 13
-                              : valueOfUrl === 'intelligence artificielle' ||
-                                valueOfUrl.includes(
-                                  'Intelligence%20 %20artificielle'
-                                )
-                              ? 14
-                              : valueOfCurrentCategorie;
-                          if (courseTyped.categoryid == nowCategorie) {
-                            return (
-                              <CourseCard
-                                key={`${index}-${courseTyped.id}`}
-                                language={courseTyped.langue}
-                                level={courseTyped.level}
-                                icon={PhBookBookmark}
-                                isAvailable={courseTyped.visible === 1}
-                                title={courseTyped.displayname}
-                                buttonText='Suivre le cours'
-                                link={`${moodleBaseUrl}/course/view.php?id=${courseTyped.id}`}
-                                description={courseTyped.summary}
-                                duration={convertTimestampToTime(
-                                  courseTyped.duration
-                                )}
-                              />
-                            );
-                          }
-                        }
-                      }
-                      return null;
-                    })
+                    <AllCourseByType
+                      courses={paginatedData as Course[]}
+                      valueOfUrl={valueOfUrl}
+                    />
                   ) : (
                     <div className=''>
                       <p className='no-cours'>
-                        Aucune correspondance exacte .
+                        Aucune correspondance exacte.
                         <div>
                           Modifiez ou supprimez certains de vos filtres ou
                           ajustez votre catégorie de recherche.
@@ -541,18 +428,11 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                 </div>
 
                 <div className='pagination-container'>
-                  <FontAwesomeIcon
-                    icon={faChevronLeft}
-                    className='pagination-chevron'
-                    onClick={() => onNavigueteBackward()}
-                  />
-                  <span className='pagination__number'>
-                    {currentPage}/{totalPages > 0 ? totalPages : 1}
-                  </span>
-                  <FontAwesomeIcon
-                    icon={faChevronRight}
-                    className='pagination-chevron'
-                    onClick={() => onNavigateForward()}
+                  <PaginationControls
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onNavigateForward={onNavigateForward}
+                    onNavigueteBackward={onNavigueteBackward}
                   />
                 </div>
                 <Spacer size={2} />
