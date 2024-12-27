@@ -43,9 +43,9 @@ import {
 } from '../../redux/atoms';
 
 import '../catalogue/show-courses-by-category.css';
-import { filterLogics } from '../../utils/routes';
 import AllCourseByType from './all-course-by-type';
 import PaginationControls from './pagination';
+import { manyCategoryFilter } from './useCategoryFilter';
 
 const mapStateToProps = createSelector(
   signInLoadingSelector,
@@ -107,100 +107,15 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
       setProgrammationState(dataForprogramation);
       const filterProgramationCourses = programmationState;
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      type CourseType = RavenCourse | MoodleCourse | ProgramationCourses;
 
-      const manyCategoryFilter = () => {
-        let courses: CourseType[] | undefined;
-        let category: 'programation' | 'aws' | 'moodle';
-
-        if (valueOfUrl == 'programmation') {
-          courses = filterProgramationCourses;
-          category = 'programation';
-        } else if (valueOfUrl == 'amazon web service') {
-          courses = filteredRavenCourses;
-          category = 'aws';
-        } else if (
-          valueOfUrl === 'intelligence artificielle' ||
-          valueOfUrl.includes('Intelligence%20 %20artificielle')
-        ) {
-          const moodleIACourses = filteredMoodleCourses?.result
-            .flatMap(course => course)
-            .filter(
-              course =>
-                // Filtrer les cours Moodle qui sont de type IA
-                course.categoryid == 14
-            ) as unknown as MoodleCourse[];
-
-          // const ravenIACourses = filteredRavenCourses.filter(course =>
-          //   // Utiliser la logique de domaine existante pour Raven
-          //   filterLogics.aws.domain(course, currentUrl)
-          // );
-          courses = [...moodleIACourses];
-          category = 'moodle';
-        } else {
-          courses = filteredMoodleCourses?.result
-            .flatMap(
-              /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-              course => course
-            )
-            .filter(
-              course => course.categoryid == valueOfCurrentCategorie
-            ) as unknown as MoodleCourse[];
-          category = 'moodle';
-        }
-
-        if (!courses) return [];
-
-        switch (category) {
-          case 'programation':
-            setRessourceDatas([]);
-            return courses.filter(
-              course =>
-                filterLogics.programation.language(
-                  course as ProgramationCourses,
-                  currentUrl
-                ) &&
-                filterLogics.programation.type(
-                  course as ProgramationCourses,
-                  currentUrl
-                ) &&
-                filterLogics.programation.level(
-                  course as ProgramationCourses,
-                  currentUrl
-                ) &&
-                filterLogics.programation.duration(
-                  course as ProgramationCourses,
-                  currentUrl
-                )
-            );
-
-          case 'aws':
-            return courses.filter(
-              course =>
-                filterLogics.aws.language(course as RavenCourse, currentUrl) &&
-                filterLogics.aws.type(course as RavenCourse, currentUrl) &&
-                filterLogics.aws.level(course as RavenCourse, currentUrl) &&
-                filterLogics.aws.duration(course as RavenCourse, currentUrl) &&
-                filterLogics.aws.domain(course as RavenCourse, currentUrl)
-            );
-
-          case 'moodle':
-            return courses.filter(
-              course =>
-                filterLogics.moodle.language(
-                  course as MoodleCourse,
-                  currentUrl
-                ) &&
-                filterLogics.moodle.type(course as MoodleCourse, currentUrl) &&
-                filterLogics.moodle.level(course as MoodleCourse, currentUrl) &&
-                filterLogics.moodle.duration(course as MoodleCourse, currentUrl)
-            );
-
-          default:
-            return [];
-        }
-      };
-      const filteredCourses = manyCategoryFilter();
+      const filteredCourses = manyCategoryFilter(
+        valueOfUrl,
+        filteredRavenCourses,
+        filteredMoodleCourses,
+        filterProgramationCourses,
+        currentUrl,
+        valueOfCurrentCategorie
+      );
 
       setCoursesData(filteredCourses);
       setRessourceDatas(filteredCourses);
