@@ -249,7 +249,7 @@ const filterLogics = {
     },
     domain: (course: RavenCourse, currentUrl: string) => {
       const filterForAI =
-        currentUrl.includes('Intelligence%20-%20artificielle') ||
+        currentUrl.includes('intelligence artificielle') ||
         currentUrl.includes('Intelligence%20 %20artificielle');
       // const filterForMarketing = currentUrl.includes('marketing communication') || currentUrl.includes('Marketing-Communication');
       // const filterForBureautique = currentUrl.includes('bureautique') || currentUrl.includes('Bureautique');
