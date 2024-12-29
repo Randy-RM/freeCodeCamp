@@ -105,8 +105,8 @@ const CourseList: React.FC<CourseListProps> = ({ courses, valueOfUrl }) => {
               }
             }
             if (valueOfUrl === 'Intelligence%20 %20artificielle') {
-              if (course as MoodleCourse) {
-                const courseTyped = course as MoodleCourse;
+              if ('visible' in course) {
+                const courseTyped = course;
                 return (
                   <CourseCard
                     key={index}
