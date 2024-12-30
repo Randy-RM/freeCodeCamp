@@ -30,7 +30,7 @@ const SwhowIaCourses: React.FC<CourseListProps> = ({ courses, valueOfUrl }) => {
 
   if (!isIaCourse) return null;
   return (
-    <div className='card-course-detail-container'>
+    <>
       {courses.length === 0
         ? renderCourseCardSkeletons(6)
         : courses.map((course, index) => {
@@ -101,7 +101,7 @@ const SwhowIaCourses: React.FC<CourseListProps> = ({ courses, valueOfUrl }) => {
               }
             }
           })}
-    </div>
+    </>
   );
 };
 
