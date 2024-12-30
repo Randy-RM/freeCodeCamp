@@ -860,12 +860,6 @@ export async function getDataFromDb() {
         return enhancedCourse;
       });
 
-    console.log(
-      coursesFilterByLanguage.filter(course =>
-        course.roles.toLowerCase().includes('branding')
-      )
-    );
-
     return coursesFilterByLanguage;
   } catch (error) {
     console.error('Error fetching courses:', error);
