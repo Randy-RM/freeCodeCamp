@@ -29,13 +29,27 @@ export const manyCategoryFilter = (
     category = 'aws';
   } else if (
     valueOfUrl === 'intelligence artificielle' ||
-    valueOfUrl.includes('Intelligence%20%20artificielle')
+    valueOfUrl.includes('Intelligence%20 %20artificielle')
   ) {
+    const keyWordIa = [
+      'intelligence artificielle',
+      'data science',
+      'machine learning',
+      'deep learning',
+      'big data',
+      'data engineering',
+      'data analytics'
+    ];
+    const ravenIaCourses = filteredRavenCourses?.filter(course =>
+      keyWordIa.some(word => course.roles.toLowerCase().includes(word))
+    );
+
     const moodleIACourses = filteredMoodleCourses?.result
       .flatMap(course => course)
       .filter(course => course.categoryid === 14) as MoodleCourse[];
 
-    courses = [...moodleIACourses];
+    courses = [...moodleIACourses, ...ravenIaCourses];
+
     category = 'moodle';
   } else {
     // Vérification de l'existence de `filteredMoodleCourses`

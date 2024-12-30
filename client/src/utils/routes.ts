@@ -249,11 +249,20 @@ const filterLogics = {
     },
     domain: (course: RavenCourse, currentUrl: string) => {
       const filterForAI =
-        currentUrl.includes('Intelligence%20-%20artificielle') ||
+        currentUrl.includes('intelligence artificielle') ||
         currentUrl.includes('Intelligence%20 %20artificielle');
       // const filterForMarketing = currentUrl.includes('marketing communication') || currentUrl.includes('Marketing-Communication');
       // const filterForBureautique = currentUrl.includes('bureautique') || currentUrl.includes('Bureautique');
-      const domainIa = ['data analytics', 'machine learning', 'ia'];
+      const domainIa = [
+        'ia',
+        'intelligence artificielle',
+        'data science',
+        'machine learning',
+        'deep learning',
+        'big data',
+        'data engineering',
+        'data analytics'
+      ];
 
       const filterByDomainIA = domainIa.some(
         domain => domain.toLowerCase() === course.roles.toLowerCase()
