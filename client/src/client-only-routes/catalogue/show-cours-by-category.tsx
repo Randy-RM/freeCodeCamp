@@ -31,6 +31,7 @@ import {
 import { User } from '../../redux/prop-types';
 import { createFlashMessage } from '../../components/Flash/redux';
 import {
+  allDataCourses,
   categoryCounter,
   categoryCours,
   centraliseRavenData,
@@ -90,6 +91,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
   const [programmationState, setProgrammationState] = useState<
     ProgramationCourses[]
   >([]);
+  const setAllDataOfCourses = useSetRecoilState(allDataCourses);
 
   const currentUrl = window.location.href;
   const location = useLocation();
@@ -106,6 +108,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
       const filteredMoodleCourses = moodleState;
       setProgrammationState(dataForprogramation);
       const filterProgramationCourses = programmationState;
+      setAllDataOfCourses(filterProgramationCourses);
       // eslint-disable-next-line @typescript-eslint/naming-convention
 
       const filteredCourses = manyCategoryFilter(
@@ -129,7 +132,8 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
     programmationState,
     currentUrl,
     valueOfCurrentCategorie,
-    setRessourceDatas
+    setRessourceDatas,
+    setAllDataOfCourses
   ]);
 
   useEffect(() => {
@@ -164,6 +168,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
 
         if (moodleData) {
           setGetAllDataMoodle(moodleData);
+          setAllDataOfCourses(moodleData as unknown as Course[]);
         }
 
         if (ravenData) {
@@ -171,6 +176,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
             ...((ravenData as unknown as RavenCourse[]) || [])
           ];
           setGetAllRavenData(unifiedRavenData);
+          setAllDataOfCourses(unifiedRavenData);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
