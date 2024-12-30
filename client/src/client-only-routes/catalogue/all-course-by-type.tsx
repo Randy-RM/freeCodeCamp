@@ -24,14 +24,12 @@ const CourseList: React.FC<CourseListProps> = ({ courses, valueOfUrl }) => {
 
   // Gestion des cours de Programmation
   if (valueOfUrl === 'programmation') {
-    return (
-      <ShowProgrammationCourses courses={courses} valueOfUrl={valueOfUrl} />
-    );
+    return <ShowProgrammationCourses courses={courses} />;
   }
 
   // Gestion des cours Amazon Web Services (RavenCourses)
   if (valueOfUrl === 'amazon web service') {
-    return <ShowOnlyRavenCouses courses={courses} valueOfUrl={valueOfUrl} />;
+    return <ShowOnlyRavenCouses courses={courses} />;
   }
 
   // Gestion des cours Intelligence Artificielle
@@ -39,7 +37,7 @@ const CourseList: React.FC<CourseListProps> = ({ courses, valueOfUrl }) => {
     valueOfUrl === 'Intelligence%20 %20artificielle' ||
     valueOfUrl === 'intelligence artificielle'
   ) {
-    return <SwhowIaCourses courses={courses} valueOfUrl={valueOfUrl} />;
+    return <SwhowIaCourses courses={courses} />;
   }
 
   // Gestion des cours Moodle
