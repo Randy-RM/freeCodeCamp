@@ -11,21 +11,17 @@ type Course = RavenCourse | MoodleCourse | ProgramationCourses;
 
 interface CourseListProps {
   courses: Course[]; // Tableau contenant différents types de cours
-  valueOfUrl: string; // Url de la catégorie pour filtrer les cours
 }
 
-const ShowProgrammationCourses: React.FC<CourseListProps> = ({
-  courses,
-  valueOfUrl
-}) => {
+const ShowProgrammationCourses: React.FC<CourseListProps> = ({ courses }) => {
   return (
     <>
       {courses.length === 0
         ? renderCourseCardSkeletons(6)
         : courses.map((course, index) => {
             // Gestion des cours de Programmation
-            if (valueOfUrl === 'programmation') {
-              const courseList = course as ProgramationCourses;
+            if ('specification' in course) {
+              const courseList = course;
               return (
                 <CourseCard
                   key={index}

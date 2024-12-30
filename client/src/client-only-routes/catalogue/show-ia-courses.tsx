@@ -18,17 +18,11 @@ type Course = RavenCourse | MoodleCourse | ProgramationCourses;
 
 interface CourseListProps {
   courses: Course[]; // Tableau contenant différents types de cours
-  valueOfUrl: string; // Url de la catégorie pour filtrer les cours
 }
 const { moodleBaseUrl } = envData;
 
-const SwhowIaCourses: React.FC<CourseListProps> = ({ courses, valueOfUrl }) => {
+const SwhowIaCourses: React.FC<CourseListProps> = ({ courses }) => {
   // Filtrer les cours pour n'afficher que ceux de l'IA
-  const isIaCourse =
-    valueOfUrl === 'Intelligence%20 %20artificielle' ||
-    valueOfUrl === 'intelligence artificielle';
-
-  if (!isIaCourse) return null;
   return (
     <>
       {courses.length === 0

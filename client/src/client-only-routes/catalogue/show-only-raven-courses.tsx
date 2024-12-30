@@ -13,20 +13,16 @@ type Course = RavenCourse | MoodleCourse | ProgramationCourses;
 
 interface CourseListProps {
   courses: Course[]; // Tableau contenant différents types de cours
-  valueOfUrl: string; // Url de la catégorie pour filtrer les cours
 }
 
-const ShowOnlyRavenCouses: React.FC<CourseListProps> = ({
-  courses,
-  valueOfUrl
-}) => {
+const ShowOnlyRavenCouses: React.FC<CourseListProps> = ({ courses }) => {
   return (
     <>
       {courses.length === 0
         ? renderCourseCardSkeletons(6)
         : courses.map((course, index) => {
-            if (valueOfUrl === 'amazon web service') {
-              const courseTyped = course as RavenCourse;
+            if ('launch_url' in course) {
+              const courseTyped = course;
               const firstCategory = courseTyped.category?.[0];
               const language = firstCategory?.tags?.[0]?.title || 'Unknown';
 

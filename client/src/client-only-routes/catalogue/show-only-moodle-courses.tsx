@@ -23,21 +23,23 @@ const ShowOnlyMoodleCourses: React.FC<CourseListProps> = ({ courses }) => {
         ? renderCourseCardSkeletons(6)
         : courses.map((course, index) => {
             // Gestion des cours Moodle
-            const courseTyped = course as MoodleCourse;
-            return (
-              <CourseCard
-                key={index}
-                language={courseTyped.langue}
-                level={courseTyped.level}
-                icon={PhBookBookmark}
-                isAvailable={courseTyped.visible === 1}
-                title={courseTyped.displayname}
-                buttonText='Suivre le cours'
-                link={`${moodleBaseUrl}/course/view.php?id=${courseTyped.id}`}
-                description={courseTyped.summary}
-                duration={convertTimestampToTime(courseTyped.duration)}
-              />
-            );
+            if ('format' in course) {
+              const courseTyped = course;
+              return (
+                <CourseCard
+                  key={index}
+                  language={courseTyped.langue}
+                  level={courseTyped.level}
+                  icon={PhBookBookmark}
+                  isAvailable={courseTyped.visible === 1}
+                  title={courseTyped.displayname}
+                  buttonText='Suivre le cours'
+                  link={`${moodleBaseUrl}/course/view.php?id=${courseTyped.id}`}
+                  description={courseTyped.summary}
+                  duration={convertTimestampToTime(courseTyped.duration)}
+                />
+              );
+            }
           })}
     </>
   );
