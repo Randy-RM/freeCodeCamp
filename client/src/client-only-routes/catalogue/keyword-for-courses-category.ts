@@ -27,7 +27,12 @@ export const keyWordDev = [
   'api',
   'microservices',
   'agile',
-  'scrum'
+  'scrum',
+  'programmation',
+  'web',
+  'serverless',
+  'ios',
+  'internet of things'
 ];
 
 export const keyWordIa = [
@@ -40,6 +45,13 @@ export const keyWordIa = [
   'data analytics'
 ];
 
+export const keyWordCompute = [
+  'bureautique',
+  'office tools',
+  'microsoft office',
+  'compute'
+];
+
 export const domainKeywords = {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   'intelligence artificielle': [
@@ -50,7 +62,8 @@ export const domainKeywords = {
     'deep learning',
     'big data',
     'data engineering',
-    'data analytics'
+    'data analytics',
+    'management & Governance'
   ],
   // eslint-disable-next-line @typescript-eslint/naming-convention
   'marketing communication': [
@@ -58,7 +71,7 @@ export const domainKeywords = {
     'communication',
     'digital marketing'
   ],
-  bureautique: ['bureautique', 'office tools', 'microsoft office'],
+  Bureautique: ['bureautique', 'office tools', 'microsoft office', 'compute'],
   programmation: [
     'software development',
     'web development',
@@ -86,6 +99,13 @@ export const domainKeywords = {
     'api',
     'microservices',
     'agile',
-    'scrum'
+    'scrum',
+    'network',
+    'security',
+    'storage',
+    'virtualization',
+    'cloud essentials',
+    'cloud ',
+    'network & content delivery'
   ]
 };
