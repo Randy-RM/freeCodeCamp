@@ -6,6 +6,7 @@ import {
 } from '../show-courses';
 import { filterLogics } from '../../utils/routes';
 import { ProgramationCourses } from '../../utils/ajax';
+import { keyWordDev, keyWordIa } from './keyword-for-courses-category';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 type CourseType = RavenCourse | MoodleCourse | ProgramationCourses;
@@ -22,7 +23,11 @@ export const manyCategoryFilter = (
   let category: 'programation' | 'aws' | 'moodle';
 
   if (valueOfUrl === 'programmation') {
-    courses = filterProgramationCourses;
+    const ravenProgramationCourses = filteredRavenCourses?.filter(course =>
+      keyWordDev.some(word => course.roles.toLowerCase().includes(word))
+    );
+
+    courses = [...filterProgramationCourses, ...ravenProgramationCourses];
     category = 'programation';
   } else if (valueOfUrl === 'amazon web service') {
     courses = filteredRavenCourses;
@@ -31,15 +36,6 @@ export const manyCategoryFilter = (
     valueOfUrl === 'intelligence artificielle' ||
     valueOfUrl.includes('Intelligence%20 %20artificielle')
   ) {
-    const keyWordIa = [
-      'intelligence artificielle',
-      'data science',
-      'machine learning',
-      'deep learning',
-      'big data',
-      'data engineering',
-      'data analytics'
-    ];
     const ravenIaCourses = filteredRavenCourses?.filter(course =>
       keyWordIa.some(word => course.roles.toLowerCase().includes(word))
     );
