@@ -6,8 +6,8 @@ import { renderCourseCardSkeletons } from '../../components/helpers';
 
 import SwhowIaCourses from './show-ia-courses';
 import ShowOnlyRavenCouses from './show-only-raven-courses';
-import ShowProgrammationCourses from './show-programmation-courses';
 import ShowOnlyMoodleCourses from './show-only-moodle-courses';
+import ShowAllProgrammationSourcesCourses from './show-all-sources-programmation-courses';
 
 // Unification des types pour les cours
 type Course = RavenCourse | MoodleCourse | ProgramationCourses;
@@ -24,7 +24,7 @@ const CourseList: React.FC<CourseListProps> = ({ courses, valueOfUrl }) => {
 
   // Gestion des cours de Programmation
   if (valueOfUrl === 'programmation') {
-    return <ShowProgrammationCourses courses={courses} />;
+    return <ShowAllProgrammationSourcesCourses courses={courses} />;
   }
 
   // Gestion des cours Amazon Web Services (RavenCourses)
