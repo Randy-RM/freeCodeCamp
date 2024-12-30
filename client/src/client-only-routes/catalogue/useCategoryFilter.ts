@@ -6,7 +6,11 @@ import {
 } from '../show-courses';
 import { filterLogics } from '../../utils/routes';
 import { ProgramationCourses } from '../../utils/ajax';
-import { keyWordDev, keyWordIa } from './keyword-for-courses-category';
+import {
+  keyWordCompute,
+  keyWordDev,
+  keyWordIa
+} from './keyword-for-courses-category';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 type CourseType = RavenCourse | MoodleCourse | ProgramationCourses;
@@ -45,6 +49,21 @@ export const manyCategoryFilter = (
       .filter(course => course.categoryid === 14) as MoodleCourse[];
 
     courses = [...moodleIACourses, ...ravenIaCourses];
+
+    category = 'moodle';
+  } else if (
+    valueOfUrl === 'Bureautique' ||
+    valueOfUrl.includes('bureautique')
+  ) {
+    const ravenComputeCourse = filteredRavenCourses?.filter(course =>
+      keyWordCompute.some(word => course.roles.toLowerCase().includes(word))
+    );
+
+    const moodleIACourses = filteredMoodleCourses?.result
+      .flatMap(course => course)
+      .filter(course => course.categoryid === 11) as MoodleCourse[];
+
+    courses = [...moodleIACourses, ...ravenComputeCourse];
 
     category = 'moodle';
   } else {
