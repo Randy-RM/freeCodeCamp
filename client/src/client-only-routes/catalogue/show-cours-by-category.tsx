@@ -234,6 +234,10 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
       setCurrentpage(currentPage);
     }
   };
+
+  const onNavigateToPage = (page: number) => {
+    setCurrentpage(page);
+  };
   if (showLoading) {
     return <Loader fullScreen={true} />;
   }
@@ -354,6 +358,7 @@ function CourseByCatalogue(props: CoursesProps): JSX.Element {
                     totalPages={totalPages}
                     onNavigateForward={onNavigateForward}
                     onNavigueteBackward={onNavigueteBackward}
+                    onNavigateToPage={onNavigateToPage}
                   />
                 </div>
                 <Spacer size={2} />
