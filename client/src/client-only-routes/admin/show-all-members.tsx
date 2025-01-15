@@ -134,8 +134,9 @@ export function ShowAllMembers(props: ShowAllMembersProps): JSX.Element {
       `/all-users?page=${currentPage}&limit=10&classRoom=${groupMembers}&memberName=${memberNameToSearch}`
     );
     if (memberList != null && !('error' in memberList)) {
-      setMembers(memberList.userList.reverse());
-      console.log(memberList.userList.reverse());
+      const inverseMemberList = memberList.userList.reverse();
+      setMembers(inverseMemberList);
+      console.log(inverseMemberList);
 
       setCountUsers(memberList.countUsers);
       setIsLoadingMember(false);
