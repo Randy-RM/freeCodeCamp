@@ -456,6 +456,8 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
       `/all-users?limit=100000`
     );
     if (memberList != null && !('error' in memberList)) {
+      console.log(memberList.userList);
+
       setMembersForExpot(memberList.userList);
     } else {
       setMembersForExpot([]);
