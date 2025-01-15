@@ -517,7 +517,7 @@ export function TableMembers(props: TableMembersProps): JSX.Element {
   return (
     <>
       <>
-        <AllUserStates members={allListMembers ? allListMembers : []} />
+        <AllUserStates members={allListMembers} />
       </>
       <Row>
         <Col md={4} sm={12} xs={12}>
