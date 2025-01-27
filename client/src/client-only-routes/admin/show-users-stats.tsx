@@ -6,7 +6,6 @@ import {
   FormGroup,
   ControlLabel,
   FormControl
-  // InputGroup
 } from '@freecodecamp/react-bootstrap';
 import { CurrentSuperBlock } from '../../redux/prop-types';
 
@@ -28,6 +27,8 @@ type Member = {
 interface EnrollmentStat {
   period: string;
   count: number;
+  year: number;
+  month: number;
 }
 
 interface Props {
@@ -37,10 +38,15 @@ interface Props {
 export function AllUserStates({ members }: Props) {
   const [enrollmentStats, setEnrollmentStats] = useState<EnrollmentStat[]>([]);
   const [dateRange, setDateRange] = useState<number>(3); // Plage de dates en mois
+  const [filteredYear, setFilteredYear] = useState<number>(
+    new Date().getFullYear()
+  );
 
   // Fonction pour calculer les statistiques d'inscription par période de date
   const calculateEnrollmentStats = () => {
-    const stats: { [key: string]: number } = {};
+    const stats: {
+      [key: string]: { count: number; year: number; month: number };
+    } = {};
     const now = new Date();
     const rangeStart = new Date();
     rangeStart.setMonth(now.getMonth() - dateRange);
@@ -50,19 +56,50 @@ export function AllUserStates({ members }: Props) {
       if (createDate >= rangeStart) {
         const period = `${createDate.getFullYear()}-${
           createDate.getMonth() + 1
-        }`; // Mois humain (1-12)
-        stats[period] = (stats[period] || 0) + 1;
+        }`;
+        stats[period] = stats[period] || {
+          count: 0,
+          year: createDate.getFullYear(),
+          month: createDate.getMonth()
+        };
+        stats[period].count += 1;
       }
     });
 
     // Convertir en tableau trié par date
     const statsArray: EnrollmentStat[] = Object.entries(stats)
-      .map(([period, count]) => ({ period, count }))
+      .map(([period, { count, year, month }]) => ({
+        period,
+        count,
+        year,
+        month
+      }))
       .sort(
         (a, b) => new Date(a.period).getTime() - new Date(b.period).getTime()
       );
 
     setEnrollmentStats(statsArray);
+  };
+
+  // Filtrer les statistiques par année
+  const filterStatsByYear = (year: number) => {
+    return enrollmentStats.filter(stat => stat.year === year);
+  };
+
+  // Calculer la somme des inscriptions pour une plage
+  const calculateTotalEnrollments = () => {
+    return enrollmentStats.reduce((total, stat) => total + stat.count, 0);
+  };
+
+  // Trouver le mois avec le plus et le moins d'inscriptions
+  const getMonthWithExtremeEnrollments = () => {
+    const min = Math.min(...enrollmentStats.map(stat => stat.count));
+    const max = Math.max(...enrollmentStats.map(stat => stat.count));
+
+    const minMonth = enrollmentStats.find(stat => stat.count === min);
+    const maxMonth = enrollmentStats.find(stat => stat.count === max);
+
+    return { minMonth, maxMonth };
   };
 
   useEffect(() => {
@@ -90,11 +127,39 @@ export function AllUserStates({ members }: Props) {
     </FormGroup>
   );
 
+  // Options d'année pour filtrer les inscriptions
+  const renderYearFilter = () => (
+    <FormGroup className='mb-3'>
+      <ControlLabel>Filtrer par année</ControlLabel>
+      <FormControl
+        componentClass='select'
+        value={filteredYear}
+        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+          setFilteredYear(Number(e.target.value))
+        }
+        className='standard-radius-5'
+      >
+        {Array.from(new Set(enrollmentStats.map(stat => stat.year))).map(
+          year => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          )
+        )}
+      </FormControl>
+    </FormGroup>
+  );
+
+  const { minMonth, maxMonth } = getMonthWithExtremeEnrollments();
+
   return (
     <>
       <Row>
         <Col md={6} sm={12} xs={12}>
           {renderDateRangeOptions()}
+        </Col>
+        <Col md={6} sm={12} xs={12}>
+          {renderYearFilter()}
         </Col>
       </Row>
       <Row>
@@ -107,7 +172,7 @@ export function AllUserStates({ members }: Props) {
               </tr>
             </thead>
             <tbody>
-              {enrollmentStats.map(stat => (
+              {filterStatsByYear(filteredYear).map(stat => (
                 <tr key={stat.period}>
                   <td>
                     {new Date(stat.period).toLocaleDateString('fr-FR', {
@@ -118,8 +183,54 @@ export function AllUserStates({ members }: Props) {
                   <td>{stat.count}</td>
                 </tr>
               ))}
+              <tr>
+                <td>
+                  <strong>Total</strong>
+                </td>
+                <td>
+                  <strong>{calculateTotalEnrollments()}</strong>
+                </td>
+              </tr>
             </tbody>
           </Table>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={6}>
+          <h4>{`Mois avec le moins d'inscriptions`}</h4>
+          {minMonth ? (
+            <Table responsive>
+              <tbody>
+                <tr>
+                  <td>
+                    {new Date(minMonth.period).toLocaleDateString('fr-FR', {
+                      year: 'numeric',
+                      month: 'long'
+                    })}
+                  </td>
+                  <td>{minMonth.count}</td>
+                </tr>
+              </tbody>
+            </Table>
+          ) : null}
+        </Col>
+        <Col md={6}>
+          <h4>{`Mois avec le plus d'inscriptions`}</h4>
+          {maxMonth ? (
+            <Table responsive>
+              <tbody>
+                <tr>
+                  <td>
+                    {new Date(maxMonth.period).toLocaleDateString('fr-FR', {
+                      year: 'numeric',
+                      month: 'long'
+                    })}
+                  </td>
+                  <td>{maxMonth.count}</td>
+                </tr>
+              </tbody>
+            </Table>
+          ) : null}
         </Col>
       </Row>
     </>
