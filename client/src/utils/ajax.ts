@@ -4,6 +4,8 @@ import envData from '../../../config/env.json';
 import type {
   ChallengeFile,
   CompletedChallenge,
+  ProgramationCourses,
+  RequestResponseModel,
   User
 } from '../redux/prop-types';
 import {
@@ -93,27 +95,6 @@ export interface CourseDetails {
 }
 
 //data structure for programation cours
-
-export interface ProgramationCourses {
-  isAvailable: boolean;
-  sameTab?: boolean;
-  external?: boolean;
-  description?: string;
-  title: string;
-  icon?: string;
-  sponsorIcon?: string;
-  badgeIcon?: string;
-  alt?: string;
-  buttonText?: string;
-  link?: string;
-  cardType?: string;
-  createAt?: Date | string | number;
-  duration: string | number;
-  language?: string;
-  level?: string;
-  type: string;
-  specification?: string;
-}
 
 export const dataForprogramation: ProgramationCourses[] = [
   {
@@ -681,6 +662,23 @@ export async function getAwsPath() {
   }
 
   return [];
+}
+
+export async function updateEnrollment(courseUrl: string): Promise<void> {
+  try {
+    const response: RequestResponseModel = await get(
+      `/update-enrolement-raven?courseUrl=${encodeURIComponent(courseUrl)}`
+    );
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+    if (response.success) {
+      console.log('✅ Enrollement mis à jour avec succès !');
+    } else {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+      console.error('⚠️ Erreur:', response.message);
+    }
+  } catch (error) {
+    console.error('❌ Erreur lors de la mise à jour de l’enrollement:', error);
+  }
 }
 
 //fonction permettant la combinaison de tous les cours notamment moodle et raven
