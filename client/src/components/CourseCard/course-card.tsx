@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+
 import PlayIcon from '../../assets/images/play.svg';
 import clockIcon from '../../assets/icons/clock.svg';
 import levelIcon from '../../assets/icons/level.svg';
@@ -7,6 +9,7 @@ import Map from '../Map/index';
 import { Link } from '../helpers';
 
 import './course-card.css';
+import { coursesUrl } from '../../redux/atoms';
 
 // const { apiLocation } = envData;
 
@@ -52,6 +55,7 @@ const CourseCard = ({
   language,
   level
 }: LandingDetailsProps): JSX.Element => {
+  const [courseLink, setCourseLink] = useRecoilState<string | null>(coursesUrl);
   const isLessThan30DaysOld = (date: string): boolean => {
     const dateObjet = new Date(date);
     const dateDuJour = new Date();
@@ -60,6 +64,14 @@ const CourseCard = ({
     const differenceEnJours = differenceEnMillisecondes / (1000 * 60 * 60 * 24);
     return differenceEnJours <= 30;
   };
+
+  useEffect(() => {
+    if (link) {
+      setCourseLink(link);
+    }
+    console.log(courseLink);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [link, setCourseLink]);
   return (
     <div className='card-course-detail-back standard-radius-5 card-outlin-border'>
       <div className='card-course-detail-unit position-relative'>

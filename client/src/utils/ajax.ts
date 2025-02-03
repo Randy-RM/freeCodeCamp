@@ -673,7 +673,6 @@ export async function updateEnrollment(courseUrl: string): Promise<void> {
     if (response.success) {
       console.log('✅ Enrollement mis à jour avec succès !');
     } else {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
       console.error('⚠️ Erreur:', response.message);
     }
   } catch (error) {

@@ -55,6 +55,13 @@ export const valueOfTypeCourse = atom<string | null>({
   effects_UNSTABLE: [localStorageEffect('valueOfTypeCourse')]
 });
 
+export const coursesUrl = atom<string | null>({
+  key: 'coursesUrl',
+  default: '',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  effects_UNSTABLE: [localStorageEffect(' coursesUrl')]
+});
+
 //atom pour la valeur du level des contenu
 export const valueOfTypeLevel = atom<string | null>({
   key: 'valueOfTypeLevel',

@@ -559,4 +559,5 @@ export interface ProgramationCourses {
 export type RequestResponseModel = {
   success: boolean;
   message: string;
+  request: string;
 };
