@@ -40,6 +40,7 @@ function bootUser(app) {
   const deleteWebhookToken = createDeleteWebhookToken(app);
   const saveDataOnBdd = saveRavenCoursesToDB(app);
   const getAllRavenCourses = getRavenCoursesFromDB(app);
+  const updateEnrolementRaven = enrollInRavenCourse(app);
 
   const csrfProtection = csurf({
     cookie: {
@@ -83,6 +84,7 @@ function bootUser(app) {
   api.get('/save-rave-courses', saveDataOnBdd);
   api.get('/get-kinshasa-digital-raven-courses', getAllRavenCourses);
   api.get('/get-all-users-data', getAllOfUsersData);
+  api.get('/update-enrolement-raven', updateEnrolementRaven);
 
   app.use(api);
 }
@@ -423,38 +425,6 @@ export async function getAllOfUsersData(req, res) {
   }
 }
 
-//cette fonction n'est à utiliser que pour les cas où le client a des difficultés de faire les fetchs de données de la base de données kadéa
-// async function saveCoursesToJSON(courses) {
-//   // Définit le chemin du répertoire où le fichier JSON doit être sauvegardé
-//   const dirPath = path.join(
-//     __dirname, // Utilise __dirname pour obtenir le répertoire courant
-//     'client',
-//     'src',
-//     'utils' // Le chemin relatif à partir du répertoire courant
-//   );
-
-//   // Définit le chemin complet du fichier JSON
-//   const filePath = path.join(dirPath, 'saveRavenCourseInJson.json');
-
-//   // Vérifie si le répertoire existe. Si ce n'est pas le cas, le crée.
-//   if (!fs.existsSync(dirPath)) {
-//     console.log('Répertoire introuvable. Création du répertoire...');
-//     fs.mkdirSync(dirPath, { recursive: true }); // Crée tous les répertoires nécessaires
-//     console.log('Répertoire créé avec succès.');
-//   }
-
-//   // Vérifie si le fichier existe, sinon le crée avec un tableau vide
-//   if (!fs.existsSync(filePath)) {
-//     console.log("Fichier JSON introuvable. Création d'un nouveau fichier...");
-//     fs.writeFileSync(filePath, JSON.stringify([], null, 2), 'utf8'); // Crée un fichier JSON avec un tableau vide
-//     console.log('Fichier JSON créé avec succès.');
-//   }
-
-//   // Sauvegarde les données des cours dans le fichier JSON
-//   fs.writeFileSync(filePath, JSON.stringify(courses, null, 2), 'utf8');
-//   console.log('Données des cours sauvegardées dans le fichier JSON.');
-// }
-
 export function saveRavenCoursesToDB(app) {
   return async function postSaveRavenCourses(req, res) {
     console.log('save data on bdd');
@@ -576,6 +546,54 @@ export function getRavenCoursesFromDB(app) {
     } catch (error) {
       console.error('[DB Error]', error);
       // Ensure error response is JSON
+      return res.status(500).json({
+        success: false,
+        message: 'Database error',
+        error: error.message
+      });
+    }
+  };
+}
+
+export function enrollInRavenCourse(app) {
+  return async function enroll(req, res) {
+    const RavenCourse = app.models.RavenCourse;
+    const { courseUrl } = req.body; // L'URL est envoyée dans le body
+
+    try {
+      res.setHeader('Content-Type', 'application/json');
+
+      // Extraire l'ID du cours depuis l'URL
+      const match = courseUrl.match(/content-viewer\/(\d+)\//);
+      if (!match) {
+        return res.status(400).json({
+          success: false,
+          message: 'Invalid course URL'
+        });
+      }
+
+      const courseId = match[1];
+
+      // Vérifier si le cours existe
+      const course = await RavenCourse.findById(courseId);
+      if (!course) {
+        return res.status(404).json({
+          success: false,
+          message: 'Course not found'
+        });
+      }
+
+      // Mettre à jour le nombre d'inscriptions
+      course.enrollmentCount = (course.enrollmentCount || 0) + 1;
+      await course.save();
+
+      return res.json({
+        success: true,
+        message: 'Enrollment count updated successfully',
+        data: course.toJSON()
+      });
+    } catch (error) {
+      console.error('[DB Error]', error);
       return res.status(500).json({
         success: false,
         message: 'Database error',
