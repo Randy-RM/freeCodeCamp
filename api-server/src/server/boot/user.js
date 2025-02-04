@@ -558,24 +558,27 @@ export function getRavenCoursesFromDB(app) {
 export function enrollInRavenCourse(app) {
   return async function enroll(req, res) {
     const RavenCourse = app.models.RavenCourse;
-    const { courseUrl } = req.body; // L'URL est envoyée dans le body
+    const { courseUrl, io } = req.query;
+    console.log('courseUrl', courseUrl);
+
+    console.log(`${courseUrl}&io=${io}`);
 
     try {
       res.setHeader('Content-Type', 'application/json');
 
-      // Extraire l'ID du cours depuis l'URL
-      const match = courseUrl.match(/content-viewer\/(\d+)\//);
-      if (!match) {
+      if (!courseUrl) {
         return res.status(400).json({
           success: false,
-          message: 'Invalid course URL'
+          message: 'Course URL is required'
         });
       }
 
-      const courseId = match[1];
+      // Rechercher le cours avec un launchUrl correspondant
+      const coursUrl = `${courseUrl}&io=${io}`;
+      const course = await RavenCourse.findOne({
+        where: { launch_url: coursUrl }
+      });
 
-      // Vérifier si le cours existe
-      const course = await RavenCourse.findById(courseId);
       if (!course) {
         return res.status(404).json({
           success: false,
@@ -584,7 +587,9 @@ export function enrollInRavenCourse(app) {
       }
 
       // Mettre à jour le nombre d'inscriptions
-      course.enrollmentCount = (course.enrollmentCount || 0) + 1;
+      course.enrolementCount = (course.enrolementCount || 0) + 1;
+      console.log('course', course);
+
       await course.save();
 
       return res.json({
