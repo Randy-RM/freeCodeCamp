@@ -528,14 +528,6 @@ export async function getDatabaseResource<T>(urlEndPoint: string) {
   return response;
 }
 
-// interface RavenFetchCoursesDto {
-//   token: string;
-//   fromDate: string;
-//   // eslint-disable-next-line @typescript-eslint/naming-convention
-//   valid_to: string;
-//   apiKey?: string;
-//   currentPage?: number;
-// }
 export const getRavenToken = async () => {
   const ravenTokenData = getRavenTokenDataFromLocalStorage();
 
@@ -667,7 +659,10 @@ export async function getAwsPath() {
 export async function updateEnrollment(courseUrl: string): Promise<void> {
   try {
     const response: RequestResponseModel = await get(
-      `/update-enrolement-raven?courseUrl=${encodeURIComponent(courseUrl)}`
+      `/update-enrolement-raven?courseUrl=${courseUrl.replace(
+        /^http:/,
+        'https:'
+      )}`
     );
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
     if (response.success) {
