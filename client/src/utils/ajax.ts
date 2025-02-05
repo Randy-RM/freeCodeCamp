@@ -110,7 +110,9 @@ export const dataForprogramation: ProgramationCourses[] = [
       "Ce cours t'apprend les langages HTML pour le contenu et CSS pour la conception, ainsi que la création de pages Web adaptatives pour différentes tailles d'écran.",
     duration: 120,
     type: 'Cours',
-    specification: 'Responsive Web Design'
+    specification: 'Responsive Web Design',
+    enrolementCount: 0,
+    author: 'kadea'
   },
   {
     title: 'JavaScript Algorithms and Data Structures',
@@ -124,7 +126,9 @@ export const dataForprogramation: ProgramationCourses[] = [
       "Ce cours t'enseigne les bases de JavaScript pour rendre les pages interactives, ainsi que les algorithmes et structures de données en JavaScript, etc.",
     duration: 120,
     type: 'Cours',
-    specification: 'JavaScript Algorithms and Data Structures'
+    specification: 'JavaScript Algorithms and Data Structures',
+    enrolementCount: 0,
+    author: 'kadea'
   }
 ];
 

@@ -554,6 +554,8 @@ export interface ProgramationCourses {
   level?: string;
   type: string;
   specification?: string;
+  enrolementCount?: number;
+  author?: string;
 }
 
 export type RequestResponseModel = {

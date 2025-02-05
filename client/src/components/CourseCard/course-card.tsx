@@ -9,6 +9,7 @@ import { Link } from '../helpers';
 
 import './course-card.css';
 import { updateEnrollment } from '../../utils/ajax';
+import { useProgramationCourses } from '../../utils/update-enrolement-programation-course';
 
 // const { apiLocation } = envData;
 
@@ -55,6 +56,8 @@ const CourseCard = ({
   level
 }: LandingDetailsProps): JSX.Element => {
   const [courseLink, setCourseLink] = useState<string | null>('');
+  const { updateProgrammationEnrolement } = useProgramationCourses();
+
   const isLessThan30DaysOld = (date: string): boolean => {
     const dateObjet = new Date(date);
     const dateDuJour = new Date();
@@ -71,9 +74,17 @@ const CourseCard = ({
   };
 
   useEffect(() => {
+    console.log('courseLink', courseLink);
+
     if (courseLink) {
-      void updateEnrollment(courseLink);
+      if (courseLink.includes('cloud.contentraven.com/awspartners')) {
+        void updateEnrollment(courseLink);
+      }
+      if (courseLink.includes('/learn/judMok')) {
+        updateProgrammationEnrolement(courseLink);
+      }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [courseLink]);
   return (
     <div className='card-course-detail-back standard-radius-5 card-outlin-border'>
@@ -181,6 +192,7 @@ const CourseCard = ({
                         external={external ? true : false}
                         state={{ description: description }}
                         className='link-course text-love-light fw-semi-bold text-responsive'
+                        onClick={handleClick}
                       >
                         <div className='row-link'>
                           <div className='row-link-text'>{buttonText}</div>
