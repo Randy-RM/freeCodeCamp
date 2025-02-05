@@ -16,6 +16,7 @@ import {
 } from '../client-only-routes/show-courses';
 import { splitArray } from '../components/helpers';
 import sortCourses from '../components/helpers/sort-course';
+import { filterAndEnhanceCourses } from './filter-And-enchance-raven';
 
 const { apiLocation } = envData;
 
@@ -767,29 +768,25 @@ export async function getDataFromDb() {
 
     const courses = response.data as RavenCourse[];
 
-    const coursesFilterByLanguage = courses
-      .filter(course => {
-        return course.category?.some(cat =>
-          cat.tags?.some(
-            tag => tag.title.match(/English/) || tag.title.match(/French/)
-          )
-        );
-      })
-      .map(course => {
-        const enhancedCourse = { ...course };
-        const skillLevelCategory = course.category?.find(cat =>
-          cat.tags?.some(tag => tag.title === 'Skill Level')
-        );
-        enhancedCourse.skill_level =
-          skillLevelCategory?.tags?.[0]?.title || 'Fundamental';
+    return filterAndEnhanceCourses(courses);
+  } catch (error) {
+    console.error('Error fetching courses:', error);
+    throw error;
+  }
+}
 
-        const domain = course.category?.[1]?.tags?.[0]?.title || '';
-        enhancedCourse.roles = domain;
+export async function getPopularRavenCourses() {
+  try {
+    const response = await get<ResponseRaven>('/get-populare-cours');
 
-        return enhancedCourse;
-      });
+    if (!response.success) {
+      console.log('Error fetching courses:', response.error);
+      throw new Error(response.error);
+    }
 
-    return coursesFilterByLanguage;
+    const courses = response.data as RavenCourse[];
+
+    return filterAndEnhanceCourses(courses);
   } catch (error) {
     console.error('Error fetching courses:', error);
     throw error;

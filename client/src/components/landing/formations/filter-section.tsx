@@ -11,6 +11,7 @@ import {
   getDataFromDb,
   getExternalResource,
   getMoodleCourses,
+  getPopularRavenCourses,
   getRavenPathResources,
   getRavenToken
 } from '../../../utils/ajax';
@@ -114,7 +115,8 @@ const CoursesFilterSection = ({
   };
   const getRavenResources = async () => {
     setIsDataOnLoading(true);
-    const getReveanCourses = await getDataFromDb();
+    const getReveanCourses = await getPopularRavenCourses();
+
     const ravenDataWhenEmptyDb = await getAwsPath();
     setRavenCourses(
       getReveanCourses.length > 0
@@ -162,6 +164,7 @@ const CoursesFilterSection = ({
       }
     };
     void getDataFromDb();
+    void getPopularRavenCourses();
 
     void fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps

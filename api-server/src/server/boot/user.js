@@ -41,6 +41,7 @@ function bootUser(app) {
   const saveDataOnBdd = saveRavenCoursesToDB(app);
   const getAllRavenCourses = getRavenCoursesFromDB(app);
   const updateEnrolementRaven = enrollInRavenCourse(app);
+  const getPopularRavenCourses = getRavenCourseByEnrolement(app);
 
   const csrfProtection = csurf({
     cookie: {
@@ -85,6 +86,7 @@ function bootUser(app) {
   api.get('/get-kinshasa-digital-raven-courses', getAllRavenCourses);
   api.get('/get-all-users-data', getAllOfUsersData);
   api.get('/update-enrolement-raven', updateEnrolementRaven);
+  api.get('/get-populare-cours', getPopularRavenCourses);
 
   app.use(api);
 }
@@ -599,6 +601,40 @@ export function enrollInRavenCourse(app) {
       });
     } catch (error) {
       console.error('[DB Error]', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Database error',
+        error: error.message
+      });
+    }
+  };
+}
+
+export function getRavenCourseByEnrolement(app) {
+  return async function getRavenCourses(req, res) {
+    const RavenCourse = app.models.RavenCourse;
+    try {
+      res.setHeader('Content-Type', 'application/json');
+      const courses = await RavenCourse.find({
+        where: { enrolementCount: { gt: 0 } },
+        limit: 10,
+        order: ['enrolementCount DESC']
+      });
+
+      if (!courses || courses.length === 0) {
+        return res.status(404).json({
+          success: false,
+          message: 'No courses found'
+        });
+      }
+
+      return res.json({
+        success: true,
+        data: courses.map(course => course.toJSON())
+      });
+    } catch (error) {
+      console.error('[DB Error]', error);
+      // Ensure error response is JSON
       return res.status(500).json({
         success: false,
         message: 'Database error',
