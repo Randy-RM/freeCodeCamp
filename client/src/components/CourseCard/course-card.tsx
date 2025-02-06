@@ -74,8 +74,6 @@ const CourseCard = ({
   };
 
   useEffect(() => {
-    console.log('courseLink', courseLink);
-
     if (courseLink) {
       if (courseLink.includes('cloud.contentraven.com/awspartners')) {
         void updateEnrollment(courseLink);
