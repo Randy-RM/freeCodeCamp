@@ -779,6 +779,23 @@ export async function getDataFromDb() {
   }
 }
 
+export async function saveKadeaCoursesOnDb() {
+  try {
+    const response = await get<ResponseRaven>(`/save-kadea-courses`);
+
+    if (response.success) {
+      console.log('Data saved successfully:', response);
+    } else {
+      console.error(
+        "Erreur lors de l'enregistrement des données",
+        response.error
+      );
+    }
+  } catch (error) {
+    console.error("Erreur lors de l'enregistrement des données", error);
+  }
+}
+
 export async function getPopularRavenCourses() {
   try {
     const response = await get<ResponseRaven>('/get-populare-cours');
