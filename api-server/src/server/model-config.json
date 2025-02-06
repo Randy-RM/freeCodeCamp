@@ -78,5 +78,9 @@
   "ravenDataCourse": {
     "dataSource": "db",
     "public": true
+  },
+  "KadeaCourse": {
+    "dataSource": "db",
+    "public": true
   }
 }

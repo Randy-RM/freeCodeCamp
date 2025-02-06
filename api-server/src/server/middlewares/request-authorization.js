@@ -36,6 +36,7 @@ const getRavenProgressRE = /^\/get-raven-user-progress/;
 const getRavenDataFromDBRE = /^\/get-kinshasa-digital-raven-courses/;
 const enrolementAcountBRE = /^\/update-enrolement-raven/;
 const getPopularCoursesRE = /^\/get-populare-cours/;
+const getSavedKadeaCoursesRE = /^\/save-kadea-courses/;
 
 const _pathsAllowedREs = [
   authRE,
@@ -58,7 +59,8 @@ const _pathsAllowedREs = [
   getRavenProgressRE,
   getRavenDataFromDBRE,
   enrolementAcountBRE,
-  getPopularCoursesRE
+  getPopularCoursesRE,
+  getSavedKadeaCoursesRE
 ];
 
 export function isAllowedPath(path, pathsAllowedREs = _pathsAllowedREs) {

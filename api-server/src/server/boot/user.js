@@ -24,6 +24,7 @@ import {
   countUserDocuments,
   getAllOfUsers
 } from '../utils/user-stats';
+import { coursesKAdea } from './course-kadea';
 const fs = require('fs');
 const path = require('path');
 
@@ -42,6 +43,7 @@ function bootUser(app) {
   const getAllRavenCourses = getRavenCoursesFromDB(app);
   const updateEnrolementRaven = enrollInRavenCourse(app);
   const getPopularRavenCourses = getRavenCourseByEnrolement(app);
+  const saveAllKadeaCoursesOnDb = saveKadeaCoursesOnDb(app);
 
   const csrfProtection = csurf({
     cookie: {
@@ -87,6 +89,7 @@ function bootUser(app) {
   api.get('/get-all-users-data', getAllOfUsersData);
   api.get('/update-enrolement-raven', updateEnrolementRaven);
   api.get('/get-populare-cours', getPopularRavenCourses);
+  api.get('/save-kadea-courses', saveAllKadeaCoursesOnDb);
 
   app.use(api);
 }
@@ -507,6 +510,55 @@ export function saveRavenCoursesToDB(app) {
         })
       );
 
+      // Réponse avec les données sauvegardées
+      const data = savedCourses.map(course => course.toJSON());
+      return res.json({
+        success: true,
+        message: 'Courses saved successfully',
+        coursesCount: data.length,
+        courses: data
+      });
+    } catch (error) {
+      console.error('Error saving Raven courses to DB:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Error saving courses to database',
+        error: error.message
+      });
+    }
+  };
+}
+
+export function saveKadeaCoursesOnDb(app) {
+  return async function postKadeaCourses(req, res) {
+    console.log('save data on bdd');
+    const KadeaCourse = app.models.KadeaCourse;
+
+    try {
+      await KadeaCourse.destroyAll();
+
+      // Sauvegarde des cours dans la base de données
+      const savedCourses = await Promise.all(
+        coursesKAdea.map(async course => {
+          const courseData = {
+            title: course.title,
+            level: course.level,
+            sponsorIcon: course.sponsorIcon,
+            alt: course.alt,
+            isAvailable: course.isAvailable,
+            link: course.link,
+            description: course.description,
+            duration: course.duration,
+            type: course.type,
+            enrolementCount: course.enrolementCount,
+            author: course.author,
+            category: course.category
+          };
+
+          const allCourses = await KadeaCourse.create(courseData);
+          return allCourses;
+        })
+      );
       // Réponse avec les données sauvegardées
       const data = savedCourses.map(course => course.toJSON());
       return res.json({
