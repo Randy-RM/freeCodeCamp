@@ -16,7 +16,7 @@ import { hardGoTo as navigate } from '../../../redux';
 import { Link } from '../../helpers';
 
 import './universal-nav-side-bar.css';
-import { saveDataOnDb } from '../../../utils/ajax';
+import { saveDataOnDb, saveKadeaCoursesOnDb } from '../../../utils/ajax';
 
 export interface SideBarNavLinksProps {
   fetchState?: { pending: boolean };
@@ -34,6 +34,7 @@ export const SideBarNavLinks = (): JSX.Element => {
   const hundleUpdatedCourses = async () => {
     try {
       await saveDataOnDb();
+      await saveKadeaCoursesOnDb();
     } catch (error) {
       console.error(
         'erreur lors de la sauvegarde des données dans la bd:',
