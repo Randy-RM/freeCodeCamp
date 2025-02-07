@@ -802,7 +802,6 @@ export async function getPopularRavenCourses() {
 
     if (!response.success) {
       console.log('Error fetching courses:', response.error);
-      throw new Error(response.error ?? 'une erreur est survenue');
     }
 
     const courses = response.data as RavenCourse[];
