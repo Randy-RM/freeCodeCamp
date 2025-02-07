@@ -78,7 +78,7 @@ const CourseCard = ({
       if (courseLink.includes('cloud.contentraven.com/awspartners')) {
         void updateEnrollment(courseLink);
       }
-      if (courseLink.includes('/learn/judMok')) {
+      if (courseLink.includes('/learn/')) {
         updateProgrammationEnrolement(courseLink);
       }
     }

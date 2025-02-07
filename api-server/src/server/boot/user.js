@@ -44,6 +44,7 @@ function bootUser(app) {
   const updateEnrolementRaven = enrollInRavenCourse(app);
   const getPopularRavenCourses = getRavenCourseByEnrolement(app);
   const saveAllKadeaCoursesOnDb = saveKadeaCoursesOnDb(app);
+  const getKadeaCoursesCatalogue = getKaDeaCoursesFromDB(app);
 
   const csrfProtection = csurf({
     cookie: {
@@ -90,6 +91,7 @@ function bootUser(app) {
   api.get('/update-enrolement-raven', updateEnrolementRaven);
   api.get('/get-populare-cours', getPopularRavenCourses);
   api.get('/save-kadea-courses', saveAllKadeaCoursesOnDb);
+  api.get('/get-kadea-courses', getKadeaCoursesCatalogue);
 
   app.use(api);
 }
@@ -434,6 +436,7 @@ export function saveRavenCoursesToDB(app) {
   return async function postSaveRavenCourses(req, res) {
     console.log('save data on bdd');
     const RavenCourse = app.models.RavenCourse;
+    const EnrolementHistory = app.models.EnrolementHistory;
 
     const apiKey = process.env.RAVEN_AWS_API_KEY;
     const baseUrl = process.env.RAVEN_AWS_BASE_URL;
@@ -447,7 +450,6 @@ export function saveRavenCoursesToDB(app) {
       page_size: 0
     });
 
-    // Vérifier si un token est fourni
     if (!awstoken) {
       return res.json({
         success: false,
@@ -456,9 +458,8 @@ export function saveRavenCoursesToDB(app) {
     }
 
     try {
-      console.log('les datas');
+      console.log('Fetching data from Raven API...');
 
-      // Requête vers l'API Raven
       const ravenResponse = await Axios.post(
         `${baseUrl}/administration/catalog/learningobjects`,
         requestBody,
@@ -472,7 +473,6 @@ export function saveRavenCoursesToDB(app) {
         }
       );
 
-      // Extraction des cours depuis la réponse de l'API
       const courses = ravenResponse.data?.data || [];
       if (courses.length === 0) {
         console.log('Aucun cours trouvé');
@@ -482,16 +482,19 @@ export function saveRavenCoursesToDB(app) {
         });
       }
 
-      //cette fonction n'est à utiliser que pour les cas où le client a des difficultés de faire les fetchs de données de la base de données kadéa
-      // Sauvegarde des cours dans un fichier JSON
-      // await saveCoursesToJSON(courses);
-
-      // Suppression des données existantes avant d'insérer les nouvelles
+      // Suppression des anciens cours
       await RavenCourse.destroyAll();
 
-      // Sauvegarde des cours dans la base de données
+      // Récupération de l'historique des enrolements
+      const coursesEnrolementHistory = await EnrolementHistory.find();
+
+      // Sauvegarde des nouveaux cours
       const savedCourses = await Promise.all(
         courses.map(async course => {
+          const enrolementEntry = coursesEnrolementHistory.find(
+            entry => entry.launch_url === course.launch_url
+          );
+
           const courseData = {
             learningobjectid: course.learningobject_id,
             name: course.name,
@@ -502,21 +505,21 @@ export function saveRavenCoursesToDB(app) {
             createddate: course.created_date,
             updateddate: course.updated_date,
             content_type: course.content_type,
-            category: course.category
+            category: course.category,
+            enrolementCount: enrolementEntry
+              ? enrolementEntry.enrolementCount
+              : 0
           };
 
-          const allCourses = await RavenCourse.create(courseData);
-          return allCourses;
+          return await RavenCourse.create(courseData);
         })
       );
 
-      // Réponse avec les données sauvegardées
-      const data = savedCourses.map(course => course.toJSON());
       return res.json({
         success: true,
         message: 'Courses saved successfully',
-        coursesCount: data.length,
-        courses: data
+        coursesCount: savedCourses.length,
+        courses: savedCourses.map(course => course.toJSON())
       });
     } catch (error) {
       console.error('Error saving Raven courses to DB:', error);
@@ -578,6 +581,29 @@ export function saveKadeaCoursesOnDb(app) {
   };
 }
 
+export function getKaDeaCoursesFromDB(app) {
+  return async function getKadeaCourses(req, res) {
+    const KadeaCourse = app.models.KadeaCourse;
+    try {
+      const courses = await KadeaCourse.find();
+      if (!courses || courses.length === 0) {
+        return res.status(404).json({
+          success: false,
+          message: 'No courses found'
+        });
+      }
+    } catch (error) {
+      console.error('[DB Error]', error);
+      // Ensure error response is JSON
+      return res.status(500).json({
+        success: false,
+        message: 'Database error',
+        error: error.message
+      });
+    }
+  };
+}
+
 export function getRavenCoursesFromDB(app) {
   return async function getRavenCourses(req, res) {
     const RavenCourse = app.models.RavenCourse;
@@ -587,9 +613,10 @@ export function getRavenCoursesFromDB(app) {
       const courses = await RavenCourse.find();
 
       if (!courses || courses.length === 0) {
-        return res.status(404).json({
-          success: false,
-          message: 'No courses found'
+        return res.status(200).json({
+          success: true,
+          data: [],
+          message: 'Aucun cours disponible pour le moment'
         });
       }
 
@@ -612,6 +639,7 @@ export function getRavenCoursesFromDB(app) {
 export function enrollInRavenCourse(app) {
   return async function enroll(req, res) {
     const RavenCourse = app.models.RavenCourse;
+    const EnrolementHistory = app.models.EnrolementHistory;
     const { courseUrl, io } = req.query;
     console.log('courseUrl', courseUrl);
 
@@ -627,7 +655,6 @@ export function enrollInRavenCourse(app) {
         });
       }
 
-      // Rechercher le cours avec un launchUrl correspondant
       const coursUrl = `${courseUrl}&io=${io}`;
       const course = await RavenCourse.findOne({
         where: { launch_url: coursUrl }
@@ -640,8 +667,24 @@ export function enrollInRavenCourse(app) {
         });
       }
 
-      // Mettre à jour le nombre d'inscriptions
-      course.enrolementCount = (course.enrolementCount || 0) + 1;
+      let enrolementHistory = await EnrolementHistory.findOne({
+        where: { launch_url: course.launch_url }
+      });
+
+      if (!enrolementHistory) {
+        enrolementHistory = await EnrolementHistory.create({
+          launch_url: course.launch_url,
+          enrolementCount: 1,
+          enrolementdate: new Date().toISOString()
+        });
+      } else {
+        enrolementHistory.enrolementCount =
+          (enrolementHistory.enrolementCount || 0) + 1;
+        enrolementHistory.enrolementdate = new Date().toISOString();
+        await enrolementHistory.save();
+      }
+
+      course.enrolementCount = enrolementHistory.enrolementCount;
       console.log('course', course);
 
       await course.save();
@@ -673,10 +716,13 @@ export function getRavenCourseByEnrolement(app) {
         order: ['enrolementCount DESC']
       });
 
+      console.log('courses actuels', courses);
+
       if (!courses || courses.length === 0) {
-        return res.status(404).json({
-          success: false,
-          message: 'No courses found'
+        return res.status(200).json({
+          success: true,
+          data: [],
+          message: 'Aucun cours trouvé'
         });
       }
 

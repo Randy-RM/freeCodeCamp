@@ -82,5 +82,9 @@
   "KadeaCourse": {
     "dataSource": "db",
     "public": true
+  },
+  "EnrolementHistory": {
+    "dataSource": "db",
+    "public": true
   }
 }

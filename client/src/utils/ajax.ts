@@ -802,12 +802,31 @@ export async function getPopularRavenCourses() {
 
     if (!response.success) {
       console.log('Error fetching courses:', response.error);
-      throw new Error(response.error);
+      throw new Error(response.error ?? 'une erreur est survenue');
     }
 
     const courses = response.data as RavenCourse[];
 
     return filterAndEnhanceCourses(courses);
+  } catch (error) {
+    console.error('Error fetching courses:', error);
+    throw error;
+  }
+}
+
+export async function getKadeaCourses() {
+  try {
+    const response = await get<ResponseRaven>('/get-kadea-courses');
+
+    if (!response.success) {
+      console.log('Error fetching courses:', response.error);
+      throw new Error(response.error);
+    }
+
+    const courses = response.data as ProgramationCourses[];
+    console.log(courses);
+
+    return courses;
   } catch (error) {
     console.error('Error fetching courses:', error);
     throw error;
