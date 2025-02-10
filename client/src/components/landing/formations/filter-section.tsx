@@ -120,8 +120,8 @@ const CoursesFilterSection = ({
     const ravenDataWhenEmptyDb = await getAwsPath();
     setRavenCourses(
       getReveanCourses.length > 0
-        ? (getReveanCourses as unknown as RavenCourse[])
-        : (ravenDataWhenEmptyDb as unknown as RavenCourse[])
+        ? (getReveanCourses.slice(0, 5) as unknown as RavenCourse[])
+        : (ravenDataWhenEmptyDb.slice(0, 5) as unknown as RavenCourse[])
     );
     setIsDataOnLoading(false);
   };
