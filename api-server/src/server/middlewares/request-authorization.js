@@ -38,6 +38,7 @@ const enrolementAcountBRE = /^\/update-enrolement-raven/;
 const getPopularCoursesRE = /^\/get-populare-cours/;
 const getSavedKadeaCoursesRE = /^\/save-kadea-courses/;
 const getKadeaCoursesRE = /^\/get-kadea-courses/;
+const updateKadeaEnrolementRE = /^\/update-enrolement-kadea/;
 
 const _pathsAllowedREs = [
   authRE,
@@ -62,7 +63,8 @@ const _pathsAllowedREs = [
   enrolementAcountBRE,
   getPopularCoursesRE,
   getSavedKadeaCoursesRE,
-  getKadeaCoursesRE
+  getKadeaCoursesRE,
+  updateKadeaEnrolementRE
 ];
 
 export function isAllowedPath(path, pathsAllowedREs = _pathsAllowedREs) {

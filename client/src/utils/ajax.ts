@@ -42,7 +42,7 @@ function getCSRFToken() {
 
 // TODO: Might want to handle flash messages as close to the request as possible
 // to make use of the Response object (message, status, etc)
-async function get<T>(path: string): Promise<T> {
+export async function get<T>(path: string): Promise<T> {
   return fetch(`${base}${path}`, defaultOptions).then<T>(res => res.json());
 }
 
