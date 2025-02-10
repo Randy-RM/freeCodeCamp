@@ -556,6 +556,7 @@ export interface ProgramationCourses {
   specification?: string;
   enrolementCount?: number;
   author?: string;
+  asset: string;
 }
 
 export type RequestResponseModel = {
@@ -563,3 +564,9 @@ export type RequestResponseModel = {
   message: string;
   request: string;
 };
+
+export interface ResponseRaven {
+  success: boolean;
+  data: [];
+  error: string;
+}
