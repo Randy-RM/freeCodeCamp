@@ -9,7 +9,7 @@ import { Link } from '../helpers';
 
 import './course-card.css';
 import { updateEnrollment } from '../../utils/ajax';
-import { useProgramationCourses } from '../../utils/update-enrolement-programation-course';
+import { updateProgrammationEnrolement } from '../../utils/update-enrolement-programation-course';
 
 // const { apiLocation } = envData;
 
@@ -56,7 +56,6 @@ const CourseCard = ({
   level
 }: LandingDetailsProps): JSX.Element => {
   const [courseLink, setCourseLink] = useState<string | null>('');
-  const { updateProgrammationEnrolement } = useProgramationCourses();
 
   const isLessThan30DaysOld = (date: string): boolean => {
     const dateObjet = new Date(date);
@@ -79,7 +78,9 @@ const CourseCard = ({
         void updateEnrollment(courseLink);
       }
       if (courseLink.includes('/learn/')) {
-        updateProgrammationEnrolement(courseLink);
+        console.log('courseLink', courseLink);
+
+        void updateProgrammationEnrolement(courseLink);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
