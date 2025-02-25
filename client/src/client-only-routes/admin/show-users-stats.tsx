@@ -191,105 +191,153 @@ export function AllUserStates({ members }: Props) {
       <Row className='mb-4 flex gap-2rem align-center '>
         <div className='filter-card'>{renderDateRangeOptions()}</div>
         <div className='filter-card'>{renderYearFilter()}</div>
+        <div className=''>
+          <Row className='mt-4 max-w-50 flex gap-2rem '>
+            <div>
+              <Col>
+                <Panel
+                  header="Mois avec le moins d'inscriptions de la période"
+                  className='custom-panel-min'
+                >
+                  <Table responsive>
+                    <tbody>
+                      <tr className='highlight-row'>
+                        <td className='text-center p-4 flex items-center text-white'>
+                          <svg
+                            className='w-6 h-6'
+                            fill='none'
+                            viewBox='0 0 24 24'
+                            stroke='currentColor'
+                            width={70}
+                            height={70}
+                          >
+                            <path
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              strokeWidth={2}
+                              d='M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4'
+                            />
+                          </svg>
+                          <strong className='text-white'>{`Mois avec le moins d'inscriptions`}</strong>
+                        </td>
+                      </tr>
+                      <tr className='highlight-row'>
+                        <td className='text-white'>
+                          {minMonth
+                            ? new Date(minMonth.period).toLocaleDateString(
+                                'fr-FR',
+                                {
+                                  year: 'numeric',
+                                  month: 'long'
+                                }
+                              )
+                            : 'Pas de résultats'}
+                        </td>
+                        <td className='text-white'>
+                          {minMonth ? minMonth.count : 0}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </Panel>
+              </Col>
+            </div>
+
+            <div>
+              <Col>
+                <Panel
+                  header="Mois avec le plus d'inscriptions"
+                  className='custom-panel-max'
+                >
+                  <Table responsive>
+                    <tbody>
+                      <tr>
+                        <td className='text-center p-4'>
+                          <div className='flex items-center justify-center gap-2 text-white'>
+                            <svg
+                              className='w-6 h-6'
+                              fill='none'
+                              viewBox='0 0 24 24'
+                              stroke='currentColor'
+                              width={80}
+                              height={80}
+                            >
+                              <path
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                                strokeWidth={2}
+                                d='M13 7h8m0 0v8m0-8l-8 8-4-4-6 6'
+                              />
+                            </svg>
+                            <strong className='text-white'>{`Mois avec le plus d'inscriptions`}</strong>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className='text-white'>
+                          {maxMonth
+                            ? new Date(maxMonth.period).toLocaleDateString(
+                                'fr-FR',
+                                {
+                                  year: 'numeric',
+                                  month: 'long'
+                                }
+                              )
+                            : 'Pas de résultats'}
+                        </td>
+                        <td className='text-white'>
+                          {maxMonth ? maxMonth.count : 0}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </Panel>
+              </Col>
+            </div>
+          </Row>
+        </div>
       </Row>
 
-      <Row className='mt-4'>
-        <Col md={6}>
-          <Panel
-            header="Mois avec le moins d'inscriptions de la période"
-            className='custom-panel custom-panel-min'
-          >
-            {minMonth ? (
-              <Table responsive>
-                <tbody>
-                  <tr className='highlight-row'>
-                    <td colSpan={2} className='text-center p-4'>
-                      <strong>{`Mois avec le moins d'inscriptions de la plage`}</strong>
-                    </td>
+      <div>
+        <Row>
+          <Col md={12} sm={12} xs={12}>
+            <Panel
+              header="Statistiques d'inscriptions"
+              className='custom-panel'
+            >
+              <Table responsive hover>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>{`Nombre d'inscriptions`}</th>
                   </tr>
-                  <tr className='highlight-row'>
+                </thead>
+                <tbody>
+                  {filterStatsByYear(filteredYear).map(stat => (
+                    <tr key={stat.period}>
+                      <td>
+                        {new Date(stat.period).toLocaleDateString('fr-FR', {
+                          year: 'numeric',
+                          month: 'long'
+                        })}
+                      </td>
+                      <td>{stat.count}</td>
+                    </tr>
+                  ))}
+                  <tr>
                     <td>
-                      {new Date(minMonth.period).toLocaleDateString('fr-FR', {
-                        year: 'numeric',
-                        month: 'long'
-                      })}
+                      <strong>Total</strong>
                     </td>
-                    <td>{minMonth.count}</td>
+                    <td>
+                      <strong>{calculateTotalEnrollments()}</strong>
+                    </td>
                   </tr>
                 </tbody>
               </Table>
-            ) : (
-              <p>0</p>
-            )}
-          </Panel>
-        </Col>
-
-        <Col md={6}>
-          <Panel
-            header="Mois avec le plus d'inscriptions"
-            className='custom-panel custom-panel-max'
-          >
-            {maxMonth ? (
-              <Table responsive>
-                <tbody>
-                  <tr className='highlight-row'>
-                    <td colSpan={2} className='text-center p-4'>
-                      <strong>{`Mois avec le plus d'inscriptions`}</strong>
-                    </td>
-                  </tr>
-                  <tr className='highlight-row'>
-                    <td>
-                      {new Date(maxMonth.period).toLocaleDateString('fr-FR', {
-                        year: 'numeric',
-                        month: 'long'
-                      })}
-                    </td>
-                    <td>{maxMonth.count}</td>
-                  </tr>
-                </tbody>
-              </Table>
-            ) : (
-              <p>0</p>
-            )}
-          </Panel>
-        </Col>
-      </Row>
-
-      <Row>
-        <Col md={12} sm={12} xs={12}>
-          <Panel header="Statistiques d'inscriptions" className='custom-panel'>
-            <Table responsive hover>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>{`Nombre d'inscriptions`}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filterStatsByYear(filteredYear).map(stat => (
-                  <tr key={stat.period}>
-                    <td>
-                      {new Date(stat.period).toLocaleDateString('fr-FR', {
-                        year: 'numeric',
-                        month: 'long'
-                      })}
-                    </td>
-                    <td>{stat.count}</td>
-                  </tr>
-                ))}
-                <tr>
-                  <td>
-                    <strong>Total</strong>
-                  </td>
-                  <td>
-                    <strong>{calculateTotalEnrollments()}</strong>
-                  </td>
-                </tr>
-              </tbody>
-            </Table>
-          </Panel>
-        </Col>
-      </Row>
+            </Panel>
+          </Col>
+        </Row>
+      </div>
     </>
   );
 }
