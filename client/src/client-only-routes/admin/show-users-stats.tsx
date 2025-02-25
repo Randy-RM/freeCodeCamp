@@ -110,15 +110,32 @@ export function AllUserStates({ members }: Props) {
 
   // Options de plage de dates
   const renderDateRangeOptions = () => (
-    <FormGroup className='mb-3'>
-      <ControlLabel>{`Plage d'inscriptions`}</ControlLabel>
+    <FormGroup className='mb-3 flex flex-col '>
+      <div className='flex items-center'>
+        <svg
+          className='filter-icon'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
+          width={100}
+          height={100}
+        >
+          <path
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth={2}
+            d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'
+          />
+        </svg>
+        <ControlLabel class='colore-withe-text'>{`Plage d'inscriptions mensuelle`}</ControlLabel>
+      </div>
       <FormControl
         componentClass='select'
         value={dateRange}
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
           setDateRange(Number(e.target.value))
         }
-        className='standard-radius-5'
+        className='standard-radius-5 '
       >
         <option value={3}>3 mois</option>
         <option value={6}>6 mois</option>
@@ -130,8 +147,26 @@ export function AllUserStates({ members }: Props) {
 
   // Options d'année pour filtrer les inscriptions
   const renderYearFilter = () => (
-    <FormGroup className='mb-3'>
-      <ControlLabel>Filtrer par année</ControlLabel>
+    <FormGroup className='mb-3 '>
+      <div className='flex items-center'>
+        <svg
+          className='filter-icon'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
+          width={80}
+          height={80}
+        >
+          <path
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth={2}
+            d='M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z'
+          />
+        </svg>
+
+        <ControlLabel>Filtrer par année</ControlLabel>
+      </div>
       <FormControl
         componentClass='select'
         value={filteredYear}
@@ -153,16 +188,73 @@ export function AllUserStates({ members }: Props) {
 
   return (
     <>
-      <Row className='mb-4'>
-        <Col md={6} sm={12} xs={12}>
-          {renderDateRangeOptions()}
+      <Row className='mb-4 flex gap-2rem align-center '>
+        <div className='filter-card'>{renderDateRangeOptions()}</div>
+        <div className='filter-card'>{renderYearFilter()}</div>
+      </Row>
+
+      <Row className='mt-4'>
+        <Col md={6}>
+          <Panel
+            header="Mois avec le moins d'inscriptions de la période"
+            className='custom-panel custom-panel-min'
+          >
+            {minMonth ? (
+              <Table responsive>
+                <tbody>
+                  <tr className='highlight-row'>
+                    <td colSpan={2} className='text-center p-4'>
+                      <strong>{`Mois avec le moins d'inscriptions de la plage`}</strong>
+                    </td>
+                  </tr>
+                  <tr className='highlight-row'>
+                    <td>
+                      {new Date(minMonth.period).toLocaleDateString('fr-FR', {
+                        year: 'numeric',
+                        month: 'long'
+                      })}
+                    </td>
+                    <td>{minMonth.count}</td>
+                  </tr>
+                </tbody>
+              </Table>
+            ) : (
+              <p>0</p>
+            )}
+          </Panel>
         </Col>
-        <Col md={6} sm={12} xs={12}>
-          {renderYearFilter()}
+
+        <Col md={6}>
+          <Panel
+            header="Mois avec le plus d'inscriptions"
+            className='custom-panel custom-panel-max'
+          >
+            {maxMonth ? (
+              <Table responsive>
+                <tbody>
+                  <tr className='highlight-row'>
+                    <td colSpan={2} className='text-center p-4'>
+                      <strong>{`Mois avec le plus d'inscriptions`}</strong>
+                    </td>
+                  </tr>
+                  <tr className='highlight-row'>
+                    <td>
+                      {new Date(maxMonth.period).toLocaleDateString('fr-FR', {
+                        year: 'numeric',
+                        month: 'long'
+                      })}
+                    </td>
+                    <td>{maxMonth.count}</td>
+                  </tr>
+                </tbody>
+              </Table>
+            ) : (
+              <p>0</p>
+            )}
+          </Panel>
         </Col>
       </Row>
 
-      {/* Tableau principal */}
       <Row>
         <Col md={12} sm={12} xs={12}>
           <Panel header="Statistiques d'inscriptions" className='custom-panel'>
@@ -195,71 +287,6 @@ export function AllUserStates({ members }: Props) {
                 </tr>
               </tbody>
             </Table>
-          </Panel>
-        </Col>
-      </Row>
-
-      {/* Tableau pour le mois avec le moins et le plus d'inscriptions */}
-      <Row className='mt-4'>
-        {/* Mois avec le moins d'inscriptions */}
-        <Col md={6}>
-          <Panel
-            header="Mois avec le moins d'inscriptions de la période"
-            className='custom-panel custom-panel-min'
-          >
-            {minMonth ? (
-              <Table responsive>
-                <tbody>
-                  <tr className='highlight-row'>
-                    <td colSpan={2} className='text-center p-4'>
-                      <strong>{`Mois avec le moins d'inscriptions de la plage`}</strong>
-                    </td>
-                  </tr>
-                  <tr className='highlight-row'>
-                    <td>
-                      {new Date(minMonth.period).toLocaleDateString('fr-FR', {
-                        year: 'numeric',
-                        month: 'long'
-                      })}
-                    </td>
-                    <td>{minMonth.count}</td>
-                  </tr>
-                </tbody>
-              </Table>
-            ) : (
-              <p>0</p>
-            )}
-          </Panel>
-        </Col>
-
-        {/* Mois avec le plus d'inscriptions */}
-        <Col md={6}>
-          <Panel
-            header="Mois avec le plus d'inscriptions"
-            className='custom-panel custom-panel-max'
-          >
-            {maxMonth ? (
-              <Table responsive>
-                <tbody>
-                  <tr className='highlight-row'>
-                    <td colSpan={2} className='text-center p-4'>
-                      <strong>{`Mois avec le plus d'inscriptions`}</strong>
-                    </td>
-                  </tr>
-                  <tr className='highlight-row'>
-                    <td>
-                      {new Date(maxMonth.period).toLocaleDateString('fr-FR', {
-                        year: 'numeric',
-                        month: 'long'
-                      })}
-                    </td>
-                    <td>{maxMonth.count}</td>
-                  </tr>
-                </tbody>
-              </Table>
-            ) : (
-              <p>0</p>
-            )}
           </Panel>
         </Col>
       </Row>
